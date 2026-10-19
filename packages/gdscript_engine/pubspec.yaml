@@ -1,0 +1,7 @@
+name: gdscript_engine
+description: A standalone Dart compiler, interpreter, and editor API for GDScript 4.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.12.2
