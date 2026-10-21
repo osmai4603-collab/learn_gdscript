@@ -31,8 +31,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter
   gdscript_engine:
-    path: packages/gdscript_engine
+    path: ../gdscript_engine
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -42,6 +44,7 @@ dependencies:
   sqlite3: ^3.5.2
   flutter_localization: ^0.4.1
   intl: ^0.20.2
+  get_it: ^9.3.0
 
 dev_dependencies:
   flutter_test:
@@ -59,11 +62,16 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/curriculum/
+    - assets/syntax_reference/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,13 +1,10 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:learn_gdscript/core/theme/text_theme.dart';
 
 sealed class AppTheme {
   static ThemeData get light {
-  final colorScheme = AppColorScheme.light;
+    final colorScheme = AppColorScheme.light;
     return _buildThemeData(
       colorScheme: colorScheme,
       textTheme: AppTextTheme.getTextTheme(
@@ -17,7 +14,7 @@ sealed class AppTheme {
       ),
     );
   }
-  
+
   static ThemeData get dark {
     final colorScheme = AppColorScheme.dark;
     return _buildThemeData(
@@ -30,15 +27,25 @@ sealed class AppTheme {
     );
   }
 
-  static ThemeData _buildThemeData({required ColorScheme colorScheme, required TextTheme textTheme}) {
+  static ThemeData _buildThemeData({
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
+  }) {
     return ThemeData(
       colorScheme: colorScheme,
       brightness: colorScheme.brightness,
       textTheme: textTheme,
+      inputDecorationTheme: getInputDecorationTheme(colorScheme: colorScheme),
+      elevatedButtonTheme: getElevatedButtonTheme(colorScheme: colorScheme),
+      outlinedButtonTheme: getOutlinedButtonTheme(colorScheme: colorScheme),
+      textButtonTheme: getTextButtonTheme(colorScheme: colorScheme),
+      appBarTheme: getAppBarTheme(colorScheme: colorScheme),
     );
   }
 
-  static InputDecorationTheme getInputDecorationTheme({required ColorScheme colorScheme}) {
+  static InputDecorationTheme getInputDecorationTheme({
+    required ColorScheme colorScheme,
+  }) {
     return InputDecorationTheme(
       filled: true,
       isDense: true,
@@ -50,35 +57,35 @@ sealed class AppTheme {
     );
   }
 
-  static ElevatedButtonThemeData getElevatedButtonTheme({required ColorScheme colorScheme}) {
+  static ElevatedButtonThemeData getElevatedButtonTheme({
+    required ColorScheme colorScheme,
+  }) {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
     );
   }
 
-  static OutlinedButtonThemeData getOutlinedButtonTheme({required ColorScheme colorScheme}) {
+  static OutlinedButtonThemeData getOutlinedButtonTheme({
+    required ColorScheme colorScheme,
+  }) {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
     );
   }
 
-  static TextButtonThemeData getTextButtonTheme({required ColorScheme colorScheme}) {
+  static TextButtonThemeData getTextButtonTheme({
+    required ColorScheme colorScheme,
+  }) {
     return TextButtonThemeData(
-      style: TextButton.styleFrom(
-        foregroundColor: colorScheme.primary,
-      ),
+      style: TextButton.styleFrom(foregroundColor: colorScheme.primary),
     );
   }
 
