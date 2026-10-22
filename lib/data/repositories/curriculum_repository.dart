@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:flutter/services.dart';
-
 import '../models/curriculum_models.dart';
 import '../models/lesson_models.dart';
 

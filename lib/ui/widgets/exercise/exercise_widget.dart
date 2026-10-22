@@ -16,10 +16,15 @@ class ExerciseWidget extends StatefulWidget {
     required this.exerciseIndex,
     required this.exerciseCount,
     this.initialCode,
+    this.initialSolutionViewed = false,
+    this.initialAttempts = 0,
+    this.initialHintsUsed = 0,
     this.fontSize = 14,
     this.onCodeChanged,
     this.onProgressChanged,
     this.onCompleted,
+    this.onExerciseCompleted,
+    this.onSolutionViewed,
     this.onCompletionRequested,
     this.onFormatRequested,
   });
@@ -28,10 +33,21 @@ class ExerciseWidget extends StatefulWidget {
   final int exerciseIndex;
   final int exerciseCount;
   final String? initialCode;
+  final bool initialSolutionViewed;
+  final int initialAttempts;
+  final int initialHintsUsed;
   final double fontSize;
   final ValueChanged<String>? onCodeChanged;
   final void Function(int attempts, int hintsUsed)? onProgressChanged;
   final VoidCallback? onCompleted;
+  final Future<void> Function(
+    int attempts,
+    int hintsUsed,
+    bool usedSolution,
+    String code,
+  )?
+  onExerciseCompleted;
+  final VoidCallback? onSolutionViewed;
   final Future<List<String>> Function(String code, int cursorOffset)?
   onCompletionRequested;
   final Future<String?> Function(String code)? onFormatRequested;
@@ -60,6 +76,9 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
             ? widget.exercise.solutionCode
             : widget.exercise.starterCode);
     _orderedLines = _code.split('\n');
+    _showSolution = widget.initialSolutionViewed;
+    _attempts = widget.initialAttempts;
+    _hintsUsed = widget.initialHintsUsed;
   }
 
   @override
@@ -75,9 +94,9 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
       _result = null;
       _runError = null;
       _running = false;
-      _showSolution = false;
-      _attempts = 0;
-      _hintsUsed = 0;
+      _showSolution = widget.initialSolutionViewed;
+      _attempts = widget.initialAttempts;
+      _hintsUsed = widget.initialHintsUsed;
       _predictionCorrect = null;
     }
   }
@@ -89,27 +108,37 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
       _attempts++;
     });
     widget.onProgressChanged?.call(_attempts, _hintsUsed);
+    final ExerciseResult result;
     try {
-      final result = await context.read<TestRunnerService>().runTests(
+      result = await context.read<TestRunnerService>().runTests(
         userCode: _code,
         testCases: widget.exercise.testCases,
       );
-      if (!mounted) return;
-      setState(() {
-        _result = result;
-        _running = false;
-      });
-      if (result.allPassed) widget.onCompleted?.call();
     } on Object catch (error) {
       if (!mounted) return;
       setState(() {
         _runError = error;
         _running = false;
       });
+      return;
+    }
+    if (!mounted) return;
+    setState(() {
+      _result = result;
+      _running = false;
+    });
+    if (result.allPassed) {
+      await widget.onExerciseCompleted?.call(
+        _attempts,
+        _hintsUsed,
+        _showSolution,
+        _code,
+      );
+      if (mounted) widget.onCompleted?.call();
     }
   }
 
-  void _choosePrediction(String choice) {
+  Future<void> _choosePrediction(String choice) async {
     final exercise = widget.exercise;
     if (exercise.testCases.isEmpty) return;
     final expected = exercise.testCases.first.expectedOutput;
@@ -119,12 +148,19 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
       _predictionCorrect = passed;
     });
     widget.onProgressChanged?.call(_attempts, _hintsUsed);
-    if (passed) widget.onCompleted?.call();
+    if (passed) {
+      await widget.onExerciseCompleted?.call(
+        _attempts,
+        _hintsUsed,
+        _showSolution,
+        _code,
+      );
+      if (mounted) widget.onCompleted?.call();
+    }
   }
 
   void _reorderLines(int oldIndex, int newIndex) {
     setState(() {
-      if (newIndex > oldIndex) newIndex--;
       final line = _orderedLines.removeAt(oldIndex);
       _orderedLines.insert(newIndex, line);
       _code = _orderedLines.join('\n');
@@ -162,12 +198,14 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
   }
 
   void _revealSolution() {
+    final wasAlreadyViewed = _showSolution;
     setState(() {
       _code = widget.exercise.solutionCode;
       _orderedLines = _code.split('\n');
       _showSolution = true;
       _result = null;
     });
+    if (!wasAlreadyViewed) widget.onSolutionViewed?.call();
     widget.onCodeChanged?.call(_code);
   }
 
@@ -264,6 +302,7 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
             HintWidget(
               key: ValueKey('${exercise.id}-hints'),
               hints: exercise.hints,
+              initialVisibleHints: _hintsUsed,
               onHintRevealed: (count) {
                 _hintsUsed = count;
                 widget.onProgressChanged?.call(_attempts, _hintsUsed);
@@ -327,7 +366,7 @@ class _ReorderSteps extends StatelessWidget {
     shrinkWrap: true,
     physics: const NeverScrollableScrollPhysics(),
     itemCount: lines.length,
-    onReorder: onReorder,
+    onReorderItem: onReorder,
     itemBuilder: (context, index) => Card(
       key: ValueKey('$index:${lines[index]}'),
       child: ListTile(

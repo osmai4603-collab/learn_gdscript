@@ -243,4 +243,48 @@ class AppLocalizationsAr extends AppLocalizations {
   String get searchWorkspaceSymbols => 'رموز';
   @override
   String get workspaceSearchEmpty => 'لم يتم العثور على نتائج.';
+
+  @override
+  String levelLabel(int level) => 'المستوى $level';
+
+  @override
+  String totalXp(int xp) => '$xp نقطة خبرة';
+
+  @override
+  String streakDays(int count) => 'سلسلة $count أيام';
+
+  @override
+  String get streakInfo =>
+      'تعلّم مرة واحدة على الأقل يوميًا للحفاظ على سلسلتك. تفويت يوم يعيد السلسلة الحالية إلى البداية، لكنه لا يحذف نقاط الخبرة أو الشارات.';
+
+  @override
+  String get badgesTitle => 'الشارات';
+
+  @override
+  String get badgeUnlocked => 'لقد فتحت شارة جديدة!';
+
+  @override
+  String get badgeLocked => 'لم تُكتسب بعد';
+
+  @override
+  String badgeProgress(int current, int target) => '$current من $target';
+
+  @override
+  String earnedOn(String date) => 'اكتُسبت في $date';
+
+  @override
+  String xpAwarded(int xp) => 'اكتسبت $xp+ نقطة خبرة';
+
+  @override
+  String get showStreak => 'إظهار سلسلة التعلّم اليومية';
+
+  @override
+  String get great => 'رائع!';
+
+  @override
+  String get syntaxExplorerTitle => 'مستكشف الصياغة';
+
+  @override
+  String get syntaxExplorerPlaceholder =>
+      'ابحث عن الكلمات المفتاحية والصياغة والأمثلة';
 }

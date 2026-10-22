@@ -29,11 +29,18 @@ class SettingsRepository {
     if (fontSize == null) {
       throw const FormatException('Stored editor font size is invalid.');
     }
+    final showStreakValue = values['showStreakInUi'];
+    if (showStreakValue != null &&
+        showStreakValue != 'true' &&
+        showStreakValue != 'false') {
+      throw const FormatException('Stored streak visibility setting is invalid.');
+    }
     return AppSettings.fromJson({
       'language': values['language'] ?? AppConstants.defaultLanguageCode,
       'themeMode': values['themeMode'] ?? ThemeMode.system.name,
       'hasCompletedOnboarding': onboardingValue == 'true',
       'editorFontSize': fontSize,
+      'showStreakInUi': showStreakValue == null || showStreakValue == 'true',
     });
   }
 
@@ -42,6 +49,7 @@ class SettingsRepository {
     final language = json['language']! as String;
     final onboarding = json['hasCompletedOnboarding']! as bool;
     final editorFontSize = json['editorFontSize']! as int;
+    final showStreakInUi = json['showStreakInUi']! as bool;
     if (!AppConstants.supportedLanguageCodes.contains(language)) {
       throw ArgumentError.value(
         language,
@@ -55,6 +63,7 @@ class SettingsRepository {
       _write(db, 'themeMode', json['themeMode']! as String);
       _write(db, 'hasCompletedOnboarding', onboarding.toString());
       _write(db, 'editorFontSize', editorFontSize.toString());
+      _write(db, 'showStreakInUi', showStreakInUi.toString());
     });
   }
 

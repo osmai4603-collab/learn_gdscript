@@ -20,6 +20,19 @@
 			],
 			"isBackground": false,
 			"problemMatcher": []
+		},
+		{
+			"label": "Verify Phase 2 curriculum tests",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"test",
+				"test/content_validation_test.dart",
+				"test/content_engine_test.dart",
+				"test/syntax_reference_repository_test.dart"
+			],
+			"isBackground": false,
+			"problemMatcher": []
 		}
 	]
 }

@@ -7,10 +7,12 @@ class HintWidget extends StatefulWidget {
   const HintWidget({
     super.key,
     required this.hints,
+    this.initialVisibleHints = 0,
     this.onHintRevealed,
   });
 
   final List<LocalizedText> hints;
+  final int initialVisibleHints;
   final ValueChanged<int>? onHintRevealed;
 
   @override
@@ -18,7 +20,15 @@ class HintWidget extends StatefulWidget {
 }
 
 class _HintWidgetState extends State<HintWidget> {
-  int _visibleHints = 0;
+  late int _visibleHints;
+
+  @override
+  void initState() {
+    super.initState();
+    _visibleHints = widget.initialVisibleHints
+        .clamp(0, widget.hints.length)
+        .toInt();
+  }
 
   @override
   Widget build(BuildContext context) {

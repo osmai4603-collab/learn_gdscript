@@ -8,12 +8,14 @@ class AppSettings {
   final ThemeMode themeMode;
   final bool hasCompletedOnboarding;
   final int editorFontSize;
+  final bool showStreakInUi;
 
   AppSettings({
     this.locale = const Locale('ar'),
     this.themeMode = ThemeMode.system,
     this.hasCompletedOnboarding = false,
     this.editorFontSize = 14,
+    this.showStreakInUi = true,
   }) : assert(locale.languageCode == 'ar' || locale.languageCode == 'en'),
        assert(editorFontSize == 12 || editorFontSize == 14 || editorFontSize == 16);
 
@@ -40,11 +42,18 @@ class AppSettings {
         'Field "editorFontSize" must be 12, 14, or 16.',
       );
     }
+    final showStreak = json['showStreakInUi'];
+    if (showStreak != null && showStreak is! bool) {
+      throw const FormatException(
+        'Field "showStreakInUi" must be a boolean.',
+      );
+    }
     return AppSettings(
       locale: Locale(language),
       themeMode: themeMode.first,
       hasCompletedOnboarding: onboarding as bool? ?? false,
       editorFontSize: fontSize as int? ?? 14,
+      showStreakInUi: showStreak as bool? ?? true,
     );
   }
 
@@ -53,5 +62,6 @@ class AppSettings {
     'themeMode': themeMode.name,
     'hasCompletedOnboarding': hasCompletedOnboarding,
     'editorFontSize': editorFontSize,
+    'showStreakInUi': showStreakInUi,
   };
 }

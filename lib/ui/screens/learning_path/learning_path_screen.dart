@@ -11,6 +11,9 @@ import '../../widgets/common/empty_state.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/common/navigation_bar.dart';
 import '../../widgets/progress/unit_card.dart';
+import '../../widgets/gamification/badges_grid_widget.dart';
+import '../../widgets/gamification/streak_badge_widget.dart';
+import '../../widgets/gamification/xp_level_header.dart';
 
 class LearningPathScreen extends StatelessWidget {
   const LearningPathScreen({super.key});
@@ -114,6 +117,12 @@ class _PathContentState extends State<_PathContent> {
     return ListView(
       padding: const EdgeInsets.all(24),
       children: [
+        const XpLevelHeader(),
+        const Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: StreakBadgeWidget(),
+        ),
+        const SizedBox(height: 12),
         Text(
           context.l10n.lessonProgress,
           style: Theme.of(context).textTheme.titleLarge,
@@ -133,6 +142,8 @@ class _PathContentState extends State<_PathContent> {
             completedUnits,
             locale,
           ),
+        const SizedBox(height: 24),
+        const BadgesGridWidget(),
       ],
     );
   }

@@ -248,4 +248,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchWorkspaceSymbols => 'Symbols';
   @override
   String get workspaceSearchEmpty => 'No results found.';
+
+  @override
+  String levelLabel(int level) => 'Level $level';
+
+  @override
+  String totalXp(int xp) => '$xp XP';
+
+  @override
+  String streakDays(int count) => '$count day streak';
+
+  @override
+  String get streakInfo =>
+      'Learn at least once each day to keep your streak. Missing a day resets the current streak but never removes your XP or badges.';
+
+  @override
+  String get badgesTitle => 'Badges';
+
+  @override
+  String get badgeUnlocked => 'New badge unlocked!';
+
+  @override
+  String get badgeLocked => 'Not yet earned';
+
+  @override
+  String badgeProgress(int current, int target) => '$current of $target';
+
+  @override
+  String earnedOn(String date) => 'Earned $date';
+
+  @override
+  String xpAwarded(int xp) => '+$xp XP earned';
+
+  @override
+  String get showStreak => 'Show daily streak';
+
+  @override
+  String get great => 'Great!';
+
+  @override
+  String get syntaxExplorerTitle => 'Syntax explorer';
+
+  @override
+  String get syntaxExplorerPlaceholder =>
+      'Search keywords, syntax, and examples';
 }

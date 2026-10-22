@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/exercise_models.dart';
+import '../../../data/models/gamification_models.dart';
 import '../../../data/models/lesson_models.dart';
 import '../../../data/models/progress_models.dart';
 import '../../../logic/providers/app_settings_provider.dart';
@@ -48,6 +49,12 @@ class _LessonScreenState extends State<LessonScreen> {
   bool _lessonDocumentOpen = false;
   bool _lessonDocumentOpening = false;
   LanguageServerProvider? _languageServer;
+  final List<BadgeDefinition> _newlyUnlockedBadges = [];
+  final Set<String> _solutionViewedExerciseIds = {};
+  final Map<String, int> _exerciseAttempts = {};
+  final Map<String, int> _exerciseHints = {};
+  int _earnedXpForLesson = 0;
+  DateTime? _lessonStartedAt;
 
   @override
   void didChangeDependencies() {
@@ -79,10 +86,27 @@ class _LessonScreenState extends State<LessonScreen> {
         .progress
         ?.lessonsProgress[lesson.id];
     _savedCode = existing?.savedCode;
+    _solutionViewedExerciseIds.addAll(
+      existing?.exercisesWithSolutionViewed ?? const [],
+    );
+    _exerciseAttempts.addAll(existing?.exerciseAttempts ?? const {});
+    _exerciseHints.addAll(existing?.exerciseHints ?? const {});
+    _lessonStartedAt = existing?.startedAt ?? DateTime.now();
     await _openLessonDocument(lesson);
     _exerciseIndex = (existing?.exercisesCompleted ?? 0)
         .clamp(0, lesson.exercises.length)
         .toInt();
+    if (_exerciseIndex < lesson.exercises.length &&
+        _exerciseAttempts.isEmpty &&
+        _exerciseHints.isEmpty) {
+      final currentExerciseId = lesson.exercises[_exerciseIndex].id;
+      if ((existing?.attempts ?? 0) > 0) {
+        _exerciseAttempts[currentExerciseId] = existing!.attempts;
+      }
+      if ((existing?.hintsUsed ?? 0) > 0) {
+        _exerciseHints[currentExerciseId] = existing!.hintsUsed;
+      }
+    }
     _completedExercises.addAll(
       lesson.exercises.take(_exerciseIndex).map((exercise) => exercise.id),
     );
@@ -122,6 +146,9 @@ class _LessonScreenState extends State<LessonScreen> {
     int? attempts,
     int? hintsUsed,
     int? exercisesCompleted,
+    List<String>? exercisesWithSolutionViewed,
+    Map<String, int>? exerciseAttempts,
+    Map<String, int>? exerciseHints,
     LessonStatus? status,
   }) async {
     final provider = context.read<ProgressProvider>();
@@ -142,6 +169,12 @@ class _LessonScreenState extends State<LessonScreen> {
             ? DateTime.now()
             : previous?.completedAt,
         savedCode: savedCode ?? previous?.savedCode,
+        exercisesWithSolutionViewed:
+            exercisesWithSolutionViewed ??
+            previous?.exercisesWithSolutionViewed ??
+            const [],
+        exerciseAttempts: exerciseAttempts ?? previous?.exerciseAttempts ?? const {},
+        exerciseHints: exerciseHints ?? previous?.exerciseHints ?? const {},
       ),
     );
   }
@@ -149,13 +182,16 @@ class _LessonScreenState extends State<LessonScreen> {
   Future<void> _runExample() async {
     final lesson = _lesson;
     if (lesson == null) return;
+    final codeRunner = context.read<CodeRunnerService>();
+    final curriculum = context.read<CurriculumProvider>().state.value;
+    final progressProvider = context.read<ProgressProvider>();
     setState(() {
       _exampleRunning = true;
       _exampleState = OutputState.running;
       _exampleError = null;
     });
     try {
-      final result = await context.read<CodeRunnerService>().runCode(
+      final result = await codeRunner.runCode(
         _exampleCode ?? lesson.exampleCode ?? '',
       );
       if (!mounted) return;
@@ -167,6 +203,17 @@ class _LessonScreenState extends State<LessonScreen> {
             ? OutputState.success
             : OutputState.error;
       });
+      if (result.isSuccess && mounted) {
+        if (curriculum != null) {
+          final reward = await progressProvider.recordExampleExecuted(
+            curriculum: curriculum,
+            lessonId: lesson.id,
+            successful: true,
+          );
+          _earnedXpForLesson += reward.earnedXP;
+          _newlyUnlockedBadges.addAll(reward.newlyUnlockedBadges);
+        }
+      }
     } on Object catch (error) {
       if (!mounted) return;
       setState(() {
@@ -179,7 +226,14 @@ class _LessonScreenState extends State<LessonScreen> {
 
   String? _exampleCode;
 
-  Future<void> _onExerciseCompleted(Exercise exercise, Lesson lesson) async {
+  Future<void> _onExerciseCompleted(
+    Exercise exercise,
+    Lesson lesson,
+    int attempts,
+    int hintsUsed,
+    bool usedSolution,
+    String code,
+  ) async {
     if (!_completedExercises.add(exercise.id)) return;
     final completedCount = _completedExercises.length;
     final allCompleted = completedCount >= lesson.exercises.length;
@@ -188,15 +242,57 @@ class _LessonScreenState extends State<LessonScreen> {
         : lesson.exercises[completedCount].type == ExerciseType.predictOutput
         ? lesson.exercises[completedCount].solutionCode
         : lesson.exercises[completedCount].starterCode;
+    final curriculum = context.read<CurriculumProvider>().state.value;
+    final progressProvider = context.read<ProgressProvider>();
+    if (curriculum == null) {
+      throw StateError('Curriculum is not available.');
+    }
     await _persistLessonProgress(
       lesson,
       savedCode: _savedCode,
+      attempts: _totalCount(_exerciseAttempts, exercise.id, attempts),
+      hintsUsed: _totalCount(_exerciseHints, exercise.id, hintsUsed),
+      exerciseAttempts: {..._exerciseAttempts, exercise.id: attempts},
+      exerciseHints: {..._exerciseHints, exercise.id: hintsUsed},
       exercisesCompleted: completedCount,
       status: allCompleted ? LessonStatus.completed : LessonStatus.inProgress,
     );
+    final exerciseReward = await progressProvider.recordExerciseResult(
+          curriculum: curriculum,
+          lessonId: lesson.id,
+          attempts: attempts,
+          hintsCount: hintsUsed,
+          usedSolution: usedSolution,
+          code: code,
+        );
+    _earnedXpForLesson += exerciseReward.earnedXP;
+    _newlyUnlockedBadges.addAll(exerciseReward.newlyUnlockedBadges);
+    if (allCompleted) {
+      final lessonReward = await progressProvider.recordLessonCompletion(
+        curriculum: curriculum,
+        unitId: lesson.unitId,
+        lessonId: lesson.id,
+      );
+      _earnedXpForLesson += lessonReward.earnedXP;
+      _newlyUnlockedBadges.addAll(lessonReward.newlyUnlockedBadges);
+    }
     if (!mounted) return;
     if (allCompleted) {
-      await Navigator.of(context).pushNamed('/lesson-complete/${lesson.id}');
+      await Navigator.of(context).pushReplacementNamed(
+        '/lesson-complete/${lesson.id}',
+        arguments: {
+          'earnedXP': _earnedXpForLesson,
+          'newlyUnlockedBadges': [
+            for (final badge in _newlyUnlockedBadges) badge.id,
+          ],
+          'hintsUsedCount':
+              progressProvider.progress?.lessonsProgress[lesson.id]?.hintsUsed ??
+              0,
+          'timeSpentMinutes': DateTime.now()
+              .difference(_lessonStartedAt ?? DateTime.now())
+              .inMinutes,
+        },
+      );
     } else {
       setState(() => _exerciseIndex++);
     }
@@ -269,21 +365,53 @@ class _LessonScreenState extends State<LessonScreen> {
       exerciseIndex: index,
       exerciseCount: lesson.exercises.length,
       initialCode: _savedCode,
+      initialSolutionViewed: _solutionViewedExerciseIds.contains(exercise.id),
+      initialAttempts: _exerciseAttempts[exercise.id] ?? 0,
+      initialHintsUsed: _exerciseHints[exercise.id] ?? 0,
       onCodeChanged: (code) {
         _savedCode = code;
         unawaited(_persistLessonProgress(lesson, savedCode: code));
         unawaited(_syncLessonDocument(lesson.id, code));
       },
       onProgressChanged: (attempts, hintsUsed) {
+        _exerciseAttempts[exercise.id] = attempts;
+        _exerciseHints[exercise.id] = hintsUsed;
         unawaited(
           _persistLessonProgress(
             lesson,
-            attempts: attempts,
-            hintsUsed: hintsUsed,
+            attempts: _exerciseAttempts.values.fold<int>(
+              0,
+              (sum, item) => sum + item,
+            ),
+            hintsUsed: _exerciseHints.values.fold<int>(
+              0,
+              (sum, item) => sum + item,
+            ),
+            exerciseAttempts: _exerciseAttempts,
+            exerciseHints: _exerciseHints,
           ),
         );
       },
-      onCompleted: () => _onExerciseCompleted(exercise, lesson),
+      onExerciseCompleted: (attempts, hintsUsed, usedSolution, code) =>
+          _onExerciseCompleted(
+            exercise,
+            lesson,
+            attempts,
+            hintsUsed,
+            usedSolution,
+            code,
+          ),
+      onSolutionViewed: () {
+        _solutionViewedExerciseIds.add(exercise.id);
+        unawaited(
+          _persistLessonProgress(
+            lesson,
+            exercisesWithSolutionViewed: [
+              ..._solutionViewedExerciseIds,
+            ],
+          ),
+        );
+      },
       onCompletionRequested:
           context.read<LanguageServerProvider>().isConnected
           ? (code, offset) => context
@@ -301,6 +429,15 @@ class _LessonScreenState extends State<LessonScreen> {
           .toDouble(),
     );
   }
+
+  static int _totalCount(
+    Map<String, int> values,
+    String exerciseId,
+    int currentValue,
+  ) =>
+      values.entries
+          .where((entry) => entry.key != exerciseId)
+          .fold(currentValue, (sum, entry) => sum + entry.value);
 
   Future<void> _syncLessonDocument(String lessonId, String code) async {
     final server = context.read<LanguageServerProvider>();

@@ -93,9 +93,17 @@ void main() {
           'startedAt': null,
           'completedAt': null,
           'savedCode': null,
+          'exercisesWithSolutionViewed': <String>[],
+          'exerciseAttempts': <String, int>{},
+          'exerciseHints': <String, int>{},
         },
       },
       'earnedBadges': ['starter'],
+      'earnedBadgeDates': <String, Object?>{},
+      'xpTransactions': <Object?>[],
+      'firstTrySolvedCount': 0,
+      'syntaxExplorerUses': 0,
+      'hasExecutedPrint': false,
     };
     final progress = UserProgress.fromJson(input);
     expect(progress.toJson(), input);
@@ -109,6 +117,7 @@ void main() {
       'themeMode': 'system',
       'hasCompletedOnboarding': false,
       'editorFontSize': 14,
+      'showStreakInUi': true,
     });
     expect(
       AppSettings.fromJson({'language': 'en', 'themeMode': 'dark'}).themeMode,

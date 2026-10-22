@@ -1,6 +1,6 @@
 import 'package:sqlite3/common.dart';
 
-const currentSchemaVersion = 1;
+const currentSchemaVersion = 2;
 
 void migrateDatabase(CommonDatabase database) {
   final currentVersion =
@@ -16,12 +16,54 @@ void migrateDatabase(CommonDatabase database) {
   database.execute('BEGIN IMMEDIATE');
   try {
     if (currentVersion < 1) _createVersion1(database);
+    if (currentVersion < 2) _createVersion2(database);
     database.execute('PRAGMA user_version = $currentSchemaVersion');
     database.execute('COMMIT');
   } on Object {
     database.execute('ROLLBACK');
     rethrow;
   }
+}
+
+void _createVersion2(CommonDatabase database) {
+  database.execute(
+    'ALTER TABLE earned_badges ADD COLUMN earned_at TEXT',
+  );
+  database.execute(
+    'ALTER TABLE user_progress ADD COLUMN first_try_solved_count '
+    'INTEGER NOT NULL DEFAULT 0 CHECK (first_try_solved_count >= 0)',
+  );
+  database.execute(
+    'ALTER TABLE user_progress ADD COLUMN syntax_explorer_uses '
+    'INTEGER NOT NULL DEFAULT 0 CHECK (syntax_explorer_uses >= 0)',
+  );
+  database.execute(
+    'ALTER TABLE user_progress ADD COLUMN has_executed_print '
+    'INTEGER NOT NULL DEFAULT 0 CHECK (has_executed_print IN (0, 1))',
+  );
+  database.execute(
+    "ALTER TABLE lesson_progress ADD COLUMN exercises_with_solution_viewed "
+    "TEXT NOT NULL DEFAULT '[]'",
+  );
+  database.execute(
+    "ALTER TABLE lesson_progress ADD COLUMN exercise_attempts "
+    "TEXT NOT NULL DEFAULT '{}'",
+  );
+  database.execute(
+    "ALTER TABLE lesson_progress ADD COLUMN exercise_hints "
+    "TEXT NOT NULL DEFAULT '{}'",
+  );
+  database.execute('''
+    CREATE TABLE xp_transactions (
+      visitor_id TEXT NOT NULL REFERENCES user_progress(visitor_id) ON DELETE CASCADE,
+      id TEXT NOT NULL,
+      amount INTEGER NOT NULL,
+      reason TEXT NOT NULL,
+      timestamp TEXT NOT NULL,
+      entity_id TEXT,
+      PRIMARY KEY (visitor_id, id)
+    )
+  ''');
 }
 
 void _createVersion1(CommonDatabase database) {

@@ -336,6 +336,34 @@ abstract class AppLocalizations {
   String get searchWorkspaceText;
   String get searchWorkspaceSymbols;
   String get workspaceSearchEmpty;
+
+  String levelLabel(int level);
+
+  String totalXp(int xp);
+
+  String streakDays(int count);
+
+  String get streakInfo;
+
+  String get badgesTitle;
+
+  String get badgeUnlocked;
+
+  String get badgeLocked;
+
+  String badgeProgress(int current, int target);
+
+  String earnedOn(String date);
+
+  String xpAwarded(int xp);
+
+  String get showStreak;
+
+  String get great;
+
+  String get syntaxExplorerTitle;
+
+  String get syntaxExplorerPlaceholder;
 }
 
 class _AppLocalizationsDelegate

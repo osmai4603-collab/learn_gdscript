@@ -102,5 +102,19 @@
   "workspaceSearchPlaceholder": "Enter text or a symbol",
   "searchWorkspaceText": "Text",
   "searchWorkspaceSymbols": "Symbols",
-  "workspaceSearchEmpty": "No results found."
+  "workspaceSearchEmpty": "No results found.",
+  "levelLabel": "Level {level}",
+  "totalXp": "{xp} XP",
+  "streakDays": "{count} day streak",
+  "streakInfo": "Learn at least once each day to keep your streak. Missing a day resets the current streak but never removes your XP or badges.",
+  "badgesTitle": "Badges",
+  "badgeUnlocked": "New badge unlocked!",
+  "badgeLocked": "Not yet earned",
+  "badgeProgress": "{current} of {target}",
+  "earnedOn": "Earned {date}",
+  "xpAwarded": "+{xp} XP earned",
+  "showStreak": "Show daily streak",
+  "great": "Great!",
+  "syntaxExplorerTitle": "Syntax explorer",
+  "syntaxExplorerPlaceholder": "Search keywords, syntax, and examples"
 }

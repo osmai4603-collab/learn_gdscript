@@ -17,6 +17,7 @@ class AppSettingsProvider extends ChangeNotifier {
   Locale get locale => _settings.locale;
   ThemeMode get themeMode => _settings.themeMode;
   int get editorFontSize => _settings.editorFontSize;
+  bool get showStreakInUi => _settings.showStreakInUi;
 
   Future<void> setLocale(Locale locale) => _update(
     AppSettings(
@@ -24,6 +25,7 @@ class AppSettingsProvider extends ChangeNotifier {
       themeMode: _settings.themeMode,
       hasCompletedOnboarding: _settings.hasCompletedOnboarding,
       editorFontSize: _settings.editorFontSize,
+      showStreakInUi: _settings.showStreakInUi,
     ),
   );
 
@@ -33,6 +35,7 @@ class AppSettingsProvider extends ChangeNotifier {
       themeMode: themeMode,
       hasCompletedOnboarding: _settings.hasCompletedOnboarding,
       editorFontSize: _settings.editorFontSize,
+      showStreakInUi: _settings.showStreakInUi,
     ),
   );
 
@@ -42,6 +45,7 @@ class AppSettingsProvider extends ChangeNotifier {
       themeMode: _settings.themeMode,
       hasCompletedOnboarding: true,
       editorFontSize: _settings.editorFontSize,
+      showStreakInUi: _settings.showStreakInUi,
     ),
   );
 
@@ -51,6 +55,17 @@ class AppSettingsProvider extends ChangeNotifier {
       themeMode: _settings.themeMode,
       hasCompletedOnboarding: _settings.hasCompletedOnboarding,
       editorFontSize: fontSize,
+      showStreakInUi: _settings.showStreakInUi,
+    ),
+  );
+
+  Future<void> setShowStreakInUi(bool show) => _update(
+    AppSettings(
+      locale: _settings.locale,
+      themeMode: _settings.themeMode,
+      hasCompletedOnboarding: _settings.hasCompletedOnboarding,
+      editorFontSize: _settings.editorFontSize,
+      showStreakInUi: show,
     ),
   );
 

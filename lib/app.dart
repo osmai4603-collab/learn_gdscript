@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'app_dependencies.dart';
 import 'core/theme/theme_data.dart';
+import 'data/repositories/syntax_reference_repository.dart';
 import 'l10n/app_localizations.dart';
 import 'logic/providers/app_settings_provider.dart';
 import 'logic/providers/curriculum_provider.dart';
@@ -20,6 +21,7 @@ import 'ui/screens/lesson/lesson_screen.dart';
 import 'ui/screens/not_found_screen.dart';
 import 'ui/screens/onboarding/onboarding_screen.dart';
 import 'ui/screens/settings/settings_screen.dart';
+import 'ui/screens/syntax_reference/syntax_reference_screen.dart';
 import 'ui/screens/workspace/workspace_screen.dart';
 import 'ui/screens/workspace/workspace_search_screen.dart';
 
@@ -88,12 +90,15 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
       '/' => const HomeScreen(),
       '/path' => const LearningPathScreen(),
       '/settings' => const SettingsScreen(),
+      '/syntax-reference' => SyntaxReferenceScreen(
+        repository: widget.dependencies.services<SyntaxReferenceRepository>(),
+      ),
       '/onboarding' => const OnboardingScreen(),
       '/workspace' => const WorkspaceScreen(),
       '/workspace/search' => const WorkspaceSearchScreen(),
       _ when name.startsWith('/lesson/') => _lessonScreen(name),
       _ when name.startsWith('/lesson-complete/') =>
-        _lessonCompleteScreen(name),
+        _lessonCompleteScreen(name, routeSettings.arguments),
       _ => const NotFoundScreen(),
     };
     return MaterialPageRoute<void>(
@@ -102,12 +107,26 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
     );
   }
 
-  Widget _lessonCompleteScreen(String route) {
+  Widget _lessonCompleteScreen(String route, Object? arguments) {
     final id = route.substring('/lesson-complete/'.length);
     if (id.isEmpty || !RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(id)) {
       return const NotFoundScreen();
     }
-    return LessonCompleteScreen(lessonId: id);
+    final values = arguments is Map<String, Object?>
+        ? arguments
+        : const <String, Object?>{};
+    final badgeIds = values['newlyUnlockedBadges'];
+    return LessonCompleteScreen(
+      lessonId: id,
+      earnedXP: values['earnedXP'] is int ? values['earnedXP']! as int : 0,
+      hintsUsedCount: values['hintsUsedCount'] is int
+          ? values['hintsUsedCount']! as int
+          : 0,
+      timeSpentMinutes: values['timeSpentMinutes'] is int
+          ? values['timeSpentMinutes']! as int
+          : 0,
+      newlyUnlockedBadges: badgeIds is List<String> ? badgeIds : const [],
+    );
   }
 
   Widget _lessonScreen(String route) {

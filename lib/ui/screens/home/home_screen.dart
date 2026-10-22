@@ -12,6 +12,8 @@ import '../../widgets/common/empty_state.dart';
 import '../../widgets/common/navigation_bar.dart';
 import '../../widgets/common/quick_try_card.dart';
 import '../../widgets/common/loading_indicator.dart';
+import '../../widgets/gamification/streak_badge_widget.dart';
+import '../../widgets/gamification/xp_level_header.dart';
 import '../../widgets/progress/unit_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -134,6 +136,12 @@ class _HomeContent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const XpLevelHeader(),
+              const Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: StreakBadgeWidget(),
+              ),
+              const SizedBox(height: 12),
               Text(
                 progress?.lessonsProgress.values.any(
                           (item) => item.status == LessonStatus.completed,

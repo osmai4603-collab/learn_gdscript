@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
               children: [
                 _SectionTitle(l10n.languageLabel),
                 DropdownButtonFormField<Locale>(
-                  value: settings.locale,
+                  initialValue: settings.locale,
                   items: [
                     DropdownMenuItem(
                       value: const Locale('ar'),
@@ -53,7 +53,7 @@ class SettingsScreen extends StatelessWidget {
                 const SizedBox(height: 24),
                 _SectionTitle(l10n.themeLabel),
                 DropdownButtonFormField<ThemeMode>(
-                  value: settings.themeMode,
+                  initialValue: settings.themeMode,
                   items: [
                     DropdownMenuItem(
                       value: ThemeMode.system,
@@ -75,9 +75,19 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 24),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(l10n.showStreak),
+                  value: settings.showStreakInUi,
+                  onChanged: (show) => _save(
+                    context,
+                    () => settings.setShowStreakInUi(show),
+                  ),
+                ),
+                const SizedBox(height: 24),
                 _SectionTitle(l10n.editorFontSize),
                 DropdownButtonFormField<int>(
-                  value: settings.editorFontSize,
+                  initialValue: settings.editorFontSize,
                   items: [
                     DropdownMenuItem(value: 12, child: Text(l10n.fontSmall)),
                     DropdownMenuItem(value: 14, child: Text(l10n.fontMedium)),
@@ -91,6 +101,13 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 _SectionTitle(l10n.lspStatus),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.menu_book_outlined),
+                  title: Text(l10n.syntaxExplorerTitle),
+                  onTap: () =>
+                      Navigator.pushNamed(context, '/syntax-reference'),
+                ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   leading: Icon(
@@ -156,6 +173,9 @@ class SettingsScreen extends StatelessWidget {
 
   static Future<void> _resetProgress(BuildContext context) async {
     final l10n = context.l10n;
+    final progressProvider = context.read<ProgressProvider>();
+    final units =
+        context.read<CurriculumProvider>().state.value?.units ?? [];
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -175,12 +195,10 @@ class SettingsScreen extends StatelessWidget {
     );
     if (confirmed != true || !context.mounted) return;
     try {
-      await context.read<ProgressProvider>().clear(AppConstants.visitorId);
-      final units =
-          context.read<CurriculumProvider>().state.value?.units ?? [];
+      await progressProvider.clear(AppConstants.visitorId);
       final firstUnit = units.isEmpty ? null : units.first;
       if (firstUnit != null && firstUnit.lessonIds.isNotEmpty) {
-        await context.read<ProgressProvider>().initialize(
+        await progressProvider.initialize(
           visitorId: AppConstants.visitorId,
           unitId: firstUnit.id,
           lessonId: firstUnit.lessonIds.first,

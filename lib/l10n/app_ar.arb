@@ -102,5 +102,19 @@
   "workspaceSearchPlaceholder": "أدخل نصاً أو رمزاً للبحث",
   "searchWorkspaceText": "نص",
   "searchWorkspaceSymbols": "رموز",
-  "workspaceSearchEmpty": "لم يتم العثور على نتائج."
+  "workspaceSearchEmpty": "لم يتم العثور على نتائج.",
+  "levelLabel": "المستوى {level}",
+  "totalXp": "{xp} نقطة خبرة",
+  "streakDays": "سلسلة {count} أيام",
+  "streakInfo": "تعلّم مرة واحدة على الأقل يوميًا للحفاظ على سلسلتك. تفويت يوم يعيد السلسلة الحالية إلى البداية، لكنه لا يحذف نقاط الخبرة أو الشارات.",
+  "badgesTitle": "الشارات",
+  "badgeUnlocked": "لقد فتحت شارة جديدة!",
+  "badgeLocked": "لم تُكتسب بعد",
+  "badgeProgress": "{current} من {target}",
+  "earnedOn": "اكتُسبت في {date}",
+  "xpAwarded": "اكتسبت {xp}+ نقطة خبرة",
+  "showStreak": "إظهار سلسلة التعلّم اليومية",
+  "great": "رائع!",
+  "syntaxExplorerTitle": "مستكشف الصياغة",
+  "syntaxExplorerPlaceholder": "ابحث عن الكلمات المفتاحية والصياغة والأمثلة"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import 'gamification_models.dart';
 import 'model_json.dart';
 
 enum LessonStatus { notStarted, inProgress, completed }
@@ -15,8 +16,11 @@ class LessonProgress {
   final DateTime? startedAt;
   final DateTime? completedAt;
   final String? savedCode;
+  final List<String> exercisesWithSolutionViewed;
+  final Map<String, int> exerciseAttempts;
+  final Map<String, int> exerciseHints;
 
-  const LessonProgress({
+  LessonProgress({
     required this.lessonId,
     this.status = LessonStatus.notStarted,
     this.exercisesCompleted = 0,
@@ -26,10 +30,23 @@ class LessonProgress {
     this.startedAt,
     this.completedAt,
     this.savedCode,
+    List<String> exercisesWithSolutionViewed = const [],
+    Map<String, int> exerciseAttempts = const {},
+    Map<String, int> exerciseHints = const {},
   }) : assert(exercisesCompleted >= 0),
        assert(exercisesTotal >= 0),
        assert(attempts >= 0),
-       assert(hintsUsed >= 0);
+       assert(hintsUsed >= 0),
+       exercisesWithSolutionViewed = List.unmodifiable(
+         exercisesWithSolutionViewed,
+       ),
+       exerciseAttempts = Map.unmodifiable(exerciseAttempts),
+       exerciseHints = Map.unmodifiable(exerciseHints) {
+    if (this.exerciseAttempts.values.any((count) => count < 0) ||
+        this.exerciseHints.values.any((count) => count < 0)) {
+      throw ArgumentError('Per-exercise counts must be non-negative.');
+    }
+  }
 
   factory LessonProgress.fromJson(JsonObject json) => LessonProgress(
     lessonId: requiredString(json, 'lessonId'),
@@ -49,6 +66,13 @@ class LessonProgress {
     startedAt: _date(json, 'startedAt'),
     completedAt: _date(json, 'completedAt'),
     savedCode: optionalString(json, 'savedCode'),
+    exercisesWithSolutionViewed: json.containsKey(
+      'exercisesWithSolutionViewed',
+    )
+        ? stringList(json, 'exercisesWithSolutionViewed')
+        : const [],
+    exerciseAttempts: _countMap(json, 'exerciseAttempts'),
+    exerciseHints: _countMap(json, 'exerciseHints'),
   );
 
   JsonObject toJson() => {
@@ -61,6 +85,9 @@ class LessonProgress {
     'startedAt': startedAt?.toIso8601String(),
     'completedAt': completedAt?.toIso8601String(),
     'savedCode': savedCode,
+    'exercisesWithSolutionViewed': exercisesWithSolutionViewed,
+    'exerciseAttempts': exerciseAttempts,
+    'exerciseHints': exerciseHints,
   };
 
   static DateTime? _date(JsonObject json, String key) {
@@ -73,6 +100,24 @@ class LessonProgress {
     } on FormatException {
       throw FormatException('Field "$key" must be an ISO-8601 date.');
     }
+  }
+
+  static Map<String, int> _countMap(JsonObject json, String key) {
+    final value = json[key];
+    if (value == null) return const {};
+    if (value is! Map) {
+      throw FormatException('Field "$key" must be an object.');
+    }
+    final counts = <String, int>{};
+    for (final entry in value.entries) {
+      if (entry.key is! String || entry.value is! int || entry.value < 0) {
+        throw FormatException(
+          'Field "$key" must map exercise IDs to non-negative integers.',
+        );
+      }
+      counts[entry.key as String] = entry.value as int;
+    }
+    return counts;
   }
 
   static LessonStatus _status(JsonObject json) {
@@ -99,6 +144,11 @@ class UserProgress {
   final DateTime lastActiveDate;
   final Map<String, LessonProgress> lessonsProgress;
   final List<String> earnedBadges;
+  final Map<String, DateTime> earnedBadgeDates;
+  final List<XpTransaction> xpTransactions;
+  final int firstTrySolvedCount;
+  final int syntaxExplorerUses;
+  final bool hasExecutedPrint;
 
   UserProgress({
     required this.visitorId,
@@ -110,12 +160,23 @@ class UserProgress {
     required this.lastActiveDate,
     required Map<String, LessonProgress> lessonsProgress,
     required List<String> earnedBadges,
+    Map<String, DateTime> earnedBadgeDates = const {},
+    List<XpTransaction> xpTransactions = const [],
+    this.firstTrySolvedCount = 0,
+    this.syntaxExplorerUses = 0,
+    this.hasExecutedPrint = false,
   }) : lessonsProgress = Map.unmodifiable(lessonsProgress),
-       earnedBadges = List.unmodifiable(earnedBadges) {
+       earnedBadges = List.unmodifiable(earnedBadges),
+       earnedBadgeDates = Map.unmodifiable(earnedBadgeDates),
+       xpTransactions = List.unmodifiable(xpTransactions) {
     if (visitorId.trim().isEmpty) {
       throw ArgumentError.value(visitorId, 'visitorId');
     }
-    if (totalXP < 0 || currentStreak < 0 || longestStreak < currentStreak) {
+    if (totalXP < 0 ||
+        currentStreak < 0 ||
+        longestStreak < currentStreak ||
+        firstTrySolvedCount < 0 ||
+        syntaxExplorerUses < 0) {
       throw ArgumentError(
         'Progress counts must be non-negative and streaks consistent.',
       );
@@ -145,6 +206,23 @@ class UserProgress {
       lastActiveDate: _requiredDate(json, 'lastActiveDate'),
       lessonsProgress: lessonProgress,
       earnedBadges: stringList(json, 'earnedBadges'),
+      earnedBadgeDates: _earnedBadgeDates(json),
+      xpTransactions: [
+        for (final transaction
+            in json['xpTransactions'] == null
+                ? const <Object?>[]
+                : requiredList(json, 'xpTransactions'))
+          XpTransaction.fromJson(_object(transaction, 'xpTransactions')),
+      ],
+      firstTrySolvedCount: json.containsKey('firstTrySolvedCount')
+          ? requiredInt(json, 'firstTrySolvedCount', minimum: 0)
+          : 0,
+      syntaxExplorerUses: json.containsKey('syntaxExplorerUses')
+          ? requiredInt(json, 'syntaxExplorerUses', minimum: 0)
+          : 0,
+      hasExecutedPrint: json.containsKey('hasExecutedPrint')
+          ? requiredBool(json, 'hasExecutedPrint')
+          : false,
     );
   }
 
@@ -161,6 +239,16 @@ class UserProgress {
         entry.key: entry.value.toJson(),
     },
     'earnedBadges': earnedBadges,
+    'earnedBadgeDates': {
+      for (final entry in earnedBadgeDates.entries)
+        entry.key: entry.value.toIso8601String(),
+    },
+    'xpTransactions': xpTransactions
+        .map((transaction) => transaction.toJson())
+        .toList(growable: false),
+    'firstTrySolvedCount': firstTrySolvedCount,
+    'syntaxExplorerUses': syntaxExplorerUses,
+    'hasExecutedPrint': hasExecutedPrint,
   };
 
   static DateTime _requiredDate(JsonObject json, String key) {
@@ -172,6 +260,30 @@ class UserProgress {
     }
   }
 
+  static Map<String, DateTime> _earnedBadgeDates(JsonObject json) {
+    final value = json['earnedBadgeDates'];
+    if (value == null) return const {};
+    if (value is! Map) {
+      throw const FormatException('Field "earnedBadgeDates" must be an object.');
+    }
+    final dates = <String, DateTime>{};
+    for (final entry in value.entries) {
+      if (entry.key is! String || entry.value is! String) {
+        throw const FormatException(
+          'Earned badge dates must map badge IDs to ISO-8601 dates.',
+        );
+      }
+      try {
+        dates[entry.key as String] = DateTime.parse(entry.value as String);
+      } on FormatException {
+        throw const FormatException(
+          'Earned badge dates must be valid ISO-8601 dates.',
+        );
+      }
+    }
+    return dates;
+  }
+
   static JsonObject _object(Object? value, String key) {
     if (value is! Map) throw FormatException('"$key" must be an object.');
     try {
@@ -180,4 +292,11 @@ class UserProgress {
       throw FormatException('"$key" must have string keys.');
     }
   }
+}
+
+extension UserLevelExtension on UserProgress {
+  int get level => (totalXP ~/ 100) + 1;
+  int get xpInCurrentLevel => totalXP % 100;
+  int get xpToNextLevel => 100;
+  double get levelProgressRatio => xpInCurrentLevel / 100;
 }
