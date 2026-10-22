@@ -9,7 +9,10 @@ import 'helpers/fake_lsp_transport.dart';
 void main() {
   test('decodes split UTF-8 frames and multiple frames in one chunk', () {
     final decoder = LspFrameDecoder();
-    final first = _frame({'method': 'message', 'params': {'text': 'مرحبا'}});
+    final first = _frame({
+      'method': 'message',
+      'params': {'text': 'مرحبا'},
+    });
     final second = _frame({'method': 'ready'});
     final split = first.length ~/ 2;
 
@@ -20,56 +23,60 @@ void main() {
     expect(messages.last['method'], 'ready');
   });
 
-  test('matches concurrent responses by id and reports JSON-RPC errors', () async {
-    final transport = FakeLspTransport(
-      serverCapabilities: {'completionProvider': true},
-    );
-    final client = LanguageServerClient(transport);
-    addTearDown(client.dispose);
-    await client.initialize();
-    transport.autoRespond = false;
+  test(
+    'matches concurrent responses by id and reports JSON-RPC errors',
+    () async {
+      final transport = FakeLspTransport(
+        serverCapabilities: {'completionProvider': true},
+      );
+      final client = LanguageServerClient(transport);
+      addTearDown(client.dispose);
+      await client.initialize();
+      transport.autoRespond = false;
 
-    final first = client.requestCancelable('first', const {});
-    final second = client.requestCancelable('second', const {});
-    final requests = transport.messages
-        .where((message) => message['id'] is int)
-        .toList();
-    final firstId = requests[1]['id'] as int;
-    final secondId = requests[2]['id'] as int;
-    transport.respond(secondId, result: 'second-result');
-    transport.respond(firstId, result: 'first-result');
-    expect(await first.result, 'first-result');
-    expect(await second.result, 'second-result');
+      final first = client.requestCancelable('first', const {});
+      final second = client.requestCancelable('second', const {});
+      final requests = transport.messages
+          .where((message) => message['id'] is int)
+          .toList();
+      final firstId = requests[1]['id'] as int;
+      final secondId = requests[2]['id'] as int;
+      transport.respond(secondId, result: 'second-result');
+      transport.respond(firstId, result: 'first-result');
+      expect(await first.result, 'first-result');
+      expect(await second.result, 'second-result');
 
-    transport.autoRespond = true;
-    transport.errorMethod = 'fails';
-    await expectLater(
-      client.request('fails', const {}),
-      throwsA(isA<LspRpcException>()),
-    );
-  });
+      transport.autoRespond = true;
+      transport.errorMethod = 'fails';
+      await expectLater(
+        client.request('fails', const {}),
+        throwsA(isA<LspRpcException>()),
+      );
+    },
+  );
 
-  test('cancels requests and rejects features absent from capabilities', () async {
-    final transport = FakeLspTransport(
-      serverCapabilities: {'completionProvider': true},
-    );
-    final client = LanguageServerClient(transport);
-    addTearDown(client.dispose);
-    await client.initialize();
+  test(
+    'cancels requests and rejects features absent from capabilities',
+    () async {
+      final transport = FakeLspTransport(
+        serverCapabilities: {'completionProvider': true},
+      );
+      final client = LanguageServerClient(transport);
+      addTearDown(client.dispose);
+      await client.initialize();
 
-    expect(
-      () => client.hover(Uri.parse('file:///main.gd'), 0, 0),
-      throwsUnsupportedError,
-    );
-    final request = client.requestCancelable('longTask', const {});
-    await request.cancel();
-    expect(
-      transport.messages.last['method'],
-      r'$/cancelRequest',
-    );
-    transport.respond(request.id, result: null);
-    expect(await request.result, isNull);
-  });
+      expect(
+        () => client.hover(Uri.parse('file:///main.gd'), 0, 0),
+        throwsUnsupportedError,
+      );
+      transport.autoRespond = false;
+      final request = client.requestCancelable('longTask', const {});
+      await request.cancel();
+      expect(transport.messages.last['method'], r'$/cancelRequest');
+      transport.respond(request.id, result: null);
+      expect(await request.result, isNull);
+    },
+  );
 
   test('shutdown sends request then exit and closes transport', () async {
     final transport = FakeLspTransport();

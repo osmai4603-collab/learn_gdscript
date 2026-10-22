@@ -11,6 +11,7 @@ class AppSettingsProvider extends ChangeNotifier {
 
   final SettingsRepository _repository;
   AppSettings _settings;
+  int _revision = 0;
 
   AppSettings get settings => _settings;
   Locale get locale => _settings.locale;
@@ -24,13 +25,16 @@ class AppSettingsProvider extends ChangeNotifier {
 
   Future<void> _update(AppSettings next) async {
     final previous = _settings;
+    final revision = ++_revision;
     _settings = next;
     notifyListeners();
     try {
       await _repository.save(next);
     } on Object {
-      _settings = previous;
-      notifyListeners();
+      if (revision == _revision) {
+        _settings = previous;
+        notifyListeners();
+      }
       rethrow;
     }
   }

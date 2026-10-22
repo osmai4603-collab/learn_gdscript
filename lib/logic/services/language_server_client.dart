@@ -34,6 +34,7 @@ class LanguageServerClient {
   bool _initialized = false;
   bool _closing = false;
   bool _closed = false;
+  bool _transportFailed = false;
   LspObject? _serverCapabilities;
 
   Stream<LspNotification> get notifications => _notifications.stream;
@@ -126,32 +127,43 @@ class LanguageServerClient {
   }
 
   Future<void> openDocument(Uri uri, String text, {int version = 1}) =>
-      notify('textDocument/didOpen', {
-        'textDocument': {
-          'uri': uri.toString(),
-          'languageId': GDScriptConstants.languageId,
-          'version': version,
-          'text': text,
-        },
-      });
+      _withSyncCapability(
+        'openClose',
+        () => notify('textDocument/didOpen', {
+          'textDocument': {
+            'uri': uri.toString(),
+            'languageId': GDScriptConstants.languageId,
+            'version': version,
+            'text': text,
+          },
+        }),
+      );
 
   Future<void> changeDocument(Uri uri, String text, {required int version}) =>
-      notify('textDocument/didChange', {
-        'textDocument': {'uri': uri.toString(), 'version': version},
-        'contentChanges': [
-          {'text': text},
-        ],
-      });
+      _withSyncCapability(
+        'change',
+        () => notify('textDocument/didChange', {
+          'textDocument': {'uri': uri.toString(), 'version': version},
+          'contentChanges': [
+            {'text': text},
+          ],
+        }),
+      );
 
-  Future<void> saveDocument(Uri uri, {String? text}) =>
-      notify('textDocument/didSave', {
-        'textDocument': {'uri': uri.toString()},
-        'text': ?text,
-      });
+  Future<void> saveDocument(Uri uri, {String? text}) => _withSyncCapability(
+    'save',
+    () => notify('textDocument/didSave', {
+      'textDocument': {'uri': uri.toString()},
+      'text': ?text,
+    }),
+  );
 
-  Future<void> closeDocument(Uri uri) => notify('textDocument/didClose', {
-    'textDocument': {'uri': uri.toString()},
-  });
+  Future<void> closeDocument(Uri uri) => _withSyncCapability(
+    'openClose',
+    () => notify('textDocument/didClose', {
+      'textDocument': {'uri': uri.toString()},
+    }),
+  );
 
   Future<Object?> complete(Uri uri, int line, int character) {
     _requireCapability('completionProvider');
@@ -268,6 +280,31 @@ class LanguageServerClient {
     });
   }
 
+  Future<void> changeWorkspaceFolders({
+    required List<Uri> added,
+    required List<Uri> removed,
+  }) {
+    final workspace = _serverCapabilities?['workspace'];
+    final folders = workspace is Map ? workspace['workspaceFolders'] : null;
+    if (folders is! Map || folders['supported'] != true) {
+      throw UnsupportedError(
+        'The language server did not advertise workspace folders.',
+      );
+    }
+    return notify('workspace/didChangeWorkspaceFolders', {
+      'event': {
+        'added': [
+          for (final uri in added)
+            {'uri': uri.toString(), 'name': _workspaceFolderName(uri)},
+        ],
+        'removed': [
+          for (final uri in removed)
+            {'uri': uri.toString(), 'name': _workspaceFolderName(uri)},
+        ],
+      },
+    });
+  }
+
   Future<void> shutdown() async {
     if (_closed) return;
     Object? shutdownError;
@@ -290,7 +327,14 @@ class LanguageServerClient {
       await _transport.closeInput();
     }
     try {
-      await _transport.exitCode.timeout(const Duration(seconds: 10));
+      final exitCode = await _transport.exitCode.timeout(
+        const Duration(seconds: 10),
+      );
+      if (exitCode != 0) {
+        throw StateError(
+          'Language server exited with status $exitCode after shutdown.',
+        );
+      }
     } on TimeoutException {
       await _transport.kill();
       throw TimeoutException('Language server did not exit after shutdown.');
@@ -304,7 +348,7 @@ class LanguageServerClient {
 
   Future<void> dispose() async {
     if (_closed) return;
-    if (_initialized) {
+    if (_initialized && !_transportFailed) {
       await shutdown();
     } else {
       await _transport.kill();
@@ -342,6 +386,28 @@ class LanguageServerClient {
         'The language server did not advertise experimental.$capability.',
       );
     }
+  }
+
+  Future<void> _withSyncCapability(
+    String option,
+    Future<void> Function() operation,
+  ) {
+    final sync = _serverCapabilities?['textDocumentSync'];
+    final supported = switch (option) {
+      'openClose' => sync is Map && sync['openClose'] == true,
+      'change' =>
+        sync is int
+            ? sync > 0
+            : sync is Map && sync['change'] is int && sync['change'] != 0,
+      'save' => sync is Map && sync['save'] != null && sync['save'] != false,
+      _ => false,
+    };
+    if (!supported) {
+      throw UnsupportedError(
+        'The language server did not advertise textDocumentSync.$option.',
+      );
+    }
+    return operation();
   }
 
   Future<void> _send(LspObject message) {
@@ -398,6 +464,7 @@ class LanguageServerClient {
   }
 
   void _onTransportError(Object error, StackTrace stackTrace) {
+    _transportFailed = true;
     for (final completer in _pending.values) {
       if (!completer.isCompleted) completer.completeError(error, stackTrace);
     }
@@ -407,12 +474,14 @@ class LanguageServerClient {
 
   void _onStdoutDone() {
     if (_closing || _closed) return;
+    _transportFailed = true;
     _onTransportError(
       StateError(
         'LSP stdout closed unexpectedly (stderr bytes received: $_stderrBytes).',
       ),
       StackTrace.current,
     );
+    unawaited(_transport.kill());
   }
 
   void _completeError(int id, Object error, StackTrace stackTrace) {
@@ -443,6 +512,13 @@ class LanguageServerClient {
     } on TypeError {
       throw FormatException('$description keys must be strings.');
     }
+  }
+
+  static String _workspaceFolderName(Uri uri) {
+    for (final segment in uri.pathSegments.reversed) {
+      if (segment.isNotEmpty) return segment;
+    }
+    return 'workspace';
   }
 }
 

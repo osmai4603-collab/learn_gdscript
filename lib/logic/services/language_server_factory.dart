@@ -48,8 +48,6 @@ class LanguageServerFactory {
     final architecture = Abi.current().toString();
     return switch ((Platform.operatingSystem, architecture)) {
       ('linux', 'Abi.linuxX64') => 'gdscript_lsp-linux-x64',
-      ('linux', 'Abi.linuxArm64') => 'gdscript_lsp-linux-arm64',
-      ('macos', 'Abi.macosX64') => 'gdscript_lsp-macos-x64',
       ('macos', 'Abi.macosArm64') => 'gdscript_lsp-macos-arm64',
       ('windows', 'Abi.windowsX64') => 'gdscript_lsp-windows-x64.exe',
       ('android', _) || ('ios', _) || ('web', _) => throw UnsupportedError(

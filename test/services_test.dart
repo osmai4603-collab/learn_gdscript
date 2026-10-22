@@ -22,68 +22,82 @@ void main() {
     expect(failure.diagnostics, isNotEmpty);
   });
 
-  test('test runner applies whitespace and case options independently', () async {
-    final runner = CodeRunnerService();
-    addTearDown(runner.dispose);
-    const service = TestRunnerService(runner);
-    final cases = [
-      const ExerciseTestCase(
-        description: LocalizedText(ar: 'مسافات', en: 'Whitespace'),
-        setupCode: 'var number = 2',
-        expectedOutput: '  2  ',
-        ignoreWhitespace: true,
-      ),
-      const ExerciseTestCase(
-        description: LocalizedText(ar: 'حالة الحروف', en: 'Case'),
-        expectedOutput: 'HELLO',
-        ignoreCase: true,
-      ),
-      const ExerciseTestCase(
-        description: LocalizedText(ar: 'مقارنة دقيقة', en: 'Exact'),
-        expectedOutput: 'Hello ',
-      ),
-    ];
-    final result = await service.runTests(
-      userCode: 'print(number)\nprint("hello")',
-      testCases: cases,
-    );
+  test(
+    'test runner applies whitespace and case options independently',
+    () async {
+      final runner = CodeRunnerService();
+      addTearDown(runner.dispose);
+      final service = TestRunnerService(runner);
+      final whitespaceResult = await service.runTests(
+        userCode: 'print(2)',
+        testCases: const [
+          ExerciseTestCase(
+            description: LocalizedText(ar: 'مسافات', en: 'Whitespace'),
+            setupCode: 'var number = 2',
+            expectedOutput: '  2  ',
+            ignoreWhitespace: true,
+          ),
+        ],
+      );
+      final caseResult = await service.runTests(
+        userCode: 'print("hello")',
+        testCases: const [
+          ExerciseTestCase(
+            description: LocalizedText(ar: 'حالة الحروف', en: 'Case'),
+            expectedOutput: 'HELLO',
+            ignoreCase: true,
+          ),
+          ExerciseTestCase(
+            description: LocalizedText(ar: 'مقارنة دقيقة', en: 'Exact'),
+            expectedOutput: 'hello ',
+          ),
+        ],
+      );
 
-    expect(result.totalCount, 3);
-    expect(result.passedCount, 2);
-    expect(result.allPassed, isFalse);
-    expect(result.testResults.map((item) => item.passed), [true, true, false]);
-  });
+      expect(whitespaceResult.testResults.single.passed, isTrue);
+      expect(caseResult.totalCount, 2);
+      expect(caseResult.passedCount, 1);
+      expect(caseResult.allPassed, isFalse);
+      expect(caseResult.testResults.map((item) => item.passed), [true, false]);
+    },
+  );
 
-  test('runner exposes empty tests as untested and returns ordered hints', () async {
-    final runner = CodeRunnerService();
-    addTearDown(runner.dispose);
-    const testRunner = TestRunnerService(runner);
-    expect(
-      (await testRunner.runTests(userCode: '', testCases: const [])).allPassed,
-      isFalse,
-    );
+  test(
+    'runner exposes empty tests as untested and returns ordered hints',
+    () async {
+      final runner = CodeRunnerService();
+      addTearDown(runner.dispose);
+      final testRunner = TestRunnerService(runner);
+      expect(
+        (await testRunner.runTests(
+          userCode: '',
+          testCases: const [],
+        )).allPassed,
+        isFalse,
+      );
 
-    final exercise = Exercise(
-      id: 'exercise',
-      lessonId: 'lesson',
-      type: ExerciseType.writeCode,
-      prompt: const LocalizedText(ar: 'اكتب', en: 'Write'),
-      starterCode: '',
-      solutionCode: 'print("answer")',
-      testCases: const [],
-      hints: const [
-        LocalizedText(ar: 'الأول', en: 'First'),
-        LocalizedText(ar: 'الثاني', en: 'Second'),
-      ],
-      order: 0,
-    );
-    const hints = HintService();
-    expect(hints.nextHint(exercise, hintsAlreadyShown: 0)?.en, 'First');
-    expect(hints.nextHint(exercise, hintsAlreadyShown: 1)?.en, 'Second');
-    expect(hints.nextHint(exercise, hintsAlreadyShown: 2), isNull);
-    expect(
-      () => hints.nextHint(exercise, hintsAlreadyShown: -1),
-      throwsArgumentError,
-    );
-  });
+      final exercise = Exercise(
+        id: 'exercise',
+        lessonId: 'lesson',
+        type: ExerciseType.writeCode,
+        prompt: const LocalizedText(ar: 'اكتب', en: 'Write'),
+        starterCode: '',
+        solutionCode: 'print("answer")',
+        testCases: const [],
+        hints: const [
+          LocalizedText(ar: 'الأول', en: 'First'),
+          LocalizedText(ar: 'الثاني', en: 'Second'),
+        ],
+        order: 0,
+      );
+      const hints = HintService();
+      expect(hints.nextHint(exercise, hintsAlreadyShown: 0)?.en, 'First');
+      expect(hints.nextHint(exercise, hintsAlreadyShown: 1)?.en, 'Second');
+      expect(hints.nextHint(exercise, hintsAlreadyShown: 2), isNull);
+      expect(
+        () => hints.nextHint(exercise, hintsAlreadyShown: -1),
+        throwsArgumentError,
+      );
+    },
+  );
 }

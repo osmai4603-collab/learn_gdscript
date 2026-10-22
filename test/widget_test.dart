@@ -5,7 +5,10 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:learn_gdscript/app.dart';
 import 'package:learn_gdscript/app_dependencies.dart';
@@ -21,6 +24,7 @@ void main() {
   ) async {
     final dependencies = await AppDependencies.create(
       databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TestAssetBundle(),
     );
     addTearDown(dependencies.dispose);
 
@@ -39,6 +43,7 @@ void main() {
   ) async {
     final dependencies = await AppDependencies.create(
       databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TestAssetBundle(),
     );
     addTearDown(dependencies.dispose);
 
@@ -69,6 +74,7 @@ void main() {
   testWidgets('supports static and validated lesson routes', (tester) async {
     final dependencies = await AppDependencies.create(
       databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TestAssetBundle(),
     );
     addTearDown(dependencies.dispose);
 
@@ -92,7 +98,7 @@ void main() {
     await database.database;
     final settings = SettingsRepository(database);
     await settings.save(
-       AppSettings(locale: Locale('en'), themeMode: ThemeMode.dark),
+      AppSettings(locale: Locale('en'), themeMode: ThemeMode.dark),
     );
     final restored = await SettingsRepository(database).load();
     expect(restored.locale, const Locale('en'));
@@ -106,4 +112,16 @@ void main() {
       containsAll([const Locale('ar'), const Locale('en')]),
     );
   });
+}
+
+class _TestAssetBundle extends CachingAssetBundle {
+  static const _manifest = '''
+    {"version":"1","targetGDScriptVersion":"4","units":[]}
+  ''';
+
+  @override
+  Future<ByteData> load(String key) async {
+    final bytes = Uint8List.fromList(utf8.encode(_manifest));
+    return ByteData.sublistView(bytes);
+  }
 }

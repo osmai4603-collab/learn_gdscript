@@ -12,6 +12,12 @@ class ProcessLspTransport implements LspTransport {
     List<String> arguments = const [],
     String? workingDirectory,
   }) async {
+    if (!Platform.isLinux && !Platform.isMacOS && !Platform.isWindows) {
+      throw UnsupportedError(
+        'Local GDScript LSP subprocesses are unsupported on '
+        '${Platform.operatingSystem}.',
+      );
+    }
     final executable = File(executablePath);
     if (!await executable.exists()) {
       throw FileSystemException(

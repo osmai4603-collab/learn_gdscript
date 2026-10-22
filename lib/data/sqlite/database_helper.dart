@@ -7,14 +7,10 @@ import 'migrations.dart';
 import 'sqlite_database.dart';
 
 class DatabaseHelper {
-  DatabaseHelper({
-    Future<String> Function()? databasePathProvider,
-    bool inMemory = false,
-  }) : _databasePathProvider = databasePathProvider,
-       _inMemory = inMemory;
+  DatabaseHelper({this.databasePathProvider, this.inMemory = false});
 
-  final Future<String> Function()? _databasePathProvider;
-  final bool _inMemory;
+  final Future<String> Function()? databasePathProvider;
+  final bool inMemory;
   Future<CommonDatabase>? _opening;
   CommonDatabase? _database;
 
@@ -31,9 +27,9 @@ class DatabaseHelper {
 
   Future<CommonDatabase> _open() async {
     final String path;
-    if (_inMemory) {
+    if (inMemory) {
       path = ':memory:';
-    } else if (_databasePathProvider case final provider?) {
+    } else if (databasePathProvider case final provider?) {
       path = await provider();
     } else {
       if (kIsWeb) {
@@ -45,7 +41,7 @@ class DatabaseHelper {
       path = '${directory.path}/${AppConstants.databaseFileName}';
     }
 
-    final database = openSqliteDatabase(path, inMemory: _inMemory);
+    final database = openSqliteDatabase(path, inMemory: inMemory);
     try {
       database.execute('PRAGMA foreign_keys = ON');
       migrateDatabase(database);

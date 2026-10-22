@@ -27,7 +27,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get workspaceTitle => 'مساحة العمل';
 
   @override
-  String get workspaceDescription => 'تشغيل خادم اللغة محليًا مدعوم على أجهزة سطح المكتب فقط.';
+  String get workspaceDescription =>
+      'تشغيل خادم اللغة محليًا مدعوم على أجهزة سطح المكتب فقط.';
 
   @override
   String get settingsTitle => 'الإعدادات';
@@ -36,7 +37,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingTitle => 'مرحبًا';
 
   @override
-  String get onboardingDescription => 'اختر مسارًا للتعلّم وتقدّم بالسرعة التي تناسبك.';
+  String get onboardingDescription =>
+      'اختر مسارًا للتعلّم وتقدّم بالسرعة التي تناسبك.';
 
   @override
   String get lessonTitle => 'الدرس';

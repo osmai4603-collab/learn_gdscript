@@ -62,10 +62,7 @@ class FakeLspTransport implements LspTransport {
     }, fragmentSizes: fragmentSizes);
   }
 
-  void sendMessage(
-    Map<String, Object?> message, {
-    List<int>? fragmentSizes,
-  }) {
+  void sendMessage(Map<String, Object?> message, {List<int>? fragmentSizes}) {
     final body = utf8.encode(jsonEncode(message));
     final packet = [
       ...ascii.encode('Content-Length: ${body.length}\r\n\r\n'),

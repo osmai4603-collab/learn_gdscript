@@ -21,13 +21,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get learningPathTitle => 'Learning path';
 
   @override
-  String get learningPathEmpty => 'Learning content will be added in a later phase.';
+  String get learningPathEmpty =>
+      'Learning content will be added in a later phase.';
 
   @override
   String get workspaceTitle => 'Workspace';
 
   @override
-  String get workspaceDescription => 'Local language-server processes are supported on desktop platforms only.';
+  String get workspaceDescription =>
+      'Local language-server processes are supported on desktop platforms only.';
 
   @override
   String get settingsTitle => 'Settings';
@@ -36,7 +38,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingTitle => 'Welcome';
 
   @override
-  String get onboardingDescription => 'Choose a learning path and continue at your own pace.';
+  String get onboardingDescription =>
+      'Choose a learning path and continue at your own pace.';
 
   @override
   String get lessonTitle => 'Lesson';
@@ -72,7 +75,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeDark => 'Dark';
 
   @override
-  String get saveSettingsError => 'Settings could not be saved. Your previous choice was restored.';
+  String get saveSettingsError =>
+      'Settings could not be saved. Your previous choice was restored.';
 
   @override
   String get navigateHome => 'Home';
