@@ -27,6 +27,7 @@ void main() {
           exercise: exercise,
           exerciseIndex: 0,
           exerciseCount: 1,
+          fontSize: 16,
           onCompleted: () => completed = true,
         ),
       ),
@@ -35,6 +36,7 @@ void main() {
     final codeField = tester.widget<TextField>(find.byType(TextField));
     expect(codeField.readOnly, isTrue);
     expect(codeField.controller!.text, 'print(2)');
+    expect(codeField.style!.fontSize, 16);
 
     await tester.tap(find.text('2!'));
     await tester.pump();

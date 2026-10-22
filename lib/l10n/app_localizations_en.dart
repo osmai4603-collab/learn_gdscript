@@ -238,4 +238,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lspFeatureError => 'The language server feature failed.';
   @override
   String diagnosticLine(int line) => 'Line $line';
+  @override
+  String get workspaceSearchTitle => 'Search workspace';
+  @override
+  String get workspaceSearchPlaceholder => 'Enter text or a symbol';
+  @override
+  String get searchWorkspaceText => 'Text';
+  @override
+  String get searchWorkspaceSymbols => 'Symbols';
+  @override
+  String get workspaceSearchEmpty => 'No results found.';
 }

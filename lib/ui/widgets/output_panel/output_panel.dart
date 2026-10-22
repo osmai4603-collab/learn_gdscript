@@ -35,21 +35,25 @@ class OutputPanel extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: switch (state) {
-              OutputState.empty => Row(
+              OutputState.empty => Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 8,
                 children: [
                   const Icon(Icons.terminal),
-                  const SizedBox(width: 8),
                   Text(context.l10n.outputEmpty),
                 ],
               ),
-              OutputState.running => Row(
+              OutputState.running => Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 8,
                 children: [
                   const SizedBox(
                     width: 18,
                     height: 18,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   ),
-                  const SizedBox(width: 8),
                   Text(context.l10n.outputRunning),
                 ],
               ),

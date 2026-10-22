@@ -402,11 +402,11 @@ class _LessonScreenState extends State<LessonScreen> {
 
 class _LspDiagnostics extends StatelessWidget {
   const _LspDiagnostics({required this.diagnostics});
-
   final List<Map<String, Object?>> diagnostics;
 
   @override
-  Widget build(BuildContext context) => Card(
+  Widget build(BuildContext context) {
+    return Card(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -429,15 +429,16 @@ class _LspDiagnostics extends StatelessWidget {
       ],
     ),
   );
+  }
 
-  static String? _diagnosticLine(
+  static Widget? _diagnosticLine(
     BuildContext context,
     Map<String, Object?> diagnostic,
   ) {
     final range = diagnostic['range'];
     if (range is! Map || range['start'] is! Map) return null;
     final line = (range['start'] as Map)['line'];
-    return line is int ? context.l10n.diagnosticLine(line + 1) : null;
+    return line is int ? Text(context.l10n.diagnosticLine(line + 1)) : null;
   }
 }
 

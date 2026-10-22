@@ -331,6 +331,11 @@ abstract class AppLocalizations {
   String get formatCode;
   String get lspFeatureError;
   String diagnosticLine(int line);
+  String get workspaceSearchTitle;
+  String get workspaceSearchPlaceholder;
+  String get searchWorkspaceText;
+  String get searchWorkspaceSymbols;
+  String get workspaceSearchEmpty;
 }
 
 class _AppLocalizationsDelegate

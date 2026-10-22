@@ -97,5 +97,10 @@
   "completeCode": "إكمال",
   "formatCode": "تنسيق",
   "lspFeatureError": "تعذّرت ميزة خادم اللغة.",
-  "diagnosticLine": "السطر {line}"
+  "diagnosticLine": "السطر {line}",
+  "workspaceSearchTitle": "البحث في مساحة العمل",
+  "workspaceSearchPlaceholder": "أدخل نصاً أو رمزاً للبحث",
+  "searchWorkspaceText": "نص",
+  "searchWorkspaceSymbols": "رموز",
+  "workspaceSearchEmpty": "لم يتم العثور على نتائج."
 }

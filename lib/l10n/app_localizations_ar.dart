@@ -233,4 +233,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get lspFeatureError => 'تعذّرت ميزة خادم اللغة.';
   @override
   String diagnosticLine(int line) => 'السطر $line';
+  @override
+  String get workspaceSearchTitle => 'البحث في مساحة العمل';
+  @override
+  String get workspaceSearchPlaceholder => 'أدخل نصاً أو رمزاً للبحث';
+  @override
+  String get searchWorkspaceText => 'نص';
+  @override
+  String get searchWorkspaceSymbols => 'رموز';
+  @override
+  String get workspaceSearchEmpty => 'لم يتم العثور على نتائج.';
 }

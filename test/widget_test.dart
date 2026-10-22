@@ -36,10 +36,41 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('الرئيسية'), findsOneWidget);
-    expect(find.text('ستُضاف المواد التعليمية في مرحلة لاحقة.'), findsOneWidget);
+    expect(
+      find.text('ستُضاف المواد التعليمية في مرحلة لاحقة.'),
+      findsOneWidget,
+    );
     await tester.tap(find.text('الإعدادات'));
     await tester.pumpAndSettle();
     expect(find.text('اللغة'), findsOneWidget);
+  });
+
+  testWidgets('experienced onboarding starts at the chosen unit', (
+    tester,
+  ) async {
+    final dependencies = await AppDependencies.create(
+      databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TwoUnitAssetBundle(),
+    );
+    addTearDown(dependencies.dispose);
+
+    await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('أعرف أساسيات البرمجة'));
+    await tester.pumpAndSettle();
+
+    expect(
+      dependencies.progressProvider.progress?.currentUnitId,
+      'unit_02_variables',
+    );
+    expect(find.text('المتغيرات · next'), findsOneWidget);
+
+    Navigator.of(
+      tester.element(find.byType(Scaffold).first),
+    ).pushNamed('/path');
+    await tester.pumpAndSettle();
+    expect(find.text('المتغيرات'), findsOneWidget);
+    expect(find.text('مقفل'), findsOneWidget);
   });
 
   testWidgets('locale controls direction and preserves code direction', (
@@ -99,6 +130,32 @@ void main() {
     expect(find.text('الصفحة غير موجودة'), findsOneWidget);
   });
 
+  testWidgets('workspace search requires an active language server', (
+    tester,
+  ) async {
+    final dependencies = await AppDependencies.create(
+      databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TestAssetBundle(),
+    );
+    addTearDown(dependencies.dispose);
+    await dependencies.appSettingsProvider.completeOnboarding();
+
+    await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+    await tester.pumpAndSettle();
+    Navigator.of(
+      tester.element(find.byType(Scaffold).first),
+    ).pushNamed('/workspace/search');
+    await tester.pumpAndSettle();
+
+    expect(find.text('نص'), findsOneWidget);
+    expect(find.text('رموز'), findsOneWidget);
+    expect(find.text('أدخل نصاً أو رمزاً للبحث'), findsOneWidget);
+    expect(
+      tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
+      isNull,
+    );
+  });
+
   test('persists settings through repository recreation', () async {
     final database = DatabaseHelper(inMemory: true);
     await database.database;
@@ -126,6 +183,47 @@ class _TestAssetBundle extends CachingAssetBundle {
   static const _manifest = '''
     {"version":"1","targetGDScriptVersion":"4","units":[]}
   ''';
+
+  @override
+  Future<ByteData> load(String key) async {
+    final bytes = Uint8List.fromList(utf8.encode(_manifest));
+    return ByteData.sublistView(bytes);
+  }
+}
+
+class _TwoUnitAssetBundle extends CachingAssetBundle {
+  static const _manifest = '''
+      {
+        "version": "1",
+        "targetGDScriptVersion": "4",
+        "units": [
+          {
+            "id": "unit_01_intro",
+            "title": {"ar": "المقدمة", "en": "Introduction"},
+            "description": {"ar": "الوحدة الأولى", "en": "First unit"},
+            "iconName": "school",
+            "order": 0,
+            "lessonIds": ["lesson_01_intro"]
+          },
+          {
+            "id": "unit_02_variables",
+            "title": {"ar": "المتغيرات", "en": "Variables"},
+            "description": {"ar": "الوحدة الثانية", "en": "Second unit"},
+            "iconName": "code",
+            "order": 1,
+            "lessonIds": ["lesson_02_next"]
+          },
+          {
+            "id": "unit_03_locked",
+            "title": {"ar": "الوحدة الثالثة", "en": "Third unit"},
+            "description": {"ar": "وحدة لاحقة", "en": "Later unit"},
+            "iconName": "code",
+            "order": 2,
+            "lessonIds": ["lesson_03_locked"]
+          }
+        ]
+      }
+    ''';
 
   @override
   Future<ByteData> load(String key) async {

@@ -21,6 +21,7 @@ import 'ui/screens/not_found_screen.dart';
 import 'ui/screens/onboarding/onboarding_screen.dart';
 import 'ui/screens/settings/settings_screen.dart';
 import 'ui/screens/workspace/workspace_screen.dart';
+import 'ui/screens/workspace/workspace_search_screen.dart';
 
 class LearnGdscriptApp extends StatefulWidget {
   const LearnGdscriptApp({super.key, required this.dependencies});
@@ -89,6 +90,7 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
       '/settings' => const SettingsScreen(),
       '/onboarding' => const OnboardingScreen(),
       '/workspace' => const WorkspaceScreen(),
+      '/workspace/search' => const WorkspaceSearchScreen(),
       _ when name.startsWith('/lesson/') => _lessonScreen(name),
       _ when name.startsWith('/lesson-complete/') =>
         _lessonCompleteScreen(name),

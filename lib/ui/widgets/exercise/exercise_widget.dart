@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/exercise_models.dart';
 import '../../../logic/services/test_runner_service.dart';
@@ -48,7 +47,6 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
   bool _running = false;
   bool _showSolution = false;
   bool? _predictionCorrect;
-  String? _selectedPrediction;
   int _attempts = 0;
   int _hintsUsed = 0;
   late List<String> _orderedLines;
@@ -81,7 +79,6 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
       _attempts = 0;
       _hintsUsed = 0;
       _predictionCorrect = null;
-      _selectedPrediction = null;
     }
   }
 
@@ -119,7 +116,6 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
     final passed = choice == expected;
     setState(() {
       _attempts++;
-      _selectedPrediction = choice;
       _predictionCorrect = passed;
     });
     widget.onProgressChanged?.call(_attempts, _hintsUsed);
@@ -161,7 +157,6 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
       _runError = null;
       _showSolution = false;
       _predictionCorrect = null;
-      _selectedPrediction = null;
     });
     widget.onCodeChanged?.call(_code);
   }
@@ -234,6 +229,7 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
                         : () => _choosePrediction(option),
                     child: Text(
                       option.isEmpty ? '""' : option,
+                      textDirection: TextDirection.ltr,
                       style: const TextStyle(fontFamily: 'monospace'),
                     ),
                   ),

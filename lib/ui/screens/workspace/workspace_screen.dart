@@ -129,6 +129,15 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
             const SizedBox(height: 8),
             Text(server.rootPath ?? ''),
             Text(l10n.indexedFiles(server.indexedFileCount)),
+            const SizedBox(height: 12),
+            OutlinedButton.icon(
+              onPressed: () => Navigator.pushNamed(
+                context,
+                '/workspace/search',
+              ),
+              icon: const Icon(Icons.search),
+              label: Text(l10n.workspaceSearchTitle),
+            ),
           ],
           if (_error != null) ...[
             const SizedBox(height: 12),

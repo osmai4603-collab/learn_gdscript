@@ -97,5 +97,10 @@
   "completeCode": "Complete",
   "formatCode": "Format",
   "lspFeatureError": "The language server feature failed.",
-  "diagnosticLine": "Line {line}"
+  "diagnosticLine": "Line {line}",
+  "workspaceSearchTitle": "Search workspace",
+  "workspaceSearchPlaceholder": "Enter text or a symbol",
+  "searchWorkspaceText": "Text",
+  "searchWorkspaceSymbols": "Symbols",
+  "workspaceSearchEmpty": "No results found."
 }
