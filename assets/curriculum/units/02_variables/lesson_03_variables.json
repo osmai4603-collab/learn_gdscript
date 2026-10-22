@@ -1,0 +1,63 @@
+{
+  "id": "lesson_03_variables",
+  "unitId": "unit_02_variables",
+  "title": {"ar": "المتغيرات", "en": "Variables"},
+  "objective": {"ar": "خزّن قيمة في متغير ثم استخدمها أو حدّثها.", "en": "Store a value in a variable, then use or update it."},
+  "estimatedMinutes": 5,
+  "order": 0,
+  "contentMarkdown": {
+    "ar": "## خزّن قيمة باسم\n\nالمتغير اسم لقيمة يمكن لبرنامجك استخدامها لاحقاً. عرّفه بكلمة `var` ثم أسند إليه قيمة:\n\n```gdscript\nvar name = \"Ali\"\nprint(name)\n```\n\nاستخدم أسماء واضحة تبدأ بحرف أو شرطة سفلية، واكتب الأسماء البرمجية بالإنجليزية. يمكنك إسناد قيمة جديدة إلى المتغير؛ عندها تُستخدم القيمة الأحدث.",
+    "en": "## Store a value by name\n\nA variable is a name for a value your program can use later. Declare it with `var` and assign a value:\n\n```gdscript\nvar name = \"Ali\"\nprint(name)\n```\n\nUse clear names that start with a letter or underscore, and write code identifiers in English. You can assign a new value to a variable; later code uses the updated value."
+  },
+  "exampleCode": "var name = \"Ali\"\nprint(name)",
+  "exercises": [
+    {
+      "id": "ex_03_store_score",
+      "lessonId": "lesson_03_variables",
+      "type": "writeCode",
+      "prompt": {"ar": "أنشئ المتغير `score` بالقيمة `10` واطبع قيمته.", "en": "Create a variable named `score` with the value `10` and print it."},
+      "starterCode": "",
+      "solutionCode": "var score = 10\nprint(score)",
+      "testCases": [
+        {"description": {"ar": "تظهر قيمة المتغير.", "en": "The variable value is displayed."}, "expectedOutput": "10"}
+      ],
+      "hints": [
+        {"ar": "ابدأ التعريف بالكلمة `var`.", "en": "Start the declaration with `var`."},
+        {"ar": "مرّر اسم المتغير إلى `print()`.", "en": "Pass the variable name to `print()`."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_03_two_variables",
+      "lessonId": "lesson_03_variables",
+      "type": "writeCode",
+      "prompt": {"ar": "أنشئ `count` بالقيمة `3` و`color` بالقيمة `Blue`، ثم اطبع كل قيمة في سطر.", "en": "Create `count` with the value `3` and `color` with the value `Blue`, then print each value on a line."},
+      "starterCode": "",
+      "solutionCode": "var count = 3\nvar color = \"Blue\"\nprint(count)\nprint(color)",
+      "testCases": [
+        {"description": {"ar": "تظهر القيمتان بالترتيب.", "en": "Both values appear in order."}, "expectedOutput": "3\nBlue"}
+      ],
+      "hints": [
+        {"ar": "اكتب تعريفاً مستقلاً لكل متغير.", "en": "Write a separate declaration for each variable."},
+        {"ar": "النصوص تحتاج إلى علامتي تنصيص، والأعداد لا تحتاج إليهما.", "en": "Strings need quotation marks; numbers do not."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_03_reassign",
+      "lessonId": "lesson_03_variables",
+      "type": "predictOutput",
+      "prompt": {"ar": "اكتب برنامجاً يعرّف `lives` بالقيمة `4` ثم يغيّرها إلى `2` ويطبع القيمة الجديدة.", "en": "Write a program that sets `lives` to `4`, changes it to `2`, and prints the new value."},
+      "starterCode": "",
+      "solutionCode": "var lives = 4\nlives = 2\nprint(lives)",
+      "testCases": [
+        {"description": {"ar": "تُطبع القيمة بعد إعادة الإسناد.", "en": "The value after reassignment is printed."}, "expectedOutput": "2"}
+      ],
+      "hints": [
+        {"ar": "عرّف المتغير مرة واحدة باستخدام `var`.", "en": "Declare the variable once using `var`."},
+        {"ar": "اكتب إسناداً جديداً إلى `lives` قبل الطباعة.", "en": "Assign a new value to `lives` before printing."}
+      ],
+      "order": 2
+    }
+  ]
+}

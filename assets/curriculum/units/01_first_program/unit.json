@@ -1,0 +1,8 @@
+{
+  "id": "unit_01_first_program",
+  "title": {"ar": "أول برنامج", "en": "Your First Program"},
+  "description": {"ar": "اكتب أول سطر كود وشاهد الناتج", "en": "Write your first line of code and see the output"},
+  "iconName": "play_circle",
+  "order": 0,
+  "lessonIds": ["lesson_01_hello", "lesson_02_comments"]
+}

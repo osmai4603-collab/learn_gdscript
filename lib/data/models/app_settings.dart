@@ -6,11 +6,16 @@ import 'model_json.dart';
 class AppSettings {
   final Locale locale;
   final ThemeMode themeMode;
+  final bool hasCompletedOnboarding;
+  final int editorFontSize;
 
   AppSettings({
     this.locale = const Locale('ar'),
     this.themeMode = ThemeMode.system,
-  }) : assert(locale.languageCode == 'ar' || locale.languageCode == 'en');
+    this.hasCompletedOnboarding = false,
+    this.editorFontSize = 14,
+  }) : assert(locale.languageCode == 'ar' || locale.languageCode == 'en'),
+       assert(editorFontSize == 12 || editorFontSize == 14 || editorFontSize == 16);
 
   factory AppSettings.fromJson(JsonObject json) {
     final language = requiredString(json, 'language');
@@ -22,11 +27,31 @@ class AppSettings {
     if (themeMode.isEmpty) {
       throw FormatException('Unsupported theme mode "$theme".');
     }
-    return AppSettings(locale: Locale(language), themeMode: themeMode.first);
+    final onboarding = json['hasCompletedOnboarding'];
+    if (onboarding != null && onboarding is! bool) {
+      throw const FormatException(
+        'Field "hasCompletedOnboarding" must be a boolean.',
+      );
+    }
+    final fontSize = json['editorFontSize'];
+    if (fontSize != null &&
+        (fontSize is! int || !const [12, 14, 16].contains(fontSize))) {
+      throw const FormatException(
+        'Field "editorFontSize" must be 12, 14, or 16.',
+      );
+    }
+    return AppSettings(
+      locale: Locale(language),
+      themeMode: themeMode.first,
+      hasCompletedOnboarding: onboarding as bool? ?? false,
+      editorFontSize: fontSize as int? ?? 14,
+    );
   }
 
   JsonObject toJson() => {
     'language': locale.languageCode,
     'themeMode': themeMode.name,
+    'hasCompletedOnboarding': hasCompletedOnboarding,
+    'editorFontSize': editorFontSize,
   };
 }

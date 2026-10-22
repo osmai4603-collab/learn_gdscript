@@ -1,0 +1,8 @@
+{
+  "id": "unit_04_loops",
+  "title": {"ar": "الحلقات والتكرار", "en": "Loops and Repetition"},
+  "description": {"ar": "كرّر العمليات بكفاءة", "en": "Repeat operations efficiently"},
+  "iconName": "loop",
+  "order": 3,
+  "lessonIds": ["lesson_09_for", "lesson_10_while", "lesson_11_break_continue"]
+}

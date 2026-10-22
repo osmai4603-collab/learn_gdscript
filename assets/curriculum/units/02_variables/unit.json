@@ -1,0 +1,8 @@
+{
+  "id": "unit_02_variables",
+  "title": {"ar": "المتغيرات والأنواع", "en": "Variables and Types"},
+  "description": {"ar": "تعلّم تخزين البيانات واستخدامها", "en": "Learn to store and use data"},
+  "iconName": "data_object",
+  "order": 1,
+  "lessonIds": ["lesson_03_variables", "lesson_04_types", "lesson_05_operations"]
+}

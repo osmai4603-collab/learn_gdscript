@@ -1,0 +1,63 @@
+{
+  "id": "lesson_07_elif",
+  "unitId": "unit_03_conditions",
+  "title": {"ar": "الشروط المتعددة", "en": "Multiple Conditions"},
+  "objective": {"ar": "تعامل مع عدة احتمالات باستخدام `elif` والعوامل المنطقية.", "en": "Handle several possibilities with `elif` and logical operators."},
+  "estimatedMinutes": 7,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## افحص أكثر من احتمال\n\nاستخدم `elif` لاختبار شرط آخر إذا لم يتحقق الشرط السابق. يُفحص كل فرع بالترتيب، وينفّذ أول فرع صحيح فقط:\n\n```gdscript\nvar grade = 85\nif grade >= 90:\n    print(\"A\")\nelif grade >= 80:\n    print(\"B\")\nelse:\n    print(\"C\")\n```\n\nادمج الشروط باستخدام `and` عندما يلزم تحقق الشرطين، أو `or` عند كفاية أحدهما. يعكس `not` القيمة المنطقية.",
+    "en": "## Check several possibilities\n\nUse `elif` to test another condition when the previous one was false. Branches are checked in order, and only the first matching branch runs:\n\n```gdscript\nvar grade = 85\nif grade >= 90:\n    print(\"A\")\nelif grade >= 80:\n    print(\"B\")\nelse:\n    print(\"C\")\n```\n\nCombine conditions with `and` when both must be true, or `or` when either is enough. `not` reverses a Boolean value."
+  },
+  "exampleCode": "var grade = 85\nif grade >= 90:\n    print(\"A\")\nelif grade >= 80:\n    print(\"B\")\nelse:\n    print(\"C\")",
+  "exercises": [
+    {
+      "id": "ex_07_temperature",
+      "lessonId": "lesson_07_elif",
+      "type": "writeCode",
+      "prompt": {"ar": "صنّف درجة الحرارة `18`: أقل من 10 هي `Cold`، وأقل من 25 هي `Mild`، وما عدا ذلك `Hot`.", "en": "Classify temperature `18`: below 10 is `Cold`, below 25 is `Mild`, and otherwise `Hot`."},
+      "starterCode": "",
+      "solutionCode": "var temperature = 18\nif temperature < 10:\n    print(\"Cold\")\nelif temperature < 25:\n    print(\"Mild\")\nelse:\n    print(\"Hot\")",
+      "testCases": [
+        {"description": {"ar": "تقع 18 في فئة الحرارة المعتدلة.", "en": "18 belongs to the mild temperature range."}, "expectedOutput": "Mild"}
+      ],
+      "hints": [
+        {"ar": "ابدأ بفحص الحد الأصغر باستخدام `if`.", "en": "Start by checking the lower limit with `if`."},
+        {"ar": "أضف فحص 25 باستخدام `elif`، ثم `else`.", "en": "Check 25 with `elif`, then add `else`."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_07_reorder_grades",
+      "lessonId": "lesson_07_elif",
+      "type": "reorderSteps",
+      "prompt": {"ar": "أعد ترتيب الفروع بحيث تُفحص الدرجة A قبل B وتظهر `A` للدرجة 95.", "en": "Reorder the branches so grade A is checked before B and a score of 95 displays `A`."},
+      "starterCode": "var grade = 95\nif grade >= 80:\n    print(\"B\")\nelif grade >= 90:\n    print(\"A\")\nelse:\n    print(\"C\")",
+      "solutionCode": "var grade = 95\nif grade >= 90:\n    print(\"A\")\nelif grade >= 80:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "testCases": [
+        {"description": {"ar": "يُفحص الحد الأعلى أولاً.", "en": "The higher threshold is checked first."}, "expectedOutput": "A"}
+      ],
+      "hints": [
+        {"ar": "الفرع الأول الذي يتحقق يمنع فحص الفروع التالية.", "en": "The first matching branch prevents later branches from being checked."},
+        {"ar": "ضع شرط 90 قبل شرط 80.", "en": "Put the condition for 90 before the condition for 80."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_07_compound_condition",
+      "lessonId": "lesson_07_elif",
+      "type": "writeCode",
+      "prompt": {"ar": "اطبع `Enter` عندما يكون العمر 20 ومعه تذكرة، مستخدماً `and`.", "en": "Print `Enter` when the age is 20 and a ticket is present, using `and`."},
+      "starterCode": "",
+      "solutionCode": "var age = 20\nvar has_ticket = true\nif age >= 18 and has_ticket:\n    print(\"Enter\")",
+      "testCases": [
+        {"description": {"ar": "يتحقق الشرطان معاً.", "en": "Both conditions are true."}, "expectedOutput": "Enter"}
+      ],
+      "hints": [
+        {"ar": "استخدم متغيراً منطقياً لحالة التذكرة.", "en": "Use a Boolean variable for the ticket status."},
+        {"ar": "اربط شرط العمر وحالة التذكرة بكلمة `and`.", "en": "Join the age check and ticket status with `and`."}
+      ],
+      "order": 2
+    }
+  ]
+}

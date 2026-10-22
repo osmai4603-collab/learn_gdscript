@@ -1,0 +1,47 @@
+{
+  "id": "lesson_11_break_continue",
+  "unitId": "unit_04_loops",
+  "title": {"ar": "التحكم بالحلقات", "en": "Loop Control"},
+  "objective": {"ar": "اخرج من الحلقة أو تخطَّ تكراراً باستخدام `break` و`continue`.", "en": "Exit a loop or skip an iteration with `break` and `continue`."},
+  "estimatedMinutes": 5,
+  "order": 2,
+  "contentMarkdown": {
+    "ar": "## غيّر مسار الحلقة\n\nاستخدم `break` للخروج فوراً من الحلقة، أو `continue` لتخطي بقية التكرار الحالي والانتقال إلى التالي:\n\n```gdscript\nfor i in range(10):\n    if i == 5:\n        break\n    print(i)\n```\n\nيطبع المثال الأعداد من 0 إلى 4 فقط. ضع `continue` داخل شرط عندما تريد استبعاد قيم معينة.",
+    "en": "## Change the loop's flow\n\nUse `break` to exit a loop immediately, or `continue` to skip the rest of the current iteration and move to the next one:\n\n```gdscript\nfor i in range(10):\n    if i == 5:\n        break\n    print(i)\n```\n\nThe example prints only 0 through 4. Put `continue` inside a condition to skip selected values."
+  },
+  "exampleCode": "for i in range(10):\n    if i == 5:\n        break\n    print(i)",
+  "exercises": [
+    {
+      "id": "ex_11_skip_multiples",
+      "lessonId": "lesson_11_break_continue",
+      "type": "writeCode",
+      "prompt": {"ar": "اطبع الأعداد من 1 إلى 20، مع تخطي مضاعفات 4 باستخدام `continue`.", "en": "Print the numbers from 1 through 20, skipping multiples of 4 with `continue`."},
+      "starterCode": "",
+      "solutionCode": "for i in range(1, 21):\n    if i % 4 == 0:\n        continue\n    print(i)",
+      "testCases": [
+        {"description": {"ar": "لا تظهر الأعداد 4 و8 و12 و16 و20.", "en": "The numbers 4, 8, 12, 16, and 20 are omitted."}, "expectedOutput": "1\n2\n3\n5\n6\n7\n9\n10\n11\n13\n14\n15\n17\n18\n19"}
+      ],
+      "hints": [
+        {"ar": "استخدم باقي القسمة `%` لاكتشاف مضاعفات 4.", "en": "Use the remainder operator `%` to detect multiples of 4."},
+        {"ar": "نفّذ `continue` عندما يكون الباقي صفراً، ثم اطبع بقية القيم.", "en": "Run `continue` when the remainder is zero, then print the other values."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_11_predict_break",
+      "lessonId": "lesson_11_break_continue",
+      "type": "predictOutput",
+      "prompt": {"ar": "اكتب حلقة تطبع القيم من 0 إلى أن تصل إلى 3، ثم تخرج باستخدام `break` دون طباعة 3.", "en": "Write a loop that prints values from 0 until it reaches 3, then exits with `break` without printing 3."},
+      "starterCode": "",
+      "solutionCode": "for i in range(6):\n    if i == 3:\n        break\n    print(i)",
+      "testCases": [
+        {"description": {"ar": "يوقف `break` الحلقة قبل طباعة 3.", "en": "`break` stops the loop before 3 is printed."}, "expectedOutput": "0\n1\n2"}
+      ],
+      "hints": [
+        {"ar": "اختبر `i == 3` داخل الحلقة.", "en": "Check `i == 3` inside the loop."},
+        {"ar": "ضع `break` قبل أمر الطباعة.", "en": "Put `break` before the print statement."}
+      ],
+      "order": 1
+    }
+  ]
+}

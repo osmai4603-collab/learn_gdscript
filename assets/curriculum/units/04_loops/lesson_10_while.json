@@ -1,0 +1,63 @@
+{
+  "id": "lesson_10_while",
+  "unitId": "unit_04_loops",
+  "title": {"ar": "حلقة while", "en": "While Loop"},
+  "objective": {"ar": "كرّر الأوامر ما دام شرط الحلقة صحيحاً.", "en": "Repeat statements while the loop condition is true."},
+  "estimatedMinutes": 7,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## كرّر ما دام الشرط صحيحاً\n\nتستمر حلقة `while` في التكرار ما دام شرطها صحيحاً. حدّث متغير التحكم داخل الحلقة حتى تصل إلى شرط التوقف:\n\n```gdscript\nvar count = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\n\nإذا لم يتغير الشرط فقد تستمر الحلقة بلا نهاية؛ تأكد من أن كل حلقة تصل إلى نقطة توقف.",
+    "en": "## Repeat while a condition is true\n\nA `while` loop continues as long as its condition is true. Update the control variable inside the loop so it can reach the stopping condition:\n\n```gdscript\nvar count = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\n\nIf the condition never changes, the loop may run forever. Make sure every loop can reach a stopping point."
+  },
+  "exampleCode": "var count = 0\nwhile count < 5:\n    print(count)\n    count += 1",
+  "exercises": [
+    {
+      "id": "ex_10_countdown",
+      "lessonId": "lesson_10_while",
+      "type": "writeCode",
+      "prompt": {"ar": "استخدم `while` لطباعة الأعداد تنازلياً من 10 إلى 1.", "en": "Use `while` to print the numbers counting down from 10 to 1."},
+      "starterCode": "",
+      "solutionCode": "var count = 10\nwhile count >= 1:\n    print(count)\n    count -= 1",
+      "testCases": [
+        {"description": {"ar": "يبدأ العد من 10 وينتهي عند 1.", "en": "The countdown starts at 10 and ends at 1."}, "expectedOutput": "10\n9\n8\n7\n6\n5\n4\n3\n2\n1"}
+      ],
+      "hints": [
+        {"ar": "ابدأ المتغير بالقيمة 10 واختبر أنه لا يقل عن 1.", "en": "Start the variable at 10 and check that it is at least 1."},
+        {"ar": "أنقص المتغير بمقدار 1 داخل الحلقة.", "en": "Decrease the variable by 1 inside the loop."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_10_fix_infinite_loop",
+      "lessonId": "lesson_10_while",
+      "type": "fixBug",
+      "prompt": {"ar": "أضف التحديث المفقود كي تنتهي الحلقة بعد طباعة 0 و1 و2.", "en": "Add the missing update so the loop ends after printing 0, 1, and 2."},
+      "starterCode": "var count = 0\nwhile count < 3:\n    print(count)",
+      "solutionCode": "var count = 0\nwhile count < 3:\n    print(count)\n    count += 1",
+      "testCases": [
+        {"description": {"ar": "يتقدم العداد حتى يتوقف الشرط عن التحقق.", "en": "The counter advances until the condition becomes false."}, "expectedOutput": "0\n1\n2"}
+      ],
+      "hints": [
+        {"ar": "تُطبع القيمة الحالية لكنها لا تتغير في الشيفرة المعطاة.", "en": "The current value is printed but never changes in the given code."},
+        {"ar": "أضف `count += 1` داخل جسم الحلقة.", "en": "Add `count += 1` inside the loop body."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_10_multiples_of_three",
+      "lessonId": "lesson_10_while",
+      "type": "writeCode",
+      "prompt": {"ar": "اطبع مضاعفات 3 الموجبة الأصغر من 30 باستخدام `while`.", "en": "Use `while` to print the positive multiples of 3 that are less than 30."},
+      "starterCode": "",
+      "solutionCode": "var number = 3\nwhile number < 30:\n    print(number)\n    number += 3",
+      "testCases": [
+        {"description": {"ar": "تظهر المضاعفات من 3 حتى 27.", "en": "Multiples from 3 through 27 appear."}, "expectedOutput": "3\n6\n9\n12\n15\n18\n21\n24\n27"}
+      ],
+      "hints": [
+        {"ar": "ابدأ من 3 واجعل شرط الاستمرار `number < 30`.", "en": "Start at 3 and use `number < 30` as the loop condition."},
+        {"ar": "أضف 3 في كل تكرار.", "en": "Add 3 on each iteration."}
+      ],
+      "order": 2
+    }
+  ]
+}

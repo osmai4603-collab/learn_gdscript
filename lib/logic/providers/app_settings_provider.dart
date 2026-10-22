@@ -16,12 +16,43 @@ class AppSettingsProvider extends ChangeNotifier {
   AppSettings get settings => _settings;
   Locale get locale => _settings.locale;
   ThemeMode get themeMode => _settings.themeMode;
+  int get editorFontSize => _settings.editorFontSize;
 
-  Future<void> setLocale(Locale locale) =>
-      _update(AppSettings(locale: locale, themeMode: _settings.themeMode));
+  Future<void> setLocale(Locale locale) => _update(
+    AppSettings(
+      locale: locale,
+      themeMode: _settings.themeMode,
+      hasCompletedOnboarding: _settings.hasCompletedOnboarding,
+      editorFontSize: _settings.editorFontSize,
+    ),
+  );
 
-  Future<void> setThemeMode(ThemeMode themeMode) =>
-      _update(AppSettings(locale: _settings.locale, themeMode: themeMode));
+  Future<void> setThemeMode(ThemeMode themeMode) => _update(
+    AppSettings(
+      locale: _settings.locale,
+      themeMode: themeMode,
+      hasCompletedOnboarding: _settings.hasCompletedOnboarding,
+      editorFontSize: _settings.editorFontSize,
+    ),
+  );
+
+  Future<void> completeOnboarding() => _update(
+    AppSettings(
+      locale: _settings.locale,
+      themeMode: _settings.themeMode,
+      hasCompletedOnboarding: true,
+      editorFontSize: _settings.editorFontSize,
+    ),
+  );
+
+  Future<void> setEditorFontSize(int fontSize) => _update(
+    AppSettings(
+      locale: _settings.locale,
+      themeMode: _settings.themeMode,
+      hasCompletedOnboarding: _settings.hasCompletedOnboarding,
+      editorFontSize: fontSize,
+    ),
+  );
 
   Future<void> _update(AppSettings next) async {
     final previous = _settings;

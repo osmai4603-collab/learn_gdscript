@@ -1,0 +1,63 @@
+{
+  "id": "lesson_13_parameters",
+  "unitId": "unit_05_functions",
+  "title": {"ar": "المعاملات", "en": "Parameters"},
+  "objective": {"ar": "مرّر قيماً إلى الدالة لتخصيص عملها.", "en": "Pass values to a function to customize its behavior."},
+  "estimatedMinutes": 7,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## مرّر بيانات إلى الدالة\n\nتستقبل الدالة قيماً عبر معاملات تكتب داخل تعريفها. عند الاستدعاء، مرّر الوسيط المناسب لكل معامل:\n\n```gdscript\nfunc greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Ali\")\ngreet(\"Sara\")\n```\n\nيمكن إعطاء المعامل قيمة افتراضية، فتُستخدم إذا لم تمرر وسيطاً له: `func greet(name = \"friend\"):`.",
+    "en": "## Pass data to a function\n\nA function receives values through parameters listed in its definition. When calling it, provide an argument for each parameter:\n\n```gdscript\nfunc greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Ali\")\ngreet(\"Sara\")\n```\n\nA parameter can have a default value, used when no argument is provided: `func greet(name = \"friend\"):`."
+  },
+  "exampleCode": "func greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Ali\")\ngreet(\"Sara\")",
+  "exercises": [
+    {
+      "id": "ex_13_double_parameter",
+      "lessonId": "lesson_13_parameters",
+      "type": "writeCode",
+      "prompt": {"ar": "عرّف `double(n)` لتطبع ضعف العدد، ثم استدعها مع `5`.", "en": "Define `double(n)` to print twice its number, then call it with `5`."},
+      "starterCode": "",
+      "solutionCode": "func double(n):\n    print(n * 2)\n\ndouble(5)",
+      "testCases": [
+        {"description": {"ar": "تطبع الدالة ضعف الوسيط.", "en": "The function prints twice its argument."}, "expectedOutput": "10"}
+      ],
+      "hints": [
+        {"ar": "اكتب `n` بين قوسي تعريف الدالة.", "en": "Put `n` in the function definition's parentheses."},
+        {"ar": "اضرب `n` في 2 داخل جسم الدالة.", "en": "Multiply `n` by 2 inside the function body."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_13_fix_parameter",
+      "lessonId": "lesson_13_parameters",
+      "type": "fixBug",
+      "prompt": {"ar": "أصلح الدالة كي تستخدم المعامل `name` وتُستدعى مع `Mia`.", "en": "Fix the function so it uses the `name` parameter and is called with `Mia`."},
+      "starterCode": "func greet(name):\n    print(\"Hello!\")\n\ngreet()",
+      "solutionCode": "func greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Mia\")",
+      "testCases": [
+        {"description": {"ar": "تظهر القيمة الممررة إلى المعامل.", "en": "The value passed to the parameter appears."}, "expectedOutput": "Hello, Mia!"}
+      ],
+      "hints": [
+        {"ar": "أضف `name` إلى رسالة الترحيب.", "en": "Add `name` to the greeting message."},
+        {"ar": "مرّر نصاً إلى الدالة عند استدعائها.", "en": "Pass a string to the function when calling it."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_13_default_repeat",
+      "lessonId": "lesson_13_parameters",
+      "type": "writeCode",
+      "prompt": {"ar": "عرّف `repeat_text(text, times = 2)` لتطبع النص مرتين عند استدعائها دون `times`.", "en": "Define `repeat_text(text, times = 2)` so it prints the text twice when called without `times`."},
+      "starterCode": "",
+      "solutionCode": "func repeat_text(text, times = 2):\n    for i in range(times):\n        print(text)\n\nrepeat_text(\"Echo\")",
+      "testCases": [
+        {"description": {"ar": "تُستخدم القيمة الافتراضية للمعامل الثاني.", "en": "The default value is used for the second parameter."}, "expectedOutput": "Echo\nEcho"}
+      ],
+      "hints": [
+        {"ar": "اكتب `= 2` بعد اسم المعامل `times`.", "en": "Write `= 2` after the parameter name `times`."},
+        {"ar": "كرّر الطباعة باستخدام حلقة على `times`.", "en": "Repeat the print statement with a loop over `times`."}
+      ],
+      "order": 2
+    }
+  ]
+}

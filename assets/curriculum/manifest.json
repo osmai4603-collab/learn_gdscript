@@ -1,5 +1,46 @@
 {
-  "version": "1",
-  "targetGDScriptVersion": "4",
-  "units": []
+  "version": "1.0.0",
+  "targetGDScriptVersion": "4.x",
+  "units": [
+    {
+      "id": "unit_01_first_program",
+      "title": {"ar": "أول برنامج", "en": "Your First Program"},
+      "description": {"ar": "اكتب أول سطر كود وشاهد الناتج", "en": "Write your first line of code and see the output"},
+      "iconName": "play_circle",
+      "order": 0,
+      "lessonIds": ["lesson_01_hello", "lesson_02_comments"]
+    },
+    {
+      "id": "unit_02_variables",
+      "title": {"ar": "المتغيرات والأنواع", "en": "Variables and Types"},
+      "description": {"ar": "تعلّم تخزين البيانات واستخدامها", "en": "Learn to store and use data"},
+      "iconName": "data_object",
+      "order": 1,
+      "lessonIds": ["lesson_03_variables", "lesson_04_types", "lesson_05_operations"]
+    },
+    {
+      "id": "unit_03_conditions",
+      "title": {"ar": "الشروط والقرارات", "en": "Conditions and Decisions"},
+      "description": {"ar": "اجعل برنامجك يتخذ قرارات", "en": "Make your program make decisions"},
+      "iconName": "call_split",
+      "order": 2,
+      "lessonIds": ["lesson_06_if_else", "lesson_07_elif", "lesson_08_match"]
+    },
+    {
+      "id": "unit_04_loops",
+      "title": {"ar": "الحلقات والتكرار", "en": "Loops and Repetition"},
+      "description": {"ar": "كرّر العمليات بكفاءة", "en": "Repeat operations efficiently"},
+      "iconName": "loop",
+      "order": 3,
+      "lessonIds": ["lesson_09_for", "lesson_10_while", "lesson_11_break_continue"]
+    },
+    {
+      "id": "unit_05_functions",
+      "title": {"ar": "الدوال وإعادة الاستخدام", "en": "Functions and Reuse"},
+      "description": {"ar": "نظّم كودك في أجزاء قابلة لإعادة الاستخدام", "en": "Organize code into reusable parts"},
+      "iconName": "functions",
+      "order": 4,
+      "lessonIds": ["lesson_12_func_basics", "lesson_13_parameters", "lesson_14_return"]
+    }
+  ]
 }

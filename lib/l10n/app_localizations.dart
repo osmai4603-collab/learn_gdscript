@@ -259,6 +259,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome'**
   String get navigateOnboarding;
+
+  String get onboardingQuestion;
+  String get onboardingNewbie;
+  String get onboardingExperienced;
+  String get continueLearning;
+  String get quickTry;
+  String get runCode;
+  String get resetCode;
+  String get showHint;
+  String get showSolution;
+  String get nextLesson;
+  String get previousLesson;
+  String get exercisePrompt;
+  String get outputLabel;
+  String get outputEmpty;
+  String get outputRunning;
+  String get testResults;
+  String get testPassed;
+  String get testFailed;
+  String get lessonComplete;
+  String completedLesson(String name);
+  String exercisesSolved(int count);
+  String hintsUsed(int count);
+  String timeSpent(int minutes);
+  String get backToPath;
+  String get unitLocked;
+  String get unitInProgress;
+  String get unitCompleted;
+  String get editorFontSize;
+  String get fontSmall;
+  String get fontMedium;
+  String get fontLarge;
+  String get resetProgress;
+  String get resetConfirmation;
+  String get aboutApp;
+  String get sendFeedback;
+  String get lspStatus;
+  String get lspConnected;
+  String get lspDisconnected;
+  String get startLearning;
+  String get newUserWelcome;
+  String get returningWelcome;
+  String get retry;
+  String get loading;
+  String get noLessons;
+  String get runExample;
+  String get exampleLabel;
+  String exerciseProgress(int current, int total);
+  String get nextExercise;
+  String get runTests;
+  String get allTestsPassed;
+  String testSummary(int passed, int total);
+  String get resetCodeConfirmation;
+  String get hintUnavailable;
+  String get lessonUnavailable;
+  String get lessonProgress;
+  String get quickTryCode;
+  String get workspaceUnavailable;
+  String get executionFailed;
+  String get expectedOutput;
+  String get actualOutput;
+  String errorLine(int line);
+  String get workspacePath;
+  String get lspExecutablePath;
+  String get connectLsp;
+  String get disconnectLsp;
+  String indexedFiles(int count);
+  String get lspConnectionError;
+  String get completeCode;
+  String get formatCode;
+  String get lspFeatureError;
+  String diagnosticLine(int line);
 }
 
 class _AppLocalizationsDelegate

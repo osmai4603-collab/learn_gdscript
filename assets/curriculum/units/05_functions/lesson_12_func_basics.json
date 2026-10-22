@@ -1,0 +1,63 @@
+{
+  "id": "lesson_12_func_basics",
+  "unitId": "unit_05_functions",
+  "title": {"ar": "تعريف الدوال", "en": "Defining Functions"},
+  "objective": {"ar": "اجمع الأوامر في دالة واستدعها عند الحاجة.", "en": "Group statements in a function and call it when needed."},
+  "estimatedMinutes": 7,
+  "order": 0,
+  "contentMarkdown": {
+    "ar": "## أنشئ أمراً قابلاً لإعادة الاستخدام\n\nتبدأ الدالة بكلمة `func` ثم اسمها وأقواس. اكتب جسمها بمسافة بادئة، واستدعها باسمها وأقواس:\n\n```gdscript\nfunc greet():\n    print(\"Hello!\")\n\ngreet()\ngreet()\n```\n\nتُنفّذ الدالة عند استدعائها، ويمكنك استدعاؤها أكثر من مرة بدلاً من تكرار أوامرها.",
+    "en": "## Create a reusable action\n\nA function starts with `func`, followed by its name and parentheses. Indent its body, then call it by name with parentheses:\n\n```gdscript\nfunc greet():\n    print(\"Hello!\")\n\ngreet()\ngreet()\n```\n\nThe function runs when called. You can call it more than once instead of repeating its statements."
+  },
+  "exampleCode": "func greet():\n    print(\"Hello!\")\n\ngreet()\ngreet()",
+  "exercises": [
+    {
+      "id": "ex_12_say_hi",
+      "lessonId": "lesson_12_func_basics",
+      "type": "writeCode",
+      "prompt": {"ar": "عرّف `say_hi()` لتطبع `Hi!` ثم استدعها ثلاث مرات.", "en": "Define `say_hi()` to print `Hi!`, then call it three times."},
+      "starterCode": "",
+      "solutionCode": "func say_hi():\n    print(\"Hi!\")\n\nsay_hi()\nsay_hi()\nsay_hi()",
+      "testCases": [
+        {"description": {"ar": "تظهر الرسالة مرة في كل استدعاء.", "en": "The message appears once for each call."}, "expectedOutput": "Hi!\nHi!\nHi!"}
+      ],
+      "hints": [
+        {"ar": "عرّف الدالة قبل استدعائها.", "en": "Define the function before calling it."},
+        {"ar": "استدع الاسم `say_hi` مع قوسين ثلاث مرات.", "en": "Call `say_hi` with parentheses three times."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_12_fill_function",
+      "lessonId": "lesson_12_func_basics",
+      "type": "fillBlank",
+      "prompt": {"ar": "أكمل تعريف `welcome()` واستدعاءها كي يظهر `Welcome!`.", "en": "Complete the definition and call of `welcome()` so it displays `Welcome!`."},
+      "starterCode": "func ___():\n    print(\"Welcome!\")\n\n___()",
+      "solutionCode": "func welcome():\n    print(\"Welcome!\")\n\nwelcome()",
+      "testCases": [
+        {"description": {"ar": "تُستدعى الدالة بعد تعريفها.", "en": "The function is called after it is defined."}, "expectedOutput": "Welcome!"}
+      ],
+      "hints": [
+        {"ar": "استخدم الاسم نفسه في التعريف والاستدعاء.", "en": "Use the same name in the definition and the call."},
+        {"ar": "ضع `welcome` في كلا الفراغين.", "en": "Put `welcome` in both blanks."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_12_separator",
+      "lessonId": "lesson_12_func_basics",
+      "type": "writeCode",
+      "prompt": {"ar": "عرّف دالة `print_separator()` تطبع `----------`، واستخدمها بين `Start` و`End`.", "en": "Define `print_separator()` to print `----------`, and use it between `Start` and `End`."},
+      "starterCode": "",
+      "solutionCode": "func print_separator():\n    print(\"----------\")\n\nprint(\"Start\")\nprint_separator()\nprint(\"End\")",
+      "testCases": [
+        {"description": {"ar": "تظهر الدالة الفاصلة بين السطرين.", "en": "The function prints a separator between the two lines."}, "expectedOutput": "Start\n----------\nEnd"}
+      ],
+      "hints": [
+        {"ar": "ضع أمر طباعة الخط داخل الدالة.", "en": "Put the line's print statement inside the function."},
+        {"ar": "استدع الدالة بين طباعة `Start` و`End`.", "en": "Call the function between printing `Start` and `End`."}
+      ],
+      "order": 2
+    }
+  ]
+}

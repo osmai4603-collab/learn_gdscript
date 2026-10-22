@@ -1,0 +1,47 @@
+{
+  "id": "lesson_02_comments",
+  "unitId": "unit_01_first_program",
+  "title": {"ar": "التعليقات", "en": "Comments"},
+  "objective": {"ar": "أضف ملاحظات إلى الشيفرة من دون تغيير ما ينفّذه البرنامج.", "en": "Add notes to code without changing what the program runs."},
+  "estimatedMinutes": 3,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## اكتب ملاحظة في الشيفرة\n\nتبدأ التعليقات في GDScript بالرمز `#`. يتجاهلها البرنامج أثناء التنفيذ، ويمكن وضعها في سطر مستقل أو بعد أمر:\n\n```gdscript\n# اطبع رسالة ترحيب\nprint(\"Hello\") # هذه ملاحظة أيضاً\n```\n\nللتعليق على عدة أسطر، ابدأ كل سطر بالرمز `#`. النصوص المحاطة بثلاث علامات اقتباس ليست تعليقات؛ إنها نصوص متعددة الأسطر.",
+    "en": "## Add a note to code\n\nIn GDScript, comments start with `#`. The program ignores them while running. A comment can be on its own line or after a statement:\n\n```gdscript\n# Print a greeting\nprint(\"Hello\") # This is also a comment\n```\n\nFor a comment spanning several lines, start each line with `#`. Text wrapped in triple quotes is a multiline string, not a comment."
+  },
+  "exampleCode": "# Print a greeting\nprint(\"Hello\") # This note does not affect output",
+  "exercises": [
+    {
+      "id": "ex_02_explain_print",
+      "lessonId": "lesson_02_comments",
+      "type": "fillBlank",
+      "prompt": {"ar": "أضف تعليقاً يشرح أن السطر التالي يطبع رسالة ترحيب.", "en": "Add a comment explaining that the next line prints a greeting."},
+      "starterCode": "___\nprint(\"Welcome\")",
+      "solutionCode": "# Print a welcome message\nprint(\"Welcome\")",
+      "testCases": [
+        {"description": {"ar": "يظل ناتج البرنامج رسالة الترحيب فقط.", "en": "The program output remains only the welcome message."}, "expectedOutput": "Welcome"}
+      ],
+      "hints": [
+        {"ar": "ابدأ الملاحظة بالرمز `#`.", "en": "Start the note with `#`."},
+        {"ar": "اكتب وصفاً قصيراً لما يفعله `print()`.", "en": "Write a short description of what `print()` does."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_02_uncomment_print",
+      "lessonId": "lesson_02_comments",
+      "type": "fixBug",
+      "prompt": {"ar": "أزل التعليق عن أمر الطباعة كي يظهر `Hello` في الناتج.", "en": "Remove the comment from the print statement so `Hello` appears in the output."},
+      "starterCode": "# print(\"Hello\")",
+      "solutionCode": "print(\"Hello\")",
+      "testCases": [
+        {"description": {"ar": "يظهر النص بعد تفعيل الأمر.", "en": "The text appears after enabling the statement."}, "expectedOutput": "Hello"}
+      ],
+      "hints": [
+        {"ar": "الرمز `#` يجعل بقية السطر تعليقاً.", "en": "The `#` symbol turns the rest of the line into a comment."},
+        {"ar": "احذف `#` والمسافة التي تليه.", "en": "Delete `#` and the space after it."}
+      ],
+      "order": 1
+    }
+  ]
+}

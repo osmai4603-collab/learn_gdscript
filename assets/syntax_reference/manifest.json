@@ -1,4 +1,8 @@
 {
-  "version": "1",
-  "entries": []
+  "version": "1.0.0",
+  "entries": [
+    {"file": "keywords.json", "category": "keywords", "count": 20},
+    {"file": "builtins.json", "category": "builtins", "count": 10},
+    {"file": "types.json", "category": "types", "count": 7}
+  ]
 }

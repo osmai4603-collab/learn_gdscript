@@ -19,7 +19,7 @@ import 'package:learn_gdscript/l10n/app_localizations.dart';
 import 'package:learn_gdscript/ui/widgets/code_directionality.dart';
 
 void main() {
-  testWidgets('starts in Arabic and opens initial destinations', (
+  testWidgets('shows onboarding once and opens the main destinations', (
     tester,
   ) async {
     final dependencies = await AppDependencies.create(
@@ -31,8 +31,12 @@ void main() {
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
     await tester.pumpAndSettle();
 
+    expect(find.text('هل سبق لك البرمجة؟'), findsOneWidget);
+    await tester.tap(find.text('أنا جديد تماماً'));
+    await tester.pumpAndSettle();
+
     expect(find.text('الرئيسية'), findsOneWidget);
-    expect(find.text('تعلّم GDScript خطوة بخطوة'), findsOneWidget);
+    expect(find.text('ستُضاف المواد التعليمية في مرحلة لاحقة.'), findsOneWidget);
     await tester.tap(find.text('الإعدادات'));
     await tester.pumpAndSettle();
     expect(find.text('اللغة'), findsOneWidget);
@@ -46,6 +50,7 @@ void main() {
       assetBundle: _TestAssetBundle(),
     );
     addTearDown(dependencies.dispose);
+    await dependencies.appSettingsProvider.completeOnboarding();
 
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
     await tester.pumpAndSettle();
@@ -77,6 +82,7 @@ void main() {
       assetBundle: _TestAssetBundle(),
     );
     addTearDown(dependencies.dispose);
+    await dependencies.appSettingsProvider.completeOnboarding();
 
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
     await tester.pumpAndSettle();
@@ -84,7 +90,7 @@ void main() {
       tester.element(find.byType(Scaffold).first),
     ).pushNamed('/lesson/intro_1');
     await tester.pumpAndSettle();
-    expect(find.text('الدرس: intro_1'), findsOneWidget);
+    expect(find.text('تعذّر تحميل الدرس.'), findsOneWidget);
 
     Navigator.of(
       tester.element(find.byType(Scaffold).first),
@@ -103,6 +109,8 @@ void main() {
     final restored = await SettingsRepository(database).load();
     expect(restored.locale, const Locale('en'));
     expect(restored.themeMode, ThemeMode.dark);
+    expect(restored.editorFontSize, 14);
+    expect(restored.hasCompletedOnboarding, isFalse);
     await database.close();
   });
 

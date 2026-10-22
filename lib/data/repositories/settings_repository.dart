@@ -16,15 +16,32 @@ class SettingsRepository {
       for (final row in db.select('SELECT key, value FROM app_settings'))
         row['key'] as String: row['value'] as String,
     };
+    final onboardingValue = values['hasCompletedOnboarding'];
+    if (onboardingValue != null &&
+        onboardingValue != 'true' &&
+        onboardingValue != 'false') {
+      throw const FormatException(
+        'Stored onboarding completion setting is invalid.',
+      );
+    }
+    final fontSizeValue = values['editorFontSize'];
+    final fontSize = fontSizeValue == null ? 14 : int.tryParse(fontSizeValue);
+    if (fontSize == null) {
+      throw const FormatException('Stored editor font size is invalid.');
+    }
     return AppSettings.fromJson({
       'language': values['language'] ?? AppConstants.defaultLanguageCode,
       'themeMode': values['themeMode'] ?? ThemeMode.system.name,
+      'hasCompletedOnboarding': onboardingValue == 'true',
+      'editorFontSize': fontSize,
     });
   }
 
   Future<void> save(AppSettings settings) async {
     final json = settings.toJson();
     final language = json['language']! as String;
+    final onboarding = json['hasCompletedOnboarding']! as bool;
+    final editorFontSize = json['editorFontSize']! as int;
     if (!AppConstants.supportedLanguageCodes.contains(language)) {
       throw ArgumentError.value(
         language,
@@ -36,6 +53,8 @@ class SettingsRepository {
     _transaction(db, () {
       _write(db, 'language', language);
       _write(db, 'themeMode', json['themeMode']! as String);
+      _write(db, 'hasCompletedOnboarding', onboarding.toString());
+      _write(db, 'editorFontSize', editorFontSize.toString());
     });
   }
 

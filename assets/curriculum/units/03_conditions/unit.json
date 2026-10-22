@@ -1,0 +1,8 @@
+{
+  "id": "unit_03_conditions",
+  "title": {"ar": "الشروط والقرارات", "en": "Conditions and Decisions"},
+  "description": {"ar": "اجعل برنامجك يتخذ قرارات", "en": "Make your program make decisions"},
+  "iconName": "call_split",
+  "order": 2,
+  "lessonIds": ["lesson_06_if_else", "lesson_07_elif", "lesson_08_match"]
+}

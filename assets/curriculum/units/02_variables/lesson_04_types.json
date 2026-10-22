@@ -1,0 +1,63 @@
+{
+  "id": "lesson_04_types",
+  "unitId": "unit_02_variables",
+  "title": {"ar": "أنواع البيانات", "en": "Data Types"},
+  "objective": {"ar": "ميّز الأنواع الأساسية واستخدم التحويلات البسيطة.", "en": "Recognize the basic types and use simple conversions."},
+  "estimatedMinutes": 5,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## لكل قيمة نوع\n\nيحدد النوع ما تمثله القيمة: `int` للأعداد الصحيحة، و`float` للأعداد العشرية، و`String` للنصوص، و`bool` للقيمتين `true` و`false`.\n\n```gdscript\nvar age = 25\nvar pi = 3.14\nvar name = \"Ali\"\nvar alive = true\n```\n\nتستنتج GDScript النوع من القيمة. تفيدك `typeof(value)` في معرفة نوعها، ويمكن استخدام `int(value)` أو `float(value)` أو `str(value)` للتحويل.",
+    "en": "## Every value has a type\n\nA type describes a value: `int` for whole numbers, `float` for decimal numbers, `String` for text, and `bool` for `true` or `false`.\n\n```gdscript\nvar age = 25\nvar pi = 3.14\nvar name = \"Ali\"\nvar alive = true\n```\n\nGDScript infers the type from the value. Use `typeof(value)` to inspect it, or `int(value)`, `float(value)`, and `str(value)` for conversions."
+  },
+  "exampleCode": "var age = 25\nvar pi = 3.14\nvar name = \"Ali\"\nvar alive = true",
+  "exercises": [
+    {
+      "id": "ex_04_predict_types",
+      "lessonId": "lesson_04_types",
+      "type": "predictOutput",
+      "prompt": {"ar": "اكتب الشيفرة التي تعرض نوع القيم `25` و`3.14` و`\"Ada\"` و`true` باستخدام `typeof()`.", "en": "Write code that displays the types of `25`, `3.14`, `\"Ada\"`, and `true` using `typeof()`."},
+      "starterCode": "",
+      "solutionCode": "print(typeof(25))\nprint(typeof(3.14))\nprint(typeof(\"Ada\"))\nprint(typeof(true))",
+      "testCases": [
+        {"description": {"ar": "تظهر الأنواع الأربعة بالترتيب.", "en": "The four types appear in order."}, "expectedOutput": "int\nfloat\nString\nbool"}
+      ],
+      "hints": [
+        {"ar": "مرّر كل قيمة إلى `typeof()`.", "en": "Pass each value to `typeof()`."},
+        {"ar": "اطبع نتيجة كل استدعاء في سطر مستقل.", "en": "Print each call's result on its own line."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_04_reorder_values",
+      "lessonId": "lesson_04_types",
+      "type": "reorderSteps",
+      "prompt": {"ar": "رتّب التعريفات والطباعة بحيث يظهر `7` ثم `Ready`.", "en": "Arrange the declarations and print statements so that `7` and then `Ready` appear."},
+      "starterCode": "print(message)\nvar number = 7\nprint(number)\nvar message = \"Ready\"",
+      "solutionCode": "var number = 7\nvar message = \"Ready\"\nprint(number)\nprint(message)",
+      "testCases": [
+        {"description": {"ar": "تُعرّف القيم قبل استخدامها وتظهر بالترتيب.", "en": "Values are declared before use and appear in order."}, "expectedOutput": "7\nReady"}
+      ],
+      "hints": [
+        {"ar": "يجب تعريف المتغير قبل تمريره إلى `print()`.", "en": "Declare a variable before passing it to `print()`."},
+        {"ar": "ضع التعريفين أولاً، ثم أمري الطباعة.", "en": "Put both declarations first, followed by the print calls."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_04_mixed_number_type",
+      "lessonId": "lesson_04_types",
+      "type": "predictOutput",
+      "prompt": {"ar": "اجمع `2` و`1.5` واعرض نوع الناتج باستخدام `typeof()`.", "en": "Add `2` and `1.5`, then display the result type using `typeof()`."},
+      "starterCode": "",
+      "solutionCode": "print(typeof(2 + 1.5))",
+      "testCases": [
+        {"description": {"ar": "الناتج من النوع العشري.", "en": "The result has the floating-point type."}, "expectedOutput": "float"}
+      ],
+      "hints": [
+        {"ar": "استخدم `+` لجمع القيمتين.", "en": "Use `+` to add the two values."},
+        {"ar": "ضع عملية الجمع داخل `typeof()`.", "en": "Place the addition inside `typeof()`."}
+      ],
+      "order": 2
+    }
+  ]
+}

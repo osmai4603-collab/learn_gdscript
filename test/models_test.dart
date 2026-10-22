@@ -104,7 +104,12 @@ void main() {
     expect(defaults.status, LessonStatus.notStarted);
     expect(defaults.exercisesCompleted, 0);
     expect(defaults.savedCode, isNull);
-    expect(AppSettings().toJson(), {'language': 'ar', 'themeMode': 'system'});
+    expect(AppSettings().toJson(), {
+      'language': 'ar',
+      'themeMode': 'system',
+      'hasCompletedOnboarding': false,
+      'editorFontSize': 14,
+    });
     expect(
       AppSettings.fromJson({'language': 'en', 'themeMode': 'dark'}).themeMode,
       ThemeMode.dark,

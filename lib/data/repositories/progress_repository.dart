@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import '../models/progress_models.dart';
 import '../sqlite/database_helper.dart';
 
@@ -48,7 +50,6 @@ class ProgressRepository {
       ],
     );
   }
-
   Future<void> save(UserProgress progress) async {
     final db = await _databaseHelper.database;
     db.execute('BEGIN IMMEDIATE');
@@ -111,6 +112,22 @@ class ProgressRepository {
           [progress.visitorId, badgeId],
         );
       }
+      db.execute('COMMIT');
+    } on Object {
+      db.execute('ROLLBACK');
+      rethrow;
+    }
+  }
+
+  Future<void> clear(String visitorId) async {
+    final db = await _databaseHelper.database;
+    db.execute('BEGIN IMMEDIATE');
+    try {
+      db.execute('DELETE FROM earned_badges WHERE visitor_id = ?', [visitorId]);
+      db.execute('DELETE FROM lesson_progress WHERE visitor_id = ?', [
+        visitorId,
+      ]);
+      db.execute('DELETE FROM user_progress WHERE visitor_id = ?', [visitorId]);
       db.execute('COMMIT');
     } on Object {
       db.execute('ROLLBACK');

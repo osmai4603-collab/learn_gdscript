@@ -10,9 +10,17 @@ import 'l10n/app_localizations.dart';
 import 'logic/providers/app_settings_provider.dart';
 import 'logic/providers/curriculum_provider.dart';
 import 'logic/providers/exercise_provider.dart';
+import 'logic/providers/language_server_provider.dart';
 import 'logic/providers/lesson_provider.dart';
 import 'logic/providers/progress_provider.dart';
-import 'ui/screens/initial_screens.dart';
+import 'ui/screens/home/home_screen.dart';
+import 'ui/screens/learning_path/learning_path_screen.dart';
+import 'ui/screens/lesson/lesson_complete_screen.dart';
+import 'ui/screens/lesson/lesson_screen.dart';
+import 'ui/screens/not_found_screen.dart';
+import 'ui/screens/onboarding/onboarding_screen.dart';
+import 'ui/screens/settings/settings_screen.dart';
+import 'ui/screens/workspace/workspace_screen.dart';
 
 class LearnGdscriptApp extends StatefulWidget {
   const LearnGdscriptApp({super.key, required this.dependencies});
@@ -38,6 +46,9 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
         ChangeNotifierProvider<LessonProvider>.value(
           value: dependencies.lessonProvider,
         ),
+        ChangeNotifierProvider<LanguageServerProvider>.value(
+          value: dependencies.languageServerProvider,
+        ),
         ChangeNotifierProvider<ExerciseProvider>.value(
           value: dependencies.exerciseProvider,
         ),
@@ -59,7 +70,9 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           themeMode: settings.themeMode,
-          initialRoute: '/',
+          initialRoute: settings.settings.hasCompletedOnboarding
+              ? '/'
+              : '/onboarding',
           onGenerateRoute: _route,
           onUnknownRoute: (_) =>
               MaterialPageRoute<void>(builder: (_) => const NotFoundScreen()),
@@ -77,12 +90,22 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
       '/onboarding' => const OnboardingScreen(),
       '/workspace' => const WorkspaceScreen(),
       _ when name.startsWith('/lesson/') => _lessonScreen(name),
+      _ when name.startsWith('/lesson-complete/') =>
+        _lessonCompleteScreen(name),
       _ => const NotFoundScreen(),
     };
     return MaterialPageRoute<void>(
       settings: routeSettings,
       builder: (_) => screen,
     );
+  }
+
+  Widget _lessonCompleteScreen(String route) {
+    final id = route.substring('/lesson-complete/'.length);
+    if (id.isEmpty || !RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(id)) {
+      return const NotFoundScreen();
+    }
+    return LessonCompleteScreen(lessonId: id);
   }
 
   Widget _lessonScreen(String route) {

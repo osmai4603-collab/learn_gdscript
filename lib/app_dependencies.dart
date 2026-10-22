@@ -11,6 +11,7 @@ import 'data/sqlite/database_helper.dart';
 import 'logic/providers/app_settings_provider.dart';
 import 'logic/providers/curriculum_provider.dart';
 import 'logic/providers/exercise_provider.dart';
+import 'logic/providers/language_server_provider.dart';
 import 'logic/providers/lesson_provider.dart';
 import 'logic/providers/progress_provider.dart';
 import 'logic/services/code_runner_service.dart';
@@ -23,6 +24,7 @@ class AppDependencies {
     required this.appSettingsProvider,
     required this.curriculumProvider,
     required this.lessonProvider,
+    required this.languageServerProvider,
     required this.exerciseProvider,
     required this.progressProvider,
   });
@@ -31,6 +33,7 @@ class AppDependencies {
   final AppSettingsProvider appSettingsProvider;
   final CurriculumProvider curriculumProvider;
   final LessonProvider lessonProvider;
+  final LanguageServerProvider languageServerProvider;
   final ExerciseProvider exerciseProvider;
   final ProgressProvider progressProvider;
   bool _disposed = false;
@@ -53,12 +56,15 @@ class AppDependencies {
         assetBundle: assetBundle ?? rootBundle,
         manifestAsset: AppConstants.curriculumManifestAsset,
       );
+      final syntaxReferenceRepository = AssetSyntaxReferenceRepository(
+        assetBundle: assetBundle ?? rootBundle,
+      );
       services.registerSingleton(settingsRepository);
       services.registerSingleton(ProgressRepository(database));
       services.registerSingleton(WorkspaceRepository(database));
       services.registerSingleton(curriculumRepository);
       services.registerSingleton<SyntaxReferenceRepository>(
-        const EmptySyntaxReferenceRepository(),
+        syntaxReferenceRepository,
       );
 
       final codeRunner = CodeRunnerService();
@@ -76,14 +82,31 @@ class AppDependencies {
       );
       final curriculumProvider = CurriculumProvider(curriculumRepository);
       await curriculumProvider.load();
+      final progressProvider = ProgressProvider(services<ProgressRepository>());
+      final languageServerProvider = LanguageServerProvider(
+        workspaceRepository: services<WorkspaceRepository>(),
+      );
+      await progressProvider.load(AppConstants.visitorId);
+      final curriculum = curriculumProvider.state.value;
+      if (progressProvider.progress == null && curriculum?.units.isNotEmpty == true) {
+        final firstUnit = curriculum!.units.first;
+        if (firstUnit.lessonIds.isNotEmpty) {
+          await progressProvider.initialize(
+            visitorId: AppConstants.visitorId,
+            unitId: firstUnit.id,
+            lessonId: firstUnit.lessonIds.first,
+          );
+        }
+      }
 
       return AppDependencies._(
         services: services,
         appSettingsProvider: appSettingsProvider,
         curriculumProvider: curriculumProvider,
-        lessonProvider: LessonProvider(),
+        lessonProvider: LessonProvider(curriculumRepository),
+        languageServerProvider: languageServerProvider,
         exerciseProvider: ExerciseProvider(),
-        progressProvider: ProgressProvider(services<ProgressRepository>()),
+        progressProvider: progressProvider,
       );
     } on Object {
       await services.reset();
@@ -99,6 +122,11 @@ class AppDependencies {
     lessonProvider.dispose();
     exerciseProvider.dispose();
     progressProvider.dispose();
-    await services.reset();
+    try {
+      await languageServerProvider.disconnect();
+    } finally {
+      languageServerProvider.dispose();
+      await services.reset();
+    }
   }
 }

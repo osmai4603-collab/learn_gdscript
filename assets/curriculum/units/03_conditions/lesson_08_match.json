@@ -1,0 +1,47 @@
+{
+  "id": "lesson_08_match",
+  "unitId": "unit_03_conditions",
+  "title": {"ar": "عبارة المطابقة", "en": "Match Statement"},
+  "objective": {"ar": "اختر فرعاً بحسب قيمة واحدة باستخدام `match`.", "en": "Choose a branch based on one value with `match`."},
+  "estimatedMinutes": 5,
+  "order": 2,
+  "contentMarkdown": {
+    "ar": "## طابق قيمة مع الحالات\n\nتفحص `match` قيمة واحدة وتنفّذ الحالة المطابقة لها. استخدم `_` كحالة افتراضية لأي قيمة لم تُذكر:\n\n```gdscript\nvar day = \"Mon\"\nmatch day:\n    \"Mon\":\n        print(\"Monday\")\n    \"Tue\":\n        print(\"Tuesday\")\n    _:\n        print(\"Other\")\n```\n\nتحتاج كل حالة إلى نقطتين، وتُكتب أوامرها بمسافة بادئة إضافية.",
+    "en": "## Match a value against cases\n\n`match` checks one value and runs the matching case. Use `_` as the default case for any value not listed:\n\n```gdscript\nvar day = \"Mon\"\nmatch day:\n    \"Mon\":\n        print(\"Monday\")\n    \"Tue\":\n        print(\"Tuesday\")\n    _:\n        print(\"Other\")\n```\n\nEach case ends with a colon, and its statements are indented one level further."
+  },
+  "exampleCode": "var day = \"Mon\"\nmatch day:\n    \"Mon\":\n        print(\"Monday\")\n    \"Tue\":\n        print(\"Tuesday\")\n    _:\n        print(\"Other\")",
+  "exercises": [
+    {
+      "id": "ex_08_match_day",
+      "lessonId": "lesson_08_match",
+      "type": "writeCode",
+      "prompt": {"ar": "استخدم `match` لطباعة اسم اليوم الموافق للرقم `3`، مع حالات للأيام من 1 إلى 7 وحالة افتراضية.", "en": "Use `match` to print the day for number `3`, with cases for days 1 through 7 and a default case."},
+      "starterCode": "",
+      "solutionCode": "var day = 3\nmatch day:\n    1:\n        print(\"Sunday\")\n    2:\n        print(\"Monday\")\n    3:\n        print(\"Tuesday\")\n    4:\n        print(\"Wednesday\")\n    5:\n        print(\"Thursday\")\n    6:\n        print(\"Friday\")\n    7:\n        print(\"Saturday\")\n    _:\n        print(\"Unknown\")",
+      "testCases": [
+        {"description": {"ar": "تطابق القيمة 3 حالة الثلاثاء.", "en": "The value 3 matches the Tuesday case."}, "expectedOutput": "Tuesday"}
+      ],
+      "hints": [
+        {"ar": "اكتب `match day:` ثم أضف حالة لكل رقم.", "en": "Write `match day:` and add one case for each number."},
+        {"ar": "استخدم `_:` بعد الحالات لتغطية أي قيمة أخرى.", "en": "Use `_:` after the cases to cover any other value."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_08_predict_match",
+      "lessonId": "lesson_08_match",
+      "type": "predictOutput",
+      "prompt": {"ar": "اكتب برنامجاً يطابق النص `Wed` ويطبع `Midweek`، أو `Other` إذا لم يطابق الحالات.", "en": "Write a program that matches `Wed` and prints `Midweek`, or prints `Other` when no case matches."},
+      "starterCode": "",
+      "solutionCode": "var day = \"Wed\"\nmatch day:\n    \"Wed\":\n        print(\"Midweek\")\n    _:\n        print(\"Other\")",
+      "testCases": [
+        {"description": {"ar": "تُنفذ الحالة المطابقة للنص.", "en": "The case matching the string runs."}, "expectedOutput": "Midweek"}
+      ],
+      "hints": [
+        {"ar": "طابق النص باستخدام علامتي تنصيص.", "en": "Match the string using quotation marks."},
+        {"ar": "أضف حالة `_` للطباعة الافتراضية.", "en": "Add a `_` case for the default output."}
+      ],
+      "order": 1
+    }
+  ]
+}

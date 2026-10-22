@@ -1,0 +1,8 @@
+{
+  "id": "unit_05_functions",
+  "title": {"ar": "الدوال وإعادة الاستخدام", "en": "Functions and Reuse"},
+  "description": {"ar": "نظّم كودك في أجزاء قابلة لإعادة الاستخدام", "en": "Organize code into reusable parts"},
+  "iconName": "functions",
+  "order": 4,
+  "lessonIds": ["lesson_12_func_basics", "lesson_13_parameters", "lesson_14_return"]
+}

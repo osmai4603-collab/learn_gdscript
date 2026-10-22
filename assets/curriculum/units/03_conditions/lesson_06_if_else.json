@@ -1,0 +1,63 @@
+{
+  "id": "lesson_06_if_else",
+  "unitId": "unit_03_conditions",
+  "title": {"ar": "الشرط البسيط", "en": "If and Else"},
+  "objective": {"ar": "اجعل البرنامج يختار ما ينفّذه بناءً على شرط.", "en": "Make a program choose what to run based on a condition."},
+  "estimatedMinutes": 7,
+  "order": 0,
+  "contentMarkdown": {
+    "ar": "## اختر باستخدام if وelse\n\nتختبر `if` شرطاً منطقياً. إذا كان صحيحاً ينفّذ البرنامج الكتلة التابعة لها، وإلا يمكنه تنفيذ كتلة `else`:\n\n```gdscript\nvar score = 75\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n```\n\nتبدأ الكتلة بعد النقطتين، وتُميّزها المسافة البادئة. تعطي المقارنات مثل `==` و`!=` و`>` و`<` و`>=` و`<=` قيمة منطقية.",
+    "en": "## Choose with if and else\n\n`if` checks a Boolean condition. When it is true, the indented block runs; otherwise, an optional `else` block can run:\n\n```gdscript\nvar score = 75\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n```\n\nA colon begins the block, and indentation marks its body. Comparisons such as `==`, `!=`, `>`, `<`, `>=`, and `<=` produce Boolean values."
+  },
+  "exampleCode": "var score = 75\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")",
+  "exercises": [
+    {
+      "id": "ex_06_positive_number",
+      "lessonId": "lesson_06_if_else",
+      "type": "writeCode",
+      "prompt": {"ar": "إذا كان `number` يساوي `3`، اطبع `positive`، وإلا اطبع `not positive`.", "en": "When `number` is `3`, print `positive`; otherwise print `not positive`."},
+      "starterCode": "",
+      "solutionCode": "var number = 3\nif number > 0:\n    print(\"positive\")\nelse:\n    print(\"not positive\")",
+      "testCases": [
+        {"description": {"ar": "العدد الموجب يختار الفرع الأول.", "en": "A positive number selects the first branch."}, "expectedOutput": "positive"}
+      ],
+      "hints": [
+        {"ar": "قارن `number` بالصفر باستخدام `>`.", "en": "Compare `number` with zero using `>`."},
+        {"ar": "ضع رسالة كل احتمال داخل كتلة ذات مسافة بادئة.", "en": "Put each message in an indented block."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_06_fix_indentation",
+      "lessonId": "lesson_06_if_else",
+      "type": "fixBug",
+      "prompt": {"ar": "أصلح المسافة البادئة بحيث يطبع البرنامج `Pass` عندما تكون الدرجة 70.", "en": "Fix the indentation so the program prints `Pass` when the score is 70."},
+      "starterCode": "var score = 70\nif score >= 60:\nprint(\"Pass\")\nelse:\nprint(\"Try again\")",
+      "solutionCode": "var score = 70\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")",
+      "testCases": [
+        {"description": {"ar": "تنتمي أوامر الطباعة إلى كتلها الصحيحة.", "en": "The print statements belong to their correct blocks."}, "expectedOutput": "Pass"}
+      ],
+      "hints": [
+        {"ar": "يجب إزاحة جسم كل فرع بعد النقطتين.", "en": "Indent each branch body after its colon."},
+        {"ar": "استخدم المستوى نفسه من الإزاحة لكتلتي `if` و`else`.", "en": "Use the same indentation level for the `if` and `else` bodies."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_06_age_check",
+      "lessonId": "lesson_06_if_else",
+      "type": "writeCode",
+      "prompt": {"ar": "تحقق من عمر `18`: اطبع `Adult` إذا كان العمر 18 أو أكثر، وإلا اطبع `Minor`.", "en": "Check age `18`: print `Adult` when the age is at least 18; otherwise print `Minor`."},
+      "starterCode": "",
+      "solutionCode": "var age = 18\nif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Minor\")",
+      "testCases": [
+        {"description": {"ar": "العمر 18 يحقق شرط البلوغ.", "en": "Age 18 satisfies the adult condition."}, "expectedOutput": "Adult"}
+      ],
+      "hints": [
+        {"ar": "استخدم العامل `>=` للمقارنة مع 18.", "en": "Use `>=` to compare with 18."},
+        {"ar": "أضف فرع `else` للحالة الأخرى.", "en": "Add an `else` branch for the other case."}
+      ],
+      "order": 2
+    }
+  ]
+}

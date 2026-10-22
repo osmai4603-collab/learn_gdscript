@@ -1,0 +1,63 @@
+{
+  "id": "lesson_14_return",
+  "unitId": "unit_05_functions",
+  "title": {"ar": "القيم المعادة", "en": "Return Values"},
+  "objective": {"ar": "أعد نتيجة من الدالة واستخدمها في موضع آخر.", "en": "Return a result from a function and use it elsewhere."},
+  "estimatedMinutes": 7,
+  "order": 2,
+  "contentMarkdown": {
+    "ar": "## أعد نتيجة بدلاً من طباعتها\n\nتُعيد `return` قيمة إلى المكان الذي استدعى الدالة. يمكنك حفظ النتيجة أو استخدامها في تعبير:\n\n```gdscript\nfunc add(a, b):\n    return a + b\n\nvar result = add(3, 5)\nprint(result)\n```\n\n`print()` تعرض القيمة للمستخدم، أما `return` فتعيدها إلى الشيفرة كي تواصل استخدامها. يمكن إضافة نوع معلن مثل `func add(a, b) -> int:`.",
+    "en": "## Return a result instead of printing it\n\n`return` sends a value back to the place that called the function. You can store the result or use it in an expression:\n\n```gdscript\nfunc add(a, b):\n    return a + b\n\nvar result = add(3, 5)\nprint(result)\n```\n\n`print()` displays a value, while `return` gives it back to the code for further use. You can add a return type such as `func add(a, b) -> int:`."
+  },
+  "exampleCode": "func add(a, b):\n    return a + b\n\nvar result = add(3, 5)\nprint(result)",
+  "exercises": [
+    {
+      "id": "ex_14_square_return",
+      "lessonId": "lesson_14_return",
+      "type": "writeCode",
+      "prompt": {"ar": "عرّف `square(n)` لتعيد مربع `6`، ثم اطبع القيمة المعادة.", "en": "Define `square(n)` to return the square of `6`, then print the returned value."},
+      "starterCode": "",
+      "solutionCode": "func square(n):\n    return n * n\n\nprint(square(6))",
+      "testCases": [
+        {"description": {"ar": "تُعاد قيمة المربع وتُطبع.", "en": "The square is returned and printed."}, "expectedOutput": "36"}
+      ],
+      "hints": [
+        {"ar": "استخدم `return` داخل جسم الدالة.", "en": "Use `return` inside the function body."},
+        {"ar": "اضرب `n` في نفسه ثم اطبع استدعاء الدالة.", "en": "Multiply `n` by itself, then print the function call."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_14_return_expression",
+      "lessonId": "lesson_14_return",
+      "type": "predictOutput",
+      "prompt": {"ar": "عرّف `add(a, b)` ثم استخدم ناتجها في عملية الضرب لإظهار `24`.", "en": "Define `add(a, b)`, then use its result in a multiplication to display `24`."},
+      "starterCode": "",
+      "solutionCode": "func add(a, b):\n    return a + b\n\nprint(add(2, 4) * 4)",
+      "testCases": [
+        {"description": {"ar": "تُستخدم القيمة المعادة في التعبير.", "en": "The returned value is used in the expression."}, "expectedOutput": "24"}
+      ],
+      "hints": [
+        {"ar": "اجعل الدالة تعيد مجموع وسيطيها.", "en": "Have the function return the sum of its arguments."},
+        {"ar": "اضرب ناتج `add(2, 4)` في 4.", "en": "Multiply the result of `add(2, 4)` by 4."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_14_is_even",
+      "lessonId": "lesson_14_return",
+      "type": "writeCode",
+      "prompt": {"ar": "عرّف `is_even(n)` لتعيد `true` إذا كان العدد زوجياً، واختبرها مع `8` بطباعة الناتج.", "en": "Define `is_even(n)` to return `true` for an even number, then test it with `8` by printing the result."},
+      "starterCode": "",
+      "solutionCode": "func is_even(n):\n    return n % 2 == 0\n\nprint(is_even(8))",
+      "testCases": [
+        {"description": {"ar": "العدد 8 زوجي.", "en": "The number 8 is even."}, "expectedOutput": "true"}
+      ],
+      "hints": [
+        {"ar": "العدد زوجي إذا كان باقي قسمته على 2 يساوي صفراً.", "en": "A number is even when its remainder after division by 2 is zero."},
+        {"ar": "أعد نتيجة المقارنة `n % 2 == 0`.", "en": "Return the comparison result `n % 2 == 0`."}
+      ],
+      "order": 2
+    }
+  ]
+}
