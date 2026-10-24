@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/providers/language_server_provider.dart';
+import '../../routers/app_routes.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/output_panel/error_display.dart';
 
@@ -131,10 +133,7 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
             Text(l10n.indexedFiles(server.indexedFileCount)),
             const SizedBox(height: 12),
             OutlinedButton.icon(
-              onPressed: () => Navigator.pushNamed(
-                context,
-                '/workspace/search',
-              ),
+              onPressed: () => context.push(AppRoutes.workspaceSearch),
               icon: const Icon(Icons.search),
               label: Text(l10n.workspaceSearchTitle),
             ),

@@ -115,6 +115,7 @@ void main() {
     expect(AppSettings().toJson(), {
       'language': 'ar',
       'themeMode': 'system',
+      'themeVariant': 'academy',
       'hasCompletedOnboarding': false,
       'editorFontSize': 14,
       'showStreakInUi': true,
@@ -122,6 +123,14 @@ void main() {
     expect(
       AppSettings.fromJson({'language': 'en', 'themeMode': 'dark'}).themeMode,
       ThemeMode.dark,
+    );
+    expect(
+      AppSettings.fromJson({
+        'language': 'en',
+        'themeMode': 'dark',
+        'themeVariant': 'arabicIde',
+      }).themeVariant,
+      AppThemeVariant.arabicIde,
     );
   });
 

@@ -89,7 +89,8 @@ class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
           ),
           const SizedBox(height: 12),
           FilledButton.icon(
-            onPressed: !server.isConnected ||
+            onPressed:
+                !server.isConnected ||
                     _searching ||
                     _queryController.text.trim().isEmpty
                 ? null
@@ -99,10 +100,7 @@ class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
           ),
           if (!server.isConnected) ...[
             const SizedBox(height: 16),
-            EmptyState(
-              icon: Icons.link_off,
-              message: l10n.lspDisconnected,
-            ),
+            EmptyState(icon: Icons.link_off, message: l10n.lspDisconnected),
           ],
           if (_searching) ...[
             const SizedBox(height: 16),
@@ -124,7 +122,7 @@ class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
             SelectableText(
               const JsonEncoder.withIndent('  ').convert(_result),
               textDirection: TextDirection.ltr,
-              style: const TextStyle(fontFamily: 'monospace'),
+              style: const TextStyle(fontFamily: 'JetBrains Mono'),
             ),
           ],
         ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'arabic_ide_theme.dart';
+
 @immutable
 class CodeEditorTheme {
   const CodeEditorTheme({
@@ -18,6 +20,7 @@ class CodeEditorTheme {
     required this.errorLine,
     required this.matchedBracket,
     required this.foldGutter,
+    this.borderRadius = 12,
   });
 
   final Color background;
@@ -35,26 +38,51 @@ class CodeEditorTheme {
   final Color errorLine;
   final Color matchedBracket;
   final Color foldGutter;
+  final double borderRadius;
 
   static CodeEditorTheme of(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
+    final theme = Theme.of(context);
+    final syntaxColors = theme.extension<ArabicIdeSyntaxColors>();
+    if (syntaxColors != null) {
+      return CodeEditorTheme(
+        background: theme.brightness == Brightness.dark
+            ? const Color(0xFF1E232A)
+            : theme.colorScheme.surfaceContainerLow,
+        foreground: theme.colorScheme.onSurface,
+        lineNumber: const Color(0xFF5C697D),
+        selection: const Color(0x33478CBF),
+        cursor: const Color(0xFF91CDFF),
+        keyword: syntaxColors.keyword,
+        string: syntaxColors.string,
+        number: syntaxColors.target,
+        comment: syntaxColors.comment,
+        function: syntaxColors.builtIn,
+        type: syntaxColors.builtIn,
+        operator: theme.colorScheme.onSurface,
+        errorLine: const Color(0x44FF6B6B),
+        matchedBracket: const Color(0x55478CBF),
+        foldGutter: const Color(0xFF5C697D),
+        borderRadius: 4,
+      );
+    }
+    final brightness = theme.brightness;
     return brightness == Brightness.dark
         ? const CodeEditorTheme(
-            background: Color(0xFF171B1A),
-            foreground: Color(0xFFE2E8E5),
-            lineNumber: Color(0xFF87948E),
-            selection: Color(0xFF315C4F),
-            cursor: Color(0xFF9DE0C4),
-            keyword: Color(0xFFCE93D8),
-            string: Color(0xFFA5D6A7),
-            number: Color(0xFFFFCC80),
-            comment: Color(0xFF82938B),
-            function: Color(0xFF80CBC4),
-            type: Color(0xFF90CAF9),
-            operator: Color(0xFFFFAB91),
-            errorLine: Color(0x44EF5350),
-            matchedBracket: Color(0x5539A886),
-            foldGutter: Color(0xFF87948E),
+            background: Color(0xFF161B22),
+            foreground: Color(0xFFE6EDF3),
+            lineNumber: Color(0xFF8B949E),
+            selection: Color(0x33478CBF),
+            cursor: Color(0xFF91CDFF),
+            keyword: Color(0xFFC678DD),
+            string: Color(0xFF98C379),
+            number: Color(0xFFD19A66),
+            comment: Color(0xFF5C6370),
+            function: Color(0xFF61AFEF),
+            type: Color(0xFF91CDFF),
+            operator: Color(0xFFE6EDF3),
+            errorLine: Color(0x44E06C75),
+            matchedBracket: Color(0x55478CBF),
+            foldGutter: Color(0xFF8B949E),
           )
         : const CodeEditorTheme(
             background: Color(0xFFF5F8F6),

@@ -38,6 +38,7 @@ class SettingsRepository {
     return AppSettings.fromJson({
       'language': values['language'] ?? AppConstants.defaultLanguageCode,
       'themeMode': values['themeMode'] ?? ThemeMode.system.name,
+      'themeVariant': values['themeVariant'] ?? AppThemeVariant.academy.name,
       'hasCompletedOnboarding': onboardingValue == 'true',
       'editorFontSize': fontSize,
       'showStreakInUi': showStreakValue == null || showStreakValue == 'true',
@@ -61,6 +62,7 @@ class SettingsRepository {
     _transaction(db, () {
       _write(db, 'language', language);
       _write(db, 'themeMode', json['themeMode']! as String);
+      _write(db, 'themeVariant', json['themeVariant']! as String);
       _write(db, 'hasCompletedOnboarding', onboarding.toString());
       _write(db, 'editorFontSize', editorFontSize.toString());
       _write(db, 'showStreakInUi', showStreakInUi.toString());

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/progress_models.dart';
 import '../../../logic/providers/progress_provider.dart';

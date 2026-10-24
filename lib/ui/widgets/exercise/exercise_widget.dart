@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../core/theme/arabic_ide_theme.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/exercise_models.dart';
 import '../../../logic/services/test_runner_service.dart';
@@ -268,7 +270,9 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
                     child: Text(
                       option.isEmpty ? '""' : option,
                       textDirection: TextDirection.ltr,
-                      style: const TextStyle(fontFamily: 'monospace'),
+                      style: TextStyle(
+                        fontFamily: ArabicIdeTheme.codeFontFamily(context),
+                      ),
                     ),
                   ),
                 ),
@@ -374,7 +378,9 @@ class _ReorderSteps extends StatelessWidget {
         title: Text(
           lines[index],
           textDirection: TextDirection.ltr,
-          style: const TextStyle(fontFamily: 'monospace'),
+          style: TextStyle(
+            fontFamily: ArabicIdeTheme.codeFontFamily(context),
+          ),
         ),
       ),
     ),

@@ -85,7 +85,11 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     }
     final selection = _controller.selection;
     final value = _controller.value;
-    final text = value.text.replaceRange(selection.start, selection.end, '    ');
+    final text = value.text.replaceRange(
+      selection.start,
+      selection.end,
+      '    ',
+    );
     _controller.value = TextEditingValue(
       text: text,
       selection: TextSelection.collapsed(offset: selection.start + 4),
@@ -165,7 +169,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     final lineCount = '\n'.allMatches(_controller.text).length + 1;
     final textStyle = TextStyle(
       color: theme.foreground,
-      fontFamily: 'monospace',
+      fontFamily: 'JetBrains Mono',
       fontSize: widget.fontSize,
       height: 1.5,
     );
@@ -176,7 +180,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
           child: Container(
             decoration: BoxDecoration(
               color: theme.background,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(theme.borderRadius),
             ),
             constraints: const BoxConstraints(minHeight: 132),
             child: Row(
@@ -184,7 +188,10 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
               children: [
                 if (widget.showLineNumbers)
                   Padding(
-                    padding: const EdgeInsetsDirectional.only(start: 12, top: 1),
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 12,
+                      top: 1,
+                    ),
                     child: LineNumbers(
                       lineCount: lineCount,
                       scrollController: _lineScrollController,

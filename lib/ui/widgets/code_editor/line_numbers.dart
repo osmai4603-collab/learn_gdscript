@@ -35,7 +35,7 @@ class LineNumbers extends StatelessWidget {
                     '$line',
                     style: TextStyle(
                       color: editorTheme.lineNumber,
-                      fontFamily: 'monospace',
+                      fontFamily: 'JetBrains Mono',
                       fontSize: fontSize,
                       height: 1.5,
                     ),

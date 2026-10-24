@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/theme/arabic_ide_theme.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/exercise_models.dart';
 import '../../../data/models/gamification_models.dart';
@@ -15,6 +17,7 @@ import '../../../logic/providers/language_server_provider.dart';
 import '../../../logic/providers/lesson_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
 import '../../../logic/services/code_runner_service.dart';
+import '../../routers/app_routes.dart';
 import '../../layouts/adaptive_layout.dart';
 import '../../layouts/lesson_layout_desktop.dart';
 import '../../layouts/lesson_layout_mobile.dart';
@@ -173,7 +176,8 @@ class _LessonScreenState extends State<LessonScreen> {
             exercisesWithSolutionViewed ??
             previous?.exercisesWithSolutionViewed ??
             const [],
-        exerciseAttempts: exerciseAttempts ?? previous?.exerciseAttempts ?? const {},
+        exerciseAttempts:
+            exerciseAttempts ?? previous?.exerciseAttempts ?? const {},
         exerciseHints: exerciseHints ?? previous?.exerciseHints ?? const {},
       ),
     );
@@ -258,13 +262,13 @@ class _LessonScreenState extends State<LessonScreen> {
       status: allCompleted ? LessonStatus.completed : LessonStatus.inProgress,
     );
     final exerciseReward = await progressProvider.recordExerciseResult(
-          curriculum: curriculum,
-          lessonId: lesson.id,
-          attempts: attempts,
-          hintsCount: hintsUsed,
-          usedSolution: usedSolution,
-          code: code,
-        );
+      curriculum: curriculum,
+      lessonId: lesson.id,
+      attempts: attempts,
+      hintsCount: hintsUsed,
+      usedSolution: usedSolution,
+      code: code,
+    );
     _earnedXpForLesson += exerciseReward.earnedXP;
     _newlyUnlockedBadges.addAll(exerciseReward.newlyUnlockedBadges);
     if (allCompleted) {
@@ -278,15 +282,18 @@ class _LessonScreenState extends State<LessonScreen> {
     }
     if (!mounted) return;
     if (allCompleted) {
-      await Navigator.of(context).pushReplacementNamed(
-        '/lesson-complete/${lesson.id}',
-        arguments: {
+      context.pushReplacement(
+        AppRoutes.lessonCompletePath(lesson.id),
+        extra: {
           'earnedXP': _earnedXpForLesson,
           'newlyUnlockedBadges': [
             for (final badge in _newlyUnlockedBadges) badge.id,
           ],
           'hintsUsedCount':
-              progressProvider.progress?.lessonsProgress[lesson.id]?.hintsUsed ??
+              progressProvider
+                  .progress
+                  ?.lessonsProgress[lesson.id]
+                  ?.hintsUsed ??
               0,
           'timeSpentMinutes': DateTime.now()
               .difference(_lessonStartedAt ?? DateTime.now())
@@ -406,14 +413,11 @@ class _LessonScreenState extends State<LessonScreen> {
         unawaited(
           _persistLessonProgress(
             lesson,
-            exercisesWithSolutionViewed: [
-              ..._solutionViewedExerciseIds,
-            ],
+            exercisesWithSolutionViewed: [..._solutionViewedExerciseIds],
           ),
         );
       },
-      onCompletionRequested:
-          context.read<LanguageServerProvider>().isConnected
+      onCompletionRequested: context.read<LanguageServerProvider>().isConnected
           ? (code, offset) => context
                 .read<LanguageServerProvider>()
                 .completeLessonDocument(lesson.id, code, offset)
@@ -423,10 +427,7 @@ class _LessonScreenState extends State<LessonScreen> {
                 .read<LanguageServerProvider>()
                 .formatLessonDocument(lesson.id, code)
           : null,
-      fontSize: context
-          .watch<AppSettingsProvider>()
-          .editorFontSize
-          .toDouble(),
+      fontSize: context.watch<AppSettingsProvider>().editorFontSize.toDouble(),
     );
   }
 
@@ -434,10 +435,9 @@ class _LessonScreenState extends State<LessonScreen> {
     Map<String, int> values,
     String exerciseId,
     int currentValue,
-  ) =>
-      values.entries
-          .where((entry) => entry.key != exerciseId)
-          .fold(currentValue, (sum, entry) => sum + entry.value);
+  ) => values.entries
+      .where((entry) => entry.key != exerciseId)
+      .fold(currentValue, (sum, entry) => sum + entry.value);
 
   Future<void> _syncLessonDocument(String lessonId, String code) async {
     final server = context.read<LanguageServerProvider>();
@@ -465,8 +465,7 @@ class _LessonScreenState extends State<LessonScreen> {
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),
-        if (diagnostics.isNotEmpty)
-          _LspDiagnostics(diagnostics: diagnostics),
+        if (diagnostics.isNotEmpty) _LspDiagnostics(diagnostics: diagnostics),
         if (_lspWarning == null && diagnostics.isEmpty)
           const SizedBox(height: 16),
       ],
@@ -476,9 +475,7 @@ class _LessonScreenState extends State<LessonScreen> {
         title: Text(title),
         leading: IconButton(
           tooltip: context.l10n.backToPath,
-          onPressed: () => Navigator.of(
-            context,
-          ).pushNamedAndRemoveUntil('/path', (route) => route.isFirst),
+          onPressed: () => context.go(AppRoutes.learningPath),
           icon: const Icon(Icons.arrow_back),
         ),
       ),
@@ -544,28 +541,28 @@ class _LspDiagnostics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        for (final diagnostic in diagnostics)
-          ListTile(
-            dense: true,
-            leading: Icon(
-              Icons.warning_amber_outlined,
-              color: diagnostic['severity'] == 1
-                  ? Theme.of(context).colorScheme.error
-                  : Theme.of(context).colorScheme.tertiary,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          for (final diagnostic in diagnostics)
+            ListTile(
+              dense: true,
+              leading: Icon(
+                Icons.warning_amber_outlined,
+                color: diagnostic['severity'] == 1
+                    ? Theme.of(context).colorScheme.error
+                    : Theme.of(context).colorScheme.tertiary,
+              ),
+              title: Text(
+                diagnostic['message'] is String
+                    ? diagnostic['message']! as String
+                    : context.l10n.lspFeatureError,
+              ),
+              subtitle: _diagnosticLine(context, diagnostic),
             ),
-            title: Text(
-              diagnostic['message'] is String
-                  ? diagnostic['message']! as String
-                  : context.l10n.lspFeatureError,
-            ),
-            subtitle: _diagnosticLine(context, diagnostic),
-          ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
   }
 
   static Widget? _diagnosticLine(
@@ -641,7 +638,7 @@ class _MarkdownContent extends StatelessWidget {
         TextSpan(
           text: match.group(1),
           style: TextStyle(
-            fontFamily: 'monospace',
+            fontFamily: ArabicIdeTheme.codeFontFamily(context),
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
@@ -673,7 +670,9 @@ class _CodeBlock extends StatelessWidget {
             Expanded(
               child: SelectableText(
                 code,
-                style: const TextStyle(fontFamily: 'monospace'),
+                style: TextStyle(
+                  fontFamily: ArabicIdeTheme.codeFontFamily(context),
+                ),
               ),
             ),
             IconButton(

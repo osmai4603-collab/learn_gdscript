@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/extensions/context_extensions.dart';
+import '../../../data/models/app_settings.dart';
 import '../../../logic/providers/app_settings_provider.dart';
 import '../../../logic/providers/curriculum_provider.dart';
 import '../../../logic/providers/language_server_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
+import '../../routers/app_routes.dart';
 import '../../widgets/common/navigation_bar.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -22,11 +25,6 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: Row(
         children: [
-          if (wide)
-            AppNavigationBar(
-              selectedRoute: '/settings',
-              onSelected: (route) => Navigator.pushReplacementNamed(context, route),
-            ),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(24),
@@ -75,14 +73,32 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 24),
+                _SectionTitle(l10n.themeVariantLabel),
+                DropdownButtonFormField<AppThemeVariant>(
+                  initialValue: settings.themeVariant,
+                  items: [
+                    DropdownMenuItem(
+                      value: AppThemeVariant.academy,
+                      child: Text(l10n.themeAcademy),
+                    ),
+                    DropdownMenuItem(
+                      value: AppThemeVariant.arabicIde,
+                      child: Text(l10n.themeArabicIde),
+                    ),
+                  ],
+                  onChanged: (variant) {
+                    if (variant != null) {
+                      _save(context, () => settings.setThemeVariant(variant));
+                    }
+                  },
+                ),
+                const SizedBox(height: 24),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
                   title: Text(l10n.showStreak),
                   value: settings.showStreakInUi,
-                  onChanged: (show) => _save(
-                    context,
-                    () => settings.setShowStreakInUi(show),
-                  ),
+                  onChanged: (show) =>
+                      _save(context, () => settings.setShowStreakInUi(show)),
                 ),
                 const SizedBox(height: 24),
                 _SectionTitle(l10n.editorFontSize),
@@ -105,8 +121,7 @@ class SettingsScreen extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   leading: const Icon(Icons.menu_book_outlined),
                   title: Text(l10n.syntaxExplorerTitle),
-                  onTap: () =>
-                      Navigator.pushNamed(context, '/syntax-reference'),
+                  onTap: () => context.push(AppRoutes.syntaxReference),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
@@ -128,7 +143,7 @@ class SettingsScreen extends StatelessWidget {
                       : Text(languageServer.rootPath!),
                   trailing: IconButton(
                     tooltip: l10n.workspaceTitle,
-                    onPressed: () => Navigator.pushNamed(context, '/workspace'),
+                    onPressed: () => context.push(AppRoutes.workspace),
                     icon: const Icon(Icons.open_in_new),
                   ),
                 ),
@@ -150,8 +165,7 @@ class SettingsScreen extends StatelessWidget {
           ? null
           : AppNavigationBar(
               selectedRoute: '/settings',
-              onSelected: (route) =>
-                  Navigator.pushReplacementNamed(context, route),
+              onSelected: (route) => context.go(route),
             ),
     );
   }
@@ -164,9 +178,9 @@ class SettingsScreen extends StatelessWidget {
       await update();
     } on Object {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.saveSettingsError)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(context.l10n.saveSettingsError)));
       }
     }
   }
@@ -174,8 +188,7 @@ class SettingsScreen extends StatelessWidget {
   static Future<void> _resetProgress(BuildContext context) async {
     final l10n = context.l10n;
     final progressProvider = context.read<ProgressProvider>();
-    final units =
-        context.read<CurriculumProvider>().state.value?.units ?? [];
+    final units = context.read<CurriculumProvider>().state.value?.units ?? [];
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -206,9 +219,9 @@ class SettingsScreen extends StatelessWidget {
       }
     } on Object {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.saveSettingsError)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(context.l10n.saveSettingsError)));
       }
     }
   }

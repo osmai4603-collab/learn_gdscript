@@ -16,6 +16,7 @@ class AppSettingsProvider extends ChangeNotifier {
   AppSettings get settings => _settings;
   Locale get locale => _settings.locale;
   ThemeMode get themeMode => _settings.themeMode;
+  AppThemeVariant get themeVariant => _settings.themeVariant;
   int get editorFontSize => _settings.editorFontSize;
   bool get showStreakInUi => _settings.showStreakInUi;
 
@@ -23,6 +24,7 @@ class AppSettingsProvider extends ChangeNotifier {
     AppSettings(
       locale: locale,
       themeMode: _settings.themeMode,
+      themeVariant: _settings.themeVariant,
       hasCompletedOnboarding: _settings.hasCompletedOnboarding,
       editorFontSize: _settings.editorFontSize,
       showStreakInUi: _settings.showStreakInUi,
@@ -33,6 +35,18 @@ class AppSettingsProvider extends ChangeNotifier {
     AppSettings(
       locale: _settings.locale,
       themeMode: themeMode,
+      themeVariant: _settings.themeVariant,
+      hasCompletedOnboarding: _settings.hasCompletedOnboarding,
+      editorFontSize: _settings.editorFontSize,
+      showStreakInUi: _settings.showStreakInUi,
+    ),
+  );
+
+  Future<void> setThemeVariant(AppThemeVariant themeVariant) => _update(
+    AppSettings(
+      locale: _settings.locale,
+      themeMode: _settings.themeMode,
+      themeVariant: themeVariant,
       hasCompletedOnboarding: _settings.hasCompletedOnboarding,
       editorFontSize: _settings.editorFontSize,
       showStreakInUi: _settings.showStreakInUi,
@@ -43,6 +57,7 @@ class AppSettingsProvider extends ChangeNotifier {
     AppSettings(
       locale: _settings.locale,
       themeMode: _settings.themeMode,
+      themeVariant: _settings.themeVariant,
       hasCompletedOnboarding: true,
       editorFontSize: _settings.editorFontSize,
       showStreakInUi: _settings.showStreakInUi,
@@ -53,6 +68,7 @@ class AppSettingsProvider extends ChangeNotifier {
     AppSettings(
       locale: _settings.locale,
       themeMode: _settings.themeMode,
+      themeVariant: _settings.themeVariant,
       hasCompletedOnboarding: _settings.hasCompletedOnboarding,
       editorFontSize: fontSize,
       showStreakInUi: _settings.showStreakInUi,
@@ -63,6 +79,7 @@ class AppSettingsProvider extends ChangeNotifier {
     AppSettings(
       locale: _settings.locale,
       themeMode: _settings.themeMode,
+      themeVariant: _settings.themeVariant,
       hasCompletedOnboarding: _settings.hasCompletedOnboarding,
       editorFontSize: _settings.editorFontSize,
       showStreakInUi: show,

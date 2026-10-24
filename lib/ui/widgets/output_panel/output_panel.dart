@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 import '../code_directionality.dart';
+import '../../../core/theme/arabic_ide_theme.dart';
 import 'error_display.dart';
 
 enum OutputState { empty, running, success, error }
@@ -81,7 +82,9 @@ class _OutputText extends StatelessWidget {
     child: SingleChildScrollView(
       child: SelectableText(
         text,
-        style: const TextStyle(fontFamily: 'monospace'),
+        style: TextStyle(
+          fontFamily: ArabicIdeTheme.codeFontFamily(context),
+        ),
       ),
     ),
   );

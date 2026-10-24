@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/extensions/context_extensions.dart';
@@ -8,6 +9,7 @@ import '../../../logic/services/badge_evaluator.dart';
 import '../../../logic/providers/curriculum_provider.dart';
 import '../../../logic/providers/lesson_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
+import '../../routers/app_routes.dart';
 import '../../widgets/gamification/badge_unlocked_dialog.dart';
 import '../../widgets/gamification/confetti_celebration.dart';
 
@@ -161,20 +163,14 @@ class _LessonCompleteScreenState extends State<LessonCompleteScreen> {
                       runSpacing: 8,
                       children: [
                         OutlinedButton(
-                          onPressed: () => Navigator.of(context)
-                              .pushNamedAndRemoveUntil(
-                                '/path',
-                                (route) => route.isFirst,
-                              ),
+                          onPressed: () => context.go(AppRoutes.learningPath),
                           child: Text(l10n.backToPath),
                         ),
                         if (nextLessonId != null)
                           FilledButton(
-                            onPressed: () => Navigator.of(context)
-                                .pushNamedAndRemoveUntil(
-                                  '/lesson/$nextLessonId',
-                                  (route) => route.isFirst,
-                                ),
+                            onPressed: () => context.go(
+                              AppRoutes.lessonPath(nextLessonId),
+                            ),
                             child: Text(l10n.nextLesson),
                           ),
                       ],

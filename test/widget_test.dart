@@ -6,16 +6,20 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learn_gdscript/app.dart';
 import 'package:learn_gdscript/app_dependencies.dart';
 import 'package:learn_gdscript/data/models/app_settings.dart';
 import 'package:learn_gdscript/data/repositories/settings_repository.dart';
 import 'package:learn_gdscript/data/sqlite/database_helper.dart';
 import 'package:learn_gdscript/l10n/app_localizations.dart';
+import 'package:learn_gdscript/ui/layouts/academy_app_layout.dart';
+import 'package:learn_gdscript/ui/layouts/app_shell_sidebar.dart';
+import 'package:learn_gdscript/ui/screens/gamification/badges_screen.dart';
+import 'package:learn_gdscript/ui/widgets/common/navigation_bar.dart';
 import 'package:learn_gdscript/ui/widgets/code_directionality.dart';
 
 void main() {
@@ -45,6 +49,52 @@ void main() {
     expect(find.text('اللغة'), findsOneWidget);
   });
 
+  testWidgets('uses the app shell sidebar on wide screens', (tester) async {
+    final dependencies = await AppDependencies.create(
+      databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TestAssetBundle(),
+    );
+    addTearDown(dependencies.dispose);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    tester.view.physicalSize = const Size(1200, 900);
+    tester.view.devicePixelRatio = 1;
+    await dependencies.appSettingsProvider.completeOnboarding();
+
+    await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(AcademyAppLayout), findsOneWidget);
+    expect(find.byType(AppShellSidebar), findsOneWidget);
+    expect(find.byType(AppNavigationBar), findsNothing);
+    expect(find.text('الرئيسية'), findsOneWidget);
+    expect(find.text('مسار التعلّم'), findsWidgets);
+    expect(find.text('محرر الأكواد'), findsOneWidget);
+    expect(find.text('مستكشف الصياغة'), findsOneWidget);
+    expect(find.text('مساحة العمل'), findsOneWidget);
+    expect(find.text('الشارات'), findsOneWidget);
+    expect(find.text('الإعدادات'), findsOneWidget);
+
+    await tester.tap(find.text('الشارات'));
+    await tester.pumpAndSettle();
+    expect(find.byType(BadgesScreen), findsOneWidget);
+
+    await dependencies.appSettingsProvider.setLocale(const Locale('en'));
+    await tester.pumpAndSettle();
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Learning path'), findsOneWidget);
+    expect(find.text('Code editor'), findsOneWidget);
+    expect(find.text('Syntax explorer'), findsOneWidget);
+    expect(find.text('Workspace'), findsOneWidget);
+    expect(find.text('Badges'), findsNWidgets(3));
+    expect(find.text('Settings'), findsOneWidget);
+
+    GoRouter.of(tester.element(find.byType(AcademyAppLayout))).go('/settings');
+    await tester.pumpAndSettle();
+    expect(find.byType(AcademyAppLayout), findsOneWidget);
+    expect(find.text('Language'), findsOneWidget);
+  });
+
   testWidgets('experienced onboarding starts at the chosen unit', (
     tester,
   ) async {
@@ -65,9 +115,7 @@ void main() {
     );
     expect(find.text('المتغيرات · next'), findsOneWidget);
 
-    Navigator.of(
-      tester.element(find.byType(Scaffold).first),
-    ).pushNamed('/path');
+    GoRouter.of(tester.element(find.byType(Scaffold).first)).go('/path');
     await tester.pumpAndSettle();
     expect(find.text('المتغيرات'), findsOneWidget);
     expect(find.text('مقفل'), findsOneWidget);
@@ -117,15 +165,15 @@ void main() {
 
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
     await tester.pumpAndSettle();
-    Navigator.of(
+    GoRouter.of(
       tester.element(find.byType(Scaffold).first),
-    ).pushNamed('/lesson/intro_1');
+    ).go('/lesson/intro_1');
     await tester.pumpAndSettle();
     expect(find.text('تعذّر تحميل الدرس.'), findsOneWidget);
 
-    Navigator.of(
+    GoRouter.of(
       tester.element(find.byType(Scaffold).first),
-    ).pushNamed('/lesson/../bad');
+    ).go('/lesson/../bad');
     await tester.pumpAndSettle();
     expect(find.text('الصفحة غير موجودة'), findsOneWidget);
   });
@@ -142,9 +190,9 @@ void main() {
 
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
     await tester.pumpAndSettle();
-    Navigator.of(
+    GoRouter.of(
       tester.element(find.byType(Scaffold).first),
-    ).pushNamed('/workspace/search');
+    ).go('/workspace/search');
     await tester.pumpAndSettle();
 
     expect(find.text('نص'), findsOneWidget);
@@ -161,11 +209,16 @@ void main() {
     await database.database;
     final settings = SettingsRepository(database);
     await settings.save(
-      AppSettings(locale: Locale('en'), themeMode: ThemeMode.dark),
+      AppSettings(
+        locale: Locale('en'),
+        themeMode: ThemeMode.dark,
+        themeVariant: AppThemeVariant.arabicIde,
+      ),
     );
     final restored = await SettingsRepository(database).load();
     expect(restored.locale, const Locale('en'));
     expect(restored.themeMode, ThemeMode.dark);
+    expect(restored.themeVariant, AppThemeVariant.arabicIde);
     expect(restored.editorFontSize, 14);
     expect(restored.hasCompletedOnboarding, isFalse);
     await database.close();

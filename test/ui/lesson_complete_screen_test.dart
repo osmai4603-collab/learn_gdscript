@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learn_gdscript/data/models/exercise_models.dart';
 import 'package:learn_gdscript/data/models/lesson_models.dart';
 import 'package:learn_gdscript/data/models/localized_text.dart';
@@ -62,6 +63,26 @@ void main() {
       curriculumProvider.dispose();
     });
 
+    final router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const LessonCompleteScreen(
+            lessonId: 'lesson_01',
+            earnedXP: 35,
+            hintsUsedCount: 1,
+            timeSpentMinutes: 5,
+          ),
+        ),
+        GoRoute(
+          path: '/path',
+          builder: (context, state) =>
+              const Scaffold(body: Text('Learning path')),
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+
     await tester.pumpWidget(
       MultiProvider(
         providers: [
@@ -73,7 +94,7 @@ void main() {
             value: curriculumProvider,
           ),
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: const [
             AppLocalizations.delegate,
@@ -81,13 +102,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          home: const LessonCompleteScreen(
-            lessonId: 'lesson_01',
-            earnedXP: 35,
-            hintsUsedCount: 1,
-            timeSpentMinutes: 5,
-          ),
-          routes: {'/path': (_) => const Scaffold(body: Text('Learning path'))},
+          routerConfig: router,
         ),
       ),
     );

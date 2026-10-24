@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'model_json.dart';
 
+enum AppThemeVariant { academy, arabicIde }
+
 @immutable
 class AppSettings {
   final Locale locale;
   final ThemeMode themeMode;
+  final AppThemeVariant themeVariant;
   final bool hasCompletedOnboarding;
   final int editorFontSize;
   final bool showStreakInUi;
@@ -13,6 +16,7 @@ class AppSettings {
   AppSettings({
     this.locale = const Locale('ar'),
     this.themeMode = ThemeMode.system,
+    this.themeVariant = AppThemeVariant.academy,
     this.hasCompletedOnboarding = false,
     this.editorFontSize = 14,
     this.showStreakInUi = true,
@@ -28,6 +32,16 @@ class AppSettings {
     final themeMode = ThemeMode.values.where((value) => value.name == theme);
     if (themeMode.isEmpty) {
       throw FormatException('Unsupported theme mode "$theme".');
+    }
+    final themeVariantName = json['themeVariant'] ?? AppThemeVariant.academy.name;
+    if (themeVariantName is! String) {
+      throw const FormatException('Field "themeVariant" must be a string.');
+    }
+    final themeVariant = AppThemeVariant.values.where(
+      (value) => value.name == themeVariantName,
+    );
+    if (themeVariant.isEmpty) {
+      throw FormatException('Unsupported theme variant "$themeVariantName".');
     }
     final onboarding = json['hasCompletedOnboarding'];
     if (onboarding != null && onboarding is! bool) {
@@ -51,6 +65,7 @@ class AppSettings {
     return AppSettings(
       locale: Locale(language),
       themeMode: themeMode.first,
+      themeVariant: themeVariant.first,
       hasCompletedOnboarding: onboarding as bool? ?? false,
       editorFontSize: fontSize as int? ?? 14,
       showStreakInUi: showStreak as bool? ?? true,
@@ -60,6 +75,7 @@ class AppSettings {
   JsonObject toJson() => {
     'language': locale.languageCode,
     'themeMode': themeMode.name,
+    'themeVariant': themeVariant.name,
     'hasCompletedOnboarding': hasCompletedOnboarding,
     'editorFontSize': editorFontSize,
     'showStreakInUi': showStreakInUi,

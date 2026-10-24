@@ -20,7 +20,10 @@ class CodeCompletionOverlay extends StatelessWidget {
         itemBuilder: (context, index) => ListTile(
           dense: true,
           leading: const Icon(Icons.code, size: 18),
-          title: Text(items[index], style: const TextStyle(fontFamily: 'monospace')),
+          title: Text(
+            items[index],
+            style: const TextStyle(fontFamily: 'JetBrains Mono'),
+          ),
           onTap: () => onSelected(items[index]),
         ),
       ),

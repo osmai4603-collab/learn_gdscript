@@ -21,15 +21,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get learningPathTitle => 'Learning path';
 
   @override
-  String get learningPathEmpty =>
-      'Learning content will be added in a later phase.';
+  String get learningPathEmpty => 'Learning content will be added in a later phase.';
 
   @override
   String get workspaceTitle => 'Workspace';
 
   @override
-  String get workspaceDescription =>
-      'Local language-server processes are supported on desktop platforms only.';
+  String get workspaceDescription => 'Local language-server processes are supported on desktop platforms only.';
 
   @override
   String get settingsTitle => 'Settings';
@@ -38,8 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingTitle => 'Welcome';
 
   @override
-  String get onboardingDescription =>
-      'Choose a learning path and continue at your own pace.';
+  String get onboardingDescription => 'Choose a learning path and continue at your own pace.';
 
   @override
   String get lessonTitle => 'Lesson';
@@ -66,6 +63,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeLabel => 'Appearance';
 
   @override
+  String get themeVariantLabel => 'Theme';
+
+  @override
+  String get themeAcademy => 'Godot Developer Academy';
+
+  @override
+  String get themeArabicIde => 'Godot Arabic IDE & Academy';
+
+  @override
   String get themeSystem => 'Follow system';
 
   @override
@@ -75,14 +81,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeDark => 'Dark';
 
   @override
-  String get saveSettingsError =>
-      'Settings could not be saved. Your previous choice was restored.';
+  String get saveSettingsError => 'Settings could not be saved. Your previous choice was restored.';
 
   @override
   String get navigateHome => 'Home';
 
   @override
   String get navigatePath => 'Learning path';
+
+  @override
+  String get navigateCodeEditor => 'Code editor';
 
   @override
   String get navigateWorkspace => 'Workspace';
@@ -95,172 +103,267 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingQuestion => 'Have you programmed before?';
+
   @override
-  String get onboardingNewbie => "I'm completely new";
+  String get onboardingNewbie => 'I\'m completely new';
+
   @override
   String get onboardingExperienced => 'I know programming basics';
+
   @override
   String get continueLearning => 'Continue Learning';
+
   @override
   String get quickTry => 'Quick Try';
+
   @override
   String get runCode => 'Run';
+
   @override
   String get resetCode => 'Reset';
+
   @override
   String get showHint => 'Hint';
+
   @override
   String get showSolution => 'Show Solution';
+
   @override
   String get nextLesson => 'Next Lesson';
+
   @override
   String get previousLesson => 'Previous Lesson';
+
   @override
   String get exercisePrompt => 'Exercise';
+
   @override
   String get outputLabel => 'Output';
+
   @override
   String get outputEmpty => 'Press Run to see output';
+
   @override
   String get outputRunning => 'Running...';
+
   @override
   String get testResults => 'Test Results';
+
   @override
   String get testPassed => 'Passed';
+
   @override
   String get testFailed => 'Failed';
+
   @override
   String get lessonComplete => 'Well done!';
+
   @override
-  String completedLesson(String name) => 'Completed lesson "$name"';
+  String completedLesson(Object name) {
+    return 'Completed lesson \"$name\"';
+  }
+
   @override
-  String exercisesSolved(int count) => '$count exercises solved';
+  String exercisesSolved(Object count) {
+    return '$count exercises solved';
+  }
+
   @override
-  String hintsUsed(int count) => '$count hints used';
+  String hintsUsed(Object count) {
+    return '$count hints used';
+  }
+
   @override
-  String timeSpent(int minutes) => '$minutes minutes';
+  String timeSpent(Object minutes) {
+    return '$minutes minutes';
+  }
+
   @override
   String get backToPath => 'Back to Path';
+
   @override
   String get unitLocked => 'Locked';
+
   @override
   String get unitInProgress => 'In Progress';
+
   @override
   String get unitCompleted => 'Completed';
+
   @override
   String get editorFontSize => 'Editor Font Size';
+
   @override
   String get fontSmall => 'Small';
+
   @override
   String get fontMedium => 'Medium';
+
   @override
   String get fontLarge => 'Large';
+
   @override
   String get resetProgress => 'Reset Progress';
+
   @override
-  String get resetConfirmation =>
-      'Are you sure? All your progress will be deleted.';
+  String get resetConfirmation => 'Are you sure? All your progress will be deleted.';
+
   @override
   String get aboutApp => 'About';
+
   @override
   String get sendFeedback => 'Send Feedback';
+
   @override
   String get lspStatus => 'Language Server Status';
+
   @override
   String get lspConnected => 'Connected';
+
   @override
   String get lspDisconnected => 'Disconnected';
+
   @override
   String get startLearning => 'Start Learning';
+
   @override
   String get newUserWelcome => 'Welcome! Start your programming journey';
+
   @override
   String get returningWelcome => 'Welcome back!';
+
   @override
   String get retry => 'Retry';
+
   @override
   String get loading => 'Loading...';
+
   @override
   String get noLessons => 'There are no lessons in this unit.';
+
   @override
   String get runExample => 'Run Example';
+
   @override
   String get exampleLabel => 'Example';
+
   @override
-  String exerciseProgress(int current, int total) =>
-      'Exercise $current of $total';
+  String exerciseProgress(Object current, Object total) {
+    return 'Exercise $current of $total';
+  }
+
   @override
   String get nextExercise => 'Next Exercise';
+
   @override
   String get runTests => 'Check solution';
+
   @override
   String get allTestsPassed => 'Well done! All tests passed';
+
   @override
-  String testSummary(int passed, int total) => '$passed of $total passed';
+  String testSummary(Object passed, Object total) {
+    return '$passed of $total passed';
+  }
+
   @override
   String get resetCodeConfirmation => 'Reset code to its starting point?';
+
   @override
   String get hintUnavailable => 'There are no more hints.';
+
   @override
   String get lessonUnavailable => 'The lesson could not be loaded.';
+
   @override
   String get lessonProgress => 'Lesson progress';
+
   @override
-  String get quickTryCode => 'print("Hello!")';
+  String get quickTryCode => 'print(\"Hello!\")';
+
   @override
-  String get workspaceUnavailable =>
-      'Workspace features are not available yet.';
+  String get workspaceUnavailable => 'Workspace features are not available yet.';
+
   @override
   String get executionFailed => 'The code could not be run.';
+
   @override
   String get expectedOutput => 'Expected';
+
   @override
   String get actualOutput => 'Actual';
+
   @override
-  String errorLine(int line) => 'Error on line $line';
+  String errorLine(Object line) {
+    return 'Error on line $line';
+  }
+
   @override
   String get workspacePath => 'Project directory path';
+
   @override
   String get lspExecutablePath => 'Language server executable path (optional)';
+
   @override
   String get connectLsp => 'Connect and index';
+
   @override
   String get disconnectLsp => 'Disconnect';
+
   @override
-  String indexedFiles(int count) => '$count files indexed';
+  String indexedFiles(Object count) {
+    return '$count files indexed';
+  }
+
   @override
   String get lspConnectionError => 'Could not connect to the language server.';
+
   @override
   String get completeCode => 'Complete';
+
   @override
   String get formatCode => 'Format';
+
   @override
   String get lspFeatureError => 'The language server feature failed.';
+
   @override
-  String diagnosticLine(int line) => 'Line $line';
+  String diagnosticLine(Object line) {
+    return 'Line $line';
+  }
+
   @override
   String get workspaceSearchTitle => 'Search workspace';
+
   @override
   String get workspaceSearchPlaceholder => 'Enter text or a symbol';
+
   @override
   String get searchWorkspaceText => 'Text';
+
   @override
   String get searchWorkspaceSymbols => 'Symbols';
+
   @override
   String get workspaceSearchEmpty => 'No results found.';
 
   @override
-  String levelLabel(int level) => 'Level $level';
+  String levelLabel(Object level) {
+    return 'Level $level';
+  }
 
   @override
-  String totalXp(int xp) => '$xp XP';
+  String totalXp(Object xp) {
+    return '$xp XP';
+  }
 
   @override
-  String streakDays(int count) => '$count day streak';
+  String streakDays(Object count) {
+    return '$count day streak';
+  }
 
   @override
-  String get streakInfo =>
-      'Learn at least once each day to keep your streak. Missing a day resets the current streak but never removes your XP or badges.';
+  String get streakInfo => 'Learn at least once each day to keep your streak. Missing a day resets the current streak but never removes your XP or badges.';
 
   @override
   String get badgesTitle => 'Badges';
@@ -272,13 +375,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get badgeLocked => 'Not yet earned';
 
   @override
-  String badgeProgress(int current, int target) => '$current of $target';
+  String badgeProgress(Object current, Object target) {
+    return '$current of $target';
+  }
 
   @override
-  String earnedOn(String date) => 'Earned $date';
+  String earnedOn(Object date) {
+    return 'Earned $date';
+  }
 
   @override
-  String xpAwarded(int xp) => '+$xp XP earned';
+  String xpAwarded(Object xp) {
+    return '+$xp XP earned';
+  }
 
   @override
   String get showStreak => 'Show daily streak';
@@ -290,6 +399,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get syntaxExplorerTitle => 'Syntax explorer';
 
   @override
-  String get syntaxExplorerPlaceholder =>
-      'Search keywords, syntax, and examples';
+  String get syntaxExplorerPlaceholder => 'Search keywords, syntax, and examples';
 }

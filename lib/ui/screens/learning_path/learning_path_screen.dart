@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/extensions/context_extensions.dart';
@@ -7,6 +8,7 @@ import '../../../data/models/curriculum_models.dart';
 import '../../../data/models/progress_models.dart';
 import '../../../logic/providers/curriculum_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
+import '../../routers/app_routes.dart';
 import '../../widgets/common/empty_state.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/common/navigation_bar.dart';
@@ -26,11 +28,6 @@ class LearningPathScreen extends StatelessWidget {
       appBar: AppBar(title: Text(l10n.learningPathTitle)),
       body: Row(
         children: [
-          if (wide)
-            AppNavigationBar(
-              selectedRoute: '/path',
-              onSelected: (route) => Navigator.pushReplacementNamed(context, route),
-            ),
           Expanded(
             child: Consumer<CurriculumProvider>(
               builder: (context, provider, _) {
@@ -66,8 +63,7 @@ class LearningPathScreen extends StatelessWidget {
           ? null
           : AppNavigationBar(
               selectedRoute: '/path',
-              onSelected: (route) =>
-                  Navigator.pushReplacementNamed(context, route),
+              onSelected: context.go,
             ),
     );
   }
@@ -198,7 +194,7 @@ class _PathContentState extends State<_PathContent> {
                       : context.l10n.lessonTitle,
                 ),
                 onTap: () =>
-                    Navigator.pushNamed(context, '/lesson/$lessonId'),
+                    context.push(AppRoutes.lessonPath(lessonId)),
               ),
             ),
       ],

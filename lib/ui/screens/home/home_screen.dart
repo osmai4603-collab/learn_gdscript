@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/extensions/context_extensions.dart';
@@ -7,6 +8,7 @@ import '../../../data/models/curriculum_models.dart';
 import '../../../data/models/progress_models.dart';
 import '../../../logic/providers/curriculum_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
+import '../../routers/app_routes.dart';
 import '../../widgets/common/continue_learning_card.dart';
 import '../../widgets/common/empty_state.dart';
 import '../../widgets/common/navigation_bar.dart';
@@ -29,18 +31,13 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             tooltip: l10n.navigateSettings,
-            onPressed: () => Navigator.pushNamed(context, '/settings'),
+            onPressed: () => context.push(AppRoutes.settings),
             icon: const Icon(Icons.settings_outlined),
           ),
         ],
       ),
       body: Row(
         children: [
-          if (wide)
-            AppNavigationBar(
-              selectedRoute: '/',
-              onSelected: (route) => Navigator.pushReplacementNamed(context, route),
-            ),
           Expanded(
             child: Consumer<CurriculumProvider>(
               builder: (context, curriculumProvider, _) {
@@ -65,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     icon: Icons.menu_book_outlined,
                     message: l10n.learningPathEmpty,
                     action: FilledButton(
-                      onPressed: () => Navigator.pushNamed(context, '/path'),
+                      onPressed: () => context.push(AppRoutes.learningPath),
                       child: Text(l10n.learningPathTitle),
                     ),
                   );
@@ -78,11 +75,7 @@ class HomeScreen extends StatelessWidget {
       ),
       bottomNavigationBar: wide
           ? null
-          : AppNavigationBar(
-              selectedRoute: '/',
-              onSelected: (route) =>
-                  Navigator.pushReplacementNamed(context, route),
-            ),
+          : AppNavigationBar(selectedRoute: '/', onSelected: context.go),
     );
   }
 }
@@ -161,10 +154,7 @@ class _HomeContent extends StatelessWidget {
                     lessonTitle: lessonTitle,
                     completedLessons: completed,
                     totalLessons: currentUnit.lessonIds.length,
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      '/lesson/${next.$2}',
-                    ),
+                    onTap: () => context.push(AppRoutes.lessonPath(next.$2)),
                   );
                   final quickTry = const QuickTryCard();
                   if (constraints.maxWidth < 720) {
@@ -218,7 +208,8 @@ class _HomeContent extends StatelessWidget {
     final isLocked =
         previousUnit != null &&
         previousUnit.lessonIds.any(
-          (id) => progress?.lessonsProgress[id]?.status != LessonStatus.completed,
+          (id) =>
+              progress?.lessonsProgress[id]?.status != LessonStatus.completed,
         );
     return UnitCard(
       title: unit.title.resolve(locale),
@@ -231,7 +222,7 @@ class _HomeContent extends StatelessWidget {
           .length,
       totalLessons: unit.lessonIds.length,
       isLocked: isLocked,
-      onTap: () => Navigator.pushNamed(context, '/path'),
+      onTap: () => context.push(AppRoutes.learningPath),
     );
   }
 

@@ -38,6 +38,7 @@ void main() {
         AppSettings(
           locale: Locale('en'),
           themeMode: ThemeMode.dark,
+          themeVariant: AppThemeVariant.arabicIde,
           showStreakInUi: false,
         ),
       );
@@ -105,6 +106,7 @@ void main() {
       final restoredSettings = await SettingsRepository(reopened).load();
       expect(restoredSettings.locale, const Locale('en'));
       expect(restoredSettings.themeMode, ThemeMode.dark);
+      expect(restoredSettings.themeVariant, AppThemeVariant.arabicIde);
       expect(restoredSettings.showStreakInUi, isFalse);
       final restoredProgress = await ProgressRepository(
         reopened,

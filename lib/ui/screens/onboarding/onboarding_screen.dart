@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learn_gdscript/core/constants/app_constants.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +7,7 @@ import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/providers/app_settings_provider.dart';
 import '../../../logic/providers/curriculum_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
+import '../../routers/app_routes.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -35,7 +37,7 @@ class OnboardingScreen extends StatelessWidget {
     if (!context.mounted) return;
     await context.read<AppSettingsProvider>().completeOnboarding();
     if (!context.mounted) return;
-    Navigator.of(context).pushNamedAndRemoveUntil('/', (_) => false);
+    context.go(AppRoutes.root);
   }
 
   @override
