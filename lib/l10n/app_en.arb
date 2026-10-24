@@ -154,6 +154,88 @@
   },
   "reviewNextStep": "Your next lesson",
   "openReview": "Open review",
+  "reviewTitle": "Review",
+  "workspaceStatus": "Workspace",
+  "workspaceReady": "Ready to practice the lessons",
+  "openWorkspace": "Open workspace",
+  "xpTotalLabel": "Total XP",
+  "streakLabel": "Daily streak",
+  "capstoneTitle": "Capstone project",
+  "capstoneDescription": "Put your GDScript skills into practice with a complete project.",
+  "learningPathHeading": "Learning path and programming concept map",
+  "conceptMapAction": "Concept map",
+  "smartReviewAction": "Smart review",
+  "curriculumVersion": "GDScript {version} curriculum",
+  "@curriculumVersion": {
+    "placeholders": {
+      "version": {"type": "String"}
+    }
+  },
+  "completedUnitsSummary": "{completed} of {total} units completed",
+  "@completedUnitsSummary": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "completedLessonsSummary": "{completed} of {total} lessons completed",
+  "@completedLessonsSummary": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "milestoneCompleted": "Completed",
+  "milestoneCurrent": "Current stage",
+  "milestoneUpcoming": "Upcoming",
+  "completedModulesCount": "{count} completed",
+  "@completedModulesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "upcomingModulesCount": "{count} remaining",
+  "@upcomingModulesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "moduleNumber": "Module {number}",
+  "@moduleNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "moduleLessonCount": "{count} lessons",
+  "@moduleLessonCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "moduleDurationHours": "{hours} min total",
+  "@moduleDurationHours": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "lessonStatusCurrent": "Current lesson",
+  "lessonStatusCompleted": "Completed",
+  "lessonStatusAvailable": "Available",
+  "lessonStatusLocked": "Locked",
+  "moduleDetails": "Module details",
+  "showLessons": "Show lessons",
+  "hideLessons": "Hide lessons",
+  "masteryStatistics": "Learning progress and statistics",
+  "progressByUnit": "Progress by unit",
+  "achievementsTitle": "Your achievements",
+  "earnedBadgesSummary": "{count} badges earned",
+  "@earnedBadgesSummary": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "reviewNextStep": "Your next lesson",
+  "openReview": "Open review",
   "workspaceStatus": "Workspace",
   "workspaceReady": "Ready to practice the lessons",
   "openWorkspace": "Open workspace",

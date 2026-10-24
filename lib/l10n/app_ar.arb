@@ -154,6 +154,88 @@
   },
   "reviewNextStep": "درسك التالي",
   "openReview": "فتح المراجعة",
+  "reviewTitle": "المراجعة",
+  "workspaceStatus": "مساحة العمل",
+  "workspaceReady": "جاهزة لتطبيق الدروس",
+  "openWorkspace": "فتح مساحة العمل",
+  "xpTotalLabel": "إجمالي XP",
+  "streakLabel": "سلسلة التعلّم",
+  "capstoneTitle": "مشروع الإتقان النهائي",
+  "capstoneDescription": "طبّق مهارات GDScript التي اكتسبتها في مشروع متكامل.",
+  "learningPathHeading": "مسار التعلّم وخريطة المفاهيم البرمجية",
+  "conceptMapAction": "خريطة المفاهيم",
+  "smartReviewAction": "مراجعة ذكية",
+  "curriculumVersion": "منهج GDScript إصدار {version}",
+  "@curriculumVersion": {
+    "placeholders": {
+      "version": {"type": "String"}
+    }
+  },
+  "completedUnitsSummary": "أكملت {completed} من {total} وحدات",
+  "@completedUnitsSummary": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "completedLessonsSummary": "أكملت {completed} من {total} دروس",
+  "@completedLessonsSummary": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "milestoneCompleted": "مكتمل",
+  "milestoneCurrent": "المرحلة الحالية",
+  "milestoneUpcoming": "قادم",
+  "completedModulesCount": "{count} مكتملة",
+  "@completedModulesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "upcomingModulesCount": "{count} متبقية",
+  "@upcomingModulesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "moduleNumber": "الوحدة {number}",
+  "@moduleNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "moduleLessonCount": "{count} دروس",
+  "@moduleLessonCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "moduleDurationHours": "مجموع {hours} دقيقة",
+  "@moduleDurationHours": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "lessonStatusCurrent": "الدرس الحالي",
+  "lessonStatusCompleted": "مكتمل",
+  "lessonStatusAvailable": "متاح",
+  "lessonStatusLocked": "مقفل",
+  "moduleDetails": "تفاصيل الوحدة",
+  "showLessons": "عرض الدروس",
+  "hideLessons": "إخفاء الدروس",
+  "masteryStatistics": "تقدم التعلّم والإحصاءات",
+  "progressByUnit": "التقدم حسب الوحدة",
+  "achievementsTitle": "إنجازاتك",
+  "earnedBadgesSummary": "اكتسبت {count} شارات",
+  "@earnedBadgesSummary": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "reviewNextStep": "درسك التالي",
+  "openReview": "فتح المراجعة",
   "workspaceStatus": "مساحة العمل",
   "workspaceReady": "جاهزة لتطبيق الدروس",
   "openWorkspace": "فتح مساحة العمل",
