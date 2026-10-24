@@ -13,9 +13,13 @@ import 'l10n/app_localizations.dart';
 import 'logic/providers/app_settings_provider.dart';
 import 'logic/providers/curriculum_provider.dart';
 import 'logic/providers/exercise_provider.dart';
+import 'logic/providers/home_dashboard_provider.dart';
+import 'logic/providers/learning_path_provider.dart';
 import 'logic/providers/language_server_provider.dart';
 import 'logic/providers/lesson_provider.dart';
+import 'logic/providers/onboarding_provider.dart';
 import 'logic/providers/progress_provider.dart';
+import 'logic/services/code_runner_service.dart';
 import 'ui/routers/app_router.dart';
 
 class LearnGdscriptApp extends StatefulWidget {
@@ -53,6 +57,9 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
         ChangeNotifierProvider<LessonProvider>.value(
           value: dependencies.lessonProvider,
         ),
+        ChangeNotifierProvider<OnboardingProvider>.value(
+          value: dependencies.onboardingProvider,
+        ),
         ChangeNotifierProvider<LanguageServerProvider>.value(
           value: dependencies.languageServerProvider,
         ),
@@ -61,6 +68,15 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
         ),
         ChangeNotifierProvider<ProgressProvider>.value(
           value: dependencies.progressProvider,
+        ),
+        ChangeNotifierProvider<HomeDashboardProvider>.value(
+          value: dependencies.homeDashboardProvider,
+        ),
+        ChangeNotifierProvider<LearningPathProvider>.value(
+          value: dependencies.learningPathProvider,
+        ),
+        Provider<CodeRunnerService>.value(
+          value: dependencies.services<CodeRunnerService>(),
         ),
       ],
       child: Consumer<AppSettingsProvider>(

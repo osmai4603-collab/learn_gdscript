@@ -1,6 +1,6 @@
 import 'package:sqlite3/common.dart';
 
-const currentSchemaVersion = 2;
+const currentSchemaVersion = 5;
 
 void migrateDatabase(CommonDatabase database) {
   final currentVersion =
@@ -17,12 +17,50 @@ void migrateDatabase(CommonDatabase database) {
   try {
     if (currentVersion < 1) _createVersion1(database);
     if (currentVersion < 2) _createVersion2(database);
+    if (currentVersion < 4) _createVersion4(database);
+    if (currentVersion < 5) _createVersion5(database);
     database.execute('PRAGMA user_version = $currentSchemaVersion');
     database.execute('COMMIT');
   } on Object {
     database.execute('ROLLBACK');
     rethrow;
   }
+}
+
+void _createVersion4(CommonDatabase database) {
+  database.execute('''
+    CREATE TABLE home_dashboard_state (
+      visitor_id TEXT PRIMARY KEY NOT NULL
+        REFERENCES user_progress(visitor_id) ON DELETE CASCADE,
+      playground_code TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    )
+  ''');
+}
+
+void _createVersion5(CommonDatabase database) {
+  database.execute('''
+    CREATE TABLE IF NOT EXISTS onboarding_state (
+      visitor_id TEXT PRIMARY KEY NOT NULL,
+      current_step INTEGER NOT NULL CHECK (current_step BETWEEN 0 AND 3),
+      selected_tier TEXT NOT NULL CHECK (
+        selected_tier IN ('absoluteBeginner', 'transitionDev', 'godotVeteran')
+      ),
+      current_question_index INTEGER NOT NULL CHECK (current_question_index >= 0),
+      question_ids TEXT NOT NULL,
+      selected_answers TEXT NOT NULL,
+      recommended_unit_id TEXT,
+      recommended_lesson_id TEXT,
+      status TEXT NOT NULL CHECK (
+        status IN ('inProgress', 'completed', 'skipped')
+      ),
+      updated_at TEXT NOT NULL,
+      CHECK (
+        (recommended_unit_id IS NULL AND recommended_lesson_id IS NULL) OR
+        (recommended_unit_id IS NOT NULL AND recommended_lesson_id IS NOT NULL)
+      )
+    )
+  ''');
 }
 
 void _createVersion2(CommonDatabase database) {

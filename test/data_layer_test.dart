@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:learn_gdscript/data/models/app_settings.dart';
 import 'package:learn_gdscript/data/models/gamification_models.dart';
 import 'package:learn_gdscript/data/models/progress_models.dart';
+import 'package:learn_gdscript/data/repositories/home_dashboard_repository.dart';
 import 'package:learn_gdscript/data/repositories/progress_repository.dart';
 import 'package:learn_gdscript/data/repositories/settings_repository.dart';
 import 'package:learn_gdscript/data/sqlite/database_helper.dart';
@@ -13,6 +14,41 @@ import 'package:sqlite3/common.dart';
 import 'package:sqlite3/sqlite3.dart' as sqlite;
 
 void main() {
+  test('home playground draft persists per visitor', () async {
+    final database = DatabaseHelper(inMemory: true);
+    addTearDown(database.close);
+    final progressRepository = ProgressRepository(database);
+    await progressRepository.save(
+      UserProgress(
+        visitorId: 'dashboard-visitor',
+        currentUnitId: 'basics',
+        currentLessonId: 'intro',
+        totalXP: 0,
+        currentStreak: 0,
+        longestStreak: 0,
+        lastActiveDate: DateTime.utc(2026, 10, 24),
+        lessonsProgress: const {},
+        earnedBadges: const [],
+      ),
+    );
+
+    final dashboardRepository = HomeDashboardRepository(database);
+    await dashboardRepository.savePlaygroundCode(
+      visitorId: 'dashboard-visitor',
+      code: 'print("saved draft")',
+      updatedAt: DateTime.utc(2026, 10, 24),
+    );
+
+    expect(
+      await dashboardRepository.loadPlaygroundCode('dashboard-visitor'),
+      'print("saved draft")',
+    );
+    expect(
+      await dashboardRepository.loadPlaygroundCode('another-visitor'),
+      isNull,
+    );
+  });
+
   test(
     'migrations are idempotent and persisted settings/progress survive reopen',
     () async {

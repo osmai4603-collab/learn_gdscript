@@ -13,6 +13,9 @@ abstract final class AppRoutes {
   static const lesson = '/lesson/:lessonId';
   static const lessonComplete = '/lesson-complete/:lessonId';
 
+  static const spacedRepetition = '/spaced-repetition';
+  static const miniGame = '/projects/mini-game';
+
   static String lessonPath(String lessonId) =>
       '/lesson/${Uri.encodeComponent(lessonId)}';
 

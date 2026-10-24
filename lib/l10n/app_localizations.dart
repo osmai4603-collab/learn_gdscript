@@ -113,6 +113,49 @@ abstract class AppLocalizations {
   /// **'Learn GDScript step by step'**
   String get homeWelcome;
 
+  String get dashboardLspConnecting;
+  String get dashboardLspActive;
+  String get dashboardLspDisconnected;
+  String dashboardDays(int days);
+  String dashboardWelcomeBack(String name);
+  String get dashboardWelcomeMessage;
+  String get dashboardCurrentUnit;
+  String dashboardPercentComplete(int percent);
+  String get dashboardNextLevel;
+  String dashboardLessonsCompleted(int completed, int total);
+  String dashboardXpToNextLevel(int xp);
+  String get dashboardContinueDescription;
+  String get dashboardContinueAction;
+  String get dashboardDraftAutoSaved;
+  String get dashboardCurriculumTitle;
+  String get dashboardCurriculumDescription;
+  String get dashboardViewFullPath;
+  String get dashboardRecentBadges;
+  String dashboardBadgeCount(int earned, int total);
+  String get dashboardNoBadges;
+  String get dashboardEarnBadges;
+  String get dashboardStreak;
+  String dashboardConsecutiveDays(int days);
+  String get dashboardEngineTitle;
+  String get dashboardEngineConnecting;
+  String get dashboardEngineConnected;
+  String get dashboardEngineDisconnected;
+  String get dashboardWorkspace;
+  String get dashboardRuntime;
+  String get dashboardLocal;
+  String get dashboardLsp;
+  String get dashboardPlaygroundReset;
+  String get dashboardPlaygroundRun;
+  String get dashboardPlaygroundRunning;
+  String get dashboardPlaygroundOutputTitle;
+  String get dashboardPlaygroundOutputRunning;
+  String get dashboardPlaygroundOutputEmpty;
+  String get dashboardPlaygroundOutputSuccess;
+  String dashboardSaveError(String error);
+  String dashboardExecutionError(String error);
+  String get dashboardExecutionFailed;
+  String get dashboardExampleTag;
+
   /// No description provided for @learningPathTitle.
   ///
   /// In en, this message translates to:
@@ -154,6 +197,58 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose a learning path and continue at your own pace.'**
   String get onboardingDescription;
+
+  String get onboardingBrand;
+  String get onboardingPlacementLabel;
+  String get onboardingSkip;
+  String get onboardingStepWelcome;
+  String get onboardingStepExperience;
+  String get onboardingStepAssessment;
+  String get onboardingStepRoadmap;
+  String get onboardingWelcomeHeading;
+  String get onboardingWelcomeBody;
+  String get onboardingWelcomeAction;
+  String get onboardingExperiencePrompt;
+  String get onboardingExperienceDescription;
+  String get onboardingTierBeginner;
+  String get onboardingTierBeginnerDescription;
+  String get onboardingTierTransition;
+  String get onboardingTierTransitionDescription;
+  String get onboardingTierVeteran;
+  String get onboardingTierVeteranDescription;
+  String get onboardingContinueAssessment;
+  String onboardingQuestionProgress(int current, int total);
+  String get onboardingAssessmentTag;
+  String get onboardingQuestionTyping;
+  String get onboardingCodeTyping;
+  String get onboardingOptionTyping0;
+  String get onboardingOptionTyping1;
+  String get onboardingOptionTyping2;
+  String get onboardingOptionTyping3;
+  String get onboardingQuestionPhysics;
+  String get onboardingCodePhysics;
+  String get onboardingOptionPhysics0;
+  String get onboardingOptionPhysics1;
+  String get onboardingOptionPhysics2;
+  String get onboardingOptionPhysics3;
+  String get onboardingQuestionMatch;
+  String get onboardingCodeMatch;
+  String get onboardingOptionMatch0;
+  String get onboardingOptionMatch1;
+  String get onboardingOptionMatch2;
+  String get onboardingOptionMatch3;
+  String get onboardingPrevious;
+  String get onboardingNextQuestion;
+  String get onboardingFinishAssessment;
+  String get onboardingRoadmapSuccess;
+  String onboardingRecommendedStart(String unit);
+  String onboardingUnitLabel(String number);
+  String get onboardingSummaryBeginner;
+  String get onboardingSummaryTransition;
+  String get onboardingSummaryVeteran;
+  String get onboardingStartLearning;
+  String get onboardingSaveError;
+  String get onboardingRestoreError;
 
   /// No description provided for @lessonTitle.
   ///

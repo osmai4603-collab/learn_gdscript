@@ -3,8 +3,160 @@
   "appTitle": "Learn GDScript",
   "homeTitle": "Home",
   "homeWelcome": "Learn GDScript step by step",
+  "dashboardLspConnecting": "GDScript: Local | LSP: Connecting",
+  "dashboardLspActive": "GDScript: Local | LSP: Active",
+  "dashboardLspDisconnected": "GDScript: Local | LSP: Disconnected",
+  "dashboardDays": "{days} days",
+  "@dashboardDays": {
+    "placeholders": {"days": {"type": "int"}}
+  },
+  "dashboardWelcomeBack": "Welcome back, {name} 👋",
+  "@dashboardWelcomeBack": {
+    "placeholders": {"name": {"type": "String"}}
+  },
+  "dashboardWelcomeMessage": "You are one step away from mastering game branching. Keep writing code and controlling node behavior today!",
+  "dashboardCurrentUnit": "Current unit:",
+  "dashboardPercentComplete": "{percent}% complete",
+  "@dashboardPercentComplete": {
+    "placeholders": {"percent": {"type": "int"}}
+  },
+  "dashboardNextLevel": "Progress to next level",
+  "dashboardLessonsCompleted": "{completed} of {total} lessons",
+  "@dashboardLessonsCompleted": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dashboardXpToNextLevel": "{xp} XP to next level",
+  "@dashboardXpToNextLevel": {
+    "placeholders": {"xp": {"type": "int"}}
+  },
+  "dashboardContinueDescription": "Pick up where you left off. Your progress is saved automatically.",
+  "dashboardContinueAction": "Continue learning",
+  "dashboardDraftAutoSaved": "Last code draft saved automatically",
+  "dashboardCurriculumTitle": "Curriculum map",
+  "dashboardCurriculumDescription": "Track your progress from your first program to building game logic with GDScript.",
+  "dashboardViewFullPath": "View complete learning path",
+  "dashboardRecentBadges": "Recently earned badges",
+  "dashboardBadgeCount": "{earned} of {total}",
+  "@dashboardBadgeCount": {
+    "placeholders": {
+      "earned": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dashboardNoBadges": "No badges yet",
+  "dashboardEarnBadges": "Complete lessons to earn badges",
+  "dashboardStreak": "Learning streak",
+  "dashboardConsecutiveDays": "{days} consecutive days 🔥",
+  "@dashboardConsecutiveDays": {
+    "placeholders": {"days": {"type": "int"}}
+  },
+  "dashboardEngineTitle": "Language server and runtime",
+  "dashboardEngineConnecting": "Connecting",
+  "dashboardEngineConnected": "Connected",
+  "dashboardEngineDisconnected": "Disconnected",
+  "dashboardWorkspace": "Workspace",
+  "dashboardRuntime": "GDScript runtime",
+  "dashboardLocal": "Local",
+  "dashboardLsp": "Language server",
+  "dashboardPlaygroundReset": "Reset code",
+  "dashboardPlaygroundRun": "Run code (F5)",
+  "dashboardPlaygroundRunning": "Running",
+  "dashboardPlaygroundOutputTitle": "Godot output console",
+  "dashboardPlaygroundOutputRunning": "Running code...",
+  "dashboardPlaygroundOutputEmpty": "Press Run code to see the result here.",
+  "dashboardPlaygroundOutputSuccess": "Executed successfully with no output.",
+  "dashboardSaveError": "Could not save the draft: {error}",
+  "@dashboardSaveError": {
+    "placeholders": {"error": {"type": "String"}}
+  },
+  "dashboardExecutionError": "Could not execute the code: {error}",
+  "@dashboardExecutionError": {
+    "placeholders": {"error": {"type": "String"}}
+  },
+  "dashboardExecutionFailed": "Could not execute the code.",
+  "dashboardExampleTag": "Example",
   "learningPathTitle": "Learning path",
   "learningPathEmpty": "Learning content will be added in a later phase.",
+  "learningPathHeading": "Learning path and programming concept map",
+  "conceptMapAction": "Concept map",
+  "smartReviewAction": "Smart review",
+  "curriculumVersion": "GDScript {version} curriculum",
+  "@curriculumVersion": {
+    "placeholders": {
+      "version": {"type": "String"}
+    }
+  },
+  "completedUnitsSummary": "{completed} of {total} units completed",
+  "@completedUnitsSummary": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "completedLessonsSummary": "{completed} of {total} lessons completed",
+  "@completedLessonsSummary": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "milestoneCompleted": "Completed",
+  "milestoneCurrent": "Current stage",
+  "milestoneUpcoming": "Upcoming",
+  "completedModulesCount": "{count} completed",
+  "@completedModulesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "upcomingModulesCount": "{count} remaining",
+  "@upcomingModulesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "moduleNumber": "Module {number}",
+  "@moduleNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "moduleLessonCount": "{count} lessons",
+  "@moduleLessonCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "moduleDurationHours": "{hours} min total",
+  "@moduleDurationHours": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "lessonStatusCurrent": "Current lesson",
+  "lessonStatusCompleted": "Completed",
+  "lessonStatusAvailable": "Available",
+  "lessonStatusLocked": "Locked",
+  "moduleDetails": "Module details",
+  "showLessons": "Show lessons",
+  "hideLessons": "Hide lessons",
+  "masteryStatistics": "Learning progress and statistics",
+  "progressByUnit": "Progress by unit",
+  "achievementsTitle": "Your achievements",
+  "earnedBadgesSummary": "{count} badges earned",
+  "@earnedBadgesSummary": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "reviewNextStep": "Your next lesson",
+  "openReview": "Open review",
+  "workspaceStatus": "Workspace",
+  "workspaceReady": "Ready to practice the lessons",
+  "openWorkspace": "Open workspace",
   "workspaceTitle": "Workspace",
   "workspaceDescription": "Local language-server processes are supported on desktop platforms only.",
   "settingsTitle": "Settings",
@@ -120,5 +272,72 @@
   "showStreak": "Show daily streak",
   "great": "Great!",
   "syntaxExplorerTitle": "Syntax explorer",
-  "syntaxExplorerPlaceholder": "Search keywords, syntax, and examples"
+  "syntaxExplorerPlaceholder": "Search keywords, syntax, and examples",
+  "onboardingBrand": "Godot Academy",
+  "onboardingPlacementLabel": "Placement & Onboarding",
+  "onboardingSkip": "Skip to home ↵",
+  "onboardingStepWelcome": "Welcome",
+  "onboardingStepExperience": "Experience",
+  "onboardingStepAssessment": "Quick assessment",
+  "onboardingStepRoadmap": "Your roadmap",
+  "onboardingWelcomeHeading": "Welcome to Godot Developer Academy!",
+  "onboardingWelcomeBody": "The first complete Arabic platform to master GDScript 2.0 and Godot 4.3 through hands-on practice, quality assessments, and applied projects.",
+  "onboardingWelcomeAction": "Start your placement (2 minutes) ↵",
+  "onboardingExperiencePrompt": "What is your current programming background?",
+  "onboardingExperienceDescription": "We will tailor the curriculum pace and exercises to your experience.",
+  "onboardingTierBeginner": "Completely new to programming",
+  "onboardingTierBeginnerDescription": "I have never written code and want to start from scratch with variables and functions.",
+  "onboardingTierTransition": "Programmer coming from another language (Python, JS, C#)",
+  "onboardingTierTransitionDescription": "I understand programming basics and objects, and want to master GDScript 2.0 and Godot.",
+  "onboardingTierVeteran": "Godot 3 developer moving to Godot 4",
+  "onboardingTierVeteranDescription": "I have experience with Godot 3 and want to explore GDScript 2.0, static typing, and signals.",
+  "onboardingContinueAssessment": "Continue to the quick diagnostic (3 questions) ↵",
+  "onboardingQuestionProgress": "Question {current} of {total}",
+  "@onboardingQuestionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "onboardingAssessmentTag": "Academic placement",
+  "onboardingQuestionTyping": "What is the correct way to declare a strictly typed numeric variable in GDScript 2.0?",
+  "onboardingCodeTyping": "# Choose the most efficient and compiler-safe syntax:",
+  "onboardingOptionTyping0": "var player_speed = 300.0",
+  "onboardingOptionTyping1": "var player_speed: float = 300.0",
+  "onboardingOptionTyping2": "float player_speed = 300.0;",
+  "onboardingOptionTyping3": "let player_speed: number = 300.0",
+  "onboardingQuestionPhysics": "Which function handles movement synchronized with Godot's physics engine?",
+  "onboardingCodePhysics": "func ???(delta: float) -> void:\\n    move_and_slide()",
+  "onboardingOptionPhysics0": "_process(delta: float)",
+  "onboardingOptionPhysics1": "_physics_process(delta: float)",
+  "onboardingOptionPhysics2": "_fixed_update(delta: float)",
+  "onboardingOptionPhysics3": "_integrate_forces(state: PhysicsDirectBodyState2D)",
+  "onboardingQuestionMatch": "What role does the _ pattern play in a match statement in Godot 4.3?",
+  "onboardingCodeMatch": "match player_state:\\n    \"IDLE\": velocity.x = 0.0\\n    _: handle_fallback()",
+  "onboardingOptionMatch0": "It ignores the rest of the code and stops execution",
+  "onboardingOptionMatch1": "It is a wildcard fallback for any unmatched value",
+  "onboardingOptionMatch2": "It declares a private unused variable",
+  "onboardingOptionMatch3": "It immediately raises an assertion error",
+  "onboardingPrevious": "Previous",
+  "onboardingNextQuestion": "Next question ↵",
+  "onboardingFinishAssessment": "Finish assessment and suggest a plan ↵",
+  "onboardingRoadmapSuccess": "Your personalized learning plan is ready!",
+  "onboardingRecommendedStart": "Recommended starting point: {unit}",
+  "@onboardingRecommendedStart": {
+    "placeholders": {
+      "unit": {"type": "String"}
+    }
+  },
+  "onboardingUnitLabel": "Unit {number}",
+  "@onboardingUnitLabel": {
+    "placeholders": {
+      "number": {"type": "String"}
+    }
+  },
+  "onboardingSummaryBeginner": "We will start with the fundamentals to build a strong foundation in programming and GDScript.",
+  "onboardingSummaryTransition": "Based on your answers and programming background, we will start at the level best suited to accelerate your learning.",
+  "onboardingSummaryVeteran": "We will focus on the concepts that help you move to GDScript 2.0 and Godot 4.",
+  "onboardingStartLearning": "Go to the learning path and start your first lesson ↵",
+  "onboardingSaveError": "Could not save onboarding progress. Please try again.",
+  "onboardingRestoreError": "Could not restore your saved onboarding data."
 }

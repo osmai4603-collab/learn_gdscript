@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:learn_gdscript/data/repositories/curriculum_repository.dart';
+import 'package:learn_gdscript/data/models/onboarding_draft.dart';
+import 'package:learn_gdscript/data/repositories/onboarding_repository.dart';
 import 'package:learn_gdscript/data/repositories/workspace_repository.dart';
 import 'package:learn_gdscript/data/sqlite/database_helper.dart';
+import 'package:learn_gdscript/logic/providers/onboarding_provider.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -63,6 +68,58 @@ void main() {
     expect(await repository.getRootPath(), '/project');
     await helper.close();
   });
+
+  test(
+    'onboarding draft persists and restores after reopening the database',
+    () async {
+      final directory = await Directory.systemTemp.createTemp(
+        'onboarding-persistence-',
+      );
+      addTearDown(() => directory.delete(recursive: true));
+      final databasePath = '${directory.path}/learning.sqlite';
+      final firstHelper = DatabaseHelper(
+        databasePathProvider: () async => databasePath,
+      );
+      final repository = OnboardingRepository(firstHelper);
+      final draft = OnboardingDraft(
+        currentStep: 2,
+        selectedTier: ExperienceTier.godotVeteran,
+        currentQuestionIndex: 2,
+        selectedAnswers: const [1, 0, 3],
+      );
+      await repository.save('visitor', draft);
+      await firstHelper.close();
+
+      final reopenedHelper = DatabaseHelper(
+        databasePathProvider: () async => databasePath,
+      );
+      final reopenedRepository = OnboardingRepository(reopenedHelper);
+      final restoredProvider = OnboardingProvider(reopenedRepository);
+      await restoredProvider.load('visitor');
+      expect(restoredProvider.draft?.currentStep, 2);
+      expect(restoredProvider.draft?.selectedTier, ExperienceTier.godotVeteran);
+      expect(restoredProvider.draft?.currentQuestionIndex, 2);
+      expect(restoredProvider.draft?.questionIds, onboardingQuestionIds);
+      expect(restoredProvider.draft?.selectedAnswers, [1, 0, 3]);
+
+      await reopenedRepository.save(
+        'visitor',
+        draft.copyWith(
+          currentStep: 3,
+          recommendedUnitId: 'unit_03',
+          recommendedLessonId: 'lesson_03',
+          status: OnboardingStatus.completed,
+        ),
+      );
+      final completedDraft = await reopenedRepository.load('visitor');
+      expect(completedDraft?.currentStep, 3);
+      expect(completedDraft?.recommendedUnitId, 'unit_03');
+      expect(completedDraft?.recommendedLessonId, 'lesson_03');
+      expect(completedDraft?.status, OnboardingStatus.completed);
+      restoredProvider.dispose();
+      await reopenedHelper.close();
+    },
+  );
 }
 
 class _TestAssetBundle extends CachingAssetBundle {

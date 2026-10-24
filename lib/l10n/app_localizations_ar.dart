@@ -18,6 +18,138 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeWelcome => 'تعلّم GDScript خطوة بخطوة';
 
   @override
+  String get dashboardLspConnecting => 'GDScript: محلي | LSP: جارٍ الاتصال';
+
+  @override
+  String get dashboardLspActive => 'GDScript: محلي | LSP: نشط';
+
+  @override
+  String get dashboardLspDisconnected => 'GDScript: محلي | LSP: غير متصل';
+
+  @override
+  String dashboardDays(int days) => '$days أيام';
+
+  @override
+  String dashboardWelcomeBack(String name) => 'مرحباً بعودتك، $name 👋';
+
+  @override
+  String get dashboardWelcomeMessage =>
+      'خطوة واحدة تفصلك عن إتقان منطق تفرع اللعبة. لنواصل كتابة الأكواد والتحكم بسلوك العقد اليوم!';
+
+  @override
+  String get dashboardCurrentUnit => 'الوحدة الحالية:';
+
+  @override
+  String dashboardPercentComplete(int percent) => '$percent% مكتمل';
+
+  @override
+  String get dashboardNextLevel => 'التقدم للمستوى التالي';
+
+  @override
+  String dashboardLessonsCompleted(int completed, int total) =>
+      '$completed من $total درساً';
+
+  @override
+  String dashboardXpToNextLevel(int xp) => '$xp XP للمستوى التالي';
+
+  @override
+  String get dashboardContinueDescription =>
+      'تابع من حيث توقفت، وسيتم حفظ تقدمك تلقائياً.';
+
+  @override
+  String get dashboardContinueAction => 'تابع التعلم الآن';
+
+  @override
+  String get dashboardDraftAutoSaved => 'حفظ تلقائي لآخر مسودة كود';
+
+  @override
+  String get dashboardCurriculumTitle => 'خريطة المنهج البرمجي';
+
+  @override
+  String get dashboardCurriculumDescription =>
+      'تابع تقدمك من أول برنامج إلى بناء منطق الألعاب باستخدام GDScript.';
+
+  @override
+  String get dashboardViewFullPath => 'عرض شجرة المسار الكاملة';
+
+  @override
+  String get dashboardRecentBadges => 'أحدث الأوسمة المكتسبة';
+
+  @override
+  String dashboardBadgeCount(int earned, int total) => '$earned من $total';
+
+  @override
+  String get dashboardNoBadges => 'لا توجد أوسمة بعد';
+
+  @override
+  String get dashboardEarnBadges => 'أكمل الدروس لاكتساب الأوسمة';
+
+  @override
+  String get dashboardStreak => 'سلسلة الالتزام (Streak)';
+
+  @override
+  String dashboardConsecutiveDays(int days) => '$days أيام متتالية 🔥';
+
+  @override
+  String get dashboardEngineTitle => 'خادم اللغة والمحاكي';
+
+  @override
+  String get dashboardEngineConnecting => 'جارٍ الاتصال';
+
+  @override
+  String get dashboardEngineConnected => 'متصل';
+
+  @override
+  String get dashboardEngineDisconnected => 'غير متصل';
+
+  @override
+  String get dashboardWorkspace => 'مساحة العمل';
+
+  @override
+  String get dashboardRuntime => 'بيئة تشغيل GDScript';
+
+  @override
+  String get dashboardLocal => 'محلي';
+
+  @override
+  String get dashboardLsp => 'خادم اللغة';
+
+  @override
+  String get dashboardPlaygroundReset => 'إعادة تعيين الكود';
+
+  @override
+  String get dashboardPlaygroundRun => 'تشغيل الكود (F5)';
+
+  @override
+  String get dashboardPlaygroundRunning => 'جارٍ التنفيذ';
+
+  @override
+  String get dashboardPlaygroundOutputTitle =>
+      'مخرجات وحدة التحكم (Godot Output Console)';
+
+  @override
+  String get dashboardPlaygroundOutputRunning => 'جارٍ تنفيذ الشيفرة...';
+
+  @override
+  String get dashboardPlaygroundOutputEmpty =>
+      'اضغط على تشغيل الكود لعرض النتيجة هنا.';
+
+  @override
+  String get dashboardPlaygroundOutputSuccess => 'تم التنفيذ بنجاح دون مخرجات.';
+
+  @override
+  String dashboardSaveError(String error) => 'تعذر حفظ المسودة: $error';
+
+  @override
+  String dashboardExecutionError(String error) => 'تعذر تنفيذ الشيفرة: $error';
+
+  @override
+  String get dashboardExecutionFailed => 'تعذر تنفيذ الشيفرة.';
+
+  @override
+  String get dashboardExampleTag => 'عرض تجريبي';
+
+  @override
   String get learningPathTitle => 'مسار التعلّم';
 
   @override
@@ -27,7 +159,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get workspaceTitle => 'مساحة العمل';
 
   @override
-  String get workspaceDescription => 'تشغيل خادم اللغة محليًا مدعوم على أجهزة سطح المكتب فقط.';
+  String get workspaceDescription =>
+      'تشغيل خادم اللغة محليًا مدعوم على أجهزة سطح المكتب فقط.';
 
   @override
   String get settingsTitle => 'الإعدادات';
@@ -36,7 +169,135 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingTitle => 'مرحبًا';
 
   @override
-  String get onboardingDescription => 'اختر مسارًا للتعلّم وتقدّم بالسرعة التي تناسبك.';
+  String get onboardingDescription =>
+      'اختر مسارًا للتعلّم وتقدّم بالسرعة التي تناسبك.';
+
+  @override
+  String get onboardingBrand => 'أكاديمية جودو';
+  @override
+  String get onboardingPlacementLabel =>
+      'الإعداد الأولي وتحديد المسار (Placement & Onboarding)';
+  @override
+  String get onboardingSkip => 'تخطي إلى الرئيسية ↵';
+  @override
+  String get onboardingStepWelcome => 'الترحيب';
+  @override
+  String get onboardingStepExperience => 'مستوى الخبرة';
+  @override
+  String get onboardingStepAssessment => 'التقييم السريع';
+  @override
+  String get onboardingStepRoadmap => 'الخطة المخصصة';
+  @override
+  String get onboardingWelcomeHeading => 'أهلاً بك في أكاديمية جودو التعليمية!';
+  @override
+  String get onboardingWelcomeBody =>
+      'المنصة العربية الأولى المتكاملة لاحتراف لغة GDScript 2.0 ومحرك Godot 4.3 عبر الممارسة الحية واختبارات الجودة والمشاريع التطبيقية.';
+  @override
+  String get onboardingWelcomeAction => 'ابدأ تحديد مستواك المخصص (دقيقتان) ↵';
+  @override
+  String get onboardingExperiencePrompt => 'ما هي خلفيتك البرمجية الحالية؟';
+  @override
+  String get onboardingExperienceDescription =>
+      'سنقوم بتخصيص وتيرة المنهاج ونوعية التمارين لتناسب خبرتك.';
+  @override
+  String get onboardingTierBeginner => 'مبتدئ تماماً في البرمجة';
+  @override
+  String get onboardingTierBeginnerDescription =>
+      'لم أكتب كوداً برمجياً من قبل وأرغب في بدء رحلتي من الصفر عبر فهم المتغيرات والدوال.';
+  @override
+  String get onboardingTierTransition =>
+      'مبرمج قادم من لغات أخرى (Python, JS, C#)';
+  @override
+  String get onboardingTierTransitionDescription =>
+      'أفهم أساسيات البرمجة والكائنات، وأريد إتقان صياغة GDScript 2.0 ومحرك Godot بكفاءة.';
+  @override
+  String get onboardingTierVeteran =>
+      'مطور Godot 3 يرغب في الانتقال لـ Godot 4';
+  @override
+  String get onboardingTierVeteranDescription =>
+      'أمتلك خبرة سابقة في Godot 3 وأريد استكشاف ميزات GDScript 2.0 والأنواع الصارمة والإشارات.';
+  @override
+  String get onboardingContinueAssessment =>
+      'متابعة إلى الاختبار التشخيصي السريع (3 أسئلة) ↵';
+  @override
+  String onboardingQuestionProgress(int current, int total) =>
+      'السؤال $current من أصل $total';
+  @override
+  String get onboardingAssessmentTag => 'تحديد المستوى الأكاديمي';
+  @override
+  String get onboardingQuestionTyping =>
+      'ما هي الطريقة الصحيحة للإعلان عن متغير رقمي صارم (Strict Typing) في GDScript 2.0؟';
+  @override
+  String get onboardingCodeTyping =>
+      '# اختر الصياغة الأكثر كفاءة وأماناً للمترجم:';
+  @override
+  String get onboardingOptionTyping0 => 'var player_speed = 300.0';
+  @override
+  String get onboardingOptionTyping1 => 'var player_speed: float = 300.0';
+  @override
+  String get onboardingOptionTyping2 => 'float player_speed = 300.0;';
+  @override
+  String get onboardingOptionTyping3 => 'let player_speed: number = 300.0';
+  @override
+  String get onboardingQuestionPhysics =>
+      'أي من الدوال التالية مسؤولة عن معالجة الحركة المتزامنة مع محرك الفيزياء في Godot؟';
+  @override
+  String get onboardingCodePhysics =>
+      'func ???(delta: float) -> void:\n    move_and_slide()';
+  @override
+  String get onboardingOptionPhysics0 => '_process(delta: float)';
+  @override
+  String get onboardingOptionPhysics1 => '_physics_process(delta: float)';
+  @override
+  String get onboardingOptionPhysics2 => '_fixed_update(delta: float)';
+  @override
+  String get onboardingOptionPhysics3 =>
+      '_integrate_forces(state: PhysicsDirectBodyState2D)';
+  @override
+  String get onboardingQuestionMatch =>
+      'ما الدور الذي يلعبه الرمز _ في عبارة match داخل محرك Godot 4.3؟';
+  @override
+  String get onboardingCodeMatch =>
+      'match player_state:\n    "IDLE": velocity.x = 0.0\n    _: handle_fallback()';
+  @override
+  String get onboardingOptionMatch0 => 'تجاهل بقية الكود وإيقاف التنفيذ';
+  @override
+  String get onboardingOptionMatch1 =>
+      'يعمل كحالة افتراضية (Wildcard Fallback) لأي قيمة غير متطابقة';
+  @override
+  String get onboardingOptionMatch2 => 'تعريف متغير خاص غير مستخدم';
+  @override
+  String get onboardingOptionMatch3 => 'إطلاق خطأ تشغيل فوري (Assertion Error)';
+  @override
+  String get onboardingPrevious => 'السابق';
+  @override
+  String get onboardingNextQuestion => 'السؤال التالي ↵';
+  @override
+  String get onboardingFinishAssessment => 'إنهاء التقييم واقتراح الخطة ↵';
+  @override
+  String get onboardingRoadmapSuccess =>
+      'تم إعداد خطتك التعليمية المخصصة بنجاح!';
+  @override
+  String onboardingRecommendedStart(String unit) =>
+      'نقطة الانطلاق الموصى بها: $unit';
+  @override
+  String onboardingUnitLabel(String number) => 'الوحدة $number';
+  @override
+  String get onboardingSummaryBeginner =>
+      'سنبدأ معك من الأساسيات لبناء قاعدة قوية في البرمجة وGDScript.';
+  @override
+  String get onboardingSummaryTransition =>
+      'بناءً على إجاباتك وخلفيتك البرمجية، سنبدأ من المستوى الأنسب لتسريع مسارك.';
+  @override
+  String get onboardingSummaryVeteran =>
+      'سنركز على المفاهيم التي تساعدك على الانتقال إلى GDScript 2.0 وGodot 4.';
+  @override
+  String get onboardingStartLearning =>
+      'انتقل إلى مسار التعلّم وابدأ الدرس الأول ↵';
+  @override
+  String get onboardingSaveError => 'تعذّر حفظ تقدم الإعداد. حاول مرة أخرى.';
+  @override
+  String get onboardingRestoreError => 'تعذّر استعادة بيانات الإعداد المحفوظة.';
 
   @override
   String get lessonTitle => 'الدرس';
@@ -363,7 +624,8 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get streakInfo => 'تعلّم مرة واحدة على الأقل يوميًا للحفاظ على سلسلتك. تفويت يوم يعيد السلسلة الحالية إلى البداية، لكنه لا يحذف نقاط الخبرة أو الشارات.';
+  String get streakInfo =>
+      'تعلّم مرة واحدة على الأقل يوميًا للحفاظ على سلسلتك. تفويت يوم يعيد السلسلة الحالية إلى البداية، لكنه لا يحذف نقاط الخبرة أو الشارات.';
 
   @override
   String get badgesTitle => 'الشارات';
@@ -399,5 +661,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get syntaxExplorerTitle => 'مستكشف الصياغة';
 
   @override
-  String get syntaxExplorerPlaceholder => 'ابحث عن الكلمات المفتاحية والصياغة والأمثلة';
+  String get syntaxExplorerPlaceholder =>
+      'ابحث عن الكلمات المفتاحية والصياغة والأمثلة';
 }

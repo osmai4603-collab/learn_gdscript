@@ -13,6 +13,8 @@ import 'package:go_router/go_router.dart';
 import 'package:learn_gdscript/app.dart';
 import 'package:learn_gdscript/app_dependencies.dart';
 import 'package:learn_gdscript/data/models/app_settings.dart';
+import 'package:learn_gdscript/data/models/onboarding_draft.dart';
+import 'package:learn_gdscript/data/repositories/home_dashboard_repository.dart';
 import 'package:learn_gdscript/data/repositories/settings_repository.dart';
 import 'package:learn_gdscript/data/sqlite/database_helper.dart';
 import 'package:learn_gdscript/l10n/app_localizations.dart';
@@ -35,11 +37,15 @@ void main() {
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
     await tester.pumpAndSettle();
 
-    expect(find.text('هل سبق لك البرمجة؟'), findsOneWidget);
-    await tester.tap(find.text('أنا جديد تماماً'));
+    expect(find.text('ما هي خلفيتك البرمجية الحالية؟'), findsOneWidget);
+    await tester.tap(find.text('تخطي إلى الرئيسية ↵'));
     await tester.pumpAndSettle();
 
     expect(find.text('الرئيسية'), findsOneWidget);
+    expect(
+      dependencies.onboardingProvider.draft?.status,
+      OnboardingStatus.skipped,
+    );
     expect(
       find.text('ستُضاف المواد التعليمية في مرحلة لاحقة.'),
       findsOneWidget,
@@ -98,6 +104,10 @@ void main() {
   testWidgets('experienced onboarding starts at the chosen unit', (
     tester,
   ) async {
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    tester.view.physicalSize = const Size(1440, 1000);
+    tester.view.devicePixelRatio = 1;
     final dependencies = await AppDependencies.create(
       databaseHelper: DatabaseHelper(inMemory: true),
       assetBundle: _TwoUnitAssetBundle(),
@@ -106,19 +116,169 @@ void main() {
 
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('أعرف أساسيات البرمجة'));
+    await tester.tap(find.text('مبرمج قادم من لغات أخرى (Python, JS, C#)'));
     await tester.pumpAndSettle();
+    await tester.ensureVisible(
+      find.text('متابعة إلى الاختبار التشخيصي السريع (3 أسئلة) ↵'),
+    );
+    await tester.tap(
+      find.text('متابعة إلى الاختبار التشخيصي السريع (3 أسئلة) ↵'),
+    );
+    await tester.pumpAndSettle();
+
+    for (final question in [
+      ('var player_speed: float = 300.0', 'السؤال التالي ↵'),
+      ('_physics_process(delta: float)', 'السؤال التالي ↵'),
+      (
+        'يعمل كحالة افتراضية (Wildcard Fallback) لأي قيمة غير متطابقة',
+        'إنهاء التقييم واقتراح الخطة ↵',
+      ),
+    ]) {
+      await tester.ensureVisible(find.text(question.$1));
+      await tester.tap(find.text(question.$1));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text(question.$2));
+      await tester.tap(find.text(question.$2));
+      await tester.pumpAndSettle();
+    }
+
+    await tester.ensureVisible(
+      find.text('انتقل إلى مسار التعلّم وابدأ الدرس الأول ↵'),
+    );
+    await tester.tap(find.text('انتقل إلى مسار التعلّم وابدأ الدرس الأول ↵'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 250));
 
     expect(
       dependencies.progressProvider.progress?.currentUnitId,
-      'unit_02_variables',
+      'unit_03_locked',
     );
-    expect(find.text('المتغيرات · next'), findsOneWidget);
+    expect(
+      dependencies.progressProvider.progress?.currentLessonId,
+      'lesson_03_locked',
+    );
 
     GoRouter.of(tester.element(find.byType(Scaffold).first)).go('/path');
     await tester.pumpAndSettle();
     expect(find.text('المتغيرات'), findsOneWidget);
-    expect(find.text('مقفل'), findsOneWidget);
+    expect(find.text('الوحدة الثالثة'), findsOneWidget);
+  });
+
+  testWidgets('onboarding assessment cannot advance without an answer', (
+    tester,
+  ) async {
+    final dependencies = await AppDependencies.create(
+      databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TestAssetBundle(),
+    );
+    addTearDown(dependencies.dispose);
+
+    await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(
+      find.text('متابعة إلى الاختبار التشخيصي السريع (3 أسئلة) ↵'),
+    );
+    await tester.tap(
+      find.text('متابعة إلى الاختبار التشخيصي السريع (3 أسئلة) ↵'),
+    );
+    await tester.pumpAndSettle();
+
+    final nextButton = find.widgetWithText(ElevatedButton, 'السؤال التالي ↵');
+    expect(tester.widget<ElevatedButton>(nextButton).onPressed, isNull);
+    expect(
+      find.text(
+        'ما هي الطريقة الصحيحة للإعلان عن متغير رقمي صارم (Strict Typing) في GDScript 2.0؟',
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('dashboard playground runs code through the shared service', (
+    tester,
+  ) async {
+    final dependencies = await AppDependencies.create(
+      databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TwoUnitAssetBundle(),
+    );
+    addTearDown(dependencies.dispose);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    tester.view.physicalSize = const Size(1200, 900);
+    tester.view.devicePixelRatio = 1;
+    await dependencies.appSettingsProvider.completeOnboarding();
+
+    await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 250));
+    await tester.ensureVisible(find.text('تشغيل الكود (F5)'));
+    await tester.tap(find.text('تشغيل الكود (F5)'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(find.text('اللاعب بصحة جيدة! ❤️'), findsOneWidget);
+  });
+
+  testWidgets('dashboard playground saves its draft locally', (tester) async {
+    final dependencies = await AppDependencies.create(
+      databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TwoUnitAssetBundle(),
+    );
+    addTearDown(dependencies.dispose);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    tester.view.physicalSize = const Size(1200, 900);
+    tester.view.devicePixelRatio = 1;
+    await dependencies.appSettingsProvider.completeOnboarding();
+
+    await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+
+    const draft = 'print("saved dashboard draft")';
+    final editor = find.byType(TextField).last;
+    await tester.ensureVisible(editor);
+    await tester.enterText(editor, draft);
+    await tester.pump(const Duration(milliseconds: 500));
+
+    expect(
+      await dependencies.services<HomeDashboardRepository>()
+          .loadPlaygroundCode(dependencies.homeDashboardProvider.visitorId),
+      draft,
+    );
+  });
+
+  testWidgets('home dashboard fits narrow and wide English layouts', (
+    tester,
+  ) async {
+    final dependencies = await AppDependencies.create(
+      databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TwoUnitAssetBundle(),
+    );
+    addTearDown(dependencies.dispose);
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(390, 844);
+    await dependencies.appSettingsProvider.completeOnboarding();
+
+    await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+
+    expect(find.text('مرحباً بعودتك، متعلّم 👋'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+
+    await dependencies.appSettingsProvider.setLocale(const Locale('en'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(find.text('Welcome back, Learner 👋'), findsOneWidget);
+    expect(find.text('Curriculum map'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+
+    tester.view.physicalSize = const Size(1200, 900);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('locale controls direction and preserves code direction', (
@@ -280,7 +440,40 @@ class _TwoUnitAssetBundle extends CachingAssetBundle {
 
   @override
   Future<ByteData> load(String key) async {
-    final bytes = Uint8List.fromList(utf8.encode(_manifest));
+    final source = switch (key.split('/').last) {
+      'lesson_01_intro.json' => _lesson(
+        id: 'lesson_01_intro',
+        unitId: 'unit_01_intro',
+        title: 'المقدمة',
+      ),
+      'lesson_02_next.json' => _lesson(
+        id: 'lesson_02_next',
+        unitId: 'unit_02_variables',
+        title: 'الدرس التالي',
+      ),
+      'lesson_03_locked.json' => _lesson(
+        id: 'lesson_03_locked',
+        unitId: 'unit_03_locked',
+        title: 'درس مقفل',
+      ),
+      _ => _manifest,
+    };
+    final bytes = Uint8List.fromList(utf8.encode(source));
     return ByteData.sublistView(bytes);
   }
+
+  static String _lesson({
+    required String id,
+    required String unitId,
+    required String title,
+  }) => jsonEncode({
+    'id': id,
+    'unitId': unitId,
+    'title': {'ar': title, 'en': title},
+    'objective': {'ar': 'تعلم الأساسيات', 'en': 'Learn the basics'},
+    'estimatedMinutes': 5,
+    'order': 0,
+    'contentMarkdown': {'ar': 'محتوى تجريبي', 'en': 'Test content'},
+    'exercises': [],
+  });
 }

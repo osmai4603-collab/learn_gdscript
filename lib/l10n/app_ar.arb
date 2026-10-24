@@ -3,8 +3,160 @@
   "appTitle": "تعلّم GDScript",
   "homeTitle": "الرئيسية",
   "homeWelcome": "تعلّم GDScript خطوة بخطوة",
+  "dashboardLspConnecting": "GDScript: محلي | LSP: جارٍ الاتصال",
+  "dashboardLspActive": "GDScript: محلي | LSP: نشط",
+  "dashboardLspDisconnected": "GDScript: محلي | LSP: غير متصل",
+  "dashboardDays": "{days} أيام",
+  "@dashboardDays": {
+    "placeholders": {"days": {"type": "int"}}
+  },
+  "dashboardWelcomeBack": "مرحباً بعودتك، {name} 👋",
+  "@dashboardWelcomeBack": {
+    "placeholders": {"name": {"type": "String"}}
+  },
+  "dashboardWelcomeMessage": "خطوة واحدة تفصلك عن إتقان منطق تفرع اللعبة. لنواصل كتابة الأكواد والتحكم بسلوك العقد اليوم!",
+  "dashboardCurrentUnit": "الوحدة الحالية:",
+  "dashboardPercentComplete": "{percent}% مكتمل",
+  "@dashboardPercentComplete": {
+    "placeholders": {"percent": {"type": "int"}}
+  },
+  "dashboardNextLevel": "التقدم للمستوى التالي",
+  "dashboardLessonsCompleted": "{completed} من {total} درساً",
+  "@dashboardLessonsCompleted": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dashboardXpToNextLevel": "{xp} XP للمستوى التالي",
+  "@dashboardXpToNextLevel": {
+    "placeholders": {"xp": {"type": "int"}}
+  },
+  "dashboardContinueDescription": "تابع من حيث توقفت، وسيتم حفظ تقدمك تلقائياً.",
+  "dashboardContinueAction": "تابع التعلم الآن",
+  "dashboardDraftAutoSaved": "حفظ تلقائي لآخر مسودة كود",
+  "dashboardCurriculumTitle": "خريطة المنهج البرمجي",
+  "dashboardCurriculumDescription": "تابع تقدمك من أول برنامج إلى بناء منطق الألعاب باستخدام GDScript.",
+  "dashboardViewFullPath": "عرض شجرة المسار الكاملة",
+  "dashboardRecentBadges": "أحدث الأوسمة المكتسبة",
+  "dashboardBadgeCount": "{earned} من {total}",
+  "@dashboardBadgeCount": {
+    "placeholders": {
+      "earned": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "dashboardNoBadges": "لا توجد أوسمة بعد",
+  "dashboardEarnBadges": "أكمل الدروس لاكتساب الأوسمة",
+  "dashboardStreak": "سلسلة الالتزام (Streak)",
+  "dashboardConsecutiveDays": "{days} أيام متتالية 🔥",
+  "@dashboardConsecutiveDays": {
+    "placeholders": {"days": {"type": "int"}}
+  },
+  "dashboardEngineTitle": "خادم اللغة والمحاكي",
+  "dashboardEngineConnecting": "جارٍ الاتصال",
+  "dashboardEngineConnected": "متصل",
+  "dashboardEngineDisconnected": "غير متصل",
+  "dashboardWorkspace": "مساحة العمل",
+  "dashboardRuntime": "بيئة تشغيل GDScript",
+  "dashboardLocal": "محلي",
+  "dashboardLsp": "خادم اللغة",
+  "dashboardPlaygroundReset": "إعادة تعيين الكود",
+  "dashboardPlaygroundRun": "تشغيل الكود (F5)",
+  "dashboardPlaygroundRunning": "جارٍ التنفيذ",
+  "dashboardPlaygroundOutputTitle": "مخرجات وحدة التحكم (Godot Output Console)",
+  "dashboardPlaygroundOutputRunning": "جارٍ تنفيذ الشيفرة...",
+  "dashboardPlaygroundOutputEmpty": "اضغط على تشغيل الكود لعرض النتيجة هنا.",
+  "dashboardPlaygroundOutputSuccess": "تم التنفيذ بنجاح دون مخرجات.",
+  "dashboardSaveError": "تعذر حفظ المسودة: {error}",
+  "@dashboardSaveError": {
+    "placeholders": {"error": {"type": "String"}}
+  },
+  "dashboardExecutionError": "تعذر تنفيذ الشيفرة: {error}",
+  "@dashboardExecutionError": {
+    "placeholders": {"error": {"type": "String"}}
+  },
+  "dashboardExecutionFailed": "تعذر تنفيذ الشيفرة.",
+  "dashboardExampleTag": "عرض تجريبي",
   "learningPathTitle": "مسار التعلّم",
   "learningPathEmpty": "ستُضاف المواد التعليمية في مرحلة لاحقة.",
+  "learningPathHeading": "مسار التعلّم وخريطة المفاهيم البرمجية",
+  "conceptMapAction": "خريطة المفاهيم",
+  "smartReviewAction": "مراجعة ذكية",
+  "curriculumVersion": "منهج GDScript إصدار {version}",
+  "@curriculumVersion": {
+    "placeholders": {
+      "version": {"type": "String"}
+    }
+  },
+  "completedUnitsSummary": "أكملت {completed} من {total} وحدات",
+  "@completedUnitsSummary": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "completedLessonsSummary": "أكملت {completed} من {total} دروس",
+  "@completedLessonsSummary": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "milestoneCompleted": "مكتمل",
+  "milestoneCurrent": "المرحلة الحالية",
+  "milestoneUpcoming": "قادم",
+  "completedModulesCount": "{count} مكتملة",
+  "@completedModulesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "upcomingModulesCount": "{count} متبقية",
+  "@upcomingModulesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "moduleNumber": "الوحدة {number}",
+  "@moduleNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "moduleLessonCount": "{count} دروس",
+  "@moduleLessonCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "moduleDurationHours": "مجموع {hours} دقيقة",
+  "@moduleDurationHours": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "lessonStatusCurrent": "الدرس الحالي",
+  "lessonStatusCompleted": "مكتمل",
+  "lessonStatusAvailable": "متاح",
+  "lessonStatusLocked": "مقفل",
+  "moduleDetails": "تفاصيل الوحدة",
+  "showLessons": "عرض الدروس",
+  "hideLessons": "إخفاء الدروس",
+  "masteryStatistics": "تقدم التعلّم والإحصاءات",
+  "progressByUnit": "التقدم حسب الوحدة",
+  "achievementsTitle": "إنجازاتك",
+  "earnedBadgesSummary": "اكتسبت {count} شارات",
+  "@earnedBadgesSummary": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "reviewNextStep": "درسك التالي",
+  "openReview": "فتح المراجعة",
+  "workspaceStatus": "مساحة العمل",
+  "workspaceReady": "جاهزة لتطبيق الدروس",
+  "openWorkspace": "فتح مساحة العمل",
   "workspaceTitle": "مساحة العمل",
   "workspaceDescription": "تشغيل خادم اللغة محليًا مدعوم على أجهزة سطح المكتب فقط.",
   "settingsTitle": "الإعدادات",
@@ -120,5 +272,72 @@
   "showStreak": "إظهار سلسلة التعلّم اليومية",
   "great": "رائع!",
   "syntaxExplorerTitle": "مستكشف الصياغة",
-  "syntaxExplorerPlaceholder": "ابحث عن الكلمات المفتاحية والصياغة والأمثلة"
+  "syntaxExplorerPlaceholder": "ابحث عن الكلمات المفتاحية والصياغة والأمثلة",
+  "onboardingBrand": "أكاديمية جودو",
+  "onboardingPlacementLabel": "الإعداد الأولي وتحديد المسار (Placement & Onboarding)",
+  "onboardingSkip": "تخطي إلى الرئيسية ↵",
+  "onboardingStepWelcome": "الترحيب",
+  "onboardingStepExperience": "مستوى الخبرة",
+  "onboardingStepAssessment": "التقييم السريع",
+  "onboardingStepRoadmap": "الخطة المخصصة",
+  "onboardingWelcomeHeading": "أهلاً بك في أكاديمية جودو التعليمية!",
+  "onboardingWelcomeBody": "المنصة العربية الأولى المتكاملة لاحتراف لغة GDScript 2.0 ومحرك Godot 4.3 عبر الممارسة الحية واختبارات الجودة والمشاريع التطبيقية.",
+  "onboardingWelcomeAction": "ابدأ تحديد مستواك المخصص (دقيقتان) ↵",
+  "onboardingExperiencePrompt": "ما هي خلفيتك البرمجية الحالية؟",
+  "onboardingExperienceDescription": "سنقوم بتخصيص وتيرة المنهاج ونوعية التمارين لتناسب خبرتك.",
+  "onboardingTierBeginner": "مبتدئ تماماً في البرمجة",
+  "onboardingTierBeginnerDescription": "لم أكتب كوداً برمجياً من قبل وأرغب في بدء رحلتي من الصفر عبر فهم المتغيرات والدوال.",
+  "onboardingTierTransition": "مبرمج قادم من لغات أخرى (Python, JS, C#)",
+  "onboardingTierTransitionDescription": "أفهم أساسيات البرمجة والكائنات، وأريد إتقان صياغة GDScript 2.0 ومحرك Godot بكفاءة.",
+  "onboardingTierVeteran": "مطور Godot 3 يرغب في الانتقال لـ Godot 4",
+  "onboardingTierVeteranDescription": "أمتلك خبرة سابقة في Godot 3 وأريد استكشاف ميزات GDScript 2.0 والأنواع الصارمة والإشارات.",
+  "onboardingContinueAssessment": "متابعة إلى الاختبار التشخيصي السريع (3 أسئلة) ↵",
+  "onboardingQuestionProgress": "السؤال {current} من أصل {total}",
+  "@onboardingQuestionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "onboardingAssessmentTag": "تحديد المستوى الأكاديمي",
+  "onboardingQuestionTyping": "ما هي الطريقة الصحيحة للإعلان عن متغير رقمي صارم (Strict Typing) في GDScript 2.0؟",
+  "onboardingCodeTyping": "# اختر الصياغة الأكثر كفاءة وأماناً للمترجم:",
+  "onboardingOptionTyping0": "var player_speed = 300.0",
+  "onboardingOptionTyping1": "var player_speed: float = 300.0",
+  "onboardingOptionTyping2": "float player_speed = 300.0;",
+  "onboardingOptionTyping3": "let player_speed: number = 300.0",
+  "onboardingQuestionPhysics": "أي من الدوال التالية مسؤولة عن معالجة الحركة المتزامنة مع محرك الفيزياء في Godot؟",
+  "onboardingCodePhysics": "func ???(delta: float) -> void:\\n    move_and_slide()",
+  "onboardingOptionPhysics0": "_process(delta: float)",
+  "onboardingOptionPhysics1": "_physics_process(delta: float)",
+  "onboardingOptionPhysics2": "_fixed_update(delta: float)",
+  "onboardingOptionPhysics3": "_integrate_forces(state: PhysicsDirectBodyState2D)",
+  "onboardingQuestionMatch": "ما الدور الذي يلعبه الرمز _ في عبارة match داخل محرك Godot 4.3؟",
+  "onboardingCodeMatch": "match player_state:\\n    \"IDLE\": velocity.x = 0.0\\n    _: handle_fallback()",
+  "onboardingOptionMatch0": "تجاهل بقية الكود وإيقاف التنفيذ",
+  "onboardingOptionMatch1": "يعمل كحالة افتراضية (Wildcard Fallback) لأي قيمة غير متطابقة",
+  "onboardingOptionMatch2": "تعريف متغير خاص غير مستخدم",
+  "onboardingOptionMatch3": "إطلاق خطأ تشغيل فوري (Assertion Error)",
+  "onboardingPrevious": "السابق",
+  "onboardingNextQuestion": "السؤال التالي ↵",
+  "onboardingFinishAssessment": "إنهاء التقييم واقتراح الخطة ↵",
+  "onboardingRoadmapSuccess": "تم إعداد خطتك التعليمية المخصصة بنجاح!",
+  "onboardingRecommendedStart": "نقطة الانطلاق الموصى بها: {unit}",
+  "@onboardingRecommendedStart": {
+    "placeholders": {
+      "unit": {"type": "String"}
+    }
+  },
+  "onboardingUnitLabel": "الوحدة {number}",
+  "@onboardingUnitLabel": {
+    "placeholders": {
+      "number": {"type": "String"}
+    }
+  },
+  "onboardingSummaryBeginner": "سنبدأ معك من الأساسيات لبناء قاعدة قوية في البرمجة وGDScript.",
+  "onboardingSummaryTransition": "بناءً على إجاباتك وخلفيتك البرمجية، سنبدأ من المستوى الأنسب لتسريع مسارك.",
+  "onboardingSummaryVeteran": "سنركز على المفاهيم التي تساعدك على الانتقال إلى GDScript 2.0 وGodot 4.",
+  "onboardingStartLearning": "انتقل إلى مسار التعلّم وابدأ الدرس الأول ↵",
+  "onboardingSaveError": "تعذّر حفظ تقدم الإعداد. حاول مرة أخرى.",
+  "onboardingRestoreError": "تعذّر استعادة بيانات الإعداد المحفوظة."
 }
