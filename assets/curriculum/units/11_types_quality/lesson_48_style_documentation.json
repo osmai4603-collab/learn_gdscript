@@ -1,0 +1,357 @@
+{
+  "id": "lesson_48_style_documentation",
+  "unitId": "unit_11_types_quality",
+  "title": {
+    "ar": "دليل الأسلوب وتعليقات التوثيق",
+    "en": "Style Guide and Documentation Comments"
+  },
+  "objective": {
+    "ar": "نسّق GDScript باتساق واكتب تعليقات توثيق مفيدة للصنف والدوال.",
+    "en": "Format GDScript consistently and write useful documentation comments for classes and functions."
+  },
+  "estimatedMinutes": 9,
+  "order": 3,
+  "contentMarkdown": {
+    "ar": "## اجعل الشيفرة سهلة القراءة\n\nالاتساق في الأسماء والمسافات وترتيب الدوال يسهل المراجعة. اتبع دليل أسلوب GDScript في المشروع، واستخدم تعليقات توثيق `##` لشرح الغرض والعقد لا لتكرار كل سطر.\n\n```gdscript\n## Tracks a best score.\nclass_name ScoreTracker\nextends RefCounted\n\nvar best_score: int = 0\n\n## Stores [param score] when it is a new record.\nfunc record_score(score: int) -> bool:\n    if score > best_score:\n        best_score = score\n        return true\n    return false\n```\n\nحدّث التعليقات عند تغير السلوك؛ فالتعليق القديم يضلل أكثر مما يساعد.",
+    "en": "## Make code easy to read\n\nConsistent names, spacing, and function ordering make reviews easier. Follow the project’s GDScript style guide, and use `##` documentation comments to explain purpose and contracts instead of repeating every line.\n\n```gdscript\n## Tracks a best score.\nclass_name ScoreTracker\nextends RefCounted\n\nvar best_score: int = 0\n\n## Stores [param score] when it is a new record.\nfunc record_score(score: int) -> bool:\n    if score > best_score:\n        best_score = score\n        return true\n    return false\n```\n\nUpdate comments when behavior changes; stale comments mislead more than they help."
+  },
+  "documentation": {
+    "ar": "يحدد دليل الأسلوب قواعد تسمية وتنسيق تجعل الملفات متسقة، لكنه لا يعوض التصميم الواضح. استخدم أسماء تعبّر عن الدور ومسافات بادئة ثابتة. تبدأ تعليقات التوثيق بـ `##` وترتبط بالصنف أو الدالة، ويمكن استخدام وسوم مثل `[param score]` للإشارة إلى معامل. اشرح الغرض والعقد والآثار المهمة، لا تفاصيل واضحة من جسم التنفيذ. راجع التعليق عند تغيير الشيفرة كي لا يصف سلوكاً قديماً.",
+    "en": "A style guide sets naming and formatting conventions to keep files consistent, but does not replace clear design. Use role-revealing names and consistent indentation. Documentation comments start with `##` and attach to a class or function; tags such as `[param score]` can refer to a parameter. Explain purpose, contract, and important effects rather than obvious implementation details. Review comments when code changes so they do not describe outdated behavior."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "دليل أسلوب GDScript",
+        "en": "GDScript style guide"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html"
+    },
+    {
+      "title": {
+        "ar": "تعليقات توثيق GDScript",
+        "en": "GDScript documentation comments"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_48_style_documentation_01",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما دور تعليق التوثيق الجيد؟",
+        "en": "What is the role of a good documentation comment?"
+      },
+      "options": [
+        {
+          "ar": "شرح الغرض والعقد والسلوك غير الواضح.",
+          "en": "Explain purpose, contract, and non-obvious behavior."
+        },
+        {
+          "ar": "تكرار كل سطر تنفيذاً.",
+          "en": "Repeat every implementation line."
+        },
+        {
+          "ar": "إخفاء التحذيرات عن المحلل.",
+          "en": "Hide analyzer warnings."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_02",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن الأسلوب والتوثيق. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about الأسلوب والتوثيق. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "شغّل منسق GDScript على ملف تجريبي لتطبيق المسافات المتسقة.",
+          "en": "Run the GDScript formatter on a sample file to apply consistent spacing."
+        },
+        {
+          "ar": "أضف تعليق `##` لصنف أو دالة عامة واشرح الغرض والمعاملات.",
+          "en": "Add a `##` comment to a public class or function and explain its purpose and parameters."
+        },
+        {
+          "ar": "افتح توثيق السكربت من المحرر وراجع أن التعليق مفيد وحديث.",
+          "en": "Open script documentation in the editor and check that the comment is useful and current."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_03",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «clean code» في سياق الأسلوب والتوثيق.",
+        "en": "Write code that prints “clean code” as a الأسلوب والتوثيق status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"clean code\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "clean code"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_04",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «clean code».",
+        "en": "Complete the line so it prints “clean code”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"clean code\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "clean code"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_05",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في الأسلوب والتوثيق: start ثم «clean code».",
+        "en": "Print two lines showing progress in الأسلوب والتوثيق: start, then “clean code”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"clean code\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nclean code"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_06",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «clean code» تماماً.",
+        "en": "Fix the code so it prints exactly “clean code”."
+      },
+      "starterCode": "print(\"clean code!\")",
+      "solutionCode": "print(\"clean code\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "clean code"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_07",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «clean code» ثم done.",
+        "en": "Arrange output to show start, then “clean code”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"clean code\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"clean code\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nclean code\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_08",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع الأسلوب والتوثيق: «clean code».",
+        "en": "Write a program that records a result related to الأسلوب والتوثيق: “clean code”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"clean code\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "clean code"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_09",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nclean code",
+        "en": "Write a program that displays this sequence:\nclean code"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"clean code\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "clean code"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_48_style_documentation_10",
+      "lessonId": "lesson_48_style_documentation",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «clean code».",
+        "en": "Use a string variable named status and print its value “clean code”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"clean code\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "clean code"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

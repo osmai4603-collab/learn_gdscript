@@ -1,63 +1,358 @@
 {
   "id": "lesson_14_return",
   "unitId": "unit_05_functions",
-  "title": {"ar": "القيم المعادة", "en": "Return Values"},
-  "objective": {"ar": "أعد نتيجة من الدالة واستخدمها في موضع آخر.", "en": "Return a result from a function and use it elsewhere."},
+  "title": {
+    "ar": "القيم المعادة",
+    "en": "Return Values"
+  },
+  "objective": {
+    "ar": "أعد نتيجة من الدالة واستخدمها في موضع آخر.",
+    "en": "Return a result from a function and use it elsewhere."
+  },
   "estimatedMinutes": 7,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## أعد نتيجة بدلاً من طباعتها\n\nتُعيد `return` قيمة إلى المكان الذي استدعى الدالة. يمكنك حفظ النتيجة أو استخدامها في تعبير:\n\n```gdscript\nfunc add(a, b):\n    return a + b\n\nvar result = add(3, 5)\nprint(result)\n```\n\n`print()` تعرض القيمة للمستخدم، أما `return` فتعيدها إلى الشيفرة كي تواصل استخدامها. يمكن إضافة نوع معلن مثل `func add(a, b) -> int:`.",
-    "en": "## Return a result instead of printing it\n\n`return` sends a value back to the place that called the function. You can store the result or use it in an expression:\n\n```gdscript\nfunc add(a, b):\n    return a + b\n\nvar result = add(3, 5)\nprint(result)\n```\n\n`print()` displays a value, while `return` gives it back to the code for further use. You can add a return type such as `func add(a, b) -> int:`."
+    "ar": "## أعد نتيجة بدلاً من طباعتها\n\nتعيد `return` قيمة إلى المكان الذي استدعى الدالة وتنهي تنفيذها. يمكنك حفظ الناتج أو استخدامه في تعبير. تعرض `print()` القيمة للمستخدم، لكنها لا تقوم مقام الإرجاع.",
+    "en": "## Return a result instead of printing it\n\n`return` sends a value back to the place that called the function and ends it. You can store the result or use it in an expression. `print()` displays the value to the user but does not replace returning it."
   },
   "exampleCode": "func add(a, b):\n    return a + b\n\nvar result = add(3, 5)\nprint(result)",
   "exercises": [
     {
-      "id": "ex_14_square_return",
+      "id": "ex_14_return_expression",
       "lessonId": "lesson_14_return",
-      "type": "writeCode",
-      "prompt": {"ar": "عرّف `square(n)` لتعيد مربع `6`، ثم اطبع القيمة المعادة.", "en": "Define `square(n)` to return the square of `6`, then print the returned value."},
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "عرّف `add(a, b)` ثم استخدم ناتجها في عملية الضرب لإظهار `24`.",
+        "en": "Define `add(a, b)`, then use its result in a multiplication to display `24`."
+      },
       "starterCode": "",
-      "solutionCode": "func square(n):\n    return n * n\n\nprint(square(6))",
+      "solutionCode": "func add(a, b):\n    return a + b\n\nprint(add(2, 4) * 4)",
       "testCases": [
-        {"description": {"ar": "تُعاد قيمة المربع وتُطبع.", "en": "The square is returned and printed."}, "expectedOutput": "36"}
+        {
+          "description": {
+            "ar": "تُستخدم القيمة المعادة في التعبير.",
+            "en": "The returned value is used in the expression."
+          },
+          "expectedOutput": "24"
+        }
       ],
       "hints": [
-        {"ar": "استخدم `return` داخل جسم الدالة.", "en": "Use `return` inside the function body."},
-        {"ar": "اضرب `n` في نفسه ثم اطبع استدعاء الدالة.", "en": "Multiply `n` by itself, then print the function call."}
+        {
+          "ar": "اجعل الدالة تعيد مجموع وسيطيها.",
+          "en": "Have the function return the sum of its arguments."
+        },
+        {
+          "ar": "اضرب ناتج `add(2, 4)` في 4.",
+          "en": "Multiply the result of `add(2, 4)` by 4."
+        }
       ],
       "order": 0
     },
     {
-      "id": "ex_14_return_expression",
+      "id": "ex_lesson_14_return_added_3",
       "lessonId": "lesson_14_return",
-      "type": "predictOutput",
-      "prompt": {"ar": "عرّف `add(a, b)` ثم استخدم ناتجها في عملية الضرب لإظهار `24`.", "en": "Define `add(a, b)`, then use its result in a multiplication to display `24`."},
-      "starterCode": "",
-      "solutionCode": "func add(a, b):\n    return a + b\n\nprint(add(2, 4) * 4)",
-      "testCases": [
-        {"description": {"ar": "تُستخدم القيمة المعادة في التعبير.", "en": "The returned value is used in the expression."}, "expectedOutput": "24"}
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي وصف يطابق مفهوم «القيم المعادة»؟",
+        "en": "Which description matches “Return Values”?"
+      },
+      "options": [
+        {
+          "ar": "الدالة تجمع تعليمات قابلة لإعادة الاستخدام.",
+          "en": "A function groups reusable statements."
+        },
+        {
+          "ar": "هو اسم آخر لمخرجات الطباعة.",
+          "en": "It is another name for printed output."
+        },
+        {
+          "ar": "لا يغير طريقة تنظيم البرنامج.",
+          "en": "It does not affect program organization."
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "اجعل الدالة تعيد مجموع وسيطيها.", "en": "Have the function return the sum of its arguments."},
-        {"ar": "اضرب ناتج `add(2, 4)` في 4.", "en": "Multiply the result of `add(2, 4)` by 4."}
+        {
+          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
+          "en": "Look for the role or benefit explained in the lesson."
+        },
+        {
+          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
+          "en": "Review the concept definition in the lesson."
+        }
       ],
       "order": 1
+    },
+    {
+      "id": "ex_lesson_14_return_added_4",
+      "lessonId": "lesson_14_return",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما فائدة القيم المعادة؟",
+        "en": "What is one benefit of Return Values?"
+      },
+      "options": [
+        {
+          "ar": "الاسم والاستدعاء يجعلان إعادة استخدام التعليمات واضحة.",
+          "en": "A name and call make statement reuse clear."
+        },
+        {
+          "ar": "يجعل كل تفاصيل البرنامج مخفية دائماً.",
+          "en": "It always hides every program detail."
+        },
+        {
+          "ar": "يلغي الحاجة إلى فهم بنية البرنامج.",
+          "en": "It removes the need to understand program structure."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
+          "en": "Look for the role or benefit explained in the lesson."
+        },
+        {
+          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
+          "en": "Review the concept definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_14_return_trace",
+      "lessonId": "lesson_14_return",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مسار قيمة `square(6)` من المعامل إلى السطر الذي يستخدم النتيجة.",
+        "en": "Complete the path of `square(6)` from its parameter to the statement using the result."
+      },
+      "steps": [
+        {
+          "ar": "عوّض 6 عن `n`.",
+          "en": "Substitute 6 for `n`."
+        },
+        {
+          "ar": "احسب القيمة التي تعيدها الدالة.",
+          "en": "Calculate the value returned by the function."
+        },
+        {
+          "ar": "حدد كيف يستقبل المستدعي هذه القيمة.",
+          "en": "Identify how the caller receives the value."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_14_square_return",
+      "lessonId": "lesson_14_return",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `square(n)` لتعيد مربع `6`، ثم اطبع القيمة المعادة.",
+        "en": "Define `square(n)` to return the square of `6`, then print the returned value."
+      },
+      "starterCode": "",
+      "solutionCode": "func square(n):\n    return n * n\n\nprint(square(6))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تُعاد قيمة المربع وتُطبع.",
+            "en": "The square is returned and printed."
+          },
+          "expectedOutput": "36"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "استخدم `return` داخل جسم الدالة.",
+          "en": "Use `return` inside the function body."
+        },
+        {
+          "ar": "اضرب `n` في نفسه ثم اطبع استدعاء الدالة.",
+          "en": "Multiply `n` by itself, then print the function call."
+        }
+      ],
+      "order": 4
     },
     {
       "id": "ex_14_is_even",
       "lessonId": "lesson_14_return",
       "type": "writeCode",
-      "prompt": {"ar": "عرّف `is_even(n)` لتعيد `true` إذا كان العدد زوجياً، واختبرها مع `8` بطباعة الناتج.", "en": "Define `is_even(n)` to return `true` for an even number, then test it with `8` by printing the result."},
+      "prompt": {
+        "ar": "عرّف `is_even(n)` لتعيد `true` إذا كان العدد زوجياً، واختبرها مع `8` بطباعة الناتج.",
+        "en": "Define `is_even(n)` to return `true` for an even number, then test it with `8` by printing the result."
+      },
       "starterCode": "",
       "solutionCode": "func is_even(n):\n    return n % 2 == 0\n\nprint(is_even(8))",
       "testCases": [
-        {"description": {"ar": "العدد 8 زوجي.", "en": "The number 8 is even."}, "expectedOutput": "true"}
+        {
+          "description": {
+            "ar": "العدد 8 زوجي.",
+            "en": "The number 8 is even."
+          },
+          "expectedOutput": "true"
+        }
       ],
       "hints": [
-        {"ar": "العدد زوجي إذا كان باقي قسمته على 2 يساوي صفراً.", "en": "A number is even when its remainder after division by 2 is zero."},
-        {"ar": "أعد نتيجة المقارنة `n % 2 == 0`.", "en": "Return the comparison result `n % 2 == 0`."}
+        {
+          "ar": "العدد زوجي إذا كان باقي قسمته على 2 يساوي صفراً.",
+          "en": "A number is even when its remainder after division by 2 is zero."
+        },
+        {
+          "ar": "أعد نتيجة المقارنة `n % 2 == 0`.",
+          "en": "Return the comparison result `n % 2 == 0`."
+        }
       ],
-      "order": 2
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_14_return_apply",
+      "lessonId": "lesson_14_return",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "خطط لدالة حساب تعيد نتيجة ثم اكتب طريقة لاستخدامها من دون الطباعة داخل دالة الحساب.",
+        "en": "Plan a calculation function that returns a result, then write how to use it without printing inside the calculation function."
+      },
+      "steps": [
+        {
+          "ar": "اختر المدخلات.",
+          "en": "Choose the inputs."
+        },
+        {
+          "ar": "حدد القيمة التي ستعيدها الدالة.",
+          "en": "Identify the value the function returns."
+        },
+        {
+          "ar": "اكتب كيف سيستخدم المستدعي النتيجة.",
+          "en": "Write how the caller will use the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_14_return_added_code_1",
+      "lessonId": "lesson_14_return",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `show_count()` لتطبع 1 ثم استدعها مرتين.",
+        "en": "Define `show_count()` to print 1, then call it twice."
+      },
+      "starterCode": "",
+      "solutionCode": "func show_count():\n    print(1)\n\nshow_count()\nshow_count()",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "1\n1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_14_return_added_code_2",
+      "lessonId": "lesson_14_return",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `say_ready()` لتطبع Ready واستدعها مرة واحدة.",
+        "en": "Define `say_ready()` to print Ready and call it once."
+      },
+      "starterCode": "",
+      "solutionCode": "func say_ready():\n    print(\"Ready\")\n\nsay_ready()",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "Ready"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_14_return_added_code_3",
+      "lessonId": "lesson_14_return",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح `add(a, b)` كي تعيد مجموع المعاملين ثم اطبع `add(2, 4)`.",
+        "en": "Fix `add(a, b)` to return the sum of its parameters, then print `add(2, 4)`."
+      },
+      "starterCode": "func add(a, b):\n    print(a + b)\n\nvar result = add(2, 4)\nprint(result)",
+      "solutionCode": "func add(a, b):\n    return a + b\n\nvar result = add(2, 4)\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "6"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 9
+    }
+  ],
+  "documentation": {
+    "ar": "تعيد `return` قيمة إلى المستدعي وتنهي الدالة. استخدم النتيجة في متغير أو تعبير. تعرض `print()` قيمة ولا تعيدها إلى الشيفرة.",
+    "en": "`return` sends a value to the caller and ends the function. Use the result in a variable or expression. `print()` displays a value but does not return it to code."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ]
 }

@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gdscript_engine/gdscript_engine.dart';
 
 import '../../../core/theme/code_editor_theme.dart';
 import '../../../core/extensions/context_extensions.dart';
+import '../../../logic/services/code_runner_service.dart';
 import '../code_directionality.dart';
 import 'code_actions_bar.dart';
 import 'code_completion_overlay.dart';
@@ -13,23 +17,58 @@ class CodeEditorWidget extends StatefulWidget {
   const CodeEditorWidget({
     super.key,
     required this.initialCode,
+    this.documentId,
+    this.initialSelection,
+    this.focusNode,
     this.readOnly = false,
+    this.expands = false,
     this.onChanged,
+    this.onSelectionChanged,
     this.onRun,
+    this.onRunCode,
+    this.onSave,
     this.onCompletionRequested,
-    this.onFormatRequested,
+    this.onCompletionItemsRequested,
+    this.onSyntaxHighlightsRequested,
+    this.onSemanticHighlightsRequested,
+    this.onDiagnosticsRequested,
+    this.onSignatureHelpRequested,
+    this.onHoverInfoRequested,
+    this.onDefinitionRequested,
+    this.onMatchingBracketRequested,
     this.fontSize = 14,
     this.showLineNumbers = true,
     this.showActionBar = true,
   });
 
   final String initialCode;
+  final String? documentId;
+  final TextSelection? initialSelection;
+  final FocusNode? focusNode;
   final bool readOnly;
+  final bool expands;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<TextSelection>? onSelectionChanged;
   final VoidCallback? onRun;
+  final Future<CodeRunResult> Function(String code)? onRunCode;
+  final Future<void> Function()? onSave;
   final Future<List<String>> Function(String code, int cursorOffset)?
   onCompletionRequested;
-  final Future<String?> Function(String code)? onFormatRequested;
+  final Future<List<CompletionItem>> Function(String code, int cursorOffset)?
+  onCompletionItemsRequested;
+  final List<SyntaxHighlight> Function(String code)?
+  onSyntaxHighlightsRequested;
+  final List<SemanticHighlight> Function(String code)?
+  onSemanticHighlightsRequested;
+  final List<Diagnostic> Function(String code)? onDiagnosticsRequested;
+  final SignatureHelp? Function(String code, int cursorOffset)?
+  onSignatureHelpRequested;
+  final HoverInfo? Function(String code, int cursorOffset)?
+  onHoverInfoRequested;
+  final GoToDefinition? Function(String code, int cursorOffset)?
+  onDefinitionRequested;
+  final (int, int)? Function(String code, int cursorOffset)?
+  onMatchingBracketRequested;
   final double fontSize;
   final bool showLineNumbers;
   final bool showActionBar;
@@ -42,31 +81,247 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
   late final _SyntaxTextController _controller;
   final ScrollController _editorScrollController = ScrollController();
   final ScrollController _lineScrollController = ScrollController();
-  List<String> _completionItems = const [];
-  bool _lspRequestRunning = false;
-  Object? _lspError;
+  List<CompletionItem> _completionItems = const [];
+  int _selectedCompletionIndex = 0;
+  int _editorRequestSequence = 0;
+  bool _editorRequestRunning = false;
+  Object? _editorError;
+  List<Diagnostic> _diagnostics = const [];
+  Object? _diagnosticsError;
+  Timer? _diagnosticsDebounce;
+  Timer? _hoverDebounce;
+  SignatureHelp? _signatureHelp;
+  HoverInfo? _hoverInfo;
+  Object? _hoverError;
+  bool _runningCode = false;
+  int _runSequence = 0;
+  CodeRunResult? _runResult;
+  Object? _runError;
+  bool _syncingControllerValue = false;
+  late String _lastNotifiedText;
 
   @override
   void initState() {
     super.initState();
-    _controller = _SyntaxTextController(text: widget.initialCode)
-      ..addListener(_notifyChanged);
+    _lastNotifiedText = widget.initialCode;
+    final initialSelection = widget.initialSelection;
+    _controller =
+        _SyntaxTextController(
+            text: widget.initialCode,
+            selection: initialSelection == null
+                ? TextSelection.collapsed(offset: widget.initialCode.length)
+                : TextSelection(
+                    baseOffset: initialSelection.baseOffset
+                        .clamp(0, widget.initialCode.length)
+                        .toInt(),
+                    extentOffset: initialSelection.extentOffset
+                        .clamp(0, widget.initialCode.length)
+                        .toInt(),
+                  ),
+          )
+          ..syntaxHighlightsRequested = widget.onSyntaxHighlightsRequested
+          ..semanticHighlightsRequested = widget.onSemanticHighlightsRequested
+          ..addListener(_handleControllerChanged);
+    _refreshDiagnostics();
+    _refreshSignatureHelp();
+    _refreshMatchingBracket();
+    _scheduleHoverInfo();
     _editorScrollController.addListener(_syncLineScroll);
   }
 
   @override
   void didUpdateWidget(covariant CodeEditorWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.initialCode != widget.initialCode &&
-        widget.initialCode != _controller.text) {
-      _controller.value = TextEditingValue(
-        text: widget.initialCode,
-        selection: TextSelection.collapsed(offset: widget.initialCode.length),
+    if (oldWidget.onSyntaxHighlightsRequested !=
+            widget.onSyntaxHighlightsRequested ||
+        oldWidget.onSemanticHighlightsRequested !=
+            widget.onSemanticHighlightsRequested) {
+      _controller.invalidateHighlights();
+    }
+    _controller.syntaxHighlightsRequested = widget.onSyntaxHighlightsRequested;
+    _controller.semanticHighlightsRequested =
+        widget.onSemanticHighlightsRequested;
+    final documentChanged = oldWidget.documentId != widget.documentId;
+    final codeChanged = oldWidget.initialCode != widget.initialCode;
+    final externalCodeChanged =
+        codeChanged && _controller.text != widget.initialCode;
+    if (documentChanged || externalCodeChanged) {
+      final selection = widget.initialSelection;
+      _setControllerValue(
+        TextEditingValue(
+          text: widget.initialCode,
+          selection: selection == null
+              ? TextSelection.collapsed(offset: widget.initialCode.length)
+              : TextSelection(
+                  baseOffset: selection.baseOffset
+                      .clamp(0, widget.initialCode.length)
+                      .toInt(),
+                  extentOffset: selection.extentOffset
+                      .clamp(0, widget.initialCode.length)
+                      .toInt(),
+                ),
+        ),
       );
+      _lastNotifiedText = widget.initialCode;
+      _runResult = null;
+      _runError = null;
+      _editorRequestSequence++;
+      _editorRequestRunning = false;
+      _editorError = null;
+      _completionItems = const [];
+      _runSequence++;
+      _runningCode = false;
+    }
+    if (documentChanged ||
+        externalCodeChanged ||
+        oldWidget.onDiagnosticsRequested != widget.onDiagnosticsRequested ||
+        oldWidget.onMatchingBracketRequested !=
+            widget.onMatchingBracketRequested ||
+        oldWidget.onHoverInfoRequested != widget.onHoverInfoRequested) {
+      _diagnosticsDebounce?.cancel();
+      _refreshDiagnostics();
+      _refreshSignatureHelp();
+      _refreshMatchingBracket();
+      _scheduleHoverInfo();
     }
   }
 
-  void _notifyChanged() => widget.onChanged?.call(_controller.text);
+  void _setControllerValue(TextEditingValue value) {
+    _syncingControllerValue = true;
+    _controller.value = value;
+    _syncingControllerValue = false;
+  }
+
+  void _handleControllerChanged() {
+    if (_syncingControllerValue) return;
+    final text = _controller.text;
+    if (text != _lastNotifiedText) {
+      _lastNotifiedText = text;
+      _scheduleDiagnostics();
+      _editorRequestSequence++;
+      _editorRequestRunning = false;
+      _completionItems = const [];
+      _runSequence++;
+      _runningCode = false;
+      _runResult = null;
+      _runError = null;
+      widget.onChanged?.call(text);
+    }
+    _refreshSignatureHelp();
+    _refreshMatchingBracket();
+    _scheduleHoverInfo();
+    widget.onSelectionChanged?.call(_controller.selection);
+    if (mounted) setState(() {});
+  }
+
+  void _refreshDiagnostics() {
+    final request = widget.onDiagnosticsRequested;
+    _diagnosticsError = null;
+    if (request == null) {
+      _diagnostics = const [];
+      return;
+    }
+    try {
+      _diagnostics = request(_controller.text);
+    } on Object catch (error) {
+      _diagnostics = const [];
+      _diagnosticsError = error;
+    }
+  }
+
+  void _scheduleDiagnostics() {
+    _diagnosticsDebounce?.cancel();
+    _diagnostics = const [];
+    _diagnosticsError = null;
+    final request = widget.onDiagnosticsRequested;
+    if (request == null) return;
+    final code = _controller.text;
+    final documentId = widget.documentId;
+    _diagnosticsDebounce = Timer(const Duration(milliseconds: 250), () {
+      if (!mounted ||
+          code != _controller.text ||
+          documentId != widget.documentId) {
+        return;
+      }
+      try {
+        final diagnostics = request(code);
+        if (!mounted ||
+            code != _controller.text ||
+            documentId != widget.documentId) {
+          return;
+        }
+        setState(() {
+          _diagnostics = diagnostics;
+          _diagnosticsError = null;
+        });
+      } on Object catch (error) {
+        if (!mounted ||
+            code != _controller.text ||
+            documentId != widget.documentId) {
+          return;
+        }
+        setState(() {
+          _diagnostics = const [];
+          _diagnosticsError = error;
+        });
+      }
+    });
+  }
+
+  void _refreshSignatureHelp() {
+    _signatureHelp = widget.onSignatureHelpRequested?.call(
+      _controller.text,
+      _controller.selection.extentOffset,
+    );
+  }
+
+  void _refreshMatchingBracket() {
+    _controller.matchingBracketOffsets = widget.onMatchingBracketRequested
+        ?.call(_controller.text, _controller.selection.extentOffset);
+  }
+
+  void _scheduleHoverInfo() {
+    _hoverDebounce?.cancel();
+    _hoverInfo = null;
+    _hoverError = null;
+    final request = widget.onHoverInfoRequested;
+    if (request == null) return;
+    final code = _controller.text;
+    final offset = _controller.selection.extentOffset;
+    final documentId = widget.documentId;
+    _hoverDebounce = Timer(const Duration(milliseconds: 500), () {
+      if (!mounted ||
+          code != _controller.text ||
+          offset != _controller.selection.extentOffset ||
+          documentId != widget.documentId) {
+        return;
+      }
+      try {
+        final info = request(code, offset);
+        if (!mounted ||
+            code != _controller.text ||
+            offset != _controller.selection.extentOffset ||
+            documentId != widget.documentId) {
+          return;
+        }
+        setState(() {
+          _hoverInfo = info;
+          _hoverError = null;
+        });
+      } on Object catch (error) {
+        if (!mounted ||
+            code != _controller.text ||
+            offset != _controller.selection.extentOffset ||
+            documentId != widget.documentId) {
+          return;
+        }
+        setState(() {
+          _hoverInfo = null;
+          _hoverError = error;
+        });
+      }
+    });
+  }
 
   void _syncLineScroll() {
     if (!_lineScrollController.hasClients) return;
@@ -78,9 +333,55 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
   }
 
   KeyEventResult _handleKey(FocusNode node, KeyEvent event) {
-    if (event is! KeyDownEvent ||
-        event.logicalKey != LogicalKeyboardKey.tab ||
-        widget.readOnly) {
+    if (event is! KeyDownEvent) return KeyEventResult.ignored;
+
+    if (_completionItems.isNotEmpty) {
+      if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+        setState(() {
+          _selectedCompletionIndex =
+              (_selectedCompletionIndex + 1) % _completionItems.length;
+        });
+        return KeyEventResult.handled;
+      }
+      if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+        setState(() {
+          _selectedCompletionIndex =
+              (_selectedCompletionIndex - 1 + _completionItems.length) %
+              _completionItems.length;
+        });
+        return KeyEventResult.handled;
+      }
+      if (event.logicalKey == LogicalKeyboardKey.enter ||
+          event.logicalKey == LogicalKeyboardKey.tab) {
+        _applyCompletion(_completionItems[_selectedCompletionIndex]);
+        return KeyEventResult.handled;
+      }
+      if (event.logicalKey == LogicalKeyboardKey.escape) {
+        setState(() => _completionItems = const []);
+        return KeyEventResult.handled;
+      }
+    }
+
+    final keyboard = HardwareKeyboard.instance;
+    if ((keyboard.isControlPressed || keyboard.isMetaPressed) &&
+        event.logicalKey == LogicalKeyboardKey.space &&
+        (widget.onCompletionRequested != null ||
+            widget.onCompletionItemsRequested != null)) {
+      unawaited(_requestCompletions());
+      return KeyEventResult.handled;
+    }
+    if ((keyboard.isControlPressed || keyboard.isMetaPressed) &&
+        event.logicalKey == LogicalKeyboardKey.keyS &&
+        widget.onSave != null) {
+      unawaited(widget.onSave!.call());
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.f12 &&
+        widget.onDefinitionRequested != null) {
+      _goToDefinition();
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey != LogicalKeyboardKey.tab || widget.readOnly) {
       return KeyEventResult.ignored;
     }
     final selection = _controller.selection;
@@ -98,74 +399,180 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
   }
 
   Future<void> _requestCompletions() async {
+    final itemRequest = widget.onCompletionItemsRequested;
     final request = widget.onCompletionRequested;
-    if (request == null) return;
+    if (itemRequest == null && request == null) return;
+    final requestSequence = ++_editorRequestSequence;
+    final code = _controller.text;
+    final documentId = widget.documentId;
     setState(() {
-      _lspRequestRunning = true;
-      _lspError = null;
+      _editorRequestRunning = true;
+      _editorError = null;
       _completionItems = const [];
     });
     try {
-      final items = await request(
-        _controller.text,
-        _controller.selection.extentOffset,
-      );
-      if (!mounted) return;
+      final cursorOffset = _controller.selection.extentOffset;
+      final items = itemRequest != null
+          ? await itemRequest(code, cursorOffset)
+          : [
+              for (final item in await request!(code, cursorOffset))
+                CompletionItem(
+                  label: item,
+                  kind: CompletionKind.snippet,
+                  insertText: item,
+                ),
+            ];
+      if (!mounted ||
+          requestSequence != _editorRequestSequence ||
+          code != _controller.text ||
+          documentId != widget.documentId) {
+        return;
+      }
       setState(() {
         _completionItems = items;
-        _lspRequestRunning = false;
+        _selectedCompletionIndex = 0;
+        _editorRequestRunning = false;
       });
     } on Object catch (error) {
-      if (!mounted) return;
+      if (!mounted ||
+          requestSequence != _editorRequestSequence ||
+          code != _controller.text ||
+          documentId != widget.documentId) {
+        return;
+      }
       setState(() {
-        _lspError = error;
-        _lspRequestRunning = false;
+        _editorError = error;
+        _editorRequestRunning = false;
       });
     }
   }
 
-  Future<void> _formatDocument() async {
-    final format = widget.onFormatRequested;
-    if (format == null) return;
+  void _applyCompletion(CompletionItem completion) {
+    var suggestion = completion.insertText ?? completion.label;
+    final selection = _controller.selection;
+    final cursor = selection.extentOffset.clamp(0, _controller.text.length);
+    final start = selection.isCollapsed
+        ? _identifierStart(_controller.text, cursor)
+        : selection.start.clamp(0, _controller.text.length).toInt();
+    final end = selection.isCollapsed
+        ? cursor
+        : selection.end.clamp(start, _controller.text.length).toInt();
+    final functionCompletion =
+        completion.kind == CompletionKind.function ||
+        completion.kind == CompletionKind.method;
+    final openingParen = functionCompletion ? suggestion.indexOf('(') : -1;
+    var selectionOffset = start + suggestion.length;
+    if (openingParen >= 0 && suggestion.endsWith(')')) {
+      final suffix = _controller.text.substring(end);
+      if (suffix.startsWith('(')) {
+        suggestion = suggestion.substring(0, openingParen);
+        selectionOffset = start + suggestion.length;
+      } else {
+        if (suffix.startsWith(')')) {
+          suggestion = suggestion.substring(0, suggestion.length - 1);
+        }
+        selectionOffset = start + openingParen + 1;
+      }
+    }
+    final text = _controller.text.replaceRange(start, end, suggestion);
+    _setControllerValue(
+      TextEditingValue(
+        text: text,
+        selection: TextSelection.collapsed(offset: selectionOffset),
+      ),
+    );
+    _lastNotifiedText = text;
+    _scheduleDiagnostics();
+    _refreshSignatureHelp();
+    _refreshMatchingBracket();
+    _scheduleHoverInfo();
+    widget.onChanged?.call(text);
+    widget.onSelectionChanged?.call(_controller.selection);
+    setState(() => _completionItems = const []);
+  }
+
+  void _goToDefinition() {
+    final definition = widget.onDefinitionRequested?.call(
+      _controller.text,
+      _controller.selection.extentOffset,
+    );
+    if (definition == null) return;
+    final start = definition.offset.clamp(0, _controller.text.length);
+    final end = (definition.offset + definition.length).clamp(
+      start,
+      _controller.text.length,
+    );
+    _setControllerValue(
+      TextEditingValue(
+        text: _controller.text,
+        selection: TextSelection(baseOffset: start, extentOffset: end),
+      ),
+    );
+    _refreshSignatureHelp();
+    _refreshMatchingBracket();
+    _scheduleHoverInfo();
+    widget.onSelectionChanged?.call(_controller.selection);
+    if (_editorScrollController.hasClients) {
+      _editorScrollController.animateTo(
+        (definition.line - 1) * widget.fontSize * 1.5,
+        duration: const Duration(milliseconds: 120),
+        curve: Curves.easeOut,
+      );
+    }
+    setState(() {});
+  }
+
+  Future<void> _runCode() async {
+    final run = widget.onRunCode;
+    if (run == null || _runningCode) return;
+    final runSequence = ++_runSequence;
+    final code = _controller.text;
+    final documentId = widget.documentId;
     setState(() {
-      _lspRequestRunning = true;
-      _lspError = null;
+      _runningCode = true;
+      _runResult = null;
+      _runError = null;
     });
     try {
-      final formatted = await format(_controller.text);
-      if (!mounted) return;
-      if (formatted != null) {
-        _controller.value = TextEditingValue(
-          text: formatted,
-          selection: TextSelection.collapsed(offset: formatted.length),
-        );
+      final result = await run(code);
+      if (!mounted ||
+          runSequence != _runSequence ||
+          code != _controller.text ||
+          documentId != widget.documentId) {
+        return;
       }
-      setState(() => _lspRequestRunning = false);
-    } on Object catch (error) {
-      if (!mounted) return;
       setState(() {
-        _lspError = error;
-        _lspRequestRunning = false;
+        _runResult = result;
+        _runningCode = false;
+      });
+    } on Object catch (error) {
+      if (!mounted ||
+          runSequence != _runSequence ||
+          code != _controller.text ||
+          documentId != widget.documentId) {
+        return;
+      }
+      setState(() {
+        _runError = error;
+        _runningCode = false;
       });
     }
   }
 
-  void _applyCompletion(String suggestion) {
-    final selection = _controller.selection;
-    final start = selection.start.clamp(0, _controller.text.length).toInt();
-    final end = selection.end.clamp(start, _controller.text.length).toInt();
-    final text = _controller.text.replaceRange(start, end, suggestion);
-    _controller.value = TextEditingValue(
-      text: text,
-      selection: TextSelection.collapsed(offset: start + suggestion.length),
-    );
-    setState(() => _completionItems = const []);
+  int _identifierStart(String code, int cursor) {
+    var start = cursor;
+    while (start > 0 && RegExp(r'[A-Za-z0-9_]').hasMatch(code[start - 1])) {
+      start--;
+    }
+    return start;
   }
 
   @override
   Widget build(BuildContext context) {
+    final colors = ColorScheme.of(context);
     final theme = CodeEditorTheme.of(context);
     _controller.editorTheme = theme;
+    _controller.refreshSyntaxHighlights();
     final lineCount = '\n'.allMatches(_controller.text).length + 1;
     final textStyle = TextStyle(
       color: theme.foreground,
@@ -176,102 +583,234 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        CodeDirectionality(
-          child: Container(
-            decoration: BoxDecoration(
-              color: theme.background,
-              borderRadius: BorderRadius.circular(theme.borderRadius),
-            ),
-            constraints: const BoxConstraints(minHeight: 132),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (widget.showLineNumbers)
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      start: 12,
-                      top: 1,
-                    ),
-                    child: LineNumbers(
-                      lineCount: lineCount,
-                      scrollController: _lineScrollController,
-                      fontSize: widget.fontSize,
-                    ),
-                  ),
-                Expanded(
-                  child: Focus(
-                    onKeyEvent: _handleKey,
-                    child: TextField(
-                      controller: _controller,
-                      scrollController: _editorScrollController,
-                      readOnly: widget.readOnly,
-                      minLines: 5,
-                      maxLines: null,
-                      keyboardType: TextInputType.multiline,
-                      inputFormatters: widget.readOnly
-                          ? null
-                          : const [_AutoIndentFormatter()],
-                      style: textStyle,
-                      cursorColor: theme.cursor,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(12),
-                      ),
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      textDirection: TextDirection.ltr,
-                      onChanged: (_) => setState(() {}),
-                    ),
-                  ),
+        if (widget.expands)
+          Expanded(child: _buildEditorField(colors, lineCount, textStyle))
+        else
+          _buildEditorField(colors, lineCount, textStyle),
+        if (_signatureHelp != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Align(
+              alignment: AlignmentDirectional.topStart,
+              child: Text(
+                _signatureHelp!.signature,
+                textDirection: TextDirection.ltr,
+                style: TextStyle(
+                  fontFamily: 'JetBrains Mono',
+                  fontSize: widget.fontSize - 1,
+                  color: theme.function,
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+        if (_hoverInfo != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: _HoverInfoPanel(info: _hoverInfo!),
+          ),
+        if (_hoverError != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Text(
+              '${context.l10n.executionFailed} $_hoverError',
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          ),
         if (widget.showActionBar &&
             (widget.onRun != null ||
+                widget.onRunCode != null ||
                 widget.onCompletionRequested != null ||
-                widget.onFormatRequested != null))
+                widget.onCompletionItemsRequested != null))
           Align(
-            alignment: AlignmentDirectional.centerEnd,
+            alignment: AlignmentDirectional.topEnd,
             child: CodeActionsBar(
-              onRun: widget.onRun,
-              onCompletion: _lspRequestRunning
+              onRun: widget.onRunCode != null
+                  ? (_runningCode ? null : _runCode)
+                  : widget.onRun,
+              onCompletion: _editorRequestRunning
                   ? null
-                  : widget.onCompletionRequested == null
+                  : widget.onCompletionRequested == null &&
+                        widget.onCompletionItemsRequested == null
                   ? null
                   : _requestCompletions,
-              onFormat: _lspRequestRunning
-                  ? null
-                  : widget.onFormatRequested == null
-                  ? null
-                  : _formatDocument,
             ),
           ),
         if (_completionItems.isNotEmpty)
           CodeDirectionality(
             child: CodeCompletionOverlay(
               items: _completionItems,
+              selectedIndex: _selectedCompletionIndex,
               onSelected: _applyCompletion,
             ),
           ),
-        if (_lspError != null)
+        if (_editorError != null)
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              '${context.l10n.lspFeatureError} $_lspError',
+              '${context.l10n.executionFailed} $_editorError',
               style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          ),
+        if (_diagnosticsError != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              '${context.l10n.executionFailed} $_diagnosticsError',
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          ),
+        if (_runError != null)
+          _ResultPanel(
+            title: context.l10n.executionFailed,
+            content: _runError.toString(),
+            isError: true,
+          ),
+        if (_runResult != null)
+          _ResultPanel(
+            title: _runResult!.isSuccess
+                ? (Localizations.localeOf(context).languageCode == 'ar'
+                      ? 'اكتمل التنفيذ'
+                      : 'Execution completed')
+                : context.l10n.executionFailed,
+            content: [
+              ..._runResult!.output,
+              ?_runResult!.errorMessage,
+              '${_runResult!.executionTimeMs} ms - '
+                  '${_runResult!.instructionsExecuted} instructions',
+            ].join('\n'),
+            isError: !_runResult!.isSuccess,
+          ),
+        if (_diagnostics.isNotEmpty)
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 150),
+            child: Card(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  for (final diagnostic in _diagnostics)
+                    ListTile(
+                      dense: true,
+                      leading: Icon(
+                        diagnostic.severity == DiagnosticSeverity.error
+                            ? Icons.error_outline
+                            : diagnostic.severity == DiagnosticSeverity.warning
+                            ? Icons.warning_amber_outlined
+                            : Icons.info_outline,
+                        color: diagnostic.severity == DiagnosticSeverity.error
+                            ? Theme.of(context).colorScheme.error
+                            : Theme.of(context).colorScheme.tertiary,
+                      ),
+                      title: Text(diagnostic.message),
+                      subtitle: Text(
+                        context.l10n.diagnosticLine(diagnostic.location.line),
+                      ),
+                      onTap: () => _selectDiagnostic(diagnostic),
+                    ),
+                ],
+              ),
             ),
           ),
       ],
     );
   }
 
+  Widget _buildEditorField(
+    ColorScheme colors,
+    int lineCount,
+    TextStyle textStyle,
+  ) {
+
+    return CodeDirectionality(
+      child: Container(
+        decoration: BoxDecoration(
+          color: colors.surface,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        constraints: const BoxConstraints(minHeight: 132),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.showLineNumbers)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 12, top: 1),
+                child: LineNumbers(
+                  lineCount: lineCount,
+                  scrollController: _lineScrollController,
+                  fontSize: widget.fontSize,
+                ),
+              ),
+            Expanded(
+              child: Focus(
+                onKeyEvent: _handleKey,
+                child: TextField(
+                  controller: _controller,
+                  focusNode: widget.focusNode,
+                  textAlignVertical: .top,
+                  scrollController: _editorScrollController,
+                  readOnly: widget.readOnly,
+                  minLines: widget.expands ? null : 5,
+                  maxLines: null,
+                  expands: widget.expands,
+                  keyboardType: TextInputType.multiline,
+                  inputFormatters: widget.readOnly
+                      ? null
+                      : const [_GDScriptInputFormatter()],
+                  style: textStyle,
+                  cursorColor: colors.primary,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    filled: true,
+                    hoverColor: Color(0xFF090F15),
+                    fillColor: Color(0xFF090F15), // colors.surfaceContainerLowest,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 17),
+                  ),
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _selectDiagnostic(Diagnostic diagnostic) {
+    final start = diagnostic.location.offset.clamp(0, _controller.text.length);
+    final end = (start + diagnostic.location.length).clamp(
+      start,
+      _controller.text.length,
+    );
+    _setControllerValue(
+      TextEditingValue(
+        text: _controller.text,
+        selection: TextSelection(baseOffset: start, extentOffset: end),
+      ),
+    );
+    _refreshSignatureHelp();
+    _refreshMatchingBracket();
+    _scheduleHoverInfo();
+    widget.onSelectionChanged?.call(_controller.selection);
+    if (_editorScrollController.hasClients) {
+      _editorScrollController.animateTo(
+        (diagnostic.location.line - 1) * widget.fontSize * 1.5,
+        duration: const Duration(milliseconds: 120),
+        curve: Curves.easeOut,
+      );
+    }
+    setState(() {});
+  }
+
   @override
   void dispose() {
     _controller
-      ..removeListener(_notifyChanged)
+      ..removeListener(_handleControllerChanged)
       ..dispose();
+    _diagnosticsDebounce?.cancel();
+    _hoverDebounce?.cancel();
     _editorScrollController
       ..removeListener(_syncLineScroll)
       ..dispose();
@@ -281,10 +820,28 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
 }
 
 class _SyntaxTextController extends TextEditingController {
-  _SyntaxTextController({super.text});
+  _SyntaxTextController({
+    required String text,
+    required TextSelection selection,
+  }) : super.fromValue(TextEditingValue(text: text, selection: selection));
 
   CodeEditorTheme? editorTheme;
+  List<SyntaxHighlight> Function(String code)? syntaxHighlightsRequested;
+  List<SemanticHighlight> Function(String code)? semanticHighlightsRequested;
   final GDScriptSyntaxHighlighter _highlighter = GDScriptSyntaxHighlighter();
+  List<SyntaxHighlight>? _syntaxHighlights;
+  List<SemanticHighlight>? _semanticHighlights;
+  (int, int)? matchingBracketOffsets;
+  String? _highlightedText;
+
+  void refreshSyntaxHighlights() {
+    if (_highlightedText == text) return;
+    _highlightedText = text;
+    _syntaxHighlights = syntaxHighlightsRequested?.call(text);
+    _semanticHighlights = semanticHighlightsRequested?.call(text);
+  }
+
+  void invalidateHighlights() => _highlightedText = null;
 
   @override
   TextSpan buildTextSpan({
@@ -300,38 +857,164 @@ class _SyntaxTextController extends TextEditingController {
         withComposing: withComposing,
       );
     }
+    refreshSyntaxHighlights();
     return TextSpan(
       style: style,
-      children: _highlighter.highlight(text, currentTheme),
+      children: _highlighter.highlight(
+        text,
+        currentTheme,
+        engineHighlights: _syntaxHighlights,
+        semanticHighlights: _semanticHighlights,
+        matchingBracketOffsets: matchingBracketOffsets,
+      ),
     );
   }
 }
 
-class _AutoIndentFormatter extends TextInputFormatter {
-  const _AutoIndentFormatter();
+class _ResultPanel extends StatelessWidget {
+  const _ResultPanel({
+    required this.title,
+    required this.content,
+    required this.isError,
+  });
+
+  final String title;
+  final String content;
+  final bool isError;
+
+  @override
+  Widget build(BuildContext context) => ConstrainedBox(
+    constraints: const BoxConstraints(maxHeight: 100),
+    child: Card(
+      child: ListView(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(8),
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: isError
+                  ? Theme.of(context).colorScheme.error
+                  : Theme.of(context).colorScheme.tertiary,
+            ),
+          ),
+          const SizedBox(height: 4),
+          SelectableText(
+            content,
+            style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 12),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+class _HoverInfoPanel extends StatelessWidget {
+  const _HoverInfoPanel({required this.info});
+
+  final HoverInfo info;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(8),
+    decoration: BoxDecoration(
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      borderRadius: BorderRadius.circular(6),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SelectableText(
+          info.signature,
+          textDirection: TextDirection.ltr,
+          style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 12),
+        ),
+        if (info.type case final type?)
+          Text(
+            type,
+            textDirection: TextDirection.ltr,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        if (info.documentation case final documentation?)
+          Text(documentation, style: Theme.of(context).textTheme.bodySmall),
+      ],
+    ),
+  );
+}
+
+class _GDScriptInputFormatter extends TextInputFormatter {
+  const _GDScriptInputFormatter();
 
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
+    const pairs = {'(': ')', '[': ']', '{': '}', '"': '"', "'": "'"};
+    final oldSelection = oldValue.selection;
+    final newSelection = newValue.selection;
+    if (oldSelection.isCollapsed &&
+        newSelection.isCollapsed &&
+        newValue.text.length == oldValue.text.length + 1) {
+      final cursor = oldSelection.extentOffset;
+      if (cursor >= 0 && cursor < oldValue.text.length) {
+        final inserted = newValue.text.substring(cursor, cursor + 1);
+        if (pairs.values.contains(inserted) &&
+            oldValue.text.substring(cursor, cursor + 1) == inserted) {
+          return TextEditingValue(
+            text: oldValue.text,
+            selection: TextSelection.collapsed(offset: cursor + 1),
+          );
+        }
+      }
+      if (newSelection.extentOffset > 0) {
+        final cursor = newSelection.extentOffset;
+        final inserted = newValue.text.substring(cursor - 1, cursor);
+        final closing = pairs[inserted];
+        if (closing != null) {
+          return TextEditingValue(
+            text: newValue.text.replaceRange(cursor, cursor, closing),
+            selection: TextSelection.collapsed(offset: cursor),
+          );
+        }
+      }
+    }
+
+    if (oldSelection.isCollapsed &&
+        newSelection.isCollapsed &&
+        oldValue.text.length == newValue.text.length + 1 &&
+        oldSelection.extentOffset > 0) {
+      final cursor = oldSelection.extentOffset;
+      final deleted = oldValue.text.substring(cursor - 1, cursor);
+      final closing = pairs[deleted];
+      if (closing != null &&
+          cursor < oldValue.text.length &&
+          oldValue.text.substring(cursor, cursor + 1) == closing) {
+        return TextEditingValue(
+          text: newValue.text.replaceRange(cursor - 1, cursor, ''),
+          selection: TextSelection.collapsed(offset: cursor - 1),
+        );
+      }
+    }
+
     if (newValue.text.length <= oldValue.text.length ||
-        newValue.selection.baseOffset <= 0) {
+        newSelection.baseOffset <= 0) {
       return newValue;
     }
-    final cursor = newValue.selection.baseOffset;
+    final cursor = newSelection.baseOffset;
     final inserted = newValue.text.substring(
-      oldValue.selection.baseOffset.clamp(0, oldValue.text.length),
+      oldSelection.baseOffset.clamp(0, oldValue.text.length),
       cursor,
     );
     if (inserted != '\n') return newValue;
     final oldLineStart = oldValue.text.lastIndexOf(
       '\n',
-      oldValue.selection.baseOffset - 1,
+      oldSelection.baseOffset - 1,
     );
     final previousLine = oldValue.text.substring(
       oldLineStart + 1,
-      oldValue.selection.baseOffset,
+      oldSelection.baseOffset,
     );
     final indentation = RegExp(r'^\s*').firstMatch(previousLine)!.group(0)!;
     final extra = previousLine.trimRight().endsWith(':') ? '    ' : '';

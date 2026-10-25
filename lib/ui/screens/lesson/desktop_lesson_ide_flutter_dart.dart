@@ -8,7 +8,7 @@ class DesktopLessonIdeLayout extends StatelessWidget {
     super.key,
     required this.unitTitle,
     required this.estimatedMinutes,
-    required this.isLspConnected,
+    required this.isEngineReady,
     required this.explanationSection,
     required this.editorSection,
     required this.statusSection,
@@ -16,7 +16,7 @@ class DesktopLessonIdeLayout extends StatelessWidget {
 
   final String unitTitle;
   final int estimatedMinutes;
-  final bool isLspConnected;
+  final bool isEngineReady;
   final Widget explanationSection;
   final Widget editorSection;
   final Widget statusSection;
@@ -33,7 +33,7 @@ class DesktopLessonIdeLayout extends StatelessWidget {
         _LessonContextBar(
           unitTitle: unitTitle,
           estimatedMinutes: estimatedMinutes,
-          isLspConnected: isLspConnected,
+          isEngineReady: isEngineReady,
         ),
         const Divider(height: 1, color: _border),
         Expanded(
@@ -104,17 +104,17 @@ class _LessonContextBar extends StatelessWidget {
   const _LessonContextBar({
     required this.unitTitle,
     required this.estimatedMinutes,
-    required this.isLspConnected,
+    required this.isEngineReady,
   });
 
   final String unitTitle;
   final int estimatedMinutes;
-  final bool isLspConnected;
+  final bool isEngineReady;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final statusColor = isLspConnected
+    final statusColor = isEngineReady
         ? const Color(0xFF22C55E)
         : const Color(0xFFF59E0B);
     return Container(
@@ -144,7 +144,13 @@ class _LessonContextBar extends StatelessWidget {
           const SizedBox(width: 10),
           _ContextBadge(
             icon: Icons.circle,
-            label: isLspConnected ? l10n.lspConnected : l10n.lspDisconnected,
+            label: isEngineReady
+                ? (Localizations.localeOf(context).languageCode == 'ar'
+                      ? 'محرك GDScript جاهز'
+                      : 'GDScript engine ready')
+                : (Localizations.localeOf(context).languageCode == 'ar'
+                      ? 'محرك GDScript غير متاح'
+                      : 'GDScript engine unavailable'),
             color: statusColor,
           ),
         ],

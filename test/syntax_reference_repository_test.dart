@@ -31,4 +31,29 @@ void main() {
     expect(printEntry.single.title.en, 'Print');
     expect(printEntry.single.title.ar, 'طباعة');
   });
+
+  test('retries loading assets after a failed initial load', () async {
+    final repository = AssetSyntaxReferenceRepository(
+      assetBundle: _FailOnceAssetBundle(),
+    );
+
+    await expectLater(repository.search(''), throwsStateError);
+    expect(await repository.search(''), hasLength(37));
+  });
+}
+
+class _FailOnceAssetBundle extends CachingAssetBundle {
+  bool _shouldFail = true;
+
+  @override
+  Future<String> loadString(String key, {bool cache = true}) async {
+    if (_shouldFail) {
+      _shouldFail = false;
+      throw StateError('Temporary asset load failure.');
+    }
+    return rootBundle.loadString(key);
+  }
+
+  @override
+  Future<ByteData> load(String key) => rootBundle.load(key);
 }

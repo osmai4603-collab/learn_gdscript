@@ -1,0 +1,19 @@
+{
+  "id": "unit_11_types_quality",
+  "title": {
+    "ar": "الأنواع والتحليل وجودة الشيفرة",
+    "en": "Types, Analysis, and Code Quality"
+  },
+  "description": {
+    "ar": "اكتب شيفرة typed واستخدم التحذيرات والتوثيق",
+    "en": "Write typed code and use warnings and documentation"
+  },
+  "iconName": "fact_check",
+  "order": 10,
+  "lessonIds": [
+    "lesson_45_static_types",
+    "lesson_46_typed_arrays",
+    "lesson_47_warnings_assert_debugging",
+    "lesson_48_style_documentation"
+  ]
+}

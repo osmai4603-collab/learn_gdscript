@@ -56,13 +56,22 @@ class _QuickTryCardState extends State<QuickTryCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(context.l10n.quickTry, style: Theme.of(context).textTheme.titleLarge),
+          Text(
+            context.l10n.quickTry,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           const SizedBox(height: 8),
           CodeEditorWidget(
             initialCode: _code,
             fontSize: 14,
             showLineNumbers: false,
             showActionBar: false,
+            onSyntaxHighlightsRequested: context
+                .read<CodeRunnerService>()
+                .getSyntaxHighlights,
+            onDiagnosticsRequested: context
+                .read<CodeRunnerService>()
+                .getDiagnostics,
             onChanged: (code) => _codeOrDefault = _code = code,
           ),
           const SizedBox(height: 8),
@@ -76,11 +85,7 @@ class _QuickTryCardState extends State<QuickTryCard> {
             ),
           ),
           const SizedBox(height: 8),
-          OutputPanel(
-            state: _state,
-            output: _output,
-            errorMessage: _error,
-          ),
+          OutputPanel(state: _state, output: _output, errorMessage: _error),
         ],
       ),
     ),

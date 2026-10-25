@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:learn_gdscript/data/models/curriculum_models.dart';
+import 'package:learn_gdscript/data/models/exercise_models.dart';
 import 'package:learn_gdscript/data/models/lesson_models.dart';
 import 'package:learn_gdscript/data/repositories/syntax_reference_repository.dart';
 
@@ -11,7 +12,7 @@ void main() {
     final curriculumJson = _readObject('assets/curriculum/manifest.json');
     final curriculum = Curriculum.fromJson(curriculumJson);
     final unitIds = curriculum.units.map((unit) => unit.id).toSet();
-    expect(curriculum.units, hasLength(5));
+    expect(curriculum.units, hasLength(12));
     expect(unitIds, hasLength(curriculum.units.length));
     expect(
       curriculum.units.map((unit) => unit.order).toList(),
@@ -22,17 +23,7 @@ void main() {
           .listSync(recursive: true)
           .whereType<File>()
           .where((file) => file.path.endsWith('/unit.json')),
-      hasLength(5),
-    );
-    expect(
-      Directory('assets/curriculum/units')
-          .listSync(recursive: true)
-          .whereType<File>()
-          .where(
-            (file) =>
-                file.path.endsWith('.json') && file.path.contains('/lesson_'),
-          ),
-      hasLength(14),
+      hasLength(12),
     );
 
     final lessonsById = <String, Lesson>{};
@@ -40,7 +31,7 @@ void main() {
     final exerciseTypes = <String, int>{};
     for (final unit in curriculum.units) {
       final unitJson = _readObject(
-        'assets/curriculum/units/${_unitDirectory(unit.order)}/unit.json',
+        'assets/curriculum/units/${_unitDirectory(unit)}/unit.json',
       );
       expect(Unit.fromJson(unitJson).toJson(), unit.toJson());
       expect(unit.lessonIds, isNotEmpty);
@@ -48,11 +39,24 @@ void main() {
       final unitLessons = <Lesson>[];
       for (final lessonId in unit.lessonIds) {
         final lessonPath =
-            'assets/curriculum/units/${_unitDirectory(unit.order)}/'
-            '${_lessonFileName(lessonId)}.json';
+            'assets/curriculum/units/${_unitDirectory(unit)}/$lessonId.json';
         final lesson = Lesson.fromJson(_readObject(lessonPath));
         expect(lesson.id, lessonId);
         expect(lesson.unitId, unit.id);
+        expect(lesson.documentation, isNotNull, reason: lesson.id);
+        expect(lesson.documentationSources, isNotEmpty, reason: lesson.id);
+        for (final source in lesson.documentationSources) {
+          expect(
+            source.url,
+            startsWith('https://docs.godotengine.org/'),
+            reason: '${lesson.id}: ${source.url}',
+          );
+        }
+        expect(
+          lesson.exercises,
+          hasLength(10),
+          reason: '${lesson.id} must have ten exercises',
+        );
         expect(lessonsById.containsKey(lesson.id), isFalse);
         lessonsById[lesson.id] = lesson;
         unitLessons.add(lesson);
@@ -71,7 +75,16 @@ void main() {
             inInclusiveRange(2, 4),
             reason: exercise.id,
           );
-          expect(exercise.testCases, isNotEmpty, reason: exercise.id);
+          if (exercise.type == ExerciseType.multipleChoice) {
+            expect(exercise.options.length, greaterThanOrEqualTo(2));
+            expect(exercise.correctOptionIndex, isNotNull);
+            expect(exercise.testCases, isEmpty, reason: exercise.id);
+          } else if (exercise.type == ExerciseType.guidedTask) {
+            expect(exercise.steps, isNotEmpty, reason: exercise.id);
+            expect(exercise.testCases, isEmpty, reason: exercise.id);
+          } else {
+            expect(exercise.testCases, isNotEmpty, reason: exercise.id);
+          }
         }
       }
       expect(
@@ -80,20 +93,30 @@ void main() {
       );
     }
 
-    expect(lessonsById, hasLength(14));
-    expect(exercisesById, hasLength(40));
+    expect(lessonsById, hasLength(51));
+    expect(exercisesById, hasLength(510));
     for (final lesson in lessonsById.values) {
       expect(
         lesson.exercises.map((exercise) => exercise.order).toList(),
         List.generate(lesson.exercises.length, (index) => index),
       );
     }
+    final lessonFiles = Directory('assets/curriculum/units')
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where(
+          (file) =>
+              file.path.endsWith('.json') && file.path.contains('/lesson_'),
+        );
+    expect(lessonFiles, hasLength(51));
 
     expect(exerciseTypes['writeCode'] ?? 0, greaterThanOrEqualTo(15));
     expect(exerciseTypes['predictOutput'] ?? 0, greaterThanOrEqualTo(6));
     expect(exerciseTypes['fillBlank'] ?? 0, greaterThanOrEqualTo(3));
     expect(exerciseTypes['fixBug'] ?? 0, greaterThanOrEqualTo(3));
     expect(exerciseTypes['reorderSteps'] ?? 0, greaterThanOrEqualTo(2));
+    expect(exerciseTypes['multipleChoice'] ?? 0, greaterThan(0));
+    expect(exerciseTypes['guidedTask'] ?? 0, greaterThan(0));
 
     final syntaxManifest = _readObject('assets/syntax_reference/manifest.json');
     final references = <SyntaxReference>[];
@@ -130,31 +153,7 @@ void main() {
   });
 }
 
-String _unitDirectory(int order) =>
-    '${(order + 1).toString().padLeft(2, '0')}_'
-    '${const ['first_program', 'variables', 'conditions', 'loops', 'functions'][order]}';
-
-String _lessonFileName(String lessonId) {
-  const fileNames = {
-    'lesson_01_hello': 'lesson_01_hello',
-    'lesson_02_comments': 'lesson_02_comments',
-    'lesson_03_variables': 'lesson_03_variables',
-    'lesson_04_types': 'lesson_04_types',
-    'lesson_05_operations': 'lesson_05_operations',
-    'lesson_06_if_else': 'lesson_06_if_else',
-    'lesson_07_elif': 'lesson_07_elif',
-    'lesson_08_match': 'lesson_08_match',
-    'lesson_09_for': 'lesson_09_for',
-    'lesson_10_while': 'lesson_10_while',
-    'lesson_11_break_continue': 'lesson_11_break_continue',
-    'lesson_12_func_basics': 'lesson_12_func_basics',
-    'lesson_13_parameters': 'lesson_13_parameters',
-    'lesson_14_return': 'lesson_14_return',
-  };
-  final fileName = fileNames[lessonId];
-  if (fileName == null) fail('Unknown lesson "$lessonId".');
-  return fileName;
-}
+String _unitDirectory(Unit unit) => unit.id.substring('unit_'.length);
 
 Map<String, Object?> _readObject(String path) {
   final decoded = jsonDecode(File(path).readAsStringSync());

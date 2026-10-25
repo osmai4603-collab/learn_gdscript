@@ -1,0 +1,18 @@
+{
+  "id": "unit_12_integrated_project",
+  "title": {
+    "ar": "تطبيق تكاملي",
+    "en": "Integrated Project"
+  },
+  "description": {
+    "ar": "طبّق ما تعلمته لبناء مشروع صغير متكامل",
+    "en": "Apply what you learned to build a small integrated project"
+  },
+  "iconName": "build",
+  "order": 11,
+  "lessonIds": [
+    "lesson_49_project_planning",
+    "lesson_50_project_building",
+    "lesson_51_final_integration"
+  ]
+}

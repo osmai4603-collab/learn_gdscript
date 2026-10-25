@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/arabic_ide_theme.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/exercise_models.dart';
+import '../../../logic/services/code_runner_service.dart';
 import '../../../logic/services/test_runner_service.dart';
 import '../code_editor/code_actions_bar.dart';
 import '../code_editor/code_editor_widget.dart';
@@ -28,7 +29,6 @@ class ExerciseWidget extends StatefulWidget {
     this.onExerciseCompleted,
     this.onSolutionViewed,
     this.onCompletionRequested,
-    this.onFormatRequested,
   });
 
   final Exercise exercise;
@@ -52,7 +52,6 @@ class ExerciseWidget extends StatefulWidget {
   final VoidCallback? onSolutionViewed;
   final Future<List<String>> Function(String code, int cursorOffset)?
   onCompletionRequested;
-  final Future<String?> Function(String code)? onFormatRequested;
 
   @override
   State<ExerciseWidget> createState() => _ExerciseWidgetState();
@@ -65,6 +64,8 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
   bool _running = false;
   bool _showSolution = false;
   bool? _predictionCorrect;
+  int? _selectedOptionIndex;
+  bool _guidedTaskCompleted = false;
   int _attempts = 0;
   int _hintsUsed = 0;
   late List<String> _orderedLines;
@@ -100,6 +101,8 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
       _attempts = widget.initialAttempts;
       _hintsUsed = widget.initialHintsUsed;
       _predictionCorrect = null;
+      _selectedOptionIndex = null;
+      _guidedTaskCompleted = false;
     }
   }
 
@@ -161,6 +164,43 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
     }
   }
 
+  Future<void> _submitChoice() async {
+    final exercise = widget.exercise;
+    final selected = _selectedOptionIndex;
+    if (selected == null || exercise.correctOptionIndex == null) return;
+    final passed = selected == exercise.correctOptionIndex;
+    setState(() {
+      _attempts++;
+      _predictionCorrect = passed;
+    });
+    widget.onProgressChanged?.call(_attempts, _hintsUsed);
+    if (passed) {
+      await widget.onExerciseCompleted?.call(
+        _attempts,
+        _hintsUsed,
+        false,
+        '',
+      );
+      if (mounted) widget.onCompleted?.call();
+    }
+  }
+
+  Future<void> _completeGuidedTask() async {
+    if (_guidedTaskCompleted) return;
+    setState(() {
+      _attempts++;
+      _guidedTaskCompleted = true;
+    });
+    widget.onProgressChanged?.call(_attempts, _hintsUsed);
+    await widget.onExerciseCompleted?.call(
+      _attempts,
+      _hintsUsed,
+      false,
+      '',
+    );
+    if (mounted) widget.onCompleted?.call();
+  }
+
   void _reorderLines(int oldIndex, int newIndex) {
     setState(() {
       final line = _orderedLines.removeAt(oldIndex);
@@ -219,6 +259,8 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
         _attempts >= 3 || _hintsUsed >= exercise.hints.length;
     final isPrediction = exercise.type == ExerciseType.predictOutput;
     final isReorder = exercise.type == ExerciseType.reorderSteps;
+    final isMultipleChoice = exercise.type == ExerciseType.multipleChoice;
+    final isGuidedTask = exercise.type == ExerciseType.guidedTask;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -240,20 +282,94 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
             const SizedBox(height: 12),
             if (isReorder)
               _ReorderSteps(lines: _orderedLines, onReorder: _reorderLines)
-            else
+            else if (!isMultipleChoice && !isGuidedTask)
               CodeEditorWidget(
                 key: ValueKey(exercise.id),
                 initialCode: _code,
                 readOnly: isPrediction,
                 fontSize: widget.fontSize,
                 showActionBar: true,
-                onCompletionRequested: widget.onCompletionRequested,
-                onFormatRequested: widget.onFormatRequested,
+                onCompletionRequested:
+                    widget.onCompletionRequested ??
+                    (code, offset) async => context
+                        .read<CodeRunnerService>()
+                        .getCompletions(code, offset),
+                onSyntaxHighlightsRequested: context
+                    .read<CodeRunnerService>()
+                    .getSyntaxHighlights,
+                onDiagnosticsRequested: context
+                    .read<CodeRunnerService>()
+                    .getDiagnostics,
                 onChanged: (code) {
                   _code = code;
                   widget.onCodeChanged?.call(code);
                 },
               ),
+            if (isGuidedTask) ...[
+              for (var index = 0; index < exercise.steps.length; index++)
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: CircleAvatar(
+                    radius: 14,
+                    child: Text('${index + 1}'),
+                  ),
+                  title: Text(exercise.steps[index].resolve(locale)),
+                ),
+              const SizedBox(height: 8),
+              FilledButton.icon(
+                onPressed: _guidedTaskCompleted ? null : _completeGuidedTask,
+                icon: const Icon(Icons.check),
+                label: Text(
+                  locale.languageCode == 'en'
+                      ? 'Mark task complete'
+                      : 'تأكيد إكمال المهمة',
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(
+                  locale.languageCode == 'en'
+                      ? 'Completion is self-reported and is not checked by the code runner.'
+                      : 'إكمال هذه المهمة ذاتيّ التأكيد ولا يفحصه مشغّل الكود.',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+            ],
+            if (isMultipleChoice) ...[
+              for (var index = 0; index < exercise.options.length; index++)
+                RadioListTile<int>(
+                  value: index,
+                  groupValue: _selectedOptionIndex,
+                  onChanged: _predictionCorrect == true
+                      ? null
+                      : (value) =>
+                            setState(() => _selectedOptionIndex = value),
+                  title: Text(exercise.options[index].resolve(locale)),
+                  contentPadding: EdgeInsets.zero,
+                ),
+              FilledButton(
+                onPressed: _predictionCorrect == true || _selectedOptionIndex == null
+                    ? null
+                    : _submitChoice,
+                child: Text(
+                  locale.languageCode == 'en' ? 'Check answer' : 'تحقق من الإجابة',
+                ),
+              ),
+              if (_predictionCorrect != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    _predictionCorrect!
+                        ? context.l10n.testPassed
+                        : context.l10n.testFailed,
+                    style: TextStyle(
+                      color: _predictionCorrect!
+                          ? Theme.of(context).colorScheme.tertiary
+                          : Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                ),
+            ],
             if (isPrediction) ...[
               const SizedBox(height: 12),
               for (final option in _predictionOptions(
@@ -289,12 +405,13 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
                 ),
             ],
             const SizedBox(height: 8),
-            CodeActionsBar(
-              onReset: isPrediction ? null : _reset,
-              onRun: isPrediction || _running ? null : _runTests,
-              canShowSolution: !isPrediction && canShowSolution,
-              onSolution: isPrediction ? null : _revealSolution,
-            ),
+            if (!isMultipleChoice && !isGuidedTask)
+              CodeActionsBar(
+                onReset: isPrediction ? null : _reset,
+                onRun: isPrediction || _running ? null : _runTests,
+                canShowSolution: !isPrediction && canShowSolution,
+                onSolution: isPrediction ? null : _revealSolution,
+              ),
             if (_showSolution) ...[
               const SizedBox(height: 8),
               Text(

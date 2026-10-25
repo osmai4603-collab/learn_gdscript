@@ -1,8 +1,20 @@
 {
   "id": "unit_02_variables",
-  "title": {"ar": "المتغيرات والأنواع", "en": "Variables and Types"},
-  "description": {"ar": "تعلّم تخزين البيانات واستخدامها", "en": "Learn to store and use data"},
+  "title": {
+    "ar": "القيم والمتغيرات والأنواع",
+    "en": "Values, Variables, and Types"
+  },
+  "description": {
+    "ar": "خزّن القيم وافهم أنواع البيانات والتحويل بينها",
+    "en": "Store values and understand data types and conversions"
+  },
   "iconName": "data_object",
   "order": 1,
-  "lessonIds": ["lesson_03_variables", "lesson_04_types", "lesson_05_operations"]
+  "lessonIds": [
+    "lesson_03_variables",
+    "lesson_04_types",
+    "lesson_16_casting",
+    "lesson_17_strings",
+    "lesson_18_enums"
+  ]
 }

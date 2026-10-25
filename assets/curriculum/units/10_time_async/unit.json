@@ -1,0 +1,19 @@
+{
+  "id": "unit_10_time_async",
+  "title": {
+    "ar": "الزمن والعمليات غير المتزامنة",
+    "en": "Time and Asynchronous Operations"
+  },
+  "description": {
+    "ar": "نسّق الإشارات والمؤقتات والعمليات المنتظرة",
+    "en": "Coordinate signals, timers, and awaited operations"
+  },
+  "iconName": "schedule",
+  "order": 9,
+  "lessonIds": [
+    "lesson_41_await_signals",
+    "lesson_42_timers_frames",
+    "lesson_43_async_flow",
+    "lesson_44_await_pitfalls"
+  ]
+}

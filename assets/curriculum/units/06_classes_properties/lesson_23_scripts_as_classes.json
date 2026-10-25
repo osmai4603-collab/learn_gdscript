@@ -1,0 +1,378 @@
+{
+  "id": "lesson_23_scripts_as_classes",
+  "unitId": "unit_06_classes_properties",
+  "title": {
+    "ar": "السكربت بوصفه صنفاً",
+    "en": "A Script as a Class"
+  },
+  "objective": {
+    "ar": "افهم أن السكربت يعرّف خصائص وسلوكاً يمكن لنسخه المتعددة مشاركته.",
+    "en": "Understand that a script defines properties and behavior shared by its instances."
+  },
+  "estimatedMinutes": 10,
+  "order": 0,
+  "documentation": {
+    "ar": "يعرّف سكربت GDScript صنفاً يمكن أن يحتوي متغيرات ودوالاً. تعامل مع التعريف بوصفه قالباً، والنسخة بوصفها كائناً فعلياً. تشترك النسخ في تعريف السلوك لكن لكل نسخة قيم خصائصها.",
+    "en": "A GDScript script defines a class that can contain variables and functions. Treat the definition as a template and an instance as an actual object. Instances share behavior definitions but each has its own property values."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الأصناف في GDScript",
+        "en": "Classes in GDScript"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## التعريف والنسخة\n\nيجمع الصنف البيانات والسلوك الخاصين بمفهوم واحد. يمكن أن تنشئ نسخاً متعددة من الصنف؛ لكل نسخة قيمها، مع مشاركة تعريف الدوال.\n\n```gdscript\nextends RefCounted\nclass_name InventoryItem\n\nvar item_name = \"\"\nvar quantity = 0\n\nfunc describe():\n    return item_name + \" x\" + str(quantity)\n```\n\nهذا سكربت صنف؛ تعريفه وحده لا ينشئ نسخة. استخدم `class_name` لإتاحة اسم واضح للصنف في المشروع.",
+    "en": "## Definition and instance\n\nA class groups data and behavior for one concept. You can create multiple instances; each has its own values while sharing the function definitions.\n\n```gdscript\nextends RefCounted\nclass_name InventoryItem\n\nvar item_name = \"\"\nvar quantity = 0\n\nfunc describe():\n    return item_name + \" x\" + str(quantity)\n```\n\nThis is a class script; defining it does not create an instance. Use `class_name` to expose a clear class name in the project."
+  },
+  "exercises": [
+    {
+      "id": "ex_lesson_23_scripts_as_classes_01_predict",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع النتيجة في المثال: سيكون لكل نسخة من `InventoryItem` اسم وكمية مستقلان، مع استخدام دالة `describe` المعرفة في الصنف.",
+        "en": "Predict the result in the example: Each `InventoryItem` instance has its own name and quantity while using the function defined by the class."
+      },
+      "options": [
+        {
+          "ar": "سيكون لكل نسخة من `InventoryItem` اسم وكمية مستقلان، مع استخدام دالة `describe` المعرفة في الصنف.",
+          "en": "Each `InventoryItem` instance has its own name and quantity while using the function defined by the class."
+        },
+        {
+          "ar": "الصنف يصف الهيكل والسلوك ولا ينشئ نسخة لمجرد تعريفه.",
+          "en": "A class describes structure and behavior; defining it does not create an instance."
+        },
+        {
+          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
+          "en": "An instance is a scene file that holds no data."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
+          "en": "Trace what happens first, then the final result."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_02_identify",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «السكربت بوصفه صنفاً»؟",
+        "en": "Which statement accurately identifies the core concept in “A Script as a Class”?"
+      },
+      "options": [
+        {
+          "ar": "الصنف وصف يجمع بيانات وسلوكاً؛ والنسخة كائن أنشئ وفق هذا الوصف.",
+          "en": "A class describes related data and behavior; an instance is an object created from that description."
+        },
+        {
+          "ar": "الصنف يصف الهيكل والسلوك ولا ينشئ نسخة لمجرد تعريفه.",
+          "en": "A class describes structure and behavior; defining it does not create an instance."
+        },
+        {
+          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
+          "en": "An instance is a scene file that holds no data."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
+          "en": "Look for the role of the key terms in the example."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_03_choose",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي قرار تصميم مناسب للحالة التالية؟ أنشئ نسختين من الصنف نفسه ثم أعط كل نسخة قيم خصائص مختلفة.",
+        "en": "Which design choice fits this situation? Create two instances of the same class and give each different property values."
+      },
+      "options": [
+        {
+          "ar": "أنشئ نسختين من الصنف نفسه ثم أعط كل نسخة قيم خصائص مختلفة.",
+          "en": "Create two instances of the same class and give each different property values."
+        },
+        {
+          "ar": "الصنف يصف الهيكل والسلوك ولا ينشئ نسخة لمجرد تعريفه.",
+          "en": "A class describes structure and behavior; defining it does not create an instance."
+        },
+        {
+          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
+          "en": "An instance is a scene file that holds no data."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
+          "en": "Choose the option that matches the scenario’s stated need."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_04_complete",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط صنف `InventoryItem` يضم `item_name` و`quantity` ودالة `describe`.",
+        "en": "Complete a short sketch or sequence that shows: A sketch of an `InventoryItem` class with `item_name`, `quantity`, and `describe`."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط صنف `InventoryItem` يضم `item_name` و`quantity` ودالة `describe`.",
+          "en": "Write the required essential parts: A sketch of an `InventoryItem` class with `item_name`, `quantity`, and `describe`."
+        },
+        {
+          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
+          "en": "Connect the elements in the correct order or relationship."
+        },
+        {
+          "ar": "راجع المخطط باستخدام تعريف الدرس.",
+          "en": "Review the sketch using the lesson definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_05_write",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أنشئ نسختين تجريبيتين من عنصر المخزون، وغيّر كمية واحدة وتحقق أن الأخرى لم تتغير.",
+        "en": "Write a short implementation plan for this application: Create two test inventory-item instances, change one quantity, and verify the other did not change."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
+          "en": "Identify the goal and the elements or nodes you need."
+        },
+        {
+          "ar": "اكتب الخطوات بترتيب التنفيذ.",
+          "en": "Write the steps in implementation order."
+        },
+        {
+          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
+          "en": "State how you will manually verify the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_06_fix",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "اقرأ الاعتقاد الخاطئ: «تعريف صنف `InventoryItem` ينشئ تلقائياً عنصراً في المخزون.» ما التصحيح الأفضل؟",
+        "en": "Read this misconception: “Defining `InventoryItem` automatically creates an inventory item.” What is the best correction?"
+      },
+      "options": [
+        {
+          "ar": "التعريف قالب؛ أنشئ نسخة منفصلة عند الحاجة إلى كائن فعلي.",
+          "en": "The definition is a template; create an instance when you need an actual object."
+        },
+        {
+          "ar": "تعريف صنف `InventoryItem` ينشئ تلقائياً عنصراً في المخزون.",
+          "en": "Defining `InventoryItem` automatically creates an inventory item."
+        },
+        {
+          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
+          "en": "An instance is a scene file that holds no data."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
+          "en": "Distinguish the correct definition from the mistaken assumption."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_07_apply",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أنشئ نسختين تجريبيتين من عنصر المخزون، وغيّر كمية واحدة وتحقق أن الأخرى لم تتغير. لا يُفحص إعداد المحرر تلقائياً.",
+        "en": "Apply the concept manually in a test project: Create two test inventory-item instances, change one quantity, and verify the other did not change. Editor setup is not automatically checked."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
+          "en": "Create the smallest example that demonstrates the idea."
+        },
+        {
+          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
+          "en": "Check the relevant names and settings inside Godot."
+        },
+        {
+          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
+          "en": "Run the experiment if possible and record what you observe."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_08_compare",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ الصنف هو وصف مشترك، أما النسخة فلها قيم خصائصها الخاصة.",
+        "en": "What is the difference between the concepts in this lesson? The class is a shared description, while an instance has its own property values."
+      },
+      "options": [
+        {
+          "ar": "الصنف هو وصف مشترك، أما النسخة فلها قيم خصائصها الخاصة.",
+          "en": "The class is a shared description, while an instance has its own property values."
+        },
+        {
+          "ar": "الصنف يصف الهيكل والسلوك ولا ينشئ نسخة لمجرد تعريفه.",
+          "en": "A class describes structure and behavior; defining it does not create an instance."
+        },
+        {
+          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
+          "en": "An instance is a scene file that holds no data."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
+          "en": "Compare each part’s role, not just its name."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_09_debug",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "راجع الحالة المعيبة: مخطط يضع كمية كل العناصر في قيمة مشتركة واحدة داخل تعريف الصنف. اكتب طريقة تشخيصها وإصلاحها.",
+        "en": "Review this flawed setup: A sketch that stores every item’s quantity in one shared value in the class definition. Write how you would diagnose and fix it."
+      },
+      "steps": [
+        {
+          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
+          "en": "Identify the incorrect element or relationship."
+        },
+        {
+          "ar": "قارنها بما يتطلبه المفهوم.",
+          "en": "Compare it with what the concept requires."
+        },
+        {
+          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
+          "en": "Write a correction and a manual verification step."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_23_scripts_as_classes_10_apply",
+      "lessonId": "lesson_23_scripts_as_classes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: اربط صنف العنصر بدالة تصف بياناته، ثم وضّح كيف ينشئ نظام المخزون أكثر من نسخة.",
+        "en": "Design an application that combines this concept with an earlier idea: Connect the item class to a function that describes its data, then show how inventory can create multiple instances."
+      },
+      "steps": [
+        {
+          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
+          "en": "Choose a clear purpose for the integrated example."
+        },
+        {
+          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
+          "en": "Define the responsibility of each node, class, or part."
+        },
+        {
+          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
+          "en": "Sketch the data or event flow, then self-review it."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

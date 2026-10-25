@@ -16,8 +16,8 @@ import '../screens/lesson/lesson_screen.dart';
 import '../screens/not_found_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/review/review_screen.dart';
-import '../screens/settings/desktop_lsp_diagnostics_flutter_dart.dart';
 import '../screens/settings/settings_screen.dart';
+import '../screens/settings/engine_diagnostics_screen.dart';
 import '../screens/syntax_reference/syntax_reference_screen.dart';
 import '../screens/workspace/workspace_screen.dart';
 import '../screens/workspace/workspace_search_screen.dart';
@@ -75,8 +75,10 @@ GoRouter createAppRouter({
             builder: (context, state) => const SettingsScreen(),
           ),
           GoRoute(
-            path: AppRoutes.lspDiagnostics,
-            builder: (context, state) => const DesktopLspDiagnosticsScreen(),
+            path: AppRoutes.engineDiagnostics,
+            builder: (context, state) => EngineDiagnosticsScreen(
+              repository: dependencies.services<WorkspaceRepository>(),
+            ),
           ),
           GoRoute(
             path: AppRoutes.syntaxReference,
@@ -92,7 +94,9 @@ GoRouter createAppRouter({
           ),
           GoRoute(
             path: AppRoutes.workspaceSearch,
-            builder: (context, state) => const WorkspaceSearchScreen(),
+            builder: (context, state) => WorkspaceSearchScreen(
+              repository: dependencies.services<WorkspaceRepository>(),
+            ),
           ),
           GoRoute(
             path: AppRoutes.badges,
@@ -156,7 +160,7 @@ bool _isValidId(String id) => RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(id);
 
 String _activeNavigationRoute(String path) {
   if (path == AppRoutes.root) return AppRoutes.root;
-  if (path == AppRoutes.settings || path == AppRoutes.lspDiagnostics) {
+  if (path == AppRoutes.settings || path == AppRoutes.engineDiagnostics) {
     return AppRoutes.settings;
   }
   if (path == AppRoutes.learningPath || path.startsWith('/lesson')) {

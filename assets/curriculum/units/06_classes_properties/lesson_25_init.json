@@ -1,0 +1,385 @@
+{
+  "id": "lesson_25_init",
+  "unitId": "unit_06_classes_properties",
+  "title": {
+    "ar": "تهيئة الكائنات",
+    "en": "Initializing Objects"
+  },
+  "objective": {
+    "ar": "استخدم `_init` لضبط بيانات النسخة عند إنشائها.",
+    "en": "Use `_init` to set instance data when it is created."
+  },
+  "estimatedMinutes": 10,
+  "order": 2,
+  "documentation": {
+    "ar": "يُستدعى `_init()` عند إنشاء نسخة من الصنف. استخدم معاملاته لتهيئة خصائصها. لا تخلط بين إنشاء كائن وبين جاهزية عقدة داخل شجرة المشهد؛ فالعمل المعتمد على الأبناء يناسب مرحلة الجاهزية.",
+    "en": "`_init()` runs when an instance of a class is created. Use its arguments to initialize properties. Do not confuse object creation with a node becoming ready in the scene tree; work that depends on children belongs at the ready stage."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الأصناف في GDScript",
+        "en": "Classes in GDScript"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+    },
+    {
+      "title": {
+        "ar": "دوال دورة حياة العقدة",
+        "en": "Node lifecycle callbacks"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/overridable_functions.html"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## اضبط الحالة منذ البداية\n\nيساعد `_init()` على جعل متطلبات إنشاء الكائن صريحة. استقبل البيانات المطلوبة ثم خزّنها في خصائص النسخة.\n\n```gdscript\nextends RefCounted\nclass_name Potion\n\nvar label: String\nvar healing: int\n\nfunc _init(item_label: String, amount: int):\n    label = item_label\n    healing = amount\n```\n\nلا تجعل المُهيئ يعتمد على عقد أبناء موجودة في شجرة المشهد؛ استخدم دورة حياة العقدة عندما تحتاج إلى تلك البنية.",
+    "en": "## Set state from the start\n\n`_init()` makes an object’s creation requirements explicit. Receive the required data and store it in instance properties.\n\n```gdscript\nextends RefCounted\nclass_name Potion\n\nvar label: String\nvar healing: int\n\nfunc _init(item_label: String, amount: int):\n    label = item_label\n    healing = amount\n```\n\nDo not make the initializer depend on child nodes being in the scene tree; use the node lifecycle when you need that structure."
+  },
+  "exercises": [
+    {
+      "id": "ex_lesson_25_init_01_predict",
+      "lessonId": "lesson_25_init",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع النتيجة في المثال: عند إنشاء النسخة يُستدعى `_init` وتُخزّن القيم التي مررها المنشئ في خصائصها.",
+        "en": "Predict the result in the example: When an instance is created, `_init` runs and stores the supplied values in its properties."
+      },
+      "options": [
+        {
+          "ar": "عند إنشاء النسخة يُستدعى `_init` وتُخزّن القيم التي مررها المنشئ في خصائصها.",
+          "en": "When an instance is created, `_init` runs and stores the supplied values in its properties."
+        },
+        {
+          "ar": "تهيئة الكائن تحصل عند الإنشاء، بينما `_ready` تخص جاهزية العقدة داخل شجرة المشهد.",
+          "en": "Object initialization happens at creation, while `_ready` concerns a node becoming ready in the scene tree."
+        },
+        {
+          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
+          "en": "`_init` removes a node from the scene tree."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
+          "en": "Trace what happens first, then the final result."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_25_init_02_identify",
+      "lessonId": "lesson_25_init",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «تهيئة الكائنات»؟",
+        "en": "Which statement accurately identifies the core concept in “Initializing Objects”?"
+      },
+      "options": [
+        {
+          "ar": "`_init()` مهيئ يُستدعى عند إنشاء نسخة ويمكنه استقبال معاملات لازمة للحالة الأولية.",
+          "en": "`_init()` is an initializer called when an instance is created and can receive arguments needed for its initial state."
+        },
+        {
+          "ar": "تهيئة الكائن تحصل عند الإنشاء، بينما `_ready` تخص جاهزية العقدة داخل شجرة المشهد.",
+          "en": "Object initialization happens at creation, while `_ready` concerns a node becoming ready in the scene tree."
+        },
+        {
+          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
+          "en": "`_init` removes a node from the scene tree."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
+          "en": "Look for the role of the key terms in the example."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_25_init_03_choose",
+      "lessonId": "lesson_25_init",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي قرار تصميم مناسب للحالة التالية؟ اجعل اسم الجرعة ومقدار العلاج معاملين مطلوبين عند إنشاء `Potion`.",
+        "en": "Which design choice fits this situation? Require a potion’s label and healing amount when creating `Potion`."
+      },
+      "options": [
+        {
+          "ar": "اجعل اسم الجرعة ومقدار العلاج معاملين مطلوبين عند إنشاء `Potion`.",
+          "en": "Require a potion’s label and healing amount when creating `Potion`."
+        },
+        {
+          "ar": "تهيئة الكائن تحصل عند الإنشاء، بينما `_ready` تخص جاهزية العقدة داخل شجرة المشهد.",
+          "en": "Object initialization happens at creation, while `_ready` concerns a node becoming ready in the scene tree."
+        },
+        {
+          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
+          "en": "`_init` removes a node from the scene tree."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
+          "en": "Choose the option that matches the scenario’s stated need."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_25_init_04_complete",
+      "lessonId": "lesson_25_init",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: قائمة بالمعاملات المطلوبة لتهيئة جرعة ثم خاصية تخزن كل قيمة.",
+        "en": "Complete a short sketch or sequence that shows: A list of required initializer arguments for a potion and a property to store each value."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الأجزاء الأساسية المطلوبة: قائمة بالمعاملات المطلوبة لتهيئة جرعة ثم خاصية تخزن كل قيمة.",
+          "en": "Write the required essential parts: A list of required initializer arguments for a potion and a property to store each value."
+        },
+        {
+          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
+          "en": "Connect the elements in the correct order or relationship."
+        },
+        {
+          "ar": "راجع المخطط باستخدام تعريف الدرس.",
+          "en": "Review the sketch using the lesson definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_25_init_05_write",
+      "lessonId": "lesson_25_init",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أنشئ كائناً تجريبياً بقيمتين مختلفتين، ثم تحقق من أن خصائصه بدأت بالقيم الممررة.",
+        "en": "Write a short implementation plan for this application: Create a test object with two values and verify its properties start with the supplied values."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
+          "en": "Identify the goal and the elements or nodes you need."
+        },
+        {
+          "ar": "اكتب الخطوات بترتيب التنفيذ.",
+          "en": "Write the steps in implementation order."
+        },
+        {
+          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
+          "en": "State how you will manually verify the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_25_init_06_fix",
+      "lessonId": "lesson_25_init",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "اقرأ الاعتقاد الخاطئ: «`_init` تنتظر دائماً حتى تصبح كل عقد الأبناء جاهزة.» ما التصحيح الأفضل؟",
+        "en": "Read this misconception: “`_init` always waits until all child nodes are ready.” What is the best correction?"
+      },
+      "options": [
+        {
+          "ar": "استخدم `_init` للحالة الأولية للكائن، واستخدم `_ready` للعمل الذي يتطلب جاهزية أبناء العقدة.",
+          "en": "Use `_init` for an object’s initial state and `_ready` for work that requires ready child nodes."
+        },
+        {
+          "ar": "`_init` تنتظر دائماً حتى تصبح كل عقد الأبناء جاهزة.",
+          "en": "`_init` always waits until all child nodes are ready."
+        },
+        {
+          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
+          "en": "`_init` removes a node from the scene tree."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
+          "en": "Distinguish the correct definition from the mistaken assumption."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_25_init_07_apply",
+      "lessonId": "lesson_25_init",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أنشئ كائناً تجريبياً بقيمتين مختلفتين، ثم تحقق من أن خصائصه بدأت بالقيم الممررة. لا يُفحص إعداد المحرر تلقائياً.",
+        "en": "Apply the concept manually in a test project: Create a test object with two values and verify its properties start with the supplied values. Editor setup is not automatically checked."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
+          "en": "Create the smallest example that demonstrates the idea."
+        },
+        {
+          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
+          "en": "Check the relevant names and settings inside Godot."
+        },
+        {
+          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
+          "en": "Run the experiment if possible and record what you observe."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_25_init_08_compare",
+      "lessonId": "lesson_25_init",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `_init` تُستدعى عند إنشاء النسخة؛ `_ready` تُستدعى ضمن دورة حياة العقدة بعد الجاهزية.",
+        "en": "What is the difference between the concepts in this lesson? `_init` runs when an instance is created; `_ready` runs in the node lifecycle after readiness."
+      },
+      "options": [
+        {
+          "ar": "`_init` تُستدعى عند إنشاء النسخة؛ `_ready` تُستدعى ضمن دورة حياة العقدة بعد الجاهزية.",
+          "en": "`_init` runs when an instance is created; `_ready` runs in the node lifecycle after readiness."
+        },
+        {
+          "ar": "تهيئة الكائن تحصل عند الإنشاء، بينما `_ready` تخص جاهزية العقدة داخل شجرة المشهد.",
+          "en": "Object initialization happens at creation, while `_ready` concerns a node becoming ready in the scene tree."
+        },
+        {
+          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
+          "en": "`_init` removes a node from the scene tree."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
+          "en": "Compare each part’s role, not just its name."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_25_init_09_debug",
+      "lessonId": "lesson_25_init",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "راجع الحالة المعيبة: مهيئ لا يأخذ قيمة العلاج، ثم يعتمد الكود على أن القيمة ستُملأ تلقائياً. اكتب طريقة تشخيصها وإصلاحها.",
+        "en": "Review this flawed setup: An initializer that accepts no healing amount while the code assumes it will be filled automatically. Write how you would diagnose and fix it."
+      },
+      "steps": [
+        {
+          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
+          "en": "Identify the incorrect element or relationship."
+        },
+        {
+          "ar": "قارنها بما يتطلبه المفهوم.",
+          "en": "Compare it with what the concept requires."
+        },
+        {
+          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
+          "en": "Write a correction and a manual verification step."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_25_init_10_apply",
+      "lessonId": "lesson_25_init",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: مرر بيانات الإنشاء إلى `_init` ثم استخدم دالة كائن لإظهار ملخص الحالة الأولية.",
+        "en": "Design an application that combines this concept with an earlier idea: Pass creation data to `_init`, then use an object function to display a summary of initial state."
+      },
+      "steps": [
+        {
+          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
+          "en": "Choose a clear purpose for the integrated example."
+        },
+        {
+          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
+          "en": "Define the responsibility of each node, class, or part."
+        },
+        {
+          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
+          "en": "Sketch the data or event flow, then self-review it."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

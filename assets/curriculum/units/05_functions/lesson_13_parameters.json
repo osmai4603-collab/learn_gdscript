@@ -1,63 +1,358 @@
 {
   "id": "lesson_13_parameters",
   "unitId": "unit_05_functions",
-  "title": {"ar": "المعاملات", "en": "Parameters"},
-  "objective": {"ar": "مرّر قيماً إلى الدالة لتخصيص عملها.", "en": "Pass values to a function to customize its behavior."},
+  "title": {
+    "ar": "المعاملات",
+    "en": "Parameters"
+  },
+  "objective": {
+    "ar": "مرّر قيماً إلى الدالة لتخصيص عملها.",
+    "en": "Pass values to a function to customize its behavior."
+  },
   "estimatedMinutes": 7,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## مرّر بيانات إلى الدالة\n\nتستقبل الدالة قيماً عبر معاملات تكتب داخل تعريفها. عند الاستدعاء، مرّر الوسيط المناسب لكل معامل:\n\n```gdscript\nfunc greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Ali\")\ngreet(\"Sara\")\n```\n\nيمكن إعطاء المعامل قيمة افتراضية، فتُستخدم إذا لم تمرر وسيطاً له: `func greet(name = \"friend\"):`.",
-    "en": "## Pass data to a function\n\nA function receives values through parameters listed in its definition. When calling it, provide an argument for each parameter:\n\n```gdscript\nfunc greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Ali\")\ngreet(\"Sara\")\n```\n\nA parameter can have a default value, used when no argument is provided: `func greet(name = \"friend\"):`."
+    "ar": "## مرّر بيانات إلى الدالة\n\nتستقبل الدالة قيماً عبر معاملات في تعريفها. مرّر وسيطاً مناسباً لكل معامل وبالترتيب نفسه. عند وجود قيمة شائعة، يمكن كتابة قيمة افتراضية للمعامل كي تستخدم إذا لم يمرر المستدعي وسيطاً.",
+    "en": "## Pass data to a function\n\nA function receives values through parameters in its definition. Pass an appropriate argument for each parameter in the same order. When there is a common value, give the parameter a default so it is used when the caller omits an argument."
   },
   "exampleCode": "func greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Ali\")\ngreet(\"Sara\")",
   "exercises": [
     {
+      "id": "ex_lesson_13_parameters_added_3",
+      "lessonId": "lesson_13_parameters",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي وصف يطابق مفهوم «المعاملات»؟",
+        "en": "Which description matches “Parameters”?"
+      },
+      "options": [
+        {
+          "ar": "الدالة تجمع تعليمات قابلة لإعادة الاستخدام.",
+          "en": "A function groups reusable statements."
+        },
+        {
+          "ar": "هو اسم آخر لمخرجات الطباعة.",
+          "en": "It is another name for printed output."
+        },
+        {
+          "ar": "لا يغير طريقة تنظيم البرنامج.",
+          "en": "It does not affect program organization."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
+          "en": "Look for the role or benefit explained in the lesson."
+        },
+        {
+          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
+          "en": "Review the concept definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_13_parameters_added_4",
+      "lessonId": "lesson_13_parameters",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما فائدة المعاملات؟",
+        "en": "What is one benefit of Parameters?"
+      },
+      "options": [
+        {
+          "ar": "الاسم والاستدعاء يجعلان إعادة استخدام التعليمات واضحة.",
+          "en": "A name and call make statement reuse clear."
+        },
+        {
+          "ar": "يجعل كل تفاصيل البرنامج مخفية دائماً.",
+          "en": "It always hides every program detail."
+        },
+        {
+          "ar": "يلغي الحاجة إلى فهم بنية البرنامج.",
+          "en": "It removes the need to understand program structure."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
+          "en": "Look for the role or benefit explained in the lesson."
+        },
+        {
+          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
+          "en": "Review the concept definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_13_parameters_trace",
+      "lessonId": "lesson_13_parameters",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل تتبع `greet(name)` عند استدعائها بـ `Mia`، مع تمييز المعامل عن الوسيط.",
+        "en": "Complete a trace of `greet(name)` called with `Mia`, identifying the parameter and argument."
+      },
+      "steps": [
+        {
+          "ar": "ضع خطاً تحت المعامل في التعريف.",
+          "en": "Underline the parameter in the definition."
+        },
+        {
+          "ar": "ضع دائرة حول الوسيط في الاستدعاء.",
+          "en": "Circle the argument in the call."
+        },
+        {
+          "ar": "اكتب النص الذي تطبعه الدالة.",
+          "en": "Write the text printed by the function."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_13_parameters_added_code_1",
+      "lessonId": "lesson_13_parameters",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل الدالة لتطبع `n + 5` عند استدعائها بـ 7.",
+        "en": "Complete the function to print `n + 5` when called with 7."
+      },
+      "starterCode": "func add_five(n):\n    print(n ___ 5)\n\nadd_five(7)",
+      "solutionCode": "func add_five(n):\n    print(n + 5)\n\nadd_five(7)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "12"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 3
+    },
+    {
       "id": "ex_13_double_parameter",
       "lessonId": "lesson_13_parameters",
       "type": "writeCode",
-      "prompt": {"ar": "عرّف `double(n)` لتطبع ضعف العدد، ثم استدعها مع `5`.", "en": "Define `double(n)` to print twice its number, then call it with `5`."},
+      "prompt": {
+        "ar": "عرّف `double(n)` لتطبع ضعف العدد، ثم استدعها مع `5`.",
+        "en": "Define `double(n)` to print twice its number, then call it with `5`."
+      },
       "starterCode": "",
       "solutionCode": "func double(n):\n    print(n * 2)\n\ndouble(5)",
       "testCases": [
-        {"description": {"ar": "تطبع الدالة ضعف الوسيط.", "en": "The function prints twice its argument."}, "expectedOutput": "10"}
+        {
+          "description": {
+            "ar": "تطبع الدالة ضعف الوسيط.",
+            "en": "The function prints twice its argument."
+          },
+          "expectedOutput": "10"
+        }
       ],
       "hints": [
-        {"ar": "اكتب `n` بين قوسي تعريف الدالة.", "en": "Put `n` in the function definition's parentheses."},
-        {"ar": "اضرب `n` في 2 داخل جسم الدالة.", "en": "Multiply `n` by 2 inside the function body."}
+        {
+          "ar": "اكتب `n` بين قوسي تعريف الدالة.",
+          "en": "Put `n` in the function definition's parentheses."
+        },
+        {
+          "ar": "اضرب `n` في 2 داخل جسم الدالة.",
+          "en": "Multiply `n` by 2 inside the function body."
+        }
       ],
-      "order": 0
+      "order": 4
     },
     {
       "id": "ex_13_fix_parameter",
       "lessonId": "lesson_13_parameters",
       "type": "fixBug",
-      "prompt": {"ar": "أصلح الدالة كي تستخدم المعامل `name` وتُستدعى مع `Mia`.", "en": "Fix the function so it uses the `name` parameter and is called with `Mia`."},
+      "prompt": {
+        "ar": "أصلح الدالة كي تستخدم المعامل `name` وتُستدعى مع `Mia`.",
+        "en": "Fix the function so it uses the `name` parameter and is called with `Mia`."
+      },
       "starterCode": "func greet(name):\n    print(\"Hello!\")\n\ngreet()",
       "solutionCode": "func greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Mia\")",
       "testCases": [
-        {"description": {"ar": "تظهر القيمة الممررة إلى المعامل.", "en": "The value passed to the parameter appears."}, "expectedOutput": "Hello, Mia!"}
+        {
+          "description": {
+            "ar": "تظهر القيمة الممررة إلى المعامل.",
+            "en": "The value passed to the parameter appears."
+          },
+          "expectedOutput": "Hello, Mia!"
+        }
       ],
       "hints": [
-        {"ar": "أضف `name` إلى رسالة الترحيب.", "en": "Add `name` to the greeting message."},
-        {"ar": "مرّر نصاً إلى الدالة عند استدعائها.", "en": "Pass a string to the function when calling it."}
+        {
+          "ar": "أضف `name` إلى رسالة الترحيب.",
+          "en": "Add `name` to the greeting message."
+        },
+        {
+          "ar": "مرّر نصاً إلى الدالة عند استدعائها.",
+          "en": "Pass a string to the function when calling it."
+        }
       ],
-      "order": 1
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_13_parameters_apply",
+      "lessonId": "lesson_13_parameters",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "خطط لدالة لها معامل مطلوب وآخر افتراضي، واكتب استدعاءين يوضحان الحالتين.",
+        "en": "Plan a function with one required and one default parameter, and write two calls showing both cases."
+      },
+      "steps": [
+        {
+          "ar": "اختر اسماً للمعاملين.",
+          "en": "Choose names for the parameters."
+        },
+        {
+          "ar": "حدد قيمة افتراضية مناسبة للثاني.",
+          "en": "Choose a suitable default for the second."
+        },
+        {
+          "ar": "اكتب استدعاءً يمرر القيمة وآخر يستخدم الافتراضي.",
+          "en": "Write one call supplying the value and one using the default."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 6
     },
     {
       "id": "ex_13_default_repeat",
       "lessonId": "lesson_13_parameters",
       "type": "writeCode",
-      "prompt": {"ar": "عرّف `repeat_text(text, times = 2)` لتطبع النص مرتين عند استدعائها دون `times`.", "en": "Define `repeat_text(text, times = 2)` so it prints the text twice when called without `times`."},
+      "prompt": {
+        "ar": "عرّف `repeat_text(text, times = 2)` لتطبع النص مرتين عند استدعائها دون `times`.",
+        "en": "Define `repeat_text(text, times = 2)` so it prints the text twice when called without `times`."
+      },
       "starterCode": "",
       "solutionCode": "func repeat_text(text, times = 2):\n    for i in range(times):\n        print(text)\n\nrepeat_text(\"Echo\")",
       "testCases": [
-        {"description": {"ar": "تُستخدم القيمة الافتراضية للمعامل الثاني.", "en": "The default value is used for the second parameter."}, "expectedOutput": "Echo\nEcho"}
+        {
+          "description": {
+            "ar": "تُستخدم القيمة الافتراضية للمعامل الثاني.",
+            "en": "The default value is used for the second parameter."
+          },
+          "expectedOutput": "Echo\nEcho"
+        }
       ],
       "hints": [
-        {"ar": "اكتب `= 2` بعد اسم المعامل `times`.", "en": "Write `= 2` after the parameter name `times`."},
-        {"ar": "كرّر الطباعة باستخدام حلقة على `times`.", "en": "Repeat the print statement with a loop over `times`."}
+        {
+          "ar": "اكتب `= 2` بعد اسم المعامل `times`.",
+          "en": "Write `= 2` after the parameter name `times`."
+        },
+        {
+          "ar": "كرّر الطباعة باستخدام حلقة على `times`.",
+          "en": "Repeat the print statement with a loop over `times`."
+        }
       ],
-      "order": 2
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_13_parameters_added_code_2",
+      "lessonId": "lesson_13_parameters",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `say_ready()` لتطبع Ready واستدعها مرة واحدة.",
+        "en": "Define `say_ready()` to print Ready and call it once."
+      },
+      "starterCode": "",
+      "solutionCode": "func say_ready():\n    print(\"Ready\")\n\nsay_ready()",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "Ready"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_13_parameters_added_code_3",
+      "lessonId": "lesson_13_parameters",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `announce(name)` لتطبع Hello متبوعة بالاسم، واختبر Ava.",
+        "en": "Define `announce(name)` to print Hello followed by the name, and test Ava."
+      },
+      "starterCode": "",
+      "solutionCode": "func announce(name):\n    print(\"Hello, \" + name)\n\nannounce(\"Ava\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "Hello, Ava"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 9
+    }
+  ],
+  "documentation": {
+    "ar": "المعامل اسم في تعريف الدالة، والوسيط قيمة تمررها عند الاستدعاء. طابق ترتيب الوسائط مع المعاملات، واستخدم قيمة افتراضية عند وجود اختيار شائع.",
+    "en": "A parameter is a name in a function definition, and an argument is a value supplied at a call. Match argument order to parameters, and use a default when there is a common choice."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ]
 }

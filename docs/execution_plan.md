@@ -2,6 +2,12 @@
 
 ## (Master Execution Plan — Learn GDScript App)
 
+> **تحديث معماري:** انتقل التطبيق إلى `gdscript_engine` مباشرةً، وأزيل مسار
+> خادم اللغة من التنفيذ. الأقسام التالية التي تصف LSP أو `gdscript_lsp` تمثل
+> افتراضات وخطة تاريخية وليست وصفاً للبنية الحالية؛ راجع
+> [خطة الانتقال المباشر](./direct_gdscript_engine_migration_plan.md) للتصميم
+> والحالة المعتمدين.
+
 **تاريخ الإعداد:** 21 أكتوبر 2026
 **تنفيذ الكود:** [`gdscript_engine`](file:///home/osm/flutter_projects/gdscript_engine/) — محرك خارجي مستقل
 **خدمات المحرر:** [`gdscript_lsp`](file:///home/osm/flutter_projects/gdscript_lsp/) — خادم لغة عبر LSP

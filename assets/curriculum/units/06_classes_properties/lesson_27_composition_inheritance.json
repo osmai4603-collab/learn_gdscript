@@ -1,0 +1,378 @@
+{
+  "id": "lesson_27_composition_inheritance",
+  "unitId": "unit_06_classes_properties",
+  "title": {
+    "ar": "التركيب والوراثة البسيطة",
+    "en": "Composition and Simple Inheritance"
+  },
+  "objective": {
+    "ar": "اختر بين تركيب كائنات متعاونة ووراثة صنف متخصص وفق العلاقة المطلوبة.",
+    "en": "Choose between composing cooperating objects and inheriting a specialized class based on the relationship."
+  },
+  "estimatedMinutes": 10,
+  "order": 4,
+  "documentation": {
+    "ar": "استخدم الوراثة عندما يكون الصنف الجديد نوعاً متخصصاً من الأب ويستفيد من واجهته. استخدم التركيب عندما يملك الكائن أجزاء مستقلة أو يتعاون معها. التركيب مناسب غالباً لعلاقة «يملك/يستخدم».",
+    "en": "Use inheritance when a new class is a specialized kind of its parent and benefits from its interface. Use composition when an object has or collaborates with independent parts. Composition often fits a “has/uses” relationship."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الأصناف في GDScript",
+        "en": "Classes in GDScript"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## «نوع من» أم «يملك»؟\n\nترث شخصية متخصصة من صنف أساسي إذا كانت بالفعل نوعاً منه. أما ملف اللاعب الذي يملك مخزوناً، فيمكنه الاحتفاظ بمرجع إلى مكوّن المخزون.\n\n```gdscript\nextends RefCounted\nclass_name PlayerProfile\n\nvar inventory\nvar display_name = \"\"\n\nfunc describe():\n    return display_name\n```\n\nتجنب سلاسل الوراثة الطويلة لمجرد مشاركة أسطر قليلة؛ اختر العلاقة التي تمثل النموذج الحقيقي.",
+    "en": "## “Is a kind of” or “has a”? \n\nA specialized character can inherit from a base class when it truly is a kind of that class. A player profile that has an inventory can instead keep a reference to an inventory component.\n\n```gdscript\nextends RefCounted\nclass_name PlayerProfile\n\nvar inventory\nvar display_name = \"\"\n\nfunc describe():\n    return display_name\n```\n\nAvoid long inheritance chains just to share a few lines; choose the relationship that represents the real model."
+  },
+  "exercises": [
+    {
+      "id": "ex_lesson_27_composition_inheritance_01_predict",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع النتيجة في المثال: يمثل `PlayerProfile` ملفاً يملك مكوّناً للمخزون، ولا يلزم أن يكون نوعاً فرعياً من المخزون.",
+        "en": "Predict the result in the example: `PlayerProfile` represents a profile that has an inventory component; it does not need to be a subtype of inventory."
+      },
+      "options": [
+        {
+          "ar": "يمثل `PlayerProfile` ملفاً يملك مكوّناً للمخزون، ولا يلزم أن يكون نوعاً فرعياً من المخزون.",
+          "en": "`PlayerProfile` represents a profile that has an inventory component; it does not need to be a subtype of inventory."
+        },
+        {
+          "ar": "اسأل هل العلاقة «هو نوع من» أم «يملك/يستخدم» قبل اختيار الوراثة أو التركيب.",
+          "en": "Ask whether the relation is “is a kind of” or “has/uses” before choosing inheritance or composition."
+        },
+        {
+          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
+          "en": "Always use inheritance because it is simpler than any other relationship."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
+          "en": "Trace what happens first, then the final result."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_02_identify",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «التركيب والوراثة البسيطة»؟",
+        "en": "Which statement accurately identifies the core concept in “Composition and Simple Inheritance”?"
+      },
+      "options": [
+        {
+          "ar": "الوراثة علاقة «نوع متخصص من»، أما التركيب فيجمع أجزاء أو مراجع متعاونة.",
+          "en": "Inheritance is a “specialized kind of” relationship, while composition combines cooperating parts or references."
+        },
+        {
+          "ar": "اسأل هل العلاقة «هو نوع من» أم «يملك/يستخدم» قبل اختيار الوراثة أو التركيب.",
+          "en": "Ask whether the relation is “is a kind of” or “has/uses” before choosing inheritance or composition."
+        },
+        {
+          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
+          "en": "Always use inheritance because it is simpler than any other relationship."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
+          "en": "Look for the role of the key terms in the example."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_03_choose",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي قرار تصميم مناسب للحالة التالية؟ استخدم التركيب عندما يملك ملف اللاعب مخزوناً مستقلاً يمكن استبداله أو تغييره.",
+        "en": "Which design choice fits this situation? Use composition when a player profile has an independent inventory that can be replaced or changed."
+      },
+      "options": [
+        {
+          "ar": "استخدم التركيب عندما يملك ملف اللاعب مخزوناً مستقلاً يمكن استبداله أو تغييره.",
+          "en": "Use composition when a player profile has an independent inventory that can be replaced or changed."
+        },
+        {
+          "ar": "اسأل هل العلاقة «هو نوع من» أم «يملك/يستخدم» قبل اختيار الوراثة أو التركيب.",
+          "en": "Ask whether the relation is “is a kind of” or “has/uses” before choosing inheritance or composition."
+        },
+        {
+          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
+          "en": "Always use inheritance because it is simpler than any other relationship."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
+          "en": "Choose the option that matches the scenario’s stated need."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_04_complete",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط صنف ملف لاعب يشير إلى مخزون مستقل ويعرض اسماً.",
+        "en": "Complete a short sketch or sequence that shows: A player-profile class sketch that references an independent inventory and exposes a name."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط صنف ملف لاعب يشير إلى مخزون مستقل ويعرض اسماً.",
+          "en": "Write the required essential parts: A player-profile class sketch that references an independent inventory and exposes a name."
+        },
+        {
+          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
+          "en": "Connect the elements in the correct order or relationship."
+        },
+        {
+          "ar": "راجع المخطط باستخدام تعريف الدرس.",
+          "en": "Review the sketch using the lesson definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_05_write",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: اختر كائناً من مشروعك وحدد مكوّناً يمكن تركيبه بدلاً من توسيع سلسلة الوراثة.",
+        "en": "Write a short implementation plan for this application: Choose an object from your project and identify a component to compose instead of extending an inheritance chain."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
+          "en": "Identify the goal and the elements or nodes you need."
+        },
+        {
+          "ar": "اكتب الخطوات بترتيب التنفيذ.",
+          "en": "Write the steps in implementation order."
+        },
+        {
+          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
+          "en": "State how you will manually verify the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_06_fix",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "اقرأ الاعتقاد الخاطئ: «كل إعادة استخدام للكود تستلزم وراثة مباشرة.» ما التصحيح الأفضل؟",
+        "en": "Read this misconception: “Every instance of code reuse requires direct inheritance.” What is the best correction?"
+      },
+      "options": [
+        {
+          "ar": "يمكن تركيب مكوّن متعاون؛ استخدم الوراثة فقط عندما يكون الصنف حقيقةً نوعاً متخصصاً من الأب.",
+          "en": "Compose a cooperating component; use inheritance only when the class truly is a specialized kind of its parent."
+        },
+        {
+          "ar": "كل إعادة استخدام للكود تستلزم وراثة مباشرة.",
+          "en": "Every instance of code reuse requires direct inheritance."
+        },
+        {
+          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
+          "en": "Always use inheritance because it is simpler than any other relationship."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
+          "en": "Distinguish the correct definition from the mistaken assumption."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_07_apply",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: اختر كائناً من مشروعك وحدد مكوّناً يمكن تركيبه بدلاً من توسيع سلسلة الوراثة. لا يُفحص إعداد المحرر تلقائياً.",
+        "en": "Apply the concept manually in a test project: Choose an object from your project and identify a component to compose instead of extending an inheritance chain. Editor setup is not automatically checked."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
+          "en": "Create the smallest example that demonstrates the idea."
+        },
+        {
+          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
+          "en": "Check the relevant names and settings inside Godot."
+        },
+        {
+          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
+          "en": "Run the experiment if possible and record what you observe."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_08_compare",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ الوراثة تعبر عن التخصص، والتركيب يعبر عن امتلاك أجزاء أو التعاون معها.",
+        "en": "What is the difference between the concepts in this lesson? Inheritance expresses specialization; composition expresses having or collaborating with parts."
+      },
+      "options": [
+        {
+          "ar": "الوراثة تعبر عن التخصص، والتركيب يعبر عن امتلاك أجزاء أو التعاون معها.",
+          "en": "Inheritance expresses specialization; composition expresses having or collaborating with parts."
+        },
+        {
+          "ar": "اسأل هل العلاقة «هو نوع من» أم «يملك/يستخدم» قبل اختيار الوراثة أو التركيب.",
+          "en": "Ask whether the relation is “is a kind of” or “has/uses” before choosing inheritance or composition."
+        },
+        {
+          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
+          "en": "Always use inheritance because it is simpler than any other relationship."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
+          "en": "Compare each part’s role, not just its name."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_09_debug",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "راجع الحالة المعيبة: سلسلة أصناف عميقة أنشئت فقط لمشاركة دالة مساعدة واحدة. اكتب طريقة تشخيصها وإصلاحها.",
+        "en": "Review this flawed setup: A deep class hierarchy created only to share one helper function. Write how you would diagnose and fix it."
+      },
+      "steps": [
+        {
+          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
+          "en": "Identify the incorrect element or relationship."
+        },
+        {
+          "ar": "قارنها بما يتطلبه المفهوم.",
+          "en": "Compare it with what the concept requires."
+        },
+        {
+          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
+          "en": "Write a correction and a manual verification step."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_27_composition_inheritance_10_apply",
+      "lessonId": "lesson_27_composition_inheritance",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: صمّم علاقة بين صنف أساسي متخصص ومكوّن منفصل، وعلّل لماذا تختلف العلاقتان.",
+        "en": "Design an application that combines this concept with an earlier idea: Design a specialized base-class relationship and a separate component, and explain why the relationships differ."
+      },
+      "steps": [
+        {
+          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
+          "en": "Choose a clear purpose for the integrated example."
+        },
+        {
+          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
+          "en": "Define the responsibility of each node, class, or part."
+        },
+        {
+          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
+          "en": "Sketch the data or event flow, then self-review it."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

@@ -1,63 +1,387 @@
 {
   "id": "lesson_09_for",
   "unitId": "unit_04_loops",
-  "title": {"ar": "حلقة for", "en": "For Loop"},
-  "objective": {"ar": "كرّر مجموعة أوامر عدداً محدداً من المرات.", "en": "Repeat a group of statements a set number of times."},
-  "estimatedMinutes": 7,
+  "title": {
+    "ar": "for وrange",
+    "en": "for and range"
+  },
+  "objective": {
+    "ar": "كرّر كتلة عدداً محدداً من المرات باستخدام `for` و`range()`.",
+    "en": "Repeat a block a fixed number of times with `for` and `range()`."
+  },
+  "estimatedMinutes": 8,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## كرّر باستخدام for\n\nتكرّر حلقة `for` أوامرها لكل قيمة في مجموعة. تنشئ `range()` نطاقاً من الأعداد؛ قيمة النهاية غير مشمولة:\n\n```gdscript\nfor i in range(5):\n    print(i)\n```\n\nيطبع المثال الأعداد من 0 إلى 4. يمكنك تحديد البداية والنهاية والخطوة باستخدام `range(start, end, step)`، مثل `range(2, 11, 2)` للأعداد الزوجية.",
-    "en": "## Repeat with for\n\nA `for` loop repeats its statements for each value in a collection. `range()` creates a sequence of numbers; its end value is excluded:\n\n```gdscript\nfor i in range(5):\n    print(i)\n```\n\nThe example prints 0 through 4. Set the start, end, and step with `range(start, end, step)`, such as `range(2, 11, 2)` for even numbers."
+    "ar": "## for وrange\n\nتكرر `for` كتلة لكل عنصر في تسلسل. تنتج `range(n)` أعداداً تبدأ من صفر وتتوقف قبل `n`، لذلك تحتوي `range(4)` الأعداد 0 إلى 3. يمكن تحديد بداية ونهاية وخطوة. تحقق من حدود النطاق لتجنب تكرار ناقص أو زائد.\n\n### مثال عملي\n\n```gdscript\nfor i in range(3):\n    print(i)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## for and range\n\n`for` repeats a block for each item in a sequence. `range(n)` produces numbers starting at zero and stopping before `n`, so `range(4)` contains 0 through 3. You can specify a start, end, and step. Check the range bounds to avoid too few or too many repetitions.\n\n### Practical example\n\n```gdscript\nfor i in range(3):\n    print(i)\n```\n\nChange one value and run the script to observe its effect."
   },
-  "exampleCode": "for i in range(5):\n    print(i)",
+  "exampleCode": "for i in range(3):\n    print(i)",
+  "documentation": {
+    "ar": "### for وrange\n\nتكرر `for` كتلة لكل عنصر في تسلسل. تنتج `range(n)` أعداداً تبدأ من صفر وتتوقف قبل `n`، لذلك تحتوي `range(4)` الأعداد 0 إلى 3. يمكن تحديد بداية ونهاية وخطوة. تحقق من حدود النطاق لتجنب تكرار ناقص أو زائد.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### for and range\n\n`for` repeats a block for each item in a sequence. `range(n)` produces numbers starting at zero and stopping before `n`, so `range(4)` contains 0 through 3. You can specify a start, end, and step. Check the range bounds to avoid too few or too many repetitions.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
   "exercises": [
     {
-      "id": "ex_09_count_to_ten",
+      "id": "ex_09_for_01",
       "lessonId": "lesson_09_for",
-      "type": "writeCode",
-      "prompt": {"ar": "استخدم `for` لطباعة الأعداد من 1 إلى 10.", "en": "Use `for` to print the numbers from 1 through 10."},
-      "starterCode": "",
-      "solutionCode": "for i in range(1, 11):\n    print(i)",
-      "testCases": [
-        {"description": {"ar": "تظهر الأعداد من 1 حتى 10.", "en": "The numbers from 1 through 10 appear."}, "expectedOutput": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10"}
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "ابدأ النطاق عند 1.", "en": "Start the range at 1."},
-        {"ar": "اجعل نهاية `range()` تساوي 11 لأن النهاية غير مشمولة.", "en": "Set the `range()` end to 11 because the end is excluded."}
-      ],
-      "order": 0
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_09_even_numbers",
+      "id": "ex_09_for_02",
       "lessonId": "lesson_09_for",
-      "type": "writeCode",
-      "prompt": {"ar": "اطبع الأعداد الزوجية من 2 إلى 20 باستخدام خطوة مقدارها 2.", "en": "Print the even numbers from 2 through 20 using a step of 2."},
-      "starterCode": "",
-      "solutionCode": "for i in range(2, 21, 2):\n    print(i)",
-      "testCases": [
-        {"description": {"ar": "تظهر الأعداد الزوجية بالترتيب.", "en": "The even numbers appear in order."}, "expectedOutput": "2\n4\n6\n8\n10\n12\n14\n16\n18\n20"}
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "تحتاج إلى بداية ونهاية وخطوة في `range()`.", "en": "Provide a start, end, and step to `range()`."},
-        {"ar": "استخدم 21 كنهاية كي يظهر العدد 20.", "en": "Use 21 as the end so that 20 is included."}
-      ],
-      "order": 1
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_09_predict_range",
+      "id": "ex_09_for_03",
       "lessonId": "lesson_09_for",
-      "type": "predictOutput",
-      "prompt": {"ar": "اكتب حلقة تطبع القيم التي تمر بها `range(1, 4)`.", "en": "Write a loop that prints the values produced by `range(1, 4)`."},
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_09_for_04",
+      "lessonId": "lesson_09_for",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_09_for_05",
+      "lessonId": "lesson_09_for",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n1\n2`",
+        "en": "Write or complete the example so its output is:\n\n`0\n1\n2`"
+      },
       "starterCode": "",
+      "solutionCode": "for i in range(3):\n    print(i)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "0\n1\n2"
+        }
+      ]
+    },
+    {
+      "id": "ex_09_for_06",
+      "lessonId": "lesson_09_for",
+      "order": 5,
+      "type": "fillBlank",
+      "title": {
+        "ar": "أكمل المثال",
+        "en": "Complete the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`1\n2\n3`",
+        "en": "Write or complete the example so its output is:\n\n`1\n2\n3`"
+      },
+      "starterCode": "for i in range(1, ___):\n    print(i)",
       "solutionCode": "for i in range(1, 4):\n    print(i)",
-      "testCases": [
-        {"description": {"ar": "قيمة النهاية 4 غير مشمولة.", "en": "The end value 4 is excluded."}, "expectedOutput": "1\n2\n3"}
-      ],
       "hints": [
-        {"ar": "استخدم متغير الحلقة `i` داخل `print()`.", "en": "Use the loop variable `i` inside `print()`."},
-        {"ar": "تتوقف الحلقة قبل الوصول إلى 4.", "en": "The loop stops before reaching 4."}
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 2
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "1\n2\n3"
+        }
+      ]
+    },
+    {
+      "id": "ex_09_for_07",
+      "lessonId": "lesson_09_for",
+      "order": 6,
+      "type": "fixBug",
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Hi\nHi`",
+        "en": "Write or complete the example so its output is:\n\n`Hi\nHi`"
+      },
+      "starterCode": "for i in range(2):\n    pront(\"Hi\")",
+      "solutionCode": "for i in range(2):\n    print(\"Hi\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Hi\nHi"
+        }
+      ]
+    },
+    {
+      "id": "ex_09_for_08",
+      "lessonId": "lesson_09_for",
+      "order": 7,
+      "type": "predictOutput",
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`2\n4\n6`",
+        "en": "What output does this example display?\n\n`2\n4\n6`"
+      },
+      "starterCode": "for i in range(2, 7, 2):\n    print(i)",
+      "solutionCode": "for i in range(2, 7, 2):\n    print(i)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "2\n4\n6"
+        }
+      ]
+    },
+    {
+      "id": "ex_09_for_09",
+      "lessonId": "lesson_09_for",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`6`",
+        "en": "Write or complete the example so its output is:\n\n`6`"
+      },
+      "starterCode": "",
+      "solutionCode": "var total = 0\nfor i in range(1, 4):\n    total += i\nprint(total)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "6"
+        }
+      ]
+    },
+    {
+      "id": "ex_09_for_10",
+      "lessonId": "lesson_09_for",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Apple\nPear`",
+        "en": "Write or complete the example so its output is:\n\n`Apple\nPear`"
+      },
+      "starterCode": "",
+      "solutionCode": "for item in [\"Apple\", \"Pear\"]:\n    print(item)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Apple\nPear"
+        }
+      ]
     }
   ]
 }

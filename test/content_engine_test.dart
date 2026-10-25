@@ -1,7 +1,9 @@
+
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:learn_gdscript/data/models/exercise_models.dart';
 import 'package:learn_gdscript/data/models/lesson_models.dart';
 import 'package:learn_gdscript/logic/services/code_runner_service.dart';
 import 'package:learn_gdscript/logic/services/test_runner_service.dart';
@@ -35,6 +37,10 @@ void main() {
         );
       }
       for (final exercise in lesson.exercises) {
+        if (exercise.type == ExerciseType.multipleChoice ||
+            exercise.type == ExerciseType.guidedTask) {
+          continue;
+        }
         final result = await testRunner.runTests(
           userCode: exercise.solutionCode,
           testCases: exercise.testCases,

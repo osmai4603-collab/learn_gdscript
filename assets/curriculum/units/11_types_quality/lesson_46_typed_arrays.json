@@ -1,0 +1,350 @@
+{
+  "id": "lesson_46_typed_arrays",
+  "unitId": "unit_11_types_quality",
+  "title": {
+    "ar": "المصفوفات المعرّفة الأنواع",
+    "en": "Typed Arrays"
+  },
+  "objective": {
+    "ar": "قيّد عناصر المصفوفة بنوع محدد واستخدم عناصرها بوضوح.",
+    "en": "Constrain array elements to a specific type and use them clearly."
+  },
+  "estimatedMinutes": 9,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## اجعل نوع العناصر معروفاً\n\nتقبل المصفوفة العادية أنواعاً مختلفة؛ أما `Array[Type]` فتحدد نوع عناصرها. يساعد ذلك على رفض القيم غير الملائمة ويوضح ما تحتويه القائمة.\n\n```gdscript\nvar scores: Array[int] = [10, 20, 30]\nvar names: Array[String] = [\"Ada\", \"Lin\"]\n```\n\nلا يحدد نوع العناصر حجم المصفوفة أو يجعلها ثابتة. عند الحاجة إلى أنواع متعددة، فكر في صنف بيانات مشترك بدلاً من خلط القيم عشوائياً.",
+    "en": "## Make element types known\n\nA regular array can contain different types; `Array[Type]` specifies the element type. This helps reject unsuitable values and documents what the collection contains.\n\n```gdscript\nvar scores: Array[int] = [10, 20, 30]\nvar names: Array[String] = [\"Ada\", \"Lin\"]\n```\n\nThe element type does not define array length or make it immutable. If several kinds are needed, consider a shared data class instead of mixing values accidentally."
+  },
+  "documentation": {
+    "ar": "تقيّد `Array[Type]` عناصر الحاوية بنوع واحد، مثل `Array[int]`. لا تحدد الصيغة حجم المصفوفة، ويمكن تغيير عناصرها ما دامت متوافقة مع النوع. توفر المصفوفة المعرّفة معلومات أفضل للمحلل عند القراءة والإضافة والتكرار. إذا تطلب التصميم أنواعاً مختلفة، فاستخدم نموذج بيانات واضحاً أو `Variant` عمداً، لا خلطاً عرضياً. تحقّق من البيانات القادمة من ملف أو واجهة قبل إسنادها إلى مصفوفة مقيّدة.",
+    "en": "`Array[Type]` constrains container elements to one type, such as `Array[int]`. It does not specify the array length, and elements can change as long as they match the type. A typed array gives the analyzer better information for reading, appending, and iteration. If a design requires mixed kinds, use a clear data model or intentionally choose `Variant` rather than accidental mixing. Validate data from files or interfaces before assigning it to a constrained array."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الأنواع الساكنة في GDScript",
+        "en": "Static typing in GDScript"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_46_typed_arrays_01",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ماذا يحدد التصريح `Array[int]`؟",
+        "en": "What does the declaration `Array[int]` specify?"
+      },
+      "options": [
+        {
+          "ar": "نوع عناصر المصفوفة",
+          "en": "The array element type"
+        },
+        {
+          "ar": "حداً أقصى دائماً للعناصر",
+          "en": "A permanent maximum length"
+        },
+        {
+          "ar": "ترتيباً عشوائياً للعناصر",
+          "en": "Random ordering"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_02",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن المصفوفات المعرّفة الأنواع. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about المصفوفات المعرّفة الأنواع. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ `Array[int]` فيها قيمتان صحيحتان.",
+          "en": "Create an `Array[int]` with two integer values."
+        },
+        {
+          "ar": "أضف قيمة صحيحة واطبع العناصر بحلقة.",
+          "en": "Append an integer and print the elements in a loop."
+        },
+        {
+          "ar": "جرّب إضافة نص، ثم راجع رفض المحلل وأعد المصفوفة إلى النوع الصحيح.",
+          "en": "Try appending a string, inspect the analyzer rejection, then restore the correct type."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_03",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «score 10» في سياق المصفوفات المعرّفة الأنواع.",
+        "en": "Write code that prints “score 10” as a المصفوفات المعرّفة الأنواع status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"score 10\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score 10"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_04",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «score 10».",
+        "en": "Complete the line so it prints “score 10”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"score 10\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score 10"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_05",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في المصفوفات المعرّفة الأنواع: start ثم «score 10».",
+        "en": "Print two lines showing progress in المصفوفات المعرّفة الأنواع: start, then “score 10”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"score 10\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nscore 10"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_06",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «score 10» تماماً.",
+        "en": "Fix the code so it prints exactly “score 10”."
+      },
+      "starterCode": "print(\"score 10!\")",
+      "solutionCode": "print(\"score 10\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score 10"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_07",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «score 10» ثم done.",
+        "en": "Arrange output to show start, then “score 10”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"score 10\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"score 10\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nscore 10\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_08",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع المصفوفات المعرّفة الأنواع: «score 10».",
+        "en": "Write a program that records a result related to المصفوفات المعرّفة الأنواع: “score 10”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"score 10\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score 10"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_09",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nscore 10",
+        "en": "Write a program that displays this sequence:\nscore 10"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"score 10\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score 10"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_46_typed_arrays_10",
+      "lessonId": "lesson_46_typed_arrays",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «score 10».",
+        "en": "Use a string variable named status and print its value “score 10”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"score 10\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score 10"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

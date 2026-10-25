@@ -1,5 +1,10 @@
 # Engine and LSP integration contract
 
+> **Deprecated:** This document describes the removed LSP architecture. The app
+> now uses `gdscript_engine` directly and performs workspace discovery/search
+> locally. See [the migration plan](./direct_gdscript_engine_migration_plan.md)
+> for the current design and supported editor capabilities.
+
 ## Responsibilities
 
 - `gdscript_engine` runs lesson code and exercises in-process. It does not

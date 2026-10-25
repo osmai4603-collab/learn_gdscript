@@ -1,0 +1,350 @@
+{
+  "id": "lesson_39_resources",
+  "unitId": "unit_09_editor_resources",
+  "title": {
+    "ar": "الموارد Resource",
+    "en": "Resource Basics"
+  },
+  "objective": {
+    "ar": "أنشئ مورداً يحمل بيانات مشتركة واستخدمه من أكثر من مكان.",
+    "en": "Create a resource that holds shared data and use it from more than one place."
+  },
+  "estimatedMinutes": 9,
+  "order": 2,
+  "contentMarkdown": {
+    "ar": "## البيانات ليست عقدة\n\n`Resource` كائن بيانات يمكن حفظه كملف ومشاركته بين العقد والمشاهد. أنشئ صنفاً مخصصاً بوراثة `Resource` واجعل حقوله المصدّرة قابلة للتحرير.\n\n```gdscript\nextends Resource\nclass_name ItemData\n\n@export var display_name: String = \"\"\n@export var value: int = 0\n```\n\nاستخدم المورد للأوصاف والإعدادات التي لا تحتاج إلى سلوك شجرة المشهد. يمكن لعدة عقد مشاركة المورد نفسه؛ أنشئ نسخة مستقلة عندما تتطلب كل نسخة حالة متغيرة خاصة بها.",
+    "en": "## Data is not a node\n\nA `Resource` is a data object that can be saved as a file and shared by nodes and scenes. Create a custom class extending `Resource` and expose its fields for editing.\n\n```gdscript\nextends Resource\nclass_name ItemData\n\n@export var display_name: String = \"\"\n@export var value: int = 0\n```\n\nUse resources for descriptions and settings that do not need scene-tree behavior. Several nodes can share one resource; make an independent duplicate when each instance needs its own changing state."
+  },
+  "documentation": {
+    "ar": "`Resource` أساس بيانات Godot القابلة للتخزين وإعادة الاستخدام؛ وعلى خلاف `Node` لا ينضم إلى شجرة المشهد ولا يملك دورة حياة عقدة. عرّف مورداً مخصصاً بوراثة `Resource` وأضف خصائص مصدّرة، ثم أنشئ ملف المورد في المحرر. يمكن لعقد متعددة الاحتفاظ بمرجع إلى المورد ذاته، وهو مفيد للبيانات الثابتة لكنه مهم عند تعديلها: قد يظهر التغيير في كل مستخدم للمورد المشترك. افصل البيانات الوصفية عن الحالة المؤقتة، وكرّر المورد عند الحاجة إلى استقلال الحالة.",
+    "en": "`Resource` is Godot’s base for storable, reusable data; unlike a `Node`, it does not join the scene tree or have a node lifecycle. Define a custom resource by extending `Resource`, add exported properties, and create a resource file in the editor. Several nodes can hold a reference to the same resource, useful for static data but important when mutating it: a change can be visible to every user of the shared resource. Separate descriptive data from transient state, and duplicate when independent state is needed."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الموارد",
+        "en": "Resources"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_39_resources_01",
+      "lessonId": "lesson_39_resources",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق الأساسي بين Resource وNode؟",
+        "en": "What is the basic difference between a Resource and a Node?"
+      },
+      "options": [
+        {
+          "ar": "المورد بيانات قابلة لإعادة الاستخدام ولا ينضم لشجرة المشهد.",
+          "en": "A resource is reusable data and does not join the scene tree."
+        },
+        {
+          "ar": "المورد يعمل دائماً كمؤقت.",
+          "en": "A resource always acts as a timer."
+        },
+        {
+          "ar": "كل مورد يرسم نافذة اللعبة.",
+          "en": "Every resource draws the game window."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_39_resources_02",
+      "lessonId": "lesson_39_resources",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن الموارد المشتركة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about الموارد المشتركة. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ سكربتاً يرث `Resource` وأضف `class_name ItemData`.",
+          "en": "Create a script extending `Resource` and add `class_name ItemData`."
+        },
+        {
+          "ar": "أضف خاصيتي display_name وvalue مع `@export` واحفظ السكربت.",
+          "en": "Add display_name and value properties with `@export`, then save the script."
+        },
+        {
+          "ar": "أنشئ Resource جديداً من نوع ItemData وحرر قيمه ثم اسنده إلى عقدة.",
+          "en": "Create an ItemData resource, edit its values, then assign it to a node."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_39_resources_03",
+      "lessonId": "lesson_39_resources",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «item: Amber Key» في سياق الموارد المشتركة.",
+        "en": "Write code that prints “item: Amber Key” as a الموارد المشتركة status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"item: Amber Key\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "item: Amber Key"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_39_resources_04",
+      "lessonId": "lesson_39_resources",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «item: Amber Key».",
+        "en": "Complete the line so it prints “item: Amber Key”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"item: Amber Key\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "item: Amber Key"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_39_resources_05",
+      "lessonId": "lesson_39_resources",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في الموارد المشتركة: start ثم «item: Amber Key».",
+        "en": "Print two lines showing progress in الموارد المشتركة: start, then “item: Amber Key”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"item: Amber Key\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nitem: Amber Key"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_39_resources_06",
+      "lessonId": "lesson_39_resources",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «item: Amber Key» تماماً.",
+        "en": "Fix the code so it prints exactly “item: Amber Key”."
+      },
+      "starterCode": "print(\"item: Amber Key!\")",
+      "solutionCode": "print(\"item: Amber Key\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "item: Amber Key"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_39_resources_07",
+      "lessonId": "lesson_39_resources",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «item: Amber Key» ثم done.",
+        "en": "Arrange output to show start, then “item: Amber Key”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"item: Amber Key\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"item: Amber Key\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nitem: Amber Key\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_39_resources_08",
+      "lessonId": "lesson_39_resources",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع الموارد المشتركة: «item: Amber Key».",
+        "en": "Write a program that records a result related to الموارد المشتركة: “item: Amber Key”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"item: Amber Key\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "item: Amber Key"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_39_resources_09",
+      "lessonId": "lesson_39_resources",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nitem: Amber Key",
+        "en": "Write a program that displays this sequence:\nitem: Amber Key"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"item: Amber Key\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "item: Amber Key"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_39_resources_10",
+      "lessonId": "lesson_39_resources",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «item: Amber Key».",
+        "en": "Use a string variable named status and print its value “item: Amber Key”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"item: Amber Key\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "item: Amber Key"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

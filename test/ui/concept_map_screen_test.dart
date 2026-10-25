@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:learn_gdscript/data/models/async_state.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:learn_gdscript/data/models/progress_models.dart';
 import 'package:learn_gdscript/data/models/review_schedule.dart';
@@ -28,21 +29,35 @@ void main() {
     addTearDown(tester.view.resetDevicePixelRatio);
 
     final harness = await _ConceptMapHarness.create();
-    addTearDown(harness.dispose);
+    addTearDown(() async {
+      await tester.pumpWidget(const SizedBox());
+      harness.dispose();
+    });
     await tester.pumpWidget(harness.app(locale: const Locale('en')));
 
     expect(find.byType(Shimmer), findsOneWidget);
-    await tester.pumpAndSettle();
+    await _pumpUntilLoaded(tester, harness.provider);
     expect(find.text('Concept Map & Spaced Repetition'), findsOneWidget);
     expect(harness.provider.state.value!.dueCards, isNotEmpty);
 
+    tester.view.physicalSize = const Size(390, 844);
+    await tester.pumpWidget(harness.app(locale: const Locale('ar')));
+    await tester.pump();
+    expect(find.text('خريطة المفاهيم والتكرار المتباعد'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+
+    tester.view.physicalSize = const Size(1200, 900);
+    await tester.pumpWidget(harness.app(locale: const Locale('en')));
+    await tester.pump();
+
     final dueCount = harness.provider.state.value!.dueCards.length;
     await tester.tap(find.text('Start review ($dueCount)'));
-    await tester.pumpAndSettle();
+    await tester.pump();
     await tester.tap(find.text('Reveal answer'));
-    await tester.pumpAndSettle();
+    await tester.pump();
     await tester.tap(find.text('Good'));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
 
     final ratedCardId = harness.provider.state.value!.schedules.keys.single;
     expect(
@@ -56,21 +71,21 @@ void main() {
       1,
     );
   });
+}
 
-  testWidgets('uses the compact layout without overflowing', (tester) async {
-    tester.view.physicalSize = const Size(390, 844);
-    tester.view.devicePixelRatio = 1;
-    addTearDown(tester.view.resetPhysicalSize);
-    addTearDown(tester.view.resetDevicePixelRatio);
-
-    final harness = await _ConceptMapHarness.create();
-    addTearDown(harness.dispose);
-    await tester.pumpWidget(harness.app(locale: const Locale('ar')));
-    await tester.pumpAndSettle();
-
-    expect(find.text('خريطة المفاهيم والتكرار المتباعد'), findsOneWidget);
-    expect(tester.takeException(), isNull);
-  });
+Future<void> _pumpUntilLoaded(
+  WidgetTester tester,
+  ConceptMapProvider provider,
+) async {
+  for (var frame = 0; frame < 20; frame++) {
+    if (provider.state.value != null ||
+        provider.state.status == LoadStatus.error) {
+      break;
+    }
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+  expect(provider.state.status, LoadStatus.data);
+  await tester.pump();
 }
 
 class _ConceptMapHarness {
@@ -151,10 +166,9 @@ class _ConceptMapHarness {
     ),
   );
 
-  Future<void> dispose() async {
+  void dispose() {
     provider.dispose();
     curriculumProvider.dispose();
     progressProvider.dispose();
-    await database.close();
   }
 }

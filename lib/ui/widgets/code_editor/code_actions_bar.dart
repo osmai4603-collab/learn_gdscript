@@ -10,7 +10,6 @@ class CodeActionsBar extends StatelessWidget {
     this.onSolution,
     this.onRun,
     this.onCompletion,
-    this.onFormat,
     this.canShowSolution = false,
   });
 
@@ -19,7 +18,6 @@ class CodeActionsBar extends StatelessWidget {
   final VoidCallback? onSolution;
   final VoidCallback? onRun;
   final VoidCallback? onCompletion;
-  final VoidCallback? onFormat;
   final bool canShowSolution;
 
   @override
@@ -60,12 +58,6 @@ class CodeActionsBar extends StatelessWidget {
             onPressed: onCompletion,
             icon: const Icon(Icons.auto_awesome),
             label: Text(l10n.completeCode),
-          ),
-        if (onFormat != null)
-          OutlinedButton.icon(
-            onPressed: onFormat,
-            icon: const Icon(Icons.format_align_left),
-            label: Text(l10n.formatCode),
           ),
       ],
     );

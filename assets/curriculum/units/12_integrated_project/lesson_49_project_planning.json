@@ -1,0 +1,357 @@
+{
+  "id": "lesson_49_project_planning",
+  "unitId": "unit_12_integrated_project",
+  "title": {
+    "ar": "تخطيط المشروع وتقسيمه",
+    "en": "Project Planning and Decomposition"
+  },
+  "objective": {
+    "ar": "حوّل فكرة صغيرة إلى مشاهد وعقد وموارد ومهام قابلة للتنفيذ.",
+    "en": "Turn a small idea into actionable scenes, nodes, resources, and tasks."
+  },
+  "estimatedMinutes": 9,
+  "order": 0,
+  "contentMarkdown": {
+    "ar": "## ابدأ بخريطة صغيرة\n\nاختر حلقة لعب واضحة مثل جمع عناصر قبل انتهاء الوقت. اكتب ما يراه اللاعب ومسؤولية كل عقدة والبيانات التي يجب أن تبقى بين المشاهد.\n\n```text\nMain (Node)\n├── Player (CharacterBody2D)\n├── Items (Node2D)\n└── HUD (CanvasLayer)\n```\n\nقسّم العمل: اللاعب للحركة، العنصر للتفاعل، HUD للعرض، ومدير الجولة للنتيجة والوقت. استخدم إشارات بين المكونات لتقليل الترابط.",
+    "en": "## Start with a small map\n\nChoose a clear gameplay loop, such as collecting items before time runs out. Write down what the player sees, each node’s responsibility, and what data must persist between scenes.\n\n```text\nMain (Node)\n├── Player (CharacterBody2D)\n├── Items (Node2D)\n└── HUD (CanvasLayer)\n```\n\nSplit the work: the player handles movement, an item handles interaction, the HUD displays information, and a round manager owns score and time. Use signals between components to reduce coupling."
+  },
+  "documentation": {
+    "ar": "يصف التخطيط الجيد حلقة لعب صغيرة قابلة للإنجاز قبل إضافة التفاصيل. حدد المشاهد ومسؤولية كل عقدة والبيانات المشتركة والإشارات التي تصل الأجزاء. تعامل مع رسم الشجرة كدليل لا كتصميم إلزامي لكل لعبة. رتّب الملفات في مجلدات مفهومة وقسّم العمل إلى خطوات قابلة للتشغيل والفحص. ابدأ بشريحة متكاملة بسيطة ثم حسّنها، بدلاً من بناء الأنظمة معزولة.",
+    "en": "Good planning describes a small playable loop before adding polish. Identify scenes, each node’s responsibility, shared data, and signals connecting parts. Treat a tree sketch as a guide, not a required design for every game. Organize files into understandable folders and split work into steps that can be run and checked. Start with a simple integrated slice, then improve it instead of building systems in isolation."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "تنظيم المشروع",
+        "en": "Project organization"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html"
+    },
+    {
+      "title": {
+        "ar": "العقد والمشاهد",
+        "en": "Nodes and scenes"
+      },
+      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_49_project_planning_01",
+      "lessonId": "lesson_49_project_planning",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "لماذا نفصل مسؤوليات اللاعب وHUD ومدير الجولة؟",
+        "en": "Why separate player, HUD, and round-manager responsibilities?"
+      },
+      "options": [
+        {
+          "ar": "لتقليل الترابط وجعل كل جزء أسهل للتغيير والفحص.",
+          "en": "To reduce coupling and make each part easier to change and inspect."
+        },
+        {
+          "ar": "لجعل كل جزء يكرر البيانات نفسها.",
+          "en": "To make every part duplicate the same data."
+        },
+        {
+          "ar": "لمنع استخدام المشاهد.",
+          "en": "To prevent scenes from being used."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_49_project_planning_02",
+      "lessonId": "lesson_49_project_planning",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن تخطيط المشروع. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about تخطيط المشروع. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "صف فكرة اللعبة في جملة وحدد نهاية الجولة أو شرط الفوز.",
+          "en": "Describe the game in one sentence and define the round end or win condition."
+        },
+        {
+          "ar": "ارسم شجرة عقد أولية وحدد المسؤوليات والبيانات المشتركة.",
+          "en": "Sketch an initial node tree and identify responsibilities and shared data."
+        },
+        {
+          "ar": "قسّم العمل إلى ثلاث مهام صغيرة واكتب كيف ستفحص كل مهمة بتشغيل المشروع.",
+          "en": "Break work into three small tasks and write how you will check each by running the project."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_49_project_planning_03",
+      "lessonId": "lesson_49_project_planning",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «plan: collect, score, restart» في سياق تخطيط المشروع.",
+        "en": "Write code that prints “plan: collect, score, restart” as a تخطيط المشروع status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "plan: collect, score, restart"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_49_project_planning_04",
+      "lessonId": "lesson_49_project_planning",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «plan: collect, score, restart».",
+        "en": "Complete the line so it prints “plan: collect, score, restart”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "plan: collect, score, restart"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_49_project_planning_05",
+      "lessonId": "lesson_49_project_planning",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في تخطيط المشروع: start ثم «plan: collect, score, restart».",
+        "en": "Print two lines showing progress in تخطيط المشروع: start, then “plan: collect, score, restart”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"plan: collect, score, restart\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nplan: collect, score, restart"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_49_project_planning_06",
+      "lessonId": "lesson_49_project_planning",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «plan: collect, score, restart» تماماً.",
+        "en": "Fix the code so it prints exactly “plan: collect, score, restart”."
+      },
+      "starterCode": "print(\"plan: collect, score, restart!\")",
+      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "plan: collect, score, restart"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_49_project_planning_07",
+      "lessonId": "lesson_49_project_planning",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «plan: collect, score, restart» ثم done.",
+        "en": "Arrange output to show start, then “plan: collect, score, restart”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"plan: collect, score, restart\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"plan: collect, score, restart\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nplan: collect, score, restart\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_49_project_planning_08",
+      "lessonId": "lesson_49_project_planning",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع تخطيط المشروع: «plan: collect, score, restart».",
+        "en": "Write a program that records a result related to تخطيط المشروع: “plan: collect, score, restart”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "plan: collect, score, restart"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_49_project_planning_09",
+      "lessonId": "lesson_49_project_planning",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nplan: collect, score, restart",
+        "en": "Write a program that displays this sequence:\nplan: collect, score, restart"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "plan: collect, score, restart"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_49_project_planning_10",
+      "lessonId": "lesson_49_project_planning",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «plan: collect, score, restart».",
+        "en": "Use a string variable named status and print its value “plan: collect, score, restart”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"plan: collect, score, restart\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "plan: collect, score, restart"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

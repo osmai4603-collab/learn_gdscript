@@ -1,63 +1,394 @@
 {
   "id": "lesson_04_types",
   "unitId": "unit_02_variables",
-  "title": {"ar": "أنواع البيانات", "en": "Data Types"},
-  "objective": {"ar": "ميّز الأنواع الأساسية واستخدم التحويلات البسيطة.", "en": "Recognize the basic types and use simple conversions."},
-  "estimatedMinutes": 5,
+  "title": {
+    "ar": "الأنواع والاستدلال على النوع",
+    "en": "Types and type inference"
+  },
+  "objective": {
+    "ar": "تعرّف الأنواع الأساسية واستفد من استدلال GDScript أو التصريح الصريح.",
+    "en": "Recognize basic types and use GDScript inference or explicit declarations."
+  },
+  "estimatedMinutes": 8,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## لكل قيمة نوع\n\nيحدد النوع ما تمثله القيمة: `int` للأعداد الصحيحة، و`float` للأعداد العشرية، و`String` للنصوص، و`bool` للقيمتين `true` و`false`.\n\n```gdscript\nvar age = 25\nvar pi = 3.14\nvar name = \"Ali\"\nvar alive = true\n```\n\nتستنتج GDScript النوع من القيمة. تفيدك `typeof(value)` في معرفة نوعها، ويمكن استخدام `int(value)` أو `float(value)` أو `str(value)` للتحويل.",
-    "en": "## Every value has a type\n\nA type describes a value: `int` for whole numbers, `float` for decimal numbers, `String` for text, and `bool` for `true` or `false`.\n\n```gdscript\nvar age = 25\nvar pi = 3.14\nvar name = \"Ali\"\nvar alive = true\n```\n\nGDScript infers the type from the value. Use `typeof(value)` to inspect it, or `int(value)`, `float(value)`, and `str(value)` for conversions."
+    "ar": "## الأنواع والاستدلال على النوع\n\nتصف الأنواع شكل القيمة والعمليات الملائمة لها: `int` للأعداد الصحيحة، و`float` للأعداد العشرية، و`String` للنص، و`bool` للصواب والخطأ. يستنتج GDScript النوع غالباً من القيمة الأولى، ويمكنك التصريح به مثل `var speed: float = 3.5`. لا تخلط النص والعدد في عملية حسابية من دون تحويل.\n\n### مثال عملي\n\n```gdscript\nvar speed: float = 3.5\nvar label: String = \"Speed\"\nprint(speed)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## Types and type inference\n\nTypes describe a value and the operations that fit it: `int` for whole numbers, `float` for decimals, `String` for text, and `bool` for true/false. GDScript often infers a type from the initial value; you can also declare it, as in `var speed: float = 3.5`. Convert values before mixing text and numbers in arithmetic.\n\n### Practical example\n\n```gdscript\nvar speed: float = 3.5\nvar label: String = \"Speed\"\nprint(speed)\n```\n\nChange one value and run the script to observe its effect."
   },
-  "exampleCode": "var age = 25\nvar pi = 3.14\nvar name = \"Ali\"\nvar alive = true",
+  "exampleCode": "var speed: float = 3.5\nvar label: String = \"Speed\"\nprint(speed)",
+  "documentation": {
+    "ar": "### الأنواع والاستدلال على النوع\n\nتصف الأنواع شكل القيمة والعمليات الملائمة لها: `int` للأعداد الصحيحة، و`float` للأعداد العشرية، و`String` للنص، و`bool` للصواب والخطأ. يستنتج GDScript النوع غالباً من القيمة الأولى، ويمكنك التصريح به مثل `var speed: float = 3.5`. لا تخلط النص والعدد في عملية حسابية من دون تحويل.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Types and type inference\n\nTypes describe a value and the operations that fit it: `int` for whole numbers, `float` for decimals, `String` for text, and `bool` for true/false. GDScript often infers a type from the initial value; you can also declare it, as in `var speed: float = 3.5`. Convert values before mixing text and numbers in arithmetic.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الأنواع الساكنة في GDScript",
+        "en": "Static typing in GDScript"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html"
+    },
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
   "exercises": [
     {
-      "id": "ex_04_predict_types",
+      "id": "ex_04_types_01",
       "lessonId": "lesson_04_types",
-      "type": "predictOutput",
-      "prompt": {"ar": "اكتب الشيفرة التي تعرض نوع القيم `25` و`3.14` و`\"Ada\"` و`true` باستخدام `typeof()`.", "en": "Write code that displays the types of `25`, `3.14`, `\"Ada\"`, and `true` using `typeof()`."},
-      "starterCode": "",
-      "solutionCode": "print(typeof(25))\nprint(typeof(3.14))\nprint(typeof(\"Ada\"))\nprint(typeof(true))",
-      "testCases": [
-        {"description": {"ar": "تظهر الأنواع الأربعة بالترتيب.", "en": "The four types appear in order."}, "expectedOutput": "int\nfloat\nString\nbool"}
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "مرّر كل قيمة إلى `typeof()`.", "en": "Pass each value to `typeof()`."},
-        {"ar": "اطبع نتيجة كل استدعاء في سطر مستقل.", "en": "Print each call's result on its own line."}
-      ],
-      "order": 0
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_04_reorder_values",
+      "id": "ex_04_types_02",
       "lessonId": "lesson_04_types",
-      "type": "reorderSteps",
-      "prompt": {"ar": "رتّب التعريفات والطباعة بحيث يظهر `7` ثم `Ready`.", "en": "Arrange the declarations and print statements so that `7` and then `Ready` appear."},
-      "starterCode": "print(message)\nvar number = 7\nprint(number)\nvar message = \"Ready\"",
-      "solutionCode": "var number = 7\nvar message = \"Ready\"\nprint(number)\nprint(message)",
-      "testCases": [
-        {"description": {"ar": "تُعرّف القيم قبل استخدامها وتظهر بالترتيب.", "en": "Values are declared before use and appear in order."}, "expectedOutput": "7\nReady"}
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "يجب تعريف المتغير قبل تمريره إلى `print()`.", "en": "Declare a variable before passing it to `print()`."},
-        {"ar": "ضع التعريفين أولاً، ثم أمري الطباعة.", "en": "Put both declarations first, followed by the print calls."}
-      ],
-      "order": 1
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_04_mixed_number_type",
+      "id": "ex_04_types_03",
       "lessonId": "lesson_04_types",
-      "type": "predictOutput",
-      "prompt": {"ar": "اجمع `2` و`1.5` واعرض نوع الناتج باستخدام `typeof()`.", "en": "Add `2` and `1.5`, then display the result type using `typeof()`."},
-      "starterCode": "",
-      "solutionCode": "print(typeof(2 + 1.5))",
-      "testCases": [
-        {"description": {"ar": "الناتج من النوع العشري.", "en": "The result has the floating-point type."}, "expectedOutput": "float"}
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_04_types_04",
+      "lessonId": "lesson_04_types",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
       ],
       "hints": [
-        {"ar": "استخدم `+` لجمع القيمتين.", "en": "Use `+` to add the two values."},
-        {"ar": "ضع عملية الجمع داخل `typeof()`.", "en": "Place the addition inside `typeof()`."}
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_04_types_05",
+      "lessonId": "lesson_04_types",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`6`",
+        "en": "Write or complete the example so its output is:\n\n`6`"
+      },
+      "starterCode": "",
+      "solutionCode": "var n = 6\nprint(n)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 2
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "6"
+        }
+      ]
+    },
+    {
+      "id": "ex_04_types_06",
+      "lessonId": "lesson_04_types",
+      "order": 5,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\n1.5",
+        "en": "Write code that applies the lesson idea and produces this output:\n\n1.5"
+      },
+      "starterCode": "",
+      "solutionCode": "var ratio: float = 1.5\nprint(ratio)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "1.5"
+        }
+      ]
+    },
+    {
+      "id": "ex_04_types_07",
+      "lessonId": "lesson_04_types",
+      "order": 6,
+      "type": "fixBug",
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Ready`",
+        "en": "Write or complete the example so its output is:\n\n`Ready`"
+      },
+      "starterCode": "var label: String = \"Ready\"\npront(label)",
+      "solutionCode": "var label: String = \"Ready\"\nprint(label)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Ready"
+        }
+      ]
+    },
+    {
+      "id": "ex_04_types_08",
+      "lessonId": "lesson_04_types",
+      "order": 7,
+      "type": "predictOutput",
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`false`",
+        "en": "What output does this example display?\n\n`false`"
+      },
+      "starterCode": "var active: bool = false\nprint(active)",
+      "solutionCode": "var active: bool = false\nprint(active)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "false"
+        }
+      ]
+    },
+    {
+      "id": "ex_04_types_09",
+      "lessonId": "lesson_04_types",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`3`",
+        "en": "Write or complete the example so its output is:\n\n`3`"
+      },
+      "starterCode": "",
+      "solutionCode": "var count = 2\nprint(count + 1)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "3"
+        }
+      ]
+    },
+    {
+      "id": "ex_04_types_10",
+      "lessonId": "lesson_04_types",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`GDScript`",
+        "en": "Write or complete the example so its output is:\n\n`GDScript`"
+      },
+      "starterCode": "",
+      "solutionCode": "var word = \"GDScript\"\nprint(word)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "GDScript"
+        }
+      ]
     }
   ]
 }

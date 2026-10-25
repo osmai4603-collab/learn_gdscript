@@ -29,7 +29,8 @@ void main() {
     await dependencies.appSettingsProvider.completeOnboarding();
 
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
     GoRouter.of(
       tester.element(find.byType(Scaffold).first),
     ).go('/lesson/lesson_02_next');

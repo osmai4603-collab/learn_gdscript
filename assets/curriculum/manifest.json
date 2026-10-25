@@ -4,43 +4,99 @@
   "units": [
     {
       "id": "unit_01_first_program",
-      "title": {"ar": "أول برنامج", "en": "Your First Program"},
-      "description": {"ar": "اكتب أول سطر كود وشاهد الناتج", "en": "Write your first line of code and see the output"},
+      "title": {"ar": "البداية وأساسيات السكربت", "en": "Starting with Scripts"},
+      "description": {"ar": "تعرّف إلى المحرر واكتب وشغّل أول سكربت", "en": "Explore the editor and write and run your first script"},
       "iconName": "play_circle",
       "order": 0,
-      "lessonIds": ["lesson_01_hello", "lesson_02_comments"]
+      "lessonIds": ["lesson_01_hello", "lesson_02_comments", "lesson_15_errors"]
     },
     {
       "id": "unit_02_variables",
-      "title": {"ar": "المتغيرات والأنواع", "en": "Variables and Types"},
-      "description": {"ar": "تعلّم تخزين البيانات واستخدامها", "en": "Learn to store and use data"},
+      "title": {"ar": "القيم والمتغيرات والأنواع", "en": "Values, Variables, and Types"},
+      "description": {"ar": "خزّن القيم وافهم أنواع البيانات والتحويل بينها", "en": "Store values and understand data types and conversions"},
       "iconName": "data_object",
       "order": 1,
-      "lessonIds": ["lesson_03_variables", "lesson_04_types", "lesson_05_operations"]
+      "lessonIds": ["lesson_03_variables", "lesson_04_types", "lesson_16_casting", "lesson_17_strings", "lesson_18_enums"]
     },
     {
       "id": "unit_03_conditions",
-      "title": {"ar": "الشروط والقرارات", "en": "Conditions and Decisions"},
-      "description": {"ar": "اجعل برنامجك يتخذ قرارات", "en": "Make your program make decisions"},
+      "title": {"ar": "التعبيرات والقرارات", "en": "Expressions and Decisions"},
+      "description": {"ar": "استخدم الحساب والمنطق لاختيار مسار التنفيذ", "en": "Use arithmetic and logic to choose execution paths"},
       "iconName": "call_split",
       "order": 2,
-      "lessonIds": ["lesson_06_if_else", "lesson_07_elif", "lesson_08_match"]
+      "lessonIds": ["lesson_05_operations", "lesson_06_if_else", "lesson_07_elif", "lesson_08_match"]
     },
     {
       "id": "unit_04_loops",
-      "title": {"ar": "الحلقات والتكرار", "en": "Loops and Repetition"},
-      "description": {"ar": "كرّر العمليات بكفاءة", "en": "Repeat operations efficiently"},
+      "title": {"ar": "التكرار والحاويات", "en": "Loops and Collections"},
+      "description": {"ar": "كرّر العمليات ونظّم مجموعات القيم", "en": "Repeat operations and organize collections of values"},
       "iconName": "loop",
       "order": 3,
-      "lessonIds": ["lesson_09_for", "lesson_10_while", "lesson_11_break_continue"]
+      "lessonIds": ["lesson_09_for", "lesson_10_while", "lesson_11_break_continue", "lesson_19_arrays", "lesson_20_dictionaries"]
     },
     {
       "id": "unit_05_functions",
-      "title": {"ar": "الدوال وإعادة الاستخدام", "en": "Functions and Reuse"},
-      "description": {"ar": "نظّم كودك في أجزاء قابلة لإعادة الاستخدام", "en": "Organize code into reusable parts"},
+      "title": {"ar": "الدوال والتصميم", "en": "Functions and Design"},
+      "description": {"ar": "صمّم دوالاً واضحة وقسّم المشكلات", "en": "Design clear functions and break problems down"},
       "iconName": "functions",
       "order": 4,
-      "lessonIds": ["lesson_12_func_basics", "lesson_13_parameters", "lesson_14_return"]
+      "lessonIds": ["lesson_12_func_basics", "lesson_13_parameters", "lesson_14_return", "lesson_21_scope", "lesson_22_problem_decomposition"]
+    },
+    {
+      "id": "unit_06_classes_properties",
+      "title": {"ar": "الأصناف والخصائص", "en": "Classes and Properties"},
+      "description": {"ar": "نمذج كائنات اللعبة باستخدام الأصناف والخصائص", "en": "Model game objects with classes and properties"},
+      "iconName": "account_tree",
+      "order": 5,
+      "lessonIds": ["lesson_23_scripts_as_classes", "lesson_24_inheritance_class_name", "lesson_25_init", "lesson_26_properties_get_set", "lesson_27_composition_inheritance"]
+    },
+    {
+      "id": "unit_07_godot_scene_tree",
+      "title": {"ar": "Godot — العقد وشجرة المشهد", "en": "Godot: Nodes and the Scene Tree"},
+      "description": {"ar": "ابنِ المشاهد وتعامل مع العقد في شجرة المشهد", "en": "Build scenes and work with nodes in the scene tree"},
+      "iconName": "schema",
+      "order": 6,
+      "lessonIds": ["lesson_28_nodes_paths", "lesson_29_node_lifecycle", "lesson_30_onready_nodes", "lesson_31_groups", "lesson_32_packed_scenes"]
+    },
+    {
+      "id": "unit_08_interaction_events",
+      "title": {"ar": "التفاعل والأحداث", "en": "Interaction and Events"},
+      "description": {"ar": "اربط العقد بالإشارات وعالج مدخلات اللاعب", "en": "Connect nodes with signals and handle player input"},
+      "iconName": "sensors",
+      "order": 7,
+      "lessonIds": ["lesson_33_signals", "lesson_34_connect_emit", "lesson_35_input", "lesson_36_node_interaction"]
+    },
+    {
+      "id": "unit_09_editor_resources",
+      "title": {"ar": "خصائص المحرر والموارد", "en": "Editor Properties and Resources"},
+      "description": {"ar": "اضبط الخصائص وحمّل الموارد واحفظ البيانات", "en": "Configure properties, load resources, and save data"},
+      "iconName": "inventory_2",
+      "order": 8,
+      "lessonIds": ["lesson_37_exports", "lesson_38_resource_loading", "lesson_39_resources", "lesson_40_saving"]
+    },
+    {
+      "id": "unit_10_time_async",
+      "title": {"ar": "الزمن والعمليات غير المتزامنة", "en": "Time and Asynchronous Operations"},
+      "description": {"ar": "نسّق الإشارات والمؤقتات والعمليات المنتظرة", "en": "Coordinate signals, timers, and awaited operations"},
+      "iconName": "schedule",
+      "order": 9,
+      "lessonIds": ["lesson_41_await_signals", "lesson_42_timers_frames", "lesson_43_async_flow", "lesson_44_await_pitfalls"]
+    },
+    {
+      "id": "unit_11_types_quality",
+      "title": {"ar": "الأنواع والتحليل وجودة الشيفرة", "en": "Types, Analysis, and Code Quality"},
+      "description": {"ar": "اكتب شيفرة typed واستخدم التحذيرات والتوثيق", "en": "Write typed code and use warnings and documentation"},
+      "iconName": "fact_check",
+      "order": 10,
+      "lessonIds": ["lesson_45_static_types", "lesson_46_typed_arrays", "lesson_47_warnings_assert_debugging", "lesson_48_style_documentation"]
+    },
+    {
+      "id": "unit_12_integrated_project",
+      "title": {"ar": "تطبيق تكاملي", "en": "Integrated Project"},
+      "description": {"ar": "طبّق ما تعلمته لبناء مشروع صغير متكامل", "en": "Apply what you learned to build a small integrated project"},
+      "iconName": "build",
+      "order": 11,
+      "lessonIds": ["lesson_49_project_planning", "lesson_50_project_building", "lesson_51_final_integration"]
     }
   ]
 }

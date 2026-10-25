@@ -1,0 +1,350 @@
+{
+  "id": "lesson_43_async_flow",
+  "unitId": "unit_10_time_async",
+  "title": {
+    "ar": "تدفق التنفيذ غير المتزامن",
+    "en": "Asynchronous Execution Flow"
+  },
+  "objective": {
+    "ar": "رتّب الخطوات قبل الانتظار وبعده وافهم أثر التعليق على الدالة.",
+    "en": "Order steps before and after a wait and understand how suspension affects a function."
+  },
+  "estimatedMinutes": 9,
+  "order": 2,
+  "contentMarkdown": {
+    "ar": "## رتّب العمل حول نقطة انتظار\n\nتتقدم الدالة حتى `await` ثم تعيد التحكم إلى المحرك. عندما يكتمل المنتظر تتابع بقية الدالة؛ وقد تنفذ دوال أخرى أثناء الانتظار وتتغير الحالة.\n\n```gdscript\nfunc refresh_panel() -> void:\n    $Panel.hide()\n    await get_tree().create_timer(0.2).timeout\n    $Panel.show()\n```\n\nقسّم العمل إلى مرحلتين وأعد فحص الشروط التي قد تتغير. لا تفترض أن استدعاء الدالة ينتظر اكتمالها تلقائياً.",
+    "en": "## Arrange work around a wait\n\nA function runs until `await`, then yields control to the engine. When the awaited object completes, the rest of the function resumes; other functions may run and state may change meanwhile.\n\n```gdscript\nfunc refresh_panel() -> void:\n    $Panel.hide()\n    await get_tree().create_timer(0.2).timeout\n    $Panel.show()\n```\n\nSeparate the work into two phases and recheck conditions that may change. Do not assume calling a function automatically waits for it to finish."
+  },
+  "documentation": {
+    "ar": "توقف الدالة التي تحتوي `await` مؤقتاً وتكمل لاحقاً، ولذلك قد يحدث عمل آخر بين مرحلتيها. اجعل حدود الانتظار واضحة وأعد التحقق من الحالة وصلاحية العقدة بعد الاستئناف. استدعاء الدالة غير المتزامنة لا يعني بالضرورة أن المستدعي ينتظر اكتمالها؛ صمم واجهة العودة بوضوح. استخدم هذا التدفق عند وجود حدث حقيقي مطلوب انتظاره، مثل مؤقت أو انتهاء حركة، لا لمجرد تقسيم الدالة.",
+    "en": "A function containing `await` suspends and resumes later, so other work can occur between its phases. Make wait boundaries clear and recheck state and node validity after resumption. Calling an asynchronous function does not necessarily mean the caller waits for completion; design the return interface explicitly. Use this flow for a real event that must be awaited, such as a timer or animation completion, not merely to split a function."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript: await",
+        "en": "GDScript basics: await"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_43_async_flow_01",
+      "lessonId": "lesson_43_async_flow",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما أفضل وصف لما يحدث عند الوصول إلى await؟",
+        "en": "What best describes reaching await?"
+      },
+      "options": [
+        {
+          "ar": "تُعلّق الدالة الحالية وتعيد التحكم حتى يكتمل المنتظر.",
+          "en": "The current function suspends and yields control until the awaited object completes."
+        },
+        {
+          "ar": "تُحذف العقدة المستدعية.",
+          "en": "The calling node is deleted."
+        },
+        {
+          "ar": "يتوقف المحرك عن الإطارات.",
+          "en": "The engine stops processing frames."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_43_async_flow_02",
+      "lessonId": "lesson_43_async_flow",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن تدفق التنفيذ. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about تدفق التنفيذ. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "اكتب دالة تطبع بداية ثم تنتظر Timer قصيراً ثم تطبع النهاية.",
+          "en": "Write a function that prints a start message, awaits a short Timer, then prints the end."
+        },
+        {
+          "ar": "استدعها ونفذ عملاً مستقلاً أثناء الانتظار.",
+          "en": "Call it and perform independent work during the wait."
+        },
+        {
+          "ar": "شغّل المشهد ولاحظ الترتيب، ثم أضف حارساً للحالة قبل تحديثها بعد الانتظار.",
+          "en": "Run the scene and observe ordering, then add a state guard before updating after the wait."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_43_async_flow_03",
+      "lessonId": "lesson_43_async_flow",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «start» في سياق تدفق التنفيذ.",
+        "en": "Write code that prints “start” as a تدفق التنفيذ status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_43_async_flow_04",
+      "lessonId": "lesson_43_async_flow",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «start».",
+        "en": "Complete the line so it prints “start”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"start\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_43_async_flow_05",
+      "lessonId": "lesson_43_async_flow",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في تدفق التنفيذ: start ثم «start».",
+        "en": "Print two lines showing progress in تدفق التنفيذ: start, then “start”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"start\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nstart"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_43_async_flow_06",
+      "lessonId": "lesson_43_async_flow",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «start» تماماً.",
+        "en": "Fix the code so it prints exactly “start”."
+      },
+      "starterCode": "print(\"start!\")",
+      "solutionCode": "print(\"start\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_43_async_flow_07",
+      "lessonId": "lesson_43_async_flow",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «start» ثم done.",
+        "en": "Arrange output to show start, then “start”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"start\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"start\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nstart\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_43_async_flow_08",
+      "lessonId": "lesson_43_async_flow",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع تدفق التنفيذ: «start».",
+        "en": "Write a program that records a result related to تدفق التنفيذ: “start”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_43_async_flow_09",
+      "lessonId": "lesson_43_async_flow",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nstart\\nfinish",
+        "en": "Write a program that displays this sequence:\nstart\\nfinish"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"finish\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nfinish"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_43_async_flow_10",
+      "lessonId": "lesson_43_async_flow",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «start».",
+        "en": "Use a string variable named status and print its value “start”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"start\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

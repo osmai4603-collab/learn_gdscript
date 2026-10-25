@@ -1,0 +1,385 @@
+{
+  "id": "lesson_30_onready_nodes",
+  "unitId": "unit_07_godot_scene_tree",
+  "title": {
+    "ar": "الوصول إلى العقد باستخدام @onready",
+    "en": "Access Nodes with @onready"
+  },
+  "objective": {
+    "ar": "استخدم `$` و`@onready` لتخزين مرجع إلى عقدة ابن بعد جاهزية المشهد.",
+    "en": "Use `$` and `@onready` to store a child-node reference after the scene is ready."
+  },
+  "estimatedMinutes": 10,
+  "order": 2,
+  "documentation": {
+    "ar": "يستخدم `$` مسار عقدة كاختصار. تؤجل `@onready` تعيين المرجع حتى تصبح العقدة جاهزة، وهو مفيد عندما يجب أن تكون بنية الأبناء موجودة. يجب أن يتطابق المسار مع المشهد الفعلي.",
+    "en": "`$` uses a node path as shorthand. `@onready` delays assigning a reference until the node is ready, which is useful when the child structure must exist. The path must match the actual scene."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "العقد والمشاهد",
+        "en": "Nodes and scenes"
+      },
+      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع الصنف Node",
+        "en": "Node class reference"
+      },
+      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## خزّن مرجع الابن عند الجاهزية\n\nإذا كانت `StatusLabel` ابناً مباشراً، يمكن تخزين مرجع لها ثم تحديث النص عند الجاهزية.\n\n```gdscript\nextends Node2D\n\n@onready var status_label = $StatusLabel\n\nfunc _ready():\n    status_label.text = \"Ready\"\n```\n\nإذا غيّرت اسم العقدة في المحرر، حدّث المسار أيضاً. لا يستطيع السكربت الإشارة إلى عقدة غير موجودة.",
+    "en": "## Cache a child reference when ready\n\nIf `StatusLabel` is a direct child, you can cache a reference and update its text when ready.\n\n```gdscript\nextends Node2D\n\n@onready var status_label = $StatusLabel\n\nfunc _ready():\n    status_label.text = \"Ready\"\n```\n\nIf you rename the node in the editor, update the path too. A script cannot reference a node that does not exist."
+  },
+  "exercises": [
+    {
+      "id": "ex_lesson_30_onready_nodes_01_predict",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع النتيجة في المثال: يُهيأ مرجع `status_label` عندما تصبح العقدة جاهزة، ثم يمكن للدالة الوصول إلى الابن الموجود في المسار.",
+        "en": "Predict the result in the example: The `status_label` reference is initialized when the node is ready, then a function can access the child at that path."
+      },
+      "options": [
+        {
+          "ar": "يُهيأ مرجع `status_label` عندما تصبح العقدة جاهزة، ثم يمكن للدالة الوصول إلى الابن الموجود في المسار.",
+          "en": "The `status_label` reference is initialized when the node is ready, then a function can access the child at that path."
+        },
+        {
+          "ar": "يجب أن يطابق المسار اسم العقدة وبنيتها الفعلية في المحرر.",
+          "en": "The path must match the node’s actual name and structure in the editor."
+        },
+        {
+          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
+          "en": "`@onready` automatically creates a missing node."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
+          "en": "Trace what happens first, then the final result."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_02_identify",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «الوصول إلى العقد باستخدام @onready»؟",
+        "en": "Which statement accurately identifies the core concept in “Access Nodes with @onready”?"
+      },
+      "options": [
+        {
+          "ar": "`$Path` يختصر الوصول بالعقدة، و`@onready` يؤجل تهيئة المرجع إلى مرحلة الجاهزية.",
+          "en": "`$Path` is shorthand for node access, and `@onready` delays reference initialization until readiness."
+        },
+        {
+          "ar": "يجب أن يطابق المسار اسم العقدة وبنيتها الفعلية في المحرر.",
+          "en": "The path must match the node’s actual name and structure in the editor."
+        },
+        {
+          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
+          "en": "`@onready` automatically creates a missing node."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
+          "en": "Look for the role of the key terms in the example."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_03_choose",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي قرار تصميم مناسب للحالة التالية؟ استخدم مرجعاً مسمى بعلامة `@onready` لعقدة ابن تحتاجها بعد جاهزية المشهد.",
+        "en": "Which design choice fits this situation? Use a named `@onready` reference for a child node needed after the scene is ready."
+      },
+      "options": [
+        {
+          "ar": "استخدم مرجعاً مسمى بعلامة `@onready` لعقدة ابن تحتاجها بعد جاهزية المشهد.",
+          "en": "Use a named `@onready` reference for a child node needed after the scene is ready."
+        },
+        {
+          "ar": "يجب أن يطابق المسار اسم العقدة وبنيتها الفعلية في المحرر.",
+          "en": "The path must match the node’s actual name and structure in the editor."
+        },
+        {
+          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
+          "en": "`@onready` automatically creates a missing node."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
+          "en": "Choose the option that matches the scenario’s stated need."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_04_complete",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط شجرة يحدد عقدة ابن ومسار `$` والمتغير الذي يخزن مرجعها.",
+        "en": "Complete a short sketch or sequence that shows: A tree sketch identifying a child, its `$` path, and the variable that stores its reference."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط شجرة يحدد عقدة ابن ومسار `$` والمتغير الذي يخزن مرجعها.",
+          "en": "Write the required essential parts: A tree sketch identifying a child, its `$` path, and the variable that stores its reference."
+        },
+        {
+          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
+          "en": "Connect the elements in the correct order or relationship."
+        },
+        {
+          "ar": "راجع المخطط باستخدام تعريف الدرس.",
+          "en": "Review the sketch using the lesson definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_05_write",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أضف عقدة Label باسم `StatusLabel` في مشهد اختبار وتحقق من تطابق المسار مع المرجع.",
+        "en": "Write a short implementation plan for this application: Add a Label named `StatusLabel` to a test scene and verify that its path matches the reference."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
+          "en": "Identify the goal and the elements or nodes you need."
+        },
+        {
+          "ar": "اكتب الخطوات بترتيب التنفيذ.",
+          "en": "Write the steps in implementation order."
+        },
+        {
+          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
+          "en": "State how you will manually verify the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_06_fix",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "اقرأ الاعتقاد الخاطئ: «`@onready` يستطيع إيجاد أي اسم حتى لو لم توجد العقدة في المشهد.» ما التصحيح الأفضل؟",
+        "en": "Read this misconception: “`@onready` can find any name even if the node is absent from the scene.” What is the best correction?"
+      },
+      "options": [
+        {
+          "ar": "أضف العقدة بالاسم والمسار المطلوبين أو صحح المسار في السكربت.",
+          "en": "Add the node at the required name and path, or correct the script path."
+        },
+        {
+          "ar": "`@onready` يستطيع إيجاد أي اسم حتى لو لم توجد العقدة في المشهد.",
+          "en": "`@onready` can find any name even if the node is absent from the scene."
+        },
+        {
+          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
+          "en": "`@onready` automatically creates a missing node."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
+          "en": "Distinguish the correct definition from the mistaken assumption."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_07_apply",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أضف عقدة Label باسم `StatusLabel` في مشهد اختبار وتحقق من تطابق المسار مع المرجع. لا يُفحص إعداد المحرر تلقائياً.",
+        "en": "Apply the concept manually in a test project: Add a Label named `StatusLabel` to a test scene and verify that its path matches the reference. Editor setup is not automatically checked."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
+          "en": "Create the smallest example that demonstrates the idea."
+        },
+        {
+          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
+          "en": "Check the relevant names and settings inside Godot."
+        },
+        {
+          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
+          "en": "Run the experiment if possible and record what you observe."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_08_compare",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `$` يحدد مرجع المسار؛ و`@onready` يتحكم في وقت تعيين المرجع.",
+        "en": "What is the difference between the concepts in this lesson? `$` specifies the path reference; `@onready` controls when the reference is assigned."
+      },
+      "options": [
+        {
+          "ar": "`$` يحدد مرجع المسار؛ و`@onready` يتحكم في وقت تعيين المرجع.",
+          "en": "`$` specifies the path reference; `@onready` controls when the reference is assigned."
+        },
+        {
+          "ar": "يجب أن يطابق المسار اسم العقدة وبنيتها الفعلية في المحرر.",
+          "en": "The path must match the node’s actual name and structure in the editor."
+        },
+        {
+          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
+          "en": "`@onready` automatically creates a missing node."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
+          "en": "Compare each part’s role, not just its name."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_09_debug",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "راجع الحالة المعيبة: اسم `$StatusLabel` في السكربت بينما العقدة في المشهد اسمها `Status`. اكتب طريقة تشخيصها وإصلاحها.",
+        "en": "Review this flawed setup: The script uses `$StatusLabel` while the scene node is named `Status`. Write how you would diagnose and fix it."
+      },
+      "steps": [
+        {
+          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
+          "en": "Identify the incorrect element or relationship."
+        },
+        {
+          "ar": "قارنها بما يتطلبه المفهوم.",
+          "en": "Compare it with what the concept requires."
+        },
+        {
+          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
+          "en": "Write a correction and a manual verification step."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_30_onready_nodes_10_apply",
+      "lessonId": "lesson_30_onready_nodes",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: استخدم مرجعاً جاهزاً لتحديث عقدة من `_ready` ثم اشرح كيف يؤثر نقلها إلى مجلد فرعي في المسار.",
+        "en": "Design an application that combines this concept with an earlier idea: Use a ready reference to update a node from `_ready`, then explain how moving it into a subfolder changes the path."
+      },
+      "steps": [
+        {
+          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
+          "en": "Choose a clear purpose for the integrated example."
+        },
+        {
+          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
+          "en": "Define the responsibility of each node, class, or part."
+        },
+        {
+          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
+          "en": "Sketch the data or event flow, then self-review it."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

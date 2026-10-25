@@ -18,15 +18,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeWelcome => 'تعلّم GDScript خطوة بخطوة';
 
   @override
-  String get dashboardLspConnecting => 'GDScript: محلي | LSP: جارٍ الاتصال';
-
-  @override
-  String get dashboardLspActive => 'GDScript: محلي | LSP: نشط';
-
-  @override
-  String get dashboardLspDisconnected => 'GDScript: محلي | LSP: غير متصل';
-
-  @override
   String dashboardDays(int days) {
     return '$days أيام';
   }
@@ -101,7 +92,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get dashboardEngineTitle => 'خادم اللغة والمحاكي';
+  String get dashboardEngineTitle => 'محرك GDScript';
 
   @override
   String get dashboardEngineConnecting => 'جارٍ الاتصال';
@@ -120,9 +111,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dashboardLocal => 'محلي';
-
-  @override
-  String get dashboardLsp => 'خادم اللغة';
 
   @override
   String get dashboardPlaygroundReset => 'إعادة تعيين الكود';
@@ -294,7 +282,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get workspaceTitle => 'مساحة العمل';
 
   @override
-  String get workspaceDescription => 'تشغيل خادم اللغة محليًا مدعوم على أجهزة سطح المكتب فقط.';
+  String get workspaceDescription => 'اختر مجلد مشروع محليًا لفحص ملفات GDScript وتحريرها.';
 
   @override
   String get settingsTitle => 'الإعدادات';
@@ -318,7 +306,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsAppearanceCategory => 'المظهر واللغة';
 
   @override
-  String get settingsEngineCategory => 'المحرك وخادم اللغة';
+  String get settingsEngineCategory => 'المحرك';
 
   @override
   String get settingsAboutCategory => 'حول التطبيق والتقدم';
@@ -330,7 +318,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsAppearanceDescription => 'اختيار لغة العرض ونسق الألوان وسلوك المظهر.';
 
   @override
-  String get settingsEngineDescription => 'حالة خادم اللغة والانتقال إلى أدوات التطوير.';
+  String get settingsEngineDescription => 'تشخيصات محرك GDScript وأدوات التطوير.';
 
   @override
   String get settingsAboutDescription => 'معلومات التطبيق وإدارة تقدم التعلّم.';
@@ -553,45 +541,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sendFeedback => 'إرسال ملاحظات';
 
   @override
-  String get lspStatus => 'حالة خادم اللغة';
+  String get engineDiagnosticsTitle => 'تشخيصات محرك GDScript';
 
   @override
-  String get lspConnected => 'متصل';
+  String get engineDiagnosticsDescription => 'استعراض تشخيصات ملفات GDScript في مساحة العمل المحددة.';
 
   @override
-  String get lspDisconnected => 'غير متصل';
+  String get engineDiagnosticsEmpty => 'لا توجد تشخيصات في ملفات مساحة العمل المفهرسة.';
 
   @override
-  String get lspDiagnosticsTitle => 'تشخيصات خادم اللغة';
-
-  @override
-  String get lspDiagnosticsDescription => 'استعراض الأخطاء والتحذيرات التي يرسلها خادم اللغة.';
-
-  @override
-  String get lspDiagnosticsEmpty => 'لا توجد تشخيصات حالية.';
-
-  @override
-  String get lspDiagnosticsConnectPrompt => 'اتصل بخادم اللغة من مساحة العمل لعرض التشخيصات.';
-
-  @override
-  String lspDiagnosticsSummary(int count) {
+  String engineDiagnosticsSummary(int count) {
     return 'عدد التشخيصات: $count';
   }
-
-  @override
-  String get lspDiagnosticError => 'أخطاء';
-
-  @override
-  String get lspDiagnosticWarning => 'تحذيرات';
-
-  @override
-  String get lspDiagnosticInformation => 'معلومات';
-
-  @override
-  String get lspDiagnosticHint => 'تلميحات';
-
-  @override
-  String get lspDiagnosticNoMessage => 'لم يقدّم خادم اللغة وصفاً لهذا التشخيص.';
 
   @override
   String get startLearning => 'ابدأ التعلّم';
@@ -672,30 +633,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get workspacePath => 'مسار مجلد المشروع';
 
   @override
-  String get lspExecutablePath => 'مسار ملف خادم اللغة (اختياري)';
-
-  @override
-  String get connectLsp => 'اتصال وفهرسة';
-
-  @override
-  String get disconnectLsp => 'قطع الاتصال';
-
-  @override
-  String indexedFiles(Object count) {
-    return '$count ملفات مفهرسة';
-  }
-
-  @override
-  String get lspConnectionError => 'تعذّر الاتصال بخادم اللغة.';
-
-  @override
   String get completeCode => 'إكمال';
-
-  @override
-  String get formatCode => 'تنسيق';
-
-  @override
-  String get lspFeatureError => 'تعذّرت ميزة خادم اللغة.';
 
   @override
   String diagnosticLine(Object line) {
@@ -706,13 +644,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get workspaceSearchTitle => 'البحث في مساحة العمل';
 
   @override
-  String get workspaceSearchPlaceholder => 'أدخل نصاً أو رمزاً للبحث';
-
-  @override
-  String get searchWorkspaceText => 'نص';
-
-  @override
-  String get searchWorkspaceSymbols => 'رموز';
+  String get workspaceSearchPlaceholder => 'أدخل نصاً للبحث في ملفات GDScript المفهرسة';
 
   @override
   String get workspaceSearchEmpty => 'لم يتم العثور على نتائج.';
@@ -995,7 +927,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get syntaxExplorerPageDescription => 'ابحث في الكلمات المفتاحية والعناصر المدمجة والأنواع في GDScript.';
 
   @override
-  String get syntaxExplorerDocumentedCount => 'عنصر موثّق';
+  String get syntaxExplorerRetry => 'إعادة المحاولة';
 
   @override
   String get syntaxExplorerSearchHint => 'ابحث عن كلمة مفتاحية أو عنصر مدمج أو نوع بيانات...';
@@ -1008,7 +940,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String syntaxExplorerCount(int count) {
-    return '$count عنصر';
+    return '$count عنصر موثّق';
   }
 
   @override

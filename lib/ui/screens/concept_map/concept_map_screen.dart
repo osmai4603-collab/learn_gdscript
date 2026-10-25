@@ -9,7 +9,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../../data/models/async_state.dart';
 import '../../../data/models/concept_map_models.dart';
 import '../../../data/models/progress_models.dart';
-import '../../../data/models/review_schedule.dart';
 import '../../../logic/providers/concept_map_provider.dart';
 import '../../../logic/services/review_service.dart';
 import 'desktop_concept_map_sm_2_flutter_dart.dart';
@@ -29,7 +28,10 @@ class _ConceptMapScreenState extends State<ConceptMapScreen> {
     super.didChangeDependencies();
     if (_loadStarted) return;
     _loadStarted = true;
-    unawaited(context.read<ConceptMapProvider>().load());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      unawaited(context.read<ConceptMapProvider>().load());
+    });
   }
 
   @override
@@ -58,10 +60,8 @@ class _ConceptMapScreenState extends State<ConceptMapScreen> {
           data: data,
           isSavingRating: provider.isSavingRating,
           onNavigateRoute: context.go,
-          onRateCard: (cardId, rating) => provider.rateCard(
-            cardId: cardId,
-            rating: rating,
-          ),
+          onRateCard: (cardId, rating) =>
+              provider.rateCard(cardId: cardId, rating: rating),
         );
       },
     );
@@ -101,10 +101,11 @@ class _ConceptMapScreenState extends State<ConceptMapScreen> {
   ) {
     final lesson = snapshot.content.lessons[definition.lessonId]!;
     final unit = snapshot.content.units[lesson.unitId]!;
-    final schedules = snapshot.schedules.values
-        .where((schedule) => schedule.conceptId == definition.id)
-        .toList(growable: false)
-      ..sort((a, b) => b.lastReviewedAt.compareTo(a.lastReviewedAt));
+    final schedules =
+        snapshot.schedules.values
+            .where((schedule) => schedule.conceptId == definition.id)
+            .toList(growable: false)
+          ..sort((a, b) => b.lastReviewedAt.compareTo(a.lastReviewedAt));
     final latestSchedule = schedules.isEmpty ? null : schedules.first;
     final lessonIsCompleted =
         snapshot.progress.lessonsProgress[lesson.id]?.status ==
@@ -136,7 +137,8 @@ class _ConceptMapScreenState extends State<ConceptMapScreen> {
         : nextReview == null
         ? null
         : nextReview.difference(snapshot.loadedAt).inDays.clamp(0, 36500);
-    final example = lesson.exampleCode ??
+    final example =
+        lesson.exampleCode ??
         (lesson.exercises.isEmpty ? '' : lesson.exercises.first.starterCode);
 
     return KnowledgeConceptNodeModel(
@@ -150,9 +152,9 @@ class _ConceptMapScreenState extends State<ConceptMapScreen> {
       daysUntilNextReview: daysUntilReview,
       lastReviewedDate: latestSchedule == null
           ? ''
-          : DateFormat.yMMMd(locale.languageCode).format(
-              latestSchedule.lastReviewedAt.toLocal(),
-            ),
+          : DateFormat.yMMMd(
+              locale.languageCode,
+            ).format(latestSchedule.lastReviewedAt.toLocal()),
       description: lesson.objective.ar,
       descriptionEn: lesson.objective.en,
       codeExample: example,
@@ -178,7 +180,8 @@ class _ConceptMapScreenState extends State<ConceptMapScreen> {
       answerExplanationEn: card.answerExplanation.en,
       answerCode: card.answerCode,
       repetitionCount: schedule?.repetitionCount ?? 0,
-      easinessFactor: schedule?.easinessFactor ?? ReviewService.initialEasinessFactor,
+      easinessFactor:
+          schedule?.easinessFactor ?? ReviewService.initialEasinessFactor,
       currentIntervalDays: schedule?.intervalDays ?? 0,
     );
   }
@@ -235,7 +238,11 @@ class _ConceptMapLoadingView extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                _conceptMapText(locale, 'جارٍ تحميل خريطة المفاهيم…', 'Loading concept map…'),
+                _conceptMapText(
+                  locale,
+                  'جارٍ تحميل خريطة المفاهيم…',
+                  'Loading concept map…',
+                ),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -285,7 +292,11 @@ class _ConceptMapErrorView extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.error_outline, size: 42, color: Colors.redAccent),
+              const Icon(
+                Icons.error_outline,
+                size: 42,
+                color: Colors.redAccent,
+              ),
               const SizedBox(height: 12),
               Text(
                 _conceptMapText(

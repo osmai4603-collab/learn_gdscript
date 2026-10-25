@@ -2,6 +2,7 @@ abstract final class AppRoutes {
   static const root = '/';
   static const learningPath = '/path';
   static const settings = '/settings';
+  static const engineDiagnostics = '/diagnostics/engine';
   static const syntaxReference = '/syntax-reference';
   static const onboarding = '/onboarding';
   static const workspace = '/workspace';
@@ -16,8 +17,6 @@ abstract final class AppRoutes {
 
   static const spacedRepetition = '/spaced-repetition';
   static const miniGame = '/projects/mini-game';
-  static const lspDiagnostics = '/diagnostics/lsp';
-
   static String lessonPath(String lessonId) =>
       '/lesson/${Uri.encodeComponent(lessonId)}';
 

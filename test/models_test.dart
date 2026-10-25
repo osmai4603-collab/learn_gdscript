@@ -16,6 +16,76 @@ void main() {
     expect(LocalizedText.fromJson(text.toJson()), text);
   });
 
+  test('lesson documentation and non-code exercise types round-trip', () {
+    final lesson = Lesson.fromJson({
+      'id': 'lesson_docs',
+      'unitId': 'unit_docs',
+      'title': {'ar': 'التوثيق', 'en': 'Documentation'},
+      'objective': {'ar': 'هدف', 'en': 'Objective'},
+      'estimatedMinutes': 5,
+      'order': 0,
+      'contentMarkdown': {'ar': 'شرح', 'en': 'Explanation'},
+      'documentation': {'ar': 'مرجع الدرس', 'en': 'Lesson reference'},
+      'documentationSources': [
+        {
+          'title': {'ar': 'مرجع Godot', 'en': 'Godot reference'},
+          'url': 'https://docs.godotengine.org/en/stable/',
+        },
+      ],
+      'exercises': [
+        {
+          'id': 'choice',
+          'lessonId': 'lesson_docs',
+          'type': 'multipleChoice',
+          'prompt': {'ar': 'اختر', 'en': 'Choose'},
+          'options': [
+            {'ar': 'صحيح', 'en': 'Correct'},
+            {'ar': 'خطأ', 'en': 'Incorrect'},
+          ],
+          'correctOptionIndex': 0,
+          'hints': [],
+          'testCases': [],
+          'order': 0,
+        },
+        {
+          'id': 'guided',
+          'lessonId': 'lesson_docs',
+          'type': 'guidedTask',
+          'prompt': {'ar': 'نفذ', 'en': 'Do it'},
+          'steps': [
+            {'ar': 'أنشئ مشهداً', 'en': 'Create a scene'},
+          ],
+          'hints': [],
+          'testCases': [],
+          'order': 1,
+        },
+      ],
+    });
+
+    expect(lesson.documentation?.en, 'Lesson reference');
+    expect(lesson.documentationSources.single.url, startsWith('https://'));
+    expect(lesson.exercises.first.options[0].en, 'Correct');
+    expect(lesson.exercises.last.steps.single.ar, 'أنشئ مشهداً');
+    expect(Lesson.fromJson(lesson.toJson()).toJson(), lesson.toJson());
+  });
+
+  test('non-code exercises reject incomplete interaction data', () {
+    expect(
+      () => Exercise(
+        id: 'choice',
+        lessonId: 'lesson',
+        type: ExerciseType.multipleChoice,
+        prompt: const LocalizedText(ar: 'اختر', en: 'Choose'),
+        options: const [LocalizedText(ar: 'خيار', en: 'Option')],
+        correctOptionIndex: 0,
+        testCases: const [],
+        hints: const [],
+        order: 0,
+      ),
+      throwsArgumentError,
+    );
+  });
+
   test('curriculum, lessons, and exercises round-trip as typed JSON', () {
     final input = <String, Object?>{
       'version': '1',
@@ -94,6 +164,7 @@ void main() {
           'completedAt': null,
           'savedCode': null,
           'exercisesWithSolutionViewed': <String>[],
+          'selfReportedExercises': <String>['guided-task'],
           'exerciseAttempts': <String, int>{},
           'exerciseHints': <String, int>{},
         },

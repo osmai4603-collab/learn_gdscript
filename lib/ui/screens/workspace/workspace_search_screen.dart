@@ -1,17 +1,17 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../core/extensions/context_extensions.dart';
-import '../../../logic/providers/language_server_provider.dart';
+import '../../../data/repositories/workspace_repository.dart';
 import '../../widgets/common/empty_state.dart';
 import '../../widgets/output_panel/error_display.dart';
 
-enum _WorkspaceSearchMode { text, symbols }
-
 class WorkspaceSearchScreen extends StatefulWidget {
-  const WorkspaceSearchScreen({super.key});
+  const WorkspaceSearchScreen({
+    super.key,
+    required this.repository,
+  });
+
+  final WorkspaceRepository repository;
 
   @override
   State<WorkspaceSearchScreen> createState() => _WorkspaceSearchScreenState();
@@ -19,7 +19,6 @@ class WorkspaceSearchScreen extends StatefulWidget {
 
 class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
   final TextEditingController _queryController = TextEditingController();
-  _WorkspaceSearchMode _mode = _WorkspaceSearchMode.text;
   Object? _result;
   Object? _error;
   bool _searching = false;
@@ -33,13 +32,18 @@ class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
       _result = null;
     });
     try {
-      final server = context.read<LanguageServerProvider>();
-      final result = _mode == _WorkspaceSearchMode.text
-          ? await server.searchWorkspace(query)
-          : await server.workspaceSymbols(query);
+      final matches = await widget.repository.searchText(query);
       if (!mounted) return;
       setState(() {
-        _result = result;
+        _result = [
+          for (final match in matches)
+            {
+              'file': match.relativePath,
+              'line': match.line,
+              'column': match.column,
+              'preview': match.preview,
+            },
+        ];
         _searching = false;
       });
     } on Object catch (error) {
@@ -54,29 +58,14 @@ class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final server = context.watch<LanguageServerProvider>();
-    final hasResults = _result is! List || (_result! as List).isNotEmpty;
+    final matches = _result is List
+        ? _result! as List<Map<String, Object?>>
+        : const <Map<String, Object?>>[];
     return Scaffold(
       appBar: AppBar(title: Text(l10n.workspaceSearchTitle)),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          SegmentedButton<_WorkspaceSearchMode>(
-            segments: [
-              ButtonSegment(
-                value: _WorkspaceSearchMode.text,
-                label: Text(l10n.searchWorkspaceText),
-              ),
-              ButtonSegment(
-                value: _WorkspaceSearchMode.symbols,
-                label: Text(l10n.searchWorkspaceSymbols),
-              ),
-            ],
-            selected: {_mode},
-            onSelectionChanged: (selection) =>
-                setState(() => _mode = selection.first),
-          ),
-          const SizedBox(height: 12),
           TextField(
             controller: _queryController,
             textDirection: TextDirection.ltr,
@@ -89,42 +78,42 @@ class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
           ),
           const SizedBox(height: 12),
           FilledButton.icon(
-            onPressed:
-                !server.isConnected ||
-                    _searching ||
-                    _queryController.text.trim().isEmpty
-                ? null
-                : _search,
+            onPressed: _searching || _queryController.text.trim().isEmpty
+              ? null
+              : _search,
             icon: const Icon(Icons.search),
             label: Text(l10n.workspaceSearchTitle),
             iconAlignment: .end,
           ),
-          if (!server.isConnected) ...[
-            const SizedBox(height: 16),
-            EmptyState(icon: Icons.link_off, message: l10n.lspDisconnected),
-          ],
           if (_searching) ...[
             const SizedBox(height: 16),
             const Center(child: CircularProgressIndicator()),
           ],
           if (_error != null) ...[
             const SizedBox(height: 16),
-            ErrorDisplay(message: '${l10n.lspFeatureError} $_error'),
+            ErrorDisplay(message: '${l10n.lessonUnavailable} $_error'),
           ],
-          if (_result != null && !hasResults) ...[
+          if (_result != null && matches.isEmpty) ...[
             const SizedBox(height: 16),
             EmptyState(
               icon: Icons.search_off,
               message: l10n.workspaceSearchEmpty,
             ),
           ],
-          if (_result != null && hasResults) ...[
+          if (_result != null && matches.isNotEmpty) ...[
             const SizedBox(height: 16),
-            SelectableText(
-              const JsonEncoder.withIndent('  ').convert(_result),
-              textDirection: TextDirection.ltr,
-              style: const TextStyle(fontFamily: 'JetBrains Mono'),
-            ),
+            for (final match in matches)
+              ListTile(
+                title: Text(
+                  '${match['file']}:${match['line']}:${match['column']}',
+                  textDirection: TextDirection.ltr,
+                ),
+                subtitle: SelectableText(
+                  match['preview']! as String,
+                  textDirection: TextDirection.ltr,
+                  style: const TextStyle(fontFamily: 'JetBrains Mono'),
+                ),
+              ),
           ],
         ],
       ),

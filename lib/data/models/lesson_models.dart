@@ -5,6 +5,32 @@ import 'localized_text.dart';
 import 'model_json.dart';
 
 @immutable
+class DocumentationSource {
+  const DocumentationSource({required this.title, required this.url});
+
+  final LocalizedText title;
+  final String url;
+
+  factory DocumentationSource.fromJson(JsonObject json) {
+    final url = requiredString(json, 'url');
+    final uri = Uri.tryParse(url);
+    if (uri == null ||
+        uri.scheme != 'https' ||
+        uri.host != 'docs.godotengine.org') {
+      throw const FormatException(
+        'Documentation sources must use the official Godot documentation site.',
+      );
+    }
+    return DocumentationSource(
+      title: LocalizedText.fromJson(requiredObject(json, 'title')),
+      url: url,
+    );
+  }
+
+  JsonObject toJson() => {'title': title.toJson(), 'url': url};
+}
+
+@immutable
 class Lesson {
   final String id;
   final String unitId;
@@ -13,6 +39,8 @@ class Lesson {
   final int estimatedMinutes;
   final int order;
   final LocalizedText contentMarkdown;
+  final LocalizedText? documentation;
+  final List<DocumentationSource> documentationSources;
   final String? exampleCode;
   final List<Exercise> exercises;
 
@@ -24,9 +52,12 @@ class Lesson {
     required this.estimatedMinutes,
     required this.order,
     required this.contentMarkdown,
+    this.documentation,
+    List<DocumentationSource> documentationSources = const [],
     this.exampleCode,
     required List<Exercise> exercises,
-  }) : exercises = List.unmodifiable(exercises) {
+  }) : documentationSources = List.unmodifiable(documentationSources),
+       exercises = List.unmodifiable(exercises) {
     if (id.trim().isEmpty) {
       throw ArgumentError.value(id, 'id');
     }
@@ -51,6 +82,16 @@ class Lesson {
     contentMarkdown: LocalizedText.fromJson(
       requiredObject(json, 'contentMarkdown'),
     ),
+    documentation: json.containsKey('documentation')
+        ? LocalizedText.fromJson(requiredObject(json, 'documentation'))
+        : null,
+    documentationSources: [
+      for (final item
+          in json['documentationSources'] == null
+              ? const <Object?>[]
+              : requiredList(json, 'documentationSources'))
+        DocumentationSource.fromJson(_asObject(item)),
+    ],
     exampleCode: optionalString(json, 'exampleCode'),
     exercises: [
       for (final item
@@ -69,6 +110,11 @@ class Lesson {
     'estimatedMinutes': estimatedMinutes,
     'order': order,
     'contentMarkdown': contentMarkdown.toJson(),
+    if (documentation != null) 'documentation': documentation!.toJson(),
+    if (documentationSources.isNotEmpty)
+      'documentationSources': documentationSources
+          .map((source) => source.toJson())
+          .toList(growable: false),
     'exampleCode': exampleCode,
     'exercises': exercises.map((item) => item.toJson()).toList(growable: false),
   };

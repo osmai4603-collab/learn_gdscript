@@ -17,6 +17,7 @@ class LessonProgress {
   final DateTime? completedAt;
   final String? savedCode;
   final List<String> exercisesWithSolutionViewed;
+  final List<String> selfReportedExercises;
   final Map<String, int> exerciseAttempts;
   final Map<String, int> exerciseHints;
 
@@ -31,6 +32,7 @@ class LessonProgress {
     this.completedAt,
     this.savedCode,
     List<String> exercisesWithSolutionViewed = const [],
+    List<String> selfReportedExercises = const [],
     Map<String, int> exerciseAttempts = const {},
     Map<String, int> exerciseHints = const {},
   }) : assert(exercisesCompleted >= 0),
@@ -40,6 +42,7 @@ class LessonProgress {
        exercisesWithSolutionViewed = List.unmodifiable(
          exercisesWithSolutionViewed,
        ),
+       selfReportedExercises = List.unmodifiable(selfReportedExercises),
        exerciseAttempts = Map.unmodifiable(exerciseAttempts),
        exerciseHints = Map.unmodifiable(exerciseHints) {
     if (this.exerciseAttempts.values.any((count) => count < 0) ||
@@ -66,10 +69,11 @@ class LessonProgress {
     startedAt: _date(json, 'startedAt'),
     completedAt: _date(json, 'completedAt'),
     savedCode: optionalString(json, 'savedCode'),
-    exercisesWithSolutionViewed: json.containsKey(
-      'exercisesWithSolutionViewed',
-    )
+    exercisesWithSolutionViewed: json.containsKey('exercisesWithSolutionViewed')
         ? stringList(json, 'exercisesWithSolutionViewed')
+        : const [],
+    selfReportedExercises: json.containsKey('selfReportedExercises')
+        ? stringList(json, 'selfReportedExercises')
         : const [],
     exerciseAttempts: _countMap(json, 'exerciseAttempts'),
     exerciseHints: _countMap(json, 'exerciseHints'),
@@ -86,6 +90,9 @@ class LessonProgress {
     'completedAt': completedAt?.toIso8601String(),
     'savedCode': savedCode,
     'exercisesWithSolutionViewed': exercisesWithSolutionViewed,
+    if (selfReportedExercises.isNotEmpty)
+      'selfReportedExercises': selfReportedExercises,
+
     'exerciseAttempts': exerciseAttempts,
     'exerciseHints': exerciseHints,
   };
@@ -264,7 +271,9 @@ class UserProgress {
     final value = json['earnedBadgeDates'];
     if (value == null) return const {};
     if (value is! Map) {
-      throw const FormatException('Field "earnedBadgeDates" must be an object.');
+      throw const FormatException(
+        'Field "earnedBadgeDates" must be an object.',
+      );
     }
     final dates = <String, DateTime>{};
     for (final entry in value.entries) {

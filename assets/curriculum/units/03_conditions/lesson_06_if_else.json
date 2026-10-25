@@ -1,63 +1,387 @@
 {
   "id": "lesson_06_if_else",
   "unitId": "unit_03_conditions",
-  "title": {"ar": "الشرط البسيط", "en": "If and Else"},
-  "objective": {"ar": "اجعل البرنامج يختار ما ينفّذه بناءً على شرط.", "en": "Make a program choose what to run based on a condition."},
-  "estimatedMinutes": 7,
-  "order": 0,
-  "contentMarkdown": {
-    "ar": "## اختر باستخدام if وelse\n\nتختبر `if` شرطاً منطقياً. إذا كان صحيحاً ينفّذ البرنامج الكتلة التابعة لها، وإلا يمكنه تنفيذ كتلة `else`:\n\n```gdscript\nvar score = 75\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n```\n\nتبدأ الكتلة بعد النقطتين، وتُميّزها المسافة البادئة. تعطي المقارنات مثل `==` و`!=` و`>` و`<` و`>=` و`<=` قيمة منطقية.",
-    "en": "## Choose with if and else\n\n`if` checks a Boolean condition. When it is true, the indented block runs; otherwise, an optional `else` block can run:\n\n```gdscript\nvar score = 75\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n```\n\nA colon begins the block, and indentation marks its body. Comparisons such as `==`, `!=`, `>`, `<`, `>=`, and `<=` produce Boolean values."
+  "title": {
+    "ar": "الشروط if / elif / else",
+    "en": "if / elif / else conditions"
   },
-  "exampleCode": "var score = 75\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")",
+  "objective": {
+    "ar": "اختر مساراً من عدة مسارات باستخدام الشروط والتفرع.",
+    "en": "Choose among several paths using conditions and branching."
+  },
+  "estimatedMinutes": 8,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## الشروط if / elif / else\n\nيفحص `if` الشرط وينفذ كتلته إذا كان صحيحاً؛ وإذا لم يتحقق، تفحص فروع `elif` بالترتيب ثم يأتي `else` للحالة المتبقية. تحدد المسافات البادئة الكتل في GDScript. للاختيار القصير يمكن استخدام التعبير `value_if_true if condition else value_if_false`، بينما تكون الفروع العادية أوضح عند وجود خطوات متعددة.\n\n### مثال عملي\n\n```gdscript\nvar age = 20\nvar label = \"Adult\" if age >= 18 else \"Child\"\nprint(label)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## if / elif / else conditions\n\n`if` checks a condition and runs its block when true. Otherwise, `elif` branches are checked in order, followed by `else` for the remaining case. Indentation defines blocks in GDScript. A short choice can use `value_if_true if condition else value_if_false`, while regular branches are clearer for multiple actions.\n\n### Practical example\n\n```gdscript\nvar age = 20\nvar label = \"Adult\" if age >= 18 else \"Child\"\nprint(label)\n```\n\nChange one value and run the script to observe its effect."
+  },
+  "exampleCode": "var age = 20\nvar label = \"Adult\" if age >= 18 else \"Child\"\nprint(label)",
+  "documentation": {
+    "ar": "### الشروط if / elif / else\n\nيفحص `if` الشرط وينفذ كتلته إذا كان صحيحاً؛ وإذا لم يتحقق، تفحص فروع `elif` بالترتيب ثم يأتي `else` للحالة المتبقية. تحدد المسافات البادئة الكتل في GDScript. للاختيار القصير يمكن استخدام التعبير `value_if_true if condition else value_if_false`، بينما تكون الفروع العادية أوضح عند وجود خطوات متعددة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### if / elif / else conditions\n\n`if` checks a condition and runs its block when true. Otherwise, `elif` branches are checked in order, followed by `else` for the remaining case. Indentation defines blocks in GDScript. A short choice can use `value_if_true if condition else value_if_false`, while regular branches are clearer for multiple actions.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
   "exercises": [
     {
-      "id": "ex_06_positive_number",
+      "id": "ex_06_if_else_01",
       "lessonId": "lesson_06_if_else",
-      "type": "writeCode",
-      "prompt": {"ar": "إذا كان `number` يساوي `3`، اطبع `positive`، وإلا اطبع `not positive`.", "en": "When `number` is `3`, print `positive`; otherwise print `not positive`."},
-      "starterCode": "",
-      "solutionCode": "var number = 3\nif number > 0:\n    print(\"positive\")\nelse:\n    print(\"not positive\")",
-      "testCases": [
-        {"description": {"ar": "العدد الموجب يختار الفرع الأول.", "en": "A positive number selects the first branch."}, "expectedOutput": "positive"}
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "قارن `number` بالصفر باستخدام `>`.", "en": "Compare `number` with zero using `>`."},
-        {"ar": "ضع رسالة كل احتمال داخل كتلة ذات مسافة بادئة.", "en": "Put each message in an indented block."}
-      ],
-      "order": 0
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_06_fix_indentation",
+      "id": "ex_06_if_else_02",
       "lessonId": "lesson_06_if_else",
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_06_if_else_03",
+      "lessonId": "lesson_06_if_else",
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_06_if_else_04",
+      "lessonId": "lesson_06_if_else",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_06_if_else_05",
+      "lessonId": "lesson_06_if_else",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Big`",
+        "en": "Write or complete the example so its output is:\n\n`Big`"
+      },
+      "starterCode": "",
+      "solutionCode": "var n = 4\nif n > 2:\n    print(\"Big\")\nelse:\n    print(\"Small\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Big"
+        }
+      ]
+    },
+    {
+      "id": "ex_06_if_else_06",
+      "lessonId": "lesson_06_if_else",
+      "order": 5,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nSmall",
+        "en": "Write code that applies the lesson idea and produces this output:\n\nSmall"
+      },
+      "starterCode": "",
+      "solutionCode": "var n = 1\nif n > 2:\n    print(\"Big\")\nelse:\n    print(\"Small\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Small"
+        }
+      ]
+    },
+    {
+      "id": "ex_06_if_else_07",
+      "lessonId": "lesson_06_if_else",
+      "order": 6,
       "type": "fixBug",
-      "prompt": {"ar": "أصلح المسافة البادئة بحيث يطبع البرنامج `Pass` عندما تكون الدرجة 70.", "en": "Fix the indentation so the program prints `Pass` when the score is 70."},
-      "starterCode": "var score = 70\nif score >= 60:\nprint(\"Pass\")\nelse:\nprint(\"Try again\")",
-      "solutionCode": "var score = 70\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")",
-      "testCases": [
-        {"description": {"ar": "تنتمي أوامر الطباعة إلى كتلها الصحيحة.", "en": "The print statements belong to their correct blocks."}, "expectedOutput": "Pass"}
-      ],
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`B`",
+        "en": "Write or complete the example so its output is:\n\n`B`"
+      },
+      "starterCode": "var score = 75\nif score >= 80:\n    pront(\"A\")\nelif score >= 50:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "solutionCode": "var score = 75\nif score >= 80:\n    print(\"A\")\nelif score >= 50:\n    print(\"B\")\nelse:\n    print(\"C\")",
       "hints": [
-        {"ar": "يجب إزاحة جسم كل فرع بعد النقطتين.", "en": "Indent each branch body after its colon."},
-        {"ar": "استخدم المستوى نفسه من الإزاحة لكتلتي `if` و`else`.", "en": "Use the same indentation level for the `if` and `else` bodies."}
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 1
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "B"
+        }
+      ]
     },
     {
-      "id": "ex_06_age_check",
+      "id": "ex_06_if_else_08",
       "lessonId": "lesson_06_if_else",
-      "type": "writeCode",
-      "prompt": {"ar": "تحقق من عمر `18`: اطبع `Adult` إذا كان العمر 18 أو أكثر، وإلا اطبع `Minor`.", "en": "Check age `18`: print `Adult` when the age is at least 18; otherwise print `Minor`."},
-      "starterCode": "",
-      "solutionCode": "var age = 18\nif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Minor\")",
-      "testCases": [
-        {"description": {"ar": "العمر 18 يحقق شرط البلوغ.", "en": "Age 18 satisfies the adult condition."}, "expectedOutput": "Adult"}
-      ],
+      "order": 7,
+      "type": "predictOutput",
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`0`",
+        "en": "What output does this example display?\n\n`0`"
+      },
+      "starterCode": "var n = 0\nif n > 0:\n    print(\"+\")\nelif n < 0:\n    print(\"-\")\nelse:\n    print(\"0\")",
+      "solutionCode": "var n = 0\nif n > 0:\n    print(\"+\")\nelif n < 0:\n    print(\"-\")\nelse:\n    print(\"0\")",
       "hints": [
-        {"ar": "استخدم العامل `>=` للمقارنة مع 18.", "en": "Use `>=` to compare with 18."},
-        {"ar": "أضف فرع `else` للحالة الأخرى.", "en": "Add an `else` branch for the other case."}
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 2
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "0"
+        }
+      ]
+    },
+    {
+      "id": "ex_06_if_else_09",
+      "lessonId": "lesson_06_if_else",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Adult`",
+        "en": "Write or complete the example so its output is:\n\n`Adult`"
+      },
+      "starterCode": "",
+      "solutionCode": "var age = 20\nprint(\"Adult\" if age >= 18 else \"Child\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Adult"
+        }
+      ]
+    },
+    {
+      "id": "ex_06_if_else_10",
+      "lessonId": "lesson_06_if_else",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Retry`",
+        "en": "Write or complete the example so its output is:\n\n`Retry`"
+      },
+      "starterCode": "",
+      "solutionCode": "var score = 20\nprint(\"Pass\" if score >= 50 else \"Retry\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Retry"
+        }
+      ]
     }
   ]
 }

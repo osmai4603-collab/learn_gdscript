@@ -24,7 +24,7 @@ class LineNumbers extends StatelessWidget {
         controller: scrollController,
         physics: const NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -36,7 +36,7 @@ class LineNumbers extends StatelessWidget {
                     style: TextStyle(
                       color: editorTheme.lineNumber,
                       fontFamily: 'JetBrains Mono',
-                      fontSize: fontSize,
+                      fontSize: fontSize + 2,
                       height: 1.5,
                     ),
                   ),

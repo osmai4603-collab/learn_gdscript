@@ -1,8 +1,19 @@
 {
   "id": "unit_03_conditions",
-  "title": {"ar": "الشروط والقرارات", "en": "Conditions and Decisions"},
-  "description": {"ar": "اجعل برنامجك يتخذ قرارات", "en": "Make your program make decisions"},
+  "title": {
+    "ar": "التعبيرات والقرارات",
+    "en": "Expressions and Decisions"
+  },
+  "description": {
+    "ar": "استخدم الحساب والمنطق لاختيار مسار التنفيذ",
+    "en": "Use arithmetic and logic to choose execution paths"
+  },
   "iconName": "call_split",
   "order": 2,
-  "lessonIds": ["lesson_06_if_else", "lesson_07_elif", "lesson_08_match"]
+  "lessonIds": [
+    "lesson_05_operations",
+    "lesson_06_if_else",
+    "lesson_07_elif",
+    "lesson_08_match"
+  ]
 }

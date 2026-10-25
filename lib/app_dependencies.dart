@@ -18,7 +18,6 @@ import 'logic/providers/concept_map_provider.dart';
 import 'logic/providers/exercise_provider.dart';
 import 'logic/providers/home_dashboard_provider.dart';
 import 'logic/providers/learning_path_provider.dart';
-import 'logic/providers/language_server_provider.dart';
 import 'logic/providers/lesson_provider.dart';
 import 'logic/providers/onboarding_provider.dart';
 import 'logic/providers/progress_provider.dart';
@@ -33,7 +32,6 @@ class AppDependencies {
     required this.curriculumProvider,
     required this.lessonProvider,
     required this.onboardingProvider,
-    required this.languageServerProvider,
     required this.exerciseProvider,
     required this.progressProvider,
     required this.homeDashboardProvider,
@@ -46,7 +44,6 @@ class AppDependencies {
   final CurriculumProvider curriculumProvider;
   final LessonProvider lessonProvider;
   final OnboardingProvider onboardingProvider;
-  final LanguageServerProvider languageServerProvider;
   final ExerciseProvider exerciseProvider;
   final ProgressProvider progressProvider;
   final HomeDashboardProvider homeDashboardProvider;
@@ -110,9 +107,6 @@ class AppDependencies {
         services<OnboardingRepository>(),
       );
       await onboardingProvider.load(AppConstants.visitorId);
-      final languageServerProvider = LanguageServerProvider(
-        workspaceRepository: services<WorkspaceRepository>(),
-      );
       await progressProvider.load(AppConstants.visitorId);
       final curriculum = curriculumProvider.state.value;
       if (progressProvider.progress == null && curriculum?.units.isNotEmpty == true) {
@@ -150,7 +144,6 @@ class AppDependencies {
         curriculumProvider: curriculumProvider,
         lessonProvider: LessonProvider(curriculumRepository),
         onboardingProvider: onboardingProvider,
-        languageServerProvider: languageServerProvider,
         exerciseProvider: ExerciseProvider(),
         progressProvider: progressProvider,
         homeDashboardProvider: homeDashboardProvider,
@@ -175,11 +168,6 @@ class AppDependencies {
     onboardingProvider.dispose();
     exerciseProvider.dispose();
     progressProvider.dispose();
-    try {
-      await languageServerProvider.disconnect();
-    } finally {
-      languageServerProvider.dispose();
-      await services.reset();
-    }
+    await services.reset();
   }
 }

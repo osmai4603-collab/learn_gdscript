@@ -1,63 +1,387 @@
 {
   "id": "lesson_03_variables",
   "unitId": "unit_02_variables",
-  "title": {"ar": "المتغيرات", "en": "Variables"},
-  "objective": {"ar": "خزّن قيمة في متغير ثم استخدمها أو حدّثها.", "en": "Store a value in a variable, then use or update it."},
-  "estimatedMinutes": 5,
+  "title": {
+    "ar": "المتغيرات والثوابت",
+    "en": "Variables and constants"
+  },
+  "objective": {
+    "ar": "خزّن قيمة في متغير، وميّزها عن قيمة ثابتة لا يعاد إسنادها.",
+    "en": "Store a value in a variable and distinguish it from a constant that cannot be reassigned."
+  },
+  "estimatedMinutes": 8,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## خزّن قيمة باسم\n\nالمتغير اسم لقيمة يمكن لبرنامجك استخدامها لاحقاً. عرّفه بكلمة `var` ثم أسند إليه قيمة:\n\n```gdscript\nvar name = \"Ali\"\nprint(name)\n```\n\nاستخدم أسماء واضحة تبدأ بحرف أو شرطة سفلية، واكتب الأسماء البرمجية بالإنجليزية. يمكنك إسناد قيمة جديدة إلى المتغير؛ عندها تُستخدم القيمة الأحدث.",
-    "en": "## Store a value by name\n\nA variable is a name for a value your program can use later. Declare it with `var` and assign a value:\n\n```gdscript\nvar name = \"Ali\"\nprint(name)\n```\n\nUse clear names that start with a letter or underscore, and write code identifiers in English. You can assign a new value to a variable; later code uses the updated value."
+    "ar": "## المتغيرات والثوابت\n\nيعرّف `var` متغيراً يمكن تغيير قيمته، بينما يعرّف `const` قيمة ثابتة لا يعاد إسنادها. اختر أسماء تصف المعنى مثل `health` أو `score` وابدأ أسماء المتغيرات بحروف صغيرة. استخدم الثابت للقيم التي لا تتغير مثل حدّ أعلى أو قيمة إعداد.\n\n### مثال عملي\n\n```gdscript\nvar score = 10\nscore = score + 5\nprint(score)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## Variables and constants\n\n`var` declares a variable whose value can change, while `const` declares a fixed value that cannot be reassigned. Choose meaningful names such as `health` or `score`, and use lowercase variable names. Use a constant for values that should not change, such as a limit or setting.\n\n### Practical example\n\n```gdscript\nvar score = 10\nscore = score + 5\nprint(score)\n```\n\nChange one value and run the script to observe its effect."
   },
-  "exampleCode": "var name = \"Ali\"\nprint(name)",
+  "exampleCode": "var score = 10\nscore = score + 5\nprint(score)",
+  "documentation": {
+    "ar": "### المتغيرات والثوابت\n\nيعرّف `var` متغيراً يمكن تغيير قيمته، بينما يعرّف `const` قيمة ثابتة لا يعاد إسنادها. اختر أسماء تصف المعنى مثل `health` أو `score` وابدأ أسماء المتغيرات بحروف صغيرة. استخدم الثابت للقيم التي لا تتغير مثل حدّ أعلى أو قيمة إعداد.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Variables and constants\n\n`var` declares a variable whose value can change, while `const` declares a fixed value that cannot be reassigned. Choose meaningful names such as `health` or `score`, and use lowercase variable names. Use a constant for values that should not change, such as a limit or setting.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
   "exercises": [
     {
-      "id": "ex_03_store_score",
+      "id": "ex_03_variables_01",
       "lessonId": "lesson_03_variables",
-      "type": "writeCode",
-      "prompt": {"ar": "أنشئ المتغير `score` بالقيمة `10` واطبع قيمته.", "en": "Create a variable named `score` with the value `10` and print it."},
-      "starterCode": "",
-      "solutionCode": "var score = 10\nprint(score)",
-      "testCases": [
-        {"description": {"ar": "تظهر قيمة المتغير.", "en": "The variable value is displayed."}, "expectedOutput": "10"}
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "ابدأ التعريف بالكلمة `var`.", "en": "Start the declaration with `var`."},
-        {"ar": "مرّر اسم المتغير إلى `print()`.", "en": "Pass the variable name to `print()`."}
-      ],
-      "order": 0
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_03_two_variables",
+      "id": "ex_03_variables_02",
       "lessonId": "lesson_03_variables",
-      "type": "writeCode",
-      "prompt": {"ar": "أنشئ `count` بالقيمة `3` و`color` بالقيمة `Blue`، ثم اطبع كل قيمة في سطر.", "en": "Create `count` with the value `3` and `color` with the value `Blue`, then print each value on a line."},
-      "starterCode": "",
-      "solutionCode": "var count = 3\nvar color = \"Blue\"\nprint(count)\nprint(color)",
-      "testCases": [
-        {"description": {"ar": "تظهر القيمتان بالترتيب.", "en": "Both values appear in order."}, "expectedOutput": "3\nBlue"}
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "اكتب تعريفاً مستقلاً لكل متغير.", "en": "Write a separate declaration for each variable."},
-        {"ar": "النصوص تحتاج إلى علامتي تنصيص، والأعداد لا تحتاج إليهما.", "en": "Strings need quotation marks; numbers do not."}
-      ],
-      "order": 1
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_03_reassign",
+      "id": "ex_03_variables_03",
       "lessonId": "lesson_03_variables",
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_03_variables_04",
+      "lessonId": "lesson_03_variables",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_03_variables_05",
+      "lessonId": "lesson_03_variables",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`4`",
+        "en": "Write or complete the example so its output is:\n\n`4`"
+      },
+      "starterCode": "",
+      "solutionCode": "var score = 4\nprint(score)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "4"
+        }
+      ]
+    },
+    {
+      "id": "ex_03_variables_06",
+      "lessonId": "lesson_03_variables",
+      "order": 5,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\n2",
+        "en": "Write code that applies the lesson idea and produces this output:\n\n2"
+      },
+      "starterCode": "",
+      "solutionCode": "var lives = 3\nlives = lives - 1\nprint(lives)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "2"
+        }
+      ]
+    },
+    {
+      "id": "ex_03_variables_07",
+      "lessonId": "lesson_03_variables",
+      "order": 6,
+      "type": "fixBug",
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`8`",
+        "en": "Write or complete the example so its output is:\n\n`8`"
+      },
+      "starterCode": "const MAX = 8\npront(MAX)",
+      "solutionCode": "const MAX = 8\nprint(MAX)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "8"
+        }
+      ]
+    },
+    {
+      "id": "ex_03_variables_08",
+      "lessonId": "lesson_03_variables",
+      "order": 7,
       "type": "predictOutput",
-      "prompt": {"ar": "اكتب برنامجاً يعرّف `lives` بالقيمة `4` ثم يغيّرها إلى `2` ويطبع القيمة الجديدة.", "en": "Write a program that sets `lives` to `4`, changes it to `2`, and prints the new value."},
-      "starterCode": "",
-      "solutionCode": "var lives = 4\nlives = 2\nprint(lives)",
-      "testCases": [
-        {"description": {"ar": "تُطبع القيمة بعد إعادة الإسناد.", "en": "The value after reassignment is printed."}, "expectedOutput": "2"}
-      ],
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`5`",
+        "en": "What output does this example display?\n\n`5`"
+      },
+      "starterCode": "var coins = 2\ncoins = coins + 3\nprint(coins)",
+      "solutionCode": "var coins = 2\ncoins = coins + 3\nprint(coins)",
       "hints": [
-        {"ar": "عرّف المتغير مرة واحدة باستخدام `var`.", "en": "Declare the variable once using `var`."},
-        {"ar": "اكتب إسناداً جديداً إلى `lives` قبل الطباعة.", "en": "Assign a new value to `lives` before printing."}
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 2
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "5"
+        }
+      ]
+    },
+    {
+      "id": "ex_03_variables_09",
+      "lessonId": "lesson_03_variables",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Lina`",
+        "en": "Write or complete the example so its output is:\n\n`Lina`"
+      },
+      "starterCode": "",
+      "solutionCode": "var name = \"Lina\"\nprint(name)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Lina"
+        }
+      ]
+    },
+    {
+      "id": "ex_03_variables_10",
+      "lessonId": "lesson_03_variables",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`true`",
+        "en": "Write or complete the example so its output is:\n\n`true`"
+      },
+      "starterCode": "",
+      "solutionCode": "var ready = true\nprint(ready)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "true"
+        }
+      ]
     }
   ]
 }

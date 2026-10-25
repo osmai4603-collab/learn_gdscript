@@ -1,0 +1,19 @@
+{
+  "id": "unit_09_editor_resources",
+  "title": {
+    "ar": "خصائص المحرر والموارد",
+    "en": "Editor Properties and Resources"
+  },
+  "description": {
+    "ar": "اضبط الخصائص وحمّل الموارد واحفظ البيانات",
+    "en": "Configure properties, load resources, and save data"
+  },
+  "iconName": "inventory_2",
+  "order": 8,
+  "lessonIds": [
+    "lesson_37_exports",
+    "lesson_38_resource_loading",
+    "lesson_39_resources",
+    "lesson_40_saving"
+  ]
+}

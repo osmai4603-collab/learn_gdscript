@@ -1,0 +1,385 @@
+{
+  "id": "lesson_31_groups",
+  "unitId": "unit_07_godot_scene_tree",
+  "title": {
+    "ar": "مجموعات العقد",
+    "en": "Node Groups"
+  },
+  "objective": {
+    "ar": "استخدم المجموعات لوصف أدوار العقد والاستعلام عنها جماعياً.",
+    "en": "Use groups to describe node roles and query them collectively."
+  },
+  "estimatedMinutes": 10,
+  "order": 3,
+  "documentation": {
+    "ar": "أضف العقد إلى مجموعات مثل `enemies` أو `interactables` من المحرر أو عبر `add_to_group()`. يمكن الاستعلام عن أعضاء المجموعة عبر شجرة المشهد. المجموعة تصنيف وصفي وليست علاقة أبوة.",
+    "en": "Add nodes to groups such as `enemies` or `interactables` in the editor or with `add_to_group()`. You can query group members through the scene tree. A group is a descriptive category, not a parent-child relationship."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "مجموعات العقد",
+        "en": "Groups"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/groups.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع الصنف Node",
+        "en": "Node class reference"
+      },
+      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## صنّف العقد حسب الدور\n\nيمكن أن تجمع `enemies` عقداً غير متجاورة في الشجرة لكنها تؤدي الدور نفسه. أضف العقدة من المحرر أو بالكود.\n\n```gdscript\nextends Node\n\nfunc _ready():\n    add_to_group(\"interactables\")\n```\n\nالمجموعة لا تنشئ عقدة أب ولا تستبدل واجهة واضحة بين المكونات.",
+    "en": "## Categorize nodes by role\n\nThe `enemies` group can collect nodes that are not next to each other in the tree but share the same role. Add a node in the editor or through code.\n\n```gdscript\nextends Node\n\nfunc _ready():\n    add_to_group(\"interactables\")\n```\n\nA group does not create a parent node or replace a clear interface between components."
+  },
+  "exercises": [
+    {
+      "id": "ex_lesson_31_groups_01_predict",
+      "lessonId": "lesson_31_groups",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع النتيجة في المثال: يمكن لشجرة المشهد إرجاع العقد التي تحمل عضوية مجموعة `interactables` حتى إن لم تكن أبناء مباشرين لبعضها.",
+        "en": "Predict the result in the example: The scene tree can return nodes in the `interactables` group even if they are not direct children of one another."
+      },
+      "options": [
+        {
+          "ar": "يمكن لشجرة المشهد إرجاع العقد التي تحمل عضوية مجموعة `interactables` حتى إن لم تكن أبناء مباشرين لبعضها.",
+          "en": "The scene tree can return nodes in the `interactables` group even if they are not direct children of one another."
+        },
+        {
+          "ar": "استخدم اسماً يصف الدور مثل `enemies` أو `interactables`.",
+          "en": "Use a role-based name such as `enemies` or `interactables`."
+        },
+        {
+          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
+          "en": "A group creates a new node in the scene."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
+          "en": "Trace what happens first, then the final result."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_31_groups_02_identify",
+      "lessonId": "lesson_31_groups",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «مجموعات العقد»؟",
+        "en": "Which statement accurately identifies the core concept in “Node Groups”?"
+      },
+      "options": [
+        {
+          "ar": "المجموعة تصنيف دلالي لعدة عقد بحسب دور مشترك، وليست علاقة أبوة.",
+          "en": "A group is a semantic category for nodes that share a role, not a parent-child relationship."
+        },
+        {
+          "ar": "استخدم اسماً يصف الدور مثل `enemies` أو `interactables`.",
+          "en": "Use a role-based name such as `enemies` or `interactables`."
+        },
+        {
+          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
+          "en": "A group creates a new node in the scene."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
+          "en": "Look for the role of the key terms in the example."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_31_groups_03_choose",
+      "lessonId": "lesson_31_groups",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي قرار تصميم مناسب للحالة التالية؟ ضع كل العناصر القابلة للتفاعل في مجموعة مشتركة ثم استعلم عنها بحسب الحاجة.",
+        "en": "Which design choice fits this situation? Place all interactable objects in a shared group and query them when needed."
+      },
+      "options": [
+        {
+          "ar": "ضع كل العناصر القابلة للتفاعل في مجموعة مشتركة ثم استعلم عنها بحسب الحاجة.",
+          "en": "Place all interactable objects in a shared group and query them when needed."
+        },
+        {
+          "ar": "استخدم اسماً يصف الدور مثل `enemies` أو `interactables`.",
+          "en": "Use a role-based name such as `enemies` or `interactables`."
+        },
+        {
+          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
+          "en": "A group creates a new node in the scene."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
+          "en": "Choose the option that matches the scenario’s stated need."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_31_groups_04_complete",
+      "lessonId": "lesson_31_groups",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: قائمتان لمجموعات مثل `enemies` و`interactables` مع أعضاء مقترحين لكل مجموعة.",
+        "en": "Complete a short sketch or sequence that shows: Two groups such as `enemies` and `interactables`, with proposed members for each."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الأجزاء الأساسية المطلوبة: قائمتان لمجموعات مثل `enemies` و`interactables` مع أعضاء مقترحين لكل مجموعة.",
+          "en": "Write the required essential parts: Two groups such as `enemies` and `interactables`, with proposed members for each."
+        },
+        {
+          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
+          "en": "Connect the elements in the correct order or relationship."
+        },
+        {
+          "ar": "راجع المخطط باستخدام تعريف الدرس.",
+          "en": "Review the sketch using the lesson definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_31_groups_05_write",
+      "lessonId": "lesson_31_groups",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أضف عقدتين تجريبيتين إلى مجموعة واحدة من المحرر وتحقق من عضويتهما يدوياً.",
+        "en": "Write a short implementation plan for this application: Add two test nodes to one group in the editor and manually verify their membership."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
+          "en": "Identify the goal and the elements or nodes you need."
+        },
+        {
+          "ar": "اكتب الخطوات بترتيب التنفيذ.",
+          "en": "Write the steps in implementation order."
+        },
+        {
+          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
+          "en": "State how you will manually verify the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_31_groups_06_fix",
+      "lessonId": "lesson_31_groups",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "اقرأ الاعتقاد الخاطئ: «إضافة عقدة إلى مجموعة تجعلها ابناً للعقدة التي أضافتها.» ما التصحيح الأفضل؟",
+        "en": "Read this misconception: “Adding a node to a group makes it a child of the node that added it.” What is the best correction?"
+      },
+      "options": [
+        {
+          "ar": "المجموعة تصنيف مستقل عن موضع العقدة في الشجرة؛ عدّل الأبوة من شجرة المشهد عند الحاجة.",
+          "en": "A group is independent of tree position; change parentage in the scene tree when needed."
+        },
+        {
+          "ar": "إضافة عقدة إلى مجموعة تجعلها ابناً للعقدة التي أضافتها.",
+          "en": "Adding a node to a group makes it a child of the node that added it."
+        },
+        {
+          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
+          "en": "A group creates a new node in the scene."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
+          "en": "Distinguish the correct definition from the mistaken assumption."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_31_groups_07_apply",
+      "lessonId": "lesson_31_groups",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أضف عقدتين تجريبيتين إلى مجموعة واحدة من المحرر وتحقق من عضويتهما يدوياً. لا يُفحص إعداد المحرر تلقائياً.",
+        "en": "Apply the concept manually in a test project: Add two test nodes to one group in the editor and manually verify their membership. Editor setup is not automatically checked."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
+          "en": "Create the smallest example that demonstrates the idea."
+        },
+        {
+          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
+          "en": "Check the relevant names and settings inside Godot."
+        },
+        {
+          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
+          "en": "Run the experiment if possible and record what you observe."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_31_groups_08_compare",
+      "lessonId": "lesson_31_groups",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ مجموعة العقد تصف دوراً مشتركاً؛ مسار العقدة يصف موقعاً بنيوياً.",
+        "en": "What is the difference between the concepts in this lesson? A node group describes a shared role; a node path describes a structural location."
+      },
+      "options": [
+        {
+          "ar": "مجموعة العقد تصف دوراً مشتركاً؛ مسار العقدة يصف موقعاً بنيوياً.",
+          "en": "A node group describes a shared role; a node path describes a structural location."
+        },
+        {
+          "ar": "استخدم اسماً يصف الدور مثل `enemies` أو `interactables`.",
+          "en": "Use a role-based name such as `enemies` or `interactables`."
+        },
+        {
+          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
+          "en": "A group creates a new node in the scene."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
+          "en": "Compare each part’s role, not just its name."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_31_groups_09_debug",
+      "lessonId": "lesson_31_groups",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "راجع الحالة المعيبة: عقدة قابلة للتفاعل مفقودة من المجموعة التي يستعلم عنها النظام. اكتب طريقة تشخيصها وإصلاحها.",
+        "en": "Review this flawed setup: An interactable node is missing from the group queried by the system. Write how you would diagnose and fix it."
+      },
+      "steps": [
+        {
+          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
+          "en": "Identify the incorrect element or relationship."
+        },
+        {
+          "ar": "قارنها بما يتطلبه المفهوم.",
+          "en": "Compare it with what the concept requires."
+        },
+        {
+          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
+          "en": "Write a correction and a manual verification step."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_31_groups_10_apply",
+      "lessonId": "lesson_31_groups",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: استخدم المجموعة لجمع العناصر واستخدم إشارة لإعلان حدث التفاعل دون ربط كل مسار مباشرة.",
+        "en": "Design an application that combines this concept with an earlier idea: Use a group to gather objects and a signal to announce interaction without directly coupling every path."
+      },
+      "steps": [
+        {
+          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
+          "en": "Choose a clear purpose for the integrated example."
+        },
+        {
+          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
+          "en": "Define the responsibility of each node, class, or part."
+        },
+        {
+          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
+          "en": "Sketch the data or event flow, then self-review it."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

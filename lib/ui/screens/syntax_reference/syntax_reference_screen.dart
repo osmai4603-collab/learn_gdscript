@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/repositories/syntax_reference_repository.dart';
 import '../../../logic/providers/curriculum_provider.dart';
@@ -64,41 +63,33 @@ class _SyntaxReferenceScreenState extends State<SyntaxReferenceScreen> {
         final entries = snapshot.data!;
         final locale = Localizations.localeOf(context);
         final l10n = context.l10n;
-        final modelEntries = entries.map((entry) {
-          final category = switch (entry.category) {
-            'keywords' => SyntaxCategory.keywords,
-            'types' => SyntaxCategory.builtinTypes,
-            'builtins' => SyntaxCategory.coreFunctions,
-            _ => SyntaxCategory.all,
-          };
-          final categoryLabel = switch (entry.category) {
-            'keywords' => l10n.syntaxCategoryKeywords,
-            'types' => l10n.syntaxCategoryTypes,
-            'builtins' => l10n.syntaxCategoryBuiltins,
-            _ => entry.category,
-          };
-          return SyntaxDocEntryModel(
-            id: '${entry.category}:${entry.id}',
-            title: entry.title.resolve(locale),
-            signature: entry.syntax,
-            category: category,
-            categoryLabel: categoryLabel,
-            briefDescription: entry.description.resolve(locale),
-            detailedExplanation: entry.description.resolve(locale),
-            codeExample: entry.example,
-            relatedConcepts: entry.seeAlso,
-            relatedLesson: entry.relatedLesson,
-            godotVersion: '',
-          );
-        }).toList(growable: false);
+        final modelEntries = entries
+            .map((entry) {
+              final category = _syntaxCategory(entry.category);
+              final categoryLabel = switch (category) {
+                SyntaxCategory.keywords => l10n.syntaxCategoryKeywords,
+                SyntaxCategory.builtins => l10n.syntaxCategoryBuiltins,
+                SyntaxCategory.types => l10n.syntaxCategoryTypes,
+                SyntaxCategory.all => entry.category,
+              };
+              return SyntaxDocEntryModel(
+                id: '${entry.category}:${entry.id}',
+                title: entry.title.resolve(locale),
+                signature: entry.syntax,
+                category: category,
+                categoryLabel: categoryLabel,
+                description: entry.description.resolve(locale),
+                codeExample: entry.example,
+                relatedConcepts: entry.seeAlso,
+                relatedLesson: entry.relatedLesson,
+              );
+            })
+            .toList(growable: false);
 
         return DesktopSyntaxExplorerScreen(
           data: SyntaxExplorerDataModel(
-            searchQuery: '',
-            selectedCategory: SyntaxCategory.all,
             entries: modelEntries,
             selectedEntryId: modelEntries.isEmpty ? '' : modelEntries.first.id,
-            totalEntriesCount: modelEntries.length,
           ),
           onSearchSubmitted: _recordSearch,
           onNavigateRoute: (route) => context.go(route),
@@ -108,6 +99,22 @@ class _SyntaxReferenceScreenState extends State<SyntaxReferenceScreen> {
     );
   }
 
+  SyntaxCategory _syntaxCategory(String sourceCategory) {
+    if (const {'primitive', 'collection', 'special'}.contains(sourceCategory)) {
+      return SyntaxCategory.types;
+    }
+    if (const {
+      'output',
+      'iteration',
+      'conversion',
+      'collections',
+      'math',
+      'type',
+    }.contains(sourceCategory)) {
+      return SyntaxCategory.builtins;
+    }
+    return SyntaxCategory.keywords;
+  }
 }
 
 class _SyntaxReferenceLoading extends StatelessWidget {
@@ -148,10 +155,7 @@ class _SyntaxReferenceLoading extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 20),
-                    const Expanded(
-                      flex: 6,
-                      child: _SkeletonBlock(height: 420),
-                    ),
+                    const Expanded(flex: 6, child: _SkeletonBlock(height: 420)),
                   ],
                 ),
               ),
@@ -233,7 +237,7 @@ class _SyntaxReferenceError extends StatelessWidget {
               FilledButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh),
-                label: Text(l10n.settingsReload),
+                label: Text(l10n.syntaxExplorerRetry),
               ),
             ],
           ),

@@ -1,0 +1,394 @@
+{
+  "id": "lesson_17_strings",
+  "unitId": "unit_02_variables",
+  "title": {
+    "ar": "النصوص والتنسيق",
+    "en": "Strings and formatting"
+  },
+  "objective": {
+    "ar": "ادمج النصوص وحوّل القيم إلى نصوص لتكوين رسائل واضحة.",
+    "en": "Combine strings and convert values to text to build clear messages."
+  },
+  "estimatedMinutes": 8,
+  "order": 3,
+  "contentMarkdown": {
+    "ar": "## النصوص والتنسيق\n\nالنصوص محاطة بعلامتي اقتباس ويمكن دمجها باستخدام `+`. استخدم `str(value)` لتحويل قيمة إلى نص. يوفر `String.format()` عناصر نائبة مسماة لتنسيق عدة قيم؛ طابق أسماء العناصر النائبة مع مفاتيح القاموس واكتب رسالة واضحة.\n\n### مثال عملي\n\n```gdscript\nvar player = \"Sam\"\nvar score = 12\nprint(\"Player \" + player + \", score: \" + str(score))\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## Strings and formatting\n\nStrings are quoted and can be joined with `+`. Use `str(value)` to convert a value to text. `String.format()` provides named placeholders for formatting several values; match placeholder names to dictionary keys and keep the message clear.\n\n### Practical example\n\n```gdscript\nvar player = \"Sam\"\nvar score = 12\nprint(\"Player \" + player + \", score: \" + str(score))\n```\n\nChange one value and run the script to observe its effect."
+  },
+  "exampleCode": "var player = \"Sam\"\nvar score = 12\nprint(\"Player \" + player + \", score: \" + str(score))",
+  "documentation": {
+    "ar": "### النصوص والتنسيق\n\nالنصوص محاطة بعلامتي اقتباس ويمكن دمجها باستخدام `+`. استخدم `str(value)` لتحويل قيمة إلى نص. يوفر `String.format()` عناصر نائبة مسماة لتنسيق عدة قيم؛ طابق أسماء العناصر النائبة مع مفاتيح القاموس واكتب رسالة واضحة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Strings and formatting\n\nStrings are quoted and can be joined with `+`. Use `str(value)` to convert a value to text. `String.format()` provides named placeholders for formatting several values; match placeholder names to dictionary keys and keep the message clear.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "تنسيق النصوص في GDScript",
+        "en": "GDScript format strings"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_format_string.html"
+    },
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_17_strings_01",
+      "lessonId": "lesson_17_strings",
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_02",
+      "lessonId": "lesson_17_strings",
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_03",
+      "lessonId": "lesson_17_strings",
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_04",
+      "lessonId": "lesson_17_strings",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_05",
+      "lessonId": "lesson_17_strings",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Hello Noor`",
+        "en": "Write or complete the example so its output is:\n\n`Hello Noor`"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"Hello \" + \"Noor\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Hello Noor"
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_06",
+      "lessonId": "lesson_17_strings",
+      "order": 5,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nScore: 8",
+        "en": "Write code that applies the lesson idea and produces this output:\n\nScore: 8"
+      },
+      "starterCode": "",
+      "solutionCode": "var score = 8\nprint(\"Score: \" + str(score))",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Score: 8"
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_07",
+      "lessonId": "lesson_17_strings",
+      "order": 6,
+      "type": "fixBug",
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Hi Omar`",
+        "en": "Write or complete the example so its output is:\n\n`Hi Omar`"
+      },
+      "starterCode": "var name = \"Omar\"\npront(\"Hi \" + name)",
+      "solutionCode": "var name = \"Omar\"\nprint(\"Hi \" + name)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Hi Omar"
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_08",
+      "lessonId": "lesson_17_strings",
+      "order": 7,
+      "type": "predictOutput",
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`3 items`",
+        "en": "What output does this example display?\n\n`3 items`"
+      },
+      "starterCode": "var count = 3\nprint(str(count) + \" items\")",
+      "solutionCode": "var count = 3\nprint(str(count) + \" items\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "3 items"
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_09",
+      "lessonId": "lesson_17_strings",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`ABC`",
+        "en": "Write or complete the example so its output is:\n\n`ABC`"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"A\" + \"B\" + \"C\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "ABC"
+        }
+      ]
+    },
+    {
+      "id": "ex_17_strings_10",
+      "lessonId": "lesson_17_strings",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Level 2`",
+        "en": "Write or complete the example so its output is:\n\n`Level 2`"
+      },
+      "starterCode": "",
+      "solutionCode": "var level = 2\nprint(\"Level \" + str(level))",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Level 2"
+        }
+      ]
+    }
+  ]
+}

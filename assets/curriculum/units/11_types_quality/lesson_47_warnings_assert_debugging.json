@@ -1,0 +1,357 @@
+{
+  "id": "lesson_47_warnings_assert_debugging",
+  "unitId": "unit_11_types_quality",
+  "title": {
+    "ar": "التحذيرات وassert والتصحيح",
+    "en": "Warnings, assert, and Debugging"
+  },
+  "objective": {
+    "ar": "عالج التحذيرات واستخدم assert لفحص افتراضات التطوير وصحح الأخطاء بالمراقبة.",
+    "en": "Address warnings, use assert for development assumptions, and debug by inspecting behavior."
+  },
+  "estimatedMinutes": 9,
+  "order": 2,
+  "contentMarkdown": {
+    "ar": "## اكتشف المشكلة مبكراً\n\nالتحذيرات تشير إلى نمط قد يكون خطأ، مثل متغير غير مستخدم أو تحويل غير آمن. اقرأ الرسالة وموقعها وأصلح السبب بدلاً من كتمها.\n\n```gdscript\nfunc apply_damage(amount: int) -> void:\n    assert(amount >= 0, \"Damage must not be negative\")\n    print(\"Damage: \", amount)\n```\n\n`assert` يفحص افتراضاً داخلياً أثناء التطوير، وليس بديلاً عن التحقق الموجّه للمستخدم. استخدم نقاط التوقف ومراقبة القيم خطوة بخطوة لتحديد موضع التغير.",
+    "en": "## Find problems early\n\nWarnings flag patterns that may be mistakes, such as an unused variable or unsafe conversion. Read the message and location and fix its cause instead of suppressing it.\n\n```gdscript\nfunc apply_damage(amount: int) -> void:\n    assert(amount >= 0, \"Damage must not be negative\")\n    print(\"Damage: \", amount)\n```\n\n`assert` checks an internal assumption during development; it is not a substitute for user-facing validation. Use breakpoints and inspect values step by step to find where a change occurs."
+  },
+  "documentation": {
+    "ar": "تعرض منظومة التحذيرات ملاحظات التحليل، وقد تتأثر شدتها بإعدادات المشروع. أصلح السبب الجذري عادةً بدلاً من تغيير مستوى التحذير. يوقف `assert(condition)` التنفيذ عند فشل افتراض داخلي في وضع التصحيح، لذا استخدمه لشروط ينبغي تحققها لا لمعالجة إدخال المستخدم المعتاد. عند التصحيح، أعد إنتاج المشكلة ثم افحص القيم عند نقطة مناسبة وتتبع تغيرها باستخدام Debugger. يمكن أن يختلف سلوك التأكيدات في إصدارات الإنتاج؛ لا تعتمد عليها كتحقق أمني أو تحقق نهائي من صحة البيانات.",
+    "en": "The warning system reports analysis findings, and their severity can depend on project settings. Usually fix the root cause rather than changing the warning level. `assert(condition)` stops execution when an internal assumption fails in a debug run, so use it for conditions that should hold, not routine user input handling. When debugging, reproduce the issue, inspect values at a useful point, and trace changes with the Debugger. Assertions can behave differently in release builds; do not rely on them as security or final data validation."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "نظام تحذيرات GDScript",
+        "en": "GDScript warning system"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/warning_system.html"
+    },
+    {
+      "title": {
+        "ar": "نظرة عامة على لوحة المصحح",
+        "en": "Overview of the Debugger panel"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/debug/overview_of_debugger_panel.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_01",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الاستخدام الأنسب لـ assert؟",
+        "en": "What is the most suitable use for assert?"
+      },
+      "options": [
+        {
+          "ar": "فحص افتراض داخلي يفترض صحته أثناء التطوير.",
+          "en": "Checking an internal assumption expected to hold during development."
+        },
+        {
+          "ar": "استبدال التحقق من إدخال المستخدم.",
+          "en": "Replacing user-input validation."
+        },
+        {
+          "ar": "انتظار إطار جديد.",
+          "en": "Waiting for a new frame."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_02",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن التحذيرات والتصحيح. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about التحذيرات والتصحيح. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "اقرأ تحذيراً في لوحة المحرر وحدد موقعه وسببه المحتمل.",
+          "en": "Read a warning in the editor panel and identify its location and likely cause."
+        },
+        {
+          "ar": "أصلح السبب وأضف assert لافتراض داخلي مناسب في دالة صغيرة.",
+          "en": "Fix the cause and add an assert for a suitable internal assumption in a small function."
+        },
+        {
+          "ar": "شغّل تصحيحياً بقيمة صحيحة ثم غير صحيحة وتابع التوقف في Debugger.",
+          "en": "Run with a valid value and then an invalid one, and follow the stop in the Debugger."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_03",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «value is valid» في سياق التحذيرات والتصحيح.",
+        "en": "Write code that prints “value is valid” as a التحذيرات والتصحيح status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"value is valid\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "value is valid"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_04",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «value is valid».",
+        "en": "Complete the line so it prints “value is valid”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"value is valid\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "value is valid"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_05",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في التحذيرات والتصحيح: start ثم «value is valid».",
+        "en": "Print two lines showing progress in التحذيرات والتصحيح: start, then “value is valid”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"value is valid\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nvalue is valid"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_06",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «value is valid» تماماً.",
+        "en": "Fix the code so it prints exactly “value is valid”."
+      },
+      "starterCode": "print(\"value is valid!\")",
+      "solutionCode": "print(\"value is valid\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "value is valid"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_07",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «value is valid» ثم done.",
+        "en": "Arrange output to show start, then “value is valid”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"value is valid\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"value is valid\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nvalue is valid\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_08",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع التحذيرات والتصحيح: «value is valid».",
+        "en": "Write a program that records a result related to التحذيرات والتصحيح: “value is valid”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"value is valid\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "value is valid"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_09",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nvalue is valid",
+        "en": "Write a program that displays this sequence:\nvalue is valid"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"value is valid\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "value is valid"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_47_warnings_assert_debugging_10",
+      "lessonId": "lesson_47_warnings_assert_debugging",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «value is valid».",
+        "en": "Use a string variable named status and print its value “value is valid”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"value is valid\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "value is valid"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

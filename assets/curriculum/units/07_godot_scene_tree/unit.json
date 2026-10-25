@@ -1,0 +1,8 @@
+{
+  "id": "unit_07_godot_scene_tree",
+  "title": {"ar": "Godot — العقد وشجرة المشهد", "en": "Godot: Nodes and the Scene Tree"},
+  "description": {"ar": "ابنِ المشاهد وتعامل مع العقد في شجرة المشهد", "en": "Build scenes and work with nodes in the scene tree"},
+  "iconName": "schema",
+  "order": 6,
+  "lessonIds": ["lesson_28_nodes_paths", "lesson_29_node_lifecycle", "lesson_30_onready_nodes", "lesson_31_groups", "lesson_32_packed_scenes"]
+}

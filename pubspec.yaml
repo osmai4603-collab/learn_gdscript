@@ -79,6 +79,13 @@ flutter:
     - assets/curriculum/units/03_conditions/
     - assets/curriculum/units/04_loops/
     - assets/curriculum/units/05_functions/
+    - assets/curriculum/units/06_classes_properties/
+    - assets/curriculum/units/07_godot_scene_tree/
+    - assets/curriculum/units/08_interaction_events/
+    - assets/curriculum/units/09_editor_resources/
+    - assets/curriculum/units/10_time_async/
+    - assets/curriculum/units/11_types_quality/
+    - assets/curriculum/units/12_integrated_project/
     - assets/syntax_reference/
 
   fonts:

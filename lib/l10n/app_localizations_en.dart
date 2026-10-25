@@ -18,15 +18,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeWelcome => 'Learn GDScript step by step';
 
   @override
-  String get dashboardLspConnecting => 'GDScript: Local | LSP: Connecting';
-
-  @override
-  String get dashboardLspActive => 'GDScript: Local | LSP: Active';
-
-  @override
-  String get dashboardLspDisconnected => 'GDScript: Local | LSP: Disconnected';
-
-  @override
   String dashboardDays(int days) {
     return '$days days';
   }
@@ -101,7 +92,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get dashboardEngineTitle => 'Language server and runtime';
+  String get dashboardEngineTitle => 'GDScript engine';
 
   @override
   String get dashboardEngineConnecting => 'Connecting';
@@ -120,9 +111,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboardLocal => 'Local';
-
-  @override
-  String get dashboardLsp => 'Language server';
 
   @override
   String get dashboardPlaygroundReset => 'Reset code';
@@ -294,7 +282,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workspaceTitle => 'Workspace';
 
   @override
-  String get workspaceDescription => 'Local language-server processes are supported on desktop platforms only.';
+  String get workspaceDescription => 'Select a local project directory to inspect and edit its GDScript files.';
 
   @override
   String get settingsTitle => 'Settings';
@@ -318,7 +306,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAppearanceCategory => 'Appearance and language';
 
   @override
-  String get settingsEngineCategory => 'Engine and language server';
+  String get settingsEngineCategory => 'Engine';
 
   @override
   String get settingsAboutCategory => 'About and progress';
@@ -330,7 +318,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAppearanceDescription => 'Choose the display language, color theme, and appearance behavior.';
 
   @override
-  String get settingsEngineDescription => 'Language-server status and development tool navigation.';
+  String get settingsEngineDescription => 'GDScript engine diagnostics and development tools.';
 
   @override
   String get settingsAboutDescription => 'Application information and learning progress management.';
@@ -553,45 +541,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sendFeedback => 'Send Feedback';
 
   @override
-  String get lspStatus => 'Language Server Status';
+  String get engineDiagnosticsTitle => 'GDScript engine diagnostics';
 
   @override
-  String get lspConnected => 'Connected';
+  String get engineDiagnosticsDescription => 'Review diagnostics from GDScript files in the selected workspace.';
 
   @override
-  String get lspDisconnected => 'Disconnected';
+  String get engineDiagnosticsEmpty => 'There are no diagnostics in the indexed workspace files.';
 
   @override
-  String get lspDiagnosticsTitle => 'Language server diagnostics';
-
-  @override
-  String get lspDiagnosticsDescription => 'Review errors and warnings reported by the language server.';
-
-  @override
-  String get lspDiagnosticsEmpty => 'There are no current diagnostics.';
-
-  @override
-  String get lspDiagnosticsConnectPrompt => 'Connect the language server from the workspace to view diagnostics.';
-
-  @override
-  String lspDiagnosticsSummary(int count) {
+  String engineDiagnosticsSummary(int count) {
     return '$count diagnostics';
   }
-
-  @override
-  String get lspDiagnosticError => 'Errors';
-
-  @override
-  String get lspDiagnosticWarning => 'Warnings';
-
-  @override
-  String get lspDiagnosticInformation => 'Information';
-
-  @override
-  String get lspDiagnosticHint => 'Hints';
-
-  @override
-  String get lspDiagnosticNoMessage => 'The language server did not provide a description for this diagnostic.';
 
   @override
   String get startLearning => 'Start Learning';
@@ -672,30 +633,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workspacePath => 'Project directory path';
 
   @override
-  String get lspExecutablePath => 'Language server executable path (optional)';
-
-  @override
-  String get connectLsp => 'Connect and index';
-
-  @override
-  String get disconnectLsp => 'Disconnect';
-
-  @override
-  String indexedFiles(Object count) {
-    return '$count files indexed';
-  }
-
-  @override
-  String get lspConnectionError => 'Could not connect to the language server.';
-
-  @override
   String get completeCode => 'Complete';
-
-  @override
-  String get formatCode => 'Format';
-
-  @override
-  String get lspFeatureError => 'The language server feature failed.';
 
   @override
   String diagnosticLine(Object line) {
@@ -706,13 +644,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workspaceSearchTitle => 'Search workspace';
 
   @override
-  String get workspaceSearchPlaceholder => 'Enter text or a symbol';
-
-  @override
-  String get searchWorkspaceText => 'Text';
-
-  @override
-  String get searchWorkspaceSymbols => 'Symbols';
+  String get workspaceSearchPlaceholder => 'Enter text to search in indexed GDScript files';
 
   @override
   String get workspaceSearchEmpty => 'No results found.';
@@ -995,7 +927,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get syntaxExplorerPageDescription => 'Search GDScript keywords, built-ins, and types.';
 
   @override
-  String get syntaxExplorerDocumentedCount => 'documented entries';
+  String get syntaxExplorerRetry => 'Try again';
 
   @override
   String get syntaxExplorerSearchHint => 'Search for a keyword, built-in, or data type...';
@@ -1008,7 +940,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String syntaxExplorerCount(int count) {
-    return '$count entries';
+    return '$count documented entries';
   }
 
   @override

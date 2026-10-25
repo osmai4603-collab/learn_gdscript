@@ -1,8 +1,20 @@
 {
   "id": "unit_04_loops",
-  "title": {"ar": "الحلقات والتكرار", "en": "Loops and Repetition"},
-  "description": {"ar": "كرّر العمليات بكفاءة", "en": "Repeat operations efficiently"},
+  "title": {
+    "ar": "التكرار والحاويات",
+    "en": "Loops and Collections"
+  },
+  "description": {
+    "ar": "كرّر العمليات ونظّم مجموعات القيم",
+    "en": "Repeat operations and organize collections of values"
+  },
   "iconName": "loop",
   "order": 3,
-  "lessonIds": ["lesson_09_for", "lesson_10_while", "lesson_11_break_continue"]
+  "lessonIds": [
+    "lesson_09_for",
+    "lesson_10_while",
+    "lesson_11_break_continue",
+    "lesson_19_arrays",
+    "lesson_20_dictionaries"
+  ]
 }

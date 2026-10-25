@@ -3,7 +3,15 @@ import 'package:flutter/foundation.dart';
 import 'localized_text.dart';
 import 'model_json.dart';
 
-enum ExerciseType { writeCode, fillBlank, predictOutput, fixBug, reorderSteps }
+enum ExerciseType {
+  writeCode,
+  fillBlank,
+  predictOutput,
+  fixBug,
+  reorderSteps,
+  multipleChoice,
+  guidedTask,
+}
 
 @immutable
 class ExerciseTestCase {
@@ -50,6 +58,9 @@ class Exercise {
   final LocalizedText prompt;
   final String starterCode;
   final String solutionCode;
+  final List<LocalizedText> options;
+  final int? correctOptionIndex;
+  final List<LocalizedText> steps;
   final List<ExerciseTestCase> testCases;
   final List<LocalizedText> hints;
   final int order;
@@ -59,12 +70,17 @@ class Exercise {
     required this.lessonId,
     required this.type,
     required this.prompt,
-    required this.starterCode,
-    required this.solutionCode,
+    this.starterCode = '',
+    this.solutionCode = '',
+    List<LocalizedText> options = const [],
+    this.correctOptionIndex,
+    List<LocalizedText> steps = const [],
     required List<ExerciseTestCase> testCases,
     required List<LocalizedText> hints,
     required this.order,
-  }) : testCases = List.unmodifiable(testCases),
+  }) : options = List.unmodifiable(options),
+       steps = List.unmodifiable(steps),
+       testCases = List.unmodifiable(testCases),
        hints = List.unmodifiable(hints) {
     if (id.trim().isEmpty) {
       throw ArgumentError.value(id, 'id');
@@ -74,6 +90,18 @@ class Exercise {
     }
     if (order < 0) {
       throw ArgumentError.value(order, 'order');
+    }
+    if (type == ExerciseType.multipleChoice &&
+        (options.length < 2 ||
+            correctOptionIndex == null ||
+            correctOptionIndex! < 0 ||
+            correctOptionIndex! >= options.length)) {
+      throw ArgumentError(
+        'Multiple-choice exercises need at least two options and a valid answer.',
+      );
+    }
+    if (type == ExerciseType.guidedTask && steps.isEmpty) {
+      throw ArgumentError('Guided tasks need at least one step.');
     }
   }
 
@@ -90,8 +118,29 @@ class Exercise {
       lessonId: requiredString(json, 'lessonId'),
       type: exerciseType.first,
       prompt: LocalizedText.fromJson(requiredObject(json, 'prompt')),
-      starterCode: requiredText(json, 'starterCode'),
-      solutionCode: requiredText(json, 'solutionCode'),
+      starterCode: json.containsKey('starterCode')
+          ? requiredText(json, 'starterCode')
+          : '',
+      solutionCode: json.containsKey('solutionCode')
+          ? requiredText(json, 'solutionCode')
+          : '',
+      options: [
+        for (final item
+            in json['options'] == null
+                ? const <Object?>[]
+                : requiredList(json, 'options'))
+          LocalizedText.fromJson(_asObject(item, 'options')),
+      ],
+      correctOptionIndex: json.containsKey('correctOptionIndex')
+          ? requiredInt(json, 'correctOptionIndex', minimum: 0)
+          : null,
+      steps: [
+        for (final item
+            in json['steps'] == null
+                ? const <Object?>[]
+                : requiredList(json, 'steps'))
+          LocalizedText.fromJson(_asObject(item, 'steps')),
+      ],
       testCases: [
         for (final item
             in json['testCases'] == null
@@ -117,6 +166,10 @@ class Exercise {
     'prompt': prompt.toJson(),
     'starterCode': starterCode,
     'solutionCode': solutionCode,
+    if (options.isNotEmpty)
+      'options': options.map((option) => option.toJson()).toList(),
+    if (correctOptionIndex != null) 'correctOptionIndex': correctOptionIndex,
+    if (steps.isNotEmpty) 'steps': steps.map((step) => step.toJson()).toList(),
     'testCases': testCases.map((test) => test.toJson()).toList(growable: false),
     'hints': hints.map((hint) => hint.toJson()).toList(growable: false),
     'order': order,

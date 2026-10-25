@@ -1,0 +1,8 @@
+{
+  "id": "unit_06_classes_properties",
+  "title": {"ar": "الأصناف والخصائص", "en": "Classes and Properties"},
+  "description": {"ar": "نمذج كائنات اللعبة باستخدام الأصناف والخصائص", "en": "Model game objects with classes and properties"},
+  "iconName": "account_tree",
+  "order": 5,
+  "lessonIds": ["lesson_23_scripts_as_classes", "lesson_24_inheritance_class_name", "lesson_25_init", "lesson_26_properties_get_set", "lesson_27_composition_inheritance"]
+}

@@ -1,0 +1,361 @@
+{
+  "id": "lesson_22_problem_decomposition",
+  "unitId": "unit_05_functions",
+  "title": {
+    "ar": "تقسيم المشكلة وإعادة الاستخدام",
+    "en": "Problem Decomposition and Reuse"
+  },
+  "objective": {
+    "ar": "قسّم مهمة أكبر إلى دوال صغيرة ذات أسماء ومسؤوليات واضحة.",
+    "en": "Break a larger task into small functions with clear names and responsibilities."
+  },
+  "estimatedMinutes": 10,
+  "order": 4,
+  "documentation": {
+    "ar": "ابدأ بالنتيجة المطلوبة، ثم قسم المهمة إلى خطوات متماسكة. اجعل لكل خطوة اسماً واضحاً ومسؤولية مفهومة. أعد القيم الحسابية بدلاً من طباعتها كي يتمكن المستدعي من إعادة استخدامها.",
+    "en": "Start with the desired result, then divide the task into cohesive steps. Give each step a clear name and responsibility. Return calculated values instead of printing them so callers can reuse them."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## من هدف إلى خطوات مسماة\n\nابدأ بوصف النتيجة، ثم قسمها إلى خطوات صغيرة. اجعل لكل خطوة دالة باسم يصف فعلها. تفيد دالة الحساب إذا أعادت نتيجة، ويمكن لدالة أخرى تنسيقها أو عرضها.\n\n```gdscript\nfunc calculate_area(width, height):\n    return width * height\n\nfunc show_area(width, height):\n    var area = calculate_area(width, height)\n    print(\"Area: \" + str(area))\n\nshow_area(3, 4)\n```\n\nتفصل `calculate_area` الحساب عن العرض. لا تحول كل سطر إلى دالة؛ اختر حدوداً تجعل المسؤوليات والأسماء مفيدة.",
+    "en": "## From a goal to named steps\n\nStart by describing the result, then split it into small steps. Give each step a function whose name describes its action. A calculation function is useful when it returns a result that another function can format or display.\n\n```gdscript\nfunc calculate_area(width, height):\n    return width * height\n\nfunc show_area(width, height):\n    var area = calculate_area(width, height)\n    print(\"Area: \" + str(area))\n\nshow_area(3, 4)\n```\n\n`calculate_area` separates calculation from display. Do not turn every line into a function; choose boundaries that make responsibilities and names useful."
+  },
+  "exampleCode": "func calculate_area(width, height):\n    return width * height\n\nfunc show_area(width, height):\n    var area = calculate_area(width, height)\n    print(\"Area: \" + str(area))\n\nshow_area(3, 4)",
+  "exercises": [
+    {
+      "id": "ex_lesson_22_problem_decomposition_predict",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع ما الذي يحدث عند استدعاء `show_area(3, 4)` في المثال.",
+        "en": "Predict what happens when `show_area(3, 4)` is called in the example."
+      },
+      "options": [
+        {
+          "ar": "تحسب دالة المساحة 12 ثم تعرض `Area: 12`.",
+          "en": "The area function calculates 12, then displays `Area: 12`."
+        },
+        {
+          "ar": "تطبع دالة الحساب دون أن تعيد نتيجة.",
+          "en": "The calculation function prints without returning a result."
+        },
+        {
+          "ar": "لا تستدعى أي دالة.",
+          "en": "No function is called."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبّع موضع تعريف المتغير أو انتقال القيمة بين الدوال.",
+          "en": "Trace where a variable is declared or how a value flows between functions."
+        },
+        {
+          "ar": "قارن اختيارك بالتعريف والأمثلة في الدرس.",
+          "en": "Compare your choice with the lesson definition and examples."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_identify",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي خطوة توضح تقسيم المشكلة وإعادة الاستخدام؟",
+        "en": "Which step demonstrates problem decomposition and reuse?"
+      },
+      "options": [
+        {
+          "ar": "تحديد خطوات مستقلة وتسميتها بدوال ثم استخدام نتائجها.",
+          "en": "Identify and name independent steps as functions, then use their results."
+        },
+        {
+          "ar": "وضع جميع الأوامر في دالة واحدة طويلة.",
+          "en": "Put every statement in one long function."
+        },
+        {
+          "ar": "نسخ الحساب نفسه في كل موضع يحتاج إليه.",
+          "en": "Copy the same calculation everywhere it is needed."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبّع موضع تعريف المتغير أو انتقال القيمة بين الدوال.",
+          "en": "Trace where a variable is declared or how a value flows between functions."
+        },
+        {
+          "ar": "قارن اختيارك بالتعريف والأمثلة في الدرس.",
+          "en": "Compare your choice with the lesson definition and examples."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_complete",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً يوضح الفكرة الأساسية لهذا الدرس.",
+        "en": "Complete a sketch that explains the core idea of this lesson."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الهدف النهائي للمهمة.",
+          "en": "Write the task’s final goal."
+        },
+        {
+          "ar": "قسّمها إلى حساب وعرض.",
+          "en": "Split it into calculation and display."
+        },
+        {
+          "ar": "حدد ما الذي تعيده دالة الحساب.",
+          "en": "Identify what the calculation function returns."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_code_1",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `rectangle_area(w, h)` لإعادة المساحة ثم اطبع مساحة 5 × 2.",
+        "en": "Define `rectangle_area(w, h)` to return the area, then print the area of 5 × 2."
+      },
+      "starterCode": "",
+      "solutionCode": "func rectangle_area(w, h):\n    return w * h\n\nprint(rectangle_area(5, 2))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "10"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_fix",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح التصميم ليعيد الحساب من دالة صغيرة ويستخدمه في العرض.",
+        "en": "Fix the design so a small function returns the calculation and the display uses it."
+      },
+      "starterCode": "func area(w, h):\n    print(w * h)\n\nvar result = area(3, 4)\nprint(result)",
+      "solutionCode": "func area(w, h):\n    return w * h\n\nvar result = area(3, 4)\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "12"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "قارن تعريف الدالة مع طريقة استخدام المعامل أو القيمة المعادة.",
+          "en": "Compare the function definition with how the parameter or returned value is used."
+        },
+        {
+          "ar": "تأكد من الإزاحة والاستدعاء بعد إصلاح الجسم.",
+          "en": "Check indentation and the call after fixing the body."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_code_2",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `format_label(label, value)` لتعيد التسمية متبوعة بالقيمة بعد نقطتين. اطبع `Level: 3`.",
+        "en": "Define `format_label(label, value)` to return the label followed by the value after a colon. Print `Level: 3`."
+      },
+      "starterCode": "",
+      "solutionCode": "func format_label(label, value):\n    return label + \": \" + str(value)\n\nprint(format_label(\"Level\", 3))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "Level: 3"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_6",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "ارسم أو أنشئ مثالاً صغيراً يوضح تقسيم المشكلة وإعادة الاستخدام. هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+        "en": "Sketch or create a small example of Problem Decomposition and Reuse. This is a self-check task, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف من المثال.",
+          "en": "Define the goal of the example."
+        },
+        {
+          "ar": "أضف أقل العناصر المطلوبة.",
+          "en": "Add only the necessary elements."
+        },
+        {
+          "ar": "قارن النتيجة بتعريف المفهوم.",
+          "en": "Compare the result with the concept definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أكمل الخطوات بنفسك في ملاحظاتك أو مشروع تجريبي.",
+          "en": "Complete the steps in your notes or a test project."
+        },
+        {
+          "ar": "لا يتحقق التطبيق آلياً من إعدادات محرر Godot.",
+          "en": "The app does not automatically verify Godot editor settings."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_code_3",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `is_large(value)` لتعيد true عندما تتجاوز القيمة 10، ثم اطبع نتيجة 12.",
+        "en": "Define `is_large(value)` to return true when value is greater than 10, then print the result for 12."
+      },
+      "starterCode": "",
+      "solutionCode": "func is_large(value):\n    return value > 10\n\nprint(is_large(12))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "true"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_code_4",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `double(n)` لإعادة الضعف و`report(n)` لطباعة `Value: ` والضعف. استدع `report(4)`.",
+        "en": "Define `double(n)` to return twice n and `report(n)` to print `Value: ` and the doubled value. Call `report(4)`."
+      },
+      "starterCode": "",
+      "solutionCode": "func double(n):\n    return n * 2\n\nfunc report(n):\n    print(\"Value: \" + str(double(n)))\n\nreport(4)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "Value: 8"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_22_problem_decomposition_apply",
+      "lessonId": "lesson_22_problem_decomposition",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم على مثال صغير من مشروعك واكتب طريقة تحقق ذاتية.",
+        "en": "Apply the concept to a small example from your project and write a self-check."
+      },
+      "steps": [
+        {
+          "ar": "سمّ دالة لكل خطوة مستقلة.",
+          "en": "Name a function for each independent step."
+        },
+        {
+          "ar": "مرّر المدخلات وأعد النتيجة اللازمة.",
+          "en": "Pass inputs and return the needed result."
+        },
+        {
+          "ar": "تحقق من إمكانية إعادة استخدام دالة الحساب.",
+          "en": "Check that the calculation function can be reused."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

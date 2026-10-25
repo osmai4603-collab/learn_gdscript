@@ -2,6 +2,7 @@
 // أكاديمية جودو التعليمية — Godot Developer Academy (GDScript 2.0)
 // الشاشة 14: الإعدادات وتفضيلات النظام وبيئة المحرك (Desktop Settings & Engine Preferences)
 // الملف: desktop_settings_screen.dart
+// نموذج تصميم غير موصول؛ لا يعكس إعدادات التكامل الفعلية في التطبيق.
 // ==============================================================================
 
 import 'package:flutter/material.dart';
@@ -11,7 +12,13 @@ import 'package:learn_gdscript/ui/routers/app_routes.dart';
 // 1. نماذج البيانات الخاصة بالإعدادات والتفضيلات (Data Models)
 // -----------------------------------------------------------------------------
 
-enum SettingsCategory { editor, engineLsp, appearance, audioAccessibility, account }
+enum SettingsCategory {
+  editor,
+  engineLsp,
+  appearance,
+  audioAccessibility,
+  account,
+}
 
 class EditorPreferencesModel {
   final int fontSize;
@@ -163,8 +170,12 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
     _autoCloseBrackets = widget.data.editor.autoCloseBrackets;
     _strictTyping = widget.data.engineLsp.strictTypingWarnings;
     _autoStartLsp = widget.data.engineLsp.autoStartLsp;
-    _godotPathController = TextEditingController(text: widget.data.engineLsp.godotBinaryPath);
-    _lspPortController = TextEditingController(text: '${widget.data.engineLsp.lspPort}');
+    _godotPathController = TextEditingController(
+      text: widget.data.engineLsp.godotBinaryPath,
+    );
+    _lspPortController = TextEditingController(
+      text: '${widget.data.engineLsp.lspPort}',
+    );
   }
 
   @override
@@ -180,7 +191,10 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
         backgroundColor: Color(0xFF14532D),
         content: Text(
           'تم حفظ كافة التفضيلات بنجاح وتمت مزامنتها مع محرك Godot 4.3 ✓',
-          style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', color: Colors.white),
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            color: Colors.white,
+          ),
         ),
       ),
     );
@@ -198,7 +212,7 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
             onNavigate: widget.onNavigateRoute,
           ),
           const Divider(height: 1, color: Color(0xFF28323F)),
-    
+
           // 2. الهيكل الرئيسي (Settings Categories Nav + Detail Form)
           Expanded(
             child: Row(
@@ -213,7 +227,10 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 8,
+                          ),
                           child: Text(
                             'أقسام التفضيلات',
                             style: TextStyle(
@@ -228,43 +245,60 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
                           icon: Icons.code_rounded,
                           title: 'محرر الأكواد والخطوط',
                           category: SettingsCategory.editor,
-                          isSelected: _selectedCategory == SettingsCategory.editor,
-                          onTap: () => setState(() => _selectedCategory = SettingsCategory.editor),
+                          isSelected:
+                              _selectedCategory == SettingsCategory.editor,
+                          onTap: () => setState(
+                            () => _selectedCategory = SettingsCategory.editor,
+                          ),
                         ),
                         _CategoryTabTile(
                           icon: Icons.dns_rounded,
                           title: 'خادم LSP ومسار المحرك',
                           category: SettingsCategory.engineLsp,
-                          isSelected: _selectedCategory == SettingsCategory.engineLsp,
-                          onTap: () => setState(() => _selectedCategory = SettingsCategory.engineLsp),
+                          isSelected:
+                              _selectedCategory == SettingsCategory.engineLsp,
+                          onTap: () => setState(
+                            () =>
+                                _selectedCategory = SettingsCategory.engineLsp,
+                          ),
                         ),
                         _CategoryTabTile(
                           icon: Icons.palette_rounded,
                           title: 'المظهر والسمة البصرية',
                           category: SettingsCategory.appearance,
-                          isSelected: _selectedCategory == SettingsCategory.appearance,
-                          onTap: () => setState(() => _selectedCategory = SettingsCategory.appearance),
+                          isSelected:
+                              _selectedCategory == SettingsCategory.appearance,
+                          onTap: () => setState(
+                            () =>
+                                _selectedCategory = SettingsCategory.appearance,
+                          ),
                         ),
                         _CategoryTabTile(
                           icon: Icons.manage_accounts_rounded,
                           title: 'الحساب والمسار الأكاديمي',
                           category: SettingsCategory.account,
-                          isSelected: _selectedCategory == SettingsCategory.account,
-                          onTap: () => setState(() => _selectedCategory = SettingsCategory.account),
+                          isSelected:
+                              _selectedCategory == SettingsCategory.account,
+                          onTap: () => setState(
+                            () => _selectedCategory = SettingsCategory.account,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-    
+
                 const VerticalDivider(width: 1, color: Color(0xFF28323F)),
-    
+
                 // لوحة النماذج وتعديل الإعدادات
                 Expanded(
                   child: Container(
                     color: const Color(0xFF0F141B),
                     child: ListView(
-                      padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 28),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 36,
+                        vertical: 28,
+                      ),
                       children: [
                         if (_selectedCategory == SettingsCategory.editor)
                           _EditorSettingsForm(
@@ -273,24 +307,33 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
                             showLineNumbers: _showLineNumbers,
                             highlightActiveLine: _highlightActiveLine,
                             autoCloseBrackets: _autoCloseBrackets,
-                            onFontSizeChanged: (v) => setState(() => _fontSize = v),
-                            onTabSizeChanged: (v) => setState(() => _tabSize = v),
-                            onToggleLineNumbers: (v) => setState(() => _showLineNumbers = v),
-                            onToggleHighlight: (v) => setState(() => _highlightActiveLine = v),
-                            onToggleBrackets: (v) => setState(() => _autoCloseBrackets = v),
+                            onFontSizeChanged: (v) =>
+                                setState(() => _fontSize = v),
+                            onTabSizeChanged: (v) =>
+                                setState(() => _tabSize = v),
+                            onToggleLineNumbers: (v) =>
+                                setState(() => _showLineNumbers = v),
+                            onToggleHighlight: (v) =>
+                                setState(() => _highlightActiveLine = v),
+                            onToggleBrackets: (v) =>
+                                setState(() => _autoCloseBrackets = v),
                           )
-                        else if (_selectedCategory == SettingsCategory.engineLsp)
+                        else if (_selectedCategory ==
+                            SettingsCategory.engineLsp)
                           _EngineLspSettingsForm(
                             godotPathController: _godotPathController,
                             portController: _lspPortController,
                             strictTyping: _strictTyping,
                             autoStartLsp: _autoStartLsp,
-                            onToggleStrict: (v) => setState(() => _strictTyping = v),
-                            onToggleAutoStart: (v) => setState(() => _autoStartLsp = v),
+                            onToggleStrict: (v) =>
+                                setState(() => _strictTyping = v),
+                            onToggleAutoStart: (v) =>
+                                setState(() => _autoStartLsp = v),
                             onOpenDiagnostics: () => widget.onNavigateRoute
-                                ?.call(AppRoutes.lspDiagnostics),
+                                ?.call(AppRoutes.engineDiagnostics),
                           )
-                        else if (_selectedCategory == SettingsCategory.appearance)
+                        else if (_selectedCategory ==
+                            SettingsCategory.appearance)
                           _AppearanceSettingsForm(
                             appearance: widget.data.appearance,
                           )
@@ -374,7 +417,9 @@ class _SettingsTopNav extends StatelessWidget {
               backgroundColor: const Color(0xFF478CBF),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
             ),
           ),
         ],
@@ -410,11 +455,21 @@ class _CategoryTabTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected ? const Color(0xFF1E2837) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
-            border: isSelected ? Border.all(color: const Color(0xFF478CBF).withValues(alpha: 0.5)) : null,
+            border: isSelected
+                ? Border.all(
+                    color: const Color(0xFF478CBF).withValues(alpha: 0.5),
+                  )
+                : null,
           ),
           child: Row(
             children: [
-              Icon(icon, size: 18, color: isSelected ? const Color(0xFF38BDF8) : const Color(0xFF94A3B8)),
+              Icon(
+                icon,
+                size: 18,
+                color: isSelected
+                    ? const Color(0xFF38BDF8)
+                    : const Color(0xFF94A3B8),
+              ),
               const SizedBox(width: 12),
               Text(
                 title,
@@ -422,7 +477,9 @@ class _CategoryTabTile extends StatelessWidget {
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 13,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                  color: isSelected ? const Color(0xFFE2E8F0) : const Color(0xFF94A3B8),
+                  color: isSelected
+                      ? const Color(0xFFE2E8F0)
+                      : const Color(0xFF94A3B8),
                 ),
               ),
             ],
@@ -465,12 +522,21 @@ class _EditorSettingsForm extends StatelessWidget {
       children: [
         const Text(
           'تفضيلات محرر الكود (GDScript Editor)',
-          style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFE2E8F0),
+          ),
         ),
         const SizedBox(height: 6),
         const Text(
           'تخصيص مقاس الخط، التباعد، وسلوك الإكمال التلقائي في بيئة التطوير.',
-          style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, color: Color(0xFF94A3B8)),
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 13,
+            color: Color(0xFF94A3B8),
+          ),
         ),
         const SizedBox(height: 24),
         const Divider(color: Color(0xFF28323F)),
@@ -479,7 +545,8 @@ class _EditorSettingsForm extends StatelessWidget {
         // مقاس الخط البرمجي
         _SettingRow(
           title: 'مقاس خط المحرر البرمجي (${fontSize.toInt()} px):',
-          subtitle: 'يتم تطبيق المقاس على خط JetBrains Mono المخصص لكتابة GDScript.',
+          subtitle:
+              'يتم تطبيق المقاس على خط JetBrains Mono المخصص لكتابة GDScript.',
           control: SizedBox(
             width: 220,
             child: Slider(
@@ -501,7 +568,10 @@ class _EditorSettingsForm extends StatelessWidget {
           control: DropdownButton<int>(
             value: tabSize,
             dropdownColor: const Color(0xFF171C23),
-            style: const TextStyle(fontFamily: 'JetBrains Mono', color: Color(0xFFE2E8F0)),
+            style: const TextStyle(
+              fontFamily: 'JetBrains Mono',
+              color: Color(0xFFE2E8F0),
+            ),
             items: const [
               DropdownMenuItem(value: 2, child: Text('2 مسافات')),
               DropdownMenuItem(value: 4, child: Text('4 مسافات (موصى به)')),
@@ -574,23 +644,40 @@ class _EngineLspSettingsForm extends StatelessWidget {
               children: const [
                 Text(
                   'خادم اللغة LSP ومحرك Godot 4.3',
-                  style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+                  style: TextStyle(
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFE2E8F0),
+                  ),
                 ),
                 SizedBox(height: 4),
                 Text(
                   'إدارة جسر الاتصال المحلي ومسارات تشغيل المحرك وبروتوكول JSON-RPC 2.0.',
-                  style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, color: Color(0xFF94A3B8)),
+                  style: TextStyle(
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    fontSize: 13,
+                    color: Color(0xFF94A3B8),
+                  ),
                 ),
               ],
             ),
             OutlinedButton.icon(
               onPressed: onOpenDiagnostics,
               icon: const Icon(Icons.monitor_heart_rounded, size: 16),
-              label: const Text('فتح سجل التشخيصات المباشر ↵', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12)),
+              label: const Text(
+                'فتح سجل التشخيصات المباشر ↵',
+                style: TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 12,
+                ),
+              ),
               style: OutlinedButton.styleFrom(
                 foregroundColor: const Color(0xFF38BDF8),
                 side: const BorderSide(color: Color(0xFF38BDF8)),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
               ),
             ),
           ],
@@ -600,16 +687,32 @@ class _EngineLspSettingsForm extends StatelessWidget {
         const SizedBox(height: 20),
 
         // مسار ملف Godot التنفيذي
-        const Text('مسار المحرك التنفيذي (Godot Executable Path):', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0))),
+        const Text(
+          'مسار المحرك التنفيذي (Godot Executable Path):',
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFE2E8F0),
+          ),
+        ),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(color: const Color(0xFF131922), borderRadius: BorderRadius.circular(8), border: Border.all(color: const Color(0xFF28323F))),
+          decoration: BoxDecoration(
+            color: const Color(0xFF131922),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFF28323F)),
+          ),
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: TextField(
               controller: godotPathController,
-              style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 13, color: Color(0xFF38BDF8)),
+              style: const TextStyle(
+                fontFamily: 'JetBrains Mono',
+                fontSize: 13,
+                color: Color(0xFF38BDF8),
+              ),
               decoration: const InputDecoration(border: InputBorder.none),
             ),
           ),
@@ -617,18 +720,34 @@ class _EngineLspSettingsForm extends StatelessWidget {
         const SizedBox(height: 20),
 
         // منفذ خادم LSP
-        const Text('منفذ الاتصال المحلي (LSP Port):', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0))),
+        const Text(
+          'منفذ الاتصال المحلي (LSP Port):',
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFE2E8F0),
+          ),
+        ),
         const SizedBox(height: 8),
         Container(
           width: 200,
           padding: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(color: const Color(0xFF131922), borderRadius: BorderRadius.circular(8), border: Border.all(color: const Color(0xFF28323F))),
+          decoration: BoxDecoration(
+            color: const Color(0xFF131922),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFF28323F)),
+          ),
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: TextField(
               controller: portController,
               keyboardType: TextInputType.number,
-              style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 13, color: Color(0xFFE2E8F0)),
+              style: const TextStyle(
+                fontFamily: 'JetBrains Mono',
+                fontSize: 13,
+                color: Color(0xFFE2E8F0),
+              ),
               decoration: const InputDecoration(border: InputBorder.none),
             ),
           ),
@@ -637,7 +756,8 @@ class _EngineLspSettingsForm extends StatelessWidget {
 
         _SettingSwitchRow(
           title: 'فرض تحذيرات الأنواع غير الصارمة (Strict Typing)',
-          subtitle: 'إطلاق تحذيرات فورية عند كتابة متغيرات Variant ديناميكية بدون تصريح نوع صريح.',
+          subtitle:
+              'إطلاق تحذيرات فورية عند كتابة متغيرات Variant ديناميكية بدون تصريح نوع صريح.',
           value: strictTyping,
           onChanged: onToggleStrict,
         ),
@@ -666,12 +786,21 @@ class _AppearanceSettingsForm extends StatelessWidget {
       children: [
         const Text(
           'المظهر والسمة البصرية',
-          style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFE2E8F0),
+          ),
         ),
         const SizedBox(height: 6),
         const Text(
           'تخصيص نسق الألوان بما يطابق واجهة محرك Godot الرسمية وتفضيلات شاشتك.',
-          style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, color: Color(0xFF94A3B8)),
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 13,
+            color: Color(0xFF94A3B8),
+          ),
         ),
         const SizedBox(height: 24),
         const Divider(color: Color(0xFF28323F)),
@@ -679,11 +808,24 @@ class _AppearanceSettingsForm extends StatelessWidget {
 
         _SettingRow(
           title: 'السمة النشطة:',
-          subtitle: 'الوضع الداكن المعتمد بدرجات الأزرق والرمادي الداكن #0F141B.',
+          subtitle:
+              'الوضع الداكن المعتمد بدرجات الأزرق والرمادي الداكن #0F141B.',
           control: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(color: const Color(0xFF171C23), borderRadius: BorderRadius.circular(6), border: Border.all(color: const Color(0xFF28323F))),
-            child: Text(appearance.themeMode, style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, color: Color(0xFF38BDF8), fontWeight: FontWeight.bold)),
+            decoration: BoxDecoration(
+              color: const Color(0xFF171C23),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: const Color(0xFF28323F)),
+            ),
+            child: Text(
+              appearance.themeMode,
+              style: const TextStyle(
+                fontFamily: 'IBM Plex Sans Arabic',
+                fontSize: 12,
+                color: Color(0xFF38BDF8),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 20),
@@ -691,7 +833,14 @@ class _AppearanceSettingsForm extends StatelessWidget {
         _SettingRow(
           title: 'خط الواجهة العربي:',
           subtitle: 'خط معتمد عالي الوضوح للغة العربية في البرمجيات التقنية.',
-          control: Text(appearance.uiFont, style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, color: Color(0xFFE2E8F0))),
+          control: Text(
+            appearance.uiFont,
+            style: const TextStyle(
+              fontFamily: 'IBM Plex Sans Arabic',
+              fontSize: 13,
+              color: Color(0xFFE2E8F0),
+            ),
+          ),
         ),
       ],
     );
@@ -716,12 +865,21 @@ class _AccountSettingsForm extends StatelessWidget {
       children: [
         const Text(
           'الحساب والمسار الأكاديمي',
-          style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFE2E8F0),
+          ),
         ),
         const SizedBox(height: 6),
         const Text(
           'بيانات حساب المتعلّم وإعادة تقييم المستوى الأكاديمي.',
-          style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, color: Color(0xFF94A3B8)),
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 13,
+            color: Color(0xFF94A3B8),
+          ),
         ),
         const SizedBox(height: 24),
         const Divider(color: Color(0xFF28323F)),
@@ -729,34 +887,73 @@ class _AccountSettingsForm extends StatelessWidget {
 
         _SettingRow(
           title: 'البريد الإلكتروني المعتمد:',
-          subtitle: 'مرتبط بحساب حفظ ومزامنة مسارات التعلّم ومشاريع مساحة العمل.',
-          control: Text(email, style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 13, color: Color(0xFFCBD5E1))),
+          subtitle:
+              'مرتبط بحساب حفظ ومزامنة مسارات التعلّم ومشاريع مساحة العمل.',
+          control: Text(
+            email,
+            style: const TextStyle(
+              fontFamily: 'JetBrains Mono',
+              fontSize: 13,
+              color: Color(0xFFCBD5E1),
+            ),
+          ),
         ),
         const SizedBox(height: 20),
 
         _SettingRow(
           title: 'خطة الاشتراك والرتبة:',
-          subtitle: 'ترقية الحساب تتيح الوصول لكامل بنك التحديات والشهادات المعتمدة.',
+          subtitle:
+              'ترقية الحساب تتيح الوصول لكامل بنك التحديات والشهادات المعتمدة.',
           control: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(color: const Color(0xFF14532D), borderRadius: BorderRadius.circular(6)),
-            child: Text(accountType, style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF4ADE80), fontWeight: FontWeight.bold)),
+            decoration: BoxDecoration(
+              color: const Color(0xFF14532D),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Text(
+              accountType,
+              style: const TextStyle(
+                fontFamily: 'IBM Plex Sans Arabic',
+                fontSize: 11,
+                color: Color(0xFF4ADE80),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 28),
 
         Container(
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(color: const Color(0xFF171C23), borderRadius: BorderRadius.circular(10), border: Border.all(color: const Color(0xFF28323F))),
+          decoration: BoxDecoration(
+            color: const Color(0xFF171C23),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: const Color(0xFF28323F)),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text('إعادة اختبار تحديد المستوى الأكاديمي', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0))),
+                  Text(
+                    'إعادة اختبار تحديد المستوى الأكاديمي',
+                    style: TextStyle(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFE2E8F0),
+                    ),
+                  ),
                   SizedBox(height: 4),
-                  Text('إعادة ضبط مسار التعلّم وخوض التقييم التشخيصي للبدء من نقطة انطلاق جديدة.', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, color: Color(0xFF94A3B8))),
+                  Text(
+                    'إعادة ضبط مسار التعلّم وخوض التقييم التشخيصي للبدء من نقطة انطلاق جديدة.',
+                    style: TextStyle(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 12,
+                      color: Color(0xFF94A3B8),
+                    ),
+                  ),
                 ],
               ),
               OutlinedButton(
@@ -764,9 +961,17 @@ class _AccountSettingsForm extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: const Color(0xFFFB923C),
                   side: const BorderSide(color: Color(0xFFFB923C)),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
                 ),
-                child: const Text('إعادة التقييم ↵', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12)),
+                child: const Text(
+                  'إعادة التقييم ↵',
+                  style: TextStyle(
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    fontSize: 12,
+                  ),
+                ),
               ),
             ],
           ),
@@ -796,9 +1001,24 @@ class _SettingRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0))),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFE2E8F0),
+                ),
+              ),
               const SizedBox(height: 2),
-              Text(subtitle, style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, color: Color(0xFF94A3B8))),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 12,
+                  color: Color(0xFF94A3B8),
+                ),
+              ),
             ],
           ),
         ),
@@ -830,9 +1050,24 @@ class _SettingSwitchRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0))),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFE2E8F0),
+                ),
+              ),
               const SizedBox(height: 2),
-              Text(subtitle, style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, color: Color(0xFF94A3B8))),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 12,
+                  color: Color(0xFF94A3B8),
+                ),
+              ),
             ],
           ),
         ),

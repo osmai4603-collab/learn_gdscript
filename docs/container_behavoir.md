@@ -2,6 +2,13 @@
 
 ## (Godot Developer Academy — Component States, Behaviors & Styling System)
 
+# تحديث معماري
+
+> أوصاف LSP وخادم اللغة في هذه الوثيقة مرجع تصميم تاريخي وليست حالة التطبيق
+> الحالي. يستخدم التطبيق `gdscript_engine` مباشرةً للتشخيص والتلوين، بينما تتم
+> فهرسة مساحة العمل والبحث النصي محلياً. راجع
+> [خطة الانتقال المباشر](./direct_gdscript_engine_migration_plan.md).
+
 **المشروع:** أكاديمية جودو التعليمية — Godot Developer Academy (GDScript 2.0)  
 **نظام التصميم المعتمد:** `{{DATA:DESIGN_SYSTEM:DESIGN_SYSTEM_1}}` (Godot Engine 4.3 Dark Theme)  
 **الغرض من الوثيقة:** توفير توصيف معماري دقيق وشامل يغطي كل حاوية وبطاقة تم بناؤها في وثائق الـ Body Breakdown السابقة، موضحاً بالتفصيل:

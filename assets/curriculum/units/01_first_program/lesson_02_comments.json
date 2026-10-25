@@ -1,47 +1,387 @@
 {
   "id": "lesson_02_comments",
   "unitId": "unit_01_first_program",
-  "title": {"ar": "التعليقات", "en": "Comments"},
-  "objective": {"ar": "أضف ملاحظات إلى الشيفرة من دون تغيير ما ينفّذه البرنامج.", "en": "Add notes to code without changing what the program runs."},
-  "estimatedMinutes": 3,
+  "title": {
+    "ar": "التعليقات والطباعة",
+    "en": "Comments and printing"
+  },
+  "objective": {
+    "ar": "استخدم التعليقات لتوضيح الشيفرة و`print()` لعرض قيم مفيدة.",
+    "en": "Use comments to clarify code and `print()` to display useful values."
+  },
+  "estimatedMinutes": 8,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## اكتب ملاحظة في الشيفرة\n\nتبدأ التعليقات في GDScript بالرمز `#`. يتجاهلها البرنامج أثناء التنفيذ، ويمكن وضعها في سطر مستقل أو بعد أمر:\n\n```gdscript\n# اطبع رسالة ترحيب\nprint(\"Hello\") # هذه ملاحظة أيضاً\n```\n\nللتعليق على عدة أسطر، ابدأ كل سطر بالرمز `#`. النصوص المحاطة بثلاث علامات اقتباس ليست تعليقات؛ إنها نصوص متعددة الأسطر.",
-    "en": "## Add a note to code\n\nIn GDScript, comments start with `#`. The program ignores them while running. A comment can be on its own line or after a statement:\n\n```gdscript\n# Print a greeting\nprint(\"Hello\") # This is also a comment\n```\n\nFor a comment spanning several lines, start each line with `#`. Text wrapped in triple quotes is a multiline string, not a comment."
+    "ar": "## التعليقات والطباعة\n\nيبدأ التعليق في GDScript بالرمز `#`، ولا ينفذه المحرك. استخدمه لشرح سبب قرار أو لتقسيم مثال، لا لإعادة وصف كل سطر. تعرض `print()` قيمة في لوحة الإخراج، ويمكن كتابة عدة أوامر في أسطر منفصلة.\n\n### مثال عملي\n\n```gdscript\n# A short note\nprint(\"Ready\")\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## Comments and printing\n\nA GDScript comment begins with `#` and is ignored by the engine. Use it to explain a decision or divide an example, not to restate every line. `print()` displays a value in the output panel, and multiple statements can be written on separate lines.\n\n### Practical example\n\n```gdscript\n# A short note\nprint(\"Ready\")\n```\n\nChange one value and run the script to observe its effect."
   },
-  "exampleCode": "# Print a greeting\nprint(\"Hello\") # This note does not affect output",
+  "exampleCode": "# A short note\nprint(\"Ready\")",
+  "documentation": {
+    "ar": "### التعليقات والطباعة\n\nيبدأ التعليق في GDScript بالرمز `#`، ولا ينفذه المحرك. استخدمه لشرح سبب قرار أو لتقسيم مثال، لا لإعادة وصف كل سطر. تعرض `print()` قيمة في لوحة الإخراج، ويمكن كتابة عدة أوامر في أسطر منفصلة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Comments and printing\n\nA GDScript comment begins with `#` and is ignored by the engine. Use it to explain a decision or divide an example, not to restate every line. `print()` displays a value in the output panel, and multiple statements can be written on separate lines.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
   "exercises": [
     {
-      "id": "ex_02_explain_print",
+      "id": "ex_02_comments_01",
       "lessonId": "lesson_02_comments",
-      "type": "fillBlank",
-      "prompt": {"ar": "أضف تعليقاً يشرح أن السطر التالي يطبع رسالة ترحيب.", "en": "Add a comment explaining that the next line prints a greeting."},
-      "starterCode": "___\nprint(\"Welcome\")",
-      "solutionCode": "# Print a welcome message\nprint(\"Welcome\")",
-      "testCases": [
-        {"description": {"ar": "يظل ناتج البرنامج رسالة الترحيب فقط.", "en": "The program output remains only the welcome message."}, "expectedOutput": "Welcome"}
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "ابدأ الملاحظة بالرمز `#`.", "en": "Start the note with `#`."},
-        {"ar": "اكتب وصفاً قصيراً لما يفعله `print()`.", "en": "Write a short description of what `print()` does."}
-      ],
-      "order": 0
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_02_uncomment_print",
+      "id": "ex_02_comments_02",
       "lessonId": "lesson_02_comments",
-      "type": "fixBug",
-      "prompt": {"ar": "أزل التعليق عن أمر الطباعة كي يظهر `Hello` في الناتج.", "en": "Remove the comment from the print statement so `Hello` appears in the output."},
-      "starterCode": "# print(\"Hello\")",
-      "solutionCode": "print(\"Hello\")",
-      "testCases": [
-        {"description": {"ar": "يظهر النص بعد تفعيل الأمر.", "en": "The text appears after enabling the statement."}, "expectedOutput": "Hello"}
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_02_comments_03",
+      "lessonId": "lesson_02_comments",
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_02_comments_04",
+      "lessonId": "lesson_02_comments",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
       ],
       "hints": [
-        {"ar": "الرمز `#` يجعل بقية السطر تعليقاً.", "en": "The `#` symbol turns the rest of the line into a comment."},
-        {"ar": "احذف `#` والمسافة التي تليه.", "en": "Delete `#` and the space after it."}
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_02_comments_05",
+      "lessonId": "lesson_02_comments",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Ready`",
+        "en": "Write or complete the example so its output is:\n\n`Ready`"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"Ready\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 1
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Ready"
+        }
+      ]
+    },
+    {
+      "id": "ex_02_comments_06",
+      "lessonId": "lesson_02_comments",
+      "order": 5,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nGo",
+        "en": "Write code that applies the lesson idea and produces this output:\n\nGo"
+      },
+      "starterCode": "",
+      "solutionCode": "# A note\nprint(\"Go\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Go"
+        }
+      ]
+    },
+    {
+      "id": "ex_02_comments_07",
+      "lessonId": "lesson_02_comments",
+      "order": 6,
+      "type": "fixBug",
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`A\nB`",
+        "en": "Write or complete the example so its output is:\n\n`A\nB`"
+      },
+      "starterCode": "pront(\"A\")\nprint(\"B\")",
+      "solutionCode": "print(\"A\")\nprint(\"B\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "A\nB"
+        }
+      ]
+    },
+    {
+      "id": "ex_02_comments_08",
+      "lessonId": "lesson_02_comments",
+      "order": 7,
+      "type": "predictOutput",
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`5`",
+        "en": "What output does this example display?\n\n`5`"
+      },
+      "starterCode": "print(4 + 1)",
+      "solutionCode": "print(4 + 1)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "5"
+        }
+      ]
+    },
+    {
+      "id": "ex_02_comments_09",
+      "lessonId": "lesson_02_comments",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Run`",
+        "en": "Write or complete the example so its output is:\n\n`Run`"
+      },
+      "starterCode": "",
+      "solutionCode": "# ignored\nprint(\"Run\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Run"
+        }
+      ]
+    },
+    {
+      "id": "ex_02_comments_10",
+      "lessonId": "lesson_02_comments",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`End`",
+        "en": "Write or complete the example so its output is:\n\n`End`"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"End\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "End"
+        }
+      ]
     }
   ]
 }

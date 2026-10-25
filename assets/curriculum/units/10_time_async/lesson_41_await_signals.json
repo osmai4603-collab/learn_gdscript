@@ -1,0 +1,357 @@
+{
+  "id": "lesson_41_await_signals",
+  "unitId": "unit_10_time_async",
+  "title": {
+    "ar": "await والإشارات",
+    "en": "await and Signals"
+  },
+  "objective": {
+    "ar": "انتظر إشارة بطريقة غير متزامنة ثم تابع الدالة عند صدورها.",
+    "en": "Wait for a signal asynchronously and resume a function when it is emitted."
+  },
+  "estimatedMinutes": 9,
+  "order": 0,
+  "contentMarkdown": {
+    "ar": "## علّق الدالة لا اللعبة\n\nتسمح `await` لدالة GDScript بالتوقف حتى تصدر إشارة، ثم تتابع من السطر التالي. لا يعني ذلك إيقاف المحرك كله؛ تظل بقية الإطارات والعقد تعمل.\n\n```gdscript\nfunc show_message() -> void:\n    print(\"Ready\")\n    await get_tree().create_timer(1.0).timeout\n    print(\"Go\")\n```\n\nيفترض المثال التالي وجود عقدة `AnimationPlayer` باسم `$AnimationPlayer` وعقدة باب باسم `$Door`، مع حركة معرفة في المحرّك. تأكد من أن الإشارة ستصدر، وراعِ عمر الكائن الذي يملكها.",
+    "en": "## Pause a function, not the game\n\n`await` lets a GDScript function suspend until a signal is emitted, then continue at the next line. It does not stop the whole engine; other frames and nodes keep running.\n\n```gdscript\nfunc show_message() -> void:\n    print(\"Ready\")\n    await get_tree().create_timer(1.0).timeout\n    print(\"Go\")\n```\n\nThe following example assumes an `AnimationPlayer` child at `$AnimationPlayer` and a door node at `$Door`, with an animation configured in the player. Ensure the signal can occur, and consider the lifetime of the object that owns it."
+  },
+  "documentation": {
+    "ar": "يحدد `await` نقطة تعليق داخل الدالة حتى تصدر الإشارة المنتظرة أو تتوفر القيمة. عند صدور الإشارة تتابع الدالة من موضع الانتظار، ولا يتجمد المحرك. الانتظار لإشارة لن تصدر قد يترك الدالة معلقة؛ تحقق من أن العملية التي تطلقها بدأت فعلاً. راعِ أيضاً عمر العقدة التي تملك الإشارة، فقد تزال قبل استئناف التنفيذ. استخدم إشارة تصف الحدث الفعلي بدلاً من تخمين عدد الإطارات.",
+    "en": "`await` marks a suspension point in a function until the awaited signal is emitted or a value becomes available. The function resumes at the wait point; the engine does not freeze. Awaiting a signal that never occurs can leave the function suspended, so ensure the operation that emits it has actually started. Also consider the lifetime of the node owning the signal, as it can be removed before resumption. Await a signal that represents the actual event instead of guessing a number of frames."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript: await",
+        "en": "GDScript basics: await"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    },
+    {
+      "title": {
+        "ar": "استخدام الإشارات",
+        "en": "Using signals"
+      },
+      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_41_await_signals_01",
+      "lessonId": "lesson_41_await_signals",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الذي يستمر عادةً أثناء تعليق دالة عند await؟",
+        "en": "What generally continues while a function is suspended at await?"
+      },
+      "options": [
+        {
+          "ar": "بقية المحرك والعقد والإطارات",
+          "en": "The rest of the engine, nodes, and frames"
+        },
+        {
+          "ar": "لا شيء؛ يتجمد المشروع كله",
+          "en": "Nothing; the whole project freezes"
+        },
+        {
+          "ar": "محرر الشيفرة فقط",
+          "en": "Only the script editor"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_41_await_signals_02",
+      "lessonId": "lesson_41_await_signals",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن انتظار الإشارة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about انتظار الإشارة. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ مشهداً يحوي AnimationPlayer ورسوم حركة قصيرة.",
+          "en": "Create a scene with an AnimationPlayer and a short animation."
+        },
+        {
+          "ar": "اكتب دالة تشغّل الحركة ثم تنتظر `animation_finished` باستخدام `await`.",
+          "en": "Write a function that plays the animation and awaits `animation_finished`."
+        },
+        {
+          "ar": "بعد الانتظار أظهر علامة أو اطبع رسالة، وشغّل المشهد للتحقق من التوقيت.",
+          "en": "After the wait, show a marker or print a message, then run the scene to check timing."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_41_await_signals_03",
+      "lessonId": "lesson_41_await_signals",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «door opened» في سياق انتظار الإشارة.",
+        "en": "Write code that prints “door opened” as a انتظار الإشارة status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"door opened\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "door opened"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_41_await_signals_04",
+      "lessonId": "lesson_41_await_signals",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «door opened».",
+        "en": "Complete the line so it prints “door opened”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"door opened\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "door opened"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_41_await_signals_05",
+      "lessonId": "lesson_41_await_signals",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في انتظار الإشارة: start ثم «door opened».",
+        "en": "Print two lines showing progress in انتظار الإشارة: start, then “door opened”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"door opened\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\ndoor opened"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_41_await_signals_06",
+      "lessonId": "lesson_41_await_signals",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «door opened» تماماً.",
+        "en": "Fix the code so it prints exactly “door opened”."
+      },
+      "starterCode": "print(\"door opened!\")",
+      "solutionCode": "print(\"door opened\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "door opened"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_41_await_signals_07",
+      "lessonId": "lesson_41_await_signals",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «door opened» ثم done.",
+        "en": "Arrange output to show start, then “door opened”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"door opened\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"door opened\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\ndoor opened\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_41_await_signals_08",
+      "lessonId": "lesson_41_await_signals",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع انتظار الإشارة: «door opened».",
+        "en": "Write a program that records a result related to انتظار الإشارة: “door opened”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"door opened\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "door opened"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_41_await_signals_09",
+      "lessonId": "lesson_41_await_signals",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\ndoor opened",
+        "en": "Write a program that displays this sequence:\ndoor opened"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"door opened\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "door opened"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_41_await_signals_10",
+      "lessonId": "lesson_41_await_signals",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «door opened».",
+        "en": "Use a string variable named status and print its value “door opened”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"door opened\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "door opened"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

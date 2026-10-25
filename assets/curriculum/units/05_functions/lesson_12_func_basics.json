@@ -1,63 +1,358 @@
 {
   "id": "lesson_12_func_basics",
   "unitId": "unit_05_functions",
-  "title": {"ar": "تعريف الدوال", "en": "Defining Functions"},
-  "objective": {"ar": "اجمع الأوامر في دالة واستدعها عند الحاجة.", "en": "Group statements in a function and call it when needed."},
+  "title": {
+    "ar": "تعريف الدوال",
+    "en": "Defining Functions"
+  },
+  "objective": {
+    "ar": "اجمع الأوامر في دالة واستدعها عند الحاجة.",
+    "en": "Group statements in a function and call it when needed."
+  },
   "estimatedMinutes": 7,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## أنشئ أمراً قابلاً لإعادة الاستخدام\n\nتبدأ الدالة بكلمة `func` ثم اسمها وأقواس. اكتب جسمها بمسافة بادئة، واستدعها باسمها وأقواس:\n\n```gdscript\nfunc greet():\n    print(\"Hello!\")\n\ngreet()\ngreet()\n```\n\nتُنفّذ الدالة عند استدعائها، ويمكنك استدعاؤها أكثر من مرة بدلاً من تكرار أوامرها.",
-    "en": "## Create a reusable action\n\nA function starts with `func`, followed by its name and parentheses. Indent its body, then call it by name with parentheses:\n\n```gdscript\nfunc greet():\n    print(\"Hello!\")\n\ngreet()\ngreet()\n```\n\nThe function runs when called. You can call it more than once instead of repeating its statements."
+    "ar": "## اجمع الأوامر في دالة قابلة لإعادة الاستخدام\n\nتبدأ الدالة بكلمة `func` واسم وأقواس. اكتب الجسم بمسافة بادئة ثم استدعها بالاسم والأقواس. لا تعمل الدالة لمجرد تعريفها؛ يبدأ التنفيذ عند الاستدعاء، ويمكن تكراره دون نسخ الأوامر.",
+    "en": "## Group statements into a reusable function\n\nA function starts with `func`, a name, and parentheses. Indent its body, then call it by name with parentheses. Defining a function does not run it; execution starts at the call, which can be repeated without copying statements."
   },
   "exampleCode": "func greet():\n    print(\"Hello!\")\n\ngreet()\ngreet()",
   "exercises": [
     {
-      "id": "ex_12_say_hi",
+      "id": "ex_lesson_12_func_basics_added_3",
       "lessonId": "lesson_12_func_basics",
-      "type": "writeCode",
-      "prompt": {"ar": "عرّف `say_hi()` لتطبع `Hi!` ثم استدعها ثلاث مرات.", "en": "Define `say_hi()` to print `Hi!`, then call it three times."},
-      "starterCode": "",
-      "solutionCode": "func say_hi():\n    print(\"Hi!\")\n\nsay_hi()\nsay_hi()\nsay_hi()",
-      "testCases": [
-        {"description": {"ar": "تظهر الرسالة مرة في كل استدعاء.", "en": "The message appears once for each call."}, "expectedOutput": "Hi!\nHi!\nHi!"}
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي وصف يطابق مفهوم «تعريف الدوال»؟",
+        "en": "Which description matches “Defining Functions”?"
+      },
+      "options": [
+        {
+          "ar": "الدالة تجمع تعليمات قابلة لإعادة الاستخدام.",
+          "en": "A function groups reusable statements."
+        },
+        {
+          "ar": "هو اسم آخر لمخرجات الطباعة.",
+          "en": "It is another name for printed output."
+        },
+        {
+          "ar": "لا يغير طريقة تنظيم البرنامج.",
+          "en": "It does not affect program organization."
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "عرّف الدالة قبل استدعائها.", "en": "Define the function before calling it."},
-        {"ar": "استدع الاسم `say_hi` مع قوسين ثلاث مرات.", "en": "Call `say_hi` with parentheses three times."}
+        {
+          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
+          "en": "Look for the role or benefit explained in the lesson."
+        },
+        {
+          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
+          "en": "Review the concept definition in the lesson."
+        }
       ],
       "order": 0
+    },
+    {
+      "id": "ex_lesson_12_func_basics_added_4",
+      "lessonId": "lesson_12_func_basics",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما فائدة تعريف الدوال؟",
+        "en": "What is one benefit of Defining Functions?"
+      },
+      "options": [
+        {
+          "ar": "الاسم والاستدعاء يجعلان إعادة استخدام التعليمات واضحة.",
+          "en": "A name and call make statement reuse clear."
+        },
+        {
+          "ar": "يجعل كل تفاصيل البرنامج مخفية دائماً.",
+          "en": "It always hides every program detail."
+        },
+        {
+          "ar": "يلغي الحاجة إلى فهم بنية البرنامج.",
+          "en": "It removes the need to understand program structure."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
+          "en": "Look for the role or benefit explained in the lesson."
+        },
+        {
+          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
+          "en": "Review the concept definition in the lesson."
+        }
+      ],
+      "order": 1
     },
     {
       "id": "ex_12_fill_function",
       "lessonId": "lesson_12_func_basics",
       "type": "fillBlank",
-      "prompt": {"ar": "أكمل تعريف `welcome()` واستدعاءها كي يظهر `Welcome!`.", "en": "Complete the definition and call of `welcome()` so it displays `Welcome!`."},
+      "prompt": {
+        "ar": "أكمل تعريف `welcome()` واستدعاءها كي يظهر `Welcome!`.",
+        "en": "Complete the definition and call of `welcome()` so it displays `Welcome!`."
+      },
       "starterCode": "func ___():\n    print(\"Welcome!\")\n\n___()",
       "solutionCode": "func welcome():\n    print(\"Welcome!\")\n\nwelcome()",
       "testCases": [
-        {"description": {"ar": "تُستدعى الدالة بعد تعريفها.", "en": "The function is called after it is defined."}, "expectedOutput": "Welcome!"}
+        {
+          "description": {
+            "ar": "تُستدعى الدالة بعد تعريفها.",
+            "en": "The function is called after it is defined."
+          },
+          "expectedOutput": "Welcome!"
+        }
       ],
       "hints": [
-        {"ar": "استخدم الاسم نفسه في التعريف والاستدعاء.", "en": "Use the same name in the definition and the call."},
-        {"ar": "ضع `welcome` في كلا الفراغين.", "en": "Put `welcome` in both blanks."}
+        {
+          "ar": "استخدم الاسم نفسه في التعريف والاستدعاء.",
+          "en": "Use the same name in the definition and the call."
+        },
+        {
+          "ar": "ضع `welcome` في كلا الفراغين.",
+          "en": "Put `welcome` in both blanks."
+        }
       ],
-      "order": 1
+      "order": 2
+    },
+    {
+      "id": "ex_12_say_hi",
+      "lessonId": "lesson_12_func_basics",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `say_hi()` لتطبع `Hi!` ثم استدعها ثلاث مرات.",
+        "en": "Define `say_hi()` to print `Hi!`, then call it three times."
+      },
+      "starterCode": "",
+      "solutionCode": "func say_hi():\n    print(\"Hi!\")\n\nsay_hi()\nsay_hi()\nsay_hi()",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تظهر الرسالة مرة في كل استدعاء.",
+            "en": "The message appears once for each call."
+          },
+          "expectedOutput": "Hi!\nHi!\nHi!"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "عرّف الدالة قبل استدعائها.",
+          "en": "Define the function before calling it."
+        },
+        {
+          "ar": "استدع الاسم `say_hi` مع قوسين ثلاث مرات.",
+          "en": "Call `say_hi` with parentheses three times."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_12_func_basics_plan",
+      "lessonId": "lesson_12_func_basics",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخطط تنفيذ `say_hi()` من التعريف إلى ظهور الرسالة.",
+        "en": "Complete a trace of `say_hi()` from its definition to the message appearing."
+      },
+      "steps": [
+        {
+          "ar": "اكتب سطر التعريف وجسم الدالة.",
+          "en": "Write the definition line and function body."
+        },
+        {
+          "ar": "حدد سطر الاستدعاء.",
+          "en": "Identify the call statement."
+        },
+        {
+          "ar": "اكتب الرسالة التي تظهر لكل استدعاء.",
+          "en": "Write the message printed for each call."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_12_func_basics_fix",
+      "lessonId": "lesson_12_func_basics",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الدالة لتستخدم معامل `name` وتطبع `Hello, Mia!`.",
+        "en": "Fix the function to use the `name` parameter and print `Hello, Mia!`."
+      },
+      "starterCode": "func greet(name):\n    print(\"Hello!\")\n\ngreet()",
+      "solutionCode": "func greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Mia\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "Hello, Mia!"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "قارن تعريف الدالة مع طريقة استخدام المعامل أو القيمة المعادة.",
+          "en": "Compare the function definition with how the parameter or returned value is used."
+        },
+        {
+          "ar": "تأكد من الإزاحة والاستدعاء بعد إصلاح الجسم.",
+          "en": "Check indentation and the call after fixing the body."
+        }
+      ],
+      "order": 5
     },
     {
       "id": "ex_12_separator",
       "lessonId": "lesson_12_func_basics",
       "type": "writeCode",
-      "prompt": {"ar": "عرّف دالة `print_separator()` تطبع `----------`، واستخدمها بين `Start` و`End`.", "en": "Define `print_separator()` to print `----------`, and use it between `Start` and `End`."},
+      "prompt": {
+        "ar": "عرّف دالة `print_separator()` تطبع `----------`، واستخدمها بين `Start` و`End`.",
+        "en": "Define `print_separator()` to print `----------`, and use it between `Start` and `End`."
+      },
       "starterCode": "",
       "solutionCode": "func print_separator():\n    print(\"----------\")\n\nprint(\"Start\")\nprint_separator()\nprint(\"End\")",
       "testCases": [
-        {"description": {"ar": "تظهر الدالة الفاصلة بين السطرين.", "en": "The function prints a separator between the two lines."}, "expectedOutput": "Start\n----------\nEnd"}
+        {
+          "description": {
+            "ar": "تظهر الدالة الفاصلة بين السطرين.",
+            "en": "The function prints a separator between the two lines."
+          },
+          "expectedOutput": "Start\n----------\nEnd"
+        }
       ],
       "hints": [
-        {"ar": "ضع أمر طباعة الخط داخل الدالة.", "en": "Put the line's print statement inside the function."},
-        {"ar": "استدع الدالة بين طباعة `Start` و`End`.", "en": "Call the function between printing `Start` and `End`."}
+        {
+          "ar": "ضع أمر طباعة الخط داخل الدالة.",
+          "en": "Put the line's print statement inside the function."
+        },
+        {
+          "ar": "استدع الدالة بين طباعة `Start` و`End`.",
+          "en": "Call the function between printing `Start` and `End`."
+        }
       ],
-      "order": 2
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_12_func_basics_apply",
+      "lessonId": "lesson_12_func_basics",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اختر مجموعة أوامر متكررة في برنامجك واقترح لها دالة قابلة لإعادة الاستخدام.",
+        "en": "Choose a repeated group of statements in your program and propose a reusable function for it."
+      },
+      "steps": [
+        {
+          "ar": "اكتب هدف المجموعة.",
+          "en": "Write the purpose of the group."
+        },
+        {
+          "ar": "اختر اسماً يبدأ بفعل ويصف هدفها.",
+          "en": "Choose an action-oriented name that describes its purpose."
+        },
+        {
+          "ar": "اذكر موضعين يمكن استدعاؤها فيهما.",
+          "en": "Name two places where it could be called."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_12_func_basics_added_code_1",
+      "lessonId": "lesson_12_func_basics",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `show_count()` لتطبع 1 ثم استدعها مرتين.",
+        "en": "Define `show_count()` to print 1, then call it twice."
+      },
+      "starterCode": "",
+      "solutionCode": "func show_count():\n    print(1)\n\nshow_count()\nshow_count()",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "1\n1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_12_func_basics_added_code_2",
+      "lessonId": "lesson_12_func_basics",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `say_ready()` لتطبع Ready واستدعها مرة واحدة.",
+        "en": "Define `say_ready()` to print Ready and call it once."
+      },
+      "starterCode": "",
+      "solutionCode": "func say_ready():\n    print(\"Ready\")\n\nsay_ready()",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "Ready"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 9
+    }
+  ],
+  "documentation": {
+    "ar": "الدالة اسم لمجموعة تعليمات تنفذ عند استدعائها. عرّفها قبل الاستدعاء، واستخدم الاسم الواضح لتجنب نسخ جسم التعليمات.",
+    "en": "A function names a group of statements that run when called. Define it before the call and use its clear name instead of copying its body."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ]
 }

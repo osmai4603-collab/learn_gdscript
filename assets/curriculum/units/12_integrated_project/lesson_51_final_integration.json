@@ -1,0 +1,364 @@
+{
+  "id": "lesson_51_final_integration",
+  "unitId": "unit_12_integrated_project",
+  "title": {
+    "ar": "دمج الإشارات والموارد والمراجعة النهائية",
+    "en": "Integrating Signals, Resources, and Final Review"
+  },
+  "objective": {
+    "ar": "اربط الأنظمة بإشارات وموارد ثم راجع المشروع بقائمة تحقق عملية.",
+    "en": "Connect systems with signals and resources, then review the project with a practical checklist."
+  },
+  "estimatedMinutes": 9,
+  "order": 2,
+  "contentMarkdown": {
+    "ar": "## اربط الأنظمة بواجهات واضحة\n\nيرسل العنصر إشارة عند جمعه، ويستقبل مدير اللعبة الحدث ليحدث النتيجة، ثم يحدّث HUD العرض. استخدم Resource لبيانات ثابتة مثل اسم العنصر أو قيمته.\n\n```gdscript\nsignal collected(item_data: Resource)\n\nfunc collect() -> void:\n    collected.emit(item_data)\n```\n\nيفترض مثال `exampleCode` أن السكربت مرفق بعقدة Area2D لها CollisionShape2D، وأن العقدة الداخلة ضمن مجموعة `player`، وأن `item_data` مورد صالح. في المراجعة شغّل المشروع من مشهد البداية، جرّب التفاعل، وافحص الأخطاء والتحذيرات والموارد. المهمة العملية تعتمد على فحصك؛ لا تُعرض كاجتياز آلي.",
+    "en": "## Connect systems through clear interfaces\n\nAn item emits a signal when collected, the game manager receives it and updates the score, then the HUD refreshes its display. Use a Resource for stable data such as an item’s name or value.\n\n```gdscript\nsignal collected(item_data: Resource)\n\nfunc collect() -> void:\n    collected.emit(item_data)\n```\n\nThe `exampleCode` assumes the script is attached to an Area2D with a CollisionShape2D, the entering node belongs to the `player` group, and `item_data` is a valid resource. For review, run the project from its start scene, test the interaction, and inspect errors, warnings, and resources. This hands-on task depends on your inspection; it is not an automated pass."
+  },
+  "documentation": {
+    "ar": "الإشارة واجهة إعلان حدث تتيح للمرسل إبلاغ المستمعين دون معرفة تفاصيل تنفيذهم. اربطها من المحرر أو الشيفرة وتأكد من تطابق المعاملات وعدم تكرار الاتصال. تناسب الموارد البيانات الوصفية القابلة لإعادة الاستخدام، بينما تحفظ الحالة المتغيرة في الكائن المسؤول. راجع المشروع بتشغيله من نقطة البداية واختبار المسارات والملفات والتحذيرات. مجرد تعريف إشارة لا يثبت عملها؛ تحقق عملياً من الاتصال وسلوك المستمع.",
+    "en": "A signal is an event interface that lets a sender notify listeners without knowing their implementation. Connect it in the editor or code, check argument compatibility, and avoid duplicate connections. Resources suit reusable descriptive data, while changing state belongs with its owner. Review the project by running it from its start point and testing flows, files, and warnings. Declaring a signal does not prove it works; check the connection and listener behavior in practice."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "استخدام الإشارات",
+        "en": "Using signals"
+      },
+      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+    },
+    {
+      "title": {
+        "ar": "الموارد",
+        "en": "Resources"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html"
+    },
+    {
+      "title": {
+        "ar": "تنظيم المشروع",
+        "en": "Project organization"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_51_final_integration_01",
+      "lessonId": "lesson_51_final_integration",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي توزيع للمسؤوليات أوضح عند جمع عنصر؟",
+        "en": "Which responsibility split is clearest when collecting an item?"
+      },
+      "options": [
+        {
+          "ar": "العنصر يرسل إشارة، والمدير يحدث النتيجة، وHUD يعرضها.",
+          "en": "The item emits a signal, the manager updates score, and the HUD displays it."
+        },
+        {
+          "ar": "العنصر يغير كل عقدة مباشرة.",
+          "en": "The item directly changes every node."
+        },
+        {
+          "ar": "المورد يحذف اللاعب.",
+          "en": "The resource deletes the player."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_51_final_integration_02",
+      "lessonId": "lesson_51_final_integration",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن دمج الأنظمة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about دمج الأنظمة. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "اربط إشارة collected بين العنصر ومدير اللعبة مع بيانات المورد عند الحاجة.",
+          "en": "Connect a collected signal between the item and game manager, passing resource data if needed."
+        },
+        {
+          "ar": "اجعل المدير يحدث النتيجة ويبلغ HUD بتحديث العرض.",
+          "en": "Have the manager update score and notify the HUD to refresh."
+        },
+        {
+          "ar": "شغّل من المشهد الرئيسي واختبر الجمع والتكرار وإعادة الجولة، ثم راجع الأخطاء والموارد.",
+          "en": "Run from the main scene and test collection, duplicates, and restart, then review errors and resources."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_51_final_integration_03",
+      "lessonId": "lesson_51_final_integration",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «score updated» في سياق دمج الأنظمة.",
+        "en": "Write code that prints “score updated” as a دمج الأنظمة status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"score updated\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score updated"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_51_final_integration_04",
+      "lessonId": "lesson_51_final_integration",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «score updated».",
+        "en": "Complete the line so it prints “score updated”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"score updated\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score updated"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_51_final_integration_05",
+      "lessonId": "lesson_51_final_integration",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في دمج الأنظمة: start ثم «score updated».",
+        "en": "Print two lines showing progress in دمج الأنظمة: start, then “score updated”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"score updated\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nscore updated"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_51_final_integration_06",
+      "lessonId": "lesson_51_final_integration",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «score updated» تماماً.",
+        "en": "Fix the code so it prints exactly “score updated”."
+      },
+      "starterCode": "print(\"score updated!\")",
+      "solutionCode": "print(\"score updated\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score updated"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_51_final_integration_07",
+      "lessonId": "lesson_51_final_integration",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «score updated» ثم done.",
+        "en": "Arrange output to show start, then “score updated”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"score updated\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"score updated\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nscore updated\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_51_final_integration_08",
+      "lessonId": "lesson_51_final_integration",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع دمج الأنظمة: «score updated».",
+        "en": "Write a program that records a result related to دمج الأنظمة: “score updated”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"score updated\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score updated"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_51_final_integration_09",
+      "lessonId": "lesson_51_final_integration",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nscore updated",
+        "en": "Write a program that displays this sequence:\nscore updated"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"score updated\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score updated"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_51_final_integration_10",
+      "lessonId": "lesson_51_final_integration",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «score updated».",
+        "en": "Use a string variable named status and print its value “score updated”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"score updated\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "score updated"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

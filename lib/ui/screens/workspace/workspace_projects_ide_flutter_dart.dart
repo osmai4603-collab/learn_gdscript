@@ -6,6 +6,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../logic/services/code_runner_service.dart';
+import '../../widgets/code_editor/code_editor_widget.dart';
 import '../../widgets/output_panel/error_display.dart';
 
 String _localized(BuildContext context, String arabic, String english) =>
@@ -70,7 +72,7 @@ class EditorTabModel {
 class WorkspaceDataModel {
   final String projectName;
   final String godotVersion;
-  final bool isLspConnected;
+  final bool isEngineReady;
   final List<ProjectFileNodeModel> fileTree;
   final List<EditorTabModel> openTabs;
   final String activeTabFileId;
@@ -83,7 +85,7 @@ class WorkspaceDataModel {
   const WorkspaceDataModel({
     required this.projectName,
     required this.godotVersion,
-    required this.isLspConnected,
+    required this.isEngineReady,
     required this.fileTree,
     required this.openTabs,
     required this.activeTabFileId,
@@ -111,138 +113,6 @@ class WorkspaceDataModel {
 
     return findContent(fileTree);
   }
-
-  static WorkspaceDataModel sampleData() {
-    return WorkspaceDataModel(
-      projectName: 'مشروع 2D Platformer Starter',
-      godotVersion: 'Godot v4.3.stable',
-      isLspConnected: true,
-      openTabs: const [
-        EditorTabModel(
-          fileId: 'f_player',
-          fileName: 'player.gd',
-          filePath: 'res://scripts/player.gd',
-          isDirty: true,
-          type: FileType.gdscript,
-        ),
-        EditorTabModel(
-          fileId: 'f_state_machine',
-          fileName: 'state_machine.gd',
-          filePath: 'res://scripts/state_machine.gd',
-          isDirty: false,
-          type: FileType.gdscript,
-        ),
-        EditorTabModel(
-          fileId: 'f_level',
-          fileName: 'level_01.tscn',
-          filePath: 'res://scenes/level_01.tscn',
-          isDirty: false,
-          type: FileType.scene,
-        ),
-      ],
-      activeTabFileId: 'f_player',
-      activeCodeContent: '''extends CharacterBody2D
-class_name PlayerController
-
-@export_group("إعدادات الحركة الأساسية")
-@export var speed: float = 240.0
-@export var jump_impulse: float = -420.0
-@export var gravity: float = 980.0
-
-@onready var sprite: AnimatedSprite2D = \$AnimatedSprite2D
-@onready var state_machine: Node = \$StateMachine
-
-var direction: Vector2 = Vector2.ZERO
-
-func _physics_process(delta: float) -> void:
-    # 1. تطبيق الجاذبية في الفضاء الثنائي
-    if not is_on_floor():
-        velocity.y += gravity * delta
-
-    # 2. قراءة مدخلات لوحة المفاتيح الموحدة
-    var input_x: float = Input.get_axis("move_left", "move_right")
-    if input_x != 0.0:
-        velocity.x = input_x * speed
-        sprite.flip_h = input_x < 0
-    else:
-        velocity.x = move_toward(velocity.x, 0.0, speed * 4.0 * delta)
-
-    # 3. معالجة القفز السلس
-    if Input.is_action_just_pressed("jump") and is_on_floor():
-        velocity.y = jump_impulse
-
-    move_and_slide()
-''',
-      fileTree: const [
-        ProjectFileNodeModel(
-          id: 'dir_res',
-          name: 'res:// (جذر المشروع)',
-          path: 'res://',
-          type: FileType.asset,
-          isDirectory: true,
-          isExpanded: true,
-          children: [
-            ProjectFileNodeModel(
-              id: 'dir_scripts',
-              name: 'scripts',
-              path: 'res://scripts',
-              type: FileType.asset,
-              isDirectory: true,
-              isExpanded: true,
-              children: [
-                ProjectFileNodeModel(
-                  id: 'f_player',
-                  name: 'player.gd',
-                  path: 'res://scripts/player.gd',
-                  type: FileType.gdscript,
-                ),
-                ProjectFileNodeModel(
-                  id: 'f_state_machine',
-                  name: 'state_machine.gd',
-                  path: 'res://scripts/state_machine.gd',
-                  type: FileType.gdscript,
-                ),
-                ProjectFileNodeModel(
-                  id: 'f_enemy',
-                  name: 'enemy_ai.gd',
-                  path: 'res://scripts/enemy_ai.gd',
-                  type: FileType.gdscript,
-                ),
-              ],
-            ),
-            ProjectFileNodeModel(
-              id: 'dir_scenes',
-              name: 'scenes',
-              path: 'res://scenes',
-              type: FileType.asset,
-              isDirectory: true,
-              isExpanded: true,
-              children: [
-                ProjectFileNodeModel(
-                  id: 'f_player_scene',
-                  name: 'Player.tscn',
-                  path: 'res://scenes/Player.tscn',
-                  type: FileType.scene,
-                ),
-                ProjectFileNodeModel(
-                  id: 'f_level',
-                  name: 'level_01.tscn',
-                  path: 'res://scenes/level_01.tscn',
-                  type: FileType.scene,
-                ),
-              ],
-            ),
-            ProjectFileNodeModel(
-              id: 'f_project_godot',
-              name: 'project.godot',
-              path: 'res://project.godot',
-              type: FileType.resource,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
 }
 
 // -----------------------------------------------------------------------------
@@ -251,6 +121,7 @@ func _physics_process(delta: float) -> void:
 
 class DesktopWorkspaceIdeScreen extends StatefulWidget {
   final WorkspaceDataModel data;
+  final CodeRunnerService? editorService;
   final ValueChanged<String>? onNavigateRoute;
   final VoidCallback? onRunProject;
   final ValueChanged<String>? onOpenFile;
@@ -271,6 +142,7 @@ class DesktopWorkspaceIdeScreen extends StatefulWidget {
   const DesktopWorkspaceIdeScreen({
     super.key,
     required this.data,
+    this.editorService,
     this.onNavigateRoute,
     this.onRunProject,
     this.onOpenFile,
@@ -296,8 +168,8 @@ class DesktopWorkspaceIdeScreen extends StatefulWidget {
 
 class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
     with SingleTickerProviderStateMixin {
-  late TextEditingController _codeEditorController;
   late FocusNode _editorFocusNode;
+  final Map<String, TextSelection> _selectionsByFileId = {};
   late String _activeTabId;
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
@@ -314,29 +186,25 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
               .where((tab) => tab.filePath == widget.initialFilePath)
               .firstOrNull;
     _activeTabId = matchingTab?.fileId ?? widget.data.activeTabFileId;
-    _codeEditorController = TextEditingController(
-      text:
-          widget.initialCode ??
-          (widget.initialFilePath == null
-              ? widget.data.activeCodeContent
-              : widget.data.codeForFilePath(widget.initialFilePath!) ?? ''),
-    );
     _editorFocusNode = FocusNode();
     final cursorLine = widget.initialCursorLine;
     if (cursorLine != null && cursorLine > 0) {
+      final initialCode =
+          widget.initialCode ??
+          (widget.initialFilePath == null
+              ? widget.data.activeCodeContent
+              : widget.data.codeForFilePath(widget.initialFilePath!) ?? '');
       var cursorOffset = 0;
       for (var line = 1; line < cursorLine; line++) {
-        final nextLine = _codeEditorController.text.indexOf('\n', cursorOffset);
+        final nextLine = initialCode.indexOf('\n', cursorOffset);
         if (nextLine == -1) {
-          cursorOffset = _codeEditorController.text.length;
+          cursorOffset = initialCode.length;
           break;
         }
         cursorOffset = nextLine + 1;
       }
-      _codeEditorController.selection = TextSelection.collapsed(
-        offset: cursorOffset
-            .clamp(0, _codeEditorController.text.length)
-            .toInt(),
+      _selectionsByFileId[_activeTabId] = TextSelection.collapsed(
+        offset: cursorOffset.clamp(0, initialCode.length).toInt(),
       );
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) _editorFocusNode.requestFocus();
@@ -373,7 +241,6 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
   @override
   void dispose() {
     _findController.removeListener(_onSearchChanged);
-    _codeEditorController.dispose();
     _editorFocusNode.dispose();
     _findController.dispose();
     _pulseController.dispose();
@@ -385,18 +252,36 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.data.activeTabFileId != widget.data.activeTabFileId) {
       _activeTabId = widget.data.activeTabFileId;
-      _codeEditorController.text = widget.data.activeCodeContent;
     }
+  }
+
+  void _saveSelection(String fileId, TextSelection selection) {
+    if (_selectionsByFileId[fileId] == selection) return;
+    setState(() => _selectionsByFileId[fileId] = selection);
+  }
+
+  (int, int) _cursorPosition(String code, TextSelection? selection) {
+    final offset = (selection?.extentOffset ?? 0).clamp(0, code.length).toInt();
+    final beforeCursor = code.substring(0, offset);
+    final line = '\n'.allMatches(beforeCursor).length + 1;
+    final lastLineBreak = beforeCursor.lastIndexOf('\n');
+    return (line, offset - lastLineBreak);
   }
 
   @override
   Widget build(BuildContext context) {
+    final code = widget.data.activeCodeContent;
+    final selection = _selectionsByFileId.putIfAbsent(
+      _activeTabId,
+      () => TextSelection.collapsed(offset: code.length),
+    );
+    final cursor = _cursorPosition(code, selection);
     return Scaffold(
       backgroundColor: const Color(0xFF0F141B),
       body: Column(
         children: [
           _WorkspaceTopNav(
-            isLspOnline: widget.data.isLspConnected,
+            isEngineReady: widget.data.isEngineReady,
             pulseAnimation: _pulseAnimation,
             onOpenSettings: widget.onOpenSettings,
           ),
@@ -538,7 +423,11 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                         Expanded(
                           child: _WorkspaceEditorPanel(
                             data: widget.data,
-                            controller: _codeEditorController,
+                            editorService: widget.editorService,
+                            initialSelection: selection,
+                            onSelectionChanged: (selection) =>
+                                _saveSelection(_activeTabId, selection),
+                            initialCode: widget.data.activeCodeContent,
                             activeTabId: _activeTabId,
                             focusNode: _editorFocusNode,
                             onSelectTab: (id) {
@@ -581,7 +470,11 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                             Expanded(
                               child: _WorkspaceEditorPanel(
                                 data: widget.data,
-                                controller: _codeEditorController,
+                                editorService: widget.editorService,
+                                initialSelection: selection,
+                                onSelectionChanged: (selection) =>
+                                    _saveSelection(_activeTabId, selection),
+                                initialCode: widget.data.activeCodeContent,
                                 activeTabId: _activeTabId,
                                 focusNode: _editorFocusNode,
                                 onSelectTab: (id) {
@@ -615,9 +508,9 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
             ),
           ),
           _WorkspaceStatusBar(
-            cursorLine: widget.data.cursorLine,
-            cursorCol: widget.data.cursorColumn,
-            lspOnline: widget.data.isLspConnected,
+            cursorLine: cursor.$1,
+            cursorCol: cursor.$2,
+            engineReady: widget.data.isEngineReady,
           ),
         ],
       ),
@@ -630,12 +523,12 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
 // -----------------------------------------------------------------------------
 
 class _WorkspaceTopNav extends StatelessWidget {
-  final bool isLspOnline;
+  final bool isEngineReady;
   final Animation<double> pulseAnimation;
   final VoidCallback? onOpenSettings;
 
   const _WorkspaceTopNav({
-    required this.isLspOnline,
+    required this.isEngineReady,
     required this.pulseAnimation,
     this.onOpenSettings,
   });
@@ -651,7 +544,7 @@ class _WorkspaceTopNav extends StatelessWidget {
           AnimatedBuilder(
             animation: pulseAnimation,
             builder: (context, _) {
-              final statusColor = isLspOnline
+              final statusColor = isEngineReady
                   ? const Color(0xFF4AE183)
                   : const Color(0xFFFFB783);
               return Container(
@@ -678,16 +571,16 @@ class _WorkspaceTopNav extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      isLspOnline
+                      isEngineReady
                           ? _localized(
                               context,
-                              'خادم GDScript: متصل',
-                              'GDScript server: connected',
+                              'محرك GDScript جاهز',
+                              'GDScript engine ready',
                             )
                           : _localized(
                               context,
-                              'خادم GDScript: غير متصل',
-                              'GDScript server: disconnected',
+                              'محرك GDScript غير متاح',
+                              'GDScript engine unavailable',
                             ),
                       style: TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
@@ -1066,26 +959,29 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                       itemCount: matchingFiles.length,
                       itemBuilder: (context, index) {
                         final file = matchingFiles[index];
-                        return ListTile(
-                          dense: true,
-                          leading: const Icon(
-                            Icons.code_rounded,
-                            size: 15,
-                            color: Color(0xFF38BDF8),
-                          ),
-                          title: Text(
-                            file.path,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textDirection: TextDirection.ltr,
-                            style: const TextStyle(
-                              fontFamily: 'JetBrains Mono',
-                              color: Color(0xFFC0C7D0),
-                              fontSize: 9,
+                        return Material(
+                          color: const Color(0xFF171C23),
+                          child: ListTile(
+                            dense: true,
+                            leading: const Icon(
+                              Icons.code_rounded,
+                              size: 15,
+                              color: Color(0xFF38BDF8),
                             ),
+                            title: Text(
+                              file.path,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textDirection: TextDirection.ltr,
+                              style: const TextStyle(
+                                fontFamily: 'JetBrains Mono',
+                                color: Color(0xFFC0C7D0),
+                                fontSize: 9,
+                              ),
+                            ),
+                            selected: file.path == activeFilePath,
+                            onTap: () => onOpenFile?.call(file.path),
                           ),
-                          selected: file.path == activeFilePath,
-                          onTap: () => onOpenFile?.call(file.path),
                         );
                       },
                     ),
@@ -1109,7 +1005,10 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
 
 class _WorkspaceEditorPanel extends StatelessWidget {
   final WorkspaceDataModel data;
-  final TextEditingController controller;
+  final CodeRunnerService? editorService;
+  final String initialCode;
+  final TextSelection? initialSelection;
+  final ValueChanged<TextSelection>? onSelectionChanged;
   final String activeTabId;
   final FocusNode focusNode;
   final ValueChanged<String> onSelectTab;
@@ -1119,7 +1018,10 @@ class _WorkspaceEditorPanel extends StatelessWidget {
 
   const _WorkspaceEditorPanel({
     required this.data,
-    required this.controller,
+    required this.initialCode,
+    required this.editorService,
+    required this.initialSelection,
+    required this.onSelectionChanged,
     required this.activeTabId,
     required this.focusNode,
     required this.onSelectTab,
@@ -1130,7 +1032,7 @@ class _WorkspaceEditorPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lineCount = controller.text.split('\n').length;
+    final service = editorService;
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF090F15),
@@ -1179,61 +1081,30 @@ class _WorkspaceEditorPanel extends StatelessWidget {
           ),
           const Divider(height: 1, color: Color(0xFF252A32)),
           Expanded(
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    width: 42,
-                    color: const Color(0xFF090F15),
-                    padding: const EdgeInsets.only(top: 15),
-                    child: ListView.builder(
-                      itemCount: lineCount < 24 ? 24 : lineCount,
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          height: 22.4,
-                          child: Text(
-                            '${index + 1}',
-                            textAlign: TextAlign.right,
-                            style: const TextStyle(
-                              fontFamily: 'JetBrains Mono',
-                              fontSize: 11,
-                              color: Color(0xFF8A919A),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const VerticalDivider(width: 1, color: Color(0xFF252A32)),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(13, 12, 12, 8),
-                      child: TextField(
-                        controller: controller,
-                        focusNode: focusNode,
-                        maxLines: null,
-                        expands: true,
-                        scrollPadding: EdgeInsets.zero,
-                        style: const TextStyle(
-                          fontFamily: 'JetBrains Mono',
-                          fontSize: 12,
-                          height: 1.6,
-                          color: Color(0xFFDEE2EC),
-                        ),
-                        cursorColor: const Color(0xFF91CDFF),
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.zero,
-                          isDense: true,
-                        ),
-                        onChanged: onCodeChanged,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            child: CodeEditorWidget(
+              key: const ValueKey('workspace-code-editor'),
+              documentId: activeTabId,
+              initialCode: initialCode,
+              initialSelection: initialSelection,
+              focusNode: focusNode,
+              expands: true,
+              fontSize: 12,
+              showActionBar: true,
+              onChanged: onCodeChanged,
+              onSelectionChanged: onSelectionChanged,
+              onRunCode: service?.runCode,
+              onSave: onSaveFile,
+              onCompletionItemsRequested: service == null
+                  ? null
+                  : (code, cursorOffset) async =>
+                        service.getCompletionItems(code, cursorOffset),
+              onSyntaxHighlightsRequested: service?.getSyntaxHighlights,
+              onSemanticHighlightsRequested: service?.getSemanticHighlights,
+              onDiagnosticsRequested: service?.getDiagnostics,
+              onSignatureHelpRequested: service?.getSignatureHelp,
+              onHoverInfoRequested: service?.getHoverInfo,
+              onDefinitionRequested: service?.findDefinition,
+              onMatchingBracketRequested: service?.findMatchingBracket,
             ),
           ),
         ],
@@ -1377,7 +1248,11 @@ class _WorkspaceDockPanel extends StatelessWidget {
               children: [
                 _DockTab(
                   icon: Icons.warning_amber_rounded,
-                  label: _localized(context, 'تشخيصات LSP', 'LSP diagnostics'),
+                  label: _localized(
+                    context,
+                    'تشخيصات المحرك',
+                    'Engine diagnostics',
+                  ),
                   count: '${data.diagnosticsCount}',
                   active: true,
                 ),
@@ -1385,12 +1260,12 @@ class _WorkspaceDockPanel extends StatelessWidget {
                 Text(
                   _localized(
                     context,
-                    data.isLspConnected ? 'متصل' : 'غير متصل',
-                    data.isLspConnected ? 'Connected' : 'Disconnected',
+                    data.isEngineReady ? 'جاهز' : 'غير متاح',
+                    data.isEngineReady ? 'Ready' : 'Unavailable',
                   ),
                   style: TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
-                    color: data.isLspConnected
+                    color: data.isEngineReady
                         ? const Color(0xFF4AE183)
                         : const Color(0xFFFFB783),
                     fontSize: 10,
@@ -1406,8 +1281,8 @@ class _WorkspaceDockPanel extends StatelessWidget {
                     child: Text(
                       _localized(
                         context,
-                        'لا توجد تشخيصات للمستندات المفهرسة.',
-                        'No diagnostics for indexed documents.',
+                        'لا توجد تشخيصات للملف المفتوح.',
+                        'No diagnostics for the open file.',
                       ),
                       style: const TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
@@ -1603,7 +1478,7 @@ class _FileTreeNodeTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: Material(
-        color: Colors.transparent,
+        color: const Color(0xFF171C23),
         child: ListTile(
           dense: true,
           contentPadding: const EdgeInsets.symmetric(horizontal: 8),
@@ -1726,12 +1601,12 @@ class _EditorTabBar extends StatelessWidget {
 class _WorkspaceStatusBar extends StatelessWidget {
   final int cursorLine;
   final int cursorCol;
-  final bool lspOnline;
+  final bool engineReady;
 
   const _WorkspaceStatusBar({
     required this.cursorLine,
     required this.cursorCol,
-    required this.lspOnline,
+    required this.engineReady,
   });
 
   @override
@@ -1745,23 +1620,23 @@ class _WorkspaceStatusBar extends StatelessWidget {
           Icon(
             Icons.bolt_rounded,
             size: 14,
-            color: lspOnline
+            color: engineReady
                 ? const Color(0xFF4AE183)
                 : const Color(0xFFFFB783),
           ),
           const SizedBox(width: 6),
           Text(
-            lspOnline
-                ? 'GDScript 2.0 • LSP'
+            engineReady
+                ? 'GDScript 2.0 • gdscript_engine'
                 : _localized(
                     context,
-                    'GDScript 2.0 • خادم اللغة غير متصل',
-                    'GDScript 2.0 • language server offline',
+                    'GDScript 2.0 • المحرك غير متاح',
+                    'GDScript 2.0 • engine unavailable',
                   ),
             style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 11,
-              color: lspOnline
+              color: engineReady
                   ? const Color(0xFF94A3B8)
                   : const Color(0xFFFFB783),
             ),

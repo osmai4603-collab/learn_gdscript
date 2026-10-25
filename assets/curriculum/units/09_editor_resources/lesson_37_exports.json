@@ -1,0 +1,350 @@
+{
+  "id": "lesson_37_exports",
+  "unitId": "unit_09_editor_resources",
+  "title": {
+    "ar": "الخصائص المصدّرة وقيودها",
+    "en": "Exported Properties and Constraints"
+  },
+  "objective": {
+    "ar": "اعرض خصائص السكربت في Inspector واضبط نوعها ومدى قيمها.",
+    "en": "Expose script properties in the Inspector and constrain their types and values."
+  },
+  "estimatedMinutes": 9,
+  "order": 0,
+  "contentMarkdown": {
+    "ar": "## اجعل الإعدادات قابلة للتحرير\n\nتتيح `@export` عرض متغير السكربت في Inspector كي يضبط المصمم قيمته لكل عقدة دون تغيير الشيفرة. اختر نوعاً واضحاً واستخدم تلميحاً مناسباً عندما تكون القيمة ضمن مجال معروف.\n\n```gdscript\n@export_range(0.0, 500.0, 10.0) var speed: float = 240.0\n@export var display_name: String = \"Rover\"\n```\n\nتظهر الخصائص بعد إرفاق السكربت بعقدة. احتفظ بقيمة افتراضية مفيدة، ولا تصدّر تفاصيل داخلية لا يحتاج المصمم إلى ضبطها.",
+    "en": "## Make settings editable\n\n`@export` exposes a script variable in the Inspector so a designer can change it for each node without editing code. Choose a clear type and a suitable hint when a value has a known range.\n\n```gdscript\n@export_range(0.0, 500.0, 10.0) var speed: float = 240.0\n@export var display_name: String = \"Rover\"\n```\n\nExported properties appear after attaching the script to a node. Keep a useful default and avoid exposing implementation details that designers should not change."
+  },
+  "documentation": {
+    "ar": "يحوّل `@export` متغيراً إلى خاصية قابلة للتحرير والتخزين في Inspector للعقدة التي تحمل السكربت. يختار Godot محرراً مناسباً بحسب النوع، وتساعد تلميحات مثل `@export_range` في تقديم مجال أو خطوة للقيم العددية. القيود تصف احتياج التصميم ولا تستبدل التحقق المنطقي في الشيفرة. تحفظ تعديلات العقدة ضمن المشهد، بينما تبقى القيمة الافتراضية في السكربت أساساً للنسخ الجديدة. استخدم التصدير للإعدادات المقصودة فقط، وأبقِ الحالة المؤقتة الخاصة بالتنفيذ غير مصدّرة.",
+    "en": "`@export` turns a variable into a property that can be edited and stored in the Inspector for a node carrying the script. Godot chooses an editor based on the type, and hints such as `@export_range` provide a range or step for numeric values. Constraints express design needs; they do not replace logic validation in code. Node edits are stored in the scene, while the script default remains the starting point for new instances. Export intentional settings only, and keep transient implementation state unexported."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "تصدير GDScript",
+        "en": "GDScript exports"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_37_exports_01",
+      "lessonId": "lesson_37_exports",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أين يحرّر المصمم قيمة متغير موسوم بـ `@export`؟",
+        "en": "Where can a designer edit a variable marked `@export`?"
+      },
+      "options": [
+        {
+          "ar": "في Inspector للعقدة",
+          "en": "In the node Inspector"
+        },
+        {
+          "ar": "في سجل الأخطاء فقط",
+          "en": "Only in the error log"
+        },
+        {
+          "ar": "داخل تعليق في ملف المشروع",
+          "en": "In a project-file comment"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_37_exports_02",
+      "lessonId": "lesson_37_exports",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن الخصائص المصدّرة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about الخصائص المصدّرة. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ مشهداً وأضف عقدة مناسبة ثم أرفق بها سكربت GDScript.",
+          "en": "Create a scene, add a suitable node, and attach a GDScript file."
+        },
+        {
+          "ar": "أضف `@export var speed: float = 240.0` واحفظ السكربت.",
+          "en": "Add `@export var speed: float = 240.0` and save the script."
+        },
+        {
+          "ar": "حدد العقدة، غيّر Speed من Inspector، ثم شغّل المشهد وافحص القيمة.",
+          "en": "Select the node, change Speed in the Inspector, then run the scene and inspect the value."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_37_exports_03",
+      "lessonId": "lesson_37_exports",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «speed = 240» في سياق الخصائص المصدّرة.",
+        "en": "Write code that prints “speed = 240” as a الخصائص المصدّرة status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"speed = 240\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "speed = 240"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_37_exports_04",
+      "lessonId": "lesson_37_exports",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «speed = 240».",
+        "en": "Complete the line so it prints “speed = 240”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"speed = 240\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "speed = 240"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_37_exports_05",
+      "lessonId": "lesson_37_exports",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في الخصائص المصدّرة: start ثم «speed = 240».",
+        "en": "Print two lines showing progress in الخصائص المصدّرة: start, then “speed = 240”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"speed = 240\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nspeed = 240"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_37_exports_06",
+      "lessonId": "lesson_37_exports",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «speed = 240» تماماً.",
+        "en": "Fix the code so it prints exactly “speed = 240”."
+      },
+      "starterCode": "print(\"speed = 240!\")",
+      "solutionCode": "print(\"speed = 240\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "speed = 240"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_37_exports_07",
+      "lessonId": "lesson_37_exports",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «speed = 240» ثم done.",
+        "en": "Arrange output to show start, then “speed = 240”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"speed = 240\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"speed = 240\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nspeed = 240\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_37_exports_08",
+      "lessonId": "lesson_37_exports",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع الخصائص المصدّرة: «speed = 240».",
+        "en": "Write a program that records a result related to الخصائص المصدّرة: “speed = 240”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"speed = 240\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "speed = 240"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_37_exports_09",
+      "lessonId": "lesson_37_exports",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nspeed = 240",
+        "en": "Write a program that displays this sequence:\nspeed = 240"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"speed = 240\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "speed = 240"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_37_exports_10",
+      "lessonId": "lesson_37_exports",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «speed = 240».",
+        "en": "Use a string variable named status and print its value “speed = 240”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"speed = 240\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "speed = 240"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

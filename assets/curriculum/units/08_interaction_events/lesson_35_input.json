@@ -1,0 +1,378 @@
+{
+  "id": "lesson_35_input",
+  "unitId": "unit_08_interaction_events",
+  "title": {
+    "ar": "استقبال مدخلات بسيطة",
+    "en": "Handling Simple Input"
+  },
+  "objective": {
+    "ar": "اختر طريقة استقبال إدخال المستخدم المناسبة للفعل المطلوب.",
+    "en": "Choose an input-handling approach that fits the requested interaction."
+  },
+  "estimatedMinutes": 10,
+  "order": 2,
+  "documentation": {
+    "ar": "عرّف أفعالاً مثل `move_left` في Project Settings → Input Map واربطها بمفاتيح. استخدم `Input.is_action_pressed()` للحالة المستمرة أو `_input(event)` لمعالجة حدث وارد. إعداد المحرر لا يتحقق منه stdout.",
+    "en": "Define actions such as `move_left` in Project Settings → Input Map and bind keys. Use `Input.is_action_pressed()` for a continuous state or `_input(event)` to handle an incoming event. Editor setup cannot be verified through stdout."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "إدخال اللاعب",
+        "en": "Input"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/inputs/index.html"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## من المفتاح إلى فعل مسمى\n\nعرّف فعلاً في Input Map واربطه بزر. يمكن للسكربت قراءة حالة فعل مستمر أو استقبال الحدث مباشرة.\n\n```gdscript\nextends Node2D\n\nfunc _physics_process(delta):\n    if Input.is_action_pressed(\"move_right\"):\n        position.x += 100.0 * delta\n```\n\nيتطلب المثال إعداد `move_right` من المحرر. استخدم مرحلة الفيزياء للحركة المرتبطة بالفيزياء.",
+    "en": "## From a key to a named action\n\nDefine an action in Input Map and bind it to a button. A script can read the state of a continuous action or receive an event directly.\n\n```gdscript\nextends Node2D\n\nfunc _physics_process(delta):\n    if Input.is_action_pressed(\"move_right\"):\n        position.x += 100.0 * delta\n```\n\nThis example requires configuring `move_right` in the editor. Use the physics stage for physics-related movement."
+  },
+  "exercises": [
+    {
+      "id": "ex_lesson_35_input_01_predict",
+      "lessonId": "lesson_35_input",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع النتيجة في المثال: إذا ضغط المستخدم الفعل المعرّف `move_right` فسيقرأ الكود الفعل ويحرك العقدة في الاتجاه المطلوب.",
+        "en": "Predict the result in the example: If the user presses the configured `move_right` action, the code reads it and moves the node as intended."
+      },
+      "options": [
+        {
+          "ar": "إذا ضغط المستخدم الفعل المعرّف `move_right` فسيقرأ الكود الفعل ويحرك العقدة في الاتجاه المطلوب.",
+          "en": "If the user presses the configured `move_right` action, the code reads it and moves the node as intended."
+        },
+        {
+          "ar": "أسماء الأفعال تفصل منطق اللعبة عن المفتاح المادي، ويجب إعداد الربط في المحرر.",
+          "en": "Action names separate game logic from physical keys, and the binding must be set in the editor."
+        },
+        {
+          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
+          "en": "Input Map defines the node tree that receives a signal."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
+          "en": "Trace what happens first, then the final result."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_35_input_02_identify",
+      "lessonId": "lesson_35_input",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «استقبال مدخلات بسيطة»؟",
+        "en": "Which statement accurately identifies the core concept in “Handling Simple Input”?"
+      },
+      "options": [
+        {
+          "ar": "Input Map يربط أسماء أفعال منطقية بأزرار؛ وتقرأ `Input` حالة الفعل أو يعالج `_input` الحدث.",
+          "en": "Input Map binds logical action names to buttons; `Input` reads action state while `_input` handles events."
+        },
+        {
+          "ar": "أسماء الأفعال تفصل منطق اللعبة عن المفتاح المادي، ويجب إعداد الربط في المحرر.",
+          "en": "Action names separate game logic from physical keys, and the binding must be set in the editor."
+        },
+        {
+          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
+          "en": "Input Map defines the node tree that receives a signal."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
+          "en": "Look for the role of the key terms in the example."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_35_input_03_choose",
+      "lessonId": "lesson_35_input",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي قرار تصميم مناسب للحالة التالية؟ عرّف `move_right` في Input Map قبل استعماله في كود الحركة.",
+        "en": "Which design choice fits this situation? Define `move_right` in Input Map before using it in movement code."
+      },
+      "options": [
+        {
+          "ar": "عرّف `move_right` في Input Map قبل استعماله في كود الحركة.",
+          "en": "Define `move_right` in Input Map before using it in movement code."
+        },
+        {
+          "ar": "أسماء الأفعال تفصل منطق اللعبة عن المفتاح المادي، ويجب إعداد الربط في المحرر.",
+          "en": "Action names separate game logic from physical keys, and the binding must be set in the editor."
+        },
+        {
+          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
+          "en": "Input Map defines the node tree that receives a signal."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
+          "en": "Choose the option that matches the scenario’s stated need."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_35_input_04_complete",
+      "lessonId": "lesson_35_input",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: جدول يربط اسم فعل منطقي بزر وتجربة يدوية للتحقق من ظهوره.",
+        "en": "Complete a short sketch or sequence that shows: A table mapping a logical action to a key and a manual test for it."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الأجزاء الأساسية المطلوبة: جدول يربط اسم فعل منطقي بزر وتجربة يدوية للتحقق من ظهوره.",
+          "en": "Write the required essential parts: A table mapping a logical action to a key and a manual test for it."
+        },
+        {
+          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
+          "en": "Connect the elements in the correct order or relationship."
+        },
+        {
+          "ar": "راجع المخطط باستخدام تعريف الدرس.",
+          "en": "Review the sketch using the lesson definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_35_input_05_write",
+      "lessonId": "lesson_35_input",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أضف فعلاً جديداً في Input Map في مشروع اختبار وجرب الضغط والإفلات يدوياً.",
+        "en": "Write a short implementation plan for this application: Add a new Input Map action in a test project and manually try pressing and releasing it."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
+          "en": "Identify the goal and the elements or nodes you need."
+        },
+        {
+          "ar": "اكتب الخطوات بترتيب التنفيذ.",
+          "en": "Write the steps in implementation order."
+        },
+        {
+          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
+          "en": "State how you will manually verify the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_35_input_06_fix",
+      "lessonId": "lesson_35_input",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "اقرأ الاعتقاد الخاطئ: «استخدام اسم `move_right` في الكود ينشئه تلقائياً في Input Map.» ما التصحيح الأفضل؟",
+        "en": "Read this misconception: “Using `move_right` in code automatically creates it in Input Map.” What is the best correction?"
+      },
+      "options": [
+        {
+          "ar": "أضف الفعل واربطه بزر من Project Settings → Input Map، ثم تحقق يدوياً.",
+          "en": "Add the action and bind a key in Project Settings → Input Map, then verify manually."
+        },
+        {
+          "ar": "استخدام اسم `move_right` في الكود ينشئه تلقائياً في Input Map.",
+          "en": "Using `move_right` in code automatically creates it in Input Map."
+        },
+        {
+          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
+          "en": "Input Map defines the node tree that receives a signal."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
+          "en": "Distinguish the correct definition from the mistaken assumption."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_35_input_07_apply",
+      "lessonId": "lesson_35_input",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أضف فعلاً جديداً في Input Map في مشروع اختبار وجرب الضغط والإفلات يدوياً. لا يُفحص إعداد المحرر تلقائياً.",
+        "en": "Apply the concept manually in a test project: Add a new Input Map action in a test project and manually try pressing and releasing it. Editor setup is not automatically checked."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
+          "en": "Create the smallest example that demonstrates the idea."
+        },
+        {
+          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
+          "en": "Check the relevant names and settings inside Godot."
+        },
+        {
+          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
+          "en": "Run the experiment if possible and record what you observe."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_35_input_08_compare",
+      "lessonId": "lesson_35_input",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `Input.is_action_pressed` مناسب لحالة مستمرة؛ و`_input(event)` يعالج الحدث الوارد.",
+        "en": "What is the difference between the concepts in this lesson? `Input.is_action_pressed` suits a continuous state; `_input(event)` handles an incoming event."
+      },
+      "options": [
+        {
+          "ar": "`Input.is_action_pressed` مناسب لحالة مستمرة؛ و`_input(event)` يعالج الحدث الوارد.",
+          "en": "`Input.is_action_pressed` suits a continuous state; `_input(event)` handles an incoming event."
+        },
+        {
+          "ar": "أسماء الأفعال تفصل منطق اللعبة عن المفتاح المادي، ويجب إعداد الربط في المحرر.",
+          "en": "Action names separate game logic from physical keys, and the binding must be set in the editor."
+        },
+        {
+          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
+          "en": "Input Map defines the node tree that receives a signal."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
+          "en": "Compare each part’s role, not just its name."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_35_input_09_debug",
+      "lessonId": "lesson_35_input",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "راجع الحالة المعيبة: سكربت يفحص `move_left` بينما إعداد Input Map يعرف فقط `move_right`. اكتب طريقة تشخيصها وإصلاحها.",
+        "en": "Review this flawed setup: A script checks `move_left` while Input Map defines only `move_right`. Write how you would diagnose and fix it."
+      },
+      "steps": [
+        {
+          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
+          "en": "Identify the incorrect element or relationship."
+        },
+        {
+          "ar": "قارنها بما يتطلبه المفهوم.",
+          "en": "Compare it with what the concept requires."
+        },
+        {
+          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
+          "en": "Write a correction and a manual verification step."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_35_input_10_apply",
+      "lessonId": "lesson_35_input",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: حوّل إدخالاً إلى حركة، ثم أرسل إشارة عند بلوغ الهدف ليتمكن مستقبل آخر من الاستجابة.",
+        "en": "Design an application that combines this concept with an earlier idea: Turn an input into movement, then emit a signal on reaching a goal so another receiver can respond."
+      },
+      "steps": [
+        {
+          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
+          "en": "Choose a clear purpose for the integrated example."
+        },
+        {
+          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
+          "en": "Define the responsibility of each node, class, or part."
+        },
+        {
+          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
+          "en": "Sketch the data or event flow, then self-review it."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

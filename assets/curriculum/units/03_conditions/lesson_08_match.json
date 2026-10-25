@@ -1,47 +1,394 @@
 {
   "id": "lesson_08_match",
   "unitId": "unit_03_conditions",
-  "title": {"ar": "عبارة المطابقة", "en": "Match Statement"},
-  "objective": {"ar": "اختر فرعاً بحسب قيمة واحدة باستخدام `match`.", "en": "Choose a branch based on one value with `match`."},
-  "estimatedMinutes": 5,
-  "order": 2,
-  "contentMarkdown": {
-    "ar": "## طابق قيمة مع الحالات\n\nتفحص `match` قيمة واحدة وتنفّذ الحالة المطابقة لها. استخدم `_` كحالة افتراضية لأي قيمة لم تُذكر:\n\n```gdscript\nvar day = \"Mon\"\nmatch day:\n    \"Mon\":\n        print(\"Monday\")\n    \"Tue\":\n        print(\"Tuesday\")\n    _:\n        print(\"Other\")\n```\n\nتحتاج كل حالة إلى نقطتين، وتُكتب أوامرها بمسافة بادئة إضافية.",
-    "en": "## Match a value against cases\n\n`match` checks one value and runs the matching case. Use `_` as the default case for any value not listed:\n\n```gdscript\nvar day = \"Mon\"\nmatch day:\n    \"Mon\":\n        print(\"Monday\")\n    \"Tue\":\n        print(\"Tuesday\")\n    _:\n        print(\"Other\")\n```\n\nEach case ends with a colon, and its statements are indented one level further."
+  "title": {
+    "ar": "match والحراسة",
+    "en": "match and pattern guards"
   },
-  "exampleCode": "var day = \"Mon\"\nmatch day:\n    \"Mon\":\n        print(\"Monday\")\n    \"Tue\":\n        print(\"Tuesday\")\n    _:\n        print(\"Other\")",
-  "exercises": [
+  "objective": {
+    "ar": "استخدم `match` للتعامل مع خيارات محددة وتعرّف على الحراسة.",
+    "en": "Use `match` for distinct choices and learn how a guard can restrict a pattern."
+  },
+  "estimatedMinutes": 8,
+  "order": 3,
+  "contentMarkdown": {
+    "ar": "## match والحراسة\n\nيختار `match` فرعاً يطابق قيمة، وتكتب فروعه بمسافة بادئة وتنتهي بـ`:`. استخدم `_` كحالة افتراضية. يمكن للحراسة إضافة شرط إلى نمط، لكن ابدأ بالمطابقة المباشرة حتى تبقى الفروع واضحة.\n\n### مثال عملي\n\n```gdscript\nvar direction = \"left\"\nmatch direction:\n    \"left\":\n        print(\"Left\")\n    \"right\":\n        print(\"Right\")\n    _:\n        print(\"Forward\")\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## match and pattern guards\n\n`match` selects a branch that matches a value; its branches are indented and end with `:`. Use `_` as a fallback. A pattern guard can add a condition to a pattern, but begin with direct matching to keep branches clear.\n\n### Practical example\n\n```gdscript\nvar direction = \"left\"\nmatch direction:\n    \"left\":\n        print(\"Left\")\n    \"right\":\n        print(\"Right\")\n    _:\n        print(\"Forward\")\n```\n\nChange one value and run the script to observe its effect."
+  },
+  "exampleCode": "var direction = \"left\"\nmatch direction:\n    \"left\":\n        print(\"Left\")\n    \"right\":\n        print(\"Right\")\n    _:\n        print(\"Forward\")",
+  "documentation": {
+    "ar": "### match والحراسة\n\nيختار `match` فرعاً يطابق قيمة، وتكتب فروعه بمسافة بادئة وتنتهي بـ`:`. استخدم `_` كحالة افتراضية. يمكن للحراسة إضافة شرط إلى نمط، لكن ابدأ بالمطابقة المباشرة حتى تبقى الفروع واضحة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### match and pattern guards\n\n`match` selects a branch that matches a value; its branches are indented and end with `:`. Use `_` as a fallback. A pattern guard can add a condition to a pattern, but begin with direct matching to keep branches clear.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
     {
-      "id": "ex_08_match_day",
-      "lessonId": "lesson_08_match",
-      "type": "writeCode",
-      "prompt": {"ar": "استخدم `match` لطباعة اسم اليوم الموافق للرقم `3`، مع حالات للأيام من 1 إلى 7 وحالة افتراضية.", "en": "Use `match` to print the day for number `3`, with cases for days 1 through 7 and a default case."},
-      "starterCode": "",
-      "solutionCode": "var day = 3\nmatch day:\n    1:\n        print(\"Sunday\")\n    2:\n        print(\"Monday\")\n    3:\n        print(\"Tuesday\")\n    4:\n        print(\"Wednesday\")\n    5:\n        print(\"Thursday\")\n    6:\n        print(\"Friday\")\n    7:\n        print(\"Saturday\")\n    _:\n        print(\"Unknown\")",
-      "testCases": [
-        {"description": {"ar": "تطابق القيمة 3 حالة الثلاثاء.", "en": "The value 3 matches the Tuesday case."}, "expectedOutput": "Tuesday"}
-      ],
-      "hints": [
-        {"ar": "اكتب `match day:` ثم أضف حالة لكل رقم.", "en": "Write `match day:` and add one case for each number."},
-        {"ar": "استخدم `_:` بعد الحالات لتغطية أي قيمة أخرى.", "en": "Use `_:` after the cases to cover any other value."}
-      ],
-      "order": 0
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
     },
     {
-      "id": "ex_08_predict_match",
+      "title": {
+        "ar": "GDScript المتقدم",
+        "en": "Advanced GDScript"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_advanced.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_08_match_01",
       "lessonId": "lesson_08_match",
-      "type": "predictOutput",
-      "prompt": {"ar": "اكتب برنامجاً يطابق النص `Wed` ويطبع `Midweek`، أو `Other` إذا لم يطابق الحالات.", "en": "Write a program that matches `Wed` and prints `Midweek`, or prints `Other` when no case matches."},
-      "starterCode": "",
-      "solutionCode": "var day = \"Wed\"\nmatch day:\n    \"Wed\":\n        print(\"Midweek\")\n    _:\n        print(\"Other\")",
-      "testCases": [
-        {"description": {"ar": "تُنفذ الحالة المطابقة للنص.", "en": "The case matching the string runs."}, "expectedOutput": "Midweek"}
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_02",
+      "lessonId": "lesson_08_match",
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_03",
+      "lessonId": "lesson_08_match",
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_04",
+      "lessonId": "lesson_08_match",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
       ],
       "hints": [
-        {"ar": "طابق النص باستخدام علامتي تنصيص.", "en": "Match the string using quotation marks."},
-        {"ar": "أضف حالة `_` للطباعة الافتراضية.", "en": "Add a `_` case for the default output."}
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_05",
+      "lessonId": "lesson_08_match",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`One`",
+        "en": "Write or complete the example so its output is:\n\n`One`"
+      },
+      "starterCode": "",
+      "solutionCode": "var x = 1\nmatch x:\n    1:\n        print(\"One\")\n    _:\n        print(\"Other\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 1
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "One"
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_06",
+      "lessonId": "lesson_08_match",
+      "order": 5,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nOther",
+        "en": "Write code that applies the lesson idea and produces this output:\n\nOther"
+      },
+      "starterCode": "",
+      "solutionCode": "var x = 3\nmatch x:\n    1:\n        print(\"One\")\n    _:\n        print(\"Other\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Other"
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_07",
+      "lessonId": "lesson_08_match",
+      "order": 6,
+      "type": "fixBug",
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Blue`",
+        "en": "Write or complete the example so its output is:\n\n`Blue`"
+      },
+      "starterCode": "var color = \"blue\"\nmatch color:\n    \"red\":\n        pront(\"Red\")\n    \"blue\":\n        print(\"Blue\")\n    _:\n        print(\"Other\")",
+      "solutionCode": "var color = \"blue\"\nmatch color:\n    \"red\":\n        print(\"Red\")\n    \"blue\":\n        print(\"Blue\")\n    _:\n        print(\"Other\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Blue"
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_08",
+      "lessonId": "lesson_08_match",
+      "order": 7,
+      "type": "predictOutput",
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`Few`",
+        "en": "What output does this example display?\n\n`Few`"
+      },
+      "starterCode": "var n = 2\nmatch n:\n    1, 2:\n        print(\"Few\")\n    _:\n        print(\"Many\")",
+      "solutionCode": "var n = 2\nmatch n:\n    1, 2:\n        print(\"Few\")\n    _:\n        print(\"Many\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Few"
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_09",
+      "lessonId": "lesson_08_match",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Done`",
+        "en": "Write or complete the example so its output is:\n\n`Done`"
+      },
+      "starterCode": "",
+      "solutionCode": "var state = \"done\"\nmatch state:\n    \"ready\":\n        print(\"Start\")\n    \"done\":\n        print(\"Done\")\n    _:\n        print(\"Other\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Done"
+        }
+      ]
+    },
+    {
+      "id": "ex_08_match_10",
+      "lessonId": "lesson_08_match",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Zero`",
+        "en": "Write or complete the example so its output is:\n\n`Zero`"
+      },
+      "starterCode": "",
+      "solutionCode": "var n = 0\nmatch n:\n    0:\n        print(\"Zero\")\n    _:\n        print(\"Not zero\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Zero"
+        }
+      ]
     }
   ]
 }

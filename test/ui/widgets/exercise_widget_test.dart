@@ -10,9 +10,94 @@ import 'package:learn_gdscript/ui/widgets/exercise/exercise_widget.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  testWidgets('multiple-choice exercises verify the selected answer', (
+    tester,
+  ) async {
+    final runner = CodeRunnerService();
+    addTearDown(runner.dispose);
+    var completed = false;
+    final exercise = Exercise(
+      id: 'choice',
+      lessonId: 'lesson',
+      type: ExerciseType.multipleChoice,
+      prompt: const LocalizedText(ar: 'اختر', en: 'Choose'),
+      options: const [
+        LocalizedText(ar: 'خطأ', en: 'Incorrect'),
+        LocalizedText(ar: 'صحيح', en: 'Correct'),
+      ],
+      correctOptionIndex: 1,
+      testCases: const [],
+      hints: const [],
+      order: 0,
+    );
+
+    await tester.pumpWidget(
+      _localizedApp(
+        ExerciseWidget(
+          exercise: exercise,
+          exerciseIndex: 0,
+          exerciseCount: 1,
+          onCompleted: () => completed = true,
+        ),
+        runner,
+      ),
+    );
+
+    await tester.tap(find.text('Correct'));
+    await tester.pump();
+    await tester.tap(find.text('Check answer'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Passed'), findsOneWidget);
+    expect(completed, isTrue);
+  });
+
+  testWidgets('guided tasks clearly identify self-reported completion', (
+    tester,
+  ) async {
+    final runner = CodeRunnerService();
+    addTearDown(runner.dispose);
+    var completed = 0;
+    final exercise = Exercise(
+      id: 'guided',
+      lessonId: 'lesson',
+      type: ExerciseType.guidedTask,
+      prompt: const LocalizedText(ar: 'أنشئ مشهداً', en: 'Create a scene'),
+      steps: const [LocalizedText(ar: 'أضف عقدة جذر', en: 'Add a root node')],
+      testCases: const [],
+      hints: const [],
+      order: 0,
+    );
+
+    await tester.pumpWidget(
+      _localizedApp(
+        ExerciseWidget(
+          exercise: exercise,
+          exerciseIndex: 0,
+          exerciseCount: 1,
+          onCompleted: () => completed++,
+        ),
+        runner,
+      ),
+    );
+
+    expect(
+      find.text(
+        'Completion is self-reported and is not checked by the code runner.',
+      ),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Mark task complete'));
+    await tester.pumpAndSettle();
+
+    expect(completed, 1);
+  });
+
   testWidgets('predict-output exercises show code and allow retrying', (
     tester,
   ) async {
+    final runner = CodeRunnerService();
+    addTearDown(runner.dispose);
     var completed = false;
     final exercise = _exercise(
       type: ExerciseType.predictOutput,
@@ -30,6 +115,7 @@ void main() {
           fontSize: 16,
           onCompleted: () => completed = true,
         ),
+        runner,
       ),
     );
 
@@ -77,6 +163,7 @@ void main() {
             onCompleted: () => completed = true,
           ),
         ),
+        runner,
       ),
     );
 
@@ -97,7 +184,7 @@ void main() {
   });
 }
 
-Widget _localizedApp(Widget child) => MaterialApp(
+Widget _localizedApp(Widget child, CodeRunnerService runner) => MaterialApp(
   supportedLocales: AppLocalizations.supportedLocales,
   localizationsDelegates: const [
     AppLocalizations.delegate,
@@ -105,7 +192,12 @@ Widget _localizedApp(Widget child) => MaterialApp(
     GlobalCupertinoLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
   ],
-  home: Scaffold(body: SingleChildScrollView(child: child)),
+  home: Scaffold(
+    body: Provider<CodeRunnerService>.value(
+      value: runner,
+      child: SingleChildScrollView(child: child),
+    ),
+  ),
 );
 
 Exercise _exercise({

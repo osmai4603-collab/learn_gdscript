@@ -1,0 +1,350 @@
+{
+  "id": "lesson_45_static_types",
+  "unitId": "unit_11_types_quality",
+  "title": {
+    "ar": "الأنواع الساكنة",
+    "en": "Static Typing"
+  },
+  "objective": {
+    "ar": "صرّح بأنواع المتغيرات والمعاملات والقيم المعادة لتوضيح العقود.",
+    "en": "Declare variable, parameter, and return types to make contracts explicit."
+  },
+  "estimatedMinutes": 9,
+  "order": 0,
+  "contentMarkdown": {
+    "ar": "## اكتب العقد في التصريح\n\nيساعد النوع الساكن المحرر والمحلل على فهم القيمة المتوقعة واكتشاف بعض الأخطاء مبكراً. استخدم `var name: Type = value`، ويمكن كتابة نوع الإرجاع بعد `->`.\n\n```gdscript\nvar lives: int = 3\nvar label: String = \"Pilot\"\nfunc add_point(amount: int) -> int:\n    return amount + 1\n```\n\nيظل `Variant` مفيداً عندما يكون النوع متغيراً عمداً، لكنه يقلل المعلومات المتاحة للمحلل. اجعل النوع والقيمة متوافقين.",
+    "en": "## Put the contract in the declaration\n\nStatic types help the editor and analyzer understand expected values and catch some mistakes early. Use `var name: Type = value`, and write a return type after `->`.\n\n```gdscript\nvar lives: int = 3\nvar label: String = \"Pilot\"\nfunc add_point(amount: int) -> int:\n    return amount + 1\n```\n\n`Variant` remains useful when a value is intentionally variable, but gives the analyzer less information. Keep declared types and values compatible."
+  },
+  "documentation": {
+    "ar": "تحدد الأنواع القيم المقبولة وتتيح تحليلاً وإكمالاً أدق. صرّح بنوع المتغير والمعامل والقيمة المعادة عند الحاجة إلى توضيح العقد، أو اعتمد الاستدلال عندما تكون القيمة الابتدائية كافية. يسمح `Variant` بأنواع متعددة لكنه قد يؤخر اكتشاف عدم التوافق إلى وقت التشغيل. اختر النوع الذي يعبر عن الاستخدام الفعلي، ولا تعالج التحذير بتحويل غير مبرر. قد تتطلب واجهات Godot نوعاً أكثر تحديداً، لذا تحقّق من النوع عند حدود الأنظمة والبيانات الخارجية.",
+    "en": "Types describe accepted values and enable more precise analysis and completion. Declare variable, parameter, and return types when a contract needs to be explicit, or rely on inference when the initial value is sufficient. `Variant` permits multiple types but may defer incompatibility until runtime. Choose a type that reflects actual use rather than silencing a warning with an unjustified conversion. Godot APIs may require a more specific type, so validate at system boundaries and when handling external data."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الأنواع الساكنة في GDScript",
+        "en": "Static typing in GDScript"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_45_static_types_01",
+      "lessonId": "lesson_45_static_types",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما فائدة تحديد نوع معامل الدالة؟",
+        "en": "What is a benefit of typing a function parameter?"
+      },
+      "options": [
+        {
+          "ar": "يوضح القيمة المتوقعة ويساعد على كشف عدم التوافق.",
+          "en": "It documents the expected value and helps detect mismatches."
+        },
+        {
+          "ar": "يجعل الدالة تعمل مرة واحدة.",
+          "en": "It makes the function run once."
+        },
+        {
+          "ar": "يحول كل قيمة إلى نص.",
+          "en": "It converts every value to text."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_45_static_types_02",
+      "lessonId": "lesson_45_static_types",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن الأنواع الساكنة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about الأنواع الساكنة. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "عرّف متغيراً صحيحاً وآخر نصياً بنوعين صريحين.",
+          "en": "Declare an integer and a string with explicit types."
+        },
+        {
+          "ar": "اكتب دالة تستقبل int وتعيد int بنوع إرجاع صريح.",
+          "en": "Write a function accepting and returning int with an explicit return type."
+        },
+        {
+          "ar": "جرّب قيمة غير متوافقة وافحص رسالة المحلل ثم أصلح النوع.",
+          "en": "Try an incompatible value, inspect the analyzer message, then fix the type."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_45_static_types_03",
+      "lessonId": "lesson_45_static_types",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «lives: 3» في سياق الأنواع الساكنة.",
+        "en": "Write code that prints “lives: 3” as a الأنواع الساكنة status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"lives: 3\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "lives: 3"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_45_static_types_04",
+      "lessonId": "lesson_45_static_types",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «lives: 3».",
+        "en": "Complete the line so it prints “lives: 3”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"lives: 3\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "lives: 3"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_45_static_types_05",
+      "lessonId": "lesson_45_static_types",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في الأنواع الساكنة: start ثم «lives: 3».",
+        "en": "Print two lines showing progress in الأنواع الساكنة: start, then “lives: 3”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"lives: 3\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nlives: 3"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_45_static_types_06",
+      "lessonId": "lesson_45_static_types",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «lives: 3» تماماً.",
+        "en": "Fix the code so it prints exactly “lives: 3”."
+      },
+      "starterCode": "print(\"lives: 3!\")",
+      "solutionCode": "print(\"lives: 3\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "lives: 3"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_45_static_types_07",
+      "lessonId": "lesson_45_static_types",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «lives: 3» ثم done.",
+        "en": "Arrange output to show start, then “lives: 3”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"lives: 3\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"lives: 3\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nlives: 3\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_45_static_types_08",
+      "lessonId": "lesson_45_static_types",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع الأنواع الساكنة: «lives: 3».",
+        "en": "Write a program that records a result related to الأنواع الساكنة: “lives: 3”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"lives: 3\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "lives: 3"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_45_static_types_09",
+      "lessonId": "lesson_45_static_types",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nlives: 3",
+        "en": "Write a program that displays this sequence:\nlives: 3"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"lives: 3\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "lives: 3"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_45_static_types_10",
+      "lessonId": "lesson_45_static_types",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «lives: 3».",
+        "en": "Use a string variable named status and print its value “lives: 3”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"lives: 3\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "lives: 3"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

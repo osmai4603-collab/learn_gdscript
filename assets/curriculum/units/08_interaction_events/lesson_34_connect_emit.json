@@ -1,0 +1,385 @@
+{
+  "id": "lesson_34_connect_emit",
+  "unitId": "unit_08_interaction_events",
+  "title": {
+    "ar": "ربط الإشارات وإرسالها",
+    "en": "Connecting and Emitting Signals"
+  },
+  "objective": {
+    "ar": "اربط مستقبلاً بإشارة واستجب للحدث دون اقتران غير لازم.",
+    "en": "Connect a receiver to a signal and respond without unnecessary coupling."
+  },
+  "estimatedMinutes": 10,
+  "order": 1,
+  "documentation": {
+    "ar": "يمكن ربط الإشارات من محرر Godot أو بالكود. عند الربط بالكود، استخدم مرجع الإشارة وطابق توقيع دالة الاستقبال مع عدد المعاملات. يطلق الباعث الإشارة عندما يقع الحدث.",
+    "en": "Signals can be connected in the Godot editor or in code. In code, use the signal reference and match the receiver function signature to the argument count. The emitter raises the signal when the event occurs."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الإشارات",
+        "en": "Signals"
+      },
+      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع الصنف Node",
+        "en": "Node class reference"
+      },
+      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## باعث ومستقبل\n\nيمكن لزر الواجهة إصدار `pressed` بينما تتصل به عقدة أخرى وتستجيب للنقر. الربط لا يجعل الباعث بحاجة إلى معرفة كل تفاصيل المستقبل.\n\n```gdscript\nfunc _ready():\n    $Button.pressed.connect(_on_button_pressed)\n\nfunc _on_button_pressed():\n    print(\"Pressed\")\n```\n\nيمكن إجراء الاتصال أيضاً من تبويب Node في المحرر. تحقق يدوياً من وجود المسار والإشارة والدالة.",
+    "en": "## Emitter and receiver\n\nA UI button can emit `pressed` while another node connects to it and responds to a click. This connection does not require the emitter to know every receiver detail.\n\n```gdscript\nfunc _ready():\n    $Button.pressed.connect(_on_button_pressed)\n\nfunc _on_button_pressed():\n    print(\"Pressed\")\n```\n\nYou can also connect from the editor’s Node tab. Manually verify that the path, signal, and function exist."
+  },
+  "exercises": [
+    {
+      "id": "ex_lesson_34_connect_emit_01_predict",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع النتيجة في المثال: عند ضغط الزر بعد اتصال الإشارة، تستدعى دالة الاستقبال المتصلة.",
+        "en": "Predict the result in the example: After the button signal is connected, pressing the button calls the connected receiver function."
+      },
+      "options": [
+        {
+          "ar": "عند ضغط الزر بعد اتصال الإشارة، تستدعى دالة الاستقبال المتصلة.",
+          "en": "After the button signal is connected, pressing the button calls the connected receiver function."
+        },
+        {
+          "ar": "يمكن الربط من المحرر أو بالكود، ويجب التحقق يدوياً من إعداد المشهد.",
+          "en": "A connection can be made in the editor or code, and scene setup must be checked manually."
+        },
+        {
+          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
+          "en": "Connecting emits the signal before the event occurs."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
+          "en": "Trace what happens first, then the final result."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_02_identify",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «ربط الإشارات وإرسالها»؟",
+        "en": "Which statement accurately identifies the core concept in “Connecting and Emitting Signals”?"
+      },
+      "options": [
+        {
+          "ar": "`connect()` يربط الإشارة بدالة مستقبل، و`emit()` يطلق الحدث من الباعث.",
+          "en": "`connect()` links a signal to a receiver function, and `emit()` raises the event from the emitter."
+        },
+        {
+          "ar": "يمكن الربط من المحرر أو بالكود، ويجب التحقق يدوياً من إعداد المشهد.",
+          "en": "A connection can be made in the editor or code, and scene setup must be checked manually."
+        },
+        {
+          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
+          "en": "Connecting emits the signal before the event occurs."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
+          "en": "Look for the role of the key terms in the example."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_03_choose",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي قرار تصميم مناسب للحالة التالية؟ تحقق من أن الدالة المستقبلة موجودة وأن معاملاتها تطابق الإشارة.",
+        "en": "Which design choice fits this situation? Check that the receiver function exists and its arguments match the signal."
+      },
+      "options": [
+        {
+          "ar": "تحقق من أن الدالة المستقبلة موجودة وأن معاملاتها تطابق الإشارة.",
+          "en": "Check that the receiver function exists and its arguments match the signal."
+        },
+        {
+          "ar": "يمكن الربط من المحرر أو بالكود، ويجب التحقق يدوياً من إعداد المشهد.",
+          "en": "A connection can be made in the editor or code, and scene setup must be checked manually."
+        },
+        {
+          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
+          "en": "Connecting emits the signal before the event occurs."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
+          "en": "Choose the option that matches the scenario’s stated need."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_04_complete",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط بثلاث خطوات: باعث، إشارة متصلة، ودالة مستقبل.",
+        "en": "Complete a short sketch or sequence that shows: A three-step diagram: emitter, connected signal, and receiver function."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط بثلاث خطوات: باعث، إشارة متصلة، ودالة مستقبل.",
+          "en": "Write the required essential parts: A three-step diagram: emitter, connected signal, and receiver function."
+        },
+        {
+          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
+          "en": "Connect the elements in the correct order or relationship."
+        },
+        {
+          "ar": "راجع المخطط باستخدام تعريف الدرس.",
+          "en": "Review the sketch using the lesson definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_05_write",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: اربط إشارة زر في مشهد Godot تجريبي من تبويب Node، ثم اختبر النقر يدوياً.",
+        "en": "Write a short implementation plan for this application: Connect a button signal in a Godot test scene from the Node tab, then manually test the click."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
+          "en": "Identify the goal and the elements or nodes you need."
+        },
+        {
+          "ar": "اكتب الخطوات بترتيب التنفيذ.",
+          "en": "Write the steps in implementation order."
+        },
+        {
+          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
+          "en": "State how you will manually verify the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_06_fix",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "اقرأ الاعتقاد الخاطئ: «`emit()` ينشئ تلقائياً اتصالاً بين أي عقدتين.» ما التصحيح الأفضل؟",
+        "en": "Read this misconception: “`emit()` automatically connects any two nodes.” What is the best correction?"
+      },
+      "options": [
+        {
+          "ar": "أنشئ الاتصال أولاً ثم أرسل الإشارة عندما يقع الحدث.",
+          "en": "Create the connection first, then emit the signal when the event occurs."
+        },
+        {
+          "ar": "`emit()` ينشئ تلقائياً اتصالاً بين أي عقدتين.",
+          "en": "`emit()` automatically connects any two nodes."
+        },
+        {
+          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
+          "en": "Connecting emits the signal before the event occurs."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
+          "en": "Distinguish the correct definition from the mistaken assumption."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_07_apply",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: اربط إشارة زر في مشهد Godot تجريبي من تبويب Node، ثم اختبر النقر يدوياً. لا يُفحص إعداد المحرر تلقائياً.",
+        "en": "Apply the concept manually in a test project: Connect a button signal in a Godot test scene from the Node tab, then manually test the click. Editor setup is not automatically checked."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
+          "en": "Create the smallest example that demonstrates the idea."
+        },
+        {
+          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
+          "en": "Check the relevant names and settings inside Godot."
+        },
+        {
+          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
+          "en": "Run the experiment if possible and record what you observe."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_08_compare",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ الاتصال يسجل المستقبل؛ الإرسال يطلق الحدث بعد حدوثه.",
+        "en": "What is the difference between the concepts in this lesson? Connecting registers a receiver; emitting raises the event when it occurs."
+      },
+      "options": [
+        {
+          "ar": "الاتصال يسجل المستقبل؛ الإرسال يطلق الحدث بعد حدوثه.",
+          "en": "Connecting registers a receiver; emitting raises the event when it occurs."
+        },
+        {
+          "ar": "يمكن الربط من المحرر أو بالكود، ويجب التحقق يدوياً من إعداد المشهد.",
+          "en": "A connection can be made in the editor or code, and scene setup must be checked manually."
+        },
+        {
+          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
+          "en": "Connecting emits the signal before the event occurs."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
+          "en": "Compare each part’s role, not just its name."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_09_debug",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "راجع الحالة المعيبة: إشارة متصلة بدالة تستقبل عدداً مختلفاً من المعاملات عن الإشارة. اكتب طريقة تشخيصها وإصلاحها.",
+        "en": "Review this flawed setup: A signal is connected to a function that expects a different number of arguments. Write how you would diagnose and fix it."
+      },
+      "steps": [
+        {
+          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
+          "en": "Identify the incorrect element or relationship."
+        },
+        {
+          "ar": "قارنها بما يتطلبه المفهوم.",
+          "en": "Compare it with what the concept requires."
+        },
+        {
+          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
+          "en": "Write a correction and a manual verification step."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_34_connect_emit_10_apply",
+      "lessonId": "lesson_34_connect_emit",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: أرسل إشارة بعد تغيير خاصية، واجعل مستقبلاً منفصلاً يحدث واجهة المستخدم.",
+        "en": "Design an application that combines this concept with an earlier idea: Emit a signal after changing a property and let a separate receiver update the UI."
+      },
+      "steps": [
+        {
+          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
+          "en": "Choose a clear purpose for the integrated example."
+        },
+        {
+          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
+          "en": "Define the responsibility of each node, class, or part."
+        },
+        {
+          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
+          "en": "Sketch the data or event flow, then self-review it."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

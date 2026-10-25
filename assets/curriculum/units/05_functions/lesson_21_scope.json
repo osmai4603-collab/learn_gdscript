@@ -1,0 +1,361 @@
+{
+  "id": "lesson_21_scope",
+  "unitId": "unit_05_functions",
+  "title": {
+    "ar": "نطاق المتغيرات",
+    "en": "Variable Scope"
+  },
+  "objective": {
+    "ar": "ميّز بين المتغير المحلي والعام، وتجنّب الاعتماد غير المقصود على الحالة المشتركة.",
+    "en": "Distinguish local and script-level variables, and avoid accidental dependence on shared state."
+  },
+  "estimatedMinutes": 10,
+  "order": 3,
+  "documentation": {
+    "ar": "يحدد النطاق المواضع التي يمكن فيها الوصول إلى اسم. أبقِ القيم المؤقتة محلية، ومرّر البيانات عبر المعاملات وأعد النتائج عند الحاجة. المتغير على مستوى السكربت متاح لنطاق أوسع، لذا قلّل مواضع تغييره.",
+    "en": "Scope defines where a name can be accessed. Keep temporary values local, pass data through parameters, and return results when useful. A script-level variable is available more broadly, so minimize places that mutate it."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## أين يعيش المتغير؟\n\nيكون المتغير الذي تعرّفه داخل دالة محلياً لها. المتغير على مستوى السكربت متاح لدوال السكربت، وقد يؤدي تغييره من مواضع كثيرة إلى صعوبة تتبع الحالة.\n\n```gdscript\nvar score = 0\n\nfunc add_point():\n    var points = 1\n    score += points\n\nadd_point()\nprint(score)\n```\n\nهنا `points` محلي داخل `add_point`، بينما `score` حالة مشتركة. استخدم المعاملات والقيم المعادة لتمرير البيانات بين الدوال عندما يكون ذلك مناسباً.",
+    "en": "## Where does a variable live?\n\nA variable declared inside a function is local to it. A script-level variable is available to functions in that script, and changing it from many places can make state hard to trace.\n\n```gdscript\nvar score = 0\n\nfunc add_point():\n    var points = 1\n    score += points\n\nadd_point()\nprint(score)\n```\n\nHere `points` is local to `add_point`, while `score` is shared state. Use parameters and return values to pass data between functions when appropriate."
+  },
+  "exampleCode": "func make_total(a, b):\n    var total = a + b\n    return total\n\nprint(make_total(2, 3))",
+  "exercises": [
+    {
+      "id": "ex_lesson_21_scope_predict",
+      "lessonId": "lesson_21_scope",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع ما يحدث للمتغير `points` بعد انتهاء `add_point()`.",
+        "en": "Predict what happens to `points` after `add_point()` finishes."
+      },
+      "options": [
+        {
+          "ar": "يبقى محلياً داخل الدالة ولا يمكن الوصول إليه من خارج نطاقها.",
+          "en": "It stays local to the function and cannot be accessed outside its scope."
+        },
+        {
+          "ar": "يصبح متغيراً عاماً تلقائياً.",
+          "en": "It automatically becomes a global variable."
+        },
+        {
+          "ar": "تتحول قيمته إلى نص.",
+          "en": "Its value becomes a string."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبّع موضع تعريف المتغير أو انتقال القيمة بين الدوال.",
+          "en": "Trace where a variable is declared or how a value flows between functions."
+        },
+        {
+          "ar": "قارن اختيارك بالتعريف والأمثلة في الدرس.",
+          "en": "Compare your choice with the lesson definition and examples."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_21_scope_identify",
+      "lessonId": "lesson_21_scope",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تصف نطاق المتغير المحلي؟",
+        "en": "Which statement describes a local variable’s scope?"
+      },
+      "options": [
+        {
+          "ar": "يمكن استخدامه داخل النطاق الذي عُرّف فيه.",
+          "en": "It can be used within the scope where it was declared."
+        },
+        {
+          "ar": "يمكن الوصول إليه من كل سكربت في المشروع.",
+          "en": "It can be accessed from every script in the project."
+        },
+        {
+          "ar": "لا يمكن تغييره بعد تعريفه.",
+          "en": "It cannot be changed after it is declared."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبّع موضع تعريف المتغير أو انتقال القيمة بين الدوال.",
+          "en": "Trace where a variable is declared or how a value flows between functions."
+        },
+        {
+          "ar": "قارن اختيارك بالتعريف والأمثلة في الدرس.",
+          "en": "Compare your choice with the lesson definition and examples."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_21_scope_complete",
+      "lessonId": "lesson_21_scope",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً يوضح الفكرة الأساسية لهذا الدرس.",
+        "en": "Complete a sketch that explains the core idea of this lesson."
+      },
+      "steps": [
+        {
+          "ar": "صنّف `score` و`points` بحسب موضع تعريفهما.",
+          "en": "Classify `score` and `points` by where they are declared."
+        },
+        {
+          "ar": "حدد أيهما محلي وأيهما مشترك.",
+          "en": "Identify which is local and which is shared."
+        },
+        {
+          "ar": "اكتب ما إذا كان يمكن الوصول إلى كل متغير خارج الدالة.",
+          "en": "Write whether each variable can be accessed outside the function."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_21_scope_code_1",
+      "lessonId": "lesson_21_scope",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `make_total(a, b)` بمتغير محلي `total` يعيد المجموع، ثم اطبع `make_total(4, 5)`.",
+        "en": "Define `make_total(a, b)` with a local `total` that returns the sum, then print `make_total(4, 5)`."
+      },
+      "starterCode": "",
+      "solutionCode": "func make_total(a, b):\n    var total = a + b\n    return total\n\nprint(make_total(4, 5))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "9"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_21_scope_fix",
+      "lessonId": "lesson_21_scope",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح المتغير المؤقت ليكون محلياً وأعد النتيجة.",
+        "en": "Fix the temporary variable so it is local and return the result."
+      },
+      "starterCode": "var total = 0\nfunc make_total(a, b):\n    total = a + b\n\nprint(make_total(2, 3))",
+      "solutionCode": "func make_total(a, b):\n    var total = a + b\n    return total\n\nprint(make_total(2, 3))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "5"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "قارن تعريف الدالة مع طريقة استخدام المعامل أو القيمة المعادة.",
+          "en": "Compare the function definition with how the parameter or returned value is used."
+        },
+        {
+          "ar": "تأكد من الإزاحة والاستدعاء بعد إصلاح الجسم.",
+          "en": "Check indentation and the call after fixing the body."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_21_scope_code_2",
+      "lessonId": "lesson_21_scope",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `format_score(score)` لتعيد `Score: ` متبوعة بالعدد، ثم اطبع ناتج 8.",
+        "en": "Define `format_score(score)` to return `Score: ` followed by the number, then print the result for 8."
+      },
+      "starterCode": "",
+      "solutionCode": "func format_score(score):\n    return \"Score: \" + str(score)\n\nprint(format_score(8))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "Score: 8"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_21_scope_6",
+      "lessonId": "lesson_21_scope",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "ارسم أو أنشئ مثالاً صغيراً يوضح نطاق المتغيرات. هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+        "en": "Sketch or create a small example of Variable Scope. This is a self-check task, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف من المثال.",
+          "en": "Define the goal of the example."
+        },
+        {
+          "ar": "أضف أقل العناصر المطلوبة.",
+          "en": "Add only the necessary elements."
+        },
+        {
+          "ar": "قارن النتيجة بتعريف المفهوم.",
+          "en": "Compare the result with the concept definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أكمل الخطوات بنفسك في ملاحظاتك أو مشروع تجريبي.",
+          "en": "Complete the steps in your notes or a test project."
+        },
+        {
+          "ar": "لا يتحقق التطبيق آلياً من إعدادات محرر Godot.",
+          "en": "The app does not automatically verify Godot editor settings."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_21_scope_code_3",
+      "lessonId": "lesson_21_scope",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `clamp_low(value, minimum)` لتعيد الحد الأدنى إذا كانت القيمة أصغر منه، وإلا تعيد القيمة. اختبر 3 و5.",
+        "en": "Define `clamp_low(value, minimum)` to return the minimum when value is smaller, otherwise return value. Test 3 and 5."
+      },
+      "starterCode": "",
+      "solutionCode": "func clamp_low(value, minimum):\n    if value < minimum:\n        return minimum\n    return value\n\nprint(clamp_low(3, 5))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "5"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_21_scope_code_4",
+      "lessonId": "lesson_21_scope",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "عرّف `average_two(a, b)` بمتغير محلي `sum_value` يعيد المتوسط. اطبع متوسط 6 و10.",
+        "en": "Define `average_two(a, b)` with a local `sum_value` that returns the average. Print the average of 6 and 10."
+      },
+      "starterCode": "",
+      "solutionCode": "func average_two(a, b):\n    var sum_value = a + b\n    return sum_value / 2.0\n\nprint(average_two(6, 10))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الإخراج السلوك المطلوب.",
+            "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "8.0"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
+          "en": "Start by defining the function and its parameters before writing the call."
+        },
+        {
+          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
+          "en": "Check indentation and make sure the output matches exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_21_scope_apply",
+      "lessonId": "lesson_21_scope",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم على مثال صغير من مشروعك واكتب طريقة تحقق ذاتية.",
+        "en": "Apply the concept to a small example from your project and write a self-check."
+      },
+      "steps": [
+        {
+          "ar": "حدد قيمة مؤقتة مناسبة لمتغير محلي.",
+          "en": "Identify a temporary value that belongs in a local variable."
+        },
+        {
+          "ar": "حدد ما إذا كانت الحالة المشتركة مقصودة.",
+          "en": "Decide whether shared state is intentional."
+        },
+        {
+          "ar": "استخدم معاملاً أو قيمة معادة عند الحاجة.",
+          "en": "Use a parameter or return value when appropriate."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
+          "en": "Write your prediction or plan before trying it, then review it against the example."
+        },
+        {
+          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
+          "en": "This is a self-check activity, not an automated test."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

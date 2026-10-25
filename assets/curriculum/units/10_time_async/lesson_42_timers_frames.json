@@ -1,0 +1,357 @@
+{
+  "id": "lesson_42_timers_frames",
+  "unitId": "unit_10_time_async",
+  "title": {
+    "ar": "المؤقتات والإطارات",
+    "en": "Timers and Frames"
+  },
+  "objective": {
+    "ar": "استخدم مؤقتاً أو إشارة إطار لمزامنة عمل مؤجل أو متكرر.",
+    "en": "Use a timer or frame signal to synchronize delayed or repeated work."
+  },
+  "estimatedMinutes": 9,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## اختر ساعة الحدث\n\nعقدة `Timer` قابلة للضبط وتصدر `timeout` عند انتهاء المدة. استخدم `SceneTree.create_timer()` لانتظار قصير داخل دالة، أو عقدة Timer لإعداد ظاهر أو تكرار.\n\n```gdscript\nawait get_tree().create_timer(0.5).timeout\nprint(\"Half a second passed\")\n```\n\nإشارات `process_frame` و`physics_frame` تزامن العمل مع دورة المحرك، لكنها ليست مؤقتاً لمدة ثابتة. لا تستخدم حلقة مشغولة لقياس الزمن.",
+    "en": "## Choose the event clock\n\nA `Timer` node can be configured and emits `timeout` when its duration elapses. Use `SceneTree.create_timer()` for a short wait inside a function, or a Timer node for visible configuration or repetition.\n\n```gdscript\nawait get_tree().create_timer(0.5).timeout\nprint(\"Half a second passed\")\n```\n\n`process_frame` and `physics_frame` synchronize work with engine processing, but are not fixed-duration timers. Do not use a busy loop to measure time."
+  },
+  "documentation": {
+    "ar": "تصدر `Timer.timeout` عند انقضاء `wait_time` إذا كان المؤقت جارياً. يمكن إعداد المؤقت ليعمل مرة واحدة أو يتكرر، كما تؤثر ملكية العقدة وإعدادات الإيقاف المؤقت في سلوكه. توفر `SceneTree.create_timer()` مؤقتاً مؤقتاً يمكن انتظار إشارته. أما إشارات الإطار فتحدد ترتيب التنفيذ بالنسبة لدورة المعالجة ولا تقيس مدة ثابتة. استخدم Timer للمدة الزمنية وإشارات الإطار عندما يلزم الانتظار إلى نقطة معالجة مناسبة.",
+    "en": "`Timer.timeout` is emitted when `wait_time` elapses while the timer is running. A timer can be configured to run once or repeat; node ownership and pause settings also affect it. `SceneTree.create_timer()` provides a temporary timer whose signal can be awaited. Frame signals order work relative to processing and do not measure a fixed duration. Use a Timer for elapsed time and frame signals when waiting for a suitable processing point."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "مرجع Timer",
+        "en": "Timer class reference"
+      },
+      "url": "https://docs.godotengine.org/en/stable/classes/class_timer.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع SceneTree",
+        "en": "SceneTree class reference"
+      },
+      "url": "https://docs.godotengine.org/en/stable/classes/class_scenetree.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_42_timers_frames_01",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الإشارة التي يصدرها Timer عند انتهاء مدته؟",
+        "en": "Which signal does a Timer emit when its duration elapses?"
+      },
+      "options": [
+        {
+          "ar": "`timeout`",
+          "en": "`timeout`"
+        },
+        {
+          "ar": "`finished_file`",
+          "en": "`finished_file`"
+        },
+        {
+          "ar": "`process_frame`",
+          "en": "`process_frame`"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_02",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن المؤقتات والإطارات. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about المؤقتات والإطارات. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "أضف عقدة Timer واضبط Wait Time وOne Shot من Inspector.",
+          "en": "Add a Timer node and set Wait Time and One Shot in the Inspector."
+        },
+        {
+          "ar": "اربط `timeout` بدالة تحدث واجهة أو تطبع رسالة.",
+          "en": "Connect `timeout` to a function that updates the UI or prints a message."
+        },
+        {
+          "ar": "اختبر المشهد مع One Shot مفعلاً ثم معطلاً ولاحظ عدد مرات الإشارة.",
+          "en": "Test the scene with One Shot enabled and disabled and observe the signal count."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_03",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «tick 1» في سياق المؤقتات والإطارات.",
+        "en": "Write code that prints “tick 1” as a المؤقتات والإطارات status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"tick 1\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "tick 1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_04",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «tick 1».",
+        "en": "Complete the line so it prints “tick 1”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"tick 1\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "tick 1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_05",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في المؤقتات والإطارات: start ثم «tick 1».",
+        "en": "Print two lines showing progress in المؤقتات والإطارات: start, then “tick 1”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"tick 1\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\ntick 1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_06",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «tick 1» تماماً.",
+        "en": "Fix the code so it prints exactly “tick 1”."
+      },
+      "starterCode": "print(\"tick 1!\")",
+      "solutionCode": "print(\"tick 1\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "tick 1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_07",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «tick 1» ثم done.",
+        "en": "Arrange output to show start, then “tick 1”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"tick 1\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"tick 1\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\ntick 1\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_08",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع المؤقتات والإطارات: «tick 1».",
+        "en": "Write a program that records a result related to المؤقتات والإطارات: “tick 1”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"tick 1\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "tick 1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_09",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\ntick 1",
+        "en": "Write a program that displays this sequence:\ntick 1"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"tick 1\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "tick 1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_42_timers_frames_10",
+      "lessonId": "lesson_42_timers_frames",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «tick 1».",
+        "en": "Use a string variable named status and print its value “tick 1”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"tick 1\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "tick 1"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

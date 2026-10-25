@@ -1,0 +1,350 @@
+{
+  "id": "lesson_38_resource_loading",
+  "unitId": "unit_09_editor_resources",
+  "title": {
+    "ar": "تحميل الموارد باستخدام preload وload",
+    "en": "Loading Resources with preload and load"
+  },
+  "objective": {
+    "ar": "اختر بين تحميل مورد مسبقاً أو طلبه أثناء التشغيل.",
+    "en": "Choose between preloading a resource and loading it at runtime."
+  },
+  "estimatedMinutes": 9,
+  "order": 1,
+  "contentMarkdown": {
+    "ar": "## اربط المورد بتوقيت مناسب\n\nتقبل `preload()` مساراً معروفاً وقت التحليل، وتناسب المورد الثابت الضروري في السكربت. أما `load()` فتطلب المورد عند تنفيذ السطر، فتناسب المسارات المختارة أثناء التشغيل.\n\n```gdscript\nconst HUD_SCENE = preload(\"res://ui/hud.tscn\")\nvar icon: Texture2D = load(\"res://art/marker.png\")\n```\n\nالمسار يبدأ عادةً بـ `res://` ويجب أن يشير إلى ملف موجود. `load()` متزامنة بذاتها؛ لا تجعلها حملاً خلفياً تلقائياً. تحقق من المورد عندما يكون المسار متغيراً.",
+    "en": "## Match the resource to its loading time\n\n`preload()` takes a path known while the script is parsed and fits a fixed resource required by the script. `load()` requests a resource when its line runs, which suits paths chosen at runtime.\n\n```gdscript\nconst HUD_SCENE = preload(\"res://ui/hud.tscn\")\nvar icon: Texture2D = load(\"res://art/marker.png\")\n```\n\nA path commonly starts with `res://` and must point to an existing file. `load()` is synchronous by itself; it does not automatically load in the background. Validate a resource when its path is dynamic."
+  },
+  "documentation": {
+    "ar": "استخدم `preload(path)` للمورد ذي المسار الثابت المعروف في السكربت؛ يكون المورد متاحاً مبكراً ويمكن إسناده إلى ثابت. يقبل `load(path)` مساراً وقت التنفيذ، فيتيح الاختيار حسب الحالة لكنه قد ينفذ العمل عند موضع الاستدعاء. قد يفشل التحميل، لذلك تحقق من نتيجة المسار الديناميكي قبل استخدامها. كلا الخيارين لتحميل موارد المشروع، ولا ينبغي الخلط بينهما وبين تحميل خلفي صريح للملفات الكبيرة. راجع المسارات بدقة وحافظ على أسماء الملفات وحالة الأحرف.",
+    "en": "Use `preload(path)` for a fixed path known in the script; the resource is available early and can be assigned to a constant. `load(path)` accepts a runtime path, allowing a state-dependent choice but potentially doing work at the call site. Loading can fail, so validate a dynamic result before using it. Both are for loading project resources and neither is an explicit background-loading strategy for large files. Check paths carefully, including file names and letter case."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الموارد: تحميل الموارد من الشيفرة",
+        "en": "Resources: loading resources from code"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_38_resource_loading_01",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي اختيار أنسب لمسار مشهد ثابت معروف في السكربت؟",
+        "en": "Which is a better fit for a fixed scene path known in the script?"
+      },
+      "options": [
+        {
+          "ar": "`preload(\"res://...\")`",
+          "en": "`preload(\"res://...\")`"
+        },
+        {
+          "ar": "`await print(...)`",
+          "en": "`await print(...)`"
+        },
+        {
+          "ar": "تخزين المسار في تعليق",
+          "en": "Store the path in a comment"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_02",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن تحميل الموارد. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about تحميل الموارد. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ مشهداً واحفظه في مجلد مشاهد باسم `level.tscn`.",
+          "en": "Create a scene and save it in a scenes folder as `level.tscn`."
+        },
+        {
+          "ar": "اكتب ثابت PackedScene يستخدم `preload(\"res://scenes/level.tscn\")`.",
+          "en": "Declare a PackedScene constant using `preload(\"res://scenes/level.tscn\")`."
+        },
+        {
+          "ar": "تحقق من المسار ثم استدعِ `instantiate()` على المورد بعد تشغيل المشروع.",
+          "en": "Check the path, then call `instantiate()` on the resource after running the project."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_03",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «scene loaded» في سياق تحميل الموارد.",
+        "en": "Write code that prints “scene loaded” as a تحميل الموارد status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"scene loaded\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "scene loaded"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_04",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «scene loaded».",
+        "en": "Complete the line so it prints “scene loaded”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"scene loaded\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "scene loaded"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_05",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في تحميل الموارد: start ثم «scene loaded».",
+        "en": "Print two lines showing progress in تحميل الموارد: start, then “scene loaded”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"scene loaded\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nscene loaded"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_06",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «scene loaded» تماماً.",
+        "en": "Fix the code so it prints exactly “scene loaded”."
+      },
+      "starterCode": "print(\"scene loaded!\")",
+      "solutionCode": "print(\"scene loaded\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "scene loaded"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_07",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «scene loaded» ثم done.",
+        "en": "Arrange output to show start, then “scene loaded”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"scene loaded\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"scene loaded\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nscene loaded\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_08",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع تحميل الموارد: «scene loaded».",
+        "en": "Write a program that records a result related to تحميل الموارد: “scene loaded”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"scene loaded\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "scene loaded"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_09",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nscene loaded",
+        "en": "Write a program that displays this sequence:\nscene loaded"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"scene loaded\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "scene loaded"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_38_resource_loading_10",
+      "lessonId": "lesson_38_resource_loading",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «scene loaded».",
+        "en": "Use a string variable named status and print its value “scene loaded”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"scene loaded\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "scene loaded"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

@@ -279,16 +279,14 @@ class DesktopHomeDashboardScreen extends StatefulWidget {
   final DashboardDataModel data;
   final ValueChanged<String>? onNavigateRoute;
   final VoidCallback? onResumeLesson;
-  final bool isLspConnected;
-  final bool isLspConnecting;
+  final bool isEngineReady;
   final String playgroundCode;
   final Future<void> Function(String code) onPlaygroundCodeChanged;
 
   const DesktopHomeDashboardScreen({
     super.key,
     required this.data,
-    required this.isLspConnected,
-    required this.isLspConnecting,
+    required this.isEngineReady,
     required this.playgroundCode,
     required this.onPlaygroundCodeChanged,
     this.onNavigateRoute,
@@ -334,8 +332,8 @@ class _DesktopHomeDashboardScreenState extends State<DesktopHomeDashboardScreen>
             streakDays: widget.data.userProgress.dailyStreak,
             xp: widget.data.userProgress.currentXp,
             userName: widget.data.userProgress.userName,
-            isEngineConnected: widget.isLspConnected,
-            isEngineConnecting: widget.isLspConnecting,
+            isEngineConnected: widget.isEngineReady,
+            isEngineConnecting: false,
             onNavigate: widget.onNavigateRoute,
           ),
           Expanded(
@@ -416,8 +414,8 @@ class _DesktopHomeDashboardScreenState extends State<DesktopHomeDashboardScreen>
                               ),
                               onViewDiagnostics: () => widget.onNavigateRoute
                                   ?.call(AppRoutes.workspace),
-                              isEngineConnected: widget.isLspConnected,
-                              isEngineConnecting: widget.isLspConnecting,
+                              isEngineConnected: widget.isEngineReady,
+                              isEngineConnecting: false,
                             ),
                           ],
                         ),
@@ -466,10 +464,10 @@ class DashboardTopNav extends StatelessWidget {
         ? const Color(0xFF4AE183)
         : const Color(0xFF8A919A);
     final statusText = isEngineConnecting
-        ? l10n.dashboardLspConnecting
+        ? l10n.dashboardEngineConnecting
         : isEngineConnected
-        ? l10n.dashboardLspActive
-        : l10n.dashboardLspDisconnected;
+        ? l10n.dashboardEngineConnected
+        : l10n.dashboardEngineDisconnected;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
@@ -1864,6 +1862,9 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                     fontSize: 13,
                     showLineNumbers: true,
                     showActionBar: false,
+                    onSyntaxHighlightsRequested: context
+                        .read<CodeRunnerService>()
+                        .getSyntaxHighlights,
                     onChanged: _saveCode,
                   ),
                 ],
@@ -2540,7 +2541,7 @@ class _EngineStatusCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 7),
                 _EngineDetail(
-                  label: '${l10n.dashboardLsp}:',
+                  label: '${l10n.dashboardEngineTitle}:',
                   value: statusLabel,
                   valueColor: statusColor,
                 ),

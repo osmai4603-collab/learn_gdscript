@@ -1,0 +1,357 @@
+{
+  "id": "lesson_40_saving",
+  "unitId": "unit_09_editor_resources",
+  "title": {
+    "ar": "حفظ البيانات وإعادة استخدامها",
+    "en": "Saving and Reusing Data"
+  },
+  "objective": {
+    "ar": "احفظ بيانات بسيطة في ملف مستخدم واستعدها مع التحقق من النتيجة.",
+    "en": "Save simple data to a user file and restore it while checking the result."
+  },
+  "estimatedMinutes": 9,
+  "order": 3,
+  "contentMarkdown": {
+    "ar": "## احفظ ما يحتاجه اللاعب\n\nتشير `res://` إلى ملفات المشروع المضمنة، بينما تخصص `user://` لملفات بيانات المستخدم القابلة للكتابة. يمكن استخدام JSON للبيانات البسيطة التي تحتاج إلى قراءة بشرية.\n\n```gdscript\nvar file := FileAccess.open(\"user://save.json\", FileAccess.WRITE)\nif file != null:\n    file.store_string(JSON.stringify({\"best_score\": 42}))\n```\n\nعند القراءة، تحقق من فتح الملف ومن نجاح تحليل البيانات قبل استخدامها. لا تخلط مورد المشروع بملف الحفظ؛ فلكل منهما موقع وغرض مختلف.",
+    "en": "## Save what the player needs\n\n`res://` refers to bundled project files, while `user://` is for writable user data. JSON can work well for simple data that should be human-readable.\n\n```gdscript\nvar file := FileAccess.open(\"user://save.json\", FileAccess.WRITE)\nif file != null:\n    file.store_string(JSON.stringify({\"best_score\": 42}))\n```\n\nWhen reading, check that the file opened and that parsing succeeded before using its data. Do not confuse a project resource with a save file: they have different locations and purposes."
+  },
+  "documentation": {
+    "ar": "يوفر `user://` موقع بيانات المستخدم الذي يمكن الكتابة إليه وقت التشغيل، أما `res://` فيشير إلى ملفات المشروع المضمنة. تتيح `FileAccess` فتح الملف في وضع القراءة أو الكتابة؛ تحقق من نجاح الفتح قبل استخدام الكائن. يمكن تمثيل قاموس بسيط بصيغة JSON، لكن البيانات المستعادة تحتاج إلى التحقق من البنية والأنواع والقيم الافتراضية، فقد يكون الملف مفقوداً أو قديماً أو تالفاً. لا تفترض أن ملف الحفظ مكان آمن لتخزين أسرار.",
+    "en": "`user://` is the user-data location writable at runtime, while `res://` refers to bundled project files. `FileAccess` opens a file in read or write mode; check that opening succeeded before using the object. A simple dictionary can be represented as JSON, but restored data needs validation for shape, types, and defaults because a file may be missing, old, or damaged. Do not assume a save file is a secure place for secrets."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "حفظ الألعاب",
+        "en": "Saving games"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع FileAccess",
+        "en": "FileAccess class reference"
+      },
+      "url": "https://docs.godotengine.org/en/stable/classes/class_fileaccess.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_40_saving_01",
+      "lessonId": "lesson_40_saving",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي بادئة مسار مخصصة لبيانات المستخدم القابلة للكتابة؟",
+        "en": "Which path prefix is intended for writable user data?"
+      },
+      "options": [
+        {
+          "ar": "`user://`",
+          "en": "`user://`"
+        },
+        {
+          "ar": "`res://` فقط",
+          "en": "Only `res://`"
+        },
+        {
+          "ar": "`node://`",
+          "en": "`node://`"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_40_saving_02",
+      "lessonId": "lesson_40_saving",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن حفظ البيانات. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about حفظ البيانات. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "افتح `user://save.json` بوضع الكتابة ضمن دالة حفظ.",
+          "en": "Open `user://save.json` in write mode in a save function."
+        },
+        {
+          "ar": "تحقق من أن FileAccess لم يُرجع null ثم خزّن قيمة JSON.",
+          "en": "Check that FileAccess did not return null, then store a JSON value."
+        },
+        {
+          "ar": "شغّل التطبيق واحفظ قيمة ثم أعد التشغيل واستعدها مع التحقق من البنية.",
+          "en": "Run the app, save a value, restart, and restore it while validating its structure."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_40_saving_03",
+      "lessonId": "lesson_40_saving",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «best score: 42» في سياق حفظ البيانات.",
+        "en": "Write code that prints “best score: 42” as a حفظ البيانات status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"best score: 42\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "best score: 42"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_40_saving_04",
+      "lessonId": "lesson_40_saving",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «best score: 42».",
+        "en": "Complete the line so it prints “best score: 42”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"best score: 42\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "best score: 42"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_40_saving_05",
+      "lessonId": "lesson_40_saving",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في حفظ البيانات: start ثم «best score: 42».",
+        "en": "Print two lines showing progress in حفظ البيانات: start, then “best score: 42”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"best score: 42\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nbest score: 42"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_40_saving_06",
+      "lessonId": "lesson_40_saving",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «best score: 42» تماماً.",
+        "en": "Fix the code so it prints exactly “best score: 42”."
+      },
+      "starterCode": "print(\"best score: 42!\")",
+      "solutionCode": "print(\"best score: 42\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "best score: 42"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_40_saving_07",
+      "lessonId": "lesson_40_saving",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «best score: 42» ثم done.",
+        "en": "Arrange output to show start, then “best score: 42”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"best score: 42\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"best score: 42\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nbest score: 42\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_40_saving_08",
+      "lessonId": "lesson_40_saving",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع حفظ البيانات: «best score: 42».",
+        "en": "Write a program that records a result related to حفظ البيانات: “best score: 42”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"best score: 42\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "best score: 42"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_40_saving_09",
+      "lessonId": "lesson_40_saving",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nbest score: 42",
+        "en": "Write a program that displays this sequence:\nbest score: 42"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"best score: 42\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "best score: 42"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_40_saving_10",
+      "lessonId": "lesson_40_saving",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «best score: 42».",
+        "en": "Use a string variable named status and print its value “best score: 42”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"best score: 42\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "best score: 42"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

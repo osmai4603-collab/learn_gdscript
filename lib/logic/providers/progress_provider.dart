@@ -88,16 +88,19 @@ class ProgressProvider extends ChangeNotifier {
     required int hintsCount,
     required bool usedSolution,
     required String code,
+    bool verified = true,
     DateTime? now,
   }) async {
     if (attempts < 1) throw ArgumentError.value(attempts, 'attempts');
     final current = _requireProgress();
     final timestamp = now ?? DateTime.now();
-    final award = _gamificationService.calculateExerciseXP(
-      isFirstTry: attempts == 1,
-      usedSolution: usedSolution,
-      hintsCount: hintsCount,
-    );
+    final award = verified
+        ? _gamificationService.calculateExerciseXP(
+            isFirstTry: attempts == 1,
+            usedSolution: usedSolution,
+            hintsCount: hintsCount,
+          )
+        : 0;
     final streak = _updatedStreak(current, timestamp);
     final transactions = [...current.xpTransactions];
     if (usedSolution) {
@@ -138,10 +141,13 @@ class ProgressProvider extends ChangeNotifier {
       longestStreak: streak.result.longestStreak,
       lastActiveDate: timestamp,
       firstTrySolvedCount:
-          current.firstTrySolvedCount + (attempts == 1 && !usedSolution ? 1 : 0),
+          current.firstTrySolvedCount +
+          (verified && attempts == 1 && !usedSolution ? 1 : 0),
       hasExecutedPrint:
           current.hasExecutedPrint ||
-          (code.contains(RegExp(r'\bprint\s*\(')) && !usedSolution),
+          (verified &&
+              code.contains(RegExp(r'\bprint\s*\(')) &&
+              !usedSolution),
       xpTransactions: transactions,
     );
     final updated = await _unlockEligibleBadges(withActivity, curriculum);

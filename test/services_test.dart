@@ -20,6 +20,27 @@ void main() {
     expect(failure.isSuccess, isFalse);
     expect(failure.errorMessage, isNotNull);
     expect(failure.diagnostics, isNotEmpty);
+    expect(service.getDiagnostics('var value: ='), isNotEmpty);
+    expect(service.getSyntaxHighlights('print("hello")'), isNotEmpty);
+    expect(
+      service.getSemanticHighlights('func greet():\n    pass'),
+      isNotEmpty,
+    );
+    expect(service.getCompletions('pri', 3), contains('print()'));
+    final completion = service
+        .getCompletionItems('pri', 3)
+        .singleWhere((item) => item.label == 'print');
+    expect(completion.insertText, 'print()');
+    expect(completion.kind.name, 'function');
+  });
+
+  test('editor APIs reject requests after the shared engine is disposed', () {
+    final service = CodeRunnerService();
+    service.dispose();
+
+    expect(() => service.getDiagnostics(''), throwsStateError);
+    expect(() => service.getSyntaxHighlights(''), throwsStateError);
+    expect(() => service.getCompletions('', 0), throwsStateError);
   });
 
   test(

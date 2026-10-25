@@ -13,7 +13,6 @@ import '../../../data/models/lesson_models.dart';
 import '../../../data/models/progress_models.dart';
 import '../../../logic/providers/app_settings_provider.dart';
 import '../../../logic/providers/curriculum_provider.dart';
-import '../../../logic/providers/language_server_provider.dart';
 import '../../../logic/providers/lesson_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
 import '../../../logic/services/code_runner_service.dart';
@@ -47,12 +46,9 @@ class _LessonScreenState extends State<LessonScreen> {
   String? _exampleError;
   OutputState _exampleState = OutputState.empty;
   bool _exampleRunning = false;
-  String? _lspWarning;
-  bool _lessonDocumentOpen = false;
-  bool _lessonDocumentOpening = false;
-  LanguageServerProvider? _languageServer;
   final List<BadgeDefinition> _newlyUnlockedBadges = [];
   final Set<String> _solutionViewedExerciseIds = {};
+  final Set<String> _selfReportedExerciseIds = {};
   final Map<String, int> _exerciseAttempts = {};
   final Map<String, int> _exerciseHints = {};
   int _earnedXpForLesson = 0;
@@ -65,8 +61,6 @@ class _LessonScreenState extends State<LessonScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final languageServer = context.watch<LanguageServerProvider>();
-    _languageServer = languageServer;
     if (_loadScheduled) return;
     _loadScheduled = true;
     _lessonFuture = Future<Lesson>.microtask(_loadLesson);
@@ -95,10 +89,12 @@ class _LessonScreenState extends State<LessonScreen> {
     _solutionViewedExerciseIds.addAll(
       existing?.exercisesWithSolutionViewed ?? const [],
     );
+    _selfReportedExerciseIds.addAll(
+      existing?.selfReportedExercises ?? const [],
+    );
     _exerciseAttempts.addAll(existing?.exerciseAttempts ?? const {});
     _exerciseHints.addAll(existing?.exerciseHints ?? const {});
     _lessonStartedAt = existing?.startedAt ?? DateTime.now();
-    await _openLessonDocument(lesson);
     _exerciseIndex = (existing?.exercisesCompleted ?? 0)
         .clamp(0, lesson.exercises.length)
         .toInt();
@@ -122,30 +118,6 @@ class _LessonScreenState extends State<LessonScreen> {
     return lesson;
   }
 
-  Future<void> _openLessonDocument(Lesson lesson) async {
-    final server = _languageServer;
-    if (server == null || !server.isConnected) {
-      _lessonDocumentOpen = false;
-      return;
-    }
-    if (_lessonDocumentOpen || _lessonDocumentOpening) return;
-    _lessonDocumentOpening = true;
-    try {
-      await server.openLessonDocument(
-        lesson.id,
-        _savedCode ??
-            (lesson.exercises.isNotEmpty
-                ? lesson.exercises.first.starterCode
-                : lesson.exampleCode ?? ''),
-      );
-      _lessonDocumentOpen = true;
-    } on Object {
-      if (mounted) setState(() => _lspWarning = context.l10n.lspFeatureError);
-    } finally {
-      _lessonDocumentOpening = false;
-    }
-  }
-
   Future<void> _persistLessonProgress(
     Lesson lesson, {
     String? savedCode,
@@ -153,6 +125,7 @@ class _LessonScreenState extends State<LessonScreen> {
     int? hintsUsed,
     int? exercisesCompleted,
     List<String>? exercisesWithSolutionViewed,
+    List<String>? selfReportedExercises,
     Map<String, int>? exerciseAttempts,
     Map<String, int>? exerciseHints,
     LessonStatus? status,
@@ -187,6 +160,10 @@ class _LessonScreenState extends State<LessonScreen> {
           exercisesWithSolutionViewed:
               exercisesWithSolutionViewed ??
               previous?.exercisesWithSolutionViewed ??
+              const [],
+          selfReportedExercises:
+              selfReportedExercises ??
+              previous?.selfReportedExercises ??
               const [],
           exerciseAttempts:
               exerciseAttempts ?? previous?.exerciseAttempts ?? const {},
@@ -288,6 +265,9 @@ class _LessonScreenState extends State<LessonScreen> {
     String code,
   ) async {
     if (!_completedExercises.add(exercise.id)) return;
+    if (exercise.type == ExerciseType.guidedTask) {
+      _selfReportedExerciseIds.add(exercise.id);
+    }
     final completedCount = _completedExercises.length;
     final allCompleted = completedCount >= lesson.exercises.length;
     _savedCode = allCompleted
@@ -307,6 +287,7 @@ class _LessonScreenState extends State<LessonScreen> {
       hintsUsed: _totalCount(_exerciseHints, exercise.id, hintsUsed),
       exerciseAttempts: {..._exerciseAttempts, exercise.id: attempts},
       exerciseHints: {..._exerciseHints, exercise.id: hintsUsed},
+      selfReportedExercises: [..._selfReportedExerciseIds],
       exercisesCompleted: completedCount,
       status: allCompleted ? LessonStatus.completed : LessonStatus.inProgress,
       clearSavedCode: allCompleted,
@@ -318,6 +299,7 @@ class _LessonScreenState extends State<LessonScreen> {
       hintsCount: hintsUsed,
       usedSolution: usedSolution,
       code: code,
+      verified: exercise.type != ExerciseType.guidedTask,
     );
     _earnedXpForLesson += exerciseReward.earnedXP;
     _newlyUnlockedBadges.addAll(exerciseReward.newlyUnlockedBadges);
@@ -371,6 +353,54 @@ class _LessonScreenState extends State<LessonScreen> {
         ),
         const SizedBox(height: 20),
         _MarkdownContent(markdown: lesson.contentMarkdown.resolve(locale)),
+        if (lesson.documentation case final documentation?) ...[
+          const SizedBox(height: 16),
+          Card(
+            child: ExpansionTile(
+              leading: const Icon(Icons.menu_book_outlined),
+              title: Text(
+                locale.languageCode == 'en'
+                    ? 'Lesson documentation'
+                    : 'توثيق الدرس',
+              ),
+              childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              children: [
+                _MarkdownContent(markdown: documentation.resolve(locale)),
+                if (lesson.documentationSources.isNotEmpty) ...[
+                  const Divider(height: 24),
+                  Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      locale.languageCode == 'en' ? 'Sources' : 'المصادر',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                  for (final source in lesson.documentationSources)
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(source.title.resolve(locale)),
+                      subtitle: SelectableText(
+                        source.url,
+                        textDirection: TextDirection.ltr,
+                      ),
+                      dense: true,
+                    ),
+                  Text(
+                    locale.languageCode == 'en'
+                        ? 'Based on Godot Engine Documentation, licensed under CC BY 3.0. This educational text is an independent adaptation and is not endorsed by Godot.'
+                        : 'يستند هذا المحتوى إلى توثيق Godot Engine المرخّص بموجب CC BY 3.0. هذا إعداد تعليمي مستقل وليس معتمداً من Godot.',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 4),
+                  const SelectableText(
+                    'https://creativecommons.org/licenses/by/3.0/',
+                    textDirection: TextDirection.ltr,
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
         if (lesson.exampleCode != null) ...[
           const SizedBox(height: 20),
           Text(
@@ -387,6 +417,12 @@ class _LessonScreenState extends State<LessonScreen> {
                 .toDouble(),
             showActionBar: false,
             onChanged: (code) => _exampleCode = code,
+            onSyntaxHighlightsRequested: context
+                .read<CodeRunnerService>()
+                .getSyntaxHighlights,
+            onDiagnosticsRequested: context
+                .read<CodeRunnerService>()
+                .getDiagnostics,
           ),
           const SizedBox(height: 8),
           Align(
@@ -429,7 +465,6 @@ class _LessonScreenState extends State<LessonScreen> {
       onCodeChanged: (code) {
         _savedCode = code;
         _persistLessonProgressInBackground(lesson, savedCode: code);
-        unawaited(_syncLessonDocument(lesson.id, code));
       },
       onProgressChanged: (attempts, hintsUsed) {
         _exerciseAttempts[exercise.id] = attempts;
@@ -464,16 +499,6 @@ class _LessonScreenState extends State<LessonScreen> {
           exercisesWithSolutionViewed: [..._solutionViewedExerciseIds],
         );
       },
-      onCompletionRequested: context.read<LanguageServerProvider>().isConnected
-          ? (code, offset) => context
-                .read<LanguageServerProvider>()
-                .completeLessonDocument(lesson.id, code, offset)
-          : null,
-      onFormatRequested: context.read<LanguageServerProvider>().isConnected
-          ? (code) => context
-                .read<LanguageServerProvider>()
-                .formatLessonDocument(lesson.id, code)
-          : null,
       fontSize: context.watch<AppSettingsProvider>().editorFontSize.toDouble(),
     );
   }
@@ -486,25 +511,12 @@ class _LessonScreenState extends State<LessonScreen> {
       .where((entry) => entry.key != exerciseId)
       .fold(currentValue, (sum, entry) => sum + entry.value);
 
-  Future<void> _syncLessonDocument(String lessonId, String code) async {
-    final server = context.read<LanguageServerProvider>();
-    if (!server.isConnected) return;
-    try {
-      await server.syncLessonDocument(lessonId, code);
-    } on Object {
-      if (mounted) setState(() => _lspWarning = context.l10n.lspFeatureError);
-    }
-  }
-
   Widget _body(Lesson lesson) {
     final title = lesson.title.resolve(Localizations.localeOf(context));
     final curriculum = context.watch<CurriculumProvider>().state.value!;
     final unit = curriculum.units.firstWhere(
       (unit) => unit.id == lesson.unitId,
     );
-    final languageServer = context.watch<LanguageServerProvider>();
-    unawaited(_openLessonDocument(lesson));
-    final diagnostics = languageServer.diagnosticsForLesson(lesson.id);
     final statusSection = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -535,17 +547,7 @@ class _LessonScreenState extends State<LessonScreen> {
               ],
             ),
           ),
-        if (_lspWarning != null)
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              _lspWarning!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
-          ),
-        if (diagnostics.isNotEmpty) _LspDiagnostics(diagnostics: diagnostics),
-        if (_lspWarning == null && diagnostics.isEmpty)
-          const SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     );
     return Scaffold(
@@ -568,7 +570,7 @@ class _LessonScreenState extends State<LessonScreen> {
         desktopBuilder: (context) => DesktopLessonIdeLayout(
           unitTitle: unit.title.resolve(Localizations.localeOf(context)),
           estimatedMinutes: lesson.estimatedMinutes,
-          isLspConnected: languageServer.isConnected,
+          isEngineReady: true,
           explanationSection: _explanation(lesson),
           editorSection: _exercise(lesson),
           statusSection: statusSection,
@@ -606,54 +608,7 @@ class _LessonScreenState extends State<LessonScreen> {
 
   @override
   void dispose() {
-    final lesson = _lesson;
-    final server = _languageServer;
-    if (lesson != null && _lessonDocumentOpen && server != null) {
-      unawaited(server.closeLessonDocument(lesson.id));
-    }
     super.dispose();
-  }
-}
-
-class _LspDiagnostics extends StatelessWidget {
-  const _LspDiagnostics({required this.diagnostics});
-  final List<Map<String, Object?>> diagnostics;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (final diagnostic in diagnostics)
-            ListTile(
-              dense: true,
-              leading: Icon(
-                Icons.warning_amber_outlined,
-                color: diagnostic['severity'] == 1
-                    ? Theme.of(context).colorScheme.error
-                    : Theme.of(context).colorScheme.tertiary,
-              ),
-              title: Text(
-                diagnostic['message'] is String
-                    ? diagnostic['message']! as String
-                    : context.l10n.lspFeatureError,
-              ),
-              subtitle: _diagnosticLine(context, diagnostic),
-            ),
-        ],
-      ),
-    );
-  }
-
-  static Widget? _diagnosticLine(
-    BuildContext context,
-    Map<String, Object?> diagnostic,
-  ) {
-    final range = diagnostic['range'];
-    if (range is! Map || range['start'] is! Map) return null;
-    final line = (range['start'] as Map)['line'];
-    return line is int ? Text(context.l10n.diagnosticLine(line + 1)) : null;
   }
 }
 

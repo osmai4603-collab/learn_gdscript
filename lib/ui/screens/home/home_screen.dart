@@ -10,7 +10,6 @@ import '../../../data/models/home_dashboard_models.dart';
 import '../../../data/models/progress_models.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../logic/providers/home_dashboard_provider.dart';
-import '../../../logic/providers/language_server_provider.dart';
 import '../../../logic/services/badge_evaluator.dart';
 import '../../../logic/services/gamification_service.dart';
 import '../../routers/app_routes.dart';
@@ -83,11 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
           final locale = Localizations.localeOf(context);
           final data = _dashboardData(snapshot, locale, l10n);
-          final languageServer = context.watch<LanguageServerProvider>();
           return DesktopHomeDashboardScreen(
             data: data,
-            isLspConnected: languageServer.isConnected,
-            isLspConnecting: languageServer.isConnecting,
+            isEngineReady: true,
             playgroundCode: snapshot.playgroundCode,
             onPlaygroundCodeChanged: dashboardProvider.savePlaygroundCode,
             onNavigateRoute: context.go,

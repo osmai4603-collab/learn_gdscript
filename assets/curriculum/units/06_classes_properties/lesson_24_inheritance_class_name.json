@@ -1,0 +1,385 @@
+{
+  "id": "lesson_24_inheritance_class_name",
+  "unitId": "unit_06_classes_properties",
+  "title": {
+    "ar": "الوراثة وclass_name",
+    "en": "Inheritance and class_name"
+  },
+  "objective": {
+    "ar": "استخدم `extends` للتخصص و`class_name` لإتاحة صنفك باسم واضح.",
+    "en": "Use `extends` for specialization and `class_name` to expose your class by a clear name."
+  },
+  "estimatedMinutes": 10,
+  "order": 1,
+  "documentation": {
+    "ar": "تحدد `extends` الصنف الأب للسكربت. يضيف الصنف المشتق خصائص أو دوالاً أو يعيد تعريف سلوك مناسب. يمنح `class_name` صنفك اسماً مسجلاً للمشروع. استخدم الوراثة لعلاقة نوع متخصص من، لا لمشاركة عابرة.",
+    "en": "`extends` selects a script’s parent class. A derived class adds properties or functions or overrides appropriate behavior. `class_name` gives your class a registered project-wide name. Use inheritance for a specialized-kind-of relationship, not incidental sharing."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "الأصناف في GDScript",
+        "en": "Classes in GDScript"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+    },
+    {
+      "title": {
+        "ar": "مرجع الصنف Node",
+        "en": "Node class reference"
+      },
+      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+    }
+  ],
+  "contentMarkdown": {
+    "ar": "## تخصيص صنف موجود\n\nيمكن للسكربت أن يرث من صنف Godot أو صنف آخر. يتيح ذلك استخدام خصائص الأب وتخصيص السلوك. يسجل `class_name` اسماً يمكن الإشارة إليه من سكربتات المشروع.\n\n```gdscript\nextends Node2D\nclass_name MovingActor\n\n@export var speed = 120.0\n\nfunc move_right(delta):\n    position.x += speed * delta\n```\n\nيوفر `Node2D` خاصية الموضع. لا ترث من صنف لا يلائم طبيعة الكائن لمجرد إعادة استخدام سطر.",
+    "en": "## Specialize an existing class\n\nA script can inherit from a Godot class or another class. This lets it use parent properties and specialize behavior. `class_name` registers a name that project scripts can reference.\n\n```gdscript\nextends Node2D\nclass_name MovingActor\n\n@export var speed = 120.0\n\nfunc move_right(delta):\n    position.x += speed * delta\n```\n\n`Node2D` provides a position property. Do not inherit from an unsuitable class just to reuse one line."
+  },
+  "exercises": [
+    {
+      "id": "ex_lesson_24_inheritance_class_name_01_predict",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "توقع النتيجة في المثال: يرث `MovingActor` سلوك `Node2D` وخصائصه المتاحة، ويمكنه إضافة `speed` وسلوكه الخاص.",
+        "en": "Predict the result in the example: `MovingActor` inherits available `Node2D` behavior and properties, and can add `speed` and its own behavior."
+      },
+      "options": [
+        {
+          "ar": "يرث `MovingActor` سلوك `Node2D` وخصائصه المتاحة، ويمكنه إضافة `speed` وسلوكه الخاص.",
+          "en": "`MovingActor` inherits available `Node2D` behavior and properties, and can add `speed` and its own behavior."
+        },
+        {
+          "ar": "الوراثة تخصّص صنفاً من أب مناسب؛ واسم الصنف المسجل لا ينشئ نسخة منه.",
+          "en": "Inheritance specializes a class from a suitable parent; a registered class name does not instantiate it."
+        },
+        {
+          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
+          "en": "The two keywords are synonyms and do the same job."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
+          "en": "Trace what happens first, then the final result."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_02_identify",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «الوراثة وclass_name»؟",
+        "en": "Which statement accurately identifies the core concept in “Inheritance and class_name”?"
+      },
+      "options": [
+        {
+          "ar": "`extends` يحدد الصنف الأب، و`class_name` يسجل اسماً للصنف كي تستخدمه سكربتات المشروع.",
+          "en": "`extends` selects a parent class, while `class_name` registers a name that project scripts can use."
+        },
+        {
+          "ar": "الوراثة تخصّص صنفاً من أب مناسب؛ واسم الصنف المسجل لا ينشئ نسخة منه.",
+          "en": "Inheritance specializes a class from a suitable parent; a registered class name does not instantiate it."
+        },
+        {
+          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
+          "en": "The two keywords are synonyms and do the same job."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
+          "en": "Look for the role of the key terms in the example."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_03_choose",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي قرار تصميم مناسب للحالة التالية؟ اختر `Node2D` أباً لكائن يحتاج خاصية الموضع ثنائية الأبعاد.",
+        "en": "Which design choice fits this situation? Choose `Node2D` as a parent for an object that needs a 2D position property."
+      },
+      "options": [
+        {
+          "ar": "اختر `Node2D` أباً لكائن يحتاج خاصية الموضع ثنائية الأبعاد.",
+          "en": "Choose `Node2D` as a parent for an object that needs a 2D position property."
+        },
+        {
+          "ar": "الوراثة تخصّص صنفاً من أب مناسب؛ واسم الصنف المسجل لا ينشئ نسخة منه.",
+          "en": "Inheritance specializes a class from a suitable parent; a registered class name does not instantiate it."
+        },
+        {
+          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
+          "en": "The two keywords are synonyms and do the same job."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
+          "en": "Choose the option that matches the scenario’s stated need."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_04_complete",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: سطرَي تعريف لصنف حركة: أب مناسب واسم مسجل واضح.",
+        "en": "Complete a short sketch or sequence that shows: Two declaration lines for a movement class: a suitable parent and a clear registered name."
+      },
+      "steps": [
+        {
+          "ar": "اكتب الأجزاء الأساسية المطلوبة: سطرَي تعريف لصنف حركة: أب مناسب واسم مسجل واضح.",
+          "en": "Write the required essential parts: Two declaration lines for a movement class: a suitable parent and a clear registered name."
+        },
+        {
+          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
+          "en": "Connect the elements in the correct order or relationship."
+        },
+        {
+          "ar": "راجع المخطط باستخدام تعريف الدرس.",
+          "en": "Review the sketch using the lesson definition."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_05_write",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: في مشروع تجريبي، أرفق سكربتاً بعقدة مناسبة، ثم تحقق من صنف الأب واسمه المسجل.",
+        "en": "Write a short implementation plan for this application: In a test project, attach a script to a suitable node and verify its parent class and registered name."
+      },
+      "steps": [
+        {
+          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
+          "en": "Identify the goal and the elements or nodes you need."
+        },
+        {
+          "ar": "اكتب الخطوات بترتيب التنفيذ.",
+          "en": "Write the steps in implementation order."
+        },
+        {
+          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
+          "en": "State how you will manually verify the result."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_06_fix",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "اقرأ الاعتقاد الخاطئ: «`class_name` وحدها تجعل السكربت يرث من `Node2D`.» ما التصحيح الأفضل؟",
+        "en": "Read this misconception: “`class_name` by itself makes a script inherit from `Node2D`.” What is the best correction?"
+      },
+      "options": [
+        {
+          "ar": "اكتب `extends Node2D` لاختيار الأب، واستخدم `class_name` بشكل منفصل لإتاحة اسم الصنف.",
+          "en": "Use `extends Node2D` to choose the parent, and use `class_name` separately to expose the class name."
+        },
+        {
+          "ar": "`class_name` وحدها تجعل السكربت يرث من `Node2D`.",
+          "en": "`class_name` by itself makes a script inherit from `Node2D`."
+        },
+        {
+          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
+          "en": "The two keywords are synonyms and do the same job."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
+          "en": "Distinguish the correct definition from the mistaken assumption."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_07_apply",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: في مشروع تجريبي، أرفق سكربتاً بعقدة مناسبة، ثم تحقق من صنف الأب واسمه المسجل. لا يُفحص إعداد المحرر تلقائياً.",
+        "en": "Apply the concept manually in a test project: In a test project, attach a script to a suitable node and verify its parent class and registered name. Editor setup is not automatically checked."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
+          "en": "Create the smallest example that demonstrates the idea."
+        },
+        {
+          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
+          "en": "Check the relevant names and settings inside Godot."
+        },
+        {
+          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
+          "en": "Run the experiment if possible and record what you observe."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_08_compare",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `extends` يحدد علاقة الوراثة، أما `class_name` فيسجل اسماً للصنف.",
+        "en": "What is the difference between the concepts in this lesson? `extends` defines inheritance, while `class_name` registers a name for the class."
+      },
+      "options": [
+        {
+          "ar": "`extends` يحدد علاقة الوراثة، أما `class_name` فيسجل اسماً للصنف.",
+          "en": "`extends` defines inheritance, while `class_name` registers a name for the class."
+        },
+        {
+          "ar": "الوراثة تخصّص صنفاً من أب مناسب؛ واسم الصنف المسجل لا ينشئ نسخة منه.",
+          "en": "Inheritance specializes a class from a suitable parent; a registered class name does not instantiate it."
+        },
+        {
+          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
+          "en": "The two keywords are synonyms and do the same job."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
+          "en": "Compare each part’s role, not just its name."
+        },
+        {
+          "ar": "ارجع إلى المثال والتعريف في الدرس.",
+          "en": "Review the example and definition in the lesson."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_09_debug",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "راجع الحالة المعيبة: تصميم يستخدم `extends` كأنه اسم عالمي للصنف ويغفل تحديد الأب. اكتب طريقة تشخيصها وإصلاحها.",
+        "en": "Review this flawed setup: A design that treats `extends` as a global class name and omits selecting a parent. Write how you would diagnose and fix it."
+      },
+      "steps": [
+        {
+          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
+          "en": "Identify the incorrect element or relationship."
+        },
+        {
+          "ar": "قارنها بما يتطلبه المفهوم.",
+          "en": "Compare it with what the concept requires."
+        },
+        {
+          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
+          "en": "Write a correction and a manual verification step."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_24_inheritance_class_name_10_apply",
+      "lessonId": "lesson_24_inheritance_class_name",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: اختر أباً يوفر سلوك العقدة المطلوب، ثم أضف خاصية ودالة متخصصتين.",
+        "en": "Design an application that combines this concept with an earlier idea: Choose a parent that provides needed node behavior, then add a specialized property and function."
+      },
+      "steps": [
+        {
+          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
+          "en": "Choose a clear purpose for the integrated example."
+        },
+        {
+          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
+          "en": "Define the responsibility of each node, class, or part."
+        },
+        {
+          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
+          "en": "Sketch the data or event flow, then self-review it."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
+          "en": "Check your result against the concept definition in the lesson."
+        },
+        {
+          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
+          "en": "Editor activities are self-checked and are not automatically verified here."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

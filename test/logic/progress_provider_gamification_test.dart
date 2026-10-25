@@ -90,4 +90,47 @@ void main() {
       containsAll(['badge_first_line', 'badge_unit_01', 'badge_graduate']),
     );
   });
+
+  test('self-reported exercise completion does not claim verified exercise XP',
+      () async {
+    final helper = DatabaseHelper(inMemory: true);
+    final provider = ProgressProvider(ProgressRepository(helper));
+    addTearDown(() async {
+      provider.dispose();
+      await helper.close();
+    });
+    final curriculum = Curriculum(
+      version: '1',
+      targetGDScriptVersion: '4.x',
+      units: [
+        Unit(
+          id: 'unit_01',
+          title: const LocalizedText(ar: 'الأولى', en: 'First'),
+          description: const LocalizedText(ar: 'وصف', en: 'Description'),
+          iconName: 'star',
+          order: 0,
+          lessonIds: const ['lesson_01'],
+        ),
+      ],
+    );
+    await provider.initialize(
+      visitorId: 'visitor',
+      unitId: 'unit_01',
+      lessonId: 'lesson_01',
+    );
+
+    final result = await provider.recordExerciseResult(
+      curriculum: curriculum,
+      lessonId: 'lesson_01',
+      attempts: 1,
+      hintsCount: 0,
+      usedSolution: false,
+      code: '',
+      verified: false,
+    );
+
+    expect(result.earnedXP, 0);
+    expect(provider.progress?.firstTrySolvedCount, 0);
+    expect(provider.progress?.hasExecutedPrint, isFalse);
+  });
 }

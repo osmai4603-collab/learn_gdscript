@@ -113,24 +113,6 @@ abstract class AppLocalizations {
   /// **'Learn GDScript step by step'**
   String get homeWelcome;
 
-  /// No description provided for @dashboardLspConnecting.
-  ///
-  /// In en, this message translates to:
-  /// **'GDScript: Local | LSP: Connecting'**
-  String get dashboardLspConnecting;
-
-  /// No description provided for @dashboardLspActive.
-  ///
-  /// In en, this message translates to:
-  /// **'GDScript: Local | LSP: Active'**
-  String get dashboardLspActive;
-
-  /// No description provided for @dashboardLspDisconnected.
-  ///
-  /// In en, this message translates to:
-  /// **'GDScript: Local | LSP: Disconnected'**
-  String get dashboardLspDisconnected;
-
   /// No description provided for @dashboardDays.
   ///
   /// In en, this message translates to:
@@ -254,7 +236,7 @@ abstract class AppLocalizations {
   /// No description provided for @dashboardEngineTitle.
   ///
   /// In en, this message translates to:
-  /// **'Language server and runtime'**
+  /// **'GDScript engine'**
   String get dashboardEngineTitle;
 
   /// No description provided for @dashboardEngineConnecting.
@@ -292,12 +274,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Local'**
   String get dashboardLocal;
-
-  /// No description provided for @dashboardLsp.
-  ///
-  /// In en, this message translates to:
-  /// **'Language server'**
-  String get dashboardLsp;
 
   /// No description provided for @dashboardPlaygroundReset.
   ///
@@ -596,7 +572,7 @@ abstract class AppLocalizations {
   /// No description provided for @workspaceDescription.
   ///
   /// In en, this message translates to:
-  /// **'Local language-server processes are supported on desktop platforms only.'**
+  /// **'Select a local project directory to inspect and edit its GDScript files.'**
   String get workspaceDescription;
 
   /// No description provided for @settingsTitle.
@@ -644,7 +620,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsEngineCategory.
   ///
   /// In en, this message translates to:
-  /// **'Engine and language server'**
+  /// **'Engine'**
   String get settingsEngineCategory;
 
   /// No description provided for @settingsAboutCategory.
@@ -668,7 +644,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsEngineDescription.
   ///
   /// In en, this message translates to:
-  /// **'Language-server status and development tool navigation.'**
+  /// **'GDScript engine diagnostics and development tools.'**
   String get settingsEngineDescription;
 
   /// No description provided for @settingsAboutDescription.
@@ -1079,83 +1055,29 @@ abstract class AppLocalizations {
   /// **'Send Feedback'**
   String get sendFeedback;
 
-  /// No description provided for @lspStatus.
+  /// No description provided for @engineDiagnosticsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Language Server Status'**
-  String get lspStatus;
+  /// **'GDScript engine diagnostics'**
+  String get engineDiagnosticsTitle;
 
-  /// No description provided for @lspConnected.
+  /// No description provided for @engineDiagnosticsDescription.
   ///
   /// In en, this message translates to:
-  /// **'Connected'**
-  String get lspConnected;
+  /// **'Review diagnostics from GDScript files in the selected workspace.'**
+  String get engineDiagnosticsDescription;
 
-  /// No description provided for @lspDisconnected.
+  /// No description provided for @engineDiagnosticsEmpty.
   ///
   /// In en, this message translates to:
-  /// **'Disconnected'**
-  String get lspDisconnected;
+  /// **'There are no diagnostics in the indexed workspace files.'**
+  String get engineDiagnosticsEmpty;
 
-  /// No description provided for @lspDiagnosticsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Language server diagnostics'**
-  String get lspDiagnosticsTitle;
-
-  /// No description provided for @lspDiagnosticsDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Review errors and warnings reported by the language server.'**
-  String get lspDiagnosticsDescription;
-
-  /// No description provided for @lspDiagnosticsEmpty.
-  ///
-  /// In en, this message translates to:
-  /// **'There are no current diagnostics.'**
-  String get lspDiagnosticsEmpty;
-
-  /// No description provided for @lspDiagnosticsConnectPrompt.
-  ///
-  /// In en, this message translates to:
-  /// **'Connect the language server from the workspace to view diagnostics.'**
-  String get lspDiagnosticsConnectPrompt;
-
-  /// No description provided for @lspDiagnosticsSummary.
+  /// No description provided for @engineDiagnosticsSummary.
   ///
   /// In en, this message translates to:
   /// **'{count} diagnostics'**
-  String lspDiagnosticsSummary(int count);
-
-  /// No description provided for @lspDiagnosticError.
-  ///
-  /// In en, this message translates to:
-  /// **'Errors'**
-  String get lspDiagnosticError;
-
-  /// No description provided for @lspDiagnosticWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Warnings'**
-  String get lspDiagnosticWarning;
-
-  /// No description provided for @lspDiagnosticInformation.
-  ///
-  /// In en, this message translates to:
-  /// **'Information'**
-  String get lspDiagnosticInformation;
-
-  /// No description provided for @lspDiagnosticHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Hints'**
-  String get lspDiagnosticHint;
-
-  /// No description provided for @lspDiagnosticNoMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'The language server did not provide a description for this diagnostic.'**
-  String get lspDiagnosticNoMessage;
+  String engineDiagnosticsSummary(int count);
 
   /// No description provided for @startLearning.
   ///
@@ -1301,53 +1223,11 @@ abstract class AppLocalizations {
   /// **'Project directory path'**
   String get workspacePath;
 
-  /// No description provided for @lspExecutablePath.
-  ///
-  /// In en, this message translates to:
-  /// **'Language server executable path (optional)'**
-  String get lspExecutablePath;
-
-  /// No description provided for @connectLsp.
-  ///
-  /// In en, this message translates to:
-  /// **'Connect and index'**
-  String get connectLsp;
-
-  /// No description provided for @disconnectLsp.
-  ///
-  /// In en, this message translates to:
-  /// **'Disconnect'**
-  String get disconnectLsp;
-
-  /// No description provided for @indexedFiles.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} files indexed'**
-  String indexedFiles(Object count);
-
-  /// No description provided for @lspConnectionError.
-  ///
-  /// In en, this message translates to:
-  /// **'Could not connect to the language server.'**
-  String get lspConnectionError;
-
   /// No description provided for @completeCode.
   ///
   /// In en, this message translates to:
   /// **'Complete'**
   String get completeCode;
-
-  /// No description provided for @formatCode.
-  ///
-  /// In en, this message translates to:
-  /// **'Format'**
-  String get formatCode;
-
-  /// No description provided for @lspFeatureError.
-  ///
-  /// In en, this message translates to:
-  /// **'The language server feature failed.'**
-  String get lspFeatureError;
 
   /// No description provided for @diagnosticLine.
   ///
@@ -1364,20 +1244,8 @@ abstract class AppLocalizations {
   /// No description provided for @workspaceSearchPlaceholder.
   ///
   /// In en, this message translates to:
-  /// **'Enter text or a symbol'**
+  /// **'Enter text to search in indexed GDScript files'**
   String get workspaceSearchPlaceholder;
-
-  /// No description provided for @searchWorkspaceText.
-  ///
-  /// In en, this message translates to:
-  /// **'Text'**
-  String get searchWorkspaceText;
-
-  /// No description provided for @searchWorkspaceSymbols.
-  ///
-  /// In en, this message translates to:
-  /// **'Symbols'**
-  String get searchWorkspaceSymbols;
 
   /// No description provided for @workspaceSearchEmpty.
   ///
@@ -1883,11 +1751,11 @@ abstract class AppLocalizations {
   /// **'Search GDScript keywords, built-ins, and types.'**
   String get syntaxExplorerPageDescription;
 
-  /// No description provided for @syntaxExplorerDocumentedCount.
+  /// No description provided for @syntaxExplorerRetry.
   ///
   /// In en, this message translates to:
-  /// **'documented entries'**
-  String get syntaxExplorerDocumentedCount;
+  /// **'Try again'**
+  String get syntaxExplorerRetry;
 
   /// No description provided for @syntaxExplorerSearchHint.
   ///
@@ -1910,7 +1778,7 @@ abstract class AppLocalizations {
   /// No description provided for @syntaxExplorerCount.
   ///
   /// In en, this message translates to:
-  /// **'{count} entries'**
+  /// **'{count} documented entries'**
   String syntaxExplorerCount(int count);
 
   /// No description provided for @syntaxExplorerVisibleCount.

@@ -121,6 +121,81 @@ void main() {
   );
 
   test(
+    'workspace discovery excludes hidden, generated, and linked paths',
+    () async {
+      final directory = await Directory.systemTemp.createTemp(
+        'workspace-discovery-',
+      );
+      addTearDown(() => directory.delete(recursive: true));
+      final nested = Directory('${directory.path}/scripts');
+      final hidden = Directory('${directory.path}/.hidden');
+      final generated = Directory('${directory.path}/build');
+      await nested.create();
+      await hidden.create();
+      await generated.create();
+      await File('${directory.path}/main.gd').writeAsString('extends Node');
+      await File('${nested.path}/helper.gd').writeAsString('class_name Helper');
+      await File('${directory.path}/notes.txt').writeAsString('ignored');
+      await File('${hidden.path}/secret.gd').writeAsString('var secret = true');
+      await File(
+        '${generated.path}/generated.gd',
+      ).writeAsString('var generated = true');
+
+      if (!Platform.isWindows) {
+        await Link('${directory.path}/linked').create(nested.path);
+      }
+
+      final helper = DatabaseHelper(inMemory: true);
+      addTearDown(helper.close);
+      final repository = WorkspaceRepository(helper);
+      final discovered = await repository.discoverAndSetWorkspace(
+        directory.path,
+      );
+
+      expect(discovered.map((file) => file.relativePath), [
+        'main.gd',
+        'scripts/helper.gd',
+      ]);
+      expect((await repository.loadFiles()).map((file) => file.relativePath), [
+        'main.gd',
+        'scripts/helper.gd',
+      ]);
+    },
+  );
+
+  test(
+    'workspace text search is case-insensitive and reports locations',
+    () async {
+      final helper = DatabaseHelper(inMemory: true);
+      addTearDown(helper.close);
+      final repository = WorkspaceRepository(helper);
+      await repository.setWorkspace('/project', const [
+        WorkspaceFileSnapshot(
+          uri: 'file:///project/main.gd',
+          relativePath: 'main.gd',
+          content: 'var Player = "player"\nprint(PLAYER)',
+          modifiedMillis: 1,
+        ),
+      ]);
+
+      final matches = await repository.searchText('player');
+
+      expect(
+        matches.map((match) => (match.relativePath, match.line, match.column)),
+        [('main.gd', 1, 5), ('main.gd', 1, 15), ('main.gd', 2, 7)],
+      );
+      expect(
+        (await repository.searchText(
+          'player',
+          caseSensitive: true,
+        )).map((match) => (match.line, match.column)),
+        [(1, 15)],
+      );
+      await expectLater(repository.searchText('  '), throwsArgumentError);
+    },
+  );
+
+  test(
     'onboarding draft persists and restores after reopening the database',
     () async {
       final directory = await Directory.systemTemp.createTemp(

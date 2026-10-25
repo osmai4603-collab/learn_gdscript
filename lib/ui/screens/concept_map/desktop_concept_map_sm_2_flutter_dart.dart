@@ -13,6 +13,7 @@ import 'package:learn_gdscript/ui/routers/app_routes.dart';
 // -----------------------------------------------------------------------------
 
 enum ConceptMasteryLevel { locked, learning, reviewing, mastered }
+
 class KnowledgeConceptNodeModel {
   final String id;
   final String titleAr;
@@ -121,7 +122,8 @@ class ConceptMapSm2DataModel {
         Sm2FlashcardItemModel(
           id: 'card_1',
           conceptId: 'c_match',
-          promptQuestion: 'ما هو دور النمط الشامل _ (Wildcard) في بنية match في GDScript 2.0؟',
+          promptQuestion:
+              'ما هو دور النمط الشامل _ (Wildcard) في بنية match في GDScript 2.0؟',
           codeContext: '''match player_state:
     "IDLE": velocity.x = 0.0
     "RUN": velocity.x = 240.0
@@ -135,9 +137,11 @@ class ConceptMapSm2DataModel {
         Sm2FlashcardItemModel(
           id: 'card_2',
           conceptId: 'c_static_typing',
-          promptQuestion: 'كيف تعلن عن دالة تعيد نوعاً صارماً ولا ترجع أي قيمة؟',
+          promptQuestion:
+              'كيف تعلن عن دالة تعيد نوعاً صارماً ولا ترجع أي قيمة؟',
           codeContext: 'func update_hud(score: int) -> ???:',
-          answerExplanation: 'استخدام سهم التحديد الصريح مع الكلمة المحجوزة void: -> void لضمان السلامة البرمجية أثناء الترجمة.',
+          answerExplanation:
+              'استخدام سهم التحديد الصريح مع الكلمة المحجوزة void: -> void لضمان السلامة البرمجية أثناء الترجمة.',
           repetitionCount: 5,
           easinessFactor: 2.6,
           currentIntervalDays: 10,
@@ -153,7 +157,8 @@ class ConceptMapSm2DataModel {
           retentionPercent: 0.98,
           daysUntilNextReview: 14,
           lastReviewedDate: 'قبل 3 أيام',
-          description: 'طباعة الرسائل والقيم إلى نافذة الإخراج Debug Console للتحقق من سلامة التنفيذ.',
+          description:
+              'طباعة الرسائل والقيم إلى نافذة الإخراج Debug Console للتحقق من سلامة التنفيذ.',
           codeExample: 'print("مرحباً بمحرك Godot 4.3")',
           prerequisites: [],
           visualPosition: Offset(60, 100),
@@ -167,8 +172,10 @@ class ConceptMapSm2DataModel {
           retentionPercent: 0.94,
           daysUntilNextReview: 7,
           lastReviewedDate: 'أمس',
-          description: 'تحديد نوع البيانات الصريح للمتغيرات والمعاملات لتمكين فاحص LSP وتحسين أداء JIT.',
-          codeExample: 'var speed: float = 300.0\nvar player_name: String = "Tariq"',
+          description:
+              'تحديد نوع البيانات الصريح للمتغيرات والمعاملات لتمكين محلل GDScript وتحسين أداء JIT.',
+          codeExample:
+              'var speed: float = 300.0\nvar player_name: String = "Tariq"',
           prerequisites: ['c_print'],
           visualPosition: Offset(220, 100),
         ),
@@ -181,7 +188,8 @@ class ConceptMapSm2DataModel {
           retentionPercent: 0.91,
           daysUntilNextReview: 4,
           lastReviewedDate: 'قبل يومين',
-          description: 'بنية هندسية لحساب الموقع والسرعة والتطبيع (Normalized) والمسافات في الفضاء 2D.',
+          description:
+              'بنية هندسية لحساب الموقع والسرعة والتطبيع (Normalized) والمسافات في الفضاء 2D.',
           codeExample: 'var dir: Vector2 = Vector2.RIGHT * speed',
           prerequisites: ['c_static_typing'],
           visualPosition: Offset(380, 80),
@@ -195,8 +203,10 @@ class ConceptMapSm2DataModel {
           retentionPercent: 0.85,
           daysUntilNextReview: 0, // مستحقة اليوم
           lastReviewedDate: 'اليوم',
-          description: 'صياغة متقدمة للتحكم في التدفق وبناء آلات الحالات المحدودة وبديل فائق لـ switch/case.',
-          codeExample: 'match state:\n    "IDLE": velocity.x = 0.0\n    _: move()',
+          description:
+              'صياغة متقدمة للتحكم في التدفق وبناء آلات الحالات المحدودة وبديل فائق لـ switch/case.',
+          codeExample:
+              'match state:\n    "IDLE": velocity.x = 0.0\n    _: move()',
           prerequisites: ['c_static_typing'],
           visualPosition: Offset(380, 220),
         ),
@@ -209,8 +219,10 @@ class ConceptMapSm2DataModel {
           retentionPercent: 0.65,
           daysUntilNextReview: 1,
           lastReviewedDate: 'لم تراجع بعد',
-          description: 'معمارية الاتصال غير المتزامن بين العقد (Loose Coupling) عبر إطلاق واستقبال الأحداث.',
-          codeExample: 'signal health_changed(new_hp: int)\nhealth_changed.emit(85)',
+          description:
+              'معمارية الاتصال غير المتزامن بين العقد (Loose Coupling) عبر إطلاق واستقبال الأحداث.',
+          codeExample:
+              'signal health_changed(new_hp: int)\nhealth_changed.emit(85)',
           prerequisites: ['c_match'],
           visualPosition: Offset(540, 160),
         ),
@@ -223,8 +235,10 @@ class ConceptMapSm2DataModel {
           retentionPercent: 0.0,
           daysUntilNextReview: 0,
           lastReviewedDate: 'مغلق',
-          description: 'دورة المعالجة الفيزيائية المتزامنة مع محرك الاصطدام ودوال move_and_slide().',
-          codeExample: 'func _physics_process(delta: float) -> void:\n    move_and_slide()',
+          description:
+              'دورة المعالجة الفيزيائية المتزامنة مع محرك الاصطدام ودوال move_and_slide().',
+          codeExample:
+              'func _physics_process(delta: float) -> void:\n    move_and_slide()',
           prerequisites: ['c_vector2', 'c_signals'],
           visualPosition: Offset(700, 160),
         ),
@@ -254,10 +268,12 @@ class DesktopConceptMapSm2Screen extends StatefulWidget {
   });
 
   @override
-  State<DesktopConceptMapSm2Screen> createState() => _DesktopConceptMapSm2ScreenState();
+  State<DesktopConceptMapSm2Screen> createState() =>
+      _DesktopConceptMapSm2ScreenState();
 }
 
-class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen> {
+class _DesktopConceptMapSm2ScreenState
+    extends State<DesktopConceptMapSm2Screen> {
   late String _selectedConceptId;
   bool _isReviewDeckMode = false;
   int _activeCardIndex = 0;
@@ -272,7 +288,9 @@ class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen>
   @override
   void didUpdateWidget(covariant DesktopConceptMapSm2Screen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!widget.data.concepts.any((concept) => concept.id == _selectedConceptId)) {
+    if (!widget.data.concepts.any(
+      (concept) => concept.id == _selectedConceptId,
+    )) {
       _selectedConceptId = widget.data.selectedConceptId;
     }
     if (_activeCardIndex >= widget.data.activeReviewDeck.length) {
@@ -294,7 +312,7 @@ class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen>
         _isAnswerRevealed = false;
         _activeCardIndex = 0;
         if (remainingCards <= 1) {
-        _isReviewDeckMode = false;
+          _isReviewDeckMode = false;
         }
       });
       if (remainingCards <= 1) {
@@ -309,7 +327,7 @@ class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen>
               ),
             ),
           ),
-          );
+        );
       }
     } on Object {
       if (!mounted) return;
@@ -342,7 +360,7 @@ class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen>
             retentionPercent: widget.data.averageRetentionRate,
           ),
           const Divider(height: 1, color: Color(0xFF28323F)),
-    
+
           // 2. الهيكل الرئيسي لسطح المكتب
           Expanded(
             child: LayoutBuilder(
@@ -359,7 +377,8 @@ class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen>
                     _isAnswerRevealed = false;
                     _activeCardIndex = 0;
                   }),
-                  onRevealAnswer: () => setState(() => _isAnswerRevealed = true),
+                  onRevealAnswer: () =>
+                      setState(() => _isAnswerRevealed = true),
                   onRate: _handleRating,
                   onSelectConcept: (id) {
                     setState(() => _selectedConceptId = id);
@@ -371,17 +390,15 @@ class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen>
                     ? const SizedBox.shrink()
                     : _ConceptInspectorPanel(
                         concept: activeConcept,
-                        onOpenLesson: (lessonId) =>
-                            widget.onNavigateRoute(AppRoutes.lessonPath(lessonId)),
+                        onOpenLesson: (lessonId) => widget.onNavigateRoute(
+                          AppRoutes.lessonPath(lessonId),
+                        ),
                       );
                 if (wide) {
                   return Row(
                     children: [
                       Expanded(flex: 7, child: main),
-                      const VerticalDivider(
-                        width: 1,
-                        color: Color(0xFF28323F),
-                      ),
+                      const VerticalDivider(width: 1, color: Color(0xFF28323F)),
                       SizedBox(width: 380, child: inspector),
                     ],
                   );
@@ -566,7 +583,11 @@ class _MetricBadge extends StatelessWidget {
   final String text;
   final Color color;
 
-  const _MetricBadge({required this.icon, required this.text, required this.color});
+  const _MetricBadge({
+    required this.icon,
+    required this.text,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -581,7 +602,15 @@ class _MetricBadge extends StatelessWidget {
         children: [
           Icon(icon, size: 14, color: color),
           const SizedBox(width: 4),
-          Text(text, style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, fontWeight: FontWeight.bold, color: color)),
+          Text(
+            text,
+            style: TextStyle(
+              fontFamily: 'IBM Plex Sans Arabic',
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
         ],
       ),
     );
@@ -695,24 +724,27 @@ class _ConceptHeaderBanner extends StatelessWidget {
           ),
         );
         return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      color: const Color(0xFF131922),
-      child: constraints.maxWidth < 700
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                details,
-                const SizedBox(height: 12),
-                Align(alignment: AlignmentDirectional.centerStart, child: button),
-              ],
-            )
-          : Row(
-              children: [
-                Expanded(child: details),
-                const SizedBox(width: 12),
-                button,
-              ],
-            ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          color: const Color(0xFF131922),
+          child: constraints.maxWidth < 700
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    details,
+                    const SizedBox(height: 12),
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: button,
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(child: details),
+                    const SizedBox(width: 12),
+                    button,
+                  ],
+                ),
         );
       },
     );
@@ -744,9 +776,7 @@ class _InteractiveGraphCanvas extends StatelessWidget {
           children: [
             // شبكة خلفية هندسية
             Positioned.fill(
-              child: CustomPaint(
-                painter: _GraphBackgroundGridPainter(),
-              ),
+              child: CustomPaint(painter: _GraphBackgroundGridPainter()),
             ),
 
             // رسم خطوط الترابط بين العقد (Connections)
@@ -795,9 +825,12 @@ class _ConceptNodeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
     Color statusColor = const Color(0xFF22C55E); // mastered
-    if (node.mastery == ConceptMasteryLevel.reviewing) statusColor = const Color(0xFFF59E0B);
-    if (node.mastery == ConceptMasteryLevel.learning) statusColor = const Color(0xFF38BDF8);
-    if (node.mastery == ConceptMasteryLevel.locked) statusColor = const Color(0xFF64748B);
+    if (node.mastery == ConceptMasteryLevel.reviewing)
+      statusColor = const Color(0xFFF59E0B);
+    if (node.mastery == ConceptMasteryLevel.learning)
+      statusColor = const Color(0xFF38BDF8);
+    if (node.mastery == ConceptMasteryLevel.locked)
+      statusColor = const Color(0xFF64748B);
 
     return InkWell(
       onTap: onTap,
@@ -809,11 +842,18 @@ class _ConceptNodeWidget extends StatelessWidget {
           color: isSelected ? const Color(0xFF1E2837) : const Color(0xFF131922),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: isSelected ? const Color(0xFF478CBF) : statusColor.withValues(alpha: 0.4),
+            color: isSelected
+                ? const Color(0xFF478CBF)
+                : statusColor.withValues(alpha: 0.4),
             width: isSelected ? 2 : 1,
           ),
           boxShadow: isSelected
-              ? [BoxShadow(color: const Color(0xFF478CBF).withValues(alpha: 0.3), blurRadius: 12)]
+              ? [
+                  BoxShadow(
+                    color: const Color(0xFF478CBF).withValues(alpha: 0.3),
+                    blurRadius: 12,
+                  ),
+                ]
               : [],
         ),
         child: Column(
@@ -824,7 +864,10 @@ class _ConceptNodeWidget extends StatelessWidget {
                 Container(
                   width: 8,
                   height: 8,
-                  decoration: BoxDecoration(color: statusColor, shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: statusColor,
+                    shape: BoxShape.circle,
+                  ),
                 ),
                 const SizedBox(width: 6),
                 Expanded(
@@ -834,7 +877,11 @@ class _ConceptNodeWidget extends StatelessWidget {
                         : node.category,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 10, color: Color(0xFF64748B)),
+                    style: const TextStyle(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 10,
+                      color: Color(0xFF64748B),
+                    ),
                   ),
                 ),
               ],
@@ -848,7 +895,9 @@ class _ConceptNodeWidget extends StatelessWidget {
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: isSelected ? const Color(0xFF38BDF8) : const Color(0xFFE2E8F0),
+                color: isSelected
+                    ? const Color(0xFF38BDF8)
+                    : const Color(0xFFE2E8F0),
               ),
             ),
             const SizedBox(height: 6),
@@ -914,18 +963,25 @@ class _GraphConnectionsPainter extends CustomPainter {
       for (var preId in node.prerequisites) {
         final preNode = nodeMap[preId];
         if (preNode != null) {
-          final isRelated = node.id == selectedConceptId ||
+          final isRelated =
+              node.id == selectedConceptId ||
               preId == selectedConceptId ||
               (selected?.prerequisites.contains(node.id) ?? false) ||
               (selected?.prerequisites.contains(preId) ?? false);
           final paint = Paint()
-            ..color = const Color(0xFF478CBF).withValues(
-              alpha: isRelated ? 0.82 : 0.16,
-            )
+            ..color = const Color(
+              0xFF478CBF,
+            ).withValues(alpha: isRelated ? 0.82 : 0.16)
             ..strokeWidth = isRelated ? 2.2 : 1.2
             ..style = PaintingStyle.stroke;
-          final p1 = Offset(preNode.visualPosition.dx + 170, preNode.visualPosition.dy + 35);
-          final p2 = Offset(node.visualPosition.dx, node.visualPosition.dy + 35);
+          final p1 = Offset(
+            preNode.visualPosition.dx + 170,
+            preNode.visualPosition.dy + 35,
+          );
+          final p2 = Offset(
+            node.visualPosition.dx,
+            node.visualPosition.dy + 35,
+          );
 
           final path = Path()
             ..moveTo(p1.dx, p1.dy)
@@ -970,7 +1026,11 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
             'لا توجد بطاقات مستحقة للمراجعة حالياً.',
             'There are no cards due for review.',
           ),
-          style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 16, color: Color(0xFF22C55E)),
+          style: TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 16,
+            color: Color(0xFF22C55E),
+          ),
         ),
       );
     }
@@ -989,7 +1049,11 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: const Color(0xFF28323F)),
             boxShadow: [
-              BoxShadow(color: Colors.black.withValues(alpha: 0.4), blurRadius: 20, offset: const Offset(0, 10)),
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.4),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
             ],
           ),
           child: Column(
@@ -1006,18 +1070,32 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                       'البطاقة ${currentIndex + 1} من ${cards.length}',
                       'Card ${currentIndex + 1} of ${cards.length}',
                     ),
-                    style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 12, color: Color(0xFF64748B)),
+                    style: const TextStyle(
+                      fontFamily: 'JetBrains Mono',
+                      fontSize: 12,
+                      color: Color(0xFF64748B),
+                    ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(color: const Color(0xFF0F141B), borderRadius: BorderRadius.circular(4)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0F141B),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                     child: Text(
                       _conceptMapCopy(
                         context,
                         'SM-2 • الفاصل ${card.currentIntervalDays} يوم',
                         'SM-2 • ${card.currentIntervalDays}-day interval',
                       ),
-                      style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 10, color: Color(0xFF38BDF8)),
+                      style: const TextStyle(
+                        fontFamily: 'IBM Plex Sans Arabic',
+                        fontSize: 10,
+                        color: Color(0xFF38BDF8),
+                      ),
                     ),
                   ),
                 ],
@@ -1029,7 +1107,13 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 locale.languageCode == 'en'
                     ? card.promptQuestionEn ?? card.promptQuestion
                     : card.promptQuestion,
-                style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0), height: 1.5),
+                style: const TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFE2E8F0),
+                  height: 1.5,
+                ),
               ),
               const SizedBox(height: 14),
 
@@ -1046,7 +1130,12 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                   textDirection: TextDirection.ltr,
                   child: Text(
                     card.codeContext,
-                    style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 12, color: Color(0xFF38BDF8), height: 1.5),
+                    style: const TextStyle(
+                      fontFamily: 'JetBrains Mono',
+                      fontSize: 12,
+                      color: Color(0xFF38BDF8),
+                      height: 1.5,
+                    ),
                   ),
                 ),
               ),
@@ -1059,22 +1148,33 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFF14532D).withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: const Color(0xFF22C55E).withValues(alpha: 0.4)),
+                    border: Border.all(
+                      color: const Color(0xFF22C55E).withValues(alpha: 0.4),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'شرح الإجابة:',
-                        style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF22C55E)),
+                        style: TextStyle(
+                          fontFamily: 'IBM Plex Sans Arabic',
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF22C55E),
+                        ),
                       ),
                       const SizedBox(height: 6),
                       Text(
                         locale.languageCode == 'en'
-                            ? card.answerExplanationEn ??
-                                  card.answerExplanation
+                            ? card.answerExplanationEn ?? card.answerExplanation
                             : card.answerExplanation,
-                        style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, color: Color(0xFFCBD5E1), height: 1.5),
+                        style: const TextStyle(
+                          fontFamily: 'IBM Plex Sans Arabic',
+                          fontSize: 13,
+                          color: Color(0xFFCBD5E1),
+                          height: 1.5,
+                        ),
                       ),
                       if (card.answerCode.isNotEmpty) ...[
                         const SizedBox(height: 10),
@@ -1084,9 +1184,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: const Color(0xFF0A0D12),
                             borderRadius: BorderRadius.circular(6),
-                            border: Border.all(
-                              color: const Color(0xFF28323F),
-                            ),
+                            border: Border.all(color: const Color(0xFF28323F)),
                           ),
                           child: Directionality(
                             textDirection: TextDirection.ltr,
@@ -1147,15 +1245,17 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                       backgroundColor: const Color(0xFF478CBF),
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                     child: Text(
-                      _conceptMapCopy(
-                        context,
-                        'كشف الإجابة',
-                        'Reveal answer',
+                      _conceptMapCopy(context, 'كشف الإجابة', 'Reveal answer'),
+                      style: TextStyle(
+                        fontFamily: 'IBM Plex Sans Arabic',
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
                       ),
-                      style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -1232,8 +1332,15 @@ class _ConceptInspectorPanel extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: const Color(0xFF478CBF).withValues(alpha: 0.2), borderRadius: BorderRadius.circular(8)),
-              child: const Icon(Icons.school_rounded, color: Color(0xFF478CBF), size: 20),
+              decoration: BoxDecoration(
+                color: const Color(0xFF478CBF).withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(
+                Icons.school_rounded,
+                color: Color(0xFF478CBF),
+                size: 20,
+              ),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -1242,11 +1349,20 @@ class _ConceptInspectorPanel extends StatelessWidget {
                 children: [
                   Text(
                     isEnglish ? concept.titleEn : concept.titleAr,
-                    style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+                    style: const TextStyle(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFE2E8F0),
+                    ),
                   ),
                   Text(
                     _masteryLabel(context, concept.mastery),
-                    style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF64748B)),
+                    style: const TextStyle(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 11,
+                      color: Color(0xFF64748B),
+                    ),
                   ),
                 ],
               ),
@@ -1259,40 +1375,77 @@ class _ConceptInspectorPanel extends StatelessWidget {
 
         Text(
           _conceptMapCopy(context, 'شرح المفهوم:', 'Concept overview:'),
-          style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+          style: const TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFE2E8F0),
+          ),
         ),
         const SizedBox(height: 6),
         Text(
-          isEnglish ? concept.descriptionEn ?? concept.description : concept.description,
-          style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, color: Color(0xFF94A3B8), height: 1.5),
+          isEnglish
+              ? concept.descriptionEn ?? concept.description
+              : concept.description,
+          style: const TextStyle(
+            fontFamily: 'IBM Plex Sans Arabic',
+            fontSize: 12,
+            color: Color(0xFF94A3B8),
+            height: 1.5,
+          ),
         ),
         const SizedBox(height: 16),
 
         if (concept.codeExample.isNotEmpty) ...[
           Text(
             _conceptMapCopy(context, 'مثال برمجي:', 'Code example:'),
-            style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+            style: const TextStyle(
+              fontFamily: 'IBM Plex Sans Arabic',
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFE2E8F0),
+            ),
           ),
           const SizedBox(height: 6),
           Container(
             padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(color: const Color(0xFF0A0D12), borderRadius: BorderRadius.circular(6), border: Border.all(color: const Color(0xFF28323F))),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0A0D12),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: const Color(0xFF28323F)),
+            ),
             child: Directionality(
               textDirection: TextDirection.ltr,
-              child: Text(concept.codeExample, style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 11, color: Color(0xFF38BDF8), height: 1.5)),
+              child: Text(
+                concept.codeExample,
+                style: const TextStyle(
+                  fontFamily: 'JetBrains Mono',
+                  fontSize: 11,
+                  color: Color(0xFF38BDF8),
+                  height: 1.5,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 18),
         ],
         Container(
           padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(color: const Color(0xFF0F141B), borderRadius: BorderRadius.circular(8), border: Border.all(color: const Color(0xFF28323F))),
+          decoration: BoxDecoration(
+            color: const Color(0xFF0F141B),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFF28323F)),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 _conceptMapCopy(context, 'حالة المفهوم', 'Concept status'),
-                style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF64748B)),
+                style: const TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 11,
+                  color: Color(0xFF64748B),
+                ),
               ),
               const SizedBox(height: 6),
               Text(
@@ -1308,7 +1461,11 @@ class _ConceptInspectorPanel extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   '${_conceptMapCopy(context, 'آخر مراجعة:', 'Last reviewed:')} ${concept.lastReviewedDate}',
-                  style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF94A3B8)),
+                  style: const TextStyle(
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    fontSize: 11,
+                    color: Color(0xFF94A3B8),
+                  ),
                 ),
               ],
             ],
@@ -1320,14 +1477,24 @@ class _ConceptInspectorPanel extends StatelessWidget {
             onPressed: () => onOpenLesson(concept.lessonId!),
             icon: const Icon(Icons.play_circle_outline_rounded, size: 16),
             label: Text(
-              _conceptMapCopy(context, 'فتح الدرس المرتبط', 'Open linked lesson'),
-              style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold),
+              _conceptMapCopy(
+                context,
+                'فتح الدرس المرتبط',
+                'Open linked lesson',
+              ),
+              style: const TextStyle(
+                fontFamily: 'IBM Plex Sans Arabic',
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF478CBF),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 12),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
         ],

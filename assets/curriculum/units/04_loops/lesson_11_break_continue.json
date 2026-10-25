@@ -1,47 +1,387 @@
 {
   "id": "lesson_11_break_continue",
   "unitId": "unit_04_loops",
-  "title": {"ar": "التحكم بالحلقات", "en": "Loop Control"},
-  "objective": {"ar": "اخرج من الحلقة أو تخطَّ تكراراً باستخدام `break` و`continue`.", "en": "Exit a loop or skip an iteration with `break` and `continue`."},
-  "estimatedMinutes": 5,
+  "title": {
+    "ar": "التحكم بالحلقات: break وcontinue",
+    "en": "Loop control: break and continue"
+  },
+  "objective": {
+    "ar": "اخرج من الحلقة باستخدام `break` أو تخطَّ الدورة الحالية باستخدام `continue`.",
+    "en": "Exit a loop with `break` or skip the current iteration with `continue`."
+  },
+  "estimatedMinutes": 8,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## غيّر مسار الحلقة\n\nاستخدم `break` للخروج فوراً من الحلقة، أو `continue` لتخطي بقية التكرار الحالي والانتقال إلى التالي:\n\n```gdscript\nfor i in range(10):\n    if i == 5:\n        break\n    print(i)\n```\n\nيطبع المثال الأعداد من 0 إلى 4 فقط. ضع `continue` داخل شرط عندما تريد استبعاد قيم معينة.",
-    "en": "## Change the loop's flow\n\nUse `break` to exit a loop immediately, or `continue` to skip the rest of the current iteration and move to the next one:\n\n```gdscript\nfor i in range(10):\n    if i == 5:\n        break\n    print(i)\n```\n\nThe example prints only 0 through 4. Put `continue` inside a condition to skip selected values."
+    "ar": "## التحكم بالحلقات: break وcontinue\n\nتنهي `break` أقرب حلقة فوراً. أما `continue` فتتجاوز بقية جسم الدورة الحالية وتنتقل إلى التالية. استخدمهما عندما يوضحان الحالة، وتأكد أن تخطي تحديث متغير الحلقة لا يسبب تكراراً لا نهائياً.\n\n### مثال عملي\n\n```gdscript\nfor i in range(5):\n    if i == 3:\n        break\n    print(i)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## Loop control: break and continue\n\n`break` immediately exits the innermost loop. `continue` skips the rest of the current body and moves to the next iteration. Use them when they clarify a case, and ensure skipping a loop-variable update cannot create an infinite loop.\n\n### Practical example\n\n```gdscript\nfor i in range(5):\n    if i == 3:\n        break\n    print(i)\n```\n\nChange one value and run the script to observe its effect."
   },
-  "exampleCode": "for i in range(10):\n    if i == 5:\n        break\n    print(i)",
+  "exampleCode": "for i in range(5):\n    if i == 3:\n        break\n    print(i)",
+  "documentation": {
+    "ar": "### التحكم بالحلقات: break وcontinue\n\nتنهي `break` أقرب حلقة فوراً. أما `continue` فتتجاوز بقية جسم الدورة الحالية وتنتقل إلى التالية. استخدمهما عندما يوضحان الحالة، وتأكد أن تخطي تحديث متغير الحلقة لا يسبب تكراراً لا نهائياً.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Loop control: break and continue\n\n`break` immediately exits the innermost loop. `continue` skips the rest of the current body and moves to the next iteration. Use them when they clarify a case, and ensure skipping a loop-variable update cannot create an infinite loop.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
   "exercises": [
     {
-      "id": "ex_11_skip_multiples",
+      "id": "ex_11_break_continue_01",
       "lessonId": "lesson_11_break_continue",
-      "type": "writeCode",
-      "prompt": {"ar": "اطبع الأعداد من 1 إلى 20، مع تخطي مضاعفات 4 باستخدام `continue`.", "en": "Print the numbers from 1 through 20, skipping multiples of 4 with `continue`."},
-      "starterCode": "",
-      "solutionCode": "for i in range(1, 21):\n    if i % 4 == 0:\n        continue\n    print(i)",
-      "testCases": [
-        {"description": {"ar": "لا تظهر الأعداد 4 و8 و12 و16 و20.", "en": "The numbers 4, 8, 12, 16, and 20 are omitted."}, "expectedOutput": "1\n2\n3\n5\n6\n7\n9\n10\n11\n13\n14\n15\n17\n18\n19"}
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "استخدم باقي القسمة `%` لاكتشاف مضاعفات 4.", "en": "Use the remainder operator `%` to detect multiples of 4."},
-        {"ar": "نفّذ `continue` عندما يكون الباقي صفراً، ثم اطبع بقية القيم.", "en": "Run `continue` when the remainder is zero, then print the other values."}
-      ],
-      "order": 0
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_11_predict_break",
+      "id": "ex_11_break_continue_02",
       "lessonId": "lesson_11_break_continue",
-      "type": "predictOutput",
-      "prompt": {"ar": "اكتب حلقة تطبع القيم من 0 إلى أن تصل إلى 3، ثم تخرج باستخدام `break` دون طباعة 3.", "en": "Write a loop that prints values from 0 until it reaches 3, then exits with `break` without printing 3."},
-      "starterCode": "",
-      "solutionCode": "for i in range(6):\n    if i == 3:\n        break\n    print(i)",
-      "testCases": [
-        {"description": {"ar": "يوقف `break` الحلقة قبل طباعة 3.", "en": "`break` stops the loop before 3 is printed."}, "expectedOutput": "0\n1\n2"}
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_11_break_continue_03",
+      "lessonId": "lesson_11_break_continue",
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_11_break_continue_04",
+      "lessonId": "lesson_11_break_continue",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
       ],
       "hints": [
-        {"ar": "اختبر `i == 3` داخل الحلقة.", "en": "Check `i == 3` inside the loop."},
-        {"ar": "ضع `break` قبل أمر الطباعة.", "en": "Put `break` before the print statement."}
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_11_break_continue_05",
+      "lessonId": "lesson_11_break_continue",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n1\n2`",
+        "en": "Write or complete the example so its output is:\n\n`0\n1\n2`"
+      },
+      "starterCode": "",
+      "solutionCode": "for i in range(5):\n    if i == 3:\n        break\n    print(i)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 1
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "0\n1\n2"
+        }
+      ]
+    },
+    {
+      "id": "ex_11_break_continue_06",
+      "lessonId": "lesson_11_break_continue",
+      "order": 5,
+      "type": "fillBlank",
+      "title": {
+        "ar": "أكمل المثال",
+        "en": "Complete the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n2\n3`",
+        "en": "Write or complete the example so its output is:\n\n`0\n2\n3`"
+      },
+      "starterCode": "for i in range(___):\n    if i == 1:\n        continue\n    print(i)",
+      "solutionCode": "for i in range(4):\n    if i == 1:\n        continue\n    print(i)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "0\n2\n3"
+        }
+      ]
+    },
+    {
+      "id": "ex_11_break_continue_07",
+      "lessonId": "lesson_11_break_continue",
+      "order": 6,
+      "type": "fixBug",
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`1\n2`",
+        "en": "Write or complete the example so its output is:\n\n`1\n2`"
+      },
+      "starterCode": "for i in range(3):\n    if i == 0:\n        continue\n    pront(i)",
+      "solutionCode": "for i in range(3):\n    if i == 0:\n        continue\n    print(i)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "1\n2"
+        }
+      ]
+    },
+    {
+      "id": "ex_11_break_continue_08",
+      "lessonId": "lesson_11_break_continue",
+      "order": 7,
+      "type": "predictOutput",
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`1\n2`",
+        "en": "What output does this example display?\n\n`1\n2`"
+      },
+      "starterCode": "var i = 0\nwhile i < 5:\n    i += 1\n    if i == 3:\n        break\n    print(i)",
+      "solutionCode": "var i = 0\nwhile i < 5:\n    i += 1\n    if i == 3:\n        break\n    print(i)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "1\n2"
+        }
+      ]
+    },
+    {
+      "id": "ex_11_break_continue_09",
+      "lessonId": "lesson_11_break_continue",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`1\n3`",
+        "en": "Write or complete the example so its output is:\n\n`1\n3`"
+      },
+      "starterCode": "",
+      "solutionCode": "for n in [1, 2, 3]:\n    if n == 2:\n        continue\n    print(n)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "1\n3"
+        }
+      ]
+    },
+    {
+      "id": "ex_11_break_continue_10",
+      "lessonId": "lesson_11_break_continue",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n1`",
+        "en": "Write or complete the example so its output is:\n\n`0\n1`"
+      },
+      "starterCode": "",
+      "solutionCode": "for i in range(4):\n    if i >= 2:\n        break\n    print(i)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "0\n1"
+        }
+      ]
     }
   ]
 }

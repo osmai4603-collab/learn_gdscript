@@ -1,63 +1,387 @@
 {
   "id": "lesson_10_while",
   "unitId": "unit_04_loops",
-  "title": {"ar": "حلقة while", "en": "While Loop"},
-  "objective": {"ar": "كرّر الأوامر ما دام شرط الحلقة صحيحاً.", "en": "Repeat statements while the loop condition is true."},
-  "estimatedMinutes": 7,
+  "title": {
+    "ar": "حلقة while",
+    "en": "The while loop"
+  },
+  "objective": {
+    "ar": "كرّر التعليمات ما دام الشرط صحيحاً مع تحديث الحالة لإنهاء الحلقة.",
+    "en": "Repeat statements while a condition is true, updating state so the loop ends."
+  },
+  "estimatedMinutes": 8,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## كرّر ما دام الشرط صحيحاً\n\nتستمر حلقة `while` في التكرار ما دام شرطها صحيحاً. حدّث متغير التحكم داخل الحلقة حتى تصل إلى شرط التوقف:\n\n```gdscript\nvar count = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\n\nإذا لم يتغير الشرط فقد تستمر الحلقة بلا نهاية؛ تأكد من أن كل حلقة تصل إلى نقطة توقف.",
-    "en": "## Repeat while a condition is true\n\nA `while` loop continues as long as its condition is true. Update the control variable inside the loop so it can reach the stopping condition:\n\n```gdscript\nvar count = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\n\nIf the condition never changes, the loop may run forever. Make sure every loop can reach a stopping point."
+    "ar": "## حلقة while\n\nتستمر `while` ما دام شرطها صحيحاً؛ لذا حدّث الحالة داخل الحلقة حتى تنتهي. استخدمها عندما يعتمد عدد التكرارات على شرط لا على عدد معروف. افحص حالة البداية وحدّ التوقف، وتجنب حلقة لا نهائية بتغيير قيمة تدخل في الشرط.\n\n### مثال عملي\n\n```gdscript\nvar i = 0\nwhile i < 3:\n    print(i)\n    i += 1\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## The while loop\n\n`while` continues as long as its condition is true, so update state inside the loop to make it finish. Use it when repetition depends on a condition rather than a known count. Check the initial state and stopping boundary, and avoid an infinite loop by changing a value used in the condition.\n\n### Practical example\n\n```gdscript\nvar i = 0\nwhile i < 3:\n    print(i)\n    i += 1\n```\n\nChange one value and run the script to observe its effect."
   },
-  "exampleCode": "var count = 0\nwhile count < 5:\n    print(count)\n    count += 1",
+  "exampleCode": "var i = 0\nwhile i < 3:\n    print(i)\n    i += 1",
+  "documentation": {
+    "ar": "### حلقة while\n\nتستمر `while` ما دام شرطها صحيحاً؛ لذا حدّث الحالة داخل الحلقة حتى تنتهي. استخدمها عندما يعتمد عدد التكرارات على شرط لا على عدد معروف. افحص حالة البداية وحدّ التوقف، وتجنب حلقة لا نهائية بتغيير قيمة تدخل في الشرط.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### The while loop\n\n`while` continues as long as its condition is true, so update state inside the loop to make it finish. Use it when repetition depends on a condition rather than a known count. Check the initial state and stopping boundary, and avoid an infinite loop by changing a value used in the condition.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
   "exercises": [
     {
-      "id": "ex_10_countdown",
+      "id": "ex_10_while_01",
       "lessonId": "lesson_10_while",
-      "type": "writeCode",
-      "prompt": {"ar": "استخدم `while` لطباعة الأعداد تنازلياً من 10 إلى 1.", "en": "Use `while` to print the numbers counting down from 10 to 1."},
-      "starterCode": "",
-      "solutionCode": "var count = 10\nwhile count >= 1:\n    print(count)\n    count -= 1",
-      "testCases": [
-        {"description": {"ar": "يبدأ العد من 10 وينتهي عند 1.", "en": "The countdown starts at 10 and ends at 1."}, "expectedOutput": "10\n9\n8\n7\n6\n5\n4\n3\n2\n1"}
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
+      },
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
+        {
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
       ],
+      "correctOptionIndex": 0,
       "hints": [
-        {"ar": "ابدأ المتغير بالقيمة 10 واختبر أنه لا يقل عن 1.", "en": "Start the variable at 10 and check that it is at least 1."},
-        {"ar": "أنقص المتغير بمقدار 1 داخل الحلقة.", "en": "Decrease the variable by 1 inside the loop."}
-      ],
-      "order": 0
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
     },
     {
-      "id": "ex_10_fix_infinite_loop",
+      "id": "ex_10_while_02",
       "lessonId": "lesson_10_while",
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_10_while_03",
+      "lessonId": "lesson_10_while",
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_10_while_04",
+      "lessonId": "lesson_10_while",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
+        },
+        {
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+        }
+      ]
+    },
+    {
+      "id": "ex_10_while_05",
+      "lessonId": "lesson_10_while",
+      "order": 4,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`1\n2\n3`",
+        "en": "Write or complete the example so its output is:\n\n`1\n2\n3`"
+      },
+      "starterCode": "",
+      "solutionCode": "var i = 1\nwhile i <= 3:\n    print(i)\n    i += 1",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "1\n2\n3"
+        }
+      ]
+    },
+    {
+      "id": "ex_10_while_06",
+      "lessonId": "lesson_10_while",
+      "order": 5,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nRound\nRound",
+        "en": "Write code that applies the lesson idea and produces this output:\n\nRound\nRound"
+      },
+      "starterCode": "",
+      "solutionCode": "var i = 0\nwhile i < 2:\n    print(\"Round\")\n    i += 1",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Round\nRound"
+        }
+      ]
+    },
+    {
+      "id": "ex_10_while_07",
+      "lessonId": "lesson_10_while",
+      "order": 6,
       "type": "fixBug",
-      "prompt": {"ar": "أضف التحديث المفقود كي تنتهي الحلقة بعد طباعة 0 و1 و2.", "en": "Add the missing update so the loop ends after printing 0, 1, and 2."},
-      "starterCode": "var count = 0\nwhile count < 3:\n    print(count)",
-      "solutionCode": "var count = 0\nwhile count < 3:\n    print(count)\n    count += 1",
-      "testCases": [
-        {"description": {"ar": "يتقدم العداد حتى يتوقف الشرط عن التحقق.", "en": "The counter advances until the condition becomes false."}, "expectedOutput": "0\n1\n2"}
-      ],
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`3\n2\n1`",
+        "en": "Write or complete the example so its output is:\n\n`3\n2\n1`"
+      },
+      "starterCode": "var n = 3\nwhile n > 0:\n    pront(n)\n    n -= 1",
+      "solutionCode": "var n = 3\nwhile n > 0:\n    print(n)\n    n -= 1",
       "hints": [
-        {"ar": "تُطبع القيمة الحالية لكنها لا تتغير في الشيفرة المعطاة.", "en": "The current value is printed but never changes in the given code."},
-        {"ar": "أضف `count += 1` داخل جسم الحلقة.", "en": "Add `count += 1` inside the loop body."}
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 1
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "3\n2\n1"
+        }
+      ]
     },
     {
-      "id": "ex_10_multiples_of_three",
+      "id": "ex_10_while_08",
       "lessonId": "lesson_10_while",
-      "type": "writeCode",
-      "prompt": {"ar": "اطبع مضاعفات 3 الموجبة الأصغر من 30 باستخدام `while`.", "en": "Use `while` to print the positive multiples of 3 that are less than 30."},
-      "starterCode": "",
-      "solutionCode": "var number = 3\nwhile number < 30:\n    print(number)\n    number += 3",
-      "testCases": [
-        {"description": {"ar": "تظهر المضاعفات من 3 حتى 27.", "en": "Multiples from 3 through 27 appear."}, "expectedOutput": "3\n6\n9\n12\n15\n18\n21\n24\n27"}
-      ],
+      "order": 7,
+      "type": "predictOutput",
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
+      },
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`6`",
+        "en": "What output does this example display?\n\n`6`"
+      },
+      "starterCode": "var total = 0\nvar i = 1\nwhile i <= 3:\n    total += i\n    i += 1\nprint(total)",
+      "solutionCode": "var total = 0\nvar i = 1\nwhile i <= 3:\n    total += i\n    i += 1\nprint(total)",
       "hints": [
-        {"ar": "ابدأ من 3 واجعل شرط الاستمرار `number < 30`.", "en": "Start at 3 and use `number < 30` as the loop condition."},
-        {"ar": "أضف 3 في كل تكرار.", "en": "Add 3 on each iteration."}
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
       ],
-      "order": 2
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "6"
+        }
+      ]
+    },
+    {
+      "id": "ex_10_while_09",
+      "lessonId": "lesson_10_while",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n1`",
+        "en": "Write or complete the example so its output is:\n\n`0\n1`"
+      },
+      "starterCode": "",
+      "solutionCode": "var i = 0\nwhile i < 2:\n    print(i)\n    i += 1",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "0\n1"
+        }
+      ]
+    },
+    {
+      "id": "ex_10_while_10",
+      "lessonId": "lesson_10_while",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`2`",
+        "en": "Write or complete the example so its output is:\n\n`2`"
+      },
+      "starterCode": "",
+      "solutionCode": "var n = 5\nwhile n > 2:\n    n -= 1\nprint(n)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "2"
+        }
+      ]
     }
   ]
 }

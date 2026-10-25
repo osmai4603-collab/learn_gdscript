@@ -10,7 +10,6 @@ import '../../../data/models/async_state.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../logic/providers/app_settings_provider.dart';
 import '../../../logic/providers/curriculum_provider.dart';
-import '../../../logic/providers/language_server_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
 import '../../routers/app_routes.dart';
 import '../../widgets/common/navigation_bar.dart';
@@ -210,7 +209,6 @@ class _CategoryDetails extends StatelessWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final settings = context.watch<AppSettingsProvider>();
-    final languageServer = context.watch<LanguageServerProvider>();
     final padding = MediaQuery.sizeOf(context).width >= 1200 ? 36.0 : 24.0;
 
     return ListView(
@@ -250,7 +248,6 @@ class _CategoryDetails extends StatelessWidget {
             settings: settings,
           ),
           _SettingsCategory.engine => _EngineSettingsSection(
-            languageServer: languageServer,
           ),
           _SettingsCategory.about => const _AboutSettingsSection(),
         },
@@ -391,38 +388,23 @@ class _AppearanceSettingsSection extends StatelessWidget {
 }
 
 class _EngineSettingsSection extends StatelessWidget {
-  const _EngineSettingsSection({required this.languageServer});
-
-  final LanguageServerProvider languageServer;
+  const _EngineSettingsSection();
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
-    final connected = languageServer.isConnected;
     return _SettingsCard(
       children: [
         ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: Icon(
-            connected ? Icons.check_circle : Icons.circle_outlined,
-            color: connected
-                ? theme.colorScheme.tertiary
-                : theme.colorScheme.outline,
+          leading: Icon(Icons.check_circle, color: theme.colorScheme.tertiary),
+          title: const Text('gdscript_engine'),
+          subtitle: Text(
+            Localizations.localeOf(context).languageCode == 'ar'
+                ? 'محرك اللغة والتحليل مضمّن مباشرةً في التطبيق.'
+                : 'The language engine and analysis run directly in the app.',
           ),
-          title: Text(connected ? l10n.lspConnected : l10n.lspDisconnected),
-          subtitle: languageServer.rootPath == null
-              ? null
-              : Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Text(
-                      languageServer.rootPath!,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
           trailing: IconButton(
             tooltip: l10n.workspaceTitle,
             onPressed: () => context.push(AppRoutes.workspace),
@@ -440,10 +422,10 @@ class _EngineSettingsSection extends StatelessWidget {
         ListTile(
           contentPadding: EdgeInsets.zero,
           leading: const Icon(Icons.monitor_heart_outlined),
-          title: Text(l10n.lspDiagnosticsTitle),
-          subtitle: Text(l10n.lspDiagnosticsDescription),
+          title: Text(l10n.engineDiagnosticsTitle),
+          subtitle: Text(l10n.engineDiagnosticsDescription),
           trailing: const Icon(Icons.chevron_right),
-          onTap: () => context.go(AppRoutes.lspDiagnostics),
+          onTap: () => context.go(AppRoutes.engineDiagnostics),
         ),
       ],
     );

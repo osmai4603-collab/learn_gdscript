@@ -16,7 +16,6 @@ import 'logic/providers/concept_map_provider.dart';
 import 'logic/providers/exercise_provider.dart';
 import 'logic/providers/home_dashboard_provider.dart';
 import 'logic/providers/learning_path_provider.dart';
-import 'logic/providers/language_server_provider.dart';
 import 'logic/providers/lesson_provider.dart';
 import 'logic/providers/onboarding_provider.dart';
 import 'logic/providers/progress_provider.dart';
@@ -62,9 +61,6 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
         ChangeNotifierProvider<OnboardingProvider>.value(
           value: dependencies.onboardingProvider,
         ),
-        ChangeNotifierProvider<LanguageServerProvider>.value(
-          value: dependencies.languageServerProvider,
-        ),
         ChangeNotifierProvider<ExerciseProvider>.value(
           value: dependencies.exerciseProvider,
         ),
@@ -92,6 +88,7 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
           onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
           locale: settings.locale,
           supportedLocales: const [Locale('ar'), Locale('en')],
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

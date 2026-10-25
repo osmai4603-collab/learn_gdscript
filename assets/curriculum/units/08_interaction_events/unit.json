@@ -1,0 +1,8 @@
+{
+  "id": "unit_08_interaction_events",
+  "title": {"ar": "التفاعل والأحداث", "en": "Interaction and Events"},
+  "description": {"ar": "اربط العقد بالإشارات وعالج مدخلات اللاعب", "en": "Connect nodes with signals and handle player input"},
+  "iconName": "sensors",
+  "order": 7,
+  "lessonIds": ["lesson_33_signals", "lesson_34_connect_emit", "lesson_35_input", "lesson_36_node_interaction"]
+}

@@ -22,7 +22,7 @@ import 'package:learn_gdscript/ui/layouts/academy_app_layout.dart';
 import 'package:learn_gdscript/ui/layouts/app_shell_sidebar.dart';
 import 'package:learn_gdscript/ui/screens/gamification/badges_screen.dart';
 import 'package:learn_gdscript/ui/screens/lesson/lesson_screen.dart';
-import 'package:learn_gdscript/ui/screens/settings/desktop_lsp_diagnostics_flutter_dart.dart';
+import 'package:learn_gdscript/ui/screens/settings/engine_diagnostics_screen.dart';
 import 'package:learn_gdscript/ui/widgets/common/navigation_bar.dart';
 import 'package:learn_gdscript/ui/widgets/code_directionality.dart';
 import 'package:shimmer/shimmer.dart';
@@ -109,9 +109,9 @@ void main() {
 
     GoRouter.of(
       tester.element(find.byType(AcademyAppLayout)),
-    ).go('/diagnostics/lsp');
+    ).go('/diagnostics/engine');
     await tester.pumpAndSettle();
-    expect(find.byType(DesktopLspDiagnosticsScreen), findsOneWidget);
+    expect(find.byType(EngineDiagnosticsScreen), findsOneWidget);
     expect(
       find.byWidgetPredicate(
         (widget) =>
@@ -176,7 +176,7 @@ void main() {
     },
   );
 
-  testWidgets('opens live LSP diagnostics from settings and direct route', (
+  testWidgets('opens engine diagnostics from settings and direct route', (
     tester,
   ) async {
     final dependencies = await AppDependencies.create(
@@ -191,13 +191,9 @@ void main() {
 
     GoRouter.of(
       tester.element(find.byType(Scaffold).first),
-    ).go('/diagnostics/lsp');
+    ).go('/diagnostics/engine');
     await tester.pumpAndSettle();
-    expect(find.byType(DesktopLspDiagnosticsScreen), findsOneWidget);
-    expect(
-      find.text('اتصل بخادم اللغة من مساحة العمل لعرض التشخيصات.'),
-      findsOneWidget,
-    );
+    expect(find.byType(EngineDiagnosticsScreen), findsOneWidget);
     expect(
       tester
           .widget<AppNavigationBar>(find.byType(AppNavigationBar))
@@ -206,14 +202,14 @@ void main() {
     );
     expect(find.text('Godot v4.3.stable.official'), findsNothing);
 
-    await tester.tap(find.byTooltip('الإعدادات'));
+    await tester.tap(find.text('الإعدادات').last);
     await tester.pumpAndSettle();
-    await tester.tap(find.text('المحرك وخادم اللغة'));
+    await tester.tap(find.text('المحرك'));
     await tester.pumpAndSettle();
-    expect(find.text('تشخيصات خادم اللغة'), findsOneWidget);
-    await tester.tap(find.text('تشخيصات خادم اللغة'));
+    expect(find.text('تشخيصات محرك GDScript'), findsOneWidget);
+    await tester.tap(find.text('تشخيصات محرك GDScript'));
     await tester.pumpAndSettle();
-    expect(find.byType(DesktopLspDiagnosticsScreen), findsOneWidget);
+    expect(find.byType(EngineDiagnosticsScreen), findsOneWidget);
   });
 
   testWidgets('experienced onboarding starts at the chosen unit', (

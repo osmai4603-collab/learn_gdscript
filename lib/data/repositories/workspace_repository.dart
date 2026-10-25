@@ -4,6 +4,17 @@ import 'dart:io';
 import '../../core/constants/gdscript_constants.dart';
 import '../sqlite/database_helper.dart';
 
+const _excludedWorkspaceDirectories = {
+  '.git',
+  '.godot',
+  '.dart_tool',
+  'build',
+  'node_modules',
+  'vendor',
+  'target',
+  'dist',
+};
+
 class WorkspaceFileSnapshot {
   const WorkspaceFileSnapshot({
     required this.uri,
@@ -18,10 +29,109 @@ class WorkspaceFileSnapshot {
   final int modifiedMillis;
 }
 
+class WorkspaceSearchMatch {
+  const WorkspaceSearchMatch({
+    required this.relativePath,
+    required this.line,
+    required this.column,
+    required this.preview,
+  });
+
+  final String relativePath;
+  final int line;
+  final int column;
+  final String preview;
+}
+
 class WorkspaceRepository {
   WorkspaceRepository(this._databaseHelper);
 
   final DatabaseHelper _databaseHelper;
+
+  Future<List<WorkspaceFileSnapshot>> discoverAndSetWorkspace(
+    String rootPath,
+  ) async {
+    final requestedRoot = Directory(rootPath).absolute;
+    if (!await requestedRoot.exists()) {
+      throw FileSystemException(
+        'Workspace directory does not exist.',
+        rootPath,
+      );
+    }
+    final resolvedRoot = await requestedRoot.resolveSymbolicLinks();
+    final pending = <Directory>[Directory(resolvedRoot)];
+    final files = <WorkspaceFileSnapshot>[];
+
+    while (pending.isNotEmpty) {
+      final directory = pending.removeLast();
+      await for (final entity in directory.list(
+        recursive: false,
+        followLinks: false,
+      )) {
+        final name = entity.path
+            .split(Platform.pathSeparator)
+            .where((segment) => segment.isNotEmpty)
+            .last;
+        if (name.startsWith('.')) continue;
+        final type = await FileSystemEntity.type(
+          entity.path,
+          followLinks: false,
+        );
+        if (type == FileSystemEntityType.link) continue;
+        if (type == FileSystemEntityType.directory) {
+          if (!_excludedWorkspaceDirectories.contains(name)) {
+            pending.add(Directory(entity.path));
+          }
+          continue;
+        }
+        if (type != FileSystemEntityType.file ||
+            !entity.path.endsWith(GDScriptConstants.fileExtension)) {
+          continue;
+        }
+        if (files.length >= GDScriptConstants.maximumWorkspaceFiles) {
+          throw FileSystemException(
+            'Workspace exceeds the '
+            '${GDScriptConstants.maximumWorkspaceFiles}-file limit.',
+            entity.path,
+          );
+        }
+
+        final file = File(entity.path);
+        final stat = await file.stat();
+        if (stat.size > GDScriptConstants.maximumWorkspaceFileBytes) {
+          throw FileSystemException(
+            'GDScript file exceeds the '
+            '${GDScriptConstants.maximumWorkspaceFileBytes}-byte limit.',
+            entity.path,
+          );
+        }
+        final content = utf8.decode(await file.readAsBytes());
+        final relativePath = entity.path
+            .substring(resolvedRoot.length)
+            .replaceFirst(RegExp(r'^[/\\]'), '')
+            .replaceAll(r'\', '/');
+        final uri = file.absolute.uri;
+        if (!uri.path.startsWith(Directory(resolvedRoot).uri.path)) {
+          throw FileSystemException(
+            'Workspace file resolves outside the workspace.',
+            entity.path,
+          );
+        }
+        files.add(
+          WorkspaceFileSnapshot(
+            uri: uri.toString(),
+            relativePath: relativePath,
+            content: content,
+            modifiedMillis: stat.modified.millisecondsSinceEpoch,
+          ),
+        );
+      }
+    }
+
+    files.sort((a, b) => a.relativePath.compareTo(b.relativePath));
+    await setWorkspace(resolvedRoot, files);
+    return List.unmodifiable(files);
+  }
 
   Future<String?> getRootPath() async {
     final db = await _databaseHelper.database;
@@ -107,6 +217,46 @@ class WorkspaceRepository {
     ];
   }
 
+  Future<List<WorkspaceSearchMatch>> searchText(
+    String query, {
+    bool caseSensitive = false,
+  }) async {
+    final normalizedQuery = query.trim();
+    if (normalizedQuery.isEmpty) {
+      throw ArgumentError.value(
+        query,
+        'query',
+        'Search query cannot be empty.',
+      );
+    }
+    final searchQuery = caseSensitive
+        ? normalizedQuery
+        : normalizedQuery.toLowerCase();
+    final matches = <WorkspaceSearchMatch>[];
+    for (final file in await loadFiles()) {
+      final lines = file.content.split('\n');
+      for (var lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+        final line = lines[lineIndex];
+        final searchableLine = caseSensitive ? line : line.toLowerCase();
+        var offset = 0;
+        while (offset <= searchableLine.length - searchQuery.length) {
+          final match = searchableLine.indexOf(searchQuery, offset);
+          if (match < 0) break;
+          matches.add(
+            WorkspaceSearchMatch(
+              relativePath: file.relativePath,
+              line: lineIndex + 1,
+              column: match + 1,
+              preview: line,
+            ),
+          );
+          offset = match + searchQuery.length;
+        }
+      }
+    }
+    return List.unmodifiable(matches);
+  }
+
   Future<void> replaceFiles(List<WorkspaceFileSnapshot> files) async {
     final db = await _databaseHelper.database;
     db.execute('BEGIN IMMEDIATE');
@@ -132,12 +282,20 @@ class WorkspaceRepository {
   Future<void> saveGDScriptFile(String uri, String content) async {
     if (utf8.encode(content).length >
         GDScriptConstants.maximumWorkspaceFileBytes) {
-      throw ArgumentError.value(content, 'content', 'File exceeds the size limit.');
+      throw ArgumentError.value(
+        content,
+        'content',
+        'File exceeds the size limit.',
+      );
     }
     final parsedUri = Uri.parse(uri);
     if (parsedUri.scheme != 'file' ||
         !parsedUri.path.endsWith(GDScriptConstants.fileExtension)) {
-      throw ArgumentError.value(uri, 'uri', 'Only GDScript files can be saved.');
+      throw ArgumentError.value(
+        uri,
+        'uri',
+        'Only GDScript files can be saved.',
+      );
     }
 
     final rootPath = await getRootPath();

@@ -1,8 +1,18 @@
 {
   "id": "unit_01_first_program",
-  "title": {"ar": "أول برنامج", "en": "Your First Program"},
-  "description": {"ar": "اكتب أول سطر كود وشاهد الناتج", "en": "Write your first line of code and see the output"},
+  "title": {
+    "ar": "البداية وأساسيات السكربت",
+    "en": "Starting with Scripts"
+  },
+  "description": {
+    "ar": "تعرّف إلى المحرر واكتب وشغّل أول سكربت",
+    "en": "Explore the editor and write and run your first script"
+  },
   "iconName": "play_circle",
   "order": 0,
-  "lessonIds": ["lesson_01_hello", "lesson_02_comments"]
+  "lessonIds": [
+    "lesson_01_hello",
+    "lesson_02_comments",
+    "lesson_15_errors"
+  ]
 }

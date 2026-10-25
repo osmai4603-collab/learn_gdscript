@@ -1,13 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/repositories/workspace_repository.dart';
-import '../../../logic/providers/language_server_provider.dart';
-import '../../widgets/common/loading_indicator.dart';
+import '../../../logic/services/code_runner_service.dart';
 import '../../widgets/output_panel/error_display.dart';
 import 'workspace_projects_ide_flutter_dart.dart';
 
@@ -22,7 +19,6 @@ class WorkspaceScreen extends StatefulWidget {
 
 class _WorkspaceScreenState extends State<WorkspaceScreen> {
   final TextEditingController _rootPathController = TextEditingController();
-  final TextEditingController _executableController = TextEditingController();
   final Map<String, String> _drafts = {};
   final Map<String, String> _savedContents = {};
   final List<String> _openFilePaths = [];
@@ -32,8 +28,7 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
   bool _loadingWorkspace = true;
   bool _loadedSavedPath = false;
   String? _loadedRootPath;
-  Timer? _documentSyncTimer;
-  final Map<String, String> _pendingDocumentChanges = {};
+  String? _rootPath;
 
   @override
   void didChangeDependencies() {
@@ -45,10 +40,10 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
 
   Future<void> _loadSavedWorkspace() async {
     try {
-      final server = context.read<LanguageServerProvider>();
-      await server.loadSavedWorkspace();
+      _rootPath = await widget.repository.getRootPath();
       if (!mounted) return;
-      _rootPathController.text = server.rootPath ?? '';
+      _loadedRootPath = _rootPath;
+      _rootPathController.text = _rootPath ?? '';
       await _loadFiles();
     } on Object catch (error) {
       if (!mounted) return;
@@ -65,7 +60,7 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
       _error = null;
     });
     try {
-      final currentRoot = context.read<LanguageServerProvider>().rootPath;
+      final currentRoot = await widget.repository.getRootPath();
       final files = await widget.repository.loadFiles();
       if (!mounted) return;
       setState(() {
@@ -76,7 +71,6 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
           _savedContents.clear();
           _openFilePaths.clear();
           _activeFilePath = null;
-          _pendingDocumentChanges.clear();
         }
         _loadedRootPath = currentRoot ?? _loadedRootPath;
         _files = files;
@@ -104,36 +98,38 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
     }
   }
 
-  Future<void> _toggleConnection() async {
-    final server = context.read<LanguageServerProvider>();
-    setState(() => _error = null);
+  Future<void> _openWorkspace() async {
+    setState(() {
+      _error = null;
+      _loadingWorkspace = true;
+    });
     try {
-      if (server.isConnected) {
-        await _flushPendingDocumentChanges(rethrowErrors: true);
-        await server.disconnect();
-      } else {
-        await server.connect(
-          _rootPathController.text.trim(),
-          executablePath: _executableController.text.trim().isEmpty
-              ? null
-              : _executableController.text.trim(),
-        );
-      }
+      final files = await widget.repository.discoverAndSetWorkspace(
+        _rootPathController.text.trim(),
+      );
+      final rootPath = await widget.repository.getRootPath();
       if (!mounted) return;
-      await _loadFiles();
-      if (server.isConnected) {
-        for (final path in List<String>.of(_openFilePaths)) {
-          final file = _fileForPath(path);
-          if (file != null) {
-            await server.openWorkspaceDocument(
-              Uri.parse(file.uri),
-              _drafts[path] ?? file.content,
-            );
-          }
-        }
-      }
+      setState(() {
+        _rootPath = rootPath;
+        _files = files;
+        _loadedRootPath = _rootPath;
+        _drafts.clear();
+        _savedContents
+          ..clear()
+          ..addEntries(
+            files.map((file) => MapEntry(_displayPath(file), file.content)),
+          );
+        _openFilePaths.clear();
+        _activeFilePath = null;
+        _loadingWorkspace = false;
+      });
     } on Object catch (error) {
-      if (mounted) setState(() => _error = error);
+      if (mounted) {
+        setState(() {
+          _error = error;
+          _loadingWorkspace = false;
+        });
+      }
     }
   }
 
@@ -145,59 +141,19 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
       _activeFilePath = path;
       _error = null;
     });
-    try {
-      await context.read<LanguageServerProvider>().openWorkspaceDocument(
-        Uri.parse(file.uri),
-        _drafts[path] ?? file.content,
-      );
-    } on Object catch (error) {
-      if (mounted) setState(() => _error = error);
-    }
   }
 
   void _onCodeChanged(String code) {
     final path = _activeFilePath;
     final file = path == null ? null : _fileForPath(path);
     if (path == null || file == null) return;
-    final baseline = _savedContents[path] ?? file.content;
     setState(() {
-      if (code == baseline) {
+      if (code == (_savedContents[path] ?? file.content)) {
         _drafts.remove(path);
-        _pendingDocumentChanges.remove(path);
       } else {
         _drafts[path] = code;
-        _pendingDocumentChanges[path] = code;
       }
     });
-    _documentSyncTimer?.cancel();
-    _documentSyncTimer = Timer(
-      const Duration(milliseconds: 250),
-      () => unawaited(_flushPendingDocumentChanges()),
-    );
-  }
-
-  Future<void> _flushPendingDocumentChanges({
-    bool rethrowErrors = false,
-  }) async {
-    if (!mounted) return;
-    _documentSyncTimer?.cancel();
-    _documentSyncTimer = null;
-    final server = context.read<LanguageServerProvider>();
-    for (final entry in Map<String, String>.of(
-      _pendingDocumentChanges,
-    ).entries) {
-      final file = _fileForPath(entry.key);
-      if (file == null || !server.isConnected) continue;
-      try {
-        await server.changeWorkspaceDocument(Uri.parse(file.uri), entry.value);
-        if (_pendingDocumentChanges[entry.key] == entry.value) {
-          _pendingDocumentChanges.remove(entry.key);
-        }
-      } on Object catch (error) {
-        if (mounted) setState(() => _error = error);
-        if (rethrowErrors) rethrow;
-      }
-    }
   }
 
   Future<void> _saveActiveFile() async {
@@ -205,14 +161,9 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
     final file = path == null ? null : _fileForPath(path);
     if (path == null || file == null) return;
     try {
-      await _flushPendingDocumentChanges(rethrowErrors: true);
       final content = _drafts[path] ?? file.content;
       setState(() => _error = null);
       await widget.repository.saveGDScriptFile(file.uri, content);
-      await context.read<LanguageServerProvider>().saveWorkspaceDocument(
-        Uri.parse(file.uri),
-        content,
-      );
       if (!mounted) return;
       setState(() {
         _drafts.remove(path);
@@ -266,10 +217,6 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
       if (discard != true || !mounted) return;
     }
     try {
-      await _flushPendingDocumentChanges(rethrowErrors: true);
-      await context.read<LanguageServerProvider>().closeWorkspaceDocument(
-        Uri.parse(file.uri),
-      );
       final refreshedFiles = await widget.repository.loadFiles();
       if (!mounted) return;
       setState(() {
@@ -280,7 +227,6 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
         }
         _openFilePaths.remove(path);
         _drafts.remove(path);
-        _pendingDocumentChanges.remove(path);
         if (_activeFilePath == path) {
           _activeFilePath = _openFilePaths.isEmpty ? null : _openFilePaths.last;
         }
@@ -296,8 +242,27 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
       _loadingWorkspace = true;
     });
     try {
-      await context.read<LanguageServerProvider>().synchronizeWorkspace();
-      await _loadFiles();
+      final rootPath = _rootPath;
+      if (rootPath == null) throw StateError('No workspace is selected.');
+      final files = await widget.repository.discoverAndSetWorkspace(rootPath);
+      if (!mounted) return;
+      setState(() {
+        _files = files;
+        for (final file in files) {
+          _savedContents[_displayPath(file)] = file.content;
+        }
+        _savedContents.removeWhere(
+          (path, _) => !files.any((file) => _displayPath(file) == path),
+        );
+        _drafts.removeWhere(
+          (path, _) => !files.any((file) => _displayPath(file) == path),
+        );
+      });
+      _openFilePaths.removeWhere((path) => _fileForPath(path) == null);
+      if (_activeFilePath != null && _fileForPath(_activeFilePath!) == null) {
+        _activeFilePath = null;
+      }
+      setState(() => _loadingWorkspace = false);
     } on Object catch (error) {
       if (mounted) {
         setState(() {
@@ -318,7 +283,7 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
     return null;
   }
 
-  WorkspaceDataModel _buildData(LanguageServerProvider server) {
+  WorkspaceDataModel _buildData({required CodeRunnerService? codeRunner}) {
     final root = _MutableWorkspaceNode('res://', 'res://');
     for (final file in _files) {
       final segments = file.relativePath.split('/');
@@ -362,23 +327,23 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
     final activeFile = _activeFilePath == null
         ? null
         : _fileForPath(_activeFilePath!);
-    final rootPath = server.rootPath ?? '';
+    final rootPath = _rootPath ?? '';
     final projectName = rootPath
         .replaceAll(RegExp(r'[/\\]+$'), '')
         .split(RegExp(r'[/\\]'))
         .last;
-    final diagnostics = server.diagnosticsByUri.entries
-        .where((entry) => _files.any((file) => file.uri == entry.key))
-        .expand((entry) => entry.value)
-        .map((diagnostic) => diagnostic['message'])
-        .whereType<String>()
-        .toList(growable: false);
+    final diagnostics = activeFile == null
+        ? const <String>[]
+        : codeRunner!
+              .getDiagnostics(_drafts[_activeFilePath] ?? activeFile.content)
+              .map((diagnostic) => diagnostic.message)
+              .toList(growable: false);
     return WorkspaceDataModel(
       projectName: projectName.isEmpty
           ? context.l10n.workspaceTitle
           : projectName,
       godotVersion: '',
-      isLspConnected: server.isConnected,
+      isEngineReady: true,
       fileTree: root.children.values.map(toModel).toList(growable: false),
       openTabs: [
         for (final file in openFiles)
@@ -406,14 +371,17 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final server = context.watch<LanguageServerProvider>();
-    if (_loadingWorkspace || server.isConnecting) {
+    if (_loadingWorkspace) {
       return const _WorkspaceLoadingSkeleton();
     }
-    if (server.isConnected) {
-      final data = _buildData(server);
+    if (_rootPath != null) {
+      final editorService = _activeFilePath == null
+          ? null
+          : context.read<CodeRunnerService>();
+      final data = _buildData(codeRunner: editorService);
       return DesktopWorkspaceIdeScreen(
         data: data,
+        editorService: editorService,
         initialFilePath: _activeFilePath,
         onOpenFile: _openFile,
         onSelectFile: (path) => setState(() => _activeFilePath = path),
@@ -444,51 +412,30 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
             ),
           ),
           const SizedBox(height: 12),
-          TextField(
-            controller: _executableController,
-            textDirection: TextDirection.ltr,
-            decoration: InputDecoration(
-              labelText: l10n.lspExecutablePath,
-              prefixIcon: const Icon(Icons.terminal),
-            ),
-          ),
-          const SizedBox(height: 16),
           FilledButton.icon(
-            onPressed: server.isConnecting ? null : _toggleConnection,
-            icon: Icon(server.isConnected ? Icons.link_off : Icons.link),
+            onPressed: _openWorkspace,
+            icon: const Icon(Icons.folder_open),
             label: Text(
-              server.isConnected ? l10n.disconnectLsp : l10n.connectLsp,
+              Localizations.localeOf(context).languageCode == 'ar'
+                  ? 'فتح مساحة العمل'
+                  : 'Open workspace',
             ),
           ),
           const SizedBox(height: 16),
           Card(
             child: ListTile(
-              leading: Icon(
-                server.isConnected ? Icons.check_circle : Icons.circle_outlined,
-                color: server.isConnected
-                    ? Theme.of(context).colorScheme.tertiary
-                    : Theme.of(context).colorScheme.outline,
-              ),
-              title: Text(l10n.lspStatus),
+              leading: const Icon(Icons.memory),
+              title: const Text('gdscript_engine'),
               subtitle: Text(
-                server.isConnecting
-                    ? l10n.loading
-                    : server.isConnected
-                    ? l10n.lspConnected
-                    : l10n.lspDisconnected,
+                Localizations.localeOf(context).languageCode == 'ar'
+                    ? 'تحليل وتحرير مباشر داخل التطبيق'
+                    : 'Direct in-process analysis and editing',
               ),
             ),
           ),
-          if (_error != null || server.lastError != null) ...[
+          if (_error != null) ...[
             const SizedBox(height: 12),
-            ErrorDisplay(
-              message:
-                  '${l10n.lspConnectionError} ${_error ?? server.lastError}',
-            ),
-          ],
-          if (server.isConnecting) ...[
-            const SizedBox(height: 12),
-            const LoadingIndicator(),
+            ErrorDisplay(message: '${l10n.lessonUnavailable} $_error'),
           ],
         ],
       ),
@@ -512,14 +459,6 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
                   labelText: context.l10n.workspacePath,
                 ),
               ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: _executableController,
-                textDirection: TextDirection.ltr,
-                decoration: InputDecoration(
-                  labelText: context.l10n.lspExecutablePath,
-                ),
-              ),
             ],
           ),
         ),
@@ -531,12 +470,12 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
           FilledButton(
             onPressed: () async {
               Navigator.pop(context);
-              await _toggleConnection();
+              await _openWorkspace();
             },
             child: Text(
-              context.read<LanguageServerProvider>().isConnected
-                  ? context.l10n.disconnectLsp
-                  : context.l10n.connectLsp,
+              Localizations.localeOf(context).languageCode == 'ar'
+                  ? 'فتح مساحة العمل'
+                  : 'Open workspace',
             ),
           ),
         ],
@@ -546,9 +485,7 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
 
   @override
   void dispose() {
-    _documentSyncTimer?.cancel();
     _rootPathController.dispose();
-    _executableController.dispose();
     super.dispose();
   }
 }
@@ -570,7 +507,7 @@ class _WorkspaceLoadingSkeleton extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
       body: Shimmer.fromColors(
-        baseColor: scheme.surfaceContainerHigh,
+        baseColor: scheme.surfaceContainer,
         highlightColor: scheme.surfaceContainerHighest,
         enabled: !MediaQuery.disableAnimationsOf(context),
         child: Padding(
@@ -600,9 +537,15 @@ class _WorkspaceLoadingSkeleton extends StatelessWidget {
                           width: 240,
                           child: Column(
                             children: [
-                              _SkeletonBlock(height: 180),
+                              Expanded(
+                                flex: 180,
+                                child: _SkeletonBlock(height: 180),
+                              ),
                               SizedBox(height: 12),
-                              _SkeletonBlock(height: 220),
+                              Expanded(
+                                flex: 220,
+                                child: _SkeletonBlock(height: 220),
+                              ),
                             ],
                           ),
                         ),

@@ -41,6 +41,64 @@ class CodeRunnerService {
     );
   }
 
+  List<Diagnostic> getDiagnostics(String code) {
+    _ensureActive();
+    return List.unmodifiable(_engine.editorApi.getDiagnostics(code));
+  }
+
+  List<String> getCompletions(String code, int cursorOffset) {
+    return List.unmodifiable([
+      for (final item in getCompletionItems(code, cursorOffset))
+        item.insertText ?? item.label,
+    ]);
+  }
+
+  List<CompletionItem> getCompletionItems(String code, int cursorOffset) {
+    _ensureActive();
+    return List.unmodifiable(
+      _engine.editorApi.getCompletions(code, cursorOffset),
+    );
+  }
+
+  List<SyntaxHighlight> getSyntaxHighlights(String code) {
+    _ensureActive();
+    return List.unmodifiable(_engine.editorApi.getSyntaxHighlights(code));
+  }
+
+  List<SemanticHighlight> getSemanticHighlights(String code) {
+    _ensureActive();
+    return List.unmodifiable(_engine.editorApi.getSemanticHighlights(code));
+  }
+
+  SignatureHelp? getSignatureHelp(String code, int cursorOffset) {
+    _ensureActive();
+    return _engine.editorApi.getSignatureHelp(code, cursorOffset);
+  }
+
+  HoverInfo? getHoverInfo(String code, int cursorOffset) {
+    _ensureActive();
+    return _engine.editorApi.getHoverInfo(code, cursorOffset);
+  }
+
+  GoToDefinition? findDefinition(String code, int cursorOffset) {
+    _ensureActive();
+    return _engine.editorApi.findDefinition(code, cursorOffset);
+  }
+
+  List<FoldingRange> getFoldingRanges(String code) {
+    _ensureActive();
+    return List.unmodifiable(_engine.editorApi.getFoldingRanges(code));
+  }
+
+  (int, int)? findMatchingBracket(String code, int cursorOffset) {
+    _ensureActive();
+    return _engine.editorApi.findMatchingBracket(code, cursorOffset);
+  }
+
+  void _ensureActive() {
+    if (_disposed) throw StateError('CodeRunnerService has been disposed.');
+  }
+
   void dispose() {
     if (_disposed) return;
     _disposed = true;

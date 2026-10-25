@@ -1,8 +1,8 @@
 {
   "id": "unit_05_functions",
-  "title": {"ar": "الدوال وإعادة الاستخدام", "en": "Functions and Reuse"},
-  "description": {"ar": "نظّم كودك في أجزاء قابلة لإعادة الاستخدام", "en": "Organize code into reusable parts"},
+  "title": {"ar": "الدوال والتصميم", "en": "Functions and Design"},
+  "description": {"ar": "صمّم دوالاً واضحة وقسّم المشكلات", "en": "Design clear functions and break problems down"},
   "iconName": "functions",
   "order": 4,
-  "lessonIds": ["lesson_12_func_basics", "lesson_13_parameters", "lesson_14_return"]
+  "lessonIds": ["lesson_12_func_basics", "lesson_13_parameters", "lesson_14_return", "lesson_21_scope", "lesson_22_problem_decomposition"]
 }

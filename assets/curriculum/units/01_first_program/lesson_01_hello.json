@@ -2,113 +2,386 @@
   "id": "lesson_01_hello",
   "unitId": "unit_01_first_program",
   "title": {
-    "ar": "مرحباً بالعالم!",
-    "en": "Hello, World!"
+    "ar": "المحرر وأول برنامج",
+    "en": "The editor and your first program"
   },
   "objective": {
-    "ar": "اكتب أول أمر طباعة وشاهد الناتج فوراً.",
-    "en": "Write your first print statement and see its output immediately."
+    "ar": "أنشئ سكربتاً بسيطاً في المحرر واستخدم `print()` لعرض رسالة.",
+    "en": "Create a small script in the editor and use `print()` to display a message."
   },
-  "estimatedMinutes": 3,
+  "estimatedMinutes": 8,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## اطبع رسالتك الأولى\n\nتستخدم الدالة `print()` لعرض قيمة في لوحة الناتج. اكتب النص بين علامتي تنصيص داخل الأقواس:\n\n```gdscript\nprint(\"مرحباً!\")\n```\n\nتُعرض كل عملية `print()` في سطر مستقل. علامات التنصيص جزء من الشيفرة ولا تظهر في الناتج.",
-    "en": "## Print your first message\n\nUse `print()` to show a value in the output panel. Put text in quotation marks inside the parentheses:\n\n```gdscript\nprint(\"Hello!\")\n```\n\nEach `print()` call appears on its own output line. The quotation marks are part of the code and do not appear in the output."
+    "ar": "## المحرر وأول برنامج\n\nيكتب GDScript تعليمات تُنفّذ بالترتيب. أنشئ ملف سكربت من محرر Godot، واستخدم `print()` لعرض نتيجة في لوحة الإخراج. احفظ تغييراتك وشغّل السكربت، ثم اقرأ الرسالة. ابدأ بمثال مستقل قبل ربط السكربت بعقدة أو مشهد.\n\n### مثال عملي\n\n```gdscript\nprint(\"Hello, Godot!\")\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
+    "en": "## The editor and your first program\n\nGDScript runs instructions in order. Create a script file in the Godot editor and use `print()` to display a result in the output panel. Save your changes and run the script, then read the message. Start with a standalone example before attaching a script to a node or scene.\n\n### Practical example\n\n```gdscript\nprint(\"Hello, Godot!\")\n```\n\nChange one value and run the script to observe its effect."
   },
-  "exampleCode": "print(\"Hello, World!\")",
+  "exampleCode": "print(\"Hello, Godot!\")",
+  "documentation": {
+    "ar": "### المحرر وأول برنامج\n\nيكتب GDScript تعليمات تُنفّذ بالترتيب. أنشئ ملف سكربت من محرر Godot، واستخدم `print()` لعرض نتيجة في لوحة الإخراج. احفظ تغييراتك وشغّل السكربت، ثم اقرأ الرسالة. ابدأ بمثال مستقل قبل ربط السكربت بعقدة أو مشهد.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### The editor and your first program\n\nGDScript runs instructions in order. Create a script file in the Godot editor and use `print()` to display a result in the output panel. Save your changes and run the script, then read the message. Start with a standalone example before attaching a script to a node or scene.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
   "exercises": [
     {
-      "id": "ex_01_hello_name",
+      "id": "ex_01_hello_01",
       "lessonId": "lesson_01_hello",
-      "type": "writeCode",
-      "prompt": {
-        "ar": "اكتب أمراً يطبع الاسم `Amina`.",
-        "en": "Write a statement that prints the name `Amina`."
+      "order": 0,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 1",
+        "en": "Check the idea 1"
       },
-      "starterCode": "",
-      "solutionCode": "print(\"Amina\")",
-      "testCases": [
+      "prompt": {
+        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
+        "en": "What is the main idea of this lesson?"
+      },
+      "options": [
         {
-          "description": {
-            "ar": "يظهر الاسم في الناتج.",
-            "en": "The name appears in the output."
-          },
-          "expectedOutput": "Amina"
+          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
+          "en": "Understand the rule and apply it in the right context"
+        },
+        {
+          "ar": "تجاهل ترتيب التنفيذ والقواعد",
+          "en": "Ignore execution order and rules"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_01_hello_02",
+      "lessonId": "lesson_01_hello",
+      "order": 1,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 2",
+        "en": "Check the idea 2"
+      },
+      "prompt": {
+        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
+        "en": "Which practice helps use the concept clearly?"
+      },
+      "options": [
+        {
+          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
+          "en": "Choose a clear form and check the result"
+        },
+        {
+          "ar": "نسخ صياغة دون فهمها",
+          "en": "Copy a form without understanding it"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_01_hello_03",
+      "lessonId": "lesson_01_hello",
+      "order": 2,
+      "type": "multipleChoice",
+      "title": {
+        "ar": "تحقق من الفكرة 3",
+        "en": "Check the idea 3"
+      },
+      "prompt": {
+        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
+        "en": "What helps reduce mistakes when applying the concept?"
+      },
+      "options": [
+        {
+          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
+          "en": "Follow the rules and review boundaries and cases"
+        },
+        {
+          "ar": "افتراض أن كل الحالات متطابقة",
+          "en": "Assume all cases are identical"
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بهدف الدرس والمثال.",
+          "en": "Connect the answer to the lesson goal and example."
+        },
+        {
+          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
+          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+        }
+      ]
+    },
+    {
+      "id": "ex_01_hello_04",
+      "lessonId": "lesson_01_hello",
+      "order": 3,
+      "type": "guidedTask",
+      "title": {
+        "ar": "مهمة تطبيقية موجّهة",
+        "en": "Guided practice"
+      },
+      "prompt": {
+        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
+        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
+          "en": "Create or open a separate practice script."
+        },
+        {
+          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
+          "en": "Write the example and change one value or case."
+        },
+        {
+          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
+          "en": "Run the script, inspect the output, and correct any mistake yourself."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ باستدعاء `print()`.",
-          "en": "Start by calling `print()`."
+          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
+          "en": "Start from the example and change one thing at a time."
         },
         {
-          "ar": "ضع الاسم بين علامتي تنصيص داخل الأقواس.",
-          "en": "Put the name in quotation marks inside the parentheses."
+          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
+          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
         }
-      ],
-      "order": 0
+      ]
     },
     {
-      "id": "ex_01_three_lines",
+      "id": "ex_01_hello_05",
       "lessonId": "lesson_01_hello",
+      "order": 4,
       "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
       "prompt": {
-        "ar": "استخدم ثلاثة أوامر `print()` لعرض `Line 1` و`Line 2` و`Line 3`، كل واحدة في سطر.",
-        "en": "Use three `print()` calls to display `Line 1`, `Line 2`, and `Line 3`, each on its own line."
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Hello!`",
+        "en": "Write or complete the example so its output is:\n\n`Hello!`"
       },
       "starterCode": "",
-      "solutionCode": "print(\"Line 1\")\nprint(\"Line 2\")\nprint(\"Line 3\")",
+      "solutionCode": "print(\"Hello!\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
       "testCases": [
         {
           "description": {
-            "ar": "تظهر الأسطر بالترتيب المطلوب.",
-            "en": "The lines appear in the requested order."
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
           },
-          "expectedOutput": "Line 1\nLine 2\nLine 3"
+          "expectedOutput": "Hello!"
         }
-      ],
-      "hints": [
-        {
-          "ar": "اكتب استدعاء `print()` لكل سطر.",
-          "en": "Write one `print()` call for each line."
-        },
-        {
-          "ar": "تأكد من وضع النص الصحيح بين علامتي التنصيص في كل استدعاء.",
-          "en": "Put the correct text in quotation marks in each call."
-        }
-      ],
-      "order": 1
+      ]
     },
     {
-      "id": "ex_01_predict_two_prints",
+      "id": "ex_01_hello_06",
       "lessonId": "lesson_01_hello",
+      "order": 5,
+      "type": "writeCode",
+      "title": {
+        "ar": "اكتب الشيفرة",
+        "en": "Write the code"
+      },
+      "prompt": {
+        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nGodot",
+        "en": "Write code that applies the lesson idea and produces this output:\n\nGodot"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"Godot\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Godot"
+        }
+      ]
+    },
+    {
+      "id": "ex_01_hello_07",
+      "lessonId": "lesson_01_hello",
+      "order": 6,
+      "type": "fixBug",
+      "title": {
+        "ar": "أصلح المثال",
+        "en": "Fix the example"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`5`",
+        "en": "Write or complete the example so its output is:\n\n`5`"
+      },
+      "starterCode": "pront(2 + 3)",
+      "solutionCode": "print(2 + 3)",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "5"
+        }
+      ]
+    },
+    {
+      "id": "ex_01_hello_08",
+      "lessonId": "lesson_01_hello",
+      "order": 7,
       "type": "predictOutput",
-      "prompt": {
-        "ar": "اكتب الشيفرة التي تتوقع أنها تنتج `Hello` ثم `World` في سطرين.",
-        "en": "Write code that you expect to produce `Hello` and then `World` on two lines."
+      "title": {
+        "ar": "تنبأ بالناتج",
+        "en": "Predict the output"
       },
-      "starterCode": "",
-      "solutionCode": "print(\"Hello\")\nprint(\"World\")",
+      "prompt": {
+        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`Start`",
+        "en": "What output does this example display?\n\n`Start`"
+      },
+      "starterCode": "print(\"Start\")",
+      "solutionCode": "print(\"Start\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
       "testCases": [
         {
           "description": {
-            "ar": "يظهر كل نداء طباعة في سطر.",
-            "en": "Each print call appears on its own line."
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
           },
-          "expectedOutput": "Hello\nWorld"
+          "expectedOutput": "Start"
         }
-      ],
+      ]
+    },
+    {
+      "id": "ex_01_hello_09",
+      "lessonId": "lesson_01_hello",
+      "order": 8,
+      "type": "writeCode",
+      "title": {
+        "ar": "طبّق الفكرة",
+        "en": "Apply the idea"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`7`",
+        "en": "Write or complete the example so its output is:\n\n`7`"
+      },
+      "starterCode": "",
+      "solutionCode": "print(7)",
       "hints": [
         {
-          "ar": "استدعاء `print()` الأول ينفّذ قبل الثاني.",
-          "en": "The first `print()` call runs before the second."
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
         },
         {
-          "ar": "اكتب استدعاءين منفصلين.",
-          "en": "Write two separate calls."
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
         }
       ],
-      "order": 2
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "7"
+        }
+      ]
+    },
+    {
+      "id": "ex_01_hello_10",
+      "lessonId": "lesson_01_hello",
+      "order": 9,
+      "type": "writeCode",
+      "title": {
+        "ar": "تحدٍ إضافي",
+        "en": "Extra challenge"
+      },
+      "prompt": {
+        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Done`",
+        "en": "Write or complete the example so its output is:\n\n`Done`"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"Done\")",
+      "hints": [
+        {
+          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
+          "en": "Review the lesson rule and trace the lines in order."
+        },
+        {
+          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
+          "en": "Compare your expected value with the specified output."
+        }
+      ],
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
+            "en": "Execution output matches the requested result."
+          },
+          "expectedOutput": "Done"
+        }
+      ]
     }
   ]
 }

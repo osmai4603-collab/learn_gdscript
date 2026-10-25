@@ -1,0 +1,357 @@
+{
+  "id": "lesson_44_await_pitfalls",
+  "unitId": "unit_10_time_async",
+  "title": {
+    "ar": "أخطاء الانتظار الشائعة",
+    "en": "Common Await Pitfalls"
+  },
+  "objective": {
+    "ar": "تجنب الانتظار الذي لا ينتهي واستخدام كائن أزيل أثناء التعليق.",
+    "en": "Avoid waits that never finish and using an object removed during suspension."
+  },
+  "estimatedMinutes": 9,
+  "order": 3,
+  "contentMarkdown": {
+    "ar": "## اجعل لكل انتظار سبباً صالحاً\n\nقد تنتظر إشارة لا تصدر أبداً، أو تستخدم عقدة بعد حذفها، أو تفترض أن الحالة لم تتغير أثناء الانتظار. تحقق من مصدر الإشارة وابدأ العملية التي تطلقها.\n\n```gdscript\nfunc wait_for_ready() -> void:\n    if not is_instance_valid($Worker):\n        return\n    await $Worker.ready_signal\n    if not is_instance_valid($Worker):\n        return\n    print(\"Ready\")\n```\n\nيفترض المثال التالي وجود عقدة ابن باسم Worker يعرّف سكربتها الإشارة `ready_signal`، وأن هناك عملية ستصدرها. الفحص قبل الانتظار لا يكفي إذا أمكن حذف العقدة أثناءه؛ أعد التحقق بعد الاستئناف.",
+    "en": "## Give every wait a valid reason\n\nYou might await a signal that never fires, use a node after it was removed, or assume state did not change while suspended. Check the signal source and start the operation that emits it.\n\n```gdscript\nfunc wait_for_ready() -> void:\n    if not is_instance_valid($Worker):\n        return\n    await $Worker.ready_signal\n    if not is_instance_valid($Worker):\n        return\n    print(\"Ready\")\n```\n\nThe example assumes a child node named Worker whose script declares `ready_signal`, and an operation that will emit it. A pre-wait check is insufficient if the node can be removed during the wait; check again after resumption."
+  },
+  "documentation": {
+    "ar": "قد تبقى الدالة معلقة إلى الأبد إذا لم يصدر الحدث المنتظر. حدد من يطلق الإشارة وكيف ينتهي المسار عند إلغاء العملية أو إغلاق المشهد. يمكن أن تزال عقدة أثناء التعليق؛ تحقق من صلاحيتها قبل الوصول إليها بعد الاستئناف. كذلك قد تتداخل عمليتان منتظرتان وتعيد عملية قديمة نتيجة غير حديثة. استخدم حالة إلغاء أو معرف عملية عند الحاجة، وتجنب حلقة انتظار مشغولة تستهلك الإطارات.",
+    "en": "A function can remain suspended forever if its awaited event never occurs. Identify who emits the signal and how the flow ends when work is cancelled or the scene closes. A node may be removed while suspended; validate it before accessing it after resumption. Two overlapping operations may also allow an old result to replace a newer one. Use cancellation state or an operation identifier when needed, and avoid a busy-wait loop that consumes frames."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript: await",
+        "en": "GDScript basics: await"
+      },
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع Object",
+        "en": "Object class reference"
+      },
+      "url": "https://docs.godotengine.org/en/stable/classes/class_object.html"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex_lesson_44_await_pitfalls_01",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "لماذا قد يلزم فحص العقدة بعد await؟",
+        "en": "Why might a node need checking after await?"
+      },
+      "options": [
+        {
+          "ar": "قد تكون أزيلت أثناء تعليق الدالة.",
+          "en": "It may have been removed while the function was suspended."
+        },
+        {
+          "ar": "await يحولها إلى مورد.",
+          "en": "await turns it into a resource."
+        },
+        {
+          "ar": "الإشارات لا تعمل إلا بعد إعادة التشغيل.",
+          "en": "Signals only work after restarting."
+        }
+      ],
+      "correctOptionIndex": 0,
+      "hints": [
+        {
+          "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
+          "en": "Connect the answer to the concept’s role in the lesson."
+        },
+        {
+          "ar": "استبعد السلوك الذي لا يقدمه Godot.",
+          "en": "Eliminate behavior Godot does not provide."
+        }
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_02",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "guidedTask",
+      "prompt": {
+        "ar": "نفّذ نشاطاً يدوياً عن الانتظار الآمن. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
+        "en": "Complete a hands-on activity about الانتظار الآمن. These are self-check steps, not an automated test."
+      },
+      "steps": [
+        {
+          "ar": "أنشئ عملية تنتظر إشارة وزراً آخر يلغيها أو يغلق المشهد.",
+          "en": "Create an operation awaiting a signal and another button to cancel it or close the scene."
+        },
+        {
+          "ar": "أضف حالة إلغاء وافحصها قبل الانتظار وبعد استئنافه.",
+          "en": "Add a cancellation state and check it before waiting and after resumption."
+        },
+        {
+          "ar": "اختبر الإلغاء أثناء الانتظار وتأكد من عدم الوصول إلى عقدة أزيلت.",
+          "en": "Test cancellation during the wait and ensure no removed node is accessed."
+        }
+      ],
+      "hints": [
+        {
+          "ar": "نفّذ الخطوات في مشروع تجريبي واحفظه قبل التشغيل.",
+          "en": "Follow the steps in a test project and save before running."
+        },
+        {
+          "ar": "تحقق بنفسك من النتيجة في المحرر أو عند تشغيل المشهد.",
+          "en": "Check the result yourself in the editor or while the scene runs."
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_03",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب شيفرة تطبع «ready to continue» في سياق الانتظار الآمن.",
+        "en": "Write code that prints “ready to continue” as a الانتظار الآمن status."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"ready to continue\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "ready to continue"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_04",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل السطر ليطبع «ready to continue».",
+        "en": "Complete the line so it prints “ready to continue”."
+      },
+      "starterCode": "print(\"___\")",
+      "solutionCode": "print(\"ready to continue\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "ready to continue"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_05",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اطبع سطرين يوضحان تقدماً في الانتظار الآمن: start ثم «ready to continue».",
+        "en": "Print two lines showing progress in الانتظار الآمن: start, then “ready to continue”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"start\")\nprint(\"ready to continue\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nready to continue"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_06",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الشيفرة لتطبع «ready to continue» تماماً.",
+        "en": "Fix the code so it prints exactly “ready to continue”."
+      },
+      "starterCode": "print(\"ready to continue!\")",
+      "solutionCode": "print(\"ready to continue\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "ready to continue"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_07",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب المخرجات لتظهر start ثم «ready to continue» ثم done.",
+        "en": "Arrange output to show start, then “ready to continue”, then done."
+      },
+      "starterCode": "print(\"done\")\nprint(\"ready to continue\")\nprint(\"start\")",
+      "solutionCode": "print(\"start\")\nprint(\"ready to continue\")\nprint(\"done\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "start\nready to continue\ndone"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_08",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع الانتظار الآمن: «ready to continue».",
+        "en": "Write a program that records a result related to الانتظار الآمن: “ready to continue”."
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"ready to continue\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "ready to continue"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
+          "en": "Check quotes, variable names, and indentation."
+        },
+        {
+          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
+          "en": "Fix the cause, then run the solution again."
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_09",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nready to continue",
+        "en": "Write a program that displays this sequence:\nready to continue"
+      },
+      "starterCode": "",
+      "solutionCode": "print(\"ready to continue\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "ready to continue"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
+          "en": "Identify the requested result or ordering."
+        },
+        {
+          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
+          "en": "Use print to display the requested output exactly."
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_lesson_44_await_pitfalls_10",
+      "lessonId": "lesson_44_await_pitfalls",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «ready to continue».",
+        "en": "Use a string variable named status and print its value “ready to continue”."
+      },
+      "starterCode": "",
+      "solutionCode": "var status = \"ready to continue\"\nprint(status)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "يطابق الخرج المتوقع.",
+            "en": "The output matches the expected result."
+          },
+          "expectedOutput": "ready to continue"
+        }
+      ],
+      "hints": [
+        {
+          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
+          "en": "Keep the solution in a small standalone GDScript snippet."
+        },
+        {
+          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
+          "en": "Match printed text to the expected output."
+        }
+      ],
+      "order": 9
+    }
+  ]
+}

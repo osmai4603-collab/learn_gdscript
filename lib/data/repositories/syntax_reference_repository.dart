@@ -62,7 +62,13 @@ class AssetSyntaxReferenceRepository implements SyntaxReferenceRepository {
 
   @override
   Future<List<SyntaxReference>> search(String query, {String? category}) async {
-    final entries = await (_entriesFuture ??= _loadEntries());
+    late final List<SyntaxReference> entries;
+    try {
+      entries = await (_entriesFuture ??= _loadEntries());
+    } on Object {
+      _entriesFuture = null;
+      rethrow;
+    }
     final normalizedQuery = query.trim().toLowerCase();
     return List.unmodifiable(
       entries.where((entry) {
