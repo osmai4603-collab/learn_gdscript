@@ -97,7 +97,7 @@ void main() {
     expect(find.text('Code editor'), findsOneWidget);
     expect(find.text('Syntax explorer'), findsOneWidget);
     expect(find.text('Workspace'), findsOneWidget);
-    expect(find.text('Badges'), findsNWidgets(3));
+    expect(find.text('Badges'), findsNWidgets(2));
     expect(find.text('Settings'), findsOneWidget);
 
     GoRouter.of(tester.element(find.byType(AcademyAppLayout))).go('/settings');

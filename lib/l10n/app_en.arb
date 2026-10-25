@@ -331,6 +331,27 @@
   "streakDays": "{count} day streak",
   "streakInfo": "Learn at least once each day to keep your streak. Missing a day resets the current streak but never removes your XP or badges.",
   "badgesTitle": "Badges",
+  "badgesCompletionSummary": "{unlocked} of {total} badges earned",
+  "@badgesCompletionSummary": {
+    "placeholders": {
+      "unlocked": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "badgeFilterAll": "All ({count})",
+  "@badgeFilterAll": {"placeholders": {"count": {"type": "int"}}},
+  "badgeFilterEarned": "Earned ({count})",
+  "@badgeFilterEarned": {"placeholders": {"count": {"type": "int"}}},
+  "badgeFilterInProgress": "In progress ({count})",
+  "@badgeFilterInProgress": {"placeholders": {"count": {"type": "int"}}},
+  "badgeFilterLocked": "Locked ({count})",
+  "@badgeFilterLocked": {"placeholders": {"count": {"type": "int"}}},
+  "badgeFilterEmpty": "No badges in this category.",
+  "badgeCatalogEmpty": "No badges are available right now.",
+  "badgeDetailsTitle": "Badge details",
+  "badgeEarnedStatus": "Earned",
+  "badgeInProgressStatus": "In progress",
+  "badgesLoadError": "Could not load badges. Check your connection and try again.",
   "badgeUnlocked": "New badge unlocked!",
   "badgeLocked": "Not yet earned",
   "badgeProgress": "{current} of {target}",

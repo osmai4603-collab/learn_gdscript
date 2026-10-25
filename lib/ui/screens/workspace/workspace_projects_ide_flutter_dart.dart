@@ -6,6 +6,23 @@
 
 import 'package:flutter/material.dart';
 
+import '../../widgets/output_panel/error_display.dart';
+
+String _localized(BuildContext context, String arabic, String english) =>
+    Localizations.localeOf(context).languageCode == 'ar' ? arabic : english;
+
+int _countFiles(List<ProjectFileNodeModel> nodes) {
+  var total = 0;
+  for (final node in nodes) {
+    if (node.isDirectory) {
+      total += _countFiles(node.children);
+    } else {
+      total++;
+    }
+  }
+  return total;
+}
+
 // -----------------------------------------------------------------------------
 // 1. نماذج البيانات الخاصة بمساحة العمل والمشاريع (Data Models)
 // -----------------------------------------------------------------------------
@@ -60,6 +77,8 @@ class WorkspaceDataModel {
   final String activeCodeContent;
   final int cursorLine;
   final int cursorColumn;
+  final int diagnosticsCount;
+  final List<String> diagnosticMessages;
 
   const WorkspaceDataModel({
     required this.projectName,
@@ -71,6 +90,8 @@ class WorkspaceDataModel {
     required this.activeCodeContent,
     this.cursorLine = 18,
     this.cursorColumn = 4,
+    this.diagnosticsCount = 0,
+    this.diagnosticMessages = const [],
   });
 
   String? codeForFilePath(String path) {
@@ -232,6 +253,14 @@ class DesktopWorkspaceIdeScreen extends StatefulWidget {
   final WorkspaceDataModel data;
   final ValueChanged<String>? onNavigateRoute;
   final VoidCallback? onRunProject;
+  final ValueChanged<String>? onOpenFile;
+  final ValueChanged<String>? onSelectFile;
+  final ValueChanged<String>? onCodeChanged;
+  final Future<void> Function()? onSaveFile;
+  final ValueChanged<String>? onCloseFile;
+  final VoidCallback? onReindex;
+  final VoidCallback? onOpenSettings;
+  final Object? error;
   final String? initialCode;
   final String? initialFilePath;
   final int? initialCursorLine;
@@ -244,6 +273,14 @@ class DesktopWorkspaceIdeScreen extends StatefulWidget {
     required this.data,
     this.onNavigateRoute,
     this.onRunProject,
+    this.onOpenFile,
+    this.onSelectFile,
+    this.onCodeChanged,
+    this.onSaveFile,
+    this.onCloseFile,
+    this.onReindex,
+    this.onOpenSettings,
+    this.error,
     this.initialCode,
     this.initialFilePath,
     this.initialCursorLine,
@@ -270,6 +307,7 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
   @override
   void initState() {
     super.initState();
+    _findController.addListener(_onSearchChanged);
     final matchingTab = widget.initialFilePath == null
         ? null
         : widget.data.openTabs
@@ -328,13 +366,27 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
     );
   }
 
+  void _onSearchChanged() {
+    if (mounted) setState(() {});
+  }
+
   @override
   void dispose() {
+    _findController.removeListener(_onSearchChanged);
     _codeEditorController.dispose();
     _editorFocusNode.dispose();
     _findController.dispose();
     _pulseController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant DesktopWorkspaceIdeScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.data.activeTabFileId != widget.data.activeTabFileId) {
+      _activeTabId = widget.data.activeTabFileId;
+      _codeEditorController.text = widget.data.activeCodeContent;
+    }
   }
 
   @override
@@ -346,6 +398,7 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
           _WorkspaceTopNav(
             isLspOnline: widget.data.isLspConnected,
             pulseAnimation: _pulseAnimation,
+            onOpenSettings: widget.onOpenSettings,
           ),
           const Divider(height: 1, color: Color(0xFF28323F)),
           Padding(
@@ -360,9 +413,9 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                       spacing: 8,
                       runSpacing: 4,
                       children: [
-                        const Text(
-                          'مساحة العمل',
-                          style: TextStyle(
+                        Text(
+                          _localized(context, 'مساحة العمل', 'Workspace'),
+                          style: const TextStyle(
                             fontFamily: 'IBM Plex Sans Arabic',
                             color: Color(0xFFC0C7D0),
                             fontSize: 13,
@@ -387,10 +440,11 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                             fontSize: 15,
                           ),
                         ),
-                        _WorkspaceChip(
-                          label: widget.data.godotVersion,
-                          color: const Color(0xFF91CDFF),
-                        ),
+                        if (widget.data.godotVersion.isNotEmpty)
+                          _WorkspaceChip(
+                            label: widget.data.godotVersion,
+                            color: const Color(0xFF91CDFF),
+                          ),
                       ],
                     ),
                     const SizedBox(height: 6),
@@ -399,14 +453,13 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                       runSpacing: 4,
                       children: [
                         _WorkspaceMeta(
-                          icon: Icons.check_circle_rounded,
-                          text: 'تم فهرسة 14 ملفاً بنجاح (100%)',
+                          icon: Icons.insert_drive_file_outlined,
+                          text: _localized(
+                            context,
+                            '${_countFiles(widget.data.fileTree)} ملف مفهرس',
+                            '${_countFiles(widget.data.fileTree)} indexed files',
+                          ),
                           color: const Color(0xFF4AE183),
-                        ),
-                        _WorkspaceMeta(
-                          icon: Icons.source_rounded,
-                          text: 'Git: main (clean)',
-                          color: const Color(0xFFC0C7D0),
                         ),
                       ],
                     ),
@@ -418,38 +471,17 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                   children: [
                     _WorkspaceActionButton(
                       icon: Icons.create_new_folder_outlined,
-                      label: 'فتح مجلد',
-                    ),
-                    _WorkspaceActionButton(
-                      icon: Icons.note_add_outlined,
-                      label: 'ملف جديد',
+                      label: _localized(
+                        context,
+                        'إعداد مساحة العمل',
+                        'Workspace settings',
+                      ),
+                      onPressed: widget.onOpenSettings,
                     ),
                     _WorkspaceActionButton(
                       icon: Icons.sync_rounded,
-                      label: 'بناء الفهرس',
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: widget.onRunProject,
-                      icon: const Icon(Icons.play_arrow_rounded, size: 18),
-                      label: const Text(
-                        'تشغيل المشروع (F5)',
-                        style: TextStyle(
-                          fontFamily: 'IBM Plex Sans Arabic',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF5397CA),
-                        foregroundColor: const Color(0xFF002C46),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 11,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
+                      label: _localized(context, 'إعادة الفهرسة', 'Reindex'),
+                      onPressed: widget.onReindex,
                     ),
                   ],
                 );
@@ -474,14 +506,58 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
               },
             ),
           ),
+          if (widget.error != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ErrorDisplay(message: widget.error.toString()),
+            ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final compact = constraints.maxWidth < 1000;
-                  final explorerWidth = compact ? 205.0 : 255.0;
-                  final inspectorWidth = compact ? 230.0 : 285.0;
+                  final explorerWidth = 255.0;
+                  final inspectorWidth = 285.0;
+                  if (compact) {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 185,
+                          child: _WorkspaceExplorerPanel(
+                            data: widget.data,
+                            searchOpen: _isSearchOpen,
+                            searchController: _findController,
+                            activeFilePath: widget.data.activeTabFileId,
+                            onToggleSearch: () =>
+                                setState(() => _isSearchOpen = !_isSearchOpen),
+                            onOpenFile: widget.onOpenFile,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Expanded(
+                          child: _WorkspaceEditorPanel(
+                            data: widget.data,
+                            controller: _codeEditorController,
+                            activeTabId: _activeTabId,
+                            focusNode: _editorFocusNode,
+                            onSelectTab: (id) {
+                              setState(() => _activeTabId = id);
+                              widget.onSelectFile?.call(id);
+                            },
+                            onCodeChanged: widget.onCodeChanged,
+                            onSaveFile: widget.onSaveFile,
+                            onCloseFile: widget.onCloseFile,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 126,
+                          child: _WorkspaceDockPanel(data: widget.data),
+                        ),
+                      ],
+                    );
+                  }
                   return Column(
                     children: [
                       Expanded(
@@ -494,9 +570,11 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                                 data: widget.data,
                                 searchOpen: _isSearchOpen,
                                 searchController: _findController,
+                                activeFilePath: widget.data.activeTabFileId,
                                 onToggleSearch: () => setState(
                                   () => _isSearchOpen = !_isSearchOpen,
                                 ),
+                                onOpenFile: widget.onOpenFile,
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -506,20 +584,30 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                                 controller: _codeEditorController,
                                 activeTabId: _activeTabId,
                                 focusNode: _editorFocusNode,
-                                onSelectTab: (id) =>
-                                    setState(() => _activeTabId = id),
+                                onSelectTab: (id) {
+                                  setState(() => _activeTabId = id);
+                                  widget.onSelectFile?.call(id);
+                                },
+                                onCodeChanged: widget.onCodeChanged,
+                                onSaveFile: widget.onSaveFile,
+                                onCloseFile: widget.onCloseFile,
                               ),
                             ),
                             const SizedBox(width: 12),
                             SizedBox(
                               width: inspectorWidth,
-                              child: const _WorkspaceInspectorPanel(),
+                              child: _WorkspaceInspectorPanel(
+                                data: widget.data,
+                              ),
                             ),
                           ],
                         ),
                       ),
                       const SizedBox(height: 12),
-                      const SizedBox(height: 178, child: _WorkspaceDockPanel()),
+                      SizedBox(
+                        height: 178,
+                        child: _WorkspaceDockPanel(data: widget.data),
+                      ),
                     ],
                   );
                 },
@@ -544,10 +632,12 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
 class _WorkspaceTopNav extends StatelessWidget {
   final bool isLspOnline;
   final Animation<double> pulseAnimation;
+  final VoidCallback? onOpenSettings;
 
   const _WorkspaceTopNav({
     required this.isLspOnline,
     required this.pulseAnimation,
+    this.onOpenSettings,
   });
 
   @override
@@ -589,8 +679,16 @@ class _WorkspaceTopNav extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       isLspOnline
-                          ? 'محرك GDScript: متصل  |  LSP: نشط'
-                          : 'محرك GDScript: غير متصل',
+                          ? _localized(
+                              context,
+                              'خادم GDScript: متصل',
+                              'GDScript server: connected',
+                            )
+                          : _localized(
+                              context,
+                              'خادم GDScript: غير متصل',
+                              'GDScript server: disconnected',
+                            ),
                       style: TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 11,
@@ -604,22 +702,14 @@ class _WorkspaceTopNav extends StatelessWidget {
             },
           ),
           const Spacer(),
-          const _WorkspaceChip(label: '🔥  3 أيام', color: Color(0xFFFFB783)),
-          const SizedBox(width: 10),
-          const _WorkspaceChip(label: '◆  420 XP', color: Color(0xFF91CDFF)),
-          const SizedBox(width: 12),
-          Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              color: const Color(0xFF252A32),
-              borderRadius: BorderRadius.circular(12),
+          IconButton(
+            tooltip: _localized(
+              context,
+              'إعدادات مساحة العمل',
+              'Workspace settings',
             ),
-            child: const Icon(
-              Icons.person_outline_rounded,
-              color: Color(0xFFDEE2EC),
-              size: 19,
-            ),
+            onPressed: onOpenSettings,
+            icon: const Icon(Icons.settings_outlined),
           ),
         ],
       ),
@@ -688,13 +778,18 @@ class _WorkspaceMeta extends StatelessWidget {
 class _WorkspaceActionButton extends StatelessWidget {
   final IconData icon;
   final String label;
+  final VoidCallback? onPressed;
 
-  const _WorkspaceActionButton({required this.icon, required this.label});
+  const _WorkspaceActionButton({
+    required this.icon,
+    required this.label,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
-      onPressed: () {},
+      onPressed: onPressed,
       icon: Icon(icon, size: 17, color: const Color(0xFF91CDFF)),
       label: Text(
         label,
@@ -719,16 +814,29 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
   final bool searchOpen;
   final TextEditingController searchController;
   final VoidCallback onToggleSearch;
+  final String activeFilePath;
+  final ValueChanged<String>? onOpenFile;
 
   const _WorkspaceExplorerPanel({
     required this.data,
     required this.searchOpen,
     required this.searchController,
+    required this.activeFilePath,
     required this.onToggleSearch,
+    this.onOpenFile,
   });
 
   @override
   Widget build(BuildContext context) {
+    final query = searchController.text.trim().toLowerCase();
+    final matchingFiles = _collectFileNodes(data.fileTree)
+        .where(
+          (file) =>
+              query.isEmpty ||
+              file.name.toLowerCase().contains(query) ||
+              file.path.toLowerCase().contains(query),
+        )
+        .toList(growable: false);
     return Column(
       children: [
         Expanded(
@@ -763,7 +871,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                     color: const Color(0xFF252A32),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(
@@ -774,7 +882,11 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                       SizedBox(width: 5),
                                       Flexible(
                                         child: Text(
-                                          'الملفات',
+                                          _localized(
+                                            context,
+                                            'الملفات',
+                                            'Files',
+                                          ),
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontFamily: 'IBM Plex Sans Arabic',
@@ -797,7 +909,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                       vertical: 7,
                                     ),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
@@ -809,7 +921,11 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                         SizedBox(width: 5),
                                         Flexible(
                                           child: Text(
-                                            'البحث',
+                                            _localized(
+                                              context,
+                                              'البحث',
+                                              'Search',
+                                            ),
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontFamily:
@@ -829,7 +945,11 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        tooltip: 'بحث في ملفات المشروع',
+                        tooltip: _localized(
+                          context,
+                          'بحث في ملفات المشروع',
+                          'Search project files',
+                        ),
                         onPressed: onToggleSearch,
                         icon: const Icon(
                           Icons.manage_search_rounded,
@@ -840,35 +960,38 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 6),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.account_tree_rounded,
-                        color: Color(0xFF91CDFF),
-                        size: 16,
-                      ),
-                      const SizedBox(width: 7),
-                      const Text(
-                        'res://',
-                        style: TextStyle(
-                          fontFamily: 'JetBrains Mono',
-                          color: Color(0xFFDEE2EC),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 6),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.account_tree_rounded,
+                          color: Color(0xFF91CDFF),
+                          size: 16,
                         ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        '${data.fileTree.length} مجلد',
-                        style: const TextStyle(
-                          fontFamily: 'IBM Plex Sans Arabic',
-                          color: Color(0xFF8A919A),
-                          fontSize: 10,
+                        const SizedBox(width: 7),
+                        const Text(
+                          'res://',
+                          style: TextStyle(
+                            fontFamily: 'JetBrains Mono',
+                            color: Color(0xFFDEE2EC),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
-                    ],
+                        const Spacer(),
+                        Text(
+                          '${_countFiles(data.fileTree)} ${_localized(context, 'ملف', 'files')}',
+                          style: const TextStyle(
+                            fontFamily: 'IBM Plex Sans Arabic',
+                            color: Color(0xFF8A919A),
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const Divider(height: 1, color: Color(0xFF252A32)),
@@ -876,7 +999,13 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                   child: ListView(
                     padding: const EdgeInsets.symmetric(vertical: 6),
                     children: data.fileTree
-                        .map((node) => _FileTreeNodeTile(node: node))
+                        .map(
+                          (node) => _FileTreeNodeTile(
+                            node: node,
+                            activeFilePath: activeFilePath,
+                            onOpenFile: onOpenFile,
+                          ),
+                        )
                         .toList(),
                   ),
                 ),
@@ -893,143 +1022,89 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: const Color(0xFF252A32)),
             ),
-            child: ListView(
+            child: Padding(
               padding: const EdgeInsets.all(10),
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.manage_search_rounded,
-                      size: 17,
-                      color: Color(0xFF91CDFF),
-                    ),
-                    const SizedBox(width: 6),
-                    const Expanded(
-                      child: Text(
-                        'نتائج البحث السريع',
-                        style: TextStyle(
-                          fontFamily: 'IBM Plex Sans Arabic',
-                          color: Color(0xFFDEE2EC),
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.manage_search_rounded,
+                        size: 17,
+                        color: Color(0xFF91CDFF),
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          _localized(
+                            context,
+                            searchOpen
+                                ? 'البحث في الملفات'
+                                : 'الملفات المطابقة',
+                            searchOpen ? 'Search files' : 'Matching files',
+                          ),
+                          style: const TextStyle(
+                            fontFamily: 'IBM Plex Sans Arabic',
+                            color: Color(0xFFDEE2EC),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
+                      _WorkspaceChip(
+                        label: '${matchingFiles.length}',
+                        color: const Color(0xFF91CDFF),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 9),
+                  _QuickSearchInput(controller: searchController),
+                  const SizedBox(height: 8),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: matchingFiles.length,
+                      itemBuilder: (context, index) {
+                        final file = matchingFiles[index];
+                        return ListTile(
+                          dense: true,
+                          leading: const Icon(
+                            Icons.code_rounded,
+                            size: 15,
+                            color: Color(0xFF38BDF8),
+                          ),
+                          title: Text(
+                            file.path,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textDirection: TextDirection.ltr,
+                            style: const TextStyle(
+                              fontFamily: 'JetBrains Mono',
+                              color: Color(0xFFC0C7D0),
+                              fontSize: 9,
+                            ),
+                          ),
+                          selected: file.path == activeFilePath,
+                          onTap: () => onOpenFile?.call(file.path),
+                        );
+                      },
                     ),
-                    _WorkspaceChip(
-                      label: searchOpen ? 'بحث' : '2 نتيجة',
-                      color: const Color(0xFF91CDFF),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 9),
-                _QuickSearchInput(controller: searchController),
-                const SizedBox(height: 8),
-                const Wrap(
-                  spacing: 5,
-                  runSpacing: 5,
-                  children: [
-                    _SearchFilterChip(label: 'LSP Symbols', selected: true),
-                    _SearchFilterChip(label: 'Full Text'),
-                    _SearchFilterChip(label: 'References'),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                const _SearchResultTile(
-                  file: 'health_system.gd:18',
-                  code: 'func take_damage(amount: int)',
-                  isDefinition: true,
-                ),
-                const SizedBox(height: 5),
-                const _SearchResultTile(
-                  file: 'player.gd:84',
-                  code: 'health_system.take_damage(20)',
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ],
     );
   }
-}
 
-class _SearchFilterChip extends StatelessWidget {
-  final String label;
-  final bool selected;
-
-  const _SearchFilterChip({required this.label, this.selected = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-      decoration: BoxDecoration(
-        color: selected ? const Color(0x1F91CDFF) : const Color(0xFF252A32),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontFamily: 'JetBrains Mono',
-          fontSize: 9,
-          color: selected ? const Color(0xFF91CDFF) : const Color(0xFFC0C7D0),
-        ),
-      ),
-    );
-  }
-}
-
-class _SearchResultTile extends StatelessWidget {
-  final String file;
-  final String code;
-  final bool isDefinition;
-
-  const _SearchResultTile({
-    required this.file,
-    required this.code,
-    this.isDefinition = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final resultColor = isDefinition
-        ? const Color(0xFF4AE183)
-        : const Color(0xFFFFB783);
-    return Container(
-      padding: const EdgeInsets.all(7),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1B2027),
-        borderRadius: BorderRadius.circular(7),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            file,
-            style: TextStyle(
-              fontFamily: 'JetBrains Mono',
-              color: resultColor,
-              fontSize: 9,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: Text(
-              code,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontFamily: 'JetBrains Mono',
-                color: Color(0xFFC0C7D0),
-                fontSize: 9,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  List<ProjectFileNodeModel> _collectFileNodes(
+    List<ProjectFileNodeModel> nodes,
+  ) => [
+    for (final node in nodes)
+      if (node.isDirectory) ..._collectFileNodes(node.children) else node,
+  ];
 }
 
 class _WorkspaceEditorPanel extends StatelessWidget {
@@ -1038,6 +1113,9 @@ class _WorkspaceEditorPanel extends StatelessWidget {
   final String activeTabId;
   final FocusNode focusNode;
   final ValueChanged<String> onSelectTab;
+  final ValueChanged<String>? onCodeChanged;
+  final Future<void> Function()? onSaveFile;
+  final ValueChanged<String>? onCloseFile;
 
   const _WorkspaceEditorPanel({
     required this.data,
@@ -1045,6 +1123,9 @@ class _WorkspaceEditorPanel extends StatelessWidget {
     required this.activeTabId,
     required this.focusNode,
     required this.onSelectTab,
+    this.onCodeChanged,
+    this.onSaveFile,
+    this.onCloseFile,
   });
 
   @override
@@ -1076,28 +1157,20 @@ class _WorkspaceEditorPanel extends StatelessWidget {
                     tabs: data.openTabs,
                     activeTabId: activeTabId,
                     onSelectTab: onSelectTab,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                const _WorkspaceChip(
-                  label: '⚠ 1 تحذير  •  0 أخطاء',
-                  color: Color(0xFFFFB783),
-                ),
-                IconButton(
-                  tooltip: 'تقسيم المحرر',
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.vertical_split_rounded,
-                    color: Color(0xFF8A919A),
-                    size: 18,
+                    onCloseTab: onCloseFile,
                   ),
                 ),
                 IconButton(
-                  tooltip: 'الخريطة المصغرة',
-                  onPressed: () {},
+                  tooltip: _localized(context, 'حفظ الملف', 'Save file'),
+                  onPressed:
+                      data.openTabs.any(
+                        (tab) => tab.fileId == activeTabId && tab.isDirty,
+                      )
+                      ? onSaveFile
+                      : null,
                   icon: const Icon(
-                    Icons.density_small_rounded,
-                    color: Color(0xFF8A919A),
+                    Icons.save_outlined,
+                    color: Color(0xFF91CDFF),
                     size: 18,
                   ),
                 ),
@@ -1117,18 +1190,20 @@ class _WorkspaceEditorPanel extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 15),
                     child: ListView.builder(
                       itemCount: lineCount < 24 ? 24 : lineCount,
-                      itemBuilder: (context, index) => SizedBox(
-                        height: 22.4,
-                        child: Text(
-                          '${index + 1}',
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(
-                            fontFamily: 'JetBrains Mono',
-                            fontSize: 11,
-                            color: Color(0xFF8A919A),
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          height: 22.4,
+                          child: Text(
+                            '${index + 1}',
+                            textAlign: TextAlign.right,
+                            style: const TextStyle(
+                              fontFamily: 'JetBrains Mono',
+                              fontSize: 11,
+                              color: Color(0xFF8A919A),
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
                   const VerticalDivider(width: 1, color: Color(0xFF252A32)),
@@ -1153,6 +1228,7 @@ class _WorkspaceEditorPanel extends StatelessWidget {
                           contentPadding: EdgeInsets.zero,
                           isDense: true,
                         ),
+                        onChanged: onCodeChanged,
                       ),
                     ),
                   ),
@@ -1167,195 +1243,62 @@ class _WorkspaceEditorPanel extends StatelessWidget {
 }
 
 class _WorkspaceInspectorPanel extends StatelessWidget {
-  const _WorkspaceInspectorPanel();
+  const _WorkspaceInspectorPanel({required this.data});
+
+  final WorkspaceDataModel data;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          flex: 6,
-          child: _WorkspaceInfoCard(
-            title: 'هيكل المستند (Symbols)',
-            icon: Icons.schema_rounded,
-            iconColor: const Color(0xFF91CDFF),
-            trailing: 'GDScript LSP',
-            child: const Column(
-              children: [
-                _SymbolRow(
-                  icon: Icons.category_rounded,
-                  label: 'PlayerController',
-                  type: 'Class',
-                  color: Color(0xFF91CDFF),
-                  emphasized: true,
-                ),
-                _SymbolRow(
-                  icon: Icons.tune_rounded,
-                  label: '@export speed',
-                  type: 'float',
-                  color: Color(0xFFFFB783),
-                  indented: true,
-                ),
-                _SymbolRow(
-                  icon: Icons.tune_rounded,
-                  label: '@export jump_impulse',
-                  type: 'float',
-                  color: Color(0xFFFFB783),
-                  indented: true,
-                ),
-                _SymbolRow(
-                  icon: Icons.sensors_rounded,
-                  label: 'player_jumped',
-                  type: 'Signal',
-                  color: Color(0xFF4AE183),
-                  indented: true,
-                ),
-                _SymbolRow(
-                  icon: Icons.functions_rounded,
-                  label: '_physics_process(delta)',
-                  type: 'void',
-                  color: Color(0xFF91CDFF),
-                  indented: true,
-                ),
-              ],
+    final activeTab = data.openTabs.where(
+      (tab) => tab.fileId == data.activeTabFileId,
+    );
+    final code = data.activeCodeContent;
+    return _WorkspaceInfoCard(
+      title: _localized(context, 'معلومات الملف', 'File information'),
+      icon: Icons.description_outlined,
+      iconColor: const Color(0xFF91CDFF),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            activeTab.isEmpty
+                ? _localized(context, 'لا يوجد ملف مفتوح', 'No file is open')
+                : activeTab.first.filePath,
+            textDirection: TextDirection.ltr,
+            style: const TextStyle(
+              fontFamily: 'JetBrains Mono',
+              color: Color(0xFF91CDFF),
+              fontSize: 10,
             ),
           ),
-        ),
-        const SizedBox(height: 10),
-        Expanded(
-          flex: 5,
-          child: _WorkspaceInfoCard(
-            title: 'العُقد والإشارات المرتبطة',
-            icon: Icons.hub_rounded,
-            iconColor: const Color(0xFFFFB783),
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1B2027),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.account_tree_rounded,
-                            color: Color(0xFF91CDFF),
-                            size: 15,
-                          ),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: Text(
-                              r'$StateMachine',
-                              style: TextStyle(
-                                fontFamily: 'JetBrains Mono',
-                                color: Color(0xFF91CDFF),
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Node متصلة',
-                            style: TextStyle(
-                              fontFamily: 'IBM Plex Sans Arabic',
-                              color: Color(0xFF4AE183),
-                              fontSize: 9,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 7),
-                      Text(
-                        'مرتبطة بسكربت state_machine.gd وتدير انتقالات حالات اللاعب.',
-                        style: TextStyle(
-                          fontFamily: 'IBM Plex Sans Arabic',
-                          color: Color(0xFFC0C7D0),
-                          fontSize: 10,
-                          height: 1.5,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(9),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1B2027),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Column(
-                    children: [
-                      const Row(
-                        children: [
-                          Icon(
-                            Icons.cloud_done_rounded,
-                            color: Color(0xFF4AE183),
-                            size: 15,
-                          ),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: Text(
-                              'المستودع المحلي',
-                              style: TextStyle(
-                                fontFamily: 'IBM Plex Sans Arabic',
-                                color: Color(0xFFC0C7D0),
-                                fontSize: 10,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Sync clean',
-                            style: TextStyle(
-                              fontFamily: 'JetBrains Mono',
-                              color: Color(0xFF8A919A),
-                              fontSize: 9,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.save_outlined,
-                            size: 15,
-                            color: Color(0xFF91CDFF),
-                          ),
-                          label: const Text(
-                            'حفظ التعديلات (Ctrl+S)',
-                            style: TextStyle(
-                              fontFamily: 'IBM Plex Sans Arabic',
-                              fontSize: 10,
-                              color: Color(0xFFDEE2EC),
-                            ),
-                          ),
-                          style: OutlinedButton.styleFrom(
-                            backgroundColor: const Color(0xFF252A32),
-                            side: BorderSide.none,
-                            padding: const EdgeInsets.symmetric(vertical: 7),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+          const SizedBox(height: 10),
+          Text(
+            _localized(
+              context,
+              'الأسطر: ${code.split('\n').length}',
+              'Lines: ${code.split('\n').length}',
+            ),
+            style: const TextStyle(
+              fontFamily: 'IBM Plex Sans Arabic',
+              color: Color(0xFFC0C7D0),
+              fontSize: 10,
             ),
           ),
-        ),
-      ],
+          const SizedBox(height: 6),
+          Text(
+            _localized(
+              context,
+              'الحجم: ${code.length} محرف',
+              'Size: ${code.length} characters',
+            ),
+            style: const TextStyle(
+              fontFamily: 'IBM Plex Sans Arabic',
+              color: Color(0xFFC0C7D0),
+              fontSize: 10,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1364,7 +1307,6 @@ class _WorkspaceInfoCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color iconColor;
-  final String? trailing;
   final Widget child;
 
   const _WorkspaceInfoCard({
@@ -1372,7 +1314,6 @@ class _WorkspaceInfoCard extends StatelessWidget {
     required this.icon,
     required this.iconColor,
     required this.child,
-    this.trailing,
   });
 
   @override
@@ -1403,15 +1344,6 @@ class _WorkspaceInfoCard extends StatelessWidget {
                   ),
                 ),
               ),
-              if (trailing != null)
-                Text(
-                  trailing!,
-                  style: const TextStyle(
-                    fontFamily: 'JetBrains Mono',
-                    color: Color(0xFF8A919A),
-                    fontSize: 8,
-                  ),
-                ),
             ],
           ),
           const SizedBox(height: 8),
@@ -1422,65 +1354,10 @@ class _WorkspaceInfoCard extends StatelessWidget {
   }
 }
 
-class _SymbolRow extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String type;
-  final Color color;
-  final bool emphasized;
-  final bool indented;
-
-  const _SymbolRow({
-    required this.icon,
-    required this.label,
-    required this.type,
-    required this.color,
-    this.emphasized = false,
-    this.indented = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.only(
-        start: indented ? 13 : 0,
-        top: 5,
-        bottom: 5,
-      ),
-      child: Row(
-        children: [
-          Icon(icon, size: 15, color: color),
-          const SizedBox(width: 6),
-          Expanded(
-            child: Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontFamily: 'JetBrains Mono',
-                color: emphasized ? color : const Color(0xFFC0C7D0),
-                fontSize: 9,
-                fontWeight: emphasized ? FontWeight.bold : FontWeight.normal,
-              ),
-            ),
-          ),
-          const SizedBox(width: 4),
-          Text(
-            type,
-            style: const TextStyle(
-              fontFamily: 'JetBrains Mono',
-              color: Color(0xFF8A919A),
-              fontSize: 8,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _WorkspaceDockPanel extends StatelessWidget {
-  const _WorkspaceDockPanel();
+  const _WorkspaceDockPanel({required this.data});
+
+  final WorkspaceDataModel data;
 
   @override
   Widget build(BuildContext context) {
@@ -1498,85 +1375,66 @@ class _WorkspaceDockPanel extends StatelessWidget {
             color: const Color(0xFF1B2027),
             child: Row(
               children: [
-                const _DockTab(
-                  icon: Icons.terminal_rounded,
-                  label: 'مخرجات التشغيل Godot Output',
-                  count: '3',
+                _DockTab(
+                  icon: Icons.warning_amber_rounded,
+                  label: _localized(context, 'تشخيصات LSP', 'LSP diagnostics'),
+                  count: '${data.diagnosticsCount}',
                   active: true,
                 ),
-                const SizedBox(width: 5),
-                const _DockTab(
-                  icon: Icons.warning_amber_rounded,
-                  label: 'تشخيصات LSP',
-                  count: '1',
-                ),
-                const SizedBox(width: 5),
-                const _DockTab(
-                  icon: Icons.code_rounded,
-                  label: 'الطرفية المدمجة',
-                ),
                 const Spacer(),
-                const Text(
-                  'الاستجابة: 2ms  |  الذاكرة: 34MB',
-                  style: TextStyle(
-                    fontFamily: 'JetBrains Mono',
-                    color: Color(0xFF4AE183),
-                    fontSize: 9,
+                Text(
+                  _localized(
+                    context,
+                    data.isLspConnected ? 'متصل' : 'غير متصل',
+                    data.isLspConnected ? 'Connected' : 'Disconnected',
                   ),
-                ),
-                IconButton(
-                  tooltip: 'مسح المخرجات',
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.block_rounded,
-                    color: Color(0xFF8A919A),
-                    size: 16,
+                  style: TextStyle(
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    color: data.isLspConnected
+                        ? const Color(0xFF4AE183)
+                        : const Color(0xFFFFB783),
+                    fontSize: 10,
                   ),
                 ),
               ],
             ),
           ),
           const Divider(height: 1, color: Color(0xFF252A32)),
-          const Expanded(
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _ConsoleLine(
-                      time: '[14:48:12]',
-                      tag: '[LSP Client]',
-                      message:
-                          'Initialized successfully with stdio connection.',
-                      color: Color(0xFF91CDFF),
+          Expanded(
+            child: data.diagnosticMessages.isEmpty
+                ? Center(
+                    child: Text(
+                      _localized(
+                        context,
+                        'لا توجد تشخيصات للمستندات المفهرسة.',
+                        'No diagnostics for indexed documents.',
+                      ),
+                      style: const TextStyle(
+                        fontFamily: 'IBM Plex Sans Arabic',
+                        color: Color(0xFF8A919A),
+                        fontSize: 11,
+                      ),
                     ),
-                    _ConsoleLine(
-                      time: '[14:48:13]',
-                      tag: '[WorkspaceIndex]',
-                      message:
-                          'Indexed 14 GDScript files in 48ms. All symbols resolved.',
-                      color: Color(0xFF4AE183),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 8,
                     ),
-                    _ConsoleLine(
-                      time: '[14:48:15]',
-                      tag: '[Running]',
-                      message:
-                          'GDScriptEngine test: player.gd loaded without errors.',
-                      color: Color(0xFF91CDFF),
+                    itemCount: data.diagnosticMessages.length,
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: Text(
+                        data.diagnosticMessages[index],
+                        textDirection: TextDirection.ltr,
+                        style: const TextStyle(
+                          fontFamily: 'JetBrains Mono',
+                          color: Color(0xFFFFB783),
+                          fontSize: 10,
+                        ),
+                      ),
                     ),
-                    _ConsoleLine(
-                      time: '[14:48:15]',
-                      tag: '[LSP Warning]',
-                      message:
-                          "Line 12: Signal 'player_jumped' is never emitted.",
-                      color: Color(0xFFFFB783),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
           ),
         ],
       ),
@@ -1639,62 +1497,6 @@ class _DockTab extends StatelessWidget {
   }
 }
 
-class _ConsoleLine extends StatelessWidget {
-  final String time;
-  final String tag;
-  final String message;
-  final Color color;
-
-  const _ConsoleLine({
-    required this.time,
-    required this.tag,
-    required this.message,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      child: Row(
-        children: [
-          Text(
-            time,
-            style: const TextStyle(
-              fontFamily: 'JetBrains Mono',
-              color: Color(0xFF8A919A),
-              fontSize: 9,
-            ),
-          ),
-          const SizedBox(width: 9),
-          Text(
-            tag,
-            style: TextStyle(
-              fontFamily: 'JetBrains Mono',
-              color: color,
-              fontSize: 9,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              message,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontFamily: 'JetBrains Mono',
-                color: Color(0xFFC0C7D0),
-                fontSize: 9,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _QuickSearchInput extends StatelessWidget {
   final TextEditingController controller;
 
@@ -1715,9 +1517,13 @@ class _QuickSearchInput extends StatelessWidget {
           fontSize: 11,
           color: Color(0xFFE2E8F0),
         ),
-        decoration: const InputDecoration(
-          hintText: 'ابحث عن ملف أو سكربت...',
-          hintStyle: TextStyle(
+        decoration: InputDecoration(
+          hintText: _localized(
+            context,
+            'ابحث عن ملف أو سكربت...',
+            'Search files or scripts...',
+          ),
+          hintStyle: const TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 11,
             color: Color(0xFF64748B),
@@ -1738,8 +1544,14 @@ class _QuickSearchInput extends StatelessWidget {
 
 class _FileTreeNodeTile extends StatelessWidget {
   final ProjectFileNodeModel node;
+  final String activeFilePath;
+  final ValueChanged<String>? onOpenFile;
 
-  const _FileTreeNodeTile({required this.node});
+  const _FileTreeNodeTile({
+    required this.node,
+    required this.activeFilePath,
+    required this.onOpenFile,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1765,7 +1577,13 @@ class _FileTreeNodeTile extends StatelessWidget {
             ),
           ),
           children: node.children
-              .map((child) => _FileTreeNodeTile(node: child))
+              .map(
+                (child) => _FileTreeNodeTile(
+                  node: child,
+                  activeFilePath: activeFilePath,
+                  onOpenFile: onOpenFile,
+                ),
+              )
               .toList(),
         ),
       );
@@ -1798,7 +1616,9 @@ class _FileTreeNodeTile extends StatelessWidget {
               color: Color(0xFF94A3B8),
             ),
           ),
-          onTap: () {},
+          selected: node.path == activeFilePath,
+          selectedTileColor: const Color(0xFF1E2837),
+          onTap: () => onOpenFile?.call(node.path),
         ),
       ),
     );
@@ -1809,11 +1629,13 @@ class _EditorTabBar extends StatelessWidget {
   final List<EditorTabModel> tabs;
   final String activeTabId;
   final ValueChanged<String> onSelectTab;
+  final ValueChanged<String>? onCloseTab;
 
   const _EditorTabBar({
     required this.tabs,
     required this.activeTabId,
     required this.onSelectTab,
+    this.onCloseTab,
   });
 
   @override
@@ -1879,10 +1701,17 @@ class _EditorTabBar extends StatelessWidget {
                     ),
                   ],
                   const SizedBox(width: 8),
-                  const Icon(
-                    Icons.close_rounded,
-                    size: 14,
-                    color: Color(0xFF64748B),
+                  InkWell(
+                    onTap: () => onCloseTab?.call(tab.filePath),
+                    borderRadius: BorderRadius.circular(10),
+                    child: const Padding(
+                      padding: EdgeInsets.all(2),
+                      child: Icon(
+                        Icons.close_rounded,
+                        size: 14,
+                        color: Color(0xFF64748B),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -1923,8 +1752,12 @@ class _WorkspaceStatusBar extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             lspOnline
-                ? 'GDScript 2.0 (Godot 4.3 Engine Bridge)'
-                : 'GDScript 2.0 • المحرك غير متصل',
+                ? 'GDScript 2.0 • LSP'
+                : _localized(
+                    context,
+                    'GDScript 2.0 • خادم اللغة غير متصل',
+                    'GDScript 2.0 • language server offline',
+                  ),
             style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 11,
@@ -1935,7 +1768,11 @@ class _WorkspaceStatusBar extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            'السطر $cursorLine، العمود $cursorCol',
+            _localized(
+              context,
+              'السطر $cursorLine، العمود $cursorCol',
+              'Line $cursorLine, column $cursorCol',
+            ),
             style: const TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 11,
@@ -1943,12 +1780,15 @@ class _WorkspaceStatusBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 14),
-          const Text(
-            'UTF-8 • Tab: 4 spaces • LF',
-            style: TextStyle(
-              fontFamily: 'JetBrains Mono',
-              fontSize: 11,
-              color: Color(0xFF64748B),
+          const Directionality(
+            textDirection: TextDirection.ltr,
+            child: Text(
+              'UTF-8 • Tab: 4 spaces • LF',
+              style: TextStyle(
+                fontFamily: 'JetBrains Mono',
+                fontSize: 11,
+                color: Color(0xFF64748B),
+              ),
             ),
           ),
         ],

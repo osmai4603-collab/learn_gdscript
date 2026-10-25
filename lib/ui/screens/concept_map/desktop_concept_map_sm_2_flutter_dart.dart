@@ -5,6 +5,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/data/models/review_schedule.dart';
 import 'package:learn_gdscript/ui/routers/app_routes.dart';
 
 // -----------------------------------------------------------------------------
@@ -12,19 +13,20 @@ import 'package:learn_gdscript/ui/routers/app_routes.dart';
 // -----------------------------------------------------------------------------
 
 enum ConceptMasteryLevel { locked, learning, reviewing, mastered }
-enum Sm2Rating { again, hard, good, easy }
-
 class KnowledgeConceptNodeModel {
   final String id;
   final String titleAr;
   final String titleEn;
   final String category;
+  final String? categoryEn;
   final ConceptMasteryLevel mastery;
-  final double retentionPercent;
-  final int daysUntilNextReview;
+  final double? retentionPercent;
+  final int? daysUntilNextReview;
   final String lastReviewedDate;
   final String description;
+  final String? descriptionEn;
   final String codeExample;
+  final String? lessonId;
   final List<String> prerequisites;
   final Offset visualPosition; // لإحداثيات الرسم البياني للشجرة
 
@@ -33,12 +35,15 @@ class KnowledgeConceptNodeModel {
     required this.titleAr,
     required this.titleEn,
     required this.category,
+    this.categoryEn,
     required this.mastery,
     required this.retentionPercent,
     required this.daysUntilNextReview,
     required this.lastReviewedDate,
     required this.description,
+    this.descriptionEn,
     required this.codeExample,
+    this.lessonId,
     required this.prerequisites,
     required this.visualPosition,
   });
@@ -48,8 +53,11 @@ class Sm2FlashcardItemModel {
   final String id;
   final String conceptId;
   final String promptQuestion;
+  final String? promptQuestionEn;
   final String codeContext;
   final String answerExplanation;
+  final String? answerExplanationEn;
+  final String answerCode;
   final int repetitionCount;
   final double easinessFactor; // عامل السهولة EF وفق خوارزمية SM-2
   final int currentIntervalDays;
@@ -58,8 +66,11 @@ class Sm2FlashcardItemModel {
     required this.id,
     required this.conceptId,
     required this.promptQuestion,
+    this.promptQuestionEn,
     required this.codeContext,
     required this.answerExplanation,
+    this.answerExplanationEn,
+    this.answerCode = '',
     required this.repetitionCount,
     required this.easinessFactor,
     required this.currentIntervalDays,
@@ -70,7 +81,7 @@ class ConceptMapSm2DataModel {
   final int totalConceptsCount;
   final int masteredConceptsCount;
   final int dueTodayCardsCount;
-  final double averageRetentionRate;
+  final double? averageRetentionRate;
   final int streakDays;
   final int xp;
   final List<KnowledgeConceptNodeModel> concepts;
@@ -89,8 +100,13 @@ class ConceptMapSm2DataModel {
     required this.selectedConceptId,
   });
 
-  KnowledgeConceptNodeModel get activeConcept =>
-      concepts.firstWhere((c) => c.id == selectedConceptId, orElse: () => concepts.first);
+  KnowledgeConceptNodeModel? get activeConcept {
+    if (concepts.isEmpty) return null;
+    for (final concept in concepts) {
+      if (concept.id == selectedConceptId) return concept;
+    }
+    return concepts.first;
+  }
 
   static ConceptMapSm2DataModel sampleData() {
     return const ConceptMapSm2DataModel(
@@ -223,16 +239,18 @@ class ConceptMapSm2DataModel {
 
 class DesktopConceptMapSm2Screen extends StatefulWidget {
   final ConceptMapSm2DataModel data;
-  final ValueChanged<String>? onNavigateRoute;
+  final ValueChanged<String> onNavigateRoute;
   final ValueChanged<String>? onSelectConcept;
-  final Function(String cardId, Sm2Rating rating)? onRateCard;
+  final Future<void> Function(String cardId, Sm2Rating rating) onRateCard;
+  final bool isSavingRating;
 
   const DesktopConceptMapSm2Screen({
     super.key,
     required this.data,
-    this.onNavigateRoute,
+    required this.onNavigateRoute,
+    required this.onRateCard,
     this.onSelectConcept,
-    this.onRateCard,
+    this.isSavingRating = false,
   });
 
   @override
@@ -251,35 +269,67 @@ class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen>
     _selectedConceptId = widget.data.selectedConceptId;
   }
 
-  KnowledgeConceptNodeModel get _activeConcept =>
-      widget.data.concepts.firstWhere((c) => c.id == _selectedConceptId, orElse: () => widget.data.concepts.first);
+  @override
+  void didUpdateWidget(covariant DesktopConceptMapSm2Screen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!widget.data.concepts.any((concept) => concept.id == _selectedConceptId)) {
+      _selectedConceptId = widget.data.selectedConceptId;
+    }
+    if (_activeCardIndex >= widget.data.activeReviewDeck.length) {
+      _activeCardIndex = 0;
+    }
+  }
 
-  void _handleRating(Sm2Rating rating) {
+  Future<void> _handleRating(Sm2Rating rating) async {
+    if (widget.isSavingRating ||
+        _activeCardIndex >= widget.data.activeReviewDeck.length) {
+      return;
+    }
     final currentCard = widget.data.activeReviewDeck[_activeCardIndex];
-    widget.onRateCard?.call(currentCard.id, rating);
-
-    setState(() {
-      _isAnswerRevealed = false;
-      if (_activeCardIndex < widget.data.activeReviewDeck.length - 1) {
-        _activeCardIndex++;
-      } else {
-        _isReviewDeckMode = false;
+    final remainingCards = widget.data.activeReviewDeck.length;
+    try {
+      await widget.onRateCard(currentCard.id, rating);
+      if (!mounted) return;
+      setState(() {
+        _isAnswerRevealed = false;
         _activeCardIndex = 0;
+        if (remainingCards <= 1) {
+        _isReviewDeckMode = false;
+        }
+      });
+      if (remainingCards <= 1) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             backgroundColor: Color(0xFF14532D),
             content: Text(
-              'اكتملت جلسة مراجعة بطاقات اليوم بنجاح! تم تحديث فترات SM-2 (+25 XP)',
-              style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', color: Colors.white),
+              _conceptMapCopy(
+                context,
+                'اكتملت جلسة المراجعة.',
+                'Review session complete.',
+              ),
             ),
           ),
-        );
+          );
       }
-    });
+    } on Object {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            _conceptMapCopy(
+              context,
+              'تعذر حفظ التقييم. حاول مرة أخرى.',
+              'Could not save the rating. Please try again.',
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final activeConcept = widget.data.activeConcept;
     return Scaffold(
       backgroundColor: const Color(0xFF0F141B),
       body: Column(
@@ -290,71 +340,62 @@ class _DesktopConceptMapSm2ScreenState extends State<DesktopConceptMapSm2Screen>
             xp: widget.data.xp,
             dueTodayCount: widget.data.dueTodayCardsCount,
             retentionPercent: widget.data.averageRetentionRate,
-            onNavigate: widget.onNavigateRoute,
           ),
           const Divider(height: 1, color: Color(0xFF28323F)),
     
           // 2. الهيكل الرئيسي لسطح المكتب
           Expanded(
-            child: Row(
-              children: [
-                // مساحة الرسم البياني التفاعلي أو وضع مراجعة الفلاش كاردز
-                Expanded(
-                  flex: 7,
-                  child: Container(
-                    color: const Color(0xFF0A0D12),
-                    child: Column(
-                      children: [
-                        // لافتة الإحصائيات وأزرار التبديل
-                        _ConceptHeaderBanner(
-                          totalCount: widget.data.totalConceptsCount,
-                          masteredCount: widget.data.masteredConceptsCount,
-                          dueCount: widget.data.dueTodayCardsCount,
-                          isReviewDeckMode: _isReviewDeckMode,
-                          onToggleMode: () => setState(() {
-                            _isReviewDeckMode = !_isReviewDeckMode;
-                            _isAnswerRevealed = false;
-                          }),
-                        ),
-                        const Divider(height: 1, color: Color(0xFF28323F)),
-    
-                        // المحتوى الرئيسي التفاعلي
-                        Expanded(
-                          child: _isReviewDeckMode
-                              ? _Sm2FlashcardDeckView(
-                                  cards: widget.data.activeReviewDeck,
-                                  currentIndex: _activeCardIndex,
-                                  isAnswerRevealed: _isAnswerRevealed,
-                                  onRevealAnswer: () => setState(() => _isAnswerRevealed = true),
-                                  onRate: _handleRating,
-                                )
-                              : _InteractiveGraphCanvas(
-                                  concepts: widget.data.concepts,
-                                  selectedConceptId: _selectedConceptId,
-                                  onSelectConcept: (id) => setState(() => _selectedConceptId = id),
-                                ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-    
-                const VerticalDivider(width: 1, color: Color(0xFF28323F)),
-    
-                // لوحة فحص المفهوم المعرفي المختار
-                SizedBox(
-                  width: 380,
-                  child: Container(
-                    color: const Color(0xFF131922),
-                    child: _ConceptInspectorPanel(
-                      concept: _activeConcept,
-                      onOpenLesson: () => widget.onNavigateRoute?.call(
-                        AppRoutes.lessonPath('u2'),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final wide = constraints.maxWidth >= 980;
+                final main = _ConceptMapMainPanel(
+                  data: widget.data,
+                  isReviewDeckMode: _isReviewDeckMode,
+                  isAnswerRevealed: _isAnswerRevealed,
+                  activeCardIndex: _activeCardIndex,
+                  isSavingRating: widget.isSavingRating,
+                  onToggleMode: () => setState(() {
+                    _isReviewDeckMode = !_isReviewDeckMode;
+                    _isAnswerRevealed = false;
+                    _activeCardIndex = 0;
+                  }),
+                  onRevealAnswer: () => setState(() => _isAnswerRevealed = true),
+                  onRate: _handleRating,
+                  onSelectConcept: (id) {
+                    setState(() => _selectedConceptId = id);
+                    widget.onSelectConcept?.call(id);
+                  },
+                  selectedConceptId: _selectedConceptId,
+                );
+                final inspector = activeConcept == null
+                    ? const SizedBox.shrink()
+                    : _ConceptInspectorPanel(
+                        concept: activeConcept,
+                        onOpenLesson: (lessonId) =>
+                            widget.onNavigateRoute(AppRoutes.lessonPath(lessonId)),
+                      );
+                if (wide) {
+                  return Row(
+                    children: [
+                      Expanded(flex: 7, child: main),
+                      const VerticalDivider(
+                        width: 1,
+                        color: Color(0xFF28323F),
                       ),
-                    ),
-                  ),
-                ),
-              ],
+                      SizedBox(width: 380, child: inspector),
+                    ],
+                  );
+                }
+                return Column(
+                  children: [
+                    Expanded(flex: 6, child: main),
+                    if (activeConcept != null) ...[
+                      const Divider(height: 1, color: Color(0xFF28323F)),
+                      Expanded(flex: 4, child: inspector),
+                    ],
+                  ],
+                );
+              },
             ),
           ),
         ],
@@ -371,69 +412,153 @@ class _ConceptMapTopNav extends StatelessWidget {
   final int streakDays;
   final int xp;
   final int dueTodayCount;
-  final double retentionPercent;
-  final ValueChanged<String>? onNavigate;
+  final double? retentionPercent;
 
   const _ConceptMapTopNav({
     required this.streakDays,
     required this.xp,
     required this.dueTodayCount,
     required this.retentionPercent,
-    this.onNavigate,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 56,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      constraints: const BoxConstraints(minHeight: 56),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       color: const Color(0xFF131922),
-      child: Row(
-        children: [
-          Row(
-            children: const [
-              Icon(Icons.psychology_rounded, color: Color(0xFF478CBF), size: 24),
-              SizedBox(width: 8),
-              Text(
-                'أكاديمية جودو',
-                style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final title = Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.psychology_rounded,
+                color: Color(0xFF478CBF),
+                size: 24,
               ),
-              SizedBox(width: 8),
-              Text('/', style: TextStyle(color: Color(0xFF64748B))),
-              SizedBox(width: 8),
-              Text(
-                'خريطة المفاهيم والتكرار المتباعد (Spaced Repetition & SM-2)',
-                style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, color: Color(0xFF94A3B8)),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  _conceptMapCopy(
+                    context,
+                    'خريطة المفاهيم والتكرار المتباعد',
+                    'Concept Map & Spaced Repetition',
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFE2E8F0),
+                  ),
+                ),
               ),
             ],
-          ),
-          const Spacer(),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: const Color(0xFF171C23),
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: const Color(0xFF28323F)),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.bolt_rounded, size: 14, color: Color(0xFF38BDF8)),
-                const SizedBox(width: 6),
-                Text(
-                  'معدل الاسترجاع: ${(retentionPercent * 100).toInt()}%',
-                  style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF38BDF8), fontWeight: FontWeight.bold),
+          );
+          final metrics = Wrap(
+            spacing: 8,
+            runSpacing: 6,
+            children: [
+              if (retentionPercent != null)
+                _MetricBadge(
+                  icon: Icons.bolt_rounded,
+                  text:
+                      '${_conceptMapCopy(context, 'معدل الاسترجاع', 'Recall')}: ${(retentionPercent! * 100).toInt()}%',
+                  color: const Color(0xFF38BDF8),
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
-          _MetricBadge(icon: Icons.local_fire_department_rounded, text: '$streakDays أيام', color: const Color(0xFFFB923C)),
-          const SizedBox(width: 8),
-          _MetricBadge(icon: Icons.diamond_rounded, text: '$xp XP', color: const Color(0xFFA855F7)),
-        ],
+              _MetricBadge(
+                icon: Icons.local_fire_department_rounded,
+                text: _conceptMapCopy(
+                  context,
+                  '$streakDays أيام',
+                  '$streakDays days',
+                ),
+                color: const Color(0xFFFB923C),
+              ),
+              _MetricBadge(
+                icon: Icons.diamond_rounded,
+                text: '$xp XP',
+                color: const Color(0xFFA855F7),
+              ),
+            ],
+          );
+          if (constraints.maxWidth < 760) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [title, const SizedBox(height: 8), metrics],
+            );
+          }
+          return Row(
+            children: [
+              Expanded(child: title),
+              const SizedBox(width: 12),
+              metrics,
+            ],
+          );
+        },
       ),
     );
   }
+}
+
+class _ConceptMapMainPanel extends StatelessWidget {
+  const _ConceptMapMainPanel({
+    required this.data,
+    required this.isReviewDeckMode,
+    required this.isAnswerRevealed,
+    required this.activeCardIndex,
+    required this.isSavingRating,
+    required this.onToggleMode,
+    required this.onRevealAnswer,
+    required this.onRate,
+    required this.onSelectConcept,
+    required this.selectedConceptId,
+  });
+
+  final ConceptMapSm2DataModel data;
+  final bool isReviewDeckMode;
+  final bool isAnswerRevealed;
+  final int activeCardIndex;
+  final bool isSavingRating;
+  final VoidCallback onToggleMode;
+  final VoidCallback onRevealAnswer;
+  final Future<void> Function(Sm2Rating rating) onRate;
+  final ValueChanged<String> onSelectConcept;
+  final String selectedConceptId;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    color: const Color(0xFF0A0D12),
+    child: Column(
+      children: [
+        _ConceptHeaderBanner(
+          totalCount: data.totalConceptsCount,
+          masteredCount: data.masteredConceptsCount,
+          dueCount: data.dueTodayCardsCount,
+          isReviewDeckMode: isReviewDeckMode,
+          onToggleMode: onToggleMode,
+        ),
+        const Divider(height: 1, color: Color(0xFF28323F)),
+        Expanded(
+          child: isReviewDeckMode
+              ? _Sm2FlashcardDeckView(
+                  cards: data.activeReviewDeck,
+                  currentIndex: activeCardIndex,
+                  isAnswerRevealed: isAnswerRevealed,
+                  isSavingRating: isSavingRating,
+                  onRevealAnswer: onRevealAnswer,
+                  onRate: onRate,
+                )
+              : _InteractiveGraphCanvas(
+                  concepts: data.concepts,
+                  selectedConceptId: selectedConceptId,
+                  onSelectConcept: onSelectConcept,
+                ),
+        ),
+      ],
+    ),
+  );
 }
 
 class _MetricBadge extends StatelessWidget {
@@ -480,52 +605,116 @@ class _ConceptHeaderBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      color: const Color(0xFF131922),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(color: const Color(0xFF478CBF).withValues(alpha: 0.2), borderRadius: BorderRadius.circular(8)),
-                child: const Icon(Icons.account_tree_rounded, size: 20, color: Color(0xFF478CBF)),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final details = Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF478CBF).withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(8),
               ),
-              const SizedBox(width: 12),
-              Column(
+              child: const Icon(
+                Icons.account_tree_rounded,
+                size: 20,
+                color: Color(0xFF478CBF),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'شجرة المعرفة التراكمية في GDScript 2.0',
-                    style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+                  Text(
+                    _conceptMapCopy(
+                      context,
+                      'شجرة المعرفة التراكمية في GDScript 2.0',
+                      'GDScript 2.0 knowledge map',
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFE2E8F0),
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'أتقنت $masteredCount من أصل $totalCount مفهوماً برمجياً • $dueCount بطاقات مستحقة للمراجعة اليوم',
-                    style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF94A3B8)),
+                    _conceptMapCopy(
+                      context,
+                      'أتقنت $masteredCount من أصل $totalCount مفهوماً • $dueCount بطاقة مستحقة اليوم',
+                      '$masteredCount of $totalCount mastered • $dueCount cards due today',
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 11,
+                      color: Color(0xFF94A3B8),
+                    ),
                   ),
                 ],
               ),
-            ],
-          ),
-          ElevatedButton.icon(
-            onPressed: onToggleMode,
-            icon: Icon(isReviewDeckMode ? Icons.map_rounded : Icons.style_rounded, size: 16),
-            label: Text(
-              isReviewDeckMode ? 'العودة للخريطة البصرية' : 'بدء جلسة المراجعة الذكية ($dueCount) ↵',
-              style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold),
             ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: isReviewDeckMode ? const Color(0xFF1F2630) : const Color(0xFF38BDF8),
-              foregroundColor: isReviewDeckMode ? const Color(0xFFE2E8F0) : Colors.black,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ],
+        );
+        final button = ElevatedButton.icon(
+          onPressed: onToggleMode,
+          icon: Icon(
+            isReviewDeckMode ? Icons.map_rounded : Icons.style_rounded,
+            size: 16,
+          ),
+          label: Text(
+            isReviewDeckMode
+                ? _conceptMapCopy(context, 'العودة للخريطة', 'Back to map')
+                : _conceptMapCopy(
+                    context,
+                    'بدء المراجعة ($dueCount)',
+                    'Start review ($dueCount)',
+                  ),
+            style: const TextStyle(
+              fontFamily: 'IBM Plex Sans Arabic',
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: isReviewDeckMode
+                ? const Color(0xFF1F2630)
+                : const Color(0xFF38BDF8),
+            foregroundColor: isReviewDeckMode
+                ? const Color(0xFFE2E8F0)
+                : Colors.black,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        );
+        return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      color: const Color(0xFF131922),
+      child: constraints.maxWidth < 700
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                details,
+                const SizedBox(height: 12),
+                Align(alignment: AlignmentDirectional.centerStart, child: button),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: details),
+                const SizedBox(width: 12),
+                button,
+              ],
+            ),
+        );
+      },
     );
   }
 }
@@ -543,9 +732,15 @@ class _InteractiveGraphCanvas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Stack(
+    return InteractiveViewer(
+      constrained: false,
+      minScale: 0.55,
+      maxScale: 1.5,
+      boundaryMargin: const EdgeInsets.all(120),
+      child: SizedBox(
+        width: 930,
+        height: 850,
+        child: Stack(
           children: [
             // شبكة خلفية هندسية
             Positioned.fill(
@@ -557,7 +752,10 @@ class _InteractiveGraphCanvas extends StatelessWidget {
             // رسم خطوط الترابط بين العقد (Connections)
             Positioned.fill(
               child: CustomPaint(
-                painter: _GraphConnectionsPainter(concepts: concepts),
+                painter: _GraphConnectionsPainter(
+                  concepts: concepts,
+                  selectedConceptId: selectedConceptId,
+                ),
               ),
             ),
 
@@ -576,8 +774,8 @@ class _InteractiveGraphCanvas extends StatelessWidget {
               );
             }),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 }
@@ -595,6 +793,7 @@ class _ConceptNodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
     Color statusColor = const Color(0xFF22C55E); // mastered
     if (node.mastery == ConceptMasteryLevel.reviewing) statusColor = const Color(0xFFF59E0B);
     if (node.mastery == ConceptMasteryLevel.learning) statusColor = const Color(0xFF38BDF8);
@@ -630,7 +829,9 @@ class _ConceptNodeWidget extends StatelessWidget {
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
-                    node.category,
+                    locale.languageCode == 'en'
+                        ? node.categoryEn ?? node.category
+                        : node.category,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 10, color: Color(0xFF64748B)),
@@ -640,7 +841,7 @@ class _ConceptNodeWidget extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              node.titleAr,
+              locale.languageCode == 'en' ? node.titleEn : node.titleAr,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -651,14 +852,23 @@ class _ConceptNodeWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 6),
-            Text(
-              node.daysUntilNextReview == 0 ? 'مستحق للمراجعة اليوم ⚠️' : 'المراجعة بعد ${node.daysUntilNextReview} أيام',
-              style: TextStyle(
-                fontFamily: 'IBM Plex Sans Arabic',
-                fontSize: 10,
-                color: node.daysUntilNextReview == 0 ? const Color(0xFFF59E0B) : const Color(0xFF94A3B8),
+            if (node.daysUntilNextReview != null)
+              Text(
+                node.daysUntilNextReview == 0
+                    ? _conceptMapCopy(context, 'مستحق اليوم', 'Due today')
+                    : _conceptMapCopy(
+                        context,
+                        'بعد ${node.daysUntilNextReview} يوم',
+                        'In ${node.daysUntilNextReview} days',
+                      ),
+                style: TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 10,
+                  color: node.daysUntilNextReview == 0
+                      ? const Color(0xFFF59E0B)
+                      : const Color(0xFF94A3B8),
+                ),
               ),
-            ),
           ],
         ),
       ),
@@ -688,22 +898,32 @@ class _GraphBackgroundGridPainter extends CustomPainter {
 
 class _GraphConnectionsPainter extends CustomPainter {
   final List<KnowledgeConceptNodeModel> concepts;
+  final String selectedConceptId;
 
-  _GraphConnectionsPainter({required this.concepts});
+  _GraphConnectionsPainter({
+    required this.concepts,
+    required this.selectedConceptId,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF478CBF).withValues(alpha: 0.3)
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
-
     final nodeMap = {for (var c in concepts) c.id: c};
+    final selected = nodeMap[selectedConceptId];
 
     for (var node in concepts) {
       for (var preId in node.prerequisites) {
         final preNode = nodeMap[preId];
         if (preNode != null) {
+          final isRelated = node.id == selectedConceptId ||
+              preId == selectedConceptId ||
+              (selected?.prerequisites.contains(node.id) ?? false) ||
+              (selected?.prerequisites.contains(preId) ?? false);
+          final paint = Paint()
+            ..color = const Color(0xFF478CBF).withValues(
+              alpha: isRelated ? 0.82 : 0.16,
+            )
+            ..strokeWidth = isRelated ? 2.2 : 1.2
+            ..style = PaintingStyle.stroke;
           final p1 = Offset(preNode.visualPosition.dx + 170, preNode.visualPosition.dy + 35);
           final p2 = Offset(node.visualPosition.dx, node.visualPosition.dy + 35);
 
@@ -718,20 +938,24 @@ class _GraphConnectionsPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant _GraphConnectionsPainter oldDelegate) =>
+      oldDelegate.concepts != concepts ||
+      oldDelegate.selectedConceptId != selectedConceptId;
 }
 
 class _Sm2FlashcardDeckView extends StatelessWidget {
   final List<Sm2FlashcardItemModel> cards;
   final int currentIndex;
   final bool isAnswerRevealed;
+  final bool isSavingRating;
   final VoidCallback onRevealAnswer;
-  final ValueChanged<Sm2Rating> onRate;
+  final Future<void> Function(Sm2Rating rating) onRate;
 
   const _Sm2FlashcardDeckView({
     required this.cards,
     required this.currentIndex,
     required this.isAnswerRevealed,
+    required this.isSavingRating,
     required this.onRevealAnswer,
     required this.onRate,
   });
@@ -739,14 +963,19 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (cards.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
-          'لا توجد بطاقات مستحقة للمراجعة حالياً! أحسنت 🎉',
+          _conceptMapCopy(
+            context,
+            'لا توجد بطاقات مستحقة للمراجعة حالياً.',
+            'There are no cards due for review.',
+          ),
           style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 16, color: Color(0xFF22C55E)),
         ),
       );
     }
 
+    final locale = Localizations.localeOf(context);
     final card = cards[currentIndex];
 
     return Center(
@@ -772,14 +1001,22 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'البطاقة ${currentIndex + 1} من أصل ${cards.length}',
+                    _conceptMapCopy(
+                      context,
+                      'البطاقة ${currentIndex + 1} من ${cards.length}',
+                      'Card ${currentIndex + 1} of ${cards.length}',
+                    ),
                     style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 12, color: Color(0xFF64748B)),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(color: const Color(0xFF0F141B), borderRadius: BorderRadius.circular(4)),
                     child: Text(
-                      'خوارزمية SM-2: الفاصل ${card.currentIntervalDays} أيام',
+                      _conceptMapCopy(
+                        context,
+                        'SM-2 • الفاصل ${card.currentIntervalDays} يوم',
+                        'SM-2 • ${card.currentIntervalDays}-day interval',
+                      ),
                       style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 10, color: Color(0xFF38BDF8)),
                     ),
                   ),
@@ -789,7 +1026,9 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
 
               // السؤال
               Text(
-                card.promptQuestion,
+                locale.languageCode == 'en'
+                    ? card.promptQuestionEn ?? card.promptQuestion
+                    : card.promptQuestion,
                 style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0), height: 1.5),
               ),
               const SizedBox(height: 14),
@@ -826,14 +1065,42 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'الشرح النموذجي:',
+                        'شرح الإجابة:',
                         style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF22C55E)),
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        card.answerExplanation,
+                        locale.languageCode == 'en'
+                            ? card.answerExplanationEn ??
+                                  card.answerExplanation
+                            : card.answerExplanation,
                         style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, color: Color(0xFFCBD5E1), height: 1.5),
                       ),
+                      if (card.answerCode.isNotEmpty) ...[
+                        const SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0A0D12),
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(
+                              color: const Color(0xFF28323F),
+                            ),
+                          ),
+                          child: Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: Text(
+                              card.answerCode,
+                              style: const TextStyle(
+                                fontFamily: 'JetBrains Mono',
+                                fontSize: 12,
+                                color: Color(0xFF86EFAC),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -842,28 +1109,52 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 // أزرار تقييم SM-2 الأربعة
                 Row(
                   children: [
-                    _Sm2RatingBtn(label: 'إعادة (0)', sublabel: '<10د', color: const Color(0xFFEF4444), onTap: () => onRate(Sm2Rating.again)),
+                    _Sm2RatingBtn(
+                      label: _conceptMapCopy(context, 'إعادة', 'Again'),
+                      color: const Color(0xFFEF4444),
+                      enabled: !isSavingRating,
+                      onTap: () => onRate(Sm2Rating.again),
+                    ),
                     const SizedBox(width: 8),
-                    _Sm2RatingBtn(label: 'صعب (3)', sublabel: '2 أيام', color: const Color(0xFFF59E0B), onTap: () => onRate(Sm2Rating.hard)),
+                    _Sm2RatingBtn(
+                      label: _conceptMapCopy(context, 'صعب', 'Hard'),
+                      color: const Color(0xFFF59E0B),
+                      enabled: !isSavingRating,
+                      onTap: () => onRate(Sm2Rating.hard),
+                    ),
                     const SizedBox(width: 8),
-                    _Sm2RatingBtn(label: 'جيد (4)', sublabel: '6 أيام', color: const Color(0xFF38BDF8), onTap: () => onRate(Sm2Rating.good)),
+                    _Sm2RatingBtn(
+                      label: _conceptMapCopy(context, 'جيد', 'Good'),
+                      color: const Color(0xFF38BDF8),
+                      enabled: !isSavingRating,
+                      onTap: () => onRate(Sm2Rating.good),
+                    ),
                     const SizedBox(width: 8),
-                    _Sm2RatingBtn(label: 'سهل (5)', sublabel: '14 يوماً', color: const Color(0xFF22C55E), onTap: () => onRate(Sm2Rating.easy)),
+                    _Sm2RatingBtn(
+                      label: _conceptMapCopy(context, 'سهل', 'Easy'),
+                      color: const Color(0xFF22C55E),
+                      enabled: !isSavingRating,
+                      onTap: () => onRate(Sm2Rating.easy),
+                    ),
                   ],
                 ),
               ] else
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: onRevealAnswer,
+                    onPressed: isSavingRating ? null : onRevealAnswer,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF478CBF),
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),
-                    child: const Text(
-                      'كشف الإجابة النموذجية (Space) ↵',
+                    child: Text(
+                      _conceptMapCopy(
+                        context,
+                        'كشف الإجابة',
+                        'Reveal answer',
+                      ),
                       style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 13, fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -878,14 +1169,14 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
 
 class _Sm2RatingBtn extends StatelessWidget {
   final String label;
-  final String sublabel;
   final Color color;
-  final VoidCallback onTap;
+  final bool enabled;
+  final Future<void> Function() onTap;
 
   const _Sm2RatingBtn({
     required this.label,
-    required this.sublabel,
     required this.color,
+    required this.enabled,
     required this.onTap,
   });
 
@@ -893,21 +1184,24 @@ class _Sm2RatingBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
-        onTap: onTap,
+        onTap: enabled ? () => onTap() : null,
         borderRadius: BorderRadius.circular(8),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
             color: color.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: color.withValues(alpha: 0.5)),
           ),
-          child: Column(
-            children: [
-              Text(label, style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: color)),
-              const SizedBox(height: 2),
-              Text(sublabel, style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 10, color: Color(0xFF94A3B8))),
-            ],
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'IBM Plex Sans Arabic',
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: enabled ? color : color.withValues(alpha: 0.45),
+            ),
           ),
         ),
       ),
@@ -917,12 +1211,20 @@ class _Sm2RatingBtn extends StatelessWidget {
 
 class _ConceptInspectorPanel extends StatelessWidget {
   final KnowledgeConceptNodeModel concept;
-  final VoidCallback onOpenLesson;
+  final ValueChanged<String> onOpenLesson;
 
-  const _ConceptInspectorPanel({required this.concept, required this.onOpenLesson});
+  const _ConceptInspectorPanel({
+    required this.concept,
+    required this.onOpenLesson,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
+    final isEnglish = locale.languageCode == 'en';
+    final canOpenLesson =
+        concept.lessonId != null &&
+        concept.mastery != ConceptMasteryLevel.locked;
     return ListView(
       padding: const EdgeInsets.all(24),
       children: [
@@ -939,12 +1241,12 @@ class _ConceptInspectorPanel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    concept.titleAr,
+                    isEnglish ? concept.titleEn : concept.titleAr,
                     style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
                   ),
                   Text(
-                    concept.titleEn,
-                    style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 11, color: Color(0xFF64748B)),
+                    _masteryLabel(context, concept.mastery),
+                    style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF64748B)),
                   ),
                 ],
               ),
@@ -955,69 +1257,94 @@ class _ConceptInspectorPanel extends StatelessWidget {
         const Divider(color: Color(0xFF28323F)),
         const SizedBox(height: 14),
 
-        const Text('شرح المفهوم البرمجي:', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0))),
+        Text(
+          _conceptMapCopy(context, 'شرح المفهوم:', 'Concept overview:'),
+          style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
+        ),
         const SizedBox(height: 6),
-        Text(concept.description, style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, color: Color(0xFF94A3B8), height: 1.5)),
+        Text(
+          isEnglish ? concept.descriptionEn ?? concept.description : concept.description,
+          style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, color: Color(0xFF94A3B8), height: 1.5),
+        ),
         const SizedBox(height: 16),
 
-        const Text('صيغة الكود في Godot 4.3:', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0))),
-        const SizedBox(height: 6),
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(color: const Color(0xFF0A0D12), borderRadius: BorderRadius.circular(6), border: Border.all(color: const Color(0xFF28323F))),
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: Text(concept.codeExample, style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 11, color: Color(0xFF38BDF8), height: 1.5)),
+        if (concept.codeExample.isNotEmpty) ...[
+          Text(
+            _conceptMapCopy(context, 'مثال برمجي:', 'Code example:'),
+            style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFE2E8F0)),
           ),
-        ),
-        const SizedBox(height: 18),
-
-        // بطاقة خوارزمية SM-2
+          const SizedBox(height: 6),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(color: const Color(0xFF0A0D12), borderRadius: BorderRadius.circular(6), border: Border.all(color: const Color(0xFF28323F))),
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Text(concept.codeExample, style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 11, color: Color(0xFF38BDF8), height: 1.5)),
+            ),
+          ),
+          const SizedBox(height: 18),
+        ],
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(color: const Color(0xFF0F141B), borderRadius: BorderRadius.circular(8), border: Border.all(color: const Color(0xFF28323F))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('مستوى الاسترجاع بالذاكرة:', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF64748B))),
-                  Text('${(concept.retentionPercent * 100).toInt()}%', style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF22C55E))),
-                ],
+              Text(
+                _conceptMapCopy(context, 'حالة المفهوم', 'Concept status'),
+                style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF64748B)),
               ),
-              const SizedBox(height: 8),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(3),
-                child: LinearProgressIndicator(
-                  value: concept.retentionPercent,
-                  minHeight: 5,
-                  backgroundColor: const Color(0xFF1F2630),
-                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF22C55E)),
+              const SizedBox(height: 6),
+              Text(
+                _masteryLabel(context, concept.mastery),
+                style: const TextStyle(
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFE2E8F0),
                 ),
               ),
-              const SizedBox(height: 10),
-              Text(
-                'آخر مراجعة: ${concept.lastReviewedDate}',
-                style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF94A3B8)),
-              ),
+              if (concept.lastReviewedDate.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Text(
+                  '${_conceptMapCopy(context, 'آخر مراجعة:', 'Last reviewed:')} ${concept.lastReviewedDate}',
+                  style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 11, color: Color(0xFF94A3B8)),
+                ),
+              ],
             ],
           ),
         ),
-        const SizedBox(height: 24),
-
-        ElevatedButton.icon(
-          onPressed: onOpenLesson,
-          icon: const Icon(Icons.play_circle_outline_rounded, size: 16),
-          label: const Text('انتقل للدرس المرتبط بهذا المفهوم ↵', style: TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold)),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF478CBF),
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        if (canOpenLesson) ...[
+          const SizedBox(height: 24),
+          ElevatedButton.icon(
+            onPressed: () => onOpenLesson(concept.lessonId!),
+            icon: const Icon(Icons.play_circle_outline_rounded, size: 16),
+            label: Text(
+              _conceptMapCopy(context, 'فتح الدرس المرتبط', 'Open linked lesson'),
+              style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic', fontSize: 12, fontWeight: FontWeight.bold),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF478CBF),
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
           ),
-        ),
+        ],
       ],
     );
   }
+}
+
+String _conceptMapCopy(BuildContext context, String arabic, String english) =>
+    Localizations.localeOf(context).languageCode == 'en' ? english : arabic;
+
+String _masteryLabel(BuildContext context, ConceptMasteryLevel mastery) {
+  final (arabic, english) = switch (mastery) {
+    ConceptMasteryLevel.locked => ('مقفل', 'Locked'),
+    ConceptMasteryLevel.learning => ('قيد التعلم', 'Learning'),
+    ConceptMasteryLevel.reviewing => ('قيد المراجعة', 'Reviewing'),
+    ConceptMasteryLevel.mastered => ('متقن', 'Mastered'),
+  };
+  return _conceptMapCopy(context, arabic, english);
 }

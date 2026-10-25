@@ -331,6 +331,27 @@
   "streakDays": "سلسلة {count} أيام",
   "streakInfo": "تعلّم مرة واحدة على الأقل يوميًا للحفاظ على سلسلتك. تفويت يوم يعيد السلسلة الحالية إلى البداية، لكنه لا يحذف نقاط الخبرة أو الشارات.",
   "badgesTitle": "الشارات",
+  "badgesCompletionSummary": "اكتسبت {unlocked} من أصل {total} شارات",
+  "@badgesCompletionSummary": {
+    "placeholders": {
+      "unlocked": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "badgeFilterAll": "الكل ({count})",
+  "@badgeFilterAll": {"placeholders": {"count": {"type": "int"}}},
+  "badgeFilterEarned": "المكتسبة ({count})",
+  "@badgeFilterEarned": {"placeholders": {"count": {"type": "int"}}},
+  "badgeFilterInProgress": "قيد التقدم ({count})",
+  "@badgeFilterInProgress": {"placeholders": {"count": {"type": "int"}}},
+  "badgeFilterLocked": "المقفلة ({count})",
+  "@badgeFilterLocked": {"placeholders": {"count": {"type": "int"}}},
+  "badgeFilterEmpty": "لا توجد شارات ضمن هذه الفئة.",
+  "badgeCatalogEmpty": "لا توجد شارات متاحة حالياً.",
+  "badgeDetailsTitle": "تفاصيل الشارة",
+  "badgeEarnedStatus": "مكتسبة",
+  "badgeInProgressStatus": "قيد التقدم",
+  "badgesLoadError": "تعذّر تحميل الشارات. تحقق من الاتصال ثم أعد المحاولة.",
   "badgeUnlocked": "لقد فتحت شارة جديدة!",
   "badgeLocked": "لم تُكتسب بعد",
   "badgeProgress": "{current} من {target}",

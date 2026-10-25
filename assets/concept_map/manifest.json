@@ -1,0 +1,102 @@
+{
+  "concepts": [
+    {
+      "id": "concept_hello",
+      "lessonId": "lesson_01_hello",
+      "prerequisiteIds": [],
+      "x": 48,
+      "y": 76
+    },
+    {
+      "id": "concept_comments",
+      "lessonId": "lesson_02_comments",
+      "prerequisiteIds": ["concept_hello"],
+      "x": 268,
+      "y": 76
+    },
+    {
+      "id": "concept_variables",
+      "lessonId": "lesson_03_variables",
+      "prerequisiteIds": ["concept_comments"],
+      "x": 488,
+      "y": 76
+    },
+    {
+      "id": "concept_types",
+      "lessonId": "lesson_04_types",
+      "prerequisiteIds": ["concept_variables"],
+      "x": 708,
+      "y": 76
+    },
+    {
+      "id": "concept_operations",
+      "lessonId": "lesson_05_operations",
+      "prerequisiteIds": ["concept_types"],
+      "x": 48,
+      "y": 266
+    },
+    {
+      "id": "concept_if_else",
+      "lessonId": "lesson_06_if_else",
+      "prerequisiteIds": ["concept_operations"],
+      "x": 268,
+      "y": 266
+    },
+    {
+      "id": "concept_elif",
+      "lessonId": "lesson_07_elif",
+      "prerequisiteIds": ["concept_if_else"],
+      "x": 488,
+      "y": 266
+    },
+    {
+      "id": "concept_match",
+      "lessonId": "lesson_08_match",
+      "prerequisiteIds": ["concept_elif"],
+      "x": 708,
+      "y": 266
+    },
+    {
+      "id": "concept_for",
+      "lessonId": "lesson_09_for",
+      "prerequisiteIds": ["concept_match"],
+      "x": 48,
+      "y": 456
+    },
+    {
+      "id": "concept_while",
+      "lessonId": "lesson_10_while",
+      "prerequisiteIds": ["concept_for"],
+      "x": 268,
+      "y": 456
+    },
+    {
+      "id": "concept_loop_control",
+      "lessonId": "lesson_11_break_continue",
+      "prerequisiteIds": ["concept_while"],
+      "x": 488,
+      "y": 456
+    },
+    {
+      "id": "concept_functions",
+      "lessonId": "lesson_12_func_basics",
+      "prerequisiteIds": ["concept_loop_control"],
+      "x": 708,
+      "y": 456
+    },
+    {
+      "id": "concept_parameters",
+      "lessonId": "lesson_13_parameters",
+      "prerequisiteIds": ["concept_functions"],
+      "x": 158,
+      "y": 646
+    },
+    {
+      "id": "concept_returns",
+      "lessonId": "lesson_14_return",
+      "prerequisiteIds": ["concept_parameters"],
+      "x": 598,
+      "y": 646
+    }
+  ]
+}

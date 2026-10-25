@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../app_dependencies.dart';
 import '../../data/repositories/syntax_reference_repository.dart';
+import '../../data/repositories/workspace_repository.dart';
 import '../../logic/providers/app_settings_provider.dart';
 import '../layouts/academy_app_layout.dart';
 import '../layouts/app_shell_sidebar.dart';
@@ -85,7 +86,9 @@ GoRouter createAppRouter({
           ),
           GoRoute(
             path: AppRoutes.workspace,
-            builder: (context, state) => const WorkspaceScreen(),
+            builder: (context, state) => WorkspaceScreen(
+              repository: dependencies.services<WorkspaceRepository>(),
+            ),
           ),
           GoRoute(
             path: AppRoutes.workspaceSearch,

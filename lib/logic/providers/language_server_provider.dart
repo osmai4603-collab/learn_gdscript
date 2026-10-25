@@ -49,16 +49,13 @@ class LanguageServerProvider extends ChangeNotifier {
 
   List<Map<String, Object?>> diagnosticsForLesson(String lessonId) {
     final uri = _documents[lessonId];
-    return uri == null
-        ? const []
-        : _diagnostics[uri.toString()] ?? const [];
+    return uri == null ? const [] : _diagnostics[uri.toString()] ?? const [];
   }
 
-  Future<void> connect(
-    String rootPath, {
-    String? executablePath,
-  }) async {
-    if (_connecting) throw StateError('Language server connection is in progress.');
+  Future<void> connect(String rootPath, {String? executablePath}) async {
+    if (_connecting) {
+      throw StateError('Language server connection is in progress.');
+    }
     if (isConnected) await disconnect();
     _connecting = true;
     _lastError = null;
@@ -68,12 +65,13 @@ class LanguageServerProvider extends ChangeNotifier {
     try {
       final root = Directory(rootPath).absolute;
       if (!await root.exists()) {
-        throw FileSystemException('Workspace directory does not exist.', rootPath);
+        throw FileSystemException(
+          'Workspace directory does not exist.',
+          rootPath,
+        );
       }
       final resolvedRoot = await root.resolveSymbolicLinks();
-      client = await _factory
-          .resolve(executablePath: executablePath)
-          .start();
+      client = await _factory.resolve(executablePath: executablePath).start();
       await client.initialize(
         rootUri: Directory(resolvedRoot).uri,
         workspaceFolders: [Directory(resolvedRoot).uri],
@@ -105,7 +103,10 @@ class LanguageServerProvider extends ChangeNotifier {
     final notificationSubscription = _notifications;
     await notificationSubscription?.cancel();
     if (client != null) {
-      for (final uri in [..._documents.values, ..._workspaceDocumentUris.map(Uri.parse)]) {
+      for (final uri in [
+        ..._documents.values,
+        ..._workspaceDocumentUris.map(Uri.parse),
+      ]) {
         await client.closeDocument(uri);
       }
     }
@@ -115,7 +116,9 @@ class LanguageServerProvider extends ChangeNotifier {
     _client = null;
     _notifications = null;
     _documents.clear();
+    _documentVersions.clear();
     _workspaceDocumentUris.clear();
+    _workspaceDocumentVersions.clear();
     _diagnostics.clear();
     _rootPath = null;
     _indexedFileCount = 0;
@@ -203,16 +206,18 @@ class LanguageServerProvider extends ChangeNotifier {
     if (response is! List || response.isEmpty) return null;
     final edits = <_TextEdit>[];
     for (final item in response) {
-      if (item is! Map ||
-          item['range'] is! Map ||
-          item['newText'] is! String) {
-        throw const FormatException('Language server returned an invalid text edit.');
+      if (item is! Map || item['range'] is! Map || item['newText'] is! String) {
+        throw const FormatException(
+          'Language server returned an invalid text edit.',
+        );
       }
       final range = item['range'] as Map;
       final start = range['start'];
       final end = range['end'];
       if (start is! Map || end is! Map) {
-        throw const FormatException('Language server returned an invalid edit range.');
+        throw const FormatException(
+          'Language server returned an invalid edit range.',
+        );
       }
       edits.add(
         _TextEdit(
@@ -241,11 +246,7 @@ class LanguageServerProvider extends ChangeNotifier {
     return _requireClient().hover(uri, line, character);
   }
 
-  Future<Object?> signatureHelp(
-    String lessonId,
-    int line,
-    int character,
-  ) {
+  Future<Object?> signatureHelp(String lessonId, int line, int character) {
     final uri = _documents[lessonId];
     if (uri == null) throw StateError('Lesson document is not open.');
     return _requireClient().signatureHelp(uri, line, character);
@@ -347,8 +348,7 @@ class LanguageServerProvider extends ChangeNotifier {
     }
     _diagnostics[uri] = [
       for (final diagnostic in rawDiagnostics)
-        if (diagnostic is Map)
-          Map<String, Object?>.from(diagnostic),
+        if (diagnostic is Map) Map<String, Object?>.from(diagnostic),
     ];
     notifyListeners();
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../../data/models/review_schedule.dart';
+
 enum ReviewResult { correct, incorrect }
 
 @immutable
@@ -47,6 +49,66 @@ class ReviewItem {
 
 class ReviewService {
   const ReviewService();
+
+  static const minimumEasinessFactor = 1.3;
+  static const initialEasinessFactor = 2.5;
+  static const retryDelay = Duration(minutes: 10);
+
+  ReviewSchedule schedule({
+    required String cardId,
+    required String conceptId,
+    required Sm2Rating rating,
+    ReviewSchedule? previous,
+    DateTime? now,
+  }) {
+    final reviewedAt = (now ?? DateTime.now()).toUtc();
+    final quality = switch (rating) {
+      Sm2Rating.again => 0,
+      Sm2Rating.hard => 3,
+      Sm2Rating.good => 4,
+      Sm2Rating.easy => 5,
+    };
+    final previousEasiness =
+        previous?.easinessFactor ?? initialEasinessFactor;
+    final difference = 5 - quality;
+    final easinessFactor = (previousEasiness +
+            (0.1 - difference * (0.08 + difference * 0.02)))
+        .clamp(minimumEasinessFactor, double.infinity)
+        .toDouble();
+
+    if (rating == Sm2Rating.again) {
+      return ReviewSchedule(
+        cardId: cardId,
+        conceptId: conceptId,
+        repetitionCount: 0,
+        easinessFactor: easinessFactor,
+        intervalDays: 0,
+        lastReviewedAt: reviewedAt,
+        nextReviewAt: reviewedAt.add(retryDelay),
+        lastRating: rating,
+      );
+    }
+
+    final repetitions = (previous?.repetitionCount ?? 0) + 1;
+    final intervalDays = switch (repetitions) {
+      1 => 1,
+      2 => 6,
+      _ => ((previous?.intervalDays ?? 0) * easinessFactor).round().clamp(
+        1,
+        36500,
+      ).toInt(),
+    };
+    return ReviewSchedule(
+      cardId: cardId,
+      conceptId: conceptId,
+      repetitionCount: repetitions,
+      easinessFactor: easinessFactor,
+      intervalDays: intervalDays,
+      lastReviewedAt: reviewedAt,
+      nextReviewAt: reviewedAt.add(Duration(days: intervalDays)),
+      lastRating: rating,
+    );
+  }
 
   DateTime nextReviewDate({
     required ReviewItem item,

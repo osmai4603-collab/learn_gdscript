@@ -142,6 +142,11 @@ class WorkspaceRepository {
 
     final rootPath = await getRootPath();
     if (rootPath == null) throw StateError('No workspace is selected.');
+    final files = await loadFiles();
+    final matchingFile = files.indexWhere((snapshot) => snapshot.uri == uri);
+    if (matchingFile == -1) {
+      throw StateError('File is not part of the indexed workspace.');
+    }
     final root = Directory(rootPath);
     final resolvedRoot = await root.resolveSymbolicLinks();
     final file = File.fromUri(parsedUri).absolute;
@@ -164,11 +169,6 @@ class WorkspaceRepository {
     }
 
     await file.writeAsString(content, flush: true);
-    final files = await loadFiles();
-    final matchingFile = files.indexWhere((snapshot) => snapshot.uri == uri);
-    if (matchingFile == -1) {
-      throw StateError('File is not part of the indexed workspace.');
-    }
     final stat = await file.stat();
     files[matchingFile] = WorkspaceFileSnapshot(
       uri: uri,

@@ -70,6 +70,57 @@ void main() {
   });
 
   test(
+    'workspace repository saves indexed GDScript to disk and snapshot',
+    () async {
+      final directory = await Directory.systemTemp.createTemp(
+        'workspace-save-',
+      );
+      addTearDown(() => directory.delete(recursive: true));
+      final script = File('${directory.path}/main.gd');
+      await script.writeAsString('var value = 1');
+      final helper = DatabaseHelper(inMemory: true);
+      addTearDown(helper.close);
+      final repository = WorkspaceRepository(helper);
+      await repository.setWorkspace(directory.path, [
+        WorkspaceFileSnapshot(
+          uri: script.uri.toString(),
+          relativePath: 'main.gd',
+          content: 'var value = 1',
+          modifiedMillis: 1,
+        ),
+      ]);
+
+      await repository.saveGDScriptFile(script.uri.toString(), 'var value = 2');
+
+      expect(await script.readAsString(), 'var value = 2');
+      expect((await repository.loadFiles()).single.content, 'var value = 2');
+    },
+  );
+
+  test(
+    'workspace repository does not write files outside indexed snapshot',
+    () async {
+      final directory = await Directory.systemTemp.createTemp(
+        'workspace-save-unindexed-',
+      );
+      addTearDown(() => directory.delete(recursive: true));
+      final script = File('${directory.path}/unindexed.gd');
+      await script.writeAsString('var value = 1');
+      final helper = DatabaseHelper(inMemory: true);
+      addTearDown(helper.close);
+      final repository = WorkspaceRepository(helper);
+      await repository.setWorkspace(directory.path, const []);
+
+      await expectLater(
+        repository.saveGDScriptFile(script.uri.toString(), 'var value = 2'),
+        throwsStateError,
+      );
+
+      expect(await script.readAsString(), 'var value = 1');
+    },
+  );
+
+  test(
     'onboarding draft persists and restores after reopening the database',
     () async {
       final directory = await Directory.systemTemp.createTemp(

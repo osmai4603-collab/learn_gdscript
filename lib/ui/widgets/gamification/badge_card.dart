@@ -9,6 +9,7 @@ class BadgeCard extends StatelessWidget {
     required this.badge,
     required this.isUnlocked,
     this.isSelected = false,
+    this.showProgressWhenUnlocked = false,
     this.earnedAt,
     this.progress = 0,
     this.progressTarget,
@@ -18,6 +19,7 @@ class BadgeCard extends StatelessWidget {
   final BadgeDefinition badge;
   final bool isUnlocked;
   final bool isSelected;
+  final bool showProgressWhenUnlocked;
   final DateTime? earnedAt;
   final int progress;
   final int? progressTarget;
@@ -35,9 +37,7 @@ class BadgeCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
-          color: isSelected
-              ? colorScheme.primary
-              : colorScheme.outlineVariant,
+          color: isSelected ? colorScheme.primary : colorScheme.outlineVariant,
           width: isSelected ? 1.6 : 0.6,
         ),
       ),
@@ -51,7 +51,11 @@ class BadgeCard extends StatelessWidget {
               Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  Icon(_badgeIcon(badge.iconName), size: 36, color: foreground),
+                  Icon(
+                    badgeIconForName(badge.iconName),
+                    size: 36,
+                    color: foreground,
+                  ),
                   if (!isUnlocked)
                     Positioned(
                       bottom: -4,
@@ -89,10 +93,12 @@ class BadgeCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              if (!isUnlocked) ...[
+              if (!isUnlocked || showProgressWhenUnlocked) ...[
                 const SizedBox(height: 6),
                 LinearProgressIndicator(
-                  value: progressTarget == null || progressTarget == 0
+                  value: isUnlocked
+                      ? 1
+                      : progressTarget == null || progressTarget == 0
                       ? 0
                       : (progress / progressTarget!).clamp(0.0, 1.0),
                 ),
@@ -103,18 +109,18 @@ class BadgeCard extends StatelessWidget {
       ),
     );
   }
-
-  static IconData _badgeIcon(String name) => switch (name) {
-    'eco' => Icons.eco,
-    'star' => Icons.star,
-    'inventory_2' => Icons.inventory_2,
-    'alt_route' => Icons.alt_route,
-    'loop' => Icons.loop,
-    'extension' => Icons.extension,
-    'bolt' => Icons.bolt,
-    'local_fire_department' => Icons.local_fire_department,
-    'search' => Icons.search,
-    'school' => Icons.school,
-    _ => Icons.emoji_events,
-  };
 }
+
+IconData badgeIconForName(String name) => switch (name) {
+  'eco' => Icons.eco,
+  'star' => Icons.star,
+  'inventory_2' => Icons.inventory_2,
+  'alt_route' => Icons.alt_route,
+  'loop' => Icons.loop,
+  'extension' => Icons.extension,
+  'bolt' => Icons.bolt,
+  'local_fire_department' => Icons.local_fire_department,
+  'search' => Icons.search,
+  'school' => Icons.school,
+  _ => Icons.emoji_events,
+};

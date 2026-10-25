@@ -1,6 +1,6 @@
 import 'package:sqlite3/common.dart';
 
-const currentSchemaVersion = 5;
+const currentSchemaVersion = 6;
 
 void migrateDatabase(CommonDatabase database) {
   final currentVersion =
@@ -19,6 +19,7 @@ void migrateDatabase(CommonDatabase database) {
     if (currentVersion < 2) _createVersion2(database);
     if (currentVersion < 4) _createVersion4(database);
     if (currentVersion < 5) _createVersion5(database);
+    if (currentVersion < 6) _createVersion6(database);
     database.execute('PRAGMA user_version = $currentSchemaVersion');
     database.execute('COMMIT');
   } on Object {
@@ -61,6 +62,30 @@ void _createVersion5(CommonDatabase database) {
       )
     )
   ''');
+}
+
+void _createVersion6(CommonDatabase database) {
+  database.execute('''
+    CREATE TABLE review_schedules (
+      visitor_id TEXT NOT NULL
+        REFERENCES user_progress(visitor_id) ON DELETE CASCADE,
+      card_id TEXT NOT NULL,
+      concept_id TEXT NOT NULL,
+      repetition_count INTEGER NOT NULL CHECK (repetition_count >= 0),
+      easiness_factor REAL NOT NULL CHECK (easiness_factor >= 1.3),
+      interval_days INTEGER NOT NULL CHECK (interval_days >= 0),
+      last_reviewed_at TEXT NOT NULL,
+      next_review_at TEXT NOT NULL,
+      last_rating TEXT NOT NULL CHECK (
+        last_rating IN ('again', 'hard', 'good', 'easy')
+      ),
+      PRIMARY KEY (visitor_id, card_id)
+    )
+  ''');
+  database.execute(
+    'CREATE INDEX review_schedules_due '
+    'ON review_schedules(visitor_id, next_review_at)',
+  );
 }
 
 void _createVersion2(CommonDatabase database) {

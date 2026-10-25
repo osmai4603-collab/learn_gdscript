@@ -1415,6 +1415,72 @@ abstract class AppLocalizations {
   /// **'Badges'**
   String get badgesTitle;
 
+  /// No description provided for @badgesCompletionSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{unlocked} of {total} badges earned'**
+  String badgesCompletionSummary(int unlocked, int total);
+
+  /// No description provided for @badgeFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All ({count})'**
+  String badgeFilterAll(int count);
+
+  /// No description provided for @badgeFilterEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'Earned ({count})'**
+  String badgeFilterEarned(int count);
+
+  /// No description provided for @badgeFilterInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress ({count})'**
+  String badgeFilterInProgress(int count);
+
+  /// No description provided for @badgeFilterLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked ({count})'**
+  String badgeFilterLocked(int count);
+
+  /// No description provided for @badgeFilterEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No badges in this category.'**
+  String get badgeFilterEmpty;
+
+  /// No description provided for @badgeCatalogEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No badges are available right now.'**
+  String get badgeCatalogEmpty;
+
+  /// No description provided for @badgeDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Badge details'**
+  String get badgeDetailsTitle;
+
+  /// No description provided for @badgeEarnedStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Earned'**
+  String get badgeEarnedStatus;
+
+  /// No description provided for @badgeInProgressStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get badgeInProgressStatus;
+
+  /// No description provided for @badgesLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load badges. Check your connection and try again.'**
+  String get badgesLoadError;
+
   /// No description provided for @badgeUnlocked.
   ///
   /// In en, this message translates to:

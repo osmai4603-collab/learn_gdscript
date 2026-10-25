@@ -739,6 +739,49 @@ class AppLocalizationsEn extends AppLocalizations {
   String get badgesTitle => 'Badges';
 
   @override
+  String badgesCompletionSummary(int unlocked, int total) {
+    return '$unlocked of $total badges earned';
+  }
+
+  @override
+  String badgeFilterAll(int count) {
+    return 'All ($count)';
+  }
+
+  @override
+  String badgeFilterEarned(int count) {
+    return 'Earned ($count)';
+  }
+
+  @override
+  String badgeFilterInProgress(int count) {
+    return 'In progress ($count)';
+  }
+
+  @override
+  String badgeFilterLocked(int count) {
+    return 'Locked ($count)';
+  }
+
+  @override
+  String get badgeFilterEmpty => 'No badges in this category.';
+
+  @override
+  String get badgeCatalogEmpty => 'No badges are available right now.';
+
+  @override
+  String get badgeDetailsTitle => 'Badge details';
+
+  @override
+  String get badgeEarnedStatus => 'Earned';
+
+  @override
+  String get badgeInProgressStatus => 'In progress';
+
+  @override
+  String get badgesLoadError => 'Could not load badges. Check your connection and try again.';
+
+  @override
   String get badgeUnlocked => 'New badge unlocked!';
 
   @override

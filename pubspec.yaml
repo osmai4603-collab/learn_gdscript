@@ -73,6 +73,7 @@ flutter:
 
   assets:
     - assets/curriculum/
+    - assets/concept_map/
     - assets/curriculum/units/01_first_program/
     - assets/curriculum/units/02_variables/
     - assets/curriculum/units/03_conditions/

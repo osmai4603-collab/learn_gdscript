@@ -12,6 +12,7 @@ import 'data/models/app_settings.dart';
 import 'l10n/app_localizations.dart';
 import 'logic/providers/app_settings_provider.dart';
 import 'logic/providers/curriculum_provider.dart';
+import 'logic/providers/concept_map_provider.dart';
 import 'logic/providers/exercise_provider.dart';
 import 'logic/providers/home_dashboard_provider.dart';
 import 'logic/providers/learning_path_provider.dart';
@@ -75,6 +76,9 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
         ),
         ChangeNotifierProvider<LearningPathProvider>.value(
           value: dependencies.learningPathProvider,
+        ),
+        ChangeNotifierProvider<ConceptMapProvider>.value(
+          value: dependencies.conceptMapProvider,
         ),
         Provider<CodeRunnerService>.value(
           value: dependencies.services<CodeRunnerService>(),

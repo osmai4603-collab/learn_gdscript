@@ -1,0 +1,160 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:learn_gdscript/data/models/progress_models.dart';
+import 'package:learn_gdscript/data/models/review_schedule.dart';
+import 'package:learn_gdscript/data/repositories/concept_map_repository.dart';
+import 'package:learn_gdscript/data/repositories/curriculum_repository.dart';
+import 'package:learn_gdscript/data/repositories/progress_repository.dart';
+import 'package:learn_gdscript/data/repositories/review_schedule_repository.dart';
+import 'package:learn_gdscript/data/sqlite/database_helper.dart';
+import 'package:learn_gdscript/logic/providers/concept_map_provider.dart';
+import 'package:learn_gdscript/logic/providers/curriculum_provider.dart';
+import 'package:learn_gdscript/logic/providers/progress_provider.dart';
+import 'package:learn_gdscript/ui/screens/concept_map/concept_map_screen.dart';
+import 'package:provider/provider.dart';
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  testWidgets('loads translated concept map, reviews a card, and persists it', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    final harness = await _ConceptMapHarness.create();
+    addTearDown(harness.dispose);
+    await tester.pumpWidget(harness.app(locale: const Locale('en')));
+
+    expect(find.byType(Shimmer), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.text('Concept Map & Spaced Repetition'), findsOneWidget);
+    expect(harness.provider.state.value!.dueCards, isNotEmpty);
+
+    final dueCount = harness.provider.state.value!.dueCards.length;
+    await tester.tap(find.text('Start review ($dueCount)'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Reveal answer'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Good'));
+    await tester.pumpAndSettle();
+
+    final ratedCardId = harness.provider.state.value!.schedules.keys.single;
+    expect(
+      harness.provider.state.value!.schedules[ratedCardId]?.lastRating,
+      Sm2Rating.good,
+    );
+    expect(
+      (await harness.scheduleRepository.loadSchedules(
+        _ConceptMapHarness.visitorId,
+      ))[ratedCardId]?.repetitionCount,
+      1,
+    );
+  });
+
+  testWidgets('uses the compact layout without overflowing', (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    final harness = await _ConceptMapHarness.create();
+    addTearDown(harness.dispose);
+    await tester.pumpWidget(harness.app(locale: const Locale('ar')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('خريطة المفاهيم والتكرار المتباعد'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+}
+
+class _ConceptMapHarness {
+  _ConceptMapHarness({
+    required this.database,
+    required this.curriculumProvider,
+    required this.progressProvider,
+    required this.provider,
+    required this.scheduleRepository,
+  });
+
+  static const visitorId = 'concept-map-widget-visitor';
+
+  final DatabaseHelper database;
+  final CurriculumProvider curriculumProvider;
+  final ProgressProvider progressProvider;
+  final ConceptMapProvider provider;
+  final ReviewScheduleRepository scheduleRepository;
+
+  static Future<_ConceptMapHarness> create() async {
+    final database = DatabaseHelper(inMemory: true);
+    final progressRepository = ProgressRepository(database);
+    await progressRepository.save(
+      UserProgress(
+        visitorId: visitorId,
+        currentUnitId: 'unit_01_first_program',
+        currentLessonId: 'lesson_01_hello',
+        totalXP: 20,
+        currentStreak: 2,
+        longestStreak: 2,
+        lastActiveDate: DateTime.utc(2026, 10, 25),
+        lessonsProgress: {
+          'lesson_01_hello': LessonProgress(
+            lessonId: 'lesson_01_hello',
+            status: LessonStatus.completed,
+          ),
+        },
+        earnedBadges: const [],
+      ),
+    );
+    final curriculumProvider = CurriculumProvider(
+      CurriculumRepository(assetBundle: rootBundle),
+    );
+    await curriculumProvider.load();
+    final progressProvider = ProgressProvider(progressRepository);
+    await progressProvider.load(visitorId);
+    final scheduleRepository = ReviewScheduleRepository(database);
+    final provider = ConceptMapProvider(
+      conceptMapRepository: ConceptMapRepository(assetBundle: rootBundle),
+      reviewScheduleRepository: scheduleRepository,
+      curriculumProvider: curriculumProvider,
+      progressProvider: progressProvider,
+      visitorId: visitorId,
+      clock: () => DateTime.utc(2026, 10, 25, 9),
+    );
+    return _ConceptMapHarness(
+      database: database,
+      curriculumProvider: curriculumProvider,
+      progressProvider: progressProvider,
+      provider: provider,
+      scheduleRepository: scheduleRepository,
+    );
+  }
+
+  Widget app({required Locale locale}) => MultiProvider(
+    providers: [
+      ChangeNotifierProvider<ConceptMapProvider>.value(value: provider),
+    ],
+    child: MaterialApp(
+      locale: locale,
+      supportedLocales: const [Locale('ar'), Locale('en')],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      home: const ConceptMapScreen(),
+    ),
+  );
+
+  Future<void> dispose() async {
+    provider.dispose();
+    curriculumProvider.dispose();
+    progressProvider.dispose();
+    await database.close();
+  }
+}

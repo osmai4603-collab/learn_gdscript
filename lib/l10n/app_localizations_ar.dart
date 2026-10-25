@@ -739,6 +739,49 @@ class AppLocalizationsAr extends AppLocalizations {
   String get badgesTitle => 'الشارات';
 
   @override
+  String badgesCompletionSummary(int unlocked, int total) {
+    return 'اكتسبت $unlocked من أصل $total شارات';
+  }
+
+  @override
+  String badgeFilterAll(int count) {
+    return 'الكل ($count)';
+  }
+
+  @override
+  String badgeFilterEarned(int count) {
+    return 'المكتسبة ($count)';
+  }
+
+  @override
+  String badgeFilterInProgress(int count) {
+    return 'قيد التقدم ($count)';
+  }
+
+  @override
+  String badgeFilterLocked(int count) {
+    return 'المقفلة ($count)';
+  }
+
+  @override
+  String get badgeFilterEmpty => 'لا توجد شارات ضمن هذه الفئة.';
+
+  @override
+  String get badgeCatalogEmpty => 'لا توجد شارات متاحة حالياً.';
+
+  @override
+  String get badgeDetailsTitle => 'تفاصيل الشارة';
+
+  @override
+  String get badgeEarnedStatus => 'مكتسبة';
+
+  @override
+  String get badgeInProgressStatus => 'قيد التقدم';
+
+  @override
+  String get badgesLoadError => 'تعذّر تحميل الشارات. تحقق من الاتصال ثم أعد المحاولة.';
+
+  @override
   String get badgeUnlocked => 'لقد فتحت شارة جديدة!';
 
   @override

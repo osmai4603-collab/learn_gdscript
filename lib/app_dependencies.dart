@@ -3,15 +3,18 @@ import 'package:get_it/get_it.dart';
 
 import 'core/constants/app_constants.dart';
 import 'data/repositories/curriculum_repository.dart';
+import 'data/repositories/concept_map_repository.dart';
 import 'data/repositories/home_dashboard_repository.dart';
 import 'data/repositories/onboarding_repository.dart';
 import 'data/repositories/progress_repository.dart';
+import 'data/repositories/review_schedule_repository.dart';
 import 'data/repositories/settings_repository.dart';
 import 'data/repositories/syntax_reference_repository.dart';
 import 'data/repositories/workspace_repository.dart';
 import 'data/sqlite/database_helper.dart';
 import 'logic/providers/app_settings_provider.dart';
 import 'logic/providers/curriculum_provider.dart';
+import 'logic/providers/concept_map_provider.dart';
 import 'logic/providers/exercise_provider.dart';
 import 'logic/providers/home_dashboard_provider.dart';
 import 'logic/providers/learning_path_provider.dart';
@@ -35,6 +38,7 @@ class AppDependencies {
     required this.progressProvider,
     required this.homeDashboardProvider,
     required this.learningPathProvider,
+    required this.conceptMapProvider,
   });
 
   final GetIt services;
@@ -47,6 +51,7 @@ class AppDependencies {
   final ProgressProvider progressProvider;
   final HomeDashboardProvider homeDashboardProvider;
   final LearningPathProvider learningPathProvider;
+  final ConceptMapProvider conceptMapProvider;
   bool _disposed = false;
 
   static Future<AppDependencies> create({
@@ -70,12 +75,17 @@ class AppDependencies {
       final syntaxReferenceRepository = AssetSyntaxReferenceRepository(
         assetBundle: assetBundle ?? rootBundle,
       );
+      final conceptMapRepository = ConceptMapRepository(
+        assetBundle: assetBundle ?? rootBundle,
+      );
       services.registerSingleton(settingsRepository);
       services.registerSingleton(OnboardingRepository(database));
       services.registerSingleton(HomeDashboardRepository(database));
       services.registerSingleton(ProgressRepository(database));
+      services.registerSingleton(ReviewScheduleRepository(database));
       services.registerSingleton(WorkspaceRepository(database));
       services.registerSingleton(curriculumRepository);
+      services.registerSingleton(conceptMapRepository);
       services.registerSingleton<SyntaxReferenceRepository>(
         syntaxReferenceRepository,
       );
@@ -126,6 +136,13 @@ class AppDependencies {
         curriculumProvider: curriculumProvider,
         progressProvider: progressProvider,
       );
+      final conceptMapProvider = ConceptMapProvider(
+        conceptMapRepository: conceptMapRepository,
+        reviewScheduleRepository: services<ReviewScheduleRepository>(),
+        curriculumProvider: curriculumProvider,
+        progressProvider: progressProvider,
+        visitorId: AppConstants.visitorId,
+      );
 
       return AppDependencies._(
         services: services,
@@ -138,6 +155,7 @@ class AppDependencies {
         progressProvider: progressProvider,
         homeDashboardProvider: homeDashboardProvider,
         learningPathProvider: learningPathProvider,
+        conceptMapProvider: conceptMapProvider,
       );
     } on Object {
       await services.reset();
@@ -150,6 +168,7 @@ class AppDependencies {
     _disposed = true;
     homeDashboardProvider.dispose();
     learningPathProvider.dispose();
+    conceptMapProvider.dispose();
     appSettingsProvider.dispose();
     curriculumProvider.dispose();
     lessonProvider.dispose();
