@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -88,22 +89,12 @@ class _LearningPathContent extends StatefulWidget {
   State<_LearningPathContent> createState() => _LearningPathContentState();
 }
 
-class _LearningPathContentState extends State<_LearningPathContent>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _glowController;
-  late final Animation<double> _glow;
+class _LearningPathContentState extends State<_LearningPathContent> {
   String? _expandedUnitId;
 
   @override
   void initState() {
     super.initState();
-    _glowController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    )..repeat(reverse: true);
-    _glow = Tween<double>(begin: 0.25, end: 0.85).animate(
-      CurvedAnimation(parent: _glowController, curve: Curves.easeInOut),
-    );
     _expandedUnitId = widget.data.curriculum.units
         .elementAt(widget.data.activeUnitIndex)
         .id;
@@ -119,12 +110,6 @@ class _LearningPathContentState extends State<_LearningPathContent>
           .elementAt(widget.data.activeUnitIndex)
           .id;
     }
-  }
-
-  @override
-  void dispose() {
-    _glowController.dispose();
-    super.dispose();
   }
 
   @override
@@ -160,15 +145,9 @@ class _LearningPathContentState extends State<_LearningPathContent>
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          flex: 8,
-                          child: _buildCurriculum(data, units),
-                        ),
+                        Expanded(flex: 8, child: _buildCurriculum(data, units)),
                         const SizedBox(width: 20),
-                        Expanded(
-                          flex: 4,
-                          child: _LearningInsights(data: data),
-                        ),
+                        Expanded(flex: 4, child: _LearningInsights(data: data)),
                       ],
                     )
                   else ...[
@@ -204,7 +183,6 @@ class _LearningPathContentState extends State<_LearningPathContent>
               unit: units[index],
               index: index,
               isExpanded: _expandedUnitId == units[index].id,
-              glow: _glow,
               onToggle: () => setState(
                 () => _expandedUnitId = _expandedUnitId == units[index].id
                     ? null
@@ -279,7 +257,8 @@ class _PageHeader extends StatelessWidget {
                     children: [
                       _StatusPill(
                         icon: Icons.verified_rounded,
-                        label: 'GDScript ${data.curriculum.targetGDScriptVersion}',
+                        label:
+                            'GDScript ${data.curriculum.targetGDScriptVersion}',
                         color: _PathColors.green,
                       ),
                       _StatusPill(
@@ -311,7 +290,7 @@ class _PageHeader extends StatelessWidget {
                   icon: Icons.account_tree_rounded,
                   label: l10n.learningPathTitle,
                   selected: true,
-                  onPressed: () {},
+                  onPressed: () => context.go(AppRoutes.learningPath),
                 ),
                 _HeaderAction(
                   icon: Icons.hub_rounded,
@@ -431,10 +410,7 @@ class _ProgressStrip extends StatelessWidget {
             alignment: WrapAlignment.spaceBetween,
             runSpacing: 6,
             children: [
-              Text(
-                context.l10n.totalXp(xp),
-                style: _PathText.monoSubtle,
-              ),
+              Text(context.l10n.totalXp(xp), style: _PathText.monoSubtle),
               Text(
                 context.l10n.completedLessonsSummary(
                   data.completedLessons,
@@ -547,7 +523,6 @@ class _ModuleCard extends StatelessWidget {
     required this.unit,
     required this.index,
     required this.isExpanded,
-    required this.glow,
     required this.onToggle,
   });
 
@@ -555,7 +530,6 @@ class _ModuleCard extends StatelessWidget {
   final Unit unit;
   final int index;
   final bool isExpanded;
-  final Animation<double> glow;
   final VoidCallback onToggle;
 
   @override
@@ -670,12 +644,17 @@ class _ModuleCard extends StatelessWidget {
                           const SizedBox(height: 5),
                           Text(
                             unit.title.resolve(locale),
+                            key: ValueKey(
+                              'learning_path_module_title_${unit.id}',
+                            ),
                             style: TextStyle(
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 17,
                               height: 1.5,
                               fontWeight: FontWeight.w700,
-                              color: locked ? _PathColors.muted : _PathColors.text,
+                              color: locked
+                                  ? _PathColors.muted
+                                  : _PathColors.text,
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -815,7 +794,6 @@ class _ModuleCard extends StatelessWidget {
                             lessonId: id,
                             status: data.progress?.lessonsProgress[id]?.status,
                             isActive: data.activeLessonId == id,
-                            glow: glow,
                           ),
                         ),
                     ],
@@ -836,14 +814,12 @@ class _LessonCard extends StatelessWidget {
     required this.lessonId,
     required this.status,
     required this.isActive,
-    required this.glow,
   });
 
   final Lesson? lesson;
   final String lessonId;
   final LessonStatus? status;
   final bool isActive;
-  final Animation<double> glow;
 
   @override
   Widget build(BuildContext context) {
@@ -859,6 +835,7 @@ class _LessonCard extends StatelessWidget {
       color: isActive ? _PathColors.surfaceHigh : _PathColors.surface,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
+        key: ValueKey('learning_path_lesson_$lessonId'),
         onTap: () => context.push(AppRoutes.lessonPath(lessonId)),
         borderRadius: BorderRadius.circular(12),
         child: Container(
@@ -878,21 +855,18 @@ class _LessonCard extends StatelessWidget {
               Row(
                 children: [
                   if (isActive)
-                    AnimatedBuilder(
-                      animation: glow,
-                      builder: (context, child) => Container(
-                        width: 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: accent,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: accent.withValues(alpha: glow.value),
-                              blurRadius: 8,
-                            ),
-                          ],
-                        ),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: accent,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: accent.withValues(alpha: 0.55),
+                            blurRadius: 8,
+                          ),
+                        ],
                       ),
                     )
                   else
@@ -919,7 +893,7 @@ class _LessonCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '#${lesson?.order ?? 0}',
+                    '#${(lesson?.order ?? 0) + 1}',
                     style: _PathText.monoSubtle,
                   ),
                 ],
@@ -963,8 +937,7 @@ class _LessonCard extends StatelessWidget {
                   ),
                   _MetadataChip(
                     icon: Icons.bolt_rounded,
-                    label:
-                        '+${GamificationService.lessonCompletionXp + (lesson?.exercises.length ?? 0) * GamificationService.firstTryExerciseXp} XP',
+                    label: '+${GamificationService.lessonCompletionXp} XP',
                     color: _PathColors.purple,
                   ),
                 ],
@@ -976,9 +949,8 @@ class _LessonCard extends StatelessWidget {
     );
   }
 
-  static String _readableLessonId(String id) => id
-      .replaceFirst(RegExp(r'^lesson_[0-9]+_'), '')
-      .replaceAll('_', ' ');
+  static String _readableLessonId(String id) =>
+      id.replaceFirst(RegExp(r'^lesson_[0-9]+_'), '').replaceAll('_', ' ');
 }
 
 class _LearningInsights extends StatelessWidget {
@@ -1038,7 +1010,7 @@ class _LearningInsights extends StatelessWidget {
                   Expanded(
                     child: _MiniStat(
                       value: '$completedUnits/$totalUnits',
-                      label: context.l10n.completedUnitsCount(completedUnits),
+                      label: context.l10n.completedModulesCount(completedUnits),
                       icon: Icons.check_circle_rounded,
                       color: _PathColors.green,
                     ),
@@ -1095,6 +1067,7 @@ class _LearningInsights extends StatelessWidget {
               FilledButton.icon(
                 onPressed: () => context.go(AppRoutes.review),
                 icon: const Icon(Icons.quiz_rounded, size: 18),
+                iconAlignment: .end,
                 label: Text(context.l10n.openReview),
                 style: FilledButton.styleFrom(
                   backgroundColor: const Color(0xFFDB7619),
@@ -1110,7 +1083,9 @@ class _LearningInsights extends StatelessWidget {
           title: context.l10n.achievementsTitle,
           icon: Icons.workspace_premium_rounded,
           trailing: Text(
-            context.l10n.earnedBadgesSummary(progress?.earnedBadges.length ?? 0),
+            context.l10n.earnedBadgesSummary(
+              progress?.earnedBadges.length ?? 0,
+            ),
             style: _PathText.monoSubtle,
           ),
           child: Wrap(
@@ -1334,7 +1309,9 @@ class _MasteryRadarPainter extends CustomPainter {
     }
     final path = Path();
     for (var index = 0; index < count; index++) {
-      final value = index < values.length ? values[index].clamp(0.08, 1.0) : 0.08;
+      final value = index < values.length
+          ? values[index].clamp(0.08, 1.0)
+          : 0.08;
       final point = _point(center, radius * value, index, count);
       if (index == 0) {
         path.moveTo(point.dx, point.dy);
@@ -1569,8 +1546,8 @@ class _FinalProjectCard extends StatelessWidget {
     decoration: BoxDecoration(
       gradient: const LinearGradient(
         colors: [Color(0xFF252A32), Color(0xFF1B2027), Color(0xFF252A32)],
-        begin: Alignment.centerRight,
-        end: Alignment.centerLeft,
+        begin: AlignmentGeometry.centerStart,
+        end: AlignmentGeometry.centerEnd,
       ),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(color: _PathColors.border.withValues(alpha: 0.55)),
@@ -1631,6 +1608,7 @@ class _FinalProjectCard extends StatelessWidget {
         FilledButton.icon(
           onPressed: onOpen,
           icon: const Icon(Icons.rocket_launch_rounded, size: 17),
+          iconAlignment: .end,
           label: Text(context.l10n.startLearning),
           style: FilledButton.styleFrom(
             backgroundColor: _PathColors.primary,
@@ -1659,11 +1637,7 @@ class _ModuleStatusLabel extends StatelessWidget {
     ),
     child: Text(
       label,
-      style: TextStyle(
-        color: color,
-        fontSize: 10,
-        fontWeight: FontWeight.w700,
-      ),
+      style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w700),
     ),
   );
 }
@@ -1757,9 +1731,7 @@ class _HeaderAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected
-        ? _PathColors.primary
-        : accent ?? _PathColors.muted;
+    final color = selected ? _PathColors.primary : accent ?? _PathColors.muted;
     return OutlinedButton.icon(
       onPressed: onPressed,
       icon: Icon(icon, size: 16),
@@ -1845,10 +1817,7 @@ class _LearningPathLoadingSkeleton extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: 20),
-                            Expanded(
-                              flex: 4,
-                              child: _SkeletonInsightCard(),
-                            ),
+                            Expanded(flex: 4, child: _SkeletonInsightCard()),
                           ],
                         );
                       },
@@ -1869,7 +1838,7 @@ class _SkeletonModuleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: 220,
+    height: 228,
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       color: _PathColors.surface,
@@ -1940,15 +1909,23 @@ class _SkeletonInsightCard extends StatelessWidget {
             SizedBox(height: 18),
             Row(
               children: [
-                Expanded(child: _SkeletonBlock(width: double.infinity, height: 90)),
+                Expanded(
+                  child: _SkeletonBlock(width: double.infinity, height: 90),
+                ),
                 SizedBox(width: 8),
-                Expanded(child: _SkeletonBlock(width: double.infinity, height: 90)),
+                Expanded(
+                  child: _SkeletonBlock(width: double.infinity, height: 90),
+                ),
                 SizedBox(width: 8),
-                Expanded(child: _SkeletonBlock(width: double.infinity, height: 90)),
+                Expanded(
+                  child: _SkeletonBlock(width: double.infinity, height: 90),
+                ),
               ],
             ),
             SizedBox(height: 18),
-            Expanded(child: _SkeletonBlock(width: double.infinity, height: 120)),
+            Expanded(
+              child: _SkeletonBlock(width: double.infinity, height: 120),
+            ),
           ],
         ),
       ),

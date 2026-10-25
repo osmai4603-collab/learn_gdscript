@@ -21,8 +21,11 @@ import 'package:learn_gdscript/l10n/app_localizations.dart';
 import 'package:learn_gdscript/ui/layouts/academy_app_layout.dart';
 import 'package:learn_gdscript/ui/layouts/app_shell_sidebar.dart';
 import 'package:learn_gdscript/ui/screens/gamification/badges_screen.dart';
+import 'package:learn_gdscript/ui/screens/lesson/lesson_screen.dart';
+import 'package:learn_gdscript/ui/screens/settings/desktop_lsp_diagnostics_flutter_dart.dart';
 import 'package:learn_gdscript/ui/widgets/common/navigation_bar.dart';
 import 'package:learn_gdscript/ui/widgets/code_directionality.dart';
+import 'package:shimmer/shimmer.dart';
 
 void main() {
   testWidgets('shows onboarding once and opens the main destinations', (
@@ -51,6 +54,8 @@ void main() {
       findsOneWidget,
     );
     await tester.tap(find.text('الإعدادات'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('المظهر واللغة'));
     await tester.pumpAndSettle();
     expect(find.text('اللغة'), findsOneWidget);
   });
@@ -98,7 +103,117 @@ void main() {
     GoRouter.of(tester.element(find.byType(AcademyAppLayout))).go('/settings');
     await tester.pumpAndSettle();
     expect(find.byType(AcademyAppLayout), findsOneWidget);
+    await tester.tap(find.text('Appearance and language').first);
+    await tester.pumpAndSettle();
     expect(find.text('Language'), findsOneWidget);
+
+    GoRouter.of(
+      tester.element(find.byType(AcademyAppLayout)),
+    ).go('/diagnostics/lsp');
+    await tester.pumpAndSettle();
+    expect(find.byType(DesktopLspDiagnosticsScreen), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is SidebarItem &&
+            widget.route == '/settings' &&
+            widget.isActive,
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets(
+    'settings follow current language and persist appearance choices',
+    (tester) async {
+      final dependencies = await AppDependencies.create(
+        databaseHelper: DatabaseHelper(inMemory: true),
+        assetBundle: _TestAssetBundle(),
+      );
+      addTearDown(dependencies.dispose);
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      tester.view.physicalSize = const Size(600, 1000);
+      tester.view.devicePixelRatio = 1;
+      await dependencies.appSettingsProvider.completeOnboarding();
+
+      await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+      await tester.pumpAndSettle();
+      GoRouter.of(tester.element(find.byType(Scaffold).first)).go('/settings');
+      await tester.pumpAndSettle();
+
+      expect(find.byType(AppNavigationBar), findsOneWidget);
+      expect(find.text('حجم خط المحرر'), findsOneWidget);
+      await tester.tap(find.text('المظهر واللغة'));
+      await tester.pumpAndSettle();
+      expect(find.text('اللغة'), findsOneWidget);
+
+      await tester.tap(find.byType(DropdownButtonFormField<Locale>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('الإنجليزية').last);
+      await tester.pumpAndSettle();
+
+      expect(dependencies.appSettingsProvider.locale, const Locale('en'));
+      expect(find.text('Appearance and language'), findsNWidgets(2));
+      expect(find.text('Language'), findsOneWidget);
+
+      await tester.tap(find.byType(DropdownButtonFormField<ThemeMode>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Dark').last);
+      await tester.pumpAndSettle();
+
+      expect(dependencies.appSettingsProvider.themeMode, ThemeMode.dark);
+      expect(
+        await dependencies.services<SettingsRepository>().load(),
+        isA<AppSettings>()
+            .having((settings) => settings.locale, 'locale', const Locale('en'))
+            .having(
+              (settings) => settings.themeMode,
+              'theme mode',
+              ThemeMode.dark,
+            ),
+      );
+    },
+  );
+
+  testWidgets('opens live LSP diagnostics from settings and direct route', (
+    tester,
+  ) async {
+    final dependencies = await AppDependencies.create(
+      databaseHelper: DatabaseHelper(inMemory: true),
+      assetBundle: _TestAssetBundle(),
+    );
+    addTearDown(dependencies.dispose);
+    await dependencies.appSettingsProvider.completeOnboarding();
+
+    await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
+    await tester.pumpAndSettle();
+
+    GoRouter.of(
+      tester.element(find.byType(Scaffold).first),
+    ).go('/diagnostics/lsp');
+    await tester.pumpAndSettle();
+    expect(find.byType(DesktopLspDiagnosticsScreen), findsOneWidget);
+    expect(
+      find.text('اتصل بخادم اللغة من مساحة العمل لعرض التشخيصات.'),
+      findsOneWidget,
+    );
+    expect(
+      tester
+          .widget<AppNavigationBar>(find.byType(AppNavigationBar))
+          .selectedRoute,
+      '/settings',
+    );
+    expect(find.text('Godot v4.3.stable.official'), findsNothing);
+
+    await tester.tap(find.byTooltip('الإعدادات'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('المحرك وخادم اللغة'));
+    await tester.pumpAndSettle();
+    expect(find.text('تشخيصات خادم اللغة'), findsOneWidget);
+    await tester.tap(find.text('تشخيصات خادم اللغة'));
+    await tester.pumpAndSettle();
+    expect(find.byType(DesktopLspDiagnosticsScreen), findsOneWidget);
   });
 
   testWidgets('experienced onboarding starts at the chosen unit', (
@@ -159,9 +274,32 @@ void main() {
     );
 
     GoRouter.of(tester.element(find.byType(Scaffold).first)).go('/path');
-    await tester.pumpAndSettle();
-    expect(find.text('المتغيرات'), findsOneWidget);
-    expect(find.text('الوحدة الثالثة'), findsOneWidget);
+    await tester.pump();
+    expect(find.byType(Shimmer), findsOneWidget);
+    await tester.pump(const Duration(milliseconds: 250));
+    expect(
+      find.byKey(
+        const ValueKey('learning_path_module_title_unit_02_variables'),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey('learning_path_module_title_unit_03_locked')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey('learning_path_lesson_lesson_03_locked')),
+      findsOneWidget,
+    );
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('learning_path_lesson_lesson_03_locked')),
+    );
+    await tester.tap(
+      find.byKey(const ValueKey('learning_path_lesson_lesson_03_locked')),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 250));
+    expect(find.byType(LessonScreen), findsOneWidget);
   });
 
   testWidgets('onboarding assessment cannot advance without an answer', (
@@ -241,8 +379,9 @@ void main() {
     await tester.pump(const Duration(milliseconds: 500));
 
     expect(
-      await dependencies.services<HomeDashboardRepository>()
-          .loadPlaygroundCode(dependencies.homeDashboardProvider.visitorId),
+      await dependencies.services<HomeDashboardRepository>().loadPlaygroundCode(
+        dependencies.homeDashboardProvider.visitorId,
+      ),
       draft,
     );
   });

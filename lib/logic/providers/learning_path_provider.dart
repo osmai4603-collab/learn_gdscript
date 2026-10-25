@@ -27,6 +27,7 @@ class LearningPathProvider extends ChangeNotifier {
   final Map<String, Lesson> _lessonCache = {};
   AsyncState<LearningPathData> state = const AsyncState.initial();
   int _loadSequence = 0;
+  String? _cachedCurriculumVersion;
 
   Future<void> load() async {
     final sequence = ++_loadSequence;
@@ -35,13 +36,30 @@ class LearningPathProvider extends ChangeNotifier {
     await _loadData(sequence);
   }
 
-  Future<void> refresh() => load();
+  Future<void> refresh() async {
+    if (_curriculumProvider.state.value == null) {
+      try {
+        await _curriculumProvider.load();
+      } on Object catch (error) {
+        state = AsyncState.error(error);
+        notifyListeners();
+        return;
+      }
+    }
+    await load();
+  }
 
   Future<void> _loadData(int sequence) async {
     try {
       final curriculum = _curriculumProvider.state.value;
       if (curriculum == null) {
         throw StateError('The curriculum must be loaded before the learning path.');
+      }
+      final curriculumVersion =
+          '${curriculum.version}:${curriculum.targetGDScriptVersion}';
+      if (_cachedCurriculumVersion != curriculumVersion) {
+        _lessonCache.clear();
+        _cachedCurriculumVersion = curriculumVersion;
       }
       final lessonIds = curriculum.units
           .expand((unit) => unit.lessonIds)

@@ -43,6 +43,7 @@ class ContinueLearningCard extends StatelessWidget {
             child: FilledButton.icon(
               onPressed: onTap,
               icon: const Icon(Icons.arrow_forward),
+              iconAlignment: .end,
               label: Text(context.l10n.continueLearning),
             ),
           ),

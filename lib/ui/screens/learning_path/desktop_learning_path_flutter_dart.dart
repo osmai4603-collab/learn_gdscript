@@ -1609,6 +1609,7 @@ class _LearningPathInsights extends StatelessWidget {
               FilledButton.icon(
                 onPressed: onStartReview,
                 icon: const Icon(Icons.quiz_rounded, size: 18),
+                iconAlignment: .end,
                 label: const Text('فتح خريطة المراجعة'),
                 style: FilledButton.styleFrom(
                   backgroundColor: const Color(0xFFDB7619),
@@ -2057,8 +2058,8 @@ class _FinalProjectCard extends StatelessWidget {
     decoration: BoxDecoration(
       gradient: const LinearGradient(
         colors: [Color(0xFF252A32), Color(0xFF1B2027), Color(0xFF252A32)],
-        begin: Alignment.centerRight,
-        end: Alignment.centerLeft,
+          begin: AlignmentGeometry.centerStart,
+          end: AlignmentGeometry.centerEnd,
       ),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
@@ -2134,6 +2135,7 @@ class _FinalProjectCard extends StatelessWidget {
             isUnlocked ? Icons.rocket_launch_rounded : Icons.lock_rounded,
             size: 17,
           ),
+          iconAlignment: .end,
           label: Text(isUnlocked ? 'ابدأ المشروع' : 'أكمل المسار لفتحه'),
           style: FilledButton.styleFrom(
             backgroundColor: isUnlocked

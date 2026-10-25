@@ -73,6 +73,11 @@ flutter:
 
   assets:
     - assets/curriculum/
+    - assets/curriculum/units/01_first_program/
+    - assets/curriculum/units/02_variables/
+    - assets/curriculum/units/03_conditions/
+    - assets/curriculum/units/04_loops/
+    - assets/curriculum/units/05_functions/
     - assets/syntax_reference/
 
   fonts:

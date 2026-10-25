@@ -162,86 +162,26 @@
   "streakLabel": "Daily streak",
   "capstoneTitle": "Capstone project",
   "capstoneDescription": "Put your GDScript skills into practice with a complete project.",
-  "learningPathHeading": "Learning path and programming concept map",
-  "conceptMapAction": "Concept map",
-  "smartReviewAction": "Smart review",
-  "curriculumVersion": "GDScript {version} curriculum",
-  "@curriculumVersion": {
-    "placeholders": {
-      "version": {"type": "String"}
-    }
-  },
-  "completedUnitsSummary": "{completed} of {total} units completed",
-  "@completedUnitsSummary": {
-    "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
-    }
-  },
-  "completedLessonsSummary": "{completed} of {total} lessons completed",
-  "@completedLessonsSummary": {
-    "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
-    }
-  },
-  "milestoneCompleted": "Completed",
-  "milestoneCurrent": "Current stage",
-  "milestoneUpcoming": "Upcoming",
-  "completedModulesCount": "{count} completed",
-  "@completedModulesCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "upcomingModulesCount": "{count} remaining",
-  "@upcomingModulesCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "moduleNumber": "Module {number}",
-  "@moduleNumber": {
-    "placeholders": {
-      "number": {"type": "int"}
-    }
-  },
-  "moduleLessonCount": "{count} lessons",
-  "@moduleLessonCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "moduleDurationHours": "{hours} min total",
-  "@moduleDurationHours": {
-    "placeholders": {
-      "hours": {"type": "int"}
-    }
-  },
-  "lessonStatusCurrent": "Current lesson",
-  "lessonStatusCompleted": "Completed",
-  "lessonStatusAvailable": "Available",
-  "lessonStatusLocked": "Locked",
-  "moduleDetails": "Module details",
-  "showLessons": "Show lessons",
-  "hideLessons": "Hide lessons",
-  "masteryStatistics": "Learning progress and statistics",
-  "progressByUnit": "Progress by unit",
-  "achievementsTitle": "Your achievements",
-  "earnedBadgesSummary": "{count} badges earned",
-  "@earnedBadgesSummary": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "reviewNextStep": "Your next lesson",
-  "openReview": "Open review",
-  "workspaceStatus": "Workspace",
-  "workspaceReady": "Ready to practice the lessons",
-  "openWorkspace": "Open workspace",
   "workspaceTitle": "Workspace",
   "workspaceDescription": "Local language-server processes are supported on desktop platforms only.",
   "settingsTitle": "Settings",
+  "settingsReload": "Reload settings",
+  "settingsLoadError": "Settings could not be loaded. Please try again.",
+  "settingsResetProgressError": "Progress could not be reset.",
+  "settingsCategories": "Settings categories",
+  "settingsEditorCategory": "Editor",
+  "settingsAppearanceCategory": "Appearance and language",
+  "settingsEngineCategory": "Engine and language server",
+  "settingsAboutCategory": "About and progress",
+  "settingsEditorDescription": "Customize GDScript editor preferences.",
+  "settingsAppearanceDescription": "Choose the display language, color theme, and appearance behavior.",
+  "settingsEngineDescription": "Language-server status and development tool navigation.",
+  "settingsAboutDescription": "Application information and learning progress management.",
+  "settingsEditorFontDescription": "The selected font size is applied to the code editor.",
+  "settingsLanguageDescription": "The interface language updates as soon as it is selected.",
+  "settingsThemeModeDescription": "Follow the system preference or choose a fixed appearance.",
+  "settingsThemeVariantDescription": "Choose one of the color themes included in the app.",
+  "settingsStreakDescription": "Show the learning streak throughout the app.",
   "onboardingTitle": "Welcome",
   "onboardingDescription": "Choose a learning path and continue at your own pace.",
   "lessonTitle": "Lesson",
@@ -288,6 +228,38 @@
   "exercisesSolved": "{count} exercises solved",
   "hintsUsed": "{count} hints used",
   "timeSpent": "{minutes} minutes",
+  "currentStreakDays": "{count}-day learning streak",
+  "@currentStreakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "levelUpTo": "Level up to level {level}",
+  "@levelUpTo": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "levelProgress": "Progress to next level: {progress}%",
+  "@levelProgress": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonCompleteDetailsError": "Some lesson completion details could not be loaded: {error}",
+  "@lessonCompleteDetailsError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "backToPath": "Back to Path",
   "unitLocked": "Locked",
   "unitInProgress": "In Progress",
@@ -303,6 +275,19 @@
   "lspStatus": "Language Server Status",
   "lspConnected": "Connected",
   "lspDisconnected": "Disconnected",
+  "lspDiagnosticsTitle": "Language server diagnostics",
+  "lspDiagnosticsDescription": "Review errors and warnings reported by the language server.",
+  "lspDiagnosticsEmpty": "There are no current diagnostics.",
+  "lspDiagnosticsConnectPrompt": "Connect the language server from the workspace to view diagnostics.",
+  "lspDiagnosticsSummary": "{count} diagnostics",
+  "@lspDiagnosticsSummary": {
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "lspDiagnosticError": "Errors",
+  "lspDiagnosticWarning": "Warnings",
+  "lspDiagnosticInformation": "Information",
+  "lspDiagnosticHint": "Hints",
+  "lspDiagnosticNoMessage": "The language server did not provide a description for this diagnostic.",
   "startLearning": "Start Learning",
   "newUserWelcome": "Welcome! Start your programming journey",
   "returningWelcome": "Welcome back!",
@@ -421,5 +406,49 @@
   "onboardingSummaryVeteran": "We will focus on the concepts that help you move to GDScript 2.0 and Godot 4.",
   "onboardingStartLearning": "Go to the learning path and start your first lesson ↵",
   "onboardingSaveError": "Could not save onboarding progress. Please try again.",
-  "onboardingRestoreError": "Could not restore your saved onboarding data."
+  "onboardingRestoreError": "Could not restore your saved onboarding data.",
+  "syntaxCategoryAll": "All",
+  "syntaxCategoryKeywords": "Keywords",
+  "syntaxCategoryBuiltins": "Built-ins",
+  "syntaxCategoryTypes": "Types",
+  "syntaxExplorerLoadError": "Could not load the syntax reference.",
+  "syntaxExplorerProgressError": "Could not record syntax explorer usage.",
+  "syntaxExplorerPageDescription": "Search GDScript keywords, built-ins, and types.",
+  "syntaxExplorerDocumentedCount": "documented entries",
+  "syntaxExplorerSearchHint": "Search for a keyword, built-in, or data type...",
+  "syntaxExplorerSortAlphabetical": "Sort: alphabetical",
+  "syntaxExplorerEntriesHeading": "Entries",
+  "syntaxExplorerCount": "{count} entries",
+  "@syntaxExplorerCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "syntaxExplorerVisibleCount": "Showing {visible} of {total}",
+  "@syntaxExplorerVisibleCount": {
+    "placeholders": {
+      "visible": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "syntaxExplorerLoadMore": "Load more",
+  "syntaxExplorerSelected": "Selected",
+  "syntaxExplorerNoResults": "No matching results.",
+  "syntaxExplorerSelectEntry": "Select an entry to view its details.",
+  "syntaxExplorerSignature": "Syntax",
+  "syntaxExplorerExample": "Example",
+  "syntaxExplorerExplanation": "Explanation",
+  "syntaxExplorerCopyEntry": "Copy entry",
+  "syntaxExplorerCopyExample": "Copy example",
+  "syntaxExplorerCopied": "Copied {item}",
+  "@syntaxExplorerCopied": {
+    "placeholders": {
+      "item": {"type": "String"}
+    }
+  },
+  "syntaxExplorerOpenLesson": "Open lesson",
+  "syntaxExplorerOpenWorkspace": "Open workspace",
+  "syntaxExplorerRelatedConcepts": "Related concepts",
+  "syntaxExplorerLessonUnavailable": "No related lesson is available for this entry.",
+  "syntaxExplorerClearSearch": "Clear search"
 }

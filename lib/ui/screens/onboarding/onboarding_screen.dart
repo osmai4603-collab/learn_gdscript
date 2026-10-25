@@ -594,7 +594,12 @@ class _WelcomeStepView extends StatelessWidget {
           const SizedBox(height: 28),
           ElevatedButton.icon(
             onPressed: busy ? null : onStart,
-            icon: const Icon(Icons.arrow_back_rounded, size: 18),
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              size: 18,
+              textDirection: Directionality.of(context) == .ltr ? .rtl : .ltr,
+            ),
+            iconAlignment: .end,
             label: Text(
               l10n.onboardingWelcomeAction,
               style: const TextStyle(
@@ -1136,7 +1141,12 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: busy ? null : onStartLearning,
-              icon: const Icon(Icons.arrow_back_rounded, size: 18),
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                size: 18,
+                textDirection: Directionality.of(context) == .ltr ? .rtl : .ltr,
+              ),
+              iconAlignment: .end,
               label: Text(
                 l10n.onboardingStartLearning,
                 textAlign: TextAlign.center,

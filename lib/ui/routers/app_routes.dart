@@ -12,9 +12,11 @@ abstract final class AppRoutes {
   static const capstone = '/capstone';
   static const lesson = '/lesson/:lessonId';
   static const lessonComplete = '/lesson-complete/:lessonId';
+  static const challenges = '/challenges';
 
   static const spacedRepetition = '/spaced-repetition';
   static const miniGame = '/projects/mini-game';
+  static const lspDiagnostics = '/diagnostics/lsp';
 
   static String lessonPath(String lessonId) =>
       '/lesson/${Uri.encodeComponent(lessonId)}';

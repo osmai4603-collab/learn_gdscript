@@ -21,6 +21,7 @@ class LanguageServerProvider extends ChangeNotifier {
   WorkspaceIndexService? _index;
   StreamSubscription<LspNotification>? _notifications;
   final Map<String, Uri> _documents = {};
+  final Set<String> _workspaceDocumentUris = {};
   final Map<String, List<Map<String, Object?>>> _diagnostics = {};
   String? _rootPath;
   Object? _lastError;
@@ -33,6 +34,13 @@ class LanguageServerProvider extends ChangeNotifier {
   Object? get lastError => _lastError;
   int get indexedFileCount => _indexedFileCount;
   LanguageServerClient? get client => _client;
+  Map<String, List<Map<String, Object?>>> get diagnosticsByUri =>
+      Map<String, List<Map<String, Object?>>>.unmodifiable({
+        for (final entry in _diagnostics.entries)
+          entry.key: List<Map<String, Object?>>.unmodifiable(
+            entry.value.map(Map<String, Object?>.unmodifiable),
+          ),
+      });
 
   Future<void> loadSavedWorkspace() async {
     _rootPath = await _workspaceRepository.getRootPath();
@@ -97,7 +105,7 @@ class LanguageServerProvider extends ChangeNotifier {
     final notificationSubscription = _notifications;
     await notificationSubscription?.cancel();
     if (client != null) {
-      for (final uri in _documents.values) {
+      for (final uri in [..._documents.values, ..._workspaceDocumentUris.map(Uri.parse)]) {
         await client.closeDocument(uri);
       }
     }
@@ -107,6 +115,7 @@ class LanguageServerProvider extends ChangeNotifier {
     _client = null;
     _notifications = null;
     _documents.clear();
+    _workspaceDocumentUris.clear();
     _diagnostics.clear();
     _rootPath = null;
     _indexedFileCount = 0;
@@ -259,6 +268,65 @@ class LanguageServerProvider extends ChangeNotifier {
 
   Future<Object?> workspaceSymbols(String query) =>
       _requireClient().workspaceSymbols(query);
+
+  Future<void> synchronizeWorkspace() async {
+    final index = _index;
+    if (index == null) throw StateError('Language server is not connected.');
+    await index.synchronizeWorkspace();
+    _indexedFileCount = (await _workspaceRepository.loadFiles()).length;
+    notifyListeners();
+  }
+
+  Future<void> openWorkspaceDocument(Uri uri, String code) async {
+    final index = _index;
+    if (index == null) throw StateError('Language server is not connected.');
+    final key = uri.toString();
+    if (_workspaceDocumentUris.contains(key)) return;
+    await index.openDocument(uri, code);
+    _workspaceDocumentUris.add(key);
+  }
+
+  Future<void> changeWorkspaceDocument(Uri uri, String code) async {
+    final index = _index;
+    if (index == null) throw StateError('Language server is not connected.');
+    final key = uri.toString();
+    if (!_workspaceDocumentUris.contains(key)) {
+      await openWorkspaceDocument(uri, code);
+      return;
+    }
+    final version = _workspaceDocumentVersions.update(
+      key,
+      (version) => version + 1,
+      ifAbsent: () => 2,
+    );
+    await index.changeDocument(uri, code, version: version);
+  }
+
+  final Map<String, int> _workspaceDocumentVersions = {};
+
+  Future<void> saveWorkspaceDocument(Uri uri, String code) async {
+    final index = _index;
+    if (index == null) throw StateError('Language server is not connected.');
+    if (!_workspaceDocumentUris.contains(uri.toString())) {
+      throw StateError('Workspace document is not open.');
+    }
+    await index.saveDocument(uri, text: code);
+    _indexedFileCount = (await _workspaceRepository.loadFiles()).length;
+    notifyListeners();
+  }
+
+  Future<void> closeWorkspaceDocument(Uri uri) async {
+    final key = uri.toString();
+    if (!_workspaceDocumentUris.remove(key)) return;
+    _workspaceDocumentVersions.remove(key);
+    final index = _index;
+    if (index != null) await index.closeDocument(uri);
+    _diagnostics.remove(key);
+    notifyListeners();
+  }
+
+  List<Map<String, Object?>> diagnosticsForUri(String uri) =>
+      _diagnostics[uri] ?? const [];
 
   LanguageServerClient _requireClient() {
     final client = _client;

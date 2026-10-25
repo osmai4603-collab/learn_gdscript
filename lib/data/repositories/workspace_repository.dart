@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import '../../core/constants/gdscript_constants.dart';
 import '../sqlite/database_helper.dart';
 
 class WorkspaceFileSnapshot {
@@ -123,5 +127,55 @@ class WorkspaceRepository {
       db.execute('ROLLBACK');
       rethrow;
     }
+  }
+
+  Future<void> saveGDScriptFile(String uri, String content) async {
+    if (utf8.encode(content).length >
+        GDScriptConstants.maximumWorkspaceFileBytes) {
+      throw ArgumentError.value(content, 'content', 'File exceeds the size limit.');
+    }
+    final parsedUri = Uri.parse(uri);
+    if (parsedUri.scheme != 'file' ||
+        !parsedUri.path.endsWith(GDScriptConstants.fileExtension)) {
+      throw ArgumentError.value(uri, 'uri', 'Only GDScript files can be saved.');
+    }
+
+    final rootPath = await getRootPath();
+    if (rootPath == null) throw StateError('No workspace is selected.');
+    final root = Directory(rootPath);
+    final resolvedRoot = await root.resolveSymbolicLinks();
+    final file = File.fromUri(parsedUri).absolute;
+    if (!file.path.startsWith('$resolvedRoot${Platform.pathSeparator}')) {
+      throw ArgumentError.value(uri, 'uri', 'File is outside the workspace.');
+    }
+    if (await FileSystemEntity.type(file.path, followLinks: false) ==
+        FileSystemEntityType.link) {
+      throw ArgumentError.value(uri, 'uri', 'Symbolic links cannot be saved.');
+    }
+    final resolvedParent = await Directory(
+      file.parent.path,
+    ).resolveSymbolicLinks();
+    if (resolvedParent != resolvedRoot &&
+        !resolvedParent.startsWith('$resolvedRoot${Platform.pathSeparator}')) {
+      throw ArgumentError.value(uri, 'uri', 'File is outside the workspace.');
+    }
+    if (!await file.exists()) {
+      throw FileSystemException('Workspace file no longer exists.', file.path);
+    }
+
+    await file.writeAsString(content, flush: true);
+    final files = await loadFiles();
+    final matchingFile = files.indexWhere((snapshot) => snapshot.uri == uri);
+    if (matchingFile == -1) {
+      throw StateError('File is not part of the indexed workspace.');
+    }
+    final stat = await file.stat();
+    files[matchingFile] = WorkspaceFileSnapshot(
+      uri: uri,
+      relativePath: files[matchingFile].relativePath,
+      content: content,
+      modifiedMillis: stat.modified.millisecondsSinceEpoch,
+    );
+    await replaceFiles(files);
   }
 }

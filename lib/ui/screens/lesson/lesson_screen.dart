@@ -19,12 +19,11 @@ import '../../../logic/providers/progress_provider.dart';
 import '../../../logic/services/code_runner_service.dart';
 import '../../routers/app_routes.dart';
 import '../../layouts/adaptive_layout.dart';
-import '../../layouts/lesson_layout_desktop.dart';
 import '../../layouts/lesson_layout_mobile.dart';
+import 'desktop_lesson_ide_flutter_dart.dart';
 import '../../widgets/code_directionality.dart';
 import '../../widgets/code_editor/code_editor_widget.dart';
 import '../../widgets/common/empty_state.dart';
-import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/exercise/exercise_widget.dart';
 import '../../widgets/output_panel/output_panel.dart';
 
@@ -58,6 +57,10 @@ class _LessonScreenState extends State<LessonScreen> {
   final Map<String, int> _exerciseHints = {};
   int _earnedXpForLesson = 0;
   DateTime? _lessonStartedAt;
+  int _progressSaveSequence = 0;
+  int _savedProgressSequence = 0;
+  bool _progressSaving = false;
+  String? _progressSaveError;
 
   @override
   void didChangeDependencies() {
@@ -153,33 +156,79 @@ class _LessonScreenState extends State<LessonScreen> {
     Map<String, int>? exerciseAttempts,
     Map<String, int>? exerciseHints,
     LessonStatus? status,
+    bool clearSavedCode = false,
   }) async {
     final provider = context.read<ProgressProvider>();
     final previous = provider.progress?.lessonsProgress[lesson.id];
-    await provider.updateLesson(
-      unitId: lesson.unitId,
-      lessonId: lesson.id,
-      lessonProgress: LessonProgress(
+    final saveSequence = ++_progressSaveSequence;
+    if (mounted) {
+      setState(() {
+        _progressSaving = true;
+        _progressSaveError = null;
+      });
+    }
+    try {
+      await provider.updateLesson(
+        unitId: lesson.unitId,
         lessonId: lesson.id,
-        status: status ?? previous?.status ?? LessonStatus.inProgress,
-        exercisesCompleted:
-            exercisesCompleted ?? previous?.exercisesCompleted ?? 0,
-        exercisesTotal: lesson.exercises.length,
-        attempts: attempts ?? previous?.attempts ?? 0,
-        hintsUsed: hintsUsed ?? previous?.hintsUsed ?? 0,
-        startedAt: previous?.startedAt ?? DateTime.now(),
-        completedAt: status == LessonStatus.completed
-            ? DateTime.now()
-            : previous?.completedAt,
-        savedCode: savedCode ?? previous?.savedCode,
-        exercisesWithSolutionViewed:
-            exercisesWithSolutionViewed ??
-            previous?.exercisesWithSolutionViewed ??
-            const [],
-        exerciseAttempts:
-            exerciseAttempts ?? previous?.exerciseAttempts ?? const {},
-        exerciseHints: exerciseHints ?? previous?.exerciseHints ?? const {},
-      ),
+        lessonProgress: LessonProgress(
+          lessonId: lesson.id,
+          status: status ?? previous?.status ?? LessonStatus.inProgress,
+          exercisesCompleted:
+              exercisesCompleted ?? previous?.exercisesCompleted ?? 0,
+          exercisesTotal: lesson.exercises.length,
+          attempts: attempts ?? previous?.attempts ?? 0,
+          hintsUsed: hintsUsed ?? previous?.hintsUsed ?? 0,
+          startedAt: previous?.startedAt ?? DateTime.now(),
+          completedAt: status == LessonStatus.completed
+              ? DateTime.now()
+              : previous?.completedAt,
+          savedCode: clearSavedCode ? null : savedCode ?? previous?.savedCode,
+          exercisesWithSolutionViewed:
+              exercisesWithSolutionViewed ??
+              previous?.exercisesWithSolutionViewed ??
+              const [],
+          exerciseAttempts:
+              exerciseAttempts ?? previous?.exerciseAttempts ?? const {},
+          exerciseHints: exerciseHints ?? previous?.exerciseHints ?? const {},
+        ),
+      );
+      if (mounted && saveSequence == _progressSaveSequence) {
+        setState(() {
+          _progressSaving = false;
+          _savedProgressSequence = saveSequence;
+        });
+      }
+    } on Object catch (error) {
+      if (mounted && saveSequence == _progressSaveSequence) {
+        setState(() {
+          _progressSaving = false;
+          _progressSaveError = error.toString();
+        });
+      }
+      rethrow;
+    }
+  }
+
+  void _persistLessonProgressInBackground(
+    Lesson lesson, {
+    String? savedCode,
+    int? attempts,
+    int? hintsUsed,
+    List<String>? exercisesWithSolutionViewed,
+    Map<String, int>? exerciseAttempts,
+    Map<String, int>? exerciseHints,
+  }) {
+    unawaited(
+      _persistLessonProgress(
+        lesson,
+        savedCode: savedCode,
+        attempts: attempts,
+        hintsUsed: hintsUsed,
+        exercisesWithSolutionViewed: exercisesWithSolutionViewed,
+        exerciseAttempts: exerciseAttempts,
+        exerciseHints: exerciseHints,
+      ).catchError((Object _) {}),
     );
   }
 
@@ -260,6 +309,7 @@ class _LessonScreenState extends State<LessonScreen> {
       exerciseHints: {..._exerciseHints, exercise.id: hintsUsed},
       exercisesCompleted: completedCount,
       status: allCompleted ? LessonStatus.completed : LessonStatus.inProgress,
+      clearSavedCode: allCompleted,
     );
     final exerciseReward = await progressProvider.recordExerciseResult(
       curriculum: curriculum,
@@ -344,6 +394,7 @@ class _LessonScreenState extends State<LessonScreen> {
             child: FilledButton.icon(
               onPressed: _exampleRunning ? null : _runExample,
               icon: const Icon(Icons.play_arrow),
+              iconAlignment: .end,
               label: Text(context.l10n.runExample),
             ),
           ),
@@ -377,26 +428,24 @@ class _LessonScreenState extends State<LessonScreen> {
       initialHintsUsed: _exerciseHints[exercise.id] ?? 0,
       onCodeChanged: (code) {
         _savedCode = code;
-        unawaited(_persistLessonProgress(lesson, savedCode: code));
+        _persistLessonProgressInBackground(lesson, savedCode: code);
         unawaited(_syncLessonDocument(lesson.id, code));
       },
       onProgressChanged: (attempts, hintsUsed) {
         _exerciseAttempts[exercise.id] = attempts;
         _exerciseHints[exercise.id] = hintsUsed;
-        unawaited(
-          _persistLessonProgress(
-            lesson,
-            attempts: _exerciseAttempts.values.fold<int>(
-              0,
-              (sum, item) => sum + item,
-            ),
-            hintsUsed: _exerciseHints.values.fold<int>(
-              0,
-              (sum, item) => sum + item,
-            ),
-            exerciseAttempts: _exerciseAttempts,
-            exerciseHints: _exerciseHints,
+        _persistLessonProgressInBackground(
+          lesson,
+          attempts: _exerciseAttempts.values.fold<int>(
+            0,
+            (sum, item) => sum + item,
           ),
+          hintsUsed: _exerciseHints.values.fold<int>(
+            0,
+            (sum, item) => sum + item,
+          ),
+          exerciseAttempts: _exerciseAttempts,
+          exerciseHints: _exerciseHints,
         );
       },
       onExerciseCompleted: (attempts, hintsUsed, usedSolution, code) =>
@@ -410,11 +459,9 @@ class _LessonScreenState extends State<LessonScreen> {
           ),
       onSolutionViewed: () {
         _solutionViewedExerciseIds.add(exercise.id);
-        unawaited(
-          _persistLessonProgress(
-            lesson,
-            exercisesWithSolutionViewed: [..._solutionViewedExerciseIds],
-          ),
+        _persistLessonProgressInBackground(
+          lesson,
+          exercisesWithSolutionViewed: [..._solutionViewedExerciseIds],
         );
       },
       onCompletionRequested: context.read<LanguageServerProvider>().isConnected
@@ -451,12 +498,43 @@ class _LessonScreenState extends State<LessonScreen> {
 
   Widget _body(Lesson lesson) {
     final title = lesson.title.resolve(Localizations.localeOf(context));
+    final curriculum = context.watch<CurriculumProvider>().state.value!;
+    final unit = curriculum.units.firstWhere(
+      (unit) => unit.id == lesson.unitId,
+    );
     final languageServer = context.watch<LanguageServerProvider>();
     unawaited(_openLessonDocument(lesson));
     final diagnostics = languageServer.diagnosticsForLesson(lesson.id);
     final statusSection = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (_progressSaving) const LinearProgressIndicator(minHeight: 2),
+        if (_progressSaveError case final error?)
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              context.l10n.dashboardSaveError(error),
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          )
+        else if (!_progressSaving &&
+            _savedProgressSequence > 0 &&
+            _savedCode != null)
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.cloud_done_outlined,
+                  size: 16,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                const SizedBox(width: 6),
+                Text(context.l10n.dashboardDraftAutoSaved),
+              ],
+            ),
+          ),
         if (_lspWarning != null)
           Padding(
             padding: const EdgeInsets.all(8),
@@ -480,17 +558,20 @@ class _LessonScreenState extends State<LessonScreen> {
         ),
       ),
       body: AdaptiveLayout(
+        breakpoint: 840,
         mobileBuilder: (context) => LessonLayoutMobile(
           explanationSection: _explanation(lesson),
           editorSection: _exercise(lesson),
           actionsSection: statusSection,
           outputSection: const SizedBox.shrink(),
         ),
-        desktopBuilder: (context) => LessonLayoutDesktop(
+        desktopBuilder: (context) => DesktopLessonIdeLayout(
+          unitTitle: unit.title.resolve(Localizations.localeOf(context)),
+          estimatedMinutes: lesson.estimatedMinutes,
+          isLspConnected: languageServer.isConnected,
           explanationSection: _explanation(lesson),
           editorSection: _exercise(lesson),
-          actionsSection: statusSection,
-          outputSection: const SizedBox.shrink(),
+          statusSection: statusSection,
         ),
       ),
     );
@@ -503,7 +584,7 @@ class _LessonScreenState extends State<LessonScreen> {
       if (snapshot.connectionState != ConnectionState.done) {
         return Scaffold(
           appBar: AppBar(title: Text(context.l10n.lessonTitle)),
-          body: const LoadingIndicator(),
+          body: const LessonLoadingSkeleton(),
         );
       }
       if (snapshot.hasError || snapshot.data == null) {

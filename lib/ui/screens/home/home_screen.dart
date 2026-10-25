@@ -50,10 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state.status == LoadStatus.error) {
             return EmptyState(
               icon: Icons.error_outline,
-              message: l10n.lessonUnavailable,
+              message: "${l10n.lessonUnavailable} ${state.error}",
               action: FilledButton(
                 onPressed: dashboardProvider.refresh,
-                child: Text(l10n.retry),
+                child: SelectableText(l10n.retry),
               ),
             );
           }

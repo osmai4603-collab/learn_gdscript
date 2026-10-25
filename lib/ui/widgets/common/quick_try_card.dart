@@ -71,6 +71,7 @@ class _QuickTryCardState extends State<QuickTryCard> {
             child: FilledButton.icon(
               onPressed: _state == OutputState.running ? null : _run,
               icon: const Icon(Icons.play_arrow),
+              iconAlignment: .end,
               label: Text(context.l10n.runCode),
             ),
           ),

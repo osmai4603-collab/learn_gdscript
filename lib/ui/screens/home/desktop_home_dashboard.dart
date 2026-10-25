@@ -491,8 +491,11 @@ class DashboardTopNav extends StatelessWidget {
                 color: const Color(0xFF1B2027),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 16,
+                runSpacing: 12,
                 children: [
                   CircleAvatar(radius: 4, backgroundColor: statusColor),
                   const SizedBox(width: 8),
@@ -675,7 +678,6 @@ class _GreetingBanner extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -720,8 +722,8 @@ class _GreetingBanner extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF252A32), Color(0xFF1B2027), Color(0xFF171C23)],
-          begin: Alignment.centerRight,
-          end: Alignment.centerLeft,
+          begin: AlignmentGeometry.centerStart,
+          end: AlignmentGeometry.centerEnd,
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFF40484F)),
@@ -953,11 +955,16 @@ class _ContinueLearningHeroCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: double.infinity,
+          width: 250,
           height: 48,
           child: ElevatedButton.icon(
             onPressed: onResume,
-            icon: const Icon(Icons.arrow_back_rounded, size: 20),
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              size: 20,
+              textDirection: Directionality.of(context) == .ltr ? .rtl : .ltr,
+            ),
+            iconAlignment: .end,
             label: Text(
               l10n.dashboardContinueAction,
               style: const TextStyle(
@@ -1897,7 +1904,11 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                         ? Icons.hourglass_top_rounded
                         : Icons.play_arrow_rounded,
                     size: 18,
+                    textDirection: Directionality.of(context) == .ltr
+                        ? .rtl
+                        : .ltr,
                   ),
+                  iconAlignment: .end,
                   label: Text(
                     _isRunning
                         ? l10n.dashboardPlaygroundRunning

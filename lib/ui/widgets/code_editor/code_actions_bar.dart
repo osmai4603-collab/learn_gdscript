@@ -52,6 +52,7 @@ class CodeActionsBar extends StatelessWidget {
           FilledButton.icon(
             onPressed: onRun,
             icon: const Icon(Icons.play_arrow),
+            iconAlignment: .end,
             label: Text(l10n.runCode),
           ),
         if (onCompletion != null)

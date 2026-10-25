@@ -162,86 +162,26 @@
   "streakLabel": "سلسلة التعلّم",
   "capstoneTitle": "مشروع الإتقان النهائي",
   "capstoneDescription": "طبّق مهارات GDScript التي اكتسبتها في مشروع متكامل.",
-  "learningPathHeading": "مسار التعلّم وخريطة المفاهيم البرمجية",
-  "conceptMapAction": "خريطة المفاهيم",
-  "smartReviewAction": "مراجعة ذكية",
-  "curriculumVersion": "منهج GDScript إصدار {version}",
-  "@curriculumVersion": {
-    "placeholders": {
-      "version": {"type": "String"}
-    }
-  },
-  "completedUnitsSummary": "أكملت {completed} من {total} وحدات",
-  "@completedUnitsSummary": {
-    "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
-    }
-  },
-  "completedLessonsSummary": "أكملت {completed} من {total} دروس",
-  "@completedLessonsSummary": {
-    "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
-    }
-  },
-  "milestoneCompleted": "مكتمل",
-  "milestoneCurrent": "المرحلة الحالية",
-  "milestoneUpcoming": "قادم",
-  "completedModulesCount": "{count} مكتملة",
-  "@completedModulesCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "upcomingModulesCount": "{count} متبقية",
-  "@upcomingModulesCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "moduleNumber": "الوحدة {number}",
-  "@moduleNumber": {
-    "placeholders": {
-      "number": {"type": "int"}
-    }
-  },
-  "moduleLessonCount": "{count} دروس",
-  "@moduleLessonCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "moduleDurationHours": "مجموع {hours} دقيقة",
-  "@moduleDurationHours": {
-    "placeholders": {
-      "hours": {"type": "int"}
-    }
-  },
-  "lessonStatusCurrent": "الدرس الحالي",
-  "lessonStatusCompleted": "مكتمل",
-  "lessonStatusAvailable": "متاح",
-  "lessonStatusLocked": "مقفل",
-  "moduleDetails": "تفاصيل الوحدة",
-  "showLessons": "عرض الدروس",
-  "hideLessons": "إخفاء الدروس",
-  "masteryStatistics": "تقدم التعلّم والإحصاءات",
-  "progressByUnit": "التقدم حسب الوحدة",
-  "achievementsTitle": "إنجازاتك",
-  "earnedBadgesSummary": "اكتسبت {count} شارات",
-  "@earnedBadgesSummary": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "reviewNextStep": "درسك التالي",
-  "openReview": "فتح المراجعة",
-  "workspaceStatus": "مساحة العمل",
-  "workspaceReady": "جاهزة لتطبيق الدروس",
-  "openWorkspace": "فتح مساحة العمل",
   "workspaceTitle": "مساحة العمل",
   "workspaceDescription": "تشغيل خادم اللغة محليًا مدعوم على أجهزة سطح المكتب فقط.",
   "settingsTitle": "الإعدادات",
+  "settingsReload": "إعادة تحميل الإعدادات",
+  "settingsLoadError": "تعذّر تحميل الإعدادات. حاول مرة أخرى.",
+  "settingsResetProgressError": "تعذّر إعادة ضبط التقدم.",
+  "settingsCategories": "أقسام الإعدادات",
+  "settingsEditorCategory": "المحرر",
+  "settingsAppearanceCategory": "المظهر واللغة",
+  "settingsEngineCategory": "المحرك وخادم اللغة",
+  "settingsAboutCategory": "حول التطبيق والتقدم",
+  "settingsEditorDescription": "تخصيص تفضيلات محرر GDScript.",
+  "settingsAppearanceDescription": "اختيار لغة العرض ونسق الألوان وسلوك المظهر.",
+  "settingsEngineDescription": "حالة خادم اللغة والانتقال إلى أدوات التطوير.",
+  "settingsAboutDescription": "معلومات التطبيق وإدارة تقدم التعلّم.",
+  "settingsEditorFontDescription": "يُطبّق حجم الخط المحدد على محرر الأكواد.",
+  "settingsLanguageDescription": "تُحدّث لغة الواجهة فور اختيارها.",
+  "settingsThemeModeDescription": "يمكنك اتباع تفضيل النظام أو اختيار مظهر ثابت.",
+  "settingsThemeVariantDescription": "اختر أحد قوالب الألوان المضمّنة في التطبيق.",
+  "settingsStreakDescription": "عرض سلسلة التعلّم في واجهات التطبيق.",
   "onboardingTitle": "مرحبًا",
   "onboardingDescription": "اختر مسارًا للتعلّم وتقدّم بالسرعة التي تناسبك.",
   "lessonTitle": "الدرس",
@@ -288,6 +228,38 @@
   "exercisesSolved": "{count} تمارين محلولة",
   "hintsUsed": "استخدمت {count} تلميحات",
   "timeSpent": "{minutes} دقائق",
+  "currentStreakDays": "سلسلة تعلّم لمدة {count} أيام",
+  "@currentStreakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "levelUpTo": "ترقية إلى المستوى {level}",
+  "@levelUpTo": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "levelProgress": "التقدم نحو المستوى التالي: {progress}٪",
+  "@levelProgress": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonCompleteDetailsError": "تعذر تحميل بعض تفاصيل إكمال الدرس: {error}",
+  "@lessonCompleteDetailsError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "backToPath": "العودة للمسار",
   "unitLocked": "مقفل",
   "unitInProgress": "قيد التقدم",
@@ -303,6 +275,19 @@
   "lspStatus": "حالة خادم اللغة",
   "lspConnected": "متصل",
   "lspDisconnected": "غير متصل",
+  "lspDiagnosticsTitle": "تشخيصات خادم اللغة",
+  "lspDiagnosticsDescription": "استعراض الأخطاء والتحذيرات التي يرسلها خادم اللغة.",
+  "lspDiagnosticsEmpty": "لا توجد تشخيصات حالية.",
+  "lspDiagnosticsConnectPrompt": "اتصل بخادم اللغة من مساحة العمل لعرض التشخيصات.",
+  "lspDiagnosticsSummary": "عدد التشخيصات: {count}",
+  "@lspDiagnosticsSummary": {
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "lspDiagnosticError": "أخطاء",
+  "lspDiagnosticWarning": "تحذيرات",
+  "lspDiagnosticInformation": "معلومات",
+  "lspDiagnosticHint": "تلميحات",
+  "lspDiagnosticNoMessage": "لم يقدّم خادم اللغة وصفاً لهذا التشخيص.",
   "startLearning": "ابدأ التعلّم",
   "newUserWelcome": "مرحباً! ابدأ رحلتك في تعلّم البرمجة",
   "returningWelcome": "مرحباً بعودتك!",
@@ -421,5 +406,49 @@
   "onboardingSummaryVeteran": "سنركز على المفاهيم التي تساعدك على الانتقال إلى GDScript 2.0 وGodot 4.",
   "onboardingStartLearning": "انتقل إلى مسار التعلّم وابدأ الدرس الأول ↵",
   "onboardingSaveError": "تعذّر حفظ تقدم الإعداد. حاول مرة أخرى.",
-  "onboardingRestoreError": "تعذّر استعادة بيانات الإعداد المحفوظة."
+  "onboardingRestoreError": "تعذّر استعادة بيانات الإعداد المحفوظة.",
+  "syntaxCategoryAll": "الكل",
+  "syntaxCategoryKeywords": "الكلمات المفتاحية",
+  "syntaxCategoryBuiltins": "العناصر المدمجة",
+  "syntaxCategoryTypes": "الأنواع",
+  "syntaxExplorerLoadError": "تعذّر تحميل مرجع الصياغة.",
+  "syntaxExplorerProgressError": "تعذّر تسجيل استخدام مستكشف الصياغة.",
+  "syntaxExplorerPageDescription": "ابحث في الكلمات المفتاحية والعناصر المدمجة والأنواع في GDScript.",
+  "syntaxExplorerDocumentedCount": "عنصر موثّق",
+  "syntaxExplorerSearchHint": "ابحث عن كلمة مفتاحية أو عنصر مدمج أو نوع بيانات...",
+  "syntaxExplorerSortAlphabetical": "الترتيب: أبجدي",
+  "syntaxExplorerEntriesHeading": "العناصر",
+  "syntaxExplorerCount": "{count} عنصر",
+  "@syntaxExplorerCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "syntaxExplorerVisibleCount": "عرض {visible} من أصل {total}",
+  "@syntaxExplorerVisibleCount": {
+    "placeholders": {
+      "visible": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "syntaxExplorerLoadMore": "تحميل المزيد",
+  "syntaxExplorerSelected": "محدد",
+  "syntaxExplorerNoResults": "لا توجد نتائج مطابقة.",
+  "syntaxExplorerSelectEntry": "اختر عنصرًا من القائمة لعرض التفاصيل.",
+  "syntaxExplorerSignature": "الصياغة",
+  "syntaxExplorerExample": "مثال",
+  "syntaxExplorerExplanation": "الشرح",
+  "syntaxExplorerCopyEntry": "نسخ العنصر",
+  "syntaxExplorerCopyExample": "نسخ المثال",
+  "syntaxExplorerCopied": "تم نسخ {item}",
+  "@syntaxExplorerCopied": {
+    "placeholders": {
+      "item": {"type": "String"}
+    }
+  },
+  "syntaxExplorerOpenLesson": "فتح الدرس",
+  "syntaxExplorerOpenWorkspace": "فتح مساحة العمل",
+  "syntaxExplorerRelatedConcepts": "مفاهيم مرتبطة",
+  "syntaxExplorerLessonUnavailable": "لا يتوفر درس مرتبط بهذا العنصر.",
+  "syntaxExplorerClearSearch": "مسح البحث"
 }

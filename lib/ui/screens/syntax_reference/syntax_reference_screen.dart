@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/repositories/syntax_reference_repository.dart';
 import '../../../logic/providers/curriculum_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
+import '../../routers/app_routes.dart';
+import '../../widgets/common/navigation_bar.dart';
+import 'desktop_syntax_explorer_flutter_dart.dart';
 
 class SyntaxReferenceScreen extends StatefulWidget {
   const SyntaxReferenceScreen({super.key, required this.repository});
@@ -16,105 +21,237 @@ class SyntaxReferenceScreen extends StatefulWidget {
 }
 
 class _SyntaxReferenceScreenState extends State<SyntaxReferenceScreen> {
-  final _queryController = TextEditingController();
-  Future<List<SyntaxReference>>? _results;
-  Object? _error;
-
-  Future<void> _search() async {
-    final query = _queryController.text.trim();
-    if (query.isEmpty) return;
-    setState(() {
-      _error = null;
-      _results = null;
-    });
-    try {
-      final curriculum = context.read<CurriculumProvider>().state.value;
-      final progressProvider = context.read<ProgressProvider>();
-      final results = await widget.repository.search(query);
-      if (!mounted) return;
-      if (curriculum == null) {
-        throw StateError('Curriculum is not available.');
-      }
-      await progressProvider.recordSyntaxExplorerUse(curriculum: curriculum);
-      if (mounted) setState(() => _results = Future.value(results));
-    } on Object catch (error) {
-      if (mounted) setState(() => _error = error);
-    }
-  }
+  late Future<List<SyntaxReference>> _entriesFuture;
 
   @override
-  Widget build(BuildContext context) {
-    final locale = Localizations.localeOf(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.syntaxExplorerTitle)),
-      body: ListView(
-        padding: const EdgeInsets.all(24),
-        children: [
-          TextField(
-            controller: _queryController,
-            textInputAction: TextInputAction.search,
-            onSubmitted: (_) => _search(),
-            decoration: InputDecoration(
-              hintText: context.l10n.syntaxExplorerPlaceholder,
-              suffixIcon: IconButton(
-                tooltip: context.l10n.searchWorkspaceText,
-                onPressed: _search,
-                icon: const Icon(Icons.search),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          if (_error case final error?)
-            Text(
-              '${context.l10n.lessonUnavailable} $error',
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
-          if (_results case final results?)
-            FutureBuilder<List<SyntaxReference>>(
-              future: results,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text('${context.l10n.lessonUnavailable} ${snapshot.error}');
-                }
-                if (!snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.data!.isEmpty) {
-                  return Text(context.l10n.workspaceSearchEmpty);
-                }
-                return Column(
-                  children: [
-                    for (final item in snapshot.data!)
-                      Card(
-                        child: ExpansionTile(
-                          title: Text(item.title.resolve(locale)),
-                          subtitle: Text(item.syntax),
-                          childrenPadding: const EdgeInsets.all(16),
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: Text(item.description.resolve(locale)),
-                            ),
-                            const SizedBox(height: 12),
-                            Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: SelectableText(item.example),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                );
-              },
-            ),
-        ],
-      ),
+  void initState() {
+    super.initState();
+    _entriesFuture = widget.repository.search('');
+  }
+
+  void _retryLoading() {
+    setState(() => _entriesFuture = widget.repository.search(''));
+  }
+
+  Future<void> _recordSearch(String query) async {
+    if (query.trim().isEmpty) return;
+    final curriculum = context.read<CurriculumProvider>().state.value;
+    if (curriculum == null) {
+      throw StateError('Curriculum is not available.');
+    }
+    await context.read<ProgressProvider>().recordSyntaxExplorerUse(
+      curriculum: curriculum,
     );
   }
 
   @override
-  void dispose() {
-    _queryController.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    final wide = MediaQuery.sizeOf(context).width >= 840;
+    return FutureBuilder<List<SyntaxReference>>(
+      future: _entriesFuture,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return _SyntaxReferenceError(
+            error: snapshot.error!,
+            onRetry: _retryLoading,
+            showBottomNavigation: !wide,
+          );
+        }
+        if (!snapshot.hasData) {
+          return _SyntaxReferenceLoading(showBottomNavigation: !wide);
+        }
+
+        final entries = snapshot.data!;
+        final locale = Localizations.localeOf(context);
+        final l10n = context.l10n;
+        final modelEntries = entries.map((entry) {
+          final category = switch (entry.category) {
+            'keywords' => SyntaxCategory.keywords,
+            'types' => SyntaxCategory.builtinTypes,
+            'builtins' => SyntaxCategory.coreFunctions,
+            _ => SyntaxCategory.all,
+          };
+          final categoryLabel = switch (entry.category) {
+            'keywords' => l10n.syntaxCategoryKeywords,
+            'types' => l10n.syntaxCategoryTypes,
+            'builtins' => l10n.syntaxCategoryBuiltins,
+            _ => entry.category,
+          };
+          return SyntaxDocEntryModel(
+            id: '${entry.category}:${entry.id}',
+            title: entry.title.resolve(locale),
+            signature: entry.syntax,
+            category: category,
+            categoryLabel: categoryLabel,
+            briefDescription: entry.description.resolve(locale),
+            detailedExplanation: entry.description.resolve(locale),
+            codeExample: entry.example,
+            relatedConcepts: entry.seeAlso,
+            relatedLesson: entry.relatedLesson,
+            godotVersion: '',
+          );
+        }).toList(growable: false);
+
+        return DesktopSyntaxExplorerScreen(
+          data: SyntaxExplorerDataModel(
+            searchQuery: '',
+            selectedCategory: SyntaxCategory.all,
+            entries: modelEntries,
+            selectedEntryId: modelEntries.isEmpty ? '' : modelEntries.first.id,
+            totalEntriesCount: modelEntries.length,
+          ),
+          onSearchSubmitted: _recordSearch,
+          onNavigateRoute: (route) => context.go(route),
+          onOpenInWorkspace: (_) => context.go(AppRoutes.workspace),
+        );
+      },
+    );
   }
+
+}
+
+class _SyntaxReferenceLoading extends StatelessWidget {
+  const _SyntaxReferenceLoading({required this.showBottomNavigation});
+
+  final bool showBottomNavigation;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final skeleton = Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 1500),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _SkeletonBlock(width: 320, height: 38),
+              const SizedBox(height: 20),
+              _SkeletonBlock(height: 54),
+              const SizedBox(height: 20),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        children: List.generate(
+                          4,
+                          (index) => const Padding(
+                            padding: EdgeInsets.only(bottom: 12),
+                            child: _SkeletonBlock(height: 112),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    const Expanded(
+                      flex: 6,
+                      child: _SkeletonBlock(height: 420),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    return Scaffold(
+      body: Shimmer.fromColors(
+        baseColor: scheme.surfaceContainerHigh,
+        highlightColor: scheme.surfaceContainerHighest,
+        enabled: !MediaQuery.disableAnimationsOf(context),
+        child: skeleton,
+      ),
+      bottomNavigationBar: showBottomNavigation
+          ? const _SyntaxReferenceBottomNavigation()
+          : null,
+    );
+  }
+}
+
+class _SkeletonBlock extends StatelessWidget {
+  const _SkeletonBlock({this.width, required this.height});
+
+  final double? width;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) => Align(
+    alignment: AlignmentDirectional.centerStart,
+    child: Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHigh,
+        borderRadius: BorderRadius.circular(12),
+      ),
+    ),
+  );
+}
+
+class _SyntaxReferenceError extends StatelessWidget {
+  const _SyntaxReferenceError({
+    required this.error,
+    required this.onRetry,
+    required this.showBottomNavigation,
+  });
+
+  final Object error;
+  final VoidCallback onRetry;
+  final bool showBottomNavigation;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.error_outline,
+                color: theme.colorScheme.error,
+                size: 36,
+              ),
+              const SizedBox(height: 12),
+              Text(l10n.syntaxExplorerLoadError),
+              const SizedBox(height: 8),
+              Text(
+                '$error',
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodySmall,
+              ),
+              const SizedBox(height: 16),
+              FilledButton.icon(
+                onPressed: onRetry,
+                icon: const Icon(Icons.refresh),
+                label: Text(l10n.settingsReload),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: showBottomNavigation
+          ? const _SyntaxReferenceBottomNavigation()
+          : null,
+    );
+  }
+}
+
+class _SyntaxReferenceBottomNavigation extends StatelessWidget {
+  const _SyntaxReferenceBottomNavigation();
+
+  @override
+  Widget build(BuildContext context) => AppNavigationBar(
+    selectedRoute: AppRoutes.syntaxReference,
+    onSelected: context.go,
+  );
 }

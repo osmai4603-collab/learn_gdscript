@@ -20,6 +20,7 @@ import 'logic/providers/lesson_provider.dart';
 import 'logic/providers/onboarding_provider.dart';
 import 'logic/providers/progress_provider.dart';
 import 'logic/services/code_runner_service.dart';
+import 'logic/services/test_runner_service.dart';
 import 'ui/routers/app_router.dart';
 
 class LearnGdscriptApp extends StatefulWidget {
@@ -77,6 +78,9 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
         ),
         Provider<CodeRunnerService>.value(
           value: dependencies.services<CodeRunnerService>(),
+        ),
+        Provider<TestRunnerService>.value(
+          value: dependencies.services<TestRunnerService>(),
         ),
       ],
       child: Consumer<AppSettingsProvider>(

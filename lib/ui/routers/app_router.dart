@@ -15,6 +15,7 @@ import '../screens/lesson/lesson_screen.dart';
 import '../screens/not_found_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/review/review_screen.dart';
+import '../screens/settings/desktop_lsp_diagnostics_flutter_dart.dart';
 import '../screens/settings/settings_screen.dart';
 import '../screens/syntax_reference/syntax_reference_screen.dart';
 import '../screens/workspace/workspace_screen.dart';
@@ -71,6 +72,10 @@ GoRouter createAppRouter({
           GoRoute(
             path: AppRoutes.settings,
             builder: (context, state) => const SettingsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.lspDiagnostics,
+            builder: (context, state) => const DesktopLspDiagnosticsScreen(),
           ),
           GoRoute(
             path: AppRoutes.syntaxReference,
@@ -148,7 +153,9 @@ bool _isValidId(String id) => RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(id);
 
 String _activeNavigationRoute(String path) {
   if (path == AppRoutes.root) return AppRoutes.root;
-  if (path == AppRoutes.settings) return AppRoutes.settings;
+  if (path == AppRoutes.settings || path == AppRoutes.lspDiagnostics) {
+    return AppRoutes.settings;
+  }
   if (path == AppRoutes.learningPath || path.startsWith('/lesson')) {
     return AppRoutes.learningPath;
   }

@@ -114,6 +114,8 @@ void main() {
     expect(find.text('2 exercises solved'), findsOneWidget);
     expect(find.text('1 hints used'), findsOneWidget);
     expect(find.text('5 minutes'), findsOneWidget);
+    expect(find.text('0-day learning streak'), findsOneWidget);
+    expect(find.textContaining('GUT'), findsNothing);
 
     await tester.ensureVisible(find.text('Back to Path'));
     await tester.tap(find.text('Back to Path'));

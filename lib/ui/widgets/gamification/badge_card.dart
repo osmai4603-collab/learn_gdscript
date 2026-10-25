@@ -8,6 +8,7 @@ class BadgeCard extends StatelessWidget {
     super.key,
     required this.badge,
     required this.isUnlocked,
+    this.isSelected = false,
     this.earnedAt,
     this.progress = 0,
     this.progressTarget,
@@ -16,6 +17,7 @@ class BadgeCard extends StatelessWidget {
 
   final BadgeDefinition badge;
   final bool isUnlocked;
+  final bool isSelected;
   final DateTime? earnedAt;
   final int progress;
   final int? progressTarget;
@@ -30,6 +32,15 @@ class BadgeCard extends StatelessWidget {
         : colorScheme.onSurfaceVariant;
     return Card(
       clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: isSelected
+              ? colorScheme.primary
+              : colorScheme.outlineVariant,
+          width: isSelected ? 1.6 : 0.6,
+        ),
+      ),
       child: InkWell(
         onTap: onTap,
         child: Padding(
@@ -65,13 +76,11 @@ class BadgeCard extends StatelessWidget {
               Text(
                 isUnlocked
                     ? earnedAt == null
-                          ? context.l10n.badgeUnlocked
+                          ? context.l10n.badgeEarnedStatus
                           : context.l10n.earnedOn(
-                              earnedAt!
-                                  .toLocal()
-                                  .toIso8601String()
-                                  .split('T')
-                                  .first,
+                              MaterialLocalizations.of(
+                                context,
+                              ).formatMediumDate(earnedAt!.toLocal()),
                             )
                     : context.l10n.badgeProgress(
                         progress.clamp(0, progressTarget ?? badge.targetValue),

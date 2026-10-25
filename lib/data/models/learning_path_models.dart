@@ -8,7 +8,7 @@ import 'progress_models.dart';
 class LearningPathData {
   LearningPathData({
     required this.curriculum,
-    required this.lessons,
+    required Map<String, Lesson> lessons,
     required this.progress,
   }) : lessons = Map.unmodifiable(lessons);
 

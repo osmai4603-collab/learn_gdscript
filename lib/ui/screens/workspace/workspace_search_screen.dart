@@ -97,6 +97,7 @@ class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
                 : _search,
             icon: const Icon(Icons.search),
             label: Text(l10n.workspaceSearchTitle),
+            iconAlignment: .end,
           ),
           if (!server.isConnected) ...[
             const SizedBox(height: 16),
