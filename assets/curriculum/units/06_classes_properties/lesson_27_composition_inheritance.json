@@ -34,345 +34,430 @@
       "lessonId": "lesson_27_composition_inheritance",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: يمثل `PlayerProfile` ملفاً يملك مكوّناً للمخزون، ولا يلزم أن يكون نوعاً فرعياً من المخزون.",
-        "en": "Predict the result in the example: `PlayerProfile` represents a profile that has an inventory component; it does not need to be a subtype of inventory."
+        "ar": "أي قاعدة تصف composition and inheritance بدقة؟",
+        "en": "Which rule accurately describes composition and inheritance?"
       },
       "options": [
         {
-          "ar": "يمثل `PlayerProfile` ملفاً يملك مكوّناً للمخزون، ولا يلزم أن يكون نوعاً فرعياً من المخزون.",
-          "en": "`PlayerProfile` represents a profile that has an inventory component; it does not need to be a subtype of inventory."
+          "ar": "كل علاقة «يملك» يجب تمثيلها بوراثة الصنف.",
+          "en": "Every has-a relationship should be modeled with inheritance."
         },
         {
-          "ar": "اسأل هل العلاقة «هو نوع من» أم «يملك/يستخدم» قبل اختيار الوراثة أو التركيب.",
-          "en": "Ask whether the relation is “is a kind of” or “has/uses” before choosing inheritance or composition."
+          "ar": "التركيب يجمع كائنات متعاونة، والوراثة تصف نوعاً متخصصاً من صنف آخر.",
+          "en": "Composition combines cooperating objects; inheritance models a specialized class."
         },
         {
-          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
-          "en": "Always use inheritance because it is simpler than any other relationship."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة composition and inheritance في المثال.",
+          "en": "Relate your answer to the role of composition and inheritance in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_27_composition_inheritance_02_identify",
       "lessonId": "lesson_27_composition_inheritance",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «التركيب والوراثة البسيطة»؟",
-        "en": "Which statement accurately identifies the core concept in “Composition and Simple Inheritance”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن composition and inheritance: أ",
+        "en": "Complete this hands-on Godot activity about composition and inheritance: Create a Player that contains an Inventory component and list each object’s responsibility."
       },
-      "options": [
-        {
-          "ar": "الوراثة علاقة «نوع متخصص من»، أما التركيب فيجمع أجزاء أو مراجع متعاونة.",
-          "en": "Inheritance is a “specialized kind of” relationship, while composition combines cooperating parts or references."
-        },
-        {
-          "ar": "اسأل هل العلاقة «هو نوع من» أم «يملك/يستخدم» قبل اختيار الوراثة أو التركيب.",
-          "en": "Ask whether the relation is “is a kind of” or “has/uses” before choosing inheritance or composition."
-        },
-        {
-          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
-          "en": "Always use inheritance because it is simpler than any other relationship."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أنشئ Player يحتوي مكوّن Inventory واكتب مسؤولية كل كائن.",
+          "en": "Create a Player that contains an Inventory component and list each object’s responsibility."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_27_composition_inheritance_03_choose",
       "lessonId": "lesson_27_composition_inheritance",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ استخدم التركيب عندما يملك ملف اللاعب مخزوناً مستقلاً يمكن استبداله أو تغييره.",
-        "en": "Which design choice fits this situation? Use composition when a player profile has an independent inventory that can be replaced or changed."
+        "ar": "تتبّع العملية في composition: اطبع base_damage بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this composition example: print base_damage after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "استخدم التركيب عندما يملك ملف اللاعب مخزوناً مستقلاً يمكن استبداله أو تغييره.",
-          "en": "Use composition when a player profile has an independent inventory that can be replaced or changed."
-        },
-        {
-          "ar": "اسأل هل العلاقة «هو نوع من» أم «يملك/يستخدم» قبل اختيار الوراثة أو التركيب.",
-          "en": "Ask whether the relation is “is a kind of” or “has/uses” before choosing inheritance or composition."
-        },
-        {
-          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
-          "en": "Always use inheritance because it is simpler than any other relationship."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(base_damage + change)",
+      "solutionCode": "print(base_damage + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 12\nvar change = 5",
+          "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 19\nvar change = 4",
+          "expectedOutput": "23"
+        }
+      ]
     },
     {
       "id": "ex_lesson_27_composition_inheritance_04_complete",
       "lessonId": "lesson_27_composition_inheritance",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط صنف ملف لاعب يشير إلى مخزون مستقل ويعرض اسماً.",
-        "en": "Complete a short sketch or sequence that shows: A player-profile class sketch that references an independent inventory and exposes a name."
+        "ar": "أكمل العامل لحساب base_damage بعد تطبيق change في composition.",
+        "en": "Fill the operator to calculate base_damage after applying change for composition."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط صنف ملف لاعب يشير إلى مخزون مستقل ويعرض اسماً.",
-          "en": "Write the required essential parts: A player-profile class sketch that references an independent inventory and exposes a name."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(base_damage ___ change)",
+      "solutionCode": "print(base_damage + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 12\nvar change = 5",
+          "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 19\nvar change = 4",
+          "expectedOutput": "23"
+        }
+      ]
     },
     {
       "id": "ex_lesson_27_composition_inheritance_05_write",
       "lessonId": "lesson_27_composition_inheritance",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: اختر كائناً من مشروعك وحدد مكوّناً يمكن تركيبه بدلاً من توسيع سلسلة الوراثة.",
-        "en": "Write a short implementation plan for this application: Choose an object from your project and identify a component to compose instead of extending an inheritance chain."
+        "ar": "اكتب شيفرة تحفظ base_damage مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores base_damage plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = base_damage + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 12\nvar change = 5",
+          "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 19\nvar change = 4",
+          "expectedOutput": "23"
+        }
+      ]
     },
     {
       "id": "ex_lesson_27_composition_inheritance_06_fix",
       "lessonId": "lesson_27_composition_inheritance",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «كل إعادة استخدام للكود تستلزم وراثة مباشرة.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “Every instance of code reuse requires direct inheritance.” What is the best correction?"
+        "ar": "أي قاعدة تصف composition and inheritance بدقة؟",
+        "en": "Which rule accurately describes composition and inheritance?"
       },
       "options": [
         {
-          "ar": "يمكن تركيب مكوّن متعاون؛ استخدم الوراثة فقط عندما يكون الصنف حقيقةً نوعاً متخصصاً من الأب.",
-          "en": "Compose a cooperating component; use inheritance only when the class truly is a specialized kind of its parent."
+          "ar": "كل علاقة «يملك» يجب تمثيلها بوراثة الصنف.",
+          "en": "Every has-a relationship should be modeled with inheritance."
         },
         {
-          "ar": "كل إعادة استخدام للكود تستلزم وراثة مباشرة.",
-          "en": "Every instance of code reuse requires direct inheritance."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
-          "en": "Always use inheritance because it is simpler than any other relationship."
+          "ar": "التركيب يجمع كائنات متعاونة، والوراثة تصف نوعاً متخصصاً من صنف آخر.",
+          "en": "Composition combines cooperating objects; inheritance models a specialized class."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة composition and inheritance في المثال.",
+          "en": "Relate your answer to the role of composition and inheritance in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_27_composition_inheritance_07_apply",
       "lessonId": "lesson_27_composition_inheritance",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: اختر كائناً من مشروعك وحدد مكوّناً يمكن تركيبه بدلاً من توسيع سلسلة الوراثة. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Choose an object from your project and identify a component to compose instead of extending an inheritance chain. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى base_damage عند حساب composition.",
+        "en": "Fix the operation so it adds change to base_damage for composition."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(base_damage - change)",
+      "solutionCode": "print(base_damage + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 12\nvar change = 5",
+          "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 19\nvar change = 4",
+          "expectedOutput": "23"
+        }
+      ]
     },
     {
       "id": "ex_lesson_27_composition_inheritance_08_compare",
       "lessonId": "lesson_27_composition_inheritance",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ الوراثة تعبر عن التخصص، والتركيب يعبر عن امتلاك أجزاء أو التعاون معها.",
-        "en": "What is the difference between the concepts in this lesson? Inheritance expresses specialization; composition expresses having or collaborating with parts."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن composition and inheritance: ق",
+        "en": "Complete this hands-on Godot activity about composition and inheritance: Compare a specialized Enemy with a Player that has an Inventory, then label each relationship is-a or has-a."
       },
-      "options": [
-        {
-          "ar": "الوراثة تعبر عن التخصص، والتركيب يعبر عن امتلاك أجزاء أو التعاون معها.",
-          "en": "Inheritance expresses specialization; composition expresses having or collaborating with parts."
-        },
-        {
-          "ar": "اسأل هل العلاقة «هو نوع من» أم «يملك/يستخدم» قبل اختيار الوراثة أو التركيب.",
-          "en": "Ask whether the relation is “is a kind of” or “has/uses” before choosing inheritance or composition."
-        },
-        {
-          "ar": "استخدم الوراثة دائماً لأنها أبسط من أي علاقة أخرى.",
-          "en": "Always use inheritance because it is simpler than any other relationship."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "قارن Enemy متخصصاً بلاعب يملك Inventory وحدد علاقة is-a أو has-a.",
+          "en": "Compare a specialized Enemy with a Player that has an Inventory, then label each relationship is-a or has-a."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_27_composition_inheritance_09_debug",
       "lessonId": "lesson_27_composition_inheritance",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: سلسلة أصناف عميقة أنشئت فقط لمشاركة دالة مساعدة واحدة. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A deep class hierarchy created only to share one helper function. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع base_damage ثم change ثم المجموع.",
+        "en": "Reorder the lines to print base_damage, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(base_damage + change)\nprint(change)\nprint(base_damage)",
+      "solutionCode": "print(base_damage)\nprint(change)\nprint(base_damage + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 12\nvar change = 5",
+          "expectedOutput": "12\n5\n17"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 5",
+          "expectedOutput": "0\n5\n5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 19\nvar change = 4",
+          "expectedOutput": "19\n4\n23"
+        }
+      ]
     },
     {
       "id": "ex_lesson_27_composition_inheritance_10_apply",
       "lessonId": "lesson_27_composition_inheritance",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: صمّم علاقة بين صنف أساسي متخصص ومكوّن منفصل، وعلّل لماذا تختلف العلاقتان.",
-        "en": "Design an application that combines this concept with an earlier idea: Design a specialized base-class relationship and a separate component, and explain why the relationships differ."
+        "ar": "اكتب شيفرة تضاعف base_damage ثم تضيف change وتطبع الناتج في مثال عن composition.",
+        "en": "Write code that doubles base_damage, adds change, and prints the result in a composition example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = base_damage * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 12\nvar change = 5",
+          "expectedOutput": "29"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_damage = 19\nvar change = 4",
+          "expectedOutput": "42"
+        }
+      ]
     }
   ]
 }

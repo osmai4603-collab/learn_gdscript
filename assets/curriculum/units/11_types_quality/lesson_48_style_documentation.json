@@ -77,7 +77,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن الأسلوب والتوثيق. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about الأسلوب والتوثيق. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about documentation. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -110,28 +110,45 @@
       "lessonId": "lesson_48_style_documentation",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «clean code» في سياق الأسلوب والتوثيق.",
-        "en": "Write code that prints “clean code” as a الأسلوب والتوثيق status."
+        "ar": "تتبّع هذه العملية في موضوع documentation باستخدام القيم المعطاة: اطبع documented_functions + change.",
+        "en": "Trace this documentation calculation using the supplied values: print(documented_functions + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"clean code\")",
+      "starterCode": "print(documented_functions + change)",
+      "solutionCode": "print(documented_functions + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "clean code"
+          "setupCode": "var documented_functions = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -141,28 +158,45 @@
       "lessonId": "lesson_48_style_documentation",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «clean code».",
-        "en": "Complete the line so it prints “clean code”."
+        "ar": "أكمل الفراغ ليضيف حساب documentation مقدار التغيير إلى documented_functions.",
+        "en": "Fill the blank so the documentation calculation adds the change to documented_functions."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"clean code\")",
+      "starterCode": "print(documented_functions ___ change)",
+      "solutionCode": "print(documented_functions + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "clean code"
+          "setupCode": "var documented_functions = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -172,28 +206,45 @@
       "lessonId": "lesson_48_style_documentation",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في الأسلوب والتوثيق: start ثم «clean code».",
-        "en": "Print two lines showing progress in الأسلوب والتوثيق: start, then “clean code”."
+        "ar": "اكتب حساباً قصيراً في documentation يطبع documented_functions مضافاً إليه change.",
+        "en": "Write a short documentation calculation that prints documented_functions plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"clean code\")",
+      "solutionCode": "var result = documented_functions + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nclean code"
+          "setupCode": "var documented_functions = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -203,28 +254,45 @@
       "lessonId": "lesson_48_style_documentation",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «clean code» تماماً.",
-        "en": "Fix the code so it prints exactly “clean code”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في documentation مقدار change إلى documented_functions.",
+        "en": "Fix the operator so this documentation calculation adds change to documented_functions."
       },
-      "starterCode": "print(\"clean code!\")",
-      "solutionCode": "print(\"clean code\")",
+      "starterCode": "print(documented_functions - change)",
+      "solutionCode": "print(documented_functions + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "clean code"
+          "setupCode": "var documented_functions = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -234,28 +302,45 @@
       "lessonId": "lesson_48_style_documentation",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «clean code» ثم done.",
-        "en": "Arrange output to show start, then “clean code”, then done."
+        "ar": "رتّب خطوات تتبع documentation لتطبع documented_functions ثم change ثم المجموع.",
+        "en": "Reorder the documentation trace to print documented_functions, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"clean code\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"clean code\")\nprint(\"done\")",
+      "starterCode": "print(documented_functions + change)\nprint(change)\nprint(documented_functions)",
+      "solutionCode": "print(documented_functions)\nprint(change)\nprint(documented_functions + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nclean code\ndone"
+          "setupCode": "var documented_functions = 3\nvar change = 1",
+          "expectedOutput": "3\n1\n4"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var documented_functions = 10\nvar change = 4",
+          "expectedOutput": "10\n4\n14"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -265,28 +350,45 @@
       "lessonId": "lesson_48_style_documentation",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع الأسلوب والتوثيق: «clean code».",
-        "en": "Write a program that records a result related to الأسلوب والتوثيق: “clean code”."
+        "ar": "اكتب حساباً في documentation يضاعف documented_functions ثم يضيف change ويطبع الناتج.",
+        "en": "Write a documentation calculation that doubles documented_functions, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"clean code\")",
+      "solutionCode": "var result = documented_functions * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "clean code"
+          "setupCode": "var documented_functions = 3\nvar change = 1",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -296,28 +398,45 @@
       "lessonId": "lesson_48_style_documentation",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nclean code",
-        "en": "Write a program that displays this sequence:\nclean code"
+        "ar": "تنبأ بنتيجة مضاعفة documented_functions ثم إضافة change في مثال documentation.",
+        "en": "Predict the result of doubling documented_functions and then adding change in this documentation example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"clean code\")",
+      "starterCode": "print(documented_functions * 2 + change)",
+      "solutionCode": "print(documented_functions * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "clean code"
+          "setupCode": "var documented_functions = 3\nvar change = 1",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -327,28 +446,45 @@
       "lessonId": "lesson_48_style_documentation",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «clean code».",
-        "en": "Use a string variable named status and print its value “clean code”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف documented_functions مضافاً إليه change في documentation.",
+        "en": "Use a named result variable to calculate documented_functions times two plus change for documentation."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"clean code\"\nprint(status)",
+      "solutionCode": "var result = documented_functions * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "clean code"
+          "setupCode": "var documented_functions = 3\nvar change = 1",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var documented_functions = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

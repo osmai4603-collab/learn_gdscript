@@ -11,19 +11,17 @@ import 'progress_provider.dart';
 
 class LearningPathProvider extends ChangeNotifier {
   LearningPathProvider({
-    required CurriculumRepository curriculumRepository,
-    required CurriculumProvider curriculumProvider,
-    required ProgressProvider progressProvider,
-  }) : _curriculumRepository = curriculumRepository,
-       _curriculumProvider = curriculumProvider,
-       _progressProvider = progressProvider {
-    _curriculumProvider.addListener(_refreshFromSources);
-    _progressProvider.addListener(_refreshFromSources);
+    required this.curriculumRepository,
+    required this.curriculumProvider,
+    required this.progressProvider,
+  }) {
+    curriculumProvider.addListener(_refreshFromSources);
+    progressProvider.addListener(_refreshFromSources);
   }
 
-  final CurriculumRepository _curriculumRepository;
-  final CurriculumProvider _curriculumProvider;
-  final ProgressProvider _progressProvider;
+  final CurriculumRepository curriculumRepository;
+  final CurriculumProvider curriculumProvider;
+  final ProgressProvider progressProvider;
   final Map<String, Lesson> _lessonCache = {};
   AsyncState<LearningPathData> state = const AsyncState.initial();
   int _loadSequence = 0;
@@ -37,9 +35,9 @@ class LearningPathProvider extends ChangeNotifier {
   }
 
   Future<void> refresh() async {
-    if (_curriculumProvider.state.value == null) {
+    if (curriculumProvider.state.value == null) {
       try {
-        await _curriculumProvider.load();
+        await curriculumProvider.load();
       } on Object catch (error) {
         state = AsyncState.error(error);
         notifyListeners();
@@ -51,7 +49,7 @@ class LearningPathProvider extends ChangeNotifier {
 
   Future<void> _loadData(int sequence) async {
     try {
-      final curriculum = _curriculumProvider.state.value;
+      final curriculum = curriculumProvider.state.value;
       if (curriculum == null) {
         throw StateError('The curriculum must be loaded before the learning path.');
       }
@@ -65,22 +63,24 @@ class LearningPathProvider extends ChangeNotifier {
           .expand((unit) => unit.lessonIds)
           .toSet();
       final missingIds = lessonIds.where((id) => !_lessonCache.containsKey(id));
-      final loaded = await Future.wait(
-        missingIds.map((id) => _curriculumRepository.loadLesson(curriculum, id)),
-      );
-      if (sequence != _loadSequence) return;
-      for (final lesson in loaded) {
-        _lessonCache[lesson.id] = lesson;
+      for (final id in missingIds) {
+        try {
+          final lesson = await curriculumRepository.loadLesson(curriculum, id);
+          _lessonCache[id] = lesson;
+        } catch (e) {
+          // Gracefully skip missing or corrupted individual lesson assets
+        }
       }
+      if (sequence != _loadSequence) return;
       _lessonCache.removeWhere((id, _) => !lessonIds.contains(id));
       state = AsyncState.data(
         LearningPathData(
           curriculum: curriculum,
           lessons: {
             for (final id in lessonIds)
-              id: _lessonCache[id]!,
+              if (_lessonCache.containsKey(id)) id: _lessonCache[id]!,
           },
-          progress: _progressProvider.progress,
+          progress: progressProvider.progress,
         ),
       );
       notifyListeners();
@@ -102,8 +102,8 @@ class LearningPathProvider extends ChangeNotifier {
 
   @override
   void dispose() {
-    _curriculumProvider.removeListener(_refreshFromSources);
-    _progressProvider.removeListener(_refreshFromSources);
+    curriculumProvider.removeListener(_refreshFromSources);
+    progressProvider.removeListener(_refreshFromSources);
     super.dispose();
   }
 }

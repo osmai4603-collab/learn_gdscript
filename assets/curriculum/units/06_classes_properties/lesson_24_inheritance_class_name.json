@@ -41,345 +41,430 @@
       "lessonId": "lesson_24_inheritance_class_name",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: يرث `MovingActor` سلوك `Node2D` وخصائصه المتاحة، ويمكنه إضافة `speed` وسلوكه الخاص.",
-        "en": "Predict the result in the example: `MovingActor` inherits available `Node2D` behavior and properties, and can add `speed` and its own behavior."
+        "ar": "أي قاعدة تصف inheritance and class_name بدقة؟",
+        "en": "Which rule accurately describes inheritance and class_name?"
       },
       "options": [
         {
-          "ar": "يرث `MovingActor` سلوك `Node2D` وخصائصه المتاحة، ويمكنه إضافة `speed` وسلوكه الخاص.",
-          "en": "`MovingActor` inherits available `Node2D` behavior and properties, and can add `speed` and its own behavior."
+          "ar": "`class_name` ينسخ كائنات الصنف الأب ويضيفها إلى المشهد.",
+          "en": "`class_name` copies parent objects and adds them to the scene."
         },
         {
-          "ar": "الوراثة تخصّص صنفاً من أب مناسب؛ واسم الصنف المسجل لا ينشئ نسخة منه.",
-          "en": "Inheritance specializes a class from a suitable parent; a registered class name does not instantiate it."
+          "ar": "تخصص `extends` صنفاً موجوداً، ويتيح `class_name` اسماً واضحاً للصنف.",
+          "en": "`extends` specializes an existing class, and `class_name` gives the script a clear name."
         },
         {
-          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
-          "en": "The two keywords are synonyms and do the same job."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة inheritance and class_name في المثال.",
+          "en": "Relate your answer to the role of inheritance and class_name in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_02_identify",
       "lessonId": "lesson_24_inheritance_class_name",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «الوراثة وclass_name»؟",
-        "en": "Which statement accurately identifies the core concept in “Inheritance and class_name”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن inheritance and class_name: أ",
+        "en": "Complete this hands-on Godot activity about inheritance and class_name: Create a base actor and a specialized actor, use extends for the relationship, and give the child one distinct behavior."
       },
-      "options": [
-        {
-          "ar": "`extends` يحدد الصنف الأب، و`class_name` يسجل اسماً للصنف كي تستخدمه سكربتات المشروع.",
-          "en": "`extends` selects a parent class, while `class_name` registers a name that project scripts can use."
-        },
-        {
-          "ar": "الوراثة تخصّص صنفاً من أب مناسب؛ واسم الصنف المسجل لا ينشئ نسخة منه.",
-          "en": "Inheritance specializes a class from a suitable parent; a registered class name does not instantiate it."
-        },
-        {
-          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
-          "en": "The two keywords are synonyms and do the same job."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أنشئ صنف actor أساسياً وصنفاً متخصصاً يستخدم extends وأضف سلوكاً جديداً للابن.",
+          "en": "Create a base actor and a specialized actor, use extends for the relationship, and give the child one distinct behavior."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_03_choose",
       "lessonId": "lesson_24_inheritance_class_name",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ اختر `Node2D` أباً لكائن يحتاج خاصية الموضع ثنائية الأبعاد.",
-        "en": "Which design choice fits this situation? Choose `Node2D` as a parent for an object that needs a 2D position property."
+        "ar": "تتبّع العملية في inheritance: اطبع base_health بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this inheritance example: print base_health after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "اختر `Node2D` أباً لكائن يحتاج خاصية الموضع ثنائية الأبعاد.",
-          "en": "Choose `Node2D` as a parent for an object that needs a 2D position property."
-        },
-        {
-          "ar": "الوراثة تخصّص صنفاً من أب مناسب؛ واسم الصنف المسجل لا ينشئ نسخة منه.",
-          "en": "Inheritance specializes a class from a suitable parent; a registered class name does not instantiate it."
-        },
-        {
-          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
-          "en": "The two keywords are synonyms and do the same job."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(base_health + change)",
+      "solutionCode": "print(base_health + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 100\nvar change = 20",
+          "expectedOutput": "120"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 107\nvar change = 4",
+          "expectedOutput": "111"
+        }
+      ]
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_04_complete",
       "lessonId": "lesson_24_inheritance_class_name",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: سطرَي تعريف لصنف حركة: أب مناسب واسم مسجل واضح.",
-        "en": "Complete a short sketch or sequence that shows: Two declaration lines for a movement class: a suitable parent and a clear registered name."
+        "ar": "أكمل العامل لحساب base_health بعد تطبيق change في inheritance.",
+        "en": "Fill the operator to calculate base_health after applying change for inheritance."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: سطرَي تعريف لصنف حركة: أب مناسب واسم مسجل واضح.",
-          "en": "Write the required essential parts: Two declaration lines for a movement class: a suitable parent and a clear registered name."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(base_health ___ change)",
+      "solutionCode": "print(base_health + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 100\nvar change = 20",
+          "expectedOutput": "120"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 107\nvar change = 4",
+          "expectedOutput": "111"
+        }
+      ]
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_05_write",
       "lessonId": "lesson_24_inheritance_class_name",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: في مشروع تجريبي، أرفق سكربتاً بعقدة مناسبة، ثم تحقق من صنف الأب واسمه المسجل.",
-        "en": "Write a short implementation plan for this application: In a test project, attach a script to a suitable node and verify its parent class and registered name."
+        "ar": "اكتب شيفرة تحفظ base_health مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores base_health plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = base_health + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 100\nvar change = 20",
+          "expectedOutput": "120"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 107\nvar change = 4",
+          "expectedOutput": "111"
+        }
+      ]
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_06_fix",
       "lessonId": "lesson_24_inheritance_class_name",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «`class_name` وحدها تجعل السكربت يرث من `Node2D`.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “`class_name` by itself makes a script inherit from `Node2D`.” What is the best correction?"
+        "ar": "أي قاعدة تصف inheritance and class_name بدقة؟",
+        "en": "Which rule accurately describes inheritance and class_name?"
       },
       "options": [
         {
-          "ar": "اكتب `extends Node2D` لاختيار الأب، واستخدم `class_name` بشكل منفصل لإتاحة اسم الصنف.",
-          "en": "Use `extends Node2D` to choose the parent, and use `class_name` separately to expose the class name."
+          "ar": "`class_name` ينسخ كائنات الصنف الأب ويضيفها إلى المشهد.",
+          "en": "`class_name` copies parent objects and adds them to the scene."
         },
         {
-          "ar": "`class_name` وحدها تجعل السكربت يرث من `Node2D`.",
-          "en": "`class_name` by itself makes a script inherit from `Node2D`."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
-          "en": "The two keywords are synonyms and do the same job."
+          "ar": "تخصص `extends` صنفاً موجوداً، ويتيح `class_name` اسماً واضحاً للصنف.",
+          "en": "`extends` specializes an existing class, and `class_name` gives the script a clear name."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة inheritance and class_name في المثال.",
+          "en": "Relate your answer to the role of inheritance and class_name in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_07_apply",
       "lessonId": "lesson_24_inheritance_class_name",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: في مشروع تجريبي، أرفق سكربتاً بعقدة مناسبة، ثم تحقق من صنف الأب واسمه المسجل. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: In a test project, attach a script to a suitable node and verify its parent class and registered name. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى base_health عند حساب inheritance.",
+        "en": "Fix the operation so it adds change to base_health for inheritance."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(base_health - change)",
+      "solutionCode": "print(base_health + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 100\nvar change = 20",
+          "expectedOutput": "120"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 107\nvar change = 4",
+          "expectedOutput": "111"
+        }
+      ]
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_08_compare",
       "lessonId": "lesson_24_inheritance_class_name",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `extends` يحدد علاقة الوراثة، أما `class_name` فيسجل اسماً للصنف.",
-        "en": "What is the difference between the concepts in this lesson? `extends` defines inheritance, while `class_name` registers a name for the class."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن inheritance and class_name: غ",
+        "en": "Complete this hands-on Godot activity about inheritance and class_name: Rename the child class, confirm its class_name, and check that its inherited behavior still comes from the parent."
       },
-      "options": [
-        {
-          "ar": "`extends` يحدد علاقة الوراثة، أما `class_name` فيسجل اسماً للصنف.",
-          "en": "`extends` defines inheritance, while `class_name` registers a name for the class."
-        },
-        {
-          "ar": "الوراثة تخصّص صنفاً من أب مناسب؛ واسم الصنف المسجل لا ينشئ نسخة منه.",
-          "en": "Inheritance specializes a class from a suitable parent; a registered class name does not instantiate it."
-        },
-        {
-          "ar": "الكلمتان مرادفان وتؤديان الوظيفة نفسها.",
-          "en": "The two keywords are synonyms and do the same job."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "غيّر اسم الصنف الابن وتحقق من class_name ومن استمرار السلوك الموروث.",
+          "en": "Rename the child class, confirm its class_name, and check that its inherited behavior still comes from the parent."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_09_debug",
       "lessonId": "lesson_24_inheritance_class_name",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: تصميم يستخدم `extends` كأنه اسم عالمي للصنف ويغفل تحديد الأب. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A design that treats `extends` as a global class name and omits selecting a parent. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع base_health ثم change ثم المجموع.",
+        "en": "Reorder the lines to print base_health, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(base_health + change)\nprint(change)\nprint(base_health)",
+      "solutionCode": "print(base_health)\nprint(change)\nprint(base_health + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 100\nvar change = 20",
+          "expectedOutput": "100\n20\n120"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 0\nvar change = 20",
+          "expectedOutput": "0\n20\n20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 107\nvar change = 4",
+          "expectedOutput": "107\n4\n111"
+        }
+      ]
     },
     {
       "id": "ex_lesson_24_inheritance_class_name_10_apply",
       "lessonId": "lesson_24_inheritance_class_name",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: اختر أباً يوفر سلوك العقدة المطلوب، ثم أضف خاصية ودالة متخصصتين.",
-        "en": "Design an application that combines this concept with an earlier idea: Choose a parent that provides needed node behavior, then add a specialized property and function."
+        "ar": "اكتب شيفرة تضاعف base_health ثم تضيف change وتطبع الناتج في مثال عن inheritance.",
+        "en": "Write code that doubles base_health, adds change, and prints the result in a inheritance example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = base_health * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 100\nvar change = 20",
+          "expectedOutput": "220"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var base_health = 107\nvar change = 4",
+          "expectedOutput": "218"
+        }
+      ]
     }
   ]
 }

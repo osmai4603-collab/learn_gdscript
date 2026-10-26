@@ -61,10 +61,12 @@ void main() {
         lessonsById[lesson.id] = lesson;
         unitLessons.add(lesson);
 
+        final lessonExerciseTypes = <ExerciseType>{};
         for (final exercise in lesson.exercises) {
           expect(exercise.lessonId, lesson.id);
           expect(exercisesById.containsKey(exercise.id), isFalse);
           exercisesById[exercise.id] = lesson.id;
+          lessonExerciseTypes.add(exercise.type);
           exerciseTypes.update(
             exercise.type.name,
             (count) => count + 1,
@@ -84,7 +86,21 @@ void main() {
             expect(exercise.testCases, isEmpty, reason: exercise.id);
           } else {
             expect(exercise.testCases, isNotEmpty, reason: exercise.id);
+            if (unit.order >= 5) {
+              expect(
+                exercise.testCases.length,
+                greaterThanOrEqualTo(3),
+                reason: exercise.id,
+              );
+            }
           }
+        }
+        if (unit.order >= 5) {
+          expect(
+            lessonExerciseTypes,
+            hasLength(7),
+            reason: '${lesson.id} should use all supported exercise types',
+          );
         }
       }
       expect(

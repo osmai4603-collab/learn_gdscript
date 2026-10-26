@@ -41,345 +41,430 @@
       "lessonId": "lesson_36_node_interaction",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: عند تغيير الصحة وإرسال `health_changed` يمكن للواجهة ونظام الصوت الاستجابة كل على حدة.",
-        "en": "Predict the result in the example: When health changes and `health_changed` is emitted, the UI and audio system can each respond independently."
+        "ar": "أي قاعدة تصف node interaction through signals بدقة؟",
+        "en": "Which rule accurately describes node interaction through signals?"
       },
       "options": [
         {
-          "ar": "عند تغيير الصحة وإرسال `health_changed` يمكن للواجهة ونظام الصوت الاستجابة كل على حدة.",
-          "en": "When health changes and `health_changed` is emitted, the UI and audio system can each respond independently."
+          "ar": "على المرسل إيجاد كل مستقبِل وتعديل حالته مباشرة.",
+          "en": "The sender should find and modify every receiver directly."
         },
         {
-          "ar": "اجعل المسؤولية واضحة: الحدث عند الباعث، وعملية الاستجابة عند المستقبل.",
-          "en": "Keep responsibilities clear: the event belongs to the emitter and response behavior belongs to the receiver."
+          "ar": "تعلن العقدة المرسلة الحدث بإشارة بدلاً من التحكم المباشر بكل مستقبِل.",
+          "en": "A sender can announce an event with a signal instead of controlling each receiver directly."
         },
         {
-          "ar": "يجب على المستقبل تعديل متغيرات الباعث دون إشارة أو واجهة.",
-          "en": "A receiver must modify emitter variables without a signal or interface."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة node interaction through signals في المثال.",
+          "en": "Relate your answer to the role of node interaction through signals in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_36_node_interaction_02_identify",
       "lessonId": "lesson_36_node_interaction",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «تنسيق التفاعل بين العقد»؟",
-        "en": "Which statement accurately identifies the core concept in “Coordinating Node Interaction”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن node interaction through signals: ت",
+        "en": "Complete this hands-on Godot activity about node interaction through signals: Trace a collectible signal from the item node to the score manager and HUD."
       },
-      "options": [
-        {
-          "ar": "الباعث يعلن الحدث، والمستقبل يحدد استجابته؛ الإشارة تقلل معرفة الباعث بالأنظمة الأخرى.",
-          "en": "The emitter announces an event and each receiver chooses a response; a signal limits the emitter’s knowledge of other systems."
-        },
-        {
-          "ar": "اجعل المسؤولية واضحة: الحدث عند الباعث، وعملية الاستجابة عند المستقبل.",
-          "en": "Keep responsibilities clear: the event belongs to the emitter and response behavior belongs to the receiver."
-        },
-        {
-          "ar": "يجب على المستقبل تعديل متغيرات الباعث دون إشارة أو واجهة.",
-          "en": "A receiver must modify emitter variables without a signal or interface."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "تتبع إشارة عنصر قابل للجمع من عقدة العنصر إلى مدير النقاط وHUD.",
+          "en": "Trace a collectible signal from the item node to the score manager and HUD."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_36_node_interaction_03_choose",
       "lessonId": "lesson_36_node_interaction",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ أرسل قيمة الصحة الحالية إلى الإشارة واجعل الواجهة مسؤولة عن تحديث عرضها.",
-        "en": "Which design choice fits this situation? Send the current health value through the signal and let the UI own its display update."
+        "ar": "تتبّع العملية في node interaction: اطبع notified_nodes بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this node interaction example: print notified_nodes after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "أرسل قيمة الصحة الحالية إلى الإشارة واجعل الواجهة مسؤولة عن تحديث عرضها.",
-          "en": "Send the current health value through the signal and let the UI own its display update."
-        },
-        {
-          "ar": "اجعل المسؤولية واضحة: الحدث عند الباعث، وعملية الاستجابة عند المستقبل.",
-          "en": "Keep responsibilities clear: the event belongs to the emitter and response behavior belongs to the receiver."
-        },
-        {
-          "ar": "يجب على المستقبل تعديل متغيرات الباعث دون إشارة أو واجهة.",
-          "en": "A receiver must modify emitter variables without a signal or interface."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(notified_nodes + change)",
+      "solutionCode": "print(notified_nodes + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_36_node_interaction_04_complete",
       "lessonId": "lesson_36_node_interaction",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط تدفق يبين باعثاً واحداً ومستقبلي واجهة وصوت.",
-        "en": "Complete a short sketch or sequence that shows: An event-flow sketch with one emitter and UI and audio receivers."
+        "ar": "أكمل العامل لحساب notified_nodes بعد تطبيق change في node interaction.",
+        "en": "Fill the operator to calculate notified_nodes after applying change for node interaction."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط تدفق يبين باعثاً واحداً ومستقبلي واجهة وصوت.",
-          "en": "Write the required essential parts: An event-flow sketch with one emitter and UI and audio receivers."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(notified_nodes ___ change)",
+      "solutionCode": "print(notified_nodes + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_36_node_interaction_05_write",
       "lessonId": "lesson_36_node_interaction",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: صمم مشهداً تجريبياً يغير قيمة ثم تحقق يدوياً من استجابة مستقبل واحد على الأقل.",
-        "en": "Write a short implementation plan for this application: Design a test scene that changes a value, then manually verify at least one receiver response."
+        "ar": "اكتب شيفرة تحفظ notified_nodes مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores notified_nodes plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = notified_nodes + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_36_node_interaction_06_fix",
       "lessonId": "lesson_36_node_interaction",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «على عقدة اللاعب أن تستدعي دوال الواجهة والصوت مباشرة لكل تغيير.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “The player node must directly call UI and audio functions for every change.” What is the best correction?"
+        "ar": "أي قاعدة تصف node interaction through signals بدقة؟",
+        "en": "Which rule accurately describes node interaction through signals?"
       },
       "options": [
         {
-          "ar": "أعلن إشارة حدث ذات بيانات لازمة، واترك كل مستقبل يتصرف باستقلال.",
-          "en": "Emit an event signal with needed data and let each receiver respond independently."
+          "ar": "على المرسل إيجاد كل مستقبِل وتعديل حالته مباشرة.",
+          "en": "The sender should find and modify every receiver directly."
         },
         {
-          "ar": "على عقدة اللاعب أن تستدعي دوال الواجهة والصوت مباشرة لكل تغيير.",
-          "en": "The player node must directly call UI and audio functions for every change."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "يجب على المستقبل تعديل متغيرات الباعث دون إشارة أو واجهة.",
-          "en": "A receiver must modify emitter variables without a signal or interface."
+          "ar": "تعلن العقدة المرسلة الحدث بإشارة بدلاً من التحكم المباشر بكل مستقبِل.",
+          "en": "A sender can announce an event with a signal instead of controlling each receiver directly."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة node interaction through signals في المثال.",
+          "en": "Relate your answer to the role of node interaction through signals in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_36_node_interaction_07_apply",
       "lessonId": "lesson_36_node_interaction",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: صمم مشهداً تجريبياً يغير قيمة ثم تحقق يدوياً من استجابة مستقبل واحد على الأقل. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Design a test scene that changes a value, then manually verify at least one receiver response. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى notified_nodes عند حساب node interaction.",
+        "en": "Fix the operation so it adds change to notified_nodes for node interaction."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(notified_nodes - change)",
+      "solutionCode": "print(notified_nodes + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_36_node_interaction_08_compare",
       "lessonId": "lesson_36_node_interaction",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ الاستدعاء المباشر يربط الطرفين؛ الإشارة تعلن الحدث لمستقبلين دون معرفة تفاصيلهما.",
-        "en": "What is the difference between the concepts in this lesson? A direct call couples both sides; a signal announces the event to receivers without knowing their details."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن node interaction through signals: أ",
+        "en": "Complete this hands-on Godot activity about node interaction through signals: Add a second receiver for the same event and verify the item does not need to know about it."
       },
-      "options": [
-        {
-          "ar": "الاستدعاء المباشر يربط الطرفين؛ الإشارة تعلن الحدث لمستقبلين دون معرفة تفاصيلهما.",
-          "en": "A direct call couples both sides; a signal announces the event to receivers without knowing their details."
-        },
-        {
-          "ar": "اجعل المسؤولية واضحة: الحدث عند الباعث، وعملية الاستجابة عند المستقبل.",
-          "en": "Keep responsibilities clear: the event belongs to the emitter and response behavior belongs to the receiver."
-        },
-        {
-          "ar": "يجب على المستقبل تعديل متغيرات الباعث دون إشارة أو واجهة.",
-          "en": "A receiver must modify emitter variables without a signal or interface."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "أضف مستقبلاً ثانياً للحدث نفسه وتحقق أن المرسل لا يحتاج لمعرفة وجوده.",
+          "en": "Add a second receiver for the same event and verify the item does not need to know about it."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_36_node_interaction_09_debug",
       "lessonId": "lesson_36_node_interaction",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: الباعث ينسق كل تفاصيل مستقبلي الواجهة والصوت بدوال مباشرة. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: The emitter directly coordinates every detail of UI and audio receivers. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع notified_nodes ثم change ثم المجموع.",
+        "en": "Reorder the lines to print notified_nodes, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(notified_nodes + change)\nprint(change)\nprint(notified_nodes)",
+      "solutionCode": "print(notified_nodes)\nprint(change)\nprint(notified_nodes + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 2\nvar change = 1",
+          "expectedOutput": "2\n1\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 9\nvar change = 4",
+          "expectedOutput": "9\n4\n13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_36_node_interaction_10_apply",
       "lessonId": "lesson_36_node_interaction",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: ادمج إدخال اللاعب وإشارة الحدث ومجموعة العقد في تدفق تفاعل متكامل.",
-        "en": "Design an application that combines this concept with an earlier idea: Combine player input, an event signal, and a node group into one interaction flow."
+        "ar": "اكتب شيفرة تضاعف notified_nodes ثم تضيف change وتطبع الناتج في مثال عن node interaction.",
+        "en": "Write code that doubles notified_nodes, adds change, and prints the result in a node interaction example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = notified_nodes * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var notified_nodes = 9\nvar change = 4",
+          "expectedOutput": "22"
+        }
+      ]
     }
   ]
 }

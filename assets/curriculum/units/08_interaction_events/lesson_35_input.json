@@ -34,345 +34,430 @@
       "lessonId": "lesson_35_input",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: إذا ضغط المستخدم الفعل المعرّف `move_right` فسيقرأ الكود الفعل ويحرك العقدة في الاتجاه المطلوب.",
-        "en": "Predict the result in the example: If the user presses the configured `move_right` action, the code reads it and moves the node as intended."
+        "ar": "أي قاعدة تصف InputMap actions بدقة؟",
+        "en": "Which rule accurately describes InputMap actions?"
       },
       "options": [
         {
-          "ar": "إذا ضغط المستخدم الفعل المعرّف `move_right` فسيقرأ الكود الفعل ويحرك العقدة في الاتجاه المطلوب.",
-          "en": "If the user presses the configured `move_right` action, the code reads it and moves the node as intended."
+          "ar": "ينبغي لكل عقدة لعب مقارنة رمز المفتاح الفعلي مباشرة.",
+          "en": "Every gameplay node should compare physical key codes directly."
         },
         {
-          "ar": "أسماء الأفعال تفصل منطق اللعبة عن المفتاح المادي، ويجب إعداد الربط في المحرر.",
-          "en": "Action names separate game logic from physical keys, and the binding must be set in the editor."
+          "ar": "تفصل أسماء InputMap بين فعل اللعب ومفتاح الجهاز المحدد.",
+          "en": "InputMap action names separate gameplay intent from a specific physical key."
         },
         {
-          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
-          "en": "Input Map defines the node tree that receives a signal."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة InputMap actions في المثال.",
+          "en": "Relate your answer to the role of InputMap actions in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_35_input_02_identify",
       "lessonId": "lesson_35_input",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «استقبال مدخلات بسيطة»؟",
-        "en": "Which statement accurately identifies the core concept in “Handling Simple Input”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن InputMap actions: أ",
+        "en": "Complete this hands-on Godot activity about InputMap actions: Create a move_left InputMap action, assign a key, and read the action in a player script."
       },
-      "options": [
-        {
-          "ar": "Input Map يربط أسماء أفعال منطقية بأزرار؛ وتقرأ `Input` حالة الفعل أو يعالج `_input` الحدث.",
-          "en": "Input Map binds logical action names to buttons; `Input` reads action state while `_input` handles events."
-        },
-        {
-          "ar": "أسماء الأفعال تفصل منطق اللعبة عن المفتاح المادي، ويجب إعداد الربط في المحرر.",
-          "en": "Action names separate game logic from physical keys, and the binding must be set in the editor."
-        },
-        {
-          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
-          "en": "Input Map defines the node tree that receives a signal."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أنشئ فعل move_left في InputMap واربط مفتاحاً واقرأ الفعل في سكربت اللاعب.",
+          "en": "Create a move_left InputMap action, assign a key, and read the action in a player script."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_35_input_03_choose",
       "lessonId": "lesson_35_input",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ عرّف `move_right` في Input Map قبل استعماله في كود الحركة.",
-        "en": "Which design choice fits this situation? Define `move_right` in Input Map before using it in movement code."
+        "ar": "تتبّع العملية في input actions: اطبع active_actions بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this input actions example: print active_actions after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "عرّف `move_right` في Input Map قبل استعماله في كود الحركة.",
-          "en": "Define `move_right` in Input Map before using it in movement code."
-        },
-        {
-          "ar": "أسماء الأفعال تفصل منطق اللعبة عن المفتاح المادي، ويجب إعداد الربط في المحرر.",
-          "en": "Action names separate game logic from physical keys, and the binding must be set in the editor."
-        },
-        {
-          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
-          "en": "Input Map defines the node tree that receives a signal."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(active_actions + change)",
+      "solutionCode": "print(active_actions + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_35_input_04_complete",
       "lessonId": "lesson_35_input",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: جدول يربط اسم فعل منطقي بزر وتجربة يدوية للتحقق من ظهوره.",
-        "en": "Complete a short sketch or sequence that shows: A table mapping a logical action to a key and a manual test for it."
+        "ar": "أكمل العامل لحساب active_actions بعد تطبيق change في input actions.",
+        "en": "Fill the operator to calculate active_actions after applying change for input actions."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: جدول يربط اسم فعل منطقي بزر وتجربة يدوية للتحقق من ظهوره.",
-          "en": "Write the required essential parts: A table mapping a logical action to a key and a manual test for it."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(active_actions ___ change)",
+      "solutionCode": "print(active_actions + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_35_input_05_write",
       "lessonId": "lesson_35_input",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أضف فعلاً جديداً في Input Map في مشروع اختبار وجرب الضغط والإفلات يدوياً.",
-        "en": "Write a short implementation plan for this application: Add a new Input Map action in a test project and manually try pressing and releasing it."
+        "ar": "اكتب شيفرة تحفظ active_actions مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores active_actions plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = active_actions + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_35_input_06_fix",
       "lessonId": "lesson_35_input",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «استخدام اسم `move_right` في الكود ينشئه تلقائياً في Input Map.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “Using `move_right` in code automatically creates it in Input Map.” What is the best correction?"
+        "ar": "أي قاعدة تصف InputMap actions بدقة؟",
+        "en": "Which rule accurately describes InputMap actions?"
       },
       "options": [
         {
-          "ar": "أضف الفعل واربطه بزر من Project Settings → Input Map، ثم تحقق يدوياً.",
-          "en": "Add the action and bind a key in Project Settings → Input Map, then verify manually."
+          "ar": "ينبغي لكل عقدة لعب مقارنة رمز المفتاح الفعلي مباشرة.",
+          "en": "Every gameplay node should compare physical key codes directly."
         },
         {
-          "ar": "استخدام اسم `move_right` في الكود ينشئه تلقائياً في Input Map.",
-          "en": "Using `move_right` in code automatically creates it in Input Map."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
-          "en": "Input Map defines the node tree that receives a signal."
+          "ar": "تفصل أسماء InputMap بين فعل اللعب ومفتاح الجهاز المحدد.",
+          "en": "InputMap action names separate gameplay intent from a specific physical key."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة InputMap actions في المثال.",
+          "en": "Relate your answer to the role of InputMap actions in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_35_input_07_apply",
       "lessonId": "lesson_35_input",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أضف فعلاً جديداً في Input Map في مشروع اختبار وجرب الضغط والإفلات يدوياً. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Add a new Input Map action in a test project and manually try pressing and releasing it. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى active_actions عند حساب input actions.",
+        "en": "Fix the operation so it adds change to active_actions for input actions."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(active_actions - change)",
+      "solutionCode": "print(active_actions + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_35_input_08_compare",
       "lessonId": "lesson_35_input",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `Input.is_action_pressed` مناسب لحالة مستمرة؛ و`_input(event)` يعالج الحدث الوارد.",
-        "en": "What is the difference between the concepts in this lesson? `Input.is_action_pressed` suits a continuous state; `_input(event)` handles an incoming event."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن InputMap actions: ا",
+        "en": "Complete this hands-on Godot activity about InputMap actions: Map a second key to the same action and test both bindings without changing gameplay code."
       },
-      "options": [
-        {
-          "ar": "`Input.is_action_pressed` مناسب لحالة مستمرة؛ و`_input(event)` يعالج الحدث الوارد.",
-          "en": "`Input.is_action_pressed` suits a continuous state; `_input(event)` handles an incoming event."
-        },
-        {
-          "ar": "أسماء الأفعال تفصل منطق اللعبة عن المفتاح المادي، ويجب إعداد الربط في المحرر.",
-          "en": "Action names separate game logic from physical keys, and the binding must be set in the editor."
-        },
-        {
-          "ar": "Input Map يحدد شجرة العقد التي تستقبل الإشارة.",
-          "en": "Input Map defines the node tree that receives a signal."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "اربط مفتاحاً ثانياً بالفعل نفسه واختبرهما دون تغيير منطق اللعب.",
+          "en": "Map a second key to the same action and test both bindings without changing gameplay code."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_35_input_09_debug",
       "lessonId": "lesson_35_input",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: سكربت يفحص `move_left` بينما إعداد Input Map يعرف فقط `move_right`. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A script checks `move_left` while Input Map defines only `move_right`. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع active_actions ثم change ثم المجموع.",
+        "en": "Reorder the lines to print active_actions, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(active_actions + change)\nprint(change)\nprint(active_actions)",
+      "solutionCode": "print(active_actions)\nprint(change)\nprint(active_actions + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 2\nvar change = 1",
+          "expectedOutput": "2\n1\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 9\nvar change = 4",
+          "expectedOutput": "9\n4\n13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_35_input_10_apply",
       "lessonId": "lesson_35_input",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: حوّل إدخالاً إلى حركة، ثم أرسل إشارة عند بلوغ الهدف ليتمكن مستقبل آخر من الاستجابة.",
-        "en": "Design an application that combines this concept with an earlier idea: Turn an input into movement, then emit a signal on reaching a goal so another receiver can respond."
+        "ar": "اكتب شيفرة تضاعف active_actions ثم تضيف change وتطبع الناتج في مثال عن input actions.",
+        "en": "Write code that doubles active_actions, adds change, and prints the result in this input-actions scenario."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = active_actions * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var active_actions = 9\nvar change = 4",
+          "expectedOutput": "22"
+        }
+      ]
     }
   ]
 }

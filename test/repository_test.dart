@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,12 +34,61 @@ void main() {
       assetBundle: _TestAssetBundle('{"version":'),
       manifestAsset: 'test.json',
     );
-    await expectLater(repository.loadCurriculum(), throwsFormatException);
+    await expectLater(
+      repository.loadCurriculum(),
+      throwsA(isA<ManifestParseException>()),
+    );
     final wrongSchema = CurriculumRepository(
       assetBundle: _TestAssetBundle('{"version":"1","units":[]}'),
       manifestAsset: 'test.json',
     );
-    await expectLater(wrongSchema.loadCurriculum(), throwsFormatException);
+    await expectLater(
+      wrongSchema.loadCurriculum(),
+      throwsA(isA<ManifestParseException>()),
+    );
+  });
+
+  test('surfaces lesson not found and malformed lesson errors', () async {
+    final manifestContent = '''
+    {
+      "version": "1.0.0",
+      "targetGDScriptVersion": "4.x",
+      "units": [
+        {
+          "id": "unit_01_first",
+          "title": {"ar": "عنوان", "en": "Title"},
+          "description": {"ar": "وصف", "en": "Desc"},
+          "iconName": "icon",
+          "order": 0,
+          "lessonIds": ["lesson_01_hello", "lesson_02_broken"]
+        }
+      ]
+    }
+    ''';
+    final assetMap = <String, String>{
+      'assets/curriculum/manifest.json': manifestContent,
+      'assets/curriculum/units/01_first/lesson_01_hello.json': '{"invalid": json}',
+      'assets/curriculum/units/01_first/lesson_02_broken.json': '',
+    };
+    final repository = CurriculumRepository(
+      assetBundle: _MapAssetBundle(assetMap),
+    );
+    final curriculum = await repository.loadCurriculum();
+
+    await expectLater(
+      repository.loadLesson(curriculum, 'unknown_lesson'),
+      throwsA(isA<LessonNotFoundException>()),
+    );
+
+    await expectLater(
+      repository.loadLesson(curriculum, 'lesson_01_hello'),
+      throwsA(isA<LessonParseException>()),
+    );
+
+    await expectLater(
+      repository.loadLesson(curriculum, 'lesson_02_broken'),
+      throwsA(isA<LessonParseException>()),
+    );
   });
 
   test('workspace repository replaces complete snapshots atomically', () async {
@@ -256,6 +307,22 @@ class _TestAssetBundle extends CachingAssetBundle {
   @override
   Future<ByteData> load(String key) async {
     final bytes = Uint8List.fromList(content.codeUnits);
+    return ByteData.view(bytes.buffer);
+  }
+}
+
+class _MapAssetBundle extends CachingAssetBundle {
+  _MapAssetBundle(this.assets);
+
+  final Map<String, String> assets;
+
+  @override
+  Future<ByteData> load(String key) async {
+    final content = assets[key];
+    if (content == null) {
+      throw FlutterError('Asset not found: $key');
+    }
+    final bytes = Uint8List.fromList(utf8.encode(content));
     return ByteData.view(bytes.buffer);
   }
 }

@@ -15,7 +15,7 @@ import '../../../logic/providers/progress_provider.dart';
 import '../../../logic/services/code_runner_service.dart';
 import '../../layouts/adaptive_layout.dart';
 import '../../layouts/lesson_layout_mobile.dart';
-import '../../widgets/common/empty_state.dart';
+import '../../widgets/lesson_error_widget.dart';
 import '../../widgets/output_panel/output_panel.dart';
 import '../../routers/app_routes.dart';
 import 'desktop_lesson_ide_flutter_dart.dart';
@@ -456,13 +456,10 @@ class _LessonScreenState extends State<LessonScreen> {
       if (snapshot.hasError || snapshot.data == null) {
         return Scaffold(
           appBar: AppBar(title: Text(context.l10n.lessonTitle)),
-          body: EmptyState(
-            icon: Icons.error_outline,
-            message: context.l10n.lessonUnavailable,
-            action: FilledButton(
-              onPressed: _retryLoad,
-              child: Text(context.l10n.retry),
-            ),
+          body: LessonErrorWidget(
+            error: snapshot.error,
+            onRetry: _retryLoad,
+            onBackToPath: () => context.go(AppRoutes.learningPath),
           ),
         );
       }

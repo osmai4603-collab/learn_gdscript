@@ -41,345 +41,430 @@
       "lessonId": "lesson_32_packed_scenes",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: ينشئ `instantiate()` نسخة تشغيلية من المشهد، ويضيفها `add_child()` إلى الشجرة.",
-        "en": "Predict the result in the example: `instantiate()` creates a runtime instance of the scene, and `add_child()` adds it to the tree."
+        "ar": "أي قاعدة تصف PackedScene instancing بدقة؟",
+        "en": "Which rule accurately describes PackedScene instancing?"
       },
       "options": [
         {
-          "ar": "ينشئ `instantiate()` نسخة تشغيلية من المشهد، ويضيفها `add_child()` إلى الشجرة.",
-          "en": "`instantiate()` creates a runtime instance of the scene, and `add_child()` adds it to the tree."
+          "ar": "إرجاع `PackedScene` من `load` يضيف نسخته تلقائياً إلى الشجرة.",
+          "en": "Loading a PackedScene automatically adds its instance to the active tree."
         },
         {
-          "ar": "تأكد من وجود ملف المشهد ومساره، ومن إضافة النسخة إلى أب مناسب.",
-          "en": "Ensure the scene file and path exist and that the instance is added to a suitable parent."
+          "ar": "ينشئ `instantiate` نسخة، ثم يضيفها `add_child` إلى الشجرة.",
+          "en": "`instantiate` creates a node, and `add_child` attaches it to the tree."
         },
         {
-          "ar": "`queue_free()` يعيد استخدام PackedScene لإنشاء نسخة جديدة.",
-          "en": "`queue_free()` reuses a PackedScene to create a new instance."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة PackedScene instancing في المثال.",
+          "en": "Relate your answer to the role of PackedScene instancing in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_32_packed_scenes_02_identify",
       "lessonId": "lesson_32_packed_scenes",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «إنشاء العقد وإزالتها والمشاهد»؟",
-        "en": "Which statement accurately identifies the core concept in “Instancing, Removing Nodes, and Scenes”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن PackedScene instancing: أ",
+        "en": "Complete this hands-on Godot activity about PackedScene instancing: Instantiate a PackedScene, add the new node to a parent, and verify it appears in the scene tree."
       },
-      "options": [
-        {
-          "ar": "`PackedScene` مورد لمشهد محفوظ؛ `instantiate()` ينشئ منه عقدة جديدة.",
-          "en": "`PackedScene` is a resource for a saved scene; `instantiate()` creates a new node from it."
-        },
-        {
-          "ar": "تأكد من وجود ملف المشهد ومساره، ومن إضافة النسخة إلى أب مناسب.",
-          "en": "Ensure the scene file and path exist and that the instance is added to a suitable parent."
-        },
-        {
-          "ar": "`queue_free()` يعيد استخدام PackedScene لإنشاء نسخة جديدة.",
-          "en": "`queue_free()` reuses a PackedScene to create a new instance."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أنشئ PackedScene وأضف النسخة الجديدة إلى الأب وتحقق من ظهورها بالشجرة.",
+          "en": "Instantiate a PackedScene, add the new node to a parent, and verify it appears in the scene tree."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_32_packed_scenes_03_choose",
       "lessonId": "lesson_32_packed_scenes",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ احتفظ بمرجع النسخة إذا كنت ستعدلها أو تستدعي `queue_free()` عليها لاحقاً.",
-        "en": "Which design choice fits this situation? Keep the instance reference if you will update it or call `queue_free()` on it later."
+        "ar": "تتبّع العملية في PackedScene instances: اطبع scene_instances بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this PackedScene instances example: print scene_instances after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "احتفظ بمرجع النسخة إذا كنت ستعدلها أو تستدعي `queue_free()` عليها لاحقاً.",
-          "en": "Keep the instance reference if you will update it or call `queue_free()` on it later."
-        },
-        {
-          "ar": "تأكد من وجود ملف المشهد ومساره، ومن إضافة النسخة إلى أب مناسب.",
-          "en": "Ensure the scene file and path exist and that the instance is added to a suitable parent."
-        },
-        {
-          "ar": "`queue_free()` يعيد استخدام PackedScene لإنشاء نسخة جديدة.",
-          "en": "`queue_free()` reuses a PackedScene to create a new instance."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(scene_instances + change)",
+      "solutionCode": "print(scene_instances + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_32_packed_scenes_04_complete",
       "lessonId": "lesson_32_packed_scenes",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط يوضح مورد PackedScene ثم نسخة node ثم إضافتها إلى أب في الشجرة.",
-        "en": "Complete a short sketch or sequence that shows: A sketch showing a PackedScene resource, then an instantiated node, then its addition under a tree parent."
+        "ar": "أكمل العامل لحساب scene_instances بعد تطبيق change في PackedScene instances.",
+        "en": "Fill the operator to calculate scene_instances after applying change for PackedScene instances."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط يوضح مورد PackedScene ثم نسخة node ثم إضافتها إلى أب في الشجرة.",
-          "en": "Write the required essential parts: A sketch showing a PackedScene resource, then an instantiated node, then its addition under a tree parent."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(scene_instances ___ change)",
+      "solutionCode": "print(scene_instances + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_32_packed_scenes_05_write",
       "lessonId": "lesson_32_packed_scenes",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: في مشروع Godot تجريبي، أنشئ مشهداً صغيراً وجرّب إنشاء نسخة واحدة وإضافتها ثم حذفها بأمان.",
-        "en": "Write a short implementation plan for this application: In a Godot test project, create a small scene and try instantiating, adding, and safely freeing one copy."
+        "ar": "اكتب شيفرة تحفظ scene_instances مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores scene_instances plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = scene_instances + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_32_packed_scenes_06_fix",
       "lessonId": "lesson_32_packed_scenes",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «`preload()` وحدها تضيف عقدة المشهد إلى الشجرة.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “`preload()` by itself adds a scene node to the tree.” What is the best correction?"
+        "ar": "أي قاعدة تصف PackedScene instancing بدقة؟",
+        "en": "Which rule accurately describes PackedScene instancing?"
       },
       "options": [
         {
-          "ar": "حمّل المورد ثم استدع `instantiate()` وأضف النسخة باستخدام `add_child()`.",
-          "en": "Load the resource, call `instantiate()`, then add the instance with `add_child()`."
+          "ar": "إرجاع `PackedScene` من `load` يضيف نسخته تلقائياً إلى الشجرة.",
+          "en": "Loading a PackedScene automatically adds its instance to the active tree."
         },
         {
-          "ar": "`preload()` وحدها تضيف عقدة المشهد إلى الشجرة.",
-          "en": "`preload()` by itself adds a scene node to the tree."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "`queue_free()` يعيد استخدام PackedScene لإنشاء نسخة جديدة.",
-          "en": "`queue_free()` reuses a PackedScene to create a new instance."
+          "ar": "ينشئ `instantiate` نسخة، ثم يضيفها `add_child` إلى الشجرة.",
+          "en": "`instantiate` creates a node, and `add_child` attaches it to the tree."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة PackedScene instancing في المثال.",
+          "en": "Relate your answer to the role of PackedScene instancing in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_32_packed_scenes_07_apply",
       "lessonId": "lesson_32_packed_scenes",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: في مشروع Godot تجريبي، أنشئ مشهداً صغيراً وجرّب إنشاء نسخة واحدة وإضافتها ثم حذفها بأمان. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: In a Godot test project, create a small scene and try instantiating, adding, and safely freeing one copy. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى scene_instances عند حساب PackedScene instances.",
+        "en": "Fix the operation so it adds change to scene_instances for PackedScene instances."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(scene_instances - change)",
+      "solutionCode": "print(scene_instances + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_32_packed_scenes_08_compare",
       "lessonId": "lesson_32_packed_scenes",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `PackedScene` هو مورد محفوظ؛ والعقدة الناتجة من `instantiate()` هي نسخة تشغيلية.",
-        "en": "What is the difference between the concepts in this lesson? A `PackedScene` is a saved resource; the node returned by `instantiate()` is a runtime instance."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن PackedScene instancing: ا",
+        "en": "Complete this hands-on Godot activity about PackedScene instancing: Queue the instance for deletion after collection and check that it is removed safely."
       },
-      "options": [
-        {
-          "ar": "`PackedScene` هو مورد محفوظ؛ والعقدة الناتجة من `instantiate()` هي نسخة تشغيلية.",
-          "en": "A `PackedScene` is a saved resource; the node returned by `instantiate()` is a runtime instance."
-        },
-        {
-          "ar": "تأكد من وجود ملف المشهد ومساره، ومن إضافة النسخة إلى أب مناسب.",
-          "en": "Ensure the scene file and path exist and that the instance is added to a suitable parent."
-        },
-        {
-          "ar": "`queue_free()` يعيد استخدام PackedScene لإنشاء نسخة جديدة.",
-          "en": "`queue_free()` reuses a PackedScene to create a new instance."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "استخدم queue_free بعد جمع النسخة وتحقق من إزالتها بأمان.",
+          "en": "Queue the instance for deletion after collection and check that it is removed safely."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_32_packed_scenes_09_debug",
       "lessonId": "lesson_32_packed_scenes",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: كود ينشئ النسخة لكنه لا يضيفها إلى أي عقدة في الشجرة. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: Code that instantiates a scene but never adds it to a node in the tree. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع scene_instances ثم change ثم المجموع.",
+        "en": "Reorder the lines to print scene_instances, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(scene_instances + change)\nprint(change)\nprint(scene_instances)",
+      "solutionCode": "print(scene_instances)\nprint(change)\nprint(scene_instances + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 2",
+          "expectedOutput": "1\n2\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 2",
+          "expectedOutput": "0\n2\n2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 8\nvar change = 4",
+          "expectedOutput": "8\n4\n12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_32_packed_scenes_10_apply",
       "lessonId": "lesson_32_packed_scenes",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: أضف نسخة مشهد إلى مجموعة دورية ثم استخدم إشارة لإعلان انتهائها قبل تحريرها.",
-        "en": "Design an application that combines this concept with an earlier idea: Add a scene instance to a role group, then use a signal to announce completion before freeing it."
+        "ar": "اكتب شيفرة تضاعف scene_instances ثم تضيف change وتطبع الناتج في مثال عن PackedScene instances.",
+        "en": "Write code that doubles scene_instances, adds change, and prints the result in a PackedScene instances example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = scene_instances * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 2",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var scene_instances = 8\nvar change = 4",
+          "expectedOutput": "20"
+        }
+      ]
     }
   ]
 }

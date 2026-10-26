@@ -41,345 +41,430 @@
       "lessonId": "lesson_30_onready_nodes",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: يُهيأ مرجع `status_label` عندما تصبح العقدة جاهزة، ثم يمكن للدالة الوصول إلى الابن الموجود في المسار.",
-        "en": "Predict the result in the example: The `status_label` reference is initialized when the node is ready, then a function can access the child at that path."
+        "ar": "أي قاعدة تصف @onready child references بدقة؟",
+        "en": "Which rule accurately describes @onready child references?"
       },
       "options": [
         {
-          "ar": "يُهيأ مرجع `status_label` عندما تصبح العقدة جاهزة، ثم يمكن للدالة الوصول إلى الابن الموجود في المسار.",
-          "en": "The `status_label` reference is initialized when the node is ready, then a function can access the child at that path."
+          "ar": "يحل `@onready` مراجع الأبناء قبل دخول المشهد إلى الشجرة.",
+          "en": "`@onready` resolves child references before the scene enters the tree."
         },
         {
-          "ar": "يجب أن يطابق المسار اسم العقدة وبنيتها الفعلية في المحرر.",
-          "en": "The path must match the node’s actual name and structure in the editor."
+          "ar": "يهيئ `@onready` مرجع الابن عندما تصبح العقدة جاهزة في الشجرة.",
+          "en": "`@onready` initializes a child reference when the node is ready in the tree."
         },
         {
-          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
-          "en": "`@onready` automatically creates a missing node."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة @onready child references في المثال.",
+          "en": "Relate your answer to the role of @onready child references in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_30_onready_nodes_02_identify",
       "lessonId": "lesson_30_onready_nodes",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «الوصول إلى العقد باستخدام @onready»؟",
-        "en": "Which statement accurately identifies the core concept in “Access Nodes with @onready”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن @onready child references: أ",
+        "en": "Complete this hands-on Godot activity about @onready child references: Add a Label child, cache it with @onready, and change its text in _ready."
       },
-      "options": [
-        {
-          "ar": "`$Path` يختصر الوصول بالعقدة، و`@onready` يؤجل تهيئة المرجع إلى مرحلة الجاهزية.",
-          "en": "`$Path` is shorthand for node access, and `@onready` delays reference initialization until readiness."
-        },
-        {
-          "ar": "يجب أن يطابق المسار اسم العقدة وبنيتها الفعلية في المحرر.",
-          "en": "The path must match the node’s actual name and structure in the editor."
-        },
-        {
-          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
-          "en": "`@onready` automatically creates a missing node."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أضف Label كابن واحفظ مرجعه بـ @onready ثم غيّر نصه في _ready.",
+          "en": "Add a Label child, cache it with @onready, and change its text in _ready."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_30_onready_nodes_03_choose",
       "lessonId": "lesson_30_onready_nodes",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ استخدم مرجعاً مسمى بعلامة `@onready` لعقدة ابن تحتاجها بعد جاهزية المشهد.",
-        "en": "Which design choice fits this situation? Use a named `@onready` reference for a child node needed after the scene is ready."
+        "ar": "تتبّع العملية في @onready references: اطبع cached_nodes بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this @onready references example: print cached_nodes after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "استخدم مرجعاً مسمى بعلامة `@onready` لعقدة ابن تحتاجها بعد جاهزية المشهد.",
-          "en": "Use a named `@onready` reference for a child node needed after the scene is ready."
-        },
-        {
-          "ar": "يجب أن يطابق المسار اسم العقدة وبنيتها الفعلية في المحرر.",
-          "en": "The path must match the node’s actual name and structure in the editor."
-        },
-        {
-          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
-          "en": "`@onready` automatically creates a missing node."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(cached_nodes + change)",
+      "solutionCode": "print(cached_nodes + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_30_onready_nodes_04_complete",
       "lessonId": "lesson_30_onready_nodes",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط شجرة يحدد عقدة ابن ومسار `$` والمتغير الذي يخزن مرجعها.",
-        "en": "Complete a short sketch or sequence that shows: A tree sketch identifying a child, its `$` path, and the variable that stores its reference."
+        "ar": "أكمل العامل لحساب cached_nodes بعد تطبيق change في @onready references.",
+        "en": "Fill the operator to calculate cached_nodes after applying change for @onready references."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط شجرة يحدد عقدة ابن ومسار `$` والمتغير الذي يخزن مرجعها.",
-          "en": "Write the required essential parts: A tree sketch identifying a child, its `$` path, and the variable that stores its reference."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(cached_nodes ___ change)",
+      "solutionCode": "print(cached_nodes + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_30_onready_nodes_05_write",
       "lessonId": "lesson_30_onready_nodes",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أضف عقدة Label باسم `StatusLabel` في مشهد اختبار وتحقق من تطابق المسار مع المرجع.",
-        "en": "Write a short implementation plan for this application: Add a Label named `StatusLabel` to a test scene and verify that its path matches the reference."
+        "ar": "اكتب شيفرة تحفظ cached_nodes مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores cached_nodes plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = cached_nodes + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_30_onready_nodes_06_fix",
       "lessonId": "lesson_30_onready_nodes",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «`@onready` يستطيع إيجاد أي اسم حتى لو لم توجد العقدة في المشهد.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “`@onready` can find any name even if the node is absent from the scene.” What is the best correction?"
+        "ar": "أي قاعدة تصف @onready child references بدقة؟",
+        "en": "Which rule accurately describes @onready child references?"
       },
       "options": [
         {
-          "ar": "أضف العقدة بالاسم والمسار المطلوبين أو صحح المسار في السكربت.",
-          "en": "Add the node at the required name and path, or correct the script path."
+          "ar": "يحل `@onready` مراجع الأبناء قبل دخول المشهد إلى الشجرة.",
+          "en": "`@onready` resolves child references before the scene enters the tree."
         },
         {
-          "ar": "`@onready` يستطيع إيجاد أي اسم حتى لو لم توجد العقدة في المشهد.",
-          "en": "`@onready` can find any name even if the node is absent from the scene."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
-          "en": "`@onready` automatically creates a missing node."
+          "ar": "يهيئ `@onready` مرجع الابن عندما تصبح العقدة جاهزة في الشجرة.",
+          "en": "`@onready` initializes a child reference when the node is ready in the tree."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة @onready child references في المثال.",
+          "en": "Relate your answer to the role of @onready child references in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_30_onready_nodes_07_apply",
       "lessonId": "lesson_30_onready_nodes",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أضف عقدة Label باسم `StatusLabel` في مشهد اختبار وتحقق من تطابق المسار مع المرجع. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Add a Label named `StatusLabel` to a test scene and verify that its path matches the reference. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى cached_nodes عند حساب @onready references.",
+        "en": "Fix the operation so it adds change to cached_nodes for @onready references."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(cached_nodes - change)",
+      "solutionCode": "print(cached_nodes + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_30_onready_nodes_08_compare",
       "lessonId": "lesson_30_onready_nodes",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `$` يحدد مرجع المسار؛ و`@onready` يتحكم في وقت تعيين المرجع.",
-        "en": "What is the difference between the concepts in this lesson? `$` specifies the path reference; `@onready` controls when the reference is assigned."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن @onready child references: غ",
+        "en": "Complete this hands-on Godot activity about @onready child references: Rename the child and verify the node path used by @onready, then run the scene."
       },
-      "options": [
-        {
-          "ar": "`$` يحدد مرجع المسار؛ و`@onready` يتحكم في وقت تعيين المرجع.",
-          "en": "`$` specifies the path reference; `@onready` controls when the reference is assigned."
-        },
-        {
-          "ar": "يجب أن يطابق المسار اسم العقدة وبنيتها الفعلية في المحرر.",
-          "en": "The path must match the node’s actual name and structure in the editor."
-        },
-        {
-          "ar": "`@onready` ينشئ العقدة المفقودة تلقائياً.",
-          "en": "`@onready` automatically creates a missing node."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "غيّر اسم الابن وتحقق من مسار @onready ثم شغّل المشهد.",
+          "en": "Rename the child and verify the node path used by @onready, then run the scene."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_30_onready_nodes_09_debug",
       "lessonId": "lesson_30_onready_nodes",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: اسم `$StatusLabel` في السكربت بينما العقدة في المشهد اسمها `Status`. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: The script uses `$StatusLabel` while the scene node is named `Status`. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع cached_nodes ثم change ثم المجموع.",
+        "en": "Reorder the lines to print cached_nodes, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(cached_nodes + change)\nprint(change)\nprint(cached_nodes)",
+      "solutionCode": "print(cached_nodes)\nprint(change)\nprint(cached_nodes + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 1\nvar change = 2",
+          "expectedOutput": "1\n2\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 0\nvar change = 2",
+          "expectedOutput": "0\n2\n2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 8\nvar change = 4",
+          "expectedOutput": "8\n4\n12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_30_onready_nodes_10_apply",
       "lessonId": "lesson_30_onready_nodes",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: استخدم مرجعاً جاهزاً لتحديث عقدة من `_ready` ثم اشرح كيف يؤثر نقلها إلى مجلد فرعي في المسار.",
-        "en": "Design an application that combines this concept with an earlier idea: Use a ready reference to update a node from `_ready`, then explain how moving it into a subfolder changes the path."
+        "ar": "اكتب شيفرة تضاعف cached_nodes ثم تضيف change وتطبع الناتج في مثال عن @onready references.",
+        "en": "Write code that doubles cached_nodes, adds change, and prints the result in this @onready references scenario."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = cached_nodes * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 1\nvar change = 2",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var cached_nodes = 8\nvar change = 4",
+          "expectedOutput": "20"
+        }
+      ]
     }
   ]
 }

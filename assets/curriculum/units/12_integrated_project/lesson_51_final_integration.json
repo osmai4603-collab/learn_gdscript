@@ -53,19 +53,19 @@
       },
       "options": [
         {
-          "ar": "العنصر يرسل إشارة، والمدير يحدث النتيجة، وHUD يعرضها.",
-          "en": "The item emits a signal, the manager updates score, and the HUD displays it."
-        },
-        {
           "ar": "العنصر يغير كل عقدة مباشرة.",
           "en": "The item directly changes every node."
         },
         {
           "ar": "المورد يحذف اللاعب.",
           "en": "The resource deletes the player."
+        },
+        {
+          "ar": "العنصر يرسل إشارة، والمدير يحدث النتيجة، وHUD يعرضها.",
+          "en": "The item emits a signal, the manager updates score, and the HUD displays it."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
           "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
@@ -84,7 +84,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن دمج الأنظمة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about دمج الأنظمة. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about project integration. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -117,28 +117,45 @@
       "lessonId": "lesson_51_final_integration",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «score updated» في سياق دمج الأنظمة.",
-        "en": "Write code that prints “score updated” as a دمج الأنظمة status."
+        "ar": "تتبّع هذه العملية في موضوع project integration باستخدام القيم المعطاة: اطبع connected_systems + change.",
+        "en": "Trace this project integration calculation using the supplied values: print(connected_systems + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"score updated\")",
+      "starterCode": "print(connected_systems + change)",
+      "solutionCode": "print(connected_systems + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score updated"
+          "setupCode": "var connected_systems = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -148,28 +165,45 @@
       "lessonId": "lesson_51_final_integration",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «score updated».",
-        "en": "Complete the line so it prints “score updated”."
+        "ar": "أكمل الفراغ ليضيف حساب project integration مقدار التغيير إلى connected_systems.",
+        "en": "Fill the blank so the project integration calculation adds the change to connected_systems."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"score updated\")",
+      "starterCode": "print(connected_systems ___ change)",
+      "solutionCode": "print(connected_systems + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score updated"
+          "setupCode": "var connected_systems = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -179,28 +213,45 @@
       "lessonId": "lesson_51_final_integration",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في دمج الأنظمة: start ثم «score updated».",
-        "en": "Print two lines showing progress in دمج الأنظمة: start, then “score updated”."
+        "ar": "اكتب حساباً قصيراً في project integration يطبع connected_systems مضافاً إليه change.",
+        "en": "Write a short project integration calculation that prints connected_systems plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"score updated\")",
+      "solutionCode": "var result = connected_systems + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nscore updated"
+          "setupCode": "var connected_systems = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -210,28 +261,45 @@
       "lessonId": "lesson_51_final_integration",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «score updated» تماماً.",
-        "en": "Fix the code so it prints exactly “score updated”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في project integration مقدار change إلى connected_systems.",
+        "en": "Fix the operator so this project integration calculation adds change to connected_systems."
       },
-      "starterCode": "print(\"score updated!\")",
-      "solutionCode": "print(\"score updated\")",
+      "starterCode": "print(connected_systems - change)",
+      "solutionCode": "print(connected_systems + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score updated"
+          "setupCode": "var connected_systems = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -241,28 +309,45 @@
       "lessonId": "lesson_51_final_integration",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «score updated» ثم done.",
-        "en": "Arrange output to show start, then “score updated”, then done."
+        "ar": "رتّب خطوات تتبع project integration لتطبع connected_systems ثم change ثم المجموع.",
+        "en": "Reorder the project integration trace to print connected_systems, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"score updated\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"score updated\")\nprint(\"done\")",
+      "starterCode": "print(connected_systems + change)\nprint(change)\nprint(connected_systems)",
+      "solutionCode": "print(connected_systems)\nprint(change)\nprint(connected_systems + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nscore updated\ndone"
+          "setupCode": "var connected_systems = 3\nvar change = 1",
+          "expectedOutput": "3\n1\n4"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var connected_systems = 10\nvar change = 4",
+          "expectedOutput": "10\n4\n14"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -272,28 +357,45 @@
       "lessonId": "lesson_51_final_integration",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع دمج الأنظمة: «score updated».",
-        "en": "Write a program that records a result related to دمج الأنظمة: “score updated”."
+        "ar": "اكتب حساباً في project integration يضاعف connected_systems ثم يضيف change ويطبع الناتج.",
+        "en": "Write a project integration calculation that doubles connected_systems, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"score updated\")",
+      "solutionCode": "var result = connected_systems * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score updated"
+          "setupCode": "var connected_systems = 3\nvar change = 1",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -303,28 +405,45 @@
       "lessonId": "lesson_51_final_integration",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nscore updated",
-        "en": "Write a program that displays this sequence:\nscore updated"
+        "ar": "تنبأ بنتيجة مضاعفة connected_systems ثم إضافة change في مثال project integration.",
+        "en": "Predict the result of doubling connected_systems and then adding change in this project integration example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"score updated\")",
+      "starterCode": "print(connected_systems * 2 + change)",
+      "solutionCode": "print(connected_systems * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score updated"
+          "setupCode": "var connected_systems = 3\nvar change = 1",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -334,28 +453,45 @@
       "lessonId": "lesson_51_final_integration",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «score updated».",
-        "en": "Use a string variable named status and print its value “score updated”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف connected_systems مضافاً إليه change في project integration.",
+        "en": "Use a named result variable to calculate connected_systems times two plus change for project integration."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"score updated\"\nprint(status)",
+      "solutionCode": "var result = connected_systems * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score updated"
+          "setupCode": "var connected_systems = 3\nvar change = 1",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var connected_systems = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

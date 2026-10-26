@@ -39,19 +39,19 @@
       },
       "options": [
         {
-          "ar": "تُعلّق الدالة الحالية وتعيد التحكم حتى يكتمل المنتظر.",
-          "en": "The current function suspends and yields control until the awaited object completes."
-        },
-        {
           "ar": "تُحذف العقدة المستدعية.",
           "en": "The calling node is deleted."
         },
         {
           "ar": "يتوقف المحرك عن الإطارات.",
           "en": "The engine stops processing frames."
+        },
+        {
+          "ar": "تُعلّق الدالة الحالية وتعيد التحكم حتى يكتمل المنتظر.",
+          "en": "The current function suspends and yields control until the awaited object completes."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
           "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
@@ -70,7 +70,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن تدفق التنفيذ. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about تدفق التنفيذ. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about asynchronous flow. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -103,28 +103,45 @@
       "lessonId": "lesson_43_async_flow",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «start» في سياق تدفق التنفيذ.",
-        "en": "Write code that prints “start” as a تدفق التنفيذ status."
+        "ar": "تتبّع هذه العملية في موضوع asynchronous flow باستخدام القيم المعطاة: اطبع completed_steps + change.",
+        "en": "Trace this asynchronous flow calculation using the supplied values: print(completed_steps + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"start\")",
+      "starterCode": "print(completed_steps + change)",
+      "solutionCode": "print(completed_steps + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start"
+          "setupCode": "var completed_steps = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -134,28 +151,45 @@
       "lessonId": "lesson_43_async_flow",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «start».",
-        "en": "Complete the line so it prints “start”."
+        "ar": "أكمل الفراغ ليضيف حساب asynchronous flow مقدار التغيير إلى completed_steps.",
+        "en": "Fill the blank so the asynchronous flow calculation adds the change to completed_steps."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"start\")",
+      "starterCode": "print(completed_steps ___ change)",
+      "solutionCode": "print(completed_steps + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start"
+          "setupCode": "var completed_steps = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -165,28 +199,45 @@
       "lessonId": "lesson_43_async_flow",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في تدفق التنفيذ: start ثم «start».",
-        "en": "Print two lines showing progress in تدفق التنفيذ: start, then “start”."
+        "ar": "اكتب حساباً قصيراً في asynchronous flow يطبع completed_steps مضافاً إليه change.",
+        "en": "Write a short asynchronous flow calculation that prints completed_steps plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"start\")",
+      "solutionCode": "var result = completed_steps + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nstart"
+          "setupCode": "var completed_steps = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -196,28 +247,45 @@
       "lessonId": "lesson_43_async_flow",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «start» تماماً.",
-        "en": "Fix the code so it prints exactly “start”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في asynchronous flow مقدار change إلى completed_steps.",
+        "en": "Fix the operator so this asynchronous flow calculation adds change to completed_steps."
       },
-      "starterCode": "print(\"start!\")",
-      "solutionCode": "print(\"start\")",
+      "starterCode": "print(completed_steps - change)",
+      "solutionCode": "print(completed_steps + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start"
+          "setupCode": "var completed_steps = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -227,28 +295,45 @@
       "lessonId": "lesson_43_async_flow",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «start» ثم done.",
-        "en": "Arrange output to show start, then “start”, then done."
+        "ar": "رتّب خطوات تتبع asynchronous flow لتطبع completed_steps ثم change ثم المجموع.",
+        "en": "Reorder the asynchronous flow trace to print completed_steps, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"start\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"start\")\nprint(\"done\")",
+      "starterCode": "print(completed_steps + change)\nprint(change)\nprint(completed_steps)",
+      "solutionCode": "print(completed_steps)\nprint(change)\nprint(completed_steps + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nstart\ndone"
+          "setupCode": "var completed_steps = 2\nvar change = 1",
+          "expectedOutput": "2\n1\n3"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var completed_steps = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var completed_steps = 9\nvar change = 4",
+          "expectedOutput": "9\n4\n13"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -258,28 +343,45 @@
       "lessonId": "lesson_43_async_flow",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع تدفق التنفيذ: «start».",
-        "en": "Write a program that records a result related to تدفق التنفيذ: “start”."
+        "ar": "اكتب حساباً في asynchronous flow يضاعف completed_steps ثم يضيف change ويطبع الناتج.",
+        "en": "Write an asynchronous-flow calculation that doubles completed_steps, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")",
+      "solutionCode": "var result = completed_steps * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start"
+          "setupCode": "var completed_steps = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -289,28 +391,45 @@
       "lessonId": "lesson_43_async_flow",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nstart\\nfinish",
-        "en": "Write a program that displays this sequence:\nstart\\nfinish"
+        "ar": "تنبأ بنتيجة مضاعفة completed_steps ثم إضافة change في مثال asynchronous flow.",
+        "en": "Predict the result of doubling completed_steps and then adding change in this asynchronous flow example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"finish\")",
+      "starterCode": "print(completed_steps * 2 + change)",
+      "solutionCode": "print(completed_steps * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nfinish"
+          "setupCode": "var completed_steps = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -320,28 +439,45 @@
       "lessonId": "lesson_43_async_flow",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «start».",
-        "en": "Use a string variable named status and print its value “start”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف completed_steps مضافاً إليه change في asynchronous flow.",
+        "en": "Use a named result variable to calculate completed_steps times two plus change for asynchronous flow."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"start\"\nprint(status)",
+      "solutionCode": "var result = completed_steps * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start"
+          "setupCode": "var completed_steps = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var completed_steps = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

@@ -39,19 +39,19 @@
       },
       "options": [
         {
-          "ar": "المورد بيانات قابلة لإعادة الاستخدام ولا ينضم لشجرة المشهد.",
-          "en": "A resource is reusable data and does not join the scene tree."
-        },
-        {
           "ar": "المورد يعمل دائماً كمؤقت.",
           "en": "A resource always acts as a timer."
         },
         {
           "ar": "كل مورد يرسم نافذة اللعبة.",
           "en": "Every resource draws the game window."
+        },
+        {
+          "ar": "المورد بيانات قابلة لإعادة الاستخدام ولا ينضم لشجرة المشهد.",
+          "en": "A resource is reusable data and does not join the scene tree."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
           "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
@@ -70,7 +70,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن الموارد المشتركة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about الموارد المشتركة. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about shared resources. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -103,28 +103,45 @@
       "lessonId": "lesson_39_resources",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «item: Amber Key» في سياق الموارد المشتركة.",
-        "en": "Write code that prints “item: Amber Key” as a الموارد المشتركة status."
+        "ar": "تتبّع هذه العملية في موضوع shared resources باستخدام القيم المعطاة: اطبع item_value + change.",
+        "en": "Trace this shared resources calculation using the supplied values: print(item_value + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"item: Amber Key\")",
+      "starterCode": "print(item_value + change)",
+      "solutionCode": "print(item_value + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "item: Amber Key"
+          "setupCode": "var item_value = 12\nvar change = 5",
+          "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 19\nvar change = 4",
+          "expectedOutput": "23"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -134,28 +151,45 @@
       "lessonId": "lesson_39_resources",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «item: Amber Key».",
-        "en": "Complete the line so it prints “item: Amber Key”."
+        "ar": "أكمل الفراغ ليضيف حساب shared resources مقدار التغيير إلى item_value.",
+        "en": "Fill the blank so the shared resources calculation adds the change to item_value."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"item: Amber Key\")",
+      "starterCode": "print(item_value ___ change)",
+      "solutionCode": "print(item_value + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "item: Amber Key"
+          "setupCode": "var item_value = 12\nvar change = 5",
+          "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 19\nvar change = 4",
+          "expectedOutput": "23"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -165,28 +199,45 @@
       "lessonId": "lesson_39_resources",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في الموارد المشتركة: start ثم «item: Amber Key».",
-        "en": "Print two lines showing progress in الموارد المشتركة: start, then “item: Amber Key”."
+        "ar": "اكتب حساباً قصيراً في shared resources يطبع item_value مضافاً إليه change.",
+        "en": "Write a short shared resources calculation that prints item_value plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"item: Amber Key\")",
+      "solutionCode": "var result = item_value + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nitem: Amber Key"
+          "setupCode": "var item_value = 12\nvar change = 5",
+          "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 19\nvar change = 4",
+          "expectedOutput": "23"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -196,28 +247,45 @@
       "lessonId": "lesson_39_resources",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «item: Amber Key» تماماً.",
-        "en": "Fix the code so it prints exactly “item: Amber Key”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في shared resources مقدار change إلى item_value.",
+        "en": "Fix the operator so this shared resources calculation adds change to item_value."
       },
-      "starterCode": "print(\"item: Amber Key!\")",
-      "solutionCode": "print(\"item: Amber Key\")",
+      "starterCode": "print(item_value - change)",
+      "solutionCode": "print(item_value + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "item: Amber Key"
+          "setupCode": "var item_value = 12\nvar change = 5",
+          "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 19\nvar change = 4",
+          "expectedOutput": "23"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -227,28 +295,45 @@
       "lessonId": "lesson_39_resources",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «item: Amber Key» ثم done.",
-        "en": "Arrange output to show start, then “item: Amber Key”, then done."
+        "ar": "رتّب خطوات تتبع shared resources لتطبع item_value ثم change ثم المجموع.",
+        "en": "Reorder the shared resources trace to print item_value, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"item: Amber Key\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"item: Amber Key\")\nprint(\"done\")",
+      "starterCode": "print(item_value + change)\nprint(change)\nprint(item_value)",
+      "solutionCode": "print(item_value)\nprint(change)\nprint(item_value + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nitem: Amber Key\ndone"
+          "setupCode": "var item_value = 12\nvar change = 5",
+          "expectedOutput": "12\n5\n17"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var item_value = 0\nvar change = 5",
+          "expectedOutput": "0\n5\n5"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var item_value = 19\nvar change = 4",
+          "expectedOutput": "19\n4\n23"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -258,28 +343,45 @@
       "lessonId": "lesson_39_resources",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع الموارد المشتركة: «item: Amber Key».",
-        "en": "Write a program that records a result related to الموارد المشتركة: “item: Amber Key”."
+        "ar": "اكتب حساباً في shared resources يضاعف item_value ثم يضيف change ويطبع الناتج.",
+        "en": "Write a shared resources calculation that doubles item_value, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"item: Amber Key\")",
+      "solutionCode": "var result = item_value * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "item: Amber Key"
+          "setupCode": "var item_value = 12\nvar change = 5",
+          "expectedOutput": "29"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 17\nvar change = 3",
+          "expectedOutput": "37"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -289,28 +391,45 @@
       "lessonId": "lesson_39_resources",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nitem: Amber Key",
-        "en": "Write a program that displays this sequence:\nitem: Amber Key"
+        "ar": "تنبأ بنتيجة مضاعفة item_value ثم إضافة change في مثال shared resources.",
+        "en": "Predict the result of doubling item_value and then adding change in this shared resources example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"item: Amber Key\")",
+      "starterCode": "print(item_value * 2 + change)",
+      "solutionCode": "print(item_value * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "item: Amber Key"
+          "setupCode": "var item_value = 12\nvar change = 5",
+          "expectedOutput": "29"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 17\nvar change = 3",
+          "expectedOutput": "37"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -320,28 +439,45 @@
       "lessonId": "lesson_39_resources",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «item: Amber Key».",
-        "en": "Use a string variable named status and print its value “item: Amber Key”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف item_value مضافاً إليه change في shared resources.",
+        "en": "Use a named result variable to calculate item_value times two plus change for shared resources."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"item: Amber Key\"\nprint(status)",
+      "solutionCode": "var result = item_value * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "item: Amber Key"
+          "setupCode": "var item_value = 12\nvar change = 5",
+          "expectedOutput": "29"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_value = 17\nvar change = 3",
+          "expectedOutput": "37"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

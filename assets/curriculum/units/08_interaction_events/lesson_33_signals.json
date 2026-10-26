@@ -34,345 +34,430 @@
       "lessonId": "lesson_33_signals",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: عند وقوع حدث جمع العنصر وإطلاق الإشارة، تصل قيمة اسم العنصر إلى المستمعين المتصلين.",
-        "en": "Predict the result in the example: When the collection event occurs and the signal is emitted, the item name reaches connected listeners."
+        "ar": "أي قاعدة تصف signal declarations بدقة؟",
+        "en": "Which rule accurately describes signal declarations?"
       },
       "options": [
         {
-          "ar": "عند وقوع حدث جمع العنصر وإطلاق الإشارة، تصل قيمة اسم العنصر إلى المستمعين المتصلين.",
-          "en": "When the collection event occurs and the signal is emitted, the item name reaches connected listeners."
+          "ar": "الإشارة حلقة polling تعمل تلقائياً في كل إطار.",
+          "en": "A signal is a polling loop that runs automatically every frame."
         },
         {
-          "ar": "الإشارة تصف حدثاً، ولا تستدعي دوال المستمعين إلا بعد الاتصال والإرسال.",
-          "en": "A signal describes an event; listeners run only after a connection and emission."
+          "ar": "تعلن الإشارة حدثاً، ويمكن أن تحمل قيماً يحتاج إليها المستقبِل.",
+          "en": "A signal declares an event and can carry values required by its receiver."
         },
         {
-          "ar": "الإشارة متغير يغير ترتيب العقد.",
-          "en": "A signal is a variable that changes node order."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة signal declarations في المثال.",
+          "en": "Relate your answer to the role of signal declarations in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_33_signals_02_identify",
       "lessonId": "lesson_33_signals",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «تعريف الإشارات»؟",
-        "en": "Which statement accurately identifies the core concept in “Defining Signals”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن signal declarations: ع",
+        "en": "Complete this hands-on Godot activity about signal declarations: Declare an item_collected signal with an integer score argument and emit it when collection succeeds."
       },
-      "options": [
-        {
-          "ar": "الإشارة إعلان عن حدث تملكه العقدة الباعثة ويمكنه حمل معاملات يحتاجها المستمع.",
-          "en": "A signal is an event announcement owned by an emitter and can carry arguments needed by listeners."
-        },
-        {
-          "ar": "الإشارة تصف حدثاً، ولا تستدعي دوال المستمعين إلا بعد الاتصال والإرسال.",
-          "en": "A signal describes an event; listeners run only after a connection and emission."
-        },
-        {
-          "ar": "الإشارة متغير يغير ترتيب العقد.",
-          "en": "A signal is a variable that changes node order."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "عرّف item_collected بإشارة تحمل score صحيحاً وأطلقها عند نجاح الجمع.",
+          "en": "Declare an item_collected signal with an integer score argument and emit it when collection succeeds."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_33_signals_03_choose",
       "lessonId": "lesson_33_signals",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ سمِّ الإشارة بصيغة حدث واضح وأرسل فقط البيانات التي يحتاجها المستمع.",
-        "en": "Which design choice fits this situation? Give the signal a clear event name and send only data listeners need."
+        "ar": "تتبّع العملية في signals: اطبع signal_values بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this signals example: print signal_values after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "سمِّ الإشارة بصيغة حدث واضح وأرسل فقط البيانات التي يحتاجها المستمع.",
-          "en": "Give the signal a clear event name and send only data listeners need."
-        },
-        {
-          "ar": "الإشارة تصف حدثاً، ولا تستدعي دوال المستمعين إلا بعد الاتصال والإرسال.",
-          "en": "A signal describes an event; listeners run only after a connection and emission."
-        },
-        {
-          "ar": "الإشارة متغير يغير ترتيب العقد.",
-          "en": "A signal is a variable that changes node order."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(signal_values + change)",
+      "solutionCode": "print(signal_values + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 10\nvar change = 5",
+          "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 17\nvar change = 4",
+          "expectedOutput": "21"
+        }
+      ]
     },
     {
       "id": "ex_lesson_33_signals_04_complete",
       "lessonId": "lesson_33_signals",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: إشارة حدث باسم واضح ومعامل واحد يصف المعلومة اللازمة.",
-        "en": "Complete a short sketch or sequence that shows: A clearly named event signal with one argument carrying needed information."
+        "ar": "أكمل العامل لحساب signal_values بعد تطبيق change في signals.",
+        "en": "Fill the operator to calculate signal_values after applying change for signals."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: إشارة حدث باسم واضح ومعامل واحد يصف المعلومة اللازمة.",
-          "en": "Write the required essential parts: A clearly named event signal with one argument carrying needed information."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(signal_values ___ change)",
+      "solutionCode": "print(signal_values + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 10\nvar change = 5",
+          "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 17\nvar change = 4",
+          "expectedOutput": "21"
+        }
+      ]
     },
     {
       "id": "ex_lesson_33_signals_05_write",
       "lessonId": "lesson_33_signals",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: عرّف إشارة في سكربت تجريبي وحدد الموقف الذي يجب أن يطلقها، دون ادعاء اختبار تلقائي.",
-        "en": "Write a short implementation plan for this application: Define a signal in a test script and identify when it should be emitted; do not claim automatic verification."
+        "ar": "اكتب شيفرة تحفظ signal_values مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores signal_values plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = signal_values + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 10\nvar change = 5",
+          "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 17\nvar change = 4",
+          "expectedOutput": "21"
+        }
+      ]
     },
     {
       "id": "ex_lesson_33_signals_06_fix",
       "lessonId": "lesson_33_signals",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «تعريف `signal item_collected` يعني أن الحدث قد وقع بالفعل.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “Declaring `signal item_collected` means the event has already happened.” What is the best correction?"
+        "ar": "أي قاعدة تصف signal declarations بدقة؟",
+        "en": "Which rule accurately describes signal declarations?"
       },
       "options": [
         {
-          "ar": "التعريف يعلن الإشارة؛ استدع `emit()` عندما يقع الحدث فعلياً.",
-          "en": "The declaration announces the signal; call `emit()` when the event actually occurs."
+          "ar": "الإشارة حلقة polling تعمل تلقائياً في كل إطار.",
+          "en": "A signal is a polling loop that runs automatically every frame."
         },
         {
-          "ar": "تعريف `signal item_collected` يعني أن الحدث قد وقع بالفعل.",
-          "en": "Declaring `signal item_collected` means the event has already happened."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "الإشارة متغير يغير ترتيب العقد.",
-          "en": "A signal is a variable that changes node order."
+          "ar": "تعلن الإشارة حدثاً، ويمكن أن تحمل قيماً يحتاج إليها المستقبِل.",
+          "en": "A signal declares an event and can carry values required by its receiver."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة signal declarations في المثال.",
+          "en": "Relate your answer to the role of signal declarations in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_33_signals_07_apply",
       "lessonId": "lesson_33_signals",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: عرّف إشارة في سكربت تجريبي وحدد الموقف الذي يجب أن يطلقها، دون ادعاء اختبار تلقائي. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Define a signal in a test script and identify when it should be emitted; do not claim automatic verification. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى signal_values عند حساب signals.",
+        "en": "Fix the operation so it adds change to signal_values for signals."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(signal_values - change)",
+      "solutionCode": "print(signal_values + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 10\nvar change = 5",
+          "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 17\nvar change = 4",
+          "expectedOutput": "21"
+        }
+      ]
     },
     {
       "id": "ex_lesson_33_signals_08_compare",
       "lessonId": "lesson_33_signals",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ تعريف الإشارة يحدد الحدث، وإرسالها يعلن وقوعه وقت التشغيل.",
-        "en": "What is the difference between the concepts in this lesson? Declaring a signal defines the event; emitting it announces that it happened at runtime."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن signal declarations: ا",
+        "en": "Complete this hands-on Godot activity about signal declarations: Choose a useful event name and payload for a health-change signal, then identify its sender."
       },
-      "options": [
-        {
-          "ar": "تعريف الإشارة يحدد الحدث، وإرسالها يعلن وقوعه وقت التشغيل.",
-          "en": "Declaring a signal defines the event; emitting it announces that it happened at runtime."
-        },
-        {
-          "ar": "الإشارة تصف حدثاً، ولا تستدعي دوال المستمعين إلا بعد الاتصال والإرسال.",
-          "en": "A signal describes an event; listeners run only after a connection and emission."
-        },
-        {
-          "ar": "الإشارة متغير يغير ترتيب العقد.",
-          "en": "A signal is a variable that changes node order."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "اختر اسماً وبيانات لإشارة health_changed وحدد العقدة التي تطلقها.",
+          "en": "Choose a useful event name and payload for a health-change signal, then identify its sender."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_33_signals_09_debug",
       "lessonId": "lesson_33_signals",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: إشارة عامة اسمها `changed` تحمل بيانات أكثر مما يحتاجه أي مستمع. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A generic `changed` signal carries more data than any listener needs. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع signal_values ثم change ثم المجموع.",
+        "en": "Reorder the lines to print signal_values, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(signal_values + change)\nprint(change)\nprint(signal_values)",
+      "solutionCode": "print(signal_values)\nprint(change)\nprint(signal_values + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 10\nvar change = 5",
+          "expectedOutput": "10\n5\n15"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 5",
+          "expectedOutput": "0\n5\n5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 17\nvar change = 4",
+          "expectedOutput": "17\n4\n21"
+        }
+      ]
     },
     {
       "id": "ex_lesson_33_signals_10_apply",
       "lessonId": "lesson_33_signals",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: اربط الإشارة بمستقبلين مختلفين واشرح لماذا لا يحتاج الباعث إلى معرفة تفاصيلهما.",
-        "en": "Design an application that combines this concept with an earlier idea: Connect the signal to two different receivers and explain why the emitter need not know their details."
+        "ar": "اكتب شيفرة تضاعف signal_values ثم تضيف change وتطبع الناتج في مثال عن signals.",
+        "en": "Write code that doubles signal_values, adds change, and prints the result in a signals example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = signal_values * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 10\nvar change = 5",
+          "expectedOutput": "25"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 5",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var signal_values = 17\nvar change = 4",
+          "expectedOutput": "38"
+        }
+      ]
     }
   ]
 }

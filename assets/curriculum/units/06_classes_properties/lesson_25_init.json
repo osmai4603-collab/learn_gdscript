@@ -41,345 +41,430 @@
       "lessonId": "lesson_25_init",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: عند إنشاء النسخة يُستدعى `_init` وتُخزّن القيم التي مررها المنشئ في خصائصها.",
-        "en": "Predict the result in the example: When an instance is created, `_init` runs and stores the supplied values in its properties."
+        "ar": "أي قاعدة تصف _init initialization بدقة؟",
+        "en": "Which rule accurately describes _init initialization?"
       },
       "options": [
         {
-          "ar": "عند إنشاء النسخة يُستدعى `_init` وتُخزّن القيم التي مررها المنشئ في خصائصها.",
-          "en": "When an instance is created, `_init` runs and stores the supplied values in its properties."
+          "ar": "تعمل `_init` مرة في كل إطار ما دامت النسخة موجودة.",
+          "en": "`_init` runs once every frame while the instance exists."
         },
         {
-          "ar": "تهيئة الكائن تحصل عند الإنشاء، بينما `_ready` تخص جاهزية العقدة داخل شجرة المشهد.",
-          "en": "Object initialization happens at creation, while `_ready` concerns a node becoming ready in the scene tree."
+          "ar": "تضبط `_init` قيم البداية عند إنشاء النسخة، ويمكنها استقبال معاملات.",
+          "en": "`_init` sets starting values when an instance is created and can receive parameters."
         },
         {
-          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
-          "en": "`_init` removes a node from the scene tree."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة _init initialization في المثال.",
+          "en": "Relate your answer to the role of _init initialization in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_25_init_02_identify",
       "lessonId": "lesson_25_init",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «تهيئة الكائنات»؟",
-        "en": "Which statement accurately identifies the core concept in “Initializing Objects”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن _init initialization: أ",
+        "en": "Complete this hands-on Godot activity about _init initialization: Add an _init parameter for a starting quantity and create two instances with different values."
       },
-      "options": [
-        {
-          "ar": "`_init()` مهيئ يُستدعى عند إنشاء نسخة ويمكنه استقبال معاملات لازمة للحالة الأولية.",
-          "en": "`_init()` is an initializer called when an instance is created and can receive arguments needed for its initial state."
-        },
-        {
-          "ar": "تهيئة الكائن تحصل عند الإنشاء، بينما `_ready` تخص جاهزية العقدة داخل شجرة المشهد.",
-          "en": "Object initialization happens at creation, while `_ready` concerns a node becoming ready in the scene tree."
-        },
-        {
-          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
-          "en": "`_init` removes a node from the scene tree."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أضف معامل بداية إلى _init وأنشئ نسختين بقيم مختلفة.",
+          "en": "Add an _init parameter for a starting quantity and create two instances with different values."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_25_init_03_choose",
       "lessonId": "lesson_25_init",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ اجعل اسم الجرعة ومقدار العلاج معاملين مطلوبين عند إنشاء `Potion`.",
-        "en": "Which design choice fits this situation? Require a potion’s label and healing amount when creating `Potion`."
+        "ar": "تتبّع العملية في initialization: اطبع starting_items بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this initialization example: print starting_items after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "اجعل اسم الجرعة ومقدار العلاج معاملين مطلوبين عند إنشاء `Potion`.",
-          "en": "Require a potion’s label and healing amount when creating `Potion`."
-        },
-        {
-          "ar": "تهيئة الكائن تحصل عند الإنشاء، بينما `_ready` تخص جاهزية العقدة داخل شجرة المشهد.",
-          "en": "Object initialization happens at creation, while `_ready` concerns a node becoming ready in the scene tree."
-        },
-        {
-          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
-          "en": "`_init` removes a node from the scene tree."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(starting_items + change)",
+      "solutionCode": "print(starting_items + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_25_init_04_complete",
       "lessonId": "lesson_25_init",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: قائمة بالمعاملات المطلوبة لتهيئة جرعة ثم خاصية تخزن كل قيمة.",
-        "en": "Complete a short sketch or sequence that shows: A list of required initializer arguments for a potion and a property to store each value."
+        "ar": "أكمل العامل لحساب starting_items بعد تطبيق change في initialization.",
+        "en": "Fill the operator to calculate starting_items after applying change for initialization."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: قائمة بالمعاملات المطلوبة لتهيئة جرعة ثم خاصية تخزن كل قيمة.",
-          "en": "Write the required essential parts: A list of required initializer arguments for a potion and a property to store each value."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(starting_items ___ change)",
+      "solutionCode": "print(starting_items + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_25_init_05_write",
       "lessonId": "lesson_25_init",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أنشئ كائناً تجريبياً بقيمتين مختلفتين، ثم تحقق من أن خصائصه بدأت بالقيم الممررة.",
-        "en": "Write a short implementation plan for this application: Create a test object with two values and verify its properties start with the supplied values."
+        "ar": "اكتب شيفرة تحفظ starting_items مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores starting_items plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = starting_items + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_25_init_06_fix",
       "lessonId": "lesson_25_init",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «`_init` تنتظر دائماً حتى تصبح كل عقد الأبناء جاهزة.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “`_init` always waits until all child nodes are ready.” What is the best correction?"
+        "ar": "أي قاعدة تصف _init initialization بدقة؟",
+        "en": "Which rule accurately describes _init initialization?"
       },
       "options": [
         {
-          "ar": "استخدم `_init` للحالة الأولية للكائن، واستخدم `_ready` للعمل الذي يتطلب جاهزية أبناء العقدة.",
-          "en": "Use `_init` for an object’s initial state and `_ready` for work that requires ready child nodes."
+          "ar": "تعمل `_init` مرة في كل إطار ما دامت النسخة موجودة.",
+          "en": "`_init` runs once every frame while the instance exists."
         },
         {
-          "ar": "`_init` تنتظر دائماً حتى تصبح كل عقد الأبناء جاهزة.",
-          "en": "`_init` always waits until all child nodes are ready."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
-          "en": "`_init` removes a node from the scene tree."
+          "ar": "تضبط `_init` قيم البداية عند إنشاء النسخة، ويمكنها استقبال معاملات.",
+          "en": "`_init` sets starting values when an instance is created and can receive parameters."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة _init initialization في المثال.",
+          "en": "Relate your answer to the role of _init initialization in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_25_init_07_apply",
       "lessonId": "lesson_25_init",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أنشئ كائناً تجريبياً بقيمتين مختلفتين، ثم تحقق من أن خصائصه بدأت بالقيم الممررة. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Create a test object with two values and verify its properties start with the supplied values. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى starting_items عند حساب initialization.",
+        "en": "Fix the operation so it adds change to starting_items for initialization."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(starting_items - change)",
+      "solutionCode": "print(starting_items + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_25_init_08_compare",
       "lessonId": "lesson_25_init",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `_init` تُستدعى عند إنشاء النسخة؛ `_ready` تُستدعى ضمن دورة حياة العقدة بعد الجاهزية.",
-        "en": "What is the difference between the concepts in this lesson? `_init` runs when an instance is created; `_ready` runs in the node lifecycle after readiness."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن _init initialization: ا",
+        "en": "Complete this hands-on Godot activity about _init initialization: Inspect both instances immediately after creation and verify their initial values are independent."
       },
-      "options": [
-        {
-          "ar": "`_init` تُستدعى عند إنشاء النسخة؛ `_ready` تُستدعى ضمن دورة حياة العقدة بعد الجاهزية.",
-          "en": "`_init` runs when an instance is created; `_ready` runs in the node lifecycle after readiness."
-        },
-        {
-          "ar": "تهيئة الكائن تحصل عند الإنشاء، بينما `_ready` تخص جاهزية العقدة داخل شجرة المشهد.",
-          "en": "Object initialization happens at creation, while `_ready` concerns a node becoming ready in the scene tree."
-        },
-        {
-          "ar": "`_init` وظيفة لإزالة العقدة من شجرة المشهد.",
-          "en": "`_init` removes a node from the scene tree."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "افحص النسختين فور إنشائهما وتحقق من استقلال قيم البداية.",
+          "en": "Inspect both instances immediately after creation and verify their initial values are independent."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_25_init_09_debug",
       "lessonId": "lesson_25_init",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: مهيئ لا يأخذ قيمة العلاج، ثم يعتمد الكود على أن القيمة ستُملأ تلقائياً. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: An initializer that accepts no healing amount while the code assumes it will be filled automatically. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع starting_items ثم change ثم المجموع.",
+        "en": "Reorder the lines to print starting_items, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(starting_items + change)\nprint(change)\nprint(starting_items)",
+      "solutionCode": "print(starting_items)\nprint(change)\nprint(starting_items + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 1\nvar change = 2",
+          "expectedOutput": "1\n2\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 0\nvar change = 2",
+          "expectedOutput": "0\n2\n2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 8\nvar change = 4",
+          "expectedOutput": "8\n4\n12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_25_init_10_apply",
       "lessonId": "lesson_25_init",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: مرر بيانات الإنشاء إلى `_init` ثم استخدم دالة كائن لإظهار ملخص الحالة الأولية.",
-        "en": "Design an application that combines this concept with an earlier idea: Pass creation data to `_init`, then use an object function to display a summary of initial state."
+        "ar": "اكتب شيفرة تضاعف starting_items ثم تضيف change وتطبع الناتج في مثال عن initialization.",
+        "en": "Write code that doubles starting_items, adds change, and prints the result in a initialization example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = starting_items * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 1\nvar change = 2",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var starting_items = 8\nvar change = 4",
+          "expectedOutput": "20"
+        }
+      ]
     }
   ]
 }

@@ -70,7 +70,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن الخصائص المصدّرة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about الخصائص المصدّرة. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about exported properties. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -103,28 +103,45 @@
       "lessonId": "lesson_37_exports",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «speed = 240» في سياق الخصائص المصدّرة.",
-        "en": "Write code that prints “speed = 240” as a الخصائص المصدّرة status."
+        "ar": "تتبّع هذه العملية في موضوع exported properties باستخدام القيم المعطاة: اطبع speed + change.",
+        "en": "Trace this exported properties calculation using the supplied values: print(speed + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"speed = 240\")",
+      "starterCode": "print(speed + change)",
+      "solutionCode": "print(speed + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "speed = 240"
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "260"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "251"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -134,28 +151,45 @@
       "lessonId": "lesson_37_exports",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «speed = 240».",
-        "en": "Complete the line so it prints “speed = 240”."
+        "ar": "أكمل الفراغ ليضيف حساب exported properties مقدار التغيير إلى speed.",
+        "en": "Fill the blank so the exported properties calculation adds the change to speed."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"speed = 240\")",
+      "starterCode": "print(speed ___ change)",
+      "solutionCode": "print(speed + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "speed = 240"
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "260"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "251"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -165,28 +199,45 @@
       "lessonId": "lesson_37_exports",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في الخصائص المصدّرة: start ثم «speed = 240».",
-        "en": "Print two lines showing progress in الخصائص المصدّرة: start, then “speed = 240”."
+        "ar": "اكتب حساباً قصيراً في exported properties يطبع speed مضافاً إليه change.",
+        "en": "Write a short exported properties calculation that prints speed plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"speed = 240\")",
+      "solutionCode": "var result = speed + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nspeed = 240"
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "260"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "251"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -196,28 +247,45 @@
       "lessonId": "lesson_37_exports",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «speed = 240» تماماً.",
-        "en": "Fix the code so it prints exactly “speed = 240”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في exported properties مقدار change إلى speed.",
+        "en": "Fix the operator so this exported properties calculation adds change to speed."
       },
-      "starterCode": "print(\"speed = 240!\")",
-      "solutionCode": "print(\"speed = 240\")",
+      "starterCode": "print(speed - change)",
+      "solutionCode": "print(speed + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "speed = 240"
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "260"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "251"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -227,28 +295,45 @@
       "lessonId": "lesson_37_exports",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «speed = 240» ثم done.",
-        "en": "Arrange output to show start, then “speed = 240”, then done."
+        "ar": "رتّب خطوات تتبع exported properties لتطبع speed ثم change ثم المجموع.",
+        "en": "Reorder the exported properties trace to print speed, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"speed = 240\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"speed = 240\")\nprint(\"done\")",
+      "starterCode": "print(speed + change)\nprint(change)\nprint(speed)",
+      "solutionCode": "print(speed)\nprint(change)\nprint(speed + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nspeed = 240\ndone"
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "240\n20\n260"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "0\n20\n20"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "247\n4\n251"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -258,28 +343,45 @@
       "lessonId": "lesson_37_exports",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع الخصائص المصدّرة: «speed = 240».",
-        "en": "Write a program that records a result related to الخصائص المصدّرة: “speed = 240”."
+        "ar": "اكتب حساباً في exported properties يضاعف speed ثم يضيف change ويطبع الناتج.",
+        "en": "Write an exported-properties calculation that doubles speed, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"speed = 240\")",
+      "solutionCode": "var result = speed * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "speed = 240"
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "500"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 245\nvar change = 3",
+          "expectedOutput": "493"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -289,28 +391,45 @@
       "lessonId": "lesson_37_exports",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nspeed = 240",
-        "en": "Write a program that displays this sequence:\nspeed = 240"
+        "ar": "تنبأ بنتيجة مضاعفة speed ثم إضافة change في مثال exported properties.",
+        "en": "Predict the result of doubling speed and then adding change in this exported properties example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"speed = 240\")",
+      "starterCode": "print(speed * 2 + change)",
+      "solutionCode": "print(speed * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "speed = 240"
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "500"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 245\nvar change = 3",
+          "expectedOutput": "493"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -320,28 +439,45 @@
       "lessonId": "lesson_37_exports",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «speed = 240».",
-        "en": "Use a string variable named status and print its value “speed = 240”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف speed مضافاً إليه change في exported properties.",
+        "en": "Use a named result variable to calculate speed times two plus change for exported properties."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"speed = 240\"\nprint(status)",
+      "solutionCode": "var result = speed * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "speed = 240"
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "500"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var speed = 245\nvar change = 3",
+          "expectedOutput": "493"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

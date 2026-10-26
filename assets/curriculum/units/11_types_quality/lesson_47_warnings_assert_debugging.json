@@ -46,19 +46,19 @@
       },
       "options": [
         {
-          "ar": "فحص افتراض داخلي يفترض صحته أثناء التطوير.",
-          "en": "Checking an internal assumption expected to hold during development."
-        },
-        {
           "ar": "استبدال التحقق من إدخال المستخدم.",
           "en": "Replacing user-input validation."
         },
         {
           "ar": "انتظار إطار جديد.",
           "en": "Waiting for a new frame."
+        },
+        {
+          "ar": "فحص افتراض داخلي يفترض صحته أثناء التطوير.",
+          "en": "Checking an internal assumption expected to hold during development."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
           "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
@@ -77,7 +77,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن التحذيرات والتصحيح. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about التحذيرات والتصحيح. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about debugging. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -110,28 +110,45 @@
       "lessonId": "lesson_47_warnings_assert_debugging",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «value is valid» في سياق التحذيرات والتصحيح.",
-        "en": "Write code that prints “value is valid” as a التحذيرات والتصحيح status."
+        "ar": "تتبّع هذه العملية في موضوع debugging باستخدام القيم المعطاة: اطبع warning_count + change.",
+        "en": "Trace this debugging calculation using the supplied values: print(warning_count + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"value is valid\")",
+      "starterCode": "print(warning_count + change)",
+      "solutionCode": "print(warning_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "value is valid"
+          "setupCode": "var warning_count = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -141,28 +158,45 @@
       "lessonId": "lesson_47_warnings_assert_debugging",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «value is valid».",
-        "en": "Complete the line so it prints “value is valid”."
+        "ar": "أكمل الفراغ ليضيف حساب debugging مقدار التغيير إلى warning_count.",
+        "en": "Fill the blank so the debugging calculation adds the change to warning_count."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"value is valid\")",
+      "starterCode": "print(warning_count ___ change)",
+      "solutionCode": "print(warning_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "value is valid"
+          "setupCode": "var warning_count = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -172,28 +206,45 @@
       "lessonId": "lesson_47_warnings_assert_debugging",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في التحذيرات والتصحيح: start ثم «value is valid».",
-        "en": "Print two lines showing progress in التحذيرات والتصحيح: start, then “value is valid”."
+        "ar": "اكتب حساباً قصيراً في debugging يطبع warning_count مضافاً إليه change.",
+        "en": "Write a short debugging calculation that prints warning_count plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"value is valid\")",
+      "solutionCode": "var result = warning_count + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nvalue is valid"
+          "setupCode": "var warning_count = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -203,28 +254,45 @@
       "lessonId": "lesson_47_warnings_assert_debugging",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «value is valid» تماماً.",
-        "en": "Fix the code so it prints exactly “value is valid”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في debugging مقدار change إلى warning_count.",
+        "en": "Fix the operator so this debugging calculation adds change to warning_count."
       },
-      "starterCode": "print(\"value is valid!\")",
-      "solutionCode": "print(\"value is valid\")",
+      "starterCode": "print(warning_count - change)",
+      "solutionCode": "print(warning_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "value is valid"
+          "setupCode": "var warning_count = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -234,28 +302,45 @@
       "lessonId": "lesson_47_warnings_assert_debugging",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «value is valid» ثم done.",
-        "en": "Arrange output to show start, then “value is valid”, then done."
+        "ar": "رتّب خطوات تتبع debugging لتطبع warning_count ثم change ثم المجموع.",
+        "en": "Reorder the debugging trace to print warning_count, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"value is valid\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"value is valid\")\nprint(\"done\")",
+      "starterCode": "print(warning_count + change)\nprint(change)\nprint(warning_count)",
+      "solutionCode": "print(warning_count)\nprint(change)\nprint(warning_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nvalue is valid\ndone"
+          "setupCode": "var warning_count = 2\nvar change = 1",
+          "expectedOutput": "2\n1\n3"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var warning_count = 9\nvar change = 4",
+          "expectedOutput": "9\n4\n13"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -265,28 +350,45 @@
       "lessonId": "lesson_47_warnings_assert_debugging",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع التحذيرات والتصحيح: «value is valid».",
-        "en": "Write a program that records a result related to التحذيرات والتصحيح: “value is valid”."
+        "ar": "اكتب حساباً في debugging يضاعف warning_count ثم يضيف change ويطبع الناتج.",
+        "en": "Write a debugging calculation that doubles warning_count, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"value is valid\")",
+      "solutionCode": "var result = warning_count * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "value is valid"
+          "setupCode": "var warning_count = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -296,28 +398,45 @@
       "lessonId": "lesson_47_warnings_assert_debugging",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nvalue is valid",
-        "en": "Write a program that displays this sequence:\nvalue is valid"
+        "ar": "تنبأ بنتيجة مضاعفة warning_count ثم إضافة change في مثال debugging.",
+        "en": "Predict the result of doubling warning_count and then adding change in this debugging example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"value is valid\")",
+      "starterCode": "print(warning_count * 2 + change)",
+      "solutionCode": "print(warning_count * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "value is valid"
+          "setupCode": "var warning_count = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -327,28 +446,45 @@
       "lessonId": "lesson_47_warnings_assert_debugging",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «value is valid».",
-        "en": "Use a string variable named status and print its value “value is valid”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف warning_count مضافاً إليه change في debugging.",
+        "en": "Use a named result variable to calculate warning_count times two plus change for debugging."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"value is valid\"\nprint(status)",
+      "solutionCode": "var result = warning_count * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "value is valid"
+          "setupCode": "var warning_count = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var warning_count = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

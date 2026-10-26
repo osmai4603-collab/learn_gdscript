@@ -41,345 +41,430 @@
       "lessonId": "lesson_31_groups",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: يمكن لشجرة المشهد إرجاع العقد التي تحمل عضوية مجموعة `interactables` حتى إن لم تكن أبناء مباشرين لبعضها.",
-        "en": "Predict the result in the example: The scene tree can return nodes in the `interactables` group even if they are not direct children of one another."
+        "ar": "أي قاعدة تصف node groups بدقة؟",
+        "en": "Which rule accurately describes node groups?"
       },
       "options": [
         {
-          "ar": "يمكن لشجرة المشهد إرجاع العقد التي تحمل عضوية مجموعة `interactables` حتى إن لم تكن أبناء مباشرين لبعضها.",
-          "en": "The scene tree can return nodes in the `interactables` group even if they are not direct children of one another."
+          "ar": "لا يمكن أن تنتمي العقدة إلا إلى مجموعة واحدة.",
+          "en": "A node can belong to exactly one group."
         },
         {
-          "ar": "استخدم اسماً يصف الدور مثل `enemies` أو `interactables`.",
-          "en": "Use a role-based name such as `enemies` or `interactables`."
+          "ar": "تتيح المجموعات الاستعلام عن عقد تشترك في دور من دون تثبيت مسار كل عقدة.",
+          "en": "Groups let code query nodes with a shared role without hard-coding every node path."
         },
         {
-          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
-          "en": "A group creates a new node in the scene."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة node groups في المثال.",
+          "en": "Relate your answer to the role of node groups in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_31_groups_02_identify",
       "lessonId": "lesson_31_groups",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «مجموعات العقد»؟",
-        "en": "Which statement accurately identifies the core concept in “Node Groups”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن node groups: أ",
+        "en": "Complete this hands-on Godot activity about node groups: Add several collectibles to one group and query the group from a manager node."
       },
-      "options": [
-        {
-          "ar": "المجموعة تصنيف دلالي لعدة عقد بحسب دور مشترك، وليست علاقة أبوة.",
-          "en": "A group is a semantic category for nodes that share a role, not a parent-child relationship."
-        },
-        {
-          "ar": "استخدم اسماً يصف الدور مثل `enemies` أو `interactables`.",
-          "en": "Use a role-based name such as `enemies` or `interactables`."
-        },
-        {
-          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
-          "en": "A group creates a new node in the scene."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أضف عدة عناصر إلى مجموعة واحدة واستعلم عنها من عقدة مدير.",
+          "en": "Add several collectibles to one group and query the group from a manager node."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_31_groups_03_choose",
       "lessonId": "lesson_31_groups",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ ضع كل العناصر القابلة للتفاعل في مجموعة مشتركة ثم استعلم عنها بحسب الحاجة.",
-        "en": "Which design choice fits this situation? Place all interactable objects in a shared group and query them when needed."
+        "ar": "تتبّع العملية في node groups: اطبع group_members بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this node groups example: print group_members after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "ضع كل العناصر القابلة للتفاعل في مجموعة مشتركة ثم استعلم عنها بحسب الحاجة.",
-          "en": "Place all interactable objects in a shared group and query them when needed."
-        },
-        {
-          "ar": "استخدم اسماً يصف الدور مثل `enemies` أو `interactables`.",
-          "en": "Use a role-based name such as `enemies` or `interactables`."
-        },
-        {
-          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
-          "en": "A group creates a new node in the scene."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(group_members + change)",
+      "solutionCode": "print(group_members + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 10\nvar change = 4",
+          "expectedOutput": "14"
+        }
+      ]
     },
     {
       "id": "ex_lesson_31_groups_04_complete",
       "lessonId": "lesson_31_groups",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: قائمتان لمجموعات مثل `enemies` و`interactables` مع أعضاء مقترحين لكل مجموعة.",
-        "en": "Complete a short sketch or sequence that shows: Two groups such as `enemies` and `interactables`, with proposed members for each."
+        "ar": "أكمل العامل لحساب group_members بعد تطبيق change في node groups.",
+        "en": "Fill the operator to calculate group_members after applying change for node groups."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: قائمتان لمجموعات مثل `enemies` و`interactables` مع أعضاء مقترحين لكل مجموعة.",
-          "en": "Write the required essential parts: Two groups such as `enemies` and `interactables`, with proposed members for each."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(group_members ___ change)",
+      "solutionCode": "print(group_members + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 10\nvar change = 4",
+          "expectedOutput": "14"
+        }
+      ]
     },
     {
       "id": "ex_lesson_31_groups_05_write",
       "lessonId": "lesson_31_groups",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أضف عقدتين تجريبيتين إلى مجموعة واحدة من المحرر وتحقق من عضويتهما يدوياً.",
-        "en": "Write a short implementation plan for this application: Add two test nodes to one group in the editor and manually verify their membership."
+        "ar": "اكتب شيفرة تحفظ group_members مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores group_members plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = group_members + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 10\nvar change = 4",
+          "expectedOutput": "14"
+        }
+      ]
     },
     {
       "id": "ex_lesson_31_groups_06_fix",
       "lessonId": "lesson_31_groups",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «إضافة عقدة إلى مجموعة تجعلها ابناً للعقدة التي أضافتها.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “Adding a node to a group makes it a child of the node that added it.” What is the best correction?"
+        "ar": "أي قاعدة تصف node groups بدقة؟",
+        "en": "Which rule accurately describes node groups?"
       },
       "options": [
         {
-          "ar": "المجموعة تصنيف مستقل عن موضع العقدة في الشجرة؛ عدّل الأبوة من شجرة المشهد عند الحاجة.",
-          "en": "A group is independent of tree position; change parentage in the scene tree when needed."
+          "ar": "لا يمكن أن تنتمي العقدة إلا إلى مجموعة واحدة.",
+          "en": "A node can belong to exactly one group."
         },
         {
-          "ar": "إضافة عقدة إلى مجموعة تجعلها ابناً للعقدة التي أضافتها.",
-          "en": "Adding a node to a group makes it a child of the node that added it."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
-          "en": "A group creates a new node in the scene."
+          "ar": "تتيح المجموعات الاستعلام عن عقد تشترك في دور من دون تثبيت مسار كل عقدة.",
+          "en": "Groups let code query nodes with a shared role without hard-coding every node path."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة node groups في المثال.",
+          "en": "Relate your answer to the role of node groups in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_31_groups_07_apply",
       "lessonId": "lesson_31_groups",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أضف عقدتين تجريبيتين إلى مجموعة واحدة من المحرر وتحقق من عضويتهما يدوياً. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Add two test nodes to one group in the editor and manually verify their membership. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى group_members عند حساب node groups.",
+        "en": "Fix the operation so it adds change to group_members for node groups."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(group_members - change)",
+      "solutionCode": "print(group_members + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 3\nvar change = 1",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 10\nvar change = 4",
+          "expectedOutput": "14"
+        }
+      ]
     },
     {
       "id": "ex_lesson_31_groups_08_compare",
       "lessonId": "lesson_31_groups",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ مجموعة العقد تصف دوراً مشتركاً؛ مسار العقدة يصف موقعاً بنيوياً.",
-        "en": "What is the difference between the concepts in this lesson? A node group describes a shared role; a node path describes a structural location."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن node groups: أ",
+        "en": "Complete this hands-on Godot activity about node groups: Add another collectible at runtime and verify the group query includes it."
       },
-      "options": [
-        {
-          "ar": "مجموعة العقد تصف دوراً مشتركاً؛ مسار العقدة يصف موقعاً بنيوياً.",
-          "en": "A node group describes a shared role; a node path describes a structural location."
-        },
-        {
-          "ar": "استخدم اسماً يصف الدور مثل `enemies` أو `interactables`.",
-          "en": "Use a role-based name such as `enemies` or `interactables`."
-        },
-        {
-          "ar": "المجموعة تنشئ عقدة جديدة في المشهد.",
-          "en": "A group creates a new node in the scene."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "أضف عنصراً للمجموعة أثناء التشغيل وتحقق أن الاستعلام يشمله.",
+          "en": "Add another collectible at runtime and verify the group query includes it."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_31_groups_09_debug",
       "lessonId": "lesson_31_groups",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: عقدة قابلة للتفاعل مفقودة من المجموعة التي يستعلم عنها النظام. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: An interactable node is missing from the group queried by the system. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع group_members ثم change ثم المجموع.",
+        "en": "Reorder the lines to print group_members, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(group_members + change)\nprint(change)\nprint(group_members)",
+      "solutionCode": "print(group_members)\nprint(change)\nprint(group_members + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 3\nvar change = 1",
+          "expectedOutput": "3\n1\n4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 10\nvar change = 4",
+          "expectedOutput": "10\n4\n14"
+        }
+      ]
     },
     {
       "id": "ex_lesson_31_groups_10_apply",
       "lessonId": "lesson_31_groups",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: استخدم المجموعة لجمع العناصر واستخدم إشارة لإعلان حدث التفاعل دون ربط كل مسار مباشرة.",
-        "en": "Design an application that combines this concept with an earlier idea: Use a group to gather objects and a signal to announce interaction without directly coupling every path."
+        "ar": "اكتب شيفرة تضاعف group_members ثم تضيف change وتطبع الناتج في مثال عن node groups.",
+        "en": "Write code that doubles group_members, adds change, and prints the result in a node groups example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = group_members * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 3\nvar change = 1",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var group_members = 10\nvar change = 4",
+          "expectedOutput": "24"
+        }
+      ]
     }
   ]
 }

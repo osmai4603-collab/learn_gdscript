@@ -41,345 +41,430 @@
       "lessonId": "lesson_28_nodes_paths",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: من `Player` يشير المسار النسبي `Label` إلى الابن `Label` المباشر في الرسم.",
-        "en": "Predict the result in the example: From `Player`, the relative path `Label` refers to its direct child named `Label` in the diagram."
+        "ar": "أي قاعدة تصف node paths بدقة؟",
+        "en": "Which rule accurately describes node paths?"
       },
       "options": [
         {
-          "ar": "من `Player` يشير المسار النسبي `Label` إلى الابن `Label` المباشر في الرسم.",
-          "en": "From `Player`, the relative path `Label` refers to its direct child named `Label` in the diagram."
+          "ar": "يبدأ المسار النسبي دائماً من `/root` بصرف النظر عن العقدة الحالية.",
+          "en": "A relative path always starts at `/root`, regardless of the current node."
         },
         {
-          "ar": "العقدة لبنة مشهد لها أب واحد في الشجرة وقد تحتوي أبناء.",
-          "en": "A node is a scene building block with one parent in the tree and may contain children."
+          "ar": "النسبي يبدأ من العقدة الحالية، والمطلق يبدأ من جذر شجرة المشهد.",
+          "en": "A relative path starts at the current node; an absolute path starts at the scene-tree root."
         },
         {
-          "ar": "المسارات لا تعتمد على بنية الشجرة.",
-          "en": "Paths do not depend on tree structure."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة node paths في المثال.",
+          "en": "Relate your answer to the role of node paths in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_28_nodes_paths_02_identify",
       "lessonId": "lesson_28_nodes_paths",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «العقد ومساراتها»؟",
-        "en": "Which statement accurately identifies the core concept in “Nodes and Paths”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن node paths: أ",
+        "en": "Complete this hands-on Godot activity about node paths: Create Main/Player/Label and write the relative path from Player to Label."
       },
-      "options": [
-        {
-          "ar": "المسار النسبي يبدأ من العقدة الحالية؛ والمسار المطلق يبدأ من جذر شجرة المشهد.",
-          "en": "A relative path starts from the current node; an absolute path starts at the scene-tree root."
-        },
-        {
-          "ar": "العقدة لبنة مشهد لها أب واحد في الشجرة وقد تحتوي أبناء.",
-          "en": "A node is a scene building block with one parent in the tree and may contain children."
-        },
-        {
-          "ar": "المسارات لا تعتمد على بنية الشجرة.",
-          "en": "Paths do not depend on tree structure."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أنشئ Main/Player/Label واكتب المسار النسبي من Player إلى Label.",
+          "en": "Create Main/Player/Label and write the relative path from Player to Label."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_28_nodes_paths_03_choose",
       "lessonId": "lesson_28_nodes_paths",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ اكتب مساراً قصيراً من العقدة الحالية متوافقاً مع ترتيب الآباء والأبناء.",
-        "en": "Which design choice fits this situation? Write a short path from the current node that matches the parent-child structure."
+        "ar": "تتبّع العملية في node paths: اطبع path_segments بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this node paths example: print path_segments after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "اكتب مساراً قصيراً من العقدة الحالية متوافقاً مع ترتيب الآباء والأبناء.",
-          "en": "Write a short path from the current node that matches the parent-child structure."
-        },
-        {
-          "ar": "العقدة لبنة مشهد لها أب واحد في الشجرة وقد تحتوي أبناء.",
-          "en": "A node is a scene building block with one parent in the tree and may contain children."
-        },
-        {
-          "ar": "المسارات لا تعتمد على بنية الشجرة.",
-          "en": "Paths do not depend on tree structure."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(path_segments + change)",
+      "solutionCode": "print(path_segments + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_28_nodes_paths_04_complete",
       "lessonId": "lesson_28_nodes_paths",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: شجرة صغيرة من ثلاث عقد مع مسار نسبي ومسار مطلق إلى العقدة نفسها.",
-        "en": "Complete a short sketch or sequence that shows: A small three-node tree with both a relative and absolute path to the same node."
+        "ar": "أكمل العامل لحساب path_segments بعد تطبيق change في node paths.",
+        "en": "Fill the operator to calculate path_segments after applying change for node paths."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: شجرة صغيرة من ثلاث عقد مع مسار نسبي ومسار مطلق إلى العقدة نفسها.",
-          "en": "Write the required essential parts: A small three-node tree with both a relative and absolute path to the same node."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(path_segments ___ change)",
+      "solutionCode": "print(path_segments + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_28_nodes_paths_05_write",
       "lessonId": "lesson_28_nodes_paths",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أنشئ شجرة اختبار في المحرر، ثم تحقق يدوياً من مسار عقدة ابن بعد إعادة تسمية عقدة.",
-        "en": "Write a short implementation plan for this application: Create a test tree in the editor and manually verify a child path after renaming a node."
+        "ar": "اكتب شيفرة تحفظ path_segments مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores path_segments plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = path_segments + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_28_nodes_paths_06_fix",
       "lessonId": "lesson_28_nodes_paths",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «مسار العقدة يبقى صحيحاً حتى بعد تغيير اسمها أو نقلها في المشهد.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “A node path stays valid even after renaming or moving the node in the scene.” What is the best correction?"
+        "ar": "أي قاعدة تصف node paths بدقة؟",
+        "en": "Which rule accurately describes node paths?"
       },
       "options": [
         {
-          "ar": "حدّث المسار بعد تغيير الاسم أو البنية، وتحقق من تطابقه مع المشهد الفعلي.",
-          "en": "Update the path after renaming or restructuring and verify it against the actual scene."
+          "ar": "يبدأ المسار النسبي دائماً من `/root` بصرف النظر عن العقدة الحالية.",
+          "en": "A relative path always starts at `/root`, regardless of the current node."
         },
         {
-          "ar": "مسار العقدة يبقى صحيحاً حتى بعد تغيير اسمها أو نقلها في المشهد.",
-          "en": "A node path stays valid even after renaming or moving the node in the scene."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "المسارات لا تعتمد على بنية الشجرة.",
-          "en": "Paths do not depend on tree structure."
+          "ar": "النسبي يبدأ من العقدة الحالية، والمطلق يبدأ من جذر شجرة المشهد.",
+          "en": "A relative path starts at the current node; an absolute path starts at the scene-tree root."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة node paths في المثال.",
+          "en": "Relate your answer to the role of node paths in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_28_nodes_paths_07_apply",
       "lessonId": "lesson_28_nodes_paths",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أنشئ شجرة اختبار في المحرر، ثم تحقق يدوياً من مسار عقدة ابن بعد إعادة تسمية عقدة. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Create a test tree in the editor and manually verify a child path after renaming a node. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى path_segments عند حساب node paths.",
+        "en": "Fix the operation so it adds change to path_segments for node paths."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(path_segments - change)",
+      "solutionCode": "print(path_segments + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 2\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_28_nodes_paths_08_compare",
       "lessonId": "lesson_28_nodes_paths",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ المسار النسبي يعتمد على نقطة الانطلاق الحالية؛ والمطلق يعتمد على جذر شجرة المشهد.",
-        "en": "What is the difference between the concepts in this lesson? A relative path depends on the current starting node; an absolute path depends on the scene-tree root."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن node paths: ا",
+        "en": "Complete this hands-on Godot activity about node paths: Move Label under a child node, update the path, and compare it with the absolute path from the root."
       },
-      "options": [
-        {
-          "ar": "المسار النسبي يعتمد على نقطة الانطلاق الحالية؛ والمطلق يعتمد على جذر شجرة المشهد.",
-          "en": "A relative path depends on the current starting node; an absolute path depends on the scene-tree root."
-        },
-        {
-          "ar": "العقدة لبنة مشهد لها أب واحد في الشجرة وقد تحتوي أبناء.",
-          "en": "A node is a scene building block with one parent in the tree and may contain children."
-        },
-        {
-          "ar": "المسارات لا تعتمد على بنية الشجرة.",
-          "en": "Paths do not depend on tree structure."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "انقل Label إلى عقدة فرعية وحدّث المسار وقارنه بالمسار المطلق.",
+          "en": "Move Label under a child node, update the path, and compare it with the absolute path from the root."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_28_nodes_paths_09_debug",
       "lessonId": "lesson_28_nodes_paths",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: مسار يشير إلى اسم عقدة غير موجود في شجرة المشهد. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A path that points to a node name absent from the scene tree. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع path_segments ثم change ثم المجموع.",
+        "en": "Reorder the lines to print path_segments, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(path_segments + change)\nprint(change)\nprint(path_segments)",
+      "solutionCode": "print(path_segments)\nprint(change)\nprint(path_segments + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 2\nvar change = 1",
+          "expectedOutput": "2\n1\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 9\nvar change = 4",
+          "expectedOutput": "9\n4\n13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_28_nodes_paths_10_apply",
       "lessonId": "lesson_28_nodes_paths",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: اربط مسار عقدة بمرجع `@onready`، ودوّن ما يجب تحديثه إذا أعيد تسمية العقدة.",
-        "en": "Design an application that combines this concept with an earlier idea: Connect a node path to an `@onready` reference and note what must change if the node is renamed."
+        "ar": "اكتب شيفرة تضاعف path_segments ثم تضيف change وتطبع الناتج في مثال عن node paths.",
+        "en": "Write code that doubles path_segments, adds change, and prints the result in a node paths example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = path_segments * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 2\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var path_segments = 9\nvar change = 4",
+          "expectedOutput": "22"
+        }
+      ]
     }
   ]
 }

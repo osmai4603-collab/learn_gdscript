@@ -41,345 +41,430 @@
       "lessonId": "lesson_34_connect_emit",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: عند ضغط الزر بعد اتصال الإشارة، تستدعى دالة الاستقبال المتصلة.",
-        "en": "Predict the result in the example: After the button signal is connected, pressing the button calls the connected receiver function."
+        "ar": "أي قاعدة تصف connecting and emitting signals بدقة؟",
+        "en": "Which rule accurately describes connecting and emitting signals?"
       },
       "options": [
         {
-          "ar": "عند ضغط الزر بعد اتصال الإشارة، تستدعى دالة الاستقبال المتصلة.",
-          "en": "After the button signal is connected, pressing the button calls the connected receiver function."
+          "ar": "استدعاء `connect` يطلق الإشارة فوراً.",
+          "en": "Calling `connect` emits the signal immediately."
         },
         {
-          "ar": "يمكن الربط من المحرر أو بالكود، ويجب التحقق يدوياً من إعداد المشهد.",
-          "en": "A connection can be made in the editor or code, and scene setup must be checked manually."
+          "ar": "يربط `connect` دالة مستقبِل، ويستدعي `emit` الدوال المتصلة.",
+          "en": "`connect` links a receiver callable, and `emit` invokes connected callbacks."
         },
         {
-          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
-          "en": "Connecting emits the signal before the event occurs."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة connecting and emitting signals في المثال.",
+          "en": "Relate your answer to the role of connecting and emitting signals in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_34_connect_emit_02_identify",
       "lessonId": "lesson_34_connect_emit",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «ربط الإشارات وإرسالها»؟",
-        "en": "Which statement accurately identifies the core concept in “Connecting and Emitting Signals”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن connecting and emitting signals: ا",
+        "en": "Complete this hands-on Godot activity about connecting and emitting signals: Connect a score display callback to a signal, emit a score change, and verify the receiver updates."
       },
-      "options": [
-        {
-          "ar": "`connect()` يربط الإشارة بدالة مستقبل، و`emit()` يطلق الحدث من الباعث.",
-          "en": "`connect()` links a signal to a receiver function, and `emit()` raises the event from the emitter."
-        },
-        {
-          "ar": "يمكن الربط من المحرر أو بالكود، ويجب التحقق يدوياً من إعداد المشهد.",
-          "en": "A connection can be made in the editor or code, and scene setup must be checked manually."
-        },
-        {
-          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
-          "en": "Connecting emits the signal before the event occurs."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "اربط دالة عرض النقاط بإشارة، وأطلق تغير النقاط وتحقق من تحديث المستقبِل.",
+          "en": "Connect a score display callback to a signal, emit a score change, and verify the receiver updates."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_34_connect_emit_03_choose",
       "lessonId": "lesson_34_connect_emit",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ تحقق من أن الدالة المستقبلة موجودة وأن معاملاتها تطابق الإشارة.",
-        "en": "Which design choice fits this situation? Check that the receiver function exists and its arguments match the signal."
+        "ar": "تتبّع العملية في signal connections: اطبع connected_receivers بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this signal connections example: print connected_receivers after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "تحقق من أن الدالة المستقبلة موجودة وأن معاملاتها تطابق الإشارة.",
-          "en": "Check that the receiver function exists and its arguments match the signal."
-        },
-        {
-          "ar": "يمكن الربط من المحرر أو بالكود، ويجب التحقق يدوياً من إعداد المشهد.",
-          "en": "A connection can be made in the editor or code, and scene setup must be checked manually."
-        },
-        {
-          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
-          "en": "Connecting emits the signal before the event occurs."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(connected_receivers + change)",
+      "solutionCode": "print(connected_receivers + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_34_connect_emit_04_complete",
       "lessonId": "lesson_34_connect_emit",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط بثلاث خطوات: باعث، إشارة متصلة، ودالة مستقبل.",
-        "en": "Complete a short sketch or sequence that shows: A three-step diagram: emitter, connected signal, and receiver function."
+        "ar": "أكمل العامل لحساب connected_receivers بعد تطبيق change في signal connections.",
+        "en": "Fill the operator to calculate connected_receivers after applying change for signal connections."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط بثلاث خطوات: باعث، إشارة متصلة، ودالة مستقبل.",
-          "en": "Write the required essential parts: A three-step diagram: emitter, connected signal, and receiver function."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(connected_receivers ___ change)",
+      "solutionCode": "print(connected_receivers + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_34_connect_emit_05_write",
       "lessonId": "lesson_34_connect_emit",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: اربط إشارة زر في مشهد Godot تجريبي من تبويب Node، ثم اختبر النقر يدوياً.",
-        "en": "Write a short implementation plan for this application: Connect a button signal in a Godot test scene from the Node tab, then manually test the click."
+        "ar": "اكتب شيفرة تحفظ connected_receivers مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores connected_receivers plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = connected_receivers + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_34_connect_emit_06_fix",
       "lessonId": "lesson_34_connect_emit",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «`emit()` ينشئ تلقائياً اتصالاً بين أي عقدتين.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “`emit()` automatically connects any two nodes.” What is the best correction?"
+        "ar": "أي قاعدة تصف connecting and emitting signals بدقة؟",
+        "en": "Which rule accurately describes connecting and emitting signals?"
       },
       "options": [
         {
-          "ar": "أنشئ الاتصال أولاً ثم أرسل الإشارة عندما يقع الحدث.",
-          "en": "Create the connection first, then emit the signal when the event occurs."
+          "ar": "استدعاء `connect` يطلق الإشارة فوراً.",
+          "en": "Calling `connect` emits the signal immediately."
         },
         {
-          "ar": "`emit()` ينشئ تلقائياً اتصالاً بين أي عقدتين.",
-          "en": "`emit()` automatically connects any two nodes."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
-          "en": "Connecting emits the signal before the event occurs."
+          "ar": "يربط `connect` دالة مستقبِل، ويستدعي `emit` الدوال المتصلة.",
+          "en": "`connect` links a receiver callable, and `emit` invokes connected callbacks."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة connecting and emitting signals في المثال.",
+          "en": "Relate your answer to the role of connecting and emitting signals in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_34_connect_emit_07_apply",
       "lessonId": "lesson_34_connect_emit",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: اربط إشارة زر في مشهد Godot تجريبي من تبويب Node، ثم اختبر النقر يدوياً. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Connect a button signal in a Godot test scene from the Node tab, then manually test the click. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى connected_receivers عند حساب signal connections.",
+        "en": "Fix the operation so it adds change to connected_receivers for signal connections."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(connected_receivers - change)",
+      "solutionCode": "print(connected_receivers + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 1\nvar change = 2",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 8\nvar change = 4",
+          "expectedOutput": "12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_34_connect_emit_08_compare",
       "lessonId": "lesson_34_connect_emit",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ الاتصال يسجل المستقبل؛ الإرسال يطلق الحدث بعد حدوثه.",
-        "en": "What is the difference between the concepts in this lesson? Connecting registers a receiver; emitting raises the event when it occurs."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن connecting and emitting signals: ا",
+        "en": "Complete this hands-on Godot activity about connecting and emitting signals: Disconnect or remove one receiver and verify other connected receivers still respond."
       },
-      "options": [
-        {
-          "ar": "الاتصال يسجل المستقبل؛ الإرسال يطلق الحدث بعد حدوثه.",
-          "en": "Connecting registers a receiver; emitting raises the event when it occurs."
-        },
-        {
-          "ar": "يمكن الربط من المحرر أو بالكود، ويجب التحقق يدوياً من إعداد المشهد.",
-          "en": "A connection can be made in the editor or code, and scene setup must be checked manually."
-        },
-        {
-          "ar": "الاتصال يطلق الإشارة قبل وقوع الحدث.",
-          "en": "Connecting emits the signal before the event occurs."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "افصل مستقبلاً أو أزله وتحقق من استمرار استجابة المستقبِلات الأخرى.",
+          "en": "Disconnect or remove one receiver and verify other connected receivers still respond."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_34_connect_emit_09_debug",
       "lessonId": "lesson_34_connect_emit",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: إشارة متصلة بدالة تستقبل عدداً مختلفاً من المعاملات عن الإشارة. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A signal is connected to a function that expects a different number of arguments. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع connected_receivers ثم change ثم المجموع.",
+        "en": "Reorder the lines to print connected_receivers, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(connected_receivers + change)\nprint(change)\nprint(connected_receivers)",
+      "solutionCode": "print(connected_receivers)\nprint(change)\nprint(connected_receivers + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 1\nvar change = 2",
+          "expectedOutput": "1\n2\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 0\nvar change = 2",
+          "expectedOutput": "0\n2\n2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 8\nvar change = 4",
+          "expectedOutput": "8\n4\n12"
+        }
+      ]
     },
     {
       "id": "ex_lesson_34_connect_emit_10_apply",
       "lessonId": "lesson_34_connect_emit",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: أرسل إشارة بعد تغيير خاصية، واجعل مستقبلاً منفصلاً يحدث واجهة المستخدم.",
-        "en": "Design an application that combines this concept with an earlier idea: Emit a signal after changing a property and let a separate receiver update the UI."
+        "ar": "اكتب شيفرة تضاعف connected_receivers ثم تضيف change وتطبع الناتج في مثال عن signal connections.",
+        "en": "Write code that doubles connected_receivers, adds change, and prints the result in a signal connections example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = connected_receivers * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 1\nvar change = 2",
+          "expectedOutput": "4"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var connected_receivers = 8\nvar change = 4",
+          "expectedOutput": "20"
+        }
+      ]
     }
   ]
 }

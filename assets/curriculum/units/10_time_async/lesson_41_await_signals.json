@@ -77,7 +77,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن انتظار الإشارة. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about انتظار الإشارة. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about await and signals. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -110,28 +110,45 @@
       "lessonId": "lesson_41_await_signals",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «door opened» في سياق انتظار الإشارة.",
-        "en": "Write code that prints “door opened” as a انتظار الإشارة status."
+        "ar": "تتبّع هذه العملية في موضوع await and signals باستخدام القيم المعطاة: اطبع ready_steps + change.",
+        "en": "Trace this await and signals calculation using the supplied values: print(ready_steps + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"door opened\")",
+      "starterCode": "print(ready_steps + change)",
+      "solutionCode": "print(ready_steps + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "door opened"
+          "setupCode": "var ready_steps = 1\nvar change = 1",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 8\nvar change = 4",
+          "expectedOutput": "12"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -141,28 +158,45 @@
       "lessonId": "lesson_41_await_signals",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «door opened».",
-        "en": "Complete the line so it prints “door opened”."
+        "ar": "أكمل الفراغ ليضيف حساب await and signals مقدار التغيير إلى ready_steps.",
+        "en": "Fill the blank so the await and signals calculation adds the change to ready_steps."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"door opened\")",
+      "starterCode": "print(ready_steps ___ change)",
+      "solutionCode": "print(ready_steps + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "door opened"
+          "setupCode": "var ready_steps = 1\nvar change = 1",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 8\nvar change = 4",
+          "expectedOutput": "12"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -172,28 +206,45 @@
       "lessonId": "lesson_41_await_signals",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في انتظار الإشارة: start ثم «door opened».",
-        "en": "Print two lines showing progress in انتظار الإشارة: start, then “door opened”."
+        "ar": "اكتب حساباً قصيراً في await and signals يطبع ready_steps مضافاً إليه change.",
+        "en": "Write a short await and signals calculation that prints ready_steps plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"door opened\")",
+      "solutionCode": "var result = ready_steps + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\ndoor opened"
+          "setupCode": "var ready_steps = 1\nvar change = 1",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 8\nvar change = 4",
+          "expectedOutput": "12"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -203,28 +254,45 @@
       "lessonId": "lesson_41_await_signals",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «door opened» تماماً.",
-        "en": "Fix the code so it prints exactly “door opened”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في await and signals مقدار change إلى ready_steps.",
+        "en": "Fix the operator so this await and signals calculation adds change to ready_steps."
       },
-      "starterCode": "print(\"door opened!\")",
-      "solutionCode": "print(\"door opened\")",
+      "starterCode": "print(ready_steps - change)",
+      "solutionCode": "print(ready_steps + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "door opened"
+          "setupCode": "var ready_steps = 1\nvar change = 1",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 8\nvar change = 4",
+          "expectedOutput": "12"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -234,28 +302,45 @@
       "lessonId": "lesson_41_await_signals",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «door opened» ثم done.",
-        "en": "Arrange output to show start, then “door opened”, then done."
+        "ar": "رتّب خطوات تتبع await and signals لتطبع ready_steps ثم change ثم المجموع.",
+        "en": "Reorder the await and signals trace to print ready_steps, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"door opened\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"door opened\")\nprint(\"done\")",
+      "starterCode": "print(ready_steps + change)\nprint(change)\nprint(ready_steps)",
+      "solutionCode": "print(ready_steps)\nprint(change)\nprint(ready_steps + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\ndoor opened\ndone"
+          "setupCode": "var ready_steps = 1\nvar change = 1",
+          "expectedOutput": "1\n1\n2"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var ready_steps = 8\nvar change = 4",
+          "expectedOutput": "8\n4\n12"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -265,28 +350,45 @@
       "lessonId": "lesson_41_await_signals",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع انتظار الإشارة: «door opened».",
-        "en": "Write a program that records a result related to انتظار الإشارة: “door opened”."
+        "ar": "اكتب حساباً في await and signals يضاعف ready_steps ثم يضيف change ويطبع الناتج.",
+        "en": "Write an await-and-signals calculation that doubles ready_steps, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"door opened\")",
+      "solutionCode": "var result = ready_steps * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "door opened"
+          "setupCode": "var ready_steps = 1\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 6\nvar change = 3",
+          "expectedOutput": "15"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -296,28 +398,45 @@
       "lessonId": "lesson_41_await_signals",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\ndoor opened",
-        "en": "Write a program that displays this sequence:\ndoor opened"
+        "ar": "تنبأ بنتيجة مضاعفة ready_steps ثم إضافة change في مثال await and signals.",
+        "en": "Predict the result of doubling ready_steps and then adding change in this await and signals example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"door opened\")",
+      "starterCode": "print(ready_steps * 2 + change)",
+      "solutionCode": "print(ready_steps * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "door opened"
+          "setupCode": "var ready_steps = 1\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 6\nvar change = 3",
+          "expectedOutput": "15"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -327,28 +446,45 @@
       "lessonId": "lesson_41_await_signals",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «door opened».",
-        "en": "Use a string variable named status and print its value “door opened”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف ready_steps مضافاً إليه change في await and signals.",
+        "en": "Use a named result variable to calculate ready_steps times two plus change for await and signals."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"door opened\"\nprint(status)",
+      "solutionCode": "var result = ready_steps * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "door opened"
+          "setupCode": "var ready_steps = 1\nvar change = 1",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 6\nvar change = 3",
+          "expectedOutput": "15"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

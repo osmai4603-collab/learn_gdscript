@@ -41,345 +41,430 @@
       "lessonId": "lesson_29_node_lifecycle",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: يعمل `_ready()` بعد جاهزية الأبناء؛ أما `_process(delta)` فيتكرر كل إطار مرسوم.",
-        "en": "Predict the result in the example: `_ready()` runs after children are ready, while `_process(delta)` repeats every rendered frame."
+        "ar": "أي قاعدة تصف node lifecycle بدقة؟",
+        "en": "Which rule accurately describes node lifecycle?"
       },
       "options": [
         {
-          "ar": "يعمل `_ready()` بعد جاهزية الأبناء؛ أما `_process(delta)` فيتكرر كل إطار مرسوم.",
-          "en": "`_ready()` runs after children are ready, while `_process(delta)` repeats every rendered frame."
+          "ar": "تعمل `_process` مرة واحدة فقط عند دخول العقدة إلى الشجرة.",
+          "en": "`_process` runs only once when a node enters the tree."
         },
         {
-          "ar": "اختر `_physics_process` للحركة المرتبطة بتحديثات الفيزياء الثابتة.",
-          "en": "Choose `_physics_process` for movement tied to fixed physics updates."
+          "ar": "تعمل `_enter_tree` قبل `_ready`، أما `_process` فتتكرر أثناء المعالجة.",
+          "en": "`_enter_tree` runs before `_ready`, while `_process` repeats during processing."
         },
         {
-          "ar": "كل callback يعمل في التوقيت نفسه وبالعدد نفسه من المرات.",
-          "en": "Every callback runs at the same time and the same number of times."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة node lifecycle في المثال.",
+          "en": "Relate your answer to the role of node lifecycle in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_29_node_lifecycle_02_identify",
       "lessonId": "lesson_29_node_lifecycle",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «دورة حياة العقدة»؟",
-        "en": "Which statement accurately identifies the core concept in “Node Lifecycle”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن node lifecycle: أ",
+        "en": "Complete this hands-on Godot activity about node lifecycle: Add prints to _enter_tree and _ready and run the scene to observe their order."
       },
-      "options": [
-        {
-          "ar": "دوال دورة الحياة توقيتات مختلفة لدخول الشجرة والجاهزية والتحديث المستمر.",
-          "en": "Lifecycle callbacks represent different timings for tree entry, readiness, and ongoing updates."
-        },
-        {
-          "ar": "اختر `_physics_process` للحركة المرتبطة بتحديثات الفيزياء الثابتة.",
-          "en": "Choose `_physics_process` for movement tied to fixed physics updates."
-        },
-        {
-          "ar": "كل callback يعمل في التوقيت نفسه وبالعدد نفسه من المرات.",
-          "en": "Every callback runs at the same time and the same number of times."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أضف رسائل إلى _enter_tree و_ready وشغّل المشهد لملاحظة الترتيب.",
+          "en": "Add prints to _enter_tree and _ready and run the scene to observe their order."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_29_node_lifecycle_03_choose",
       "lessonId": "lesson_29_node_lifecycle",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ استخدم `_ready` لقراءة ابن جاهز، و`_process` فقط لتحديث ضروري كل إطار.",
-        "en": "Which design choice fits this situation? Use `_ready` to access a ready child and `_process` only for an update needed every frame."
+        "ar": "تتبّع العملية في node lifecycle: اطبع ready_steps بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this node lifecycle example: print ready_steps after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "استخدم `_ready` لقراءة ابن جاهز، و`_process` فقط لتحديث ضروري كل إطار.",
-          "en": "Use `_ready` to access a ready child and `_process` only for an update needed every frame."
-        },
-        {
-          "ar": "اختر `_physics_process` للحركة المرتبطة بتحديثات الفيزياء الثابتة.",
-          "en": "Choose `_physics_process` for movement tied to fixed physics updates."
-        },
-        {
-          "ar": "كل callback يعمل في التوقيت نفسه وبالعدد نفسه من المرات.",
-          "en": "Every callback runs at the same time and the same number of times."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(ready_steps + change)",
+      "solutionCode": "print(ready_steps + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_29_node_lifecycle_04_complete",
       "lessonId": "lesson_29_node_lifecycle",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: جدول بثلاثة صفوف يحدد ما إذا كان العمل يناسب `_enter_tree` أو `_ready` أو `_process`.",
-        "en": "Complete a short sketch or sequence that shows: A three-row table deciding whether work belongs in `_enter_tree`, `_ready`, or `_process`."
+        "ar": "أكمل العامل لحساب ready_steps بعد تطبيق change في node lifecycle.",
+        "en": "Fill the operator to calculate ready_steps after applying change for node lifecycle."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: جدول بثلاثة صفوف يحدد ما إذا كان العمل يناسب `_enter_tree` أو `_ready` أو `_process`.",
-          "en": "Write the required essential parts: A three-row table deciding whether work belongs in `_enter_tree`, `_ready`, or `_process`."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(ready_steps ___ change)",
+      "solutionCode": "print(ready_steps + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_29_node_lifecycle_05_write",
       "lessonId": "lesson_29_node_lifecycle",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أضف إلى مشهد تجريبي علامة بسيطة في `_ready`، ثم تحقق من أنها لا تتكرر كل إطار.",
-        "en": "Write a short implementation plan for this application: Add a simple marker in `_ready` to a test scene and verify it does not repeat every frame."
+        "ar": "اكتب شيفرة تحفظ ready_steps مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores ready_steps plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = ready_steps + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_29_node_lifecycle_06_fix",
       "lessonId": "lesson_29_node_lifecycle",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «`_process` يعمل مرة واحدة فقط بعد إضافة العقدة.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “`_process` runs only once after a node is added.” What is the best correction?"
+        "ar": "أي قاعدة تصف node lifecycle بدقة؟",
+        "en": "Which rule accurately describes node lifecycle?"
       },
       "options": [
         {
-          "ar": "`_process` يعمل كل إطار؛ استخدم `_ready` للتهيئة التي تحدث مرة واحدة.",
-          "en": "`_process` runs every frame; use `_ready` for one-time initialization."
+          "ar": "تعمل `_process` مرة واحدة فقط عند دخول العقدة إلى الشجرة.",
+          "en": "`_process` runs only once when a node enters the tree."
         },
         {
-          "ar": "`_process` يعمل مرة واحدة فقط بعد إضافة العقدة.",
-          "en": "`_process` runs only once after a node is added."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "كل callback يعمل في التوقيت نفسه وبالعدد نفسه من المرات.",
-          "en": "Every callback runs at the same time and the same number of times."
+          "ar": "تعمل `_enter_tree` قبل `_ready`، أما `_process` فتتكرر أثناء المعالجة.",
+          "en": "`_enter_tree` runs before `_ready`, while `_process` repeats during processing."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة node lifecycle في المثال.",
+          "en": "Relate your answer to the role of node lifecycle in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_29_node_lifecycle_07_apply",
       "lessonId": "lesson_29_node_lifecycle",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أضف إلى مشهد تجريبي علامة بسيطة في `_ready`، ثم تحقق من أنها لا تتكرر كل إطار. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Add a simple marker in `_ready` to a test scene and verify it does not repeat every frame. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى ready_steps عند حساب node lifecycle.",
+        "en": "Fix the operation so it adds change to ready_steps for node lifecycle."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(ready_steps - change)",
+      "solutionCode": "print(ready_steps + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_29_node_lifecycle_08_compare",
       "lessonId": "lesson_29_node_lifecycle",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `_ready` مرحلة تهيئة بعد جاهزية الأبناء؛ `_process` تحديث متكرر كل إطار.",
-        "en": "What is the difference between the concepts in this lesson? `_ready` is an initialization stage after children are ready; `_process` is a repeated per-frame update."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن node lifecycle: ف",
+        "en": "Complete this hands-on Godot activity about node lifecycle: Enable _process, observe it across frames, then disable processing and compare the output."
       },
-      "options": [
-        {
-          "ar": "`_ready` مرحلة تهيئة بعد جاهزية الأبناء؛ `_process` تحديث متكرر كل إطار.",
-          "en": "`_ready` is an initialization stage after children are ready; `_process` is a repeated per-frame update."
-        },
-        {
-          "ar": "اختر `_physics_process` للحركة المرتبطة بتحديثات الفيزياء الثابتة.",
-          "en": "Choose `_physics_process` for movement tied to fixed physics updates."
-        },
-        {
-          "ar": "كل callback يعمل في التوقيت نفسه وبالعدد نفسه من المرات.",
-          "en": "Every callback runs at the same time and the same number of times."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "فعّل _process وراقبه عبر الإطارات، ثم عطّل المعالجة وقارن الخرج.",
+          "en": "Enable _process, observe it across frames, then disable processing and compare the output."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_29_node_lifecycle_09_debug",
       "lessonId": "lesson_29_node_lifecycle",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: تحديث ثقيل لا يحتاج التكرار موضوع داخل `_process`. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A costly update that does not need repetition is placed in `_process`. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع ready_steps ثم change ثم المجموع.",
+        "en": "Reorder the lines to print ready_steps, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(ready_steps + change)\nprint(change)\nprint(ready_steps)",
+      "solutionCode": "print(ready_steps)\nprint(change)\nprint(ready_steps + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 2\nvar change = 3",
+          "expectedOutput": "2\n3\n5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 3",
+          "expectedOutput": "0\n3\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 9\nvar change = 4",
+          "expectedOutput": "9\n4\n13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_29_node_lifecycle_10_apply",
       "lessonId": "lesson_29_node_lifecycle",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: اختر مرحلة تهيئة ثم مرحلة حركة، واشرح كيف يمر `delta` في تحديث مستمر مناسب.",
-        "en": "Design an application that combines this concept with an earlier idea: Choose an initialization stage and a movement stage, and explain how `delta` is used in a suitable continuous update."
+        "ar": "اكتب شيفرة تضاعف ready_steps ثم تضيف change وتطبع الناتج في مثال عن node lifecycle.",
+        "en": "Write code that doubles ready_steps, adds change, and prints the result in a node lifecycle example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = ready_steps * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 2\nvar change = 3",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var ready_steps = 9\nvar change = 4",
+          "expectedOutput": "22"
+        }
+      ]
     }
   ]
 }

@@ -46,19 +46,19 @@
       },
       "options": [
         {
-          "ar": "`timeout`",
-          "en": "`timeout`"
-        },
-        {
           "ar": "`finished_file`",
           "en": "`finished_file`"
+        },
+        {
+          "ar": "`timeout`",
+          "en": "`timeout`"
         },
         {
           "ar": "`process_frame`",
           "en": "`process_frame`"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
           "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
@@ -77,7 +77,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن المؤقتات والإطارات. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about المؤقتات والإطارات. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about timers and frames. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -110,28 +110,45 @@
       "lessonId": "lesson_42_timers_frames",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «tick 1» في سياق المؤقتات والإطارات.",
-        "en": "Write code that prints “tick 1” as a المؤقتات والإطارات status."
+        "ar": "تتبّع هذه العملية في موضوع timers and frames باستخدام القيم المعطاة: اطبع elapsed_ticks + change.",
+        "en": "Trace this timers and frames calculation using the supplied values: print(elapsed_ticks + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"tick 1\")",
+      "starterCode": "print(elapsed_ticks + change)",
+      "solutionCode": "print(elapsed_ticks + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "tick 1"
+          "setupCode": "var elapsed_ticks = 3\nvar change = 2",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -141,28 +158,45 @@
       "lessonId": "lesson_42_timers_frames",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «tick 1».",
-        "en": "Complete the line so it prints “tick 1”."
+        "ar": "أكمل الفراغ ليضيف حساب timers and frames مقدار التغيير إلى elapsed_ticks.",
+        "en": "Fill the blank so the timers and frames calculation adds the change to elapsed_ticks."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"tick 1\")",
+      "starterCode": "print(elapsed_ticks ___ change)",
+      "solutionCode": "print(elapsed_ticks + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "tick 1"
+          "setupCode": "var elapsed_ticks = 3\nvar change = 2",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -172,28 +206,45 @@
       "lessonId": "lesson_42_timers_frames",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في المؤقتات والإطارات: start ثم «tick 1».",
-        "en": "Print two lines showing progress in المؤقتات والإطارات: start, then “tick 1”."
+        "ar": "اكتب حساباً قصيراً في timers and frames يطبع elapsed_ticks مضافاً إليه change.",
+        "en": "Write a short timers and frames calculation that prints elapsed_ticks plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"tick 1\")",
+      "solutionCode": "var result = elapsed_ticks + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\ntick 1"
+          "setupCode": "var elapsed_ticks = 3\nvar change = 2",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -203,28 +254,45 @@
       "lessonId": "lesson_42_timers_frames",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «tick 1» تماماً.",
-        "en": "Fix the code so it prints exactly “tick 1”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في timers and frames مقدار change إلى elapsed_ticks.",
+        "en": "Fix the operator so this timers and frames calculation adds change to elapsed_ticks."
       },
-      "starterCode": "print(\"tick 1!\")",
-      "solutionCode": "print(\"tick 1\")",
+      "starterCode": "print(elapsed_ticks - change)",
+      "solutionCode": "print(elapsed_ticks + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "tick 1"
+          "setupCode": "var elapsed_ticks = 3\nvar change = 2",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -234,28 +302,45 @@
       "lessonId": "lesson_42_timers_frames",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «tick 1» ثم done.",
-        "en": "Arrange output to show start, then “tick 1”, then done."
+        "ar": "رتّب خطوات تتبع timers and frames لتطبع elapsed_ticks ثم change ثم المجموع.",
+        "en": "Reorder the timers and frames trace to print elapsed_ticks, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"tick 1\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"tick 1\")\nprint(\"done\")",
+      "starterCode": "print(elapsed_ticks + change)\nprint(change)\nprint(elapsed_ticks)",
+      "solutionCode": "print(elapsed_ticks)\nprint(change)\nprint(elapsed_ticks + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\ntick 1\ndone"
+          "setupCode": "var elapsed_ticks = 3\nvar change = 2",
+          "expectedOutput": "3\n2\n5"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var elapsed_ticks = 0\nvar change = 2",
+          "expectedOutput": "0\n2\n2"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var elapsed_ticks = 10\nvar change = 4",
+          "expectedOutput": "10\n4\n14"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -265,28 +350,45 @@
       "lessonId": "lesson_42_timers_frames",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع المؤقتات والإطارات: «tick 1».",
-        "en": "Write a program that records a result related to المؤقتات والإطارات: “tick 1”."
+        "ar": "اكتب حساباً في timers and frames يضاعف elapsed_ticks ثم يضيف change ويطبع الناتج.",
+        "en": "Write a timers and frames calculation that doubles elapsed_ticks, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"tick 1\")",
+      "solutionCode": "var result = elapsed_ticks * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "tick 1"
+          "setupCode": "var elapsed_ticks = 3\nvar change = 2",
+          "expectedOutput": "8"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -296,28 +398,45 @@
       "lessonId": "lesson_42_timers_frames",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\ntick 1",
-        "en": "Write a program that displays this sequence:\ntick 1"
+        "ar": "تنبأ بنتيجة مضاعفة elapsed_ticks ثم إضافة change في مثال timers and frames.",
+        "en": "Predict the result of doubling elapsed_ticks and then adding change in this timers and frames example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"tick 1\")",
+      "starterCode": "print(elapsed_ticks * 2 + change)",
+      "solutionCode": "print(elapsed_ticks * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "tick 1"
+          "setupCode": "var elapsed_ticks = 3\nvar change = 2",
+          "expectedOutput": "8"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -327,28 +446,45 @@
       "lessonId": "lesson_42_timers_frames",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «tick 1».",
-        "en": "Use a string variable named status and print its value “tick 1”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف elapsed_ticks مضافاً إليه change في timers and frames.",
+        "en": "Use a named result variable to calculate elapsed_ticks times two plus change for timers and frames."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"tick 1\"\nprint(status)",
+      "solutionCode": "var result = elapsed_ticks * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "tick 1"
+          "setupCode": "var elapsed_ticks = 3\nvar change = 2",
+          "expectedOutput": "8"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var elapsed_ticks = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

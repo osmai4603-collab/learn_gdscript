@@ -77,7 +77,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن تخطيط المشروع. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about تخطيط المشروع. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about project planning. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -110,28 +110,45 @@
       "lessonId": "lesson_49_project_planning",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «plan: collect, score, restart» في سياق تخطيط المشروع.",
-        "en": "Write code that prints “plan: collect, score, restart” as a تخطيط المشروع status."
+        "ar": "تتبّع هذه العملية في موضوع project planning باستخدام القيم المعطاة: اطبع planned_tasks + change.",
+        "en": "Trace this project planning calculation using the supplied values: print(planned_tasks + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "starterCode": "print(planned_tasks + change)",
+      "solutionCode": "print(planned_tasks + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "plan: collect, score, restart"
+          "setupCode": "var planned_tasks = 3\nvar change = 2",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -141,28 +158,45 @@
       "lessonId": "lesson_49_project_planning",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «plan: collect, score, restart».",
-        "en": "Complete the line so it prints “plan: collect, score, restart”."
+        "ar": "أكمل الفراغ ليضيف حساب project planning مقدار التغيير إلى planned_tasks.",
+        "en": "Fill the blank so the project planning calculation adds the change to planned_tasks."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "starterCode": "print(planned_tasks ___ change)",
+      "solutionCode": "print(planned_tasks + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "plan: collect, score, restart"
+          "setupCode": "var planned_tasks = 3\nvar change = 2",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -172,28 +206,45 @@
       "lessonId": "lesson_49_project_planning",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في تخطيط المشروع: start ثم «plan: collect, score, restart».",
-        "en": "Print two lines showing progress in تخطيط المشروع: start, then “plan: collect, score, restart”."
+        "ar": "اكتب حساباً قصيراً في project planning يطبع planned_tasks مضافاً إليه change.",
+        "en": "Write a short project planning calculation that prints planned_tasks plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"plan: collect, score, restart\")",
+      "solutionCode": "var result = planned_tasks + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nplan: collect, score, restart"
+          "setupCode": "var planned_tasks = 3\nvar change = 2",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -203,28 +254,45 @@
       "lessonId": "lesson_49_project_planning",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «plan: collect, score, restart» تماماً.",
-        "en": "Fix the code so it prints exactly “plan: collect, score, restart”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في project planning مقدار change إلى planned_tasks.",
+        "en": "Fix the operator so this project planning calculation adds change to planned_tasks."
       },
-      "starterCode": "print(\"plan: collect, score, restart!\")",
-      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "starterCode": "print(planned_tasks - change)",
+      "solutionCode": "print(planned_tasks + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "plan: collect, score, restart"
+          "setupCode": "var planned_tasks = 3\nvar change = 2",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 10\nvar change = 4",
+          "expectedOutput": "14"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -234,28 +302,45 @@
       "lessonId": "lesson_49_project_planning",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «plan: collect, score, restart» ثم done.",
-        "en": "Arrange output to show start, then “plan: collect, score, restart”, then done."
+        "ar": "رتّب خطوات تتبع project planning لتطبع planned_tasks ثم change ثم المجموع.",
+        "en": "Reorder the project planning trace to print planned_tasks, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"plan: collect, score, restart\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"plan: collect, score, restart\")\nprint(\"done\")",
+      "starterCode": "print(planned_tasks + change)\nprint(change)\nprint(planned_tasks)",
+      "solutionCode": "print(planned_tasks)\nprint(change)\nprint(planned_tasks + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nplan: collect, score, restart\ndone"
+          "setupCode": "var planned_tasks = 3\nvar change = 2",
+          "expectedOutput": "3\n2\n5"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var planned_tasks = 0\nvar change = 2",
+          "expectedOutput": "0\n2\n2"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var planned_tasks = 10\nvar change = 4",
+          "expectedOutput": "10\n4\n14"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -265,28 +350,45 @@
       "lessonId": "lesson_49_project_planning",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع تخطيط المشروع: «plan: collect, score, restart».",
-        "en": "Write a program that records a result related to تخطيط المشروع: “plan: collect, score, restart”."
+        "ar": "اكتب حساباً في project planning يضاعف planned_tasks ثم يضيف change ويطبع الناتج.",
+        "en": "Write a project planning calculation that doubles planned_tasks, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "solutionCode": "var result = planned_tasks * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "plan: collect, score, restart"
+          "setupCode": "var planned_tasks = 3\nvar change = 2",
+          "expectedOutput": "8"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -296,28 +398,45 @@
       "lessonId": "lesson_49_project_planning",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nplan: collect, score, restart",
-        "en": "Write a program that displays this sequence:\nplan: collect, score, restart"
+        "ar": "تنبأ بنتيجة مضاعفة planned_tasks ثم إضافة change في مثال project planning.",
+        "en": "Predict the result of doubling planned_tasks and then adding change in this project planning example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"plan: collect, score, restart\")",
+      "starterCode": "print(planned_tasks * 2 + change)",
+      "solutionCode": "print(planned_tasks * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "plan: collect, score, restart"
+          "setupCode": "var planned_tasks = 3\nvar change = 2",
+          "expectedOutput": "8"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -327,28 +446,45 @@
       "lessonId": "lesson_49_project_planning",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «plan: collect, score, restart».",
-        "en": "Use a string variable named status and print its value “plan: collect, score, restart”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف planned_tasks مضافاً إليه change في project planning.",
+        "en": "Use a named result variable to calculate planned_tasks times two plus change for project planning."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"plan: collect, score, restart\"\nprint(status)",
+      "solutionCode": "var result = planned_tasks * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "plan: collect, score, restart"
+          "setupCode": "var planned_tasks = 3\nvar change = 2",
+          "expectedOutput": "8"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 0\nvar change = 2",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var planned_tasks = 8\nvar change = 3",
+          "expectedOutput": "19"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

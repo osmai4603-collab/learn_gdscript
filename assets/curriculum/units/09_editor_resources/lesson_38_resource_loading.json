@@ -39,19 +39,19 @@
       },
       "options": [
         {
-          "ar": "`preload(\"res://...\")`",
-          "en": "`preload(\"res://...\")`"
-        },
-        {
           "ar": "`await print(...)`",
           "en": "`await print(...)`"
+        },
+        {
+          "ar": "`preload(\"res://...\")`",
+          "en": "`preload(\"res://...\")`"
         },
         {
           "ar": "تخزين المسار في تعليق",
           "en": "Store the path in a comment"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
           "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
@@ -70,7 +70,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن تحميل الموارد. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about تحميل الموارد. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about resource loading. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -103,28 +103,45 @@
       "lessonId": "lesson_38_resource_loading",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «scene loaded» في سياق تحميل الموارد.",
-        "en": "Write code that prints “scene loaded” as a تحميل الموارد status."
+        "ar": "تتبّع هذه العملية في موضوع resource loading باستخدام القيم المعطاة: اطبع resource_count + change.",
+        "en": "Trace this resource loading calculation using the supplied values: print(resource_count + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"scene loaded\")",
+      "starterCode": "print(resource_count + change)",
+      "solutionCode": "print(resource_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "scene loaded"
+          "setupCode": "var resource_count = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -134,28 +151,45 @@
       "lessonId": "lesson_38_resource_loading",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «scene loaded».",
-        "en": "Complete the line so it prints “scene loaded”."
+        "ar": "أكمل الفراغ ليضيف حساب resource loading مقدار التغيير إلى resource_count.",
+        "en": "Fill the blank so the resource loading calculation adds the change to resource_count."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"scene loaded\")",
+      "starterCode": "print(resource_count ___ change)",
+      "solutionCode": "print(resource_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "scene loaded"
+          "setupCode": "var resource_count = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -165,28 +199,45 @@
       "lessonId": "lesson_38_resource_loading",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في تحميل الموارد: start ثم «scene loaded».",
-        "en": "Print two lines showing progress in تحميل الموارد: start, then “scene loaded”."
+        "ar": "اكتب حساباً قصيراً في resource loading يطبع resource_count مضافاً إليه change.",
+        "en": "Write a short resource loading calculation that prints resource_count plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"scene loaded\")",
+      "solutionCode": "var result = resource_count + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nscene loaded"
+          "setupCode": "var resource_count = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -196,28 +247,45 @@
       "lessonId": "lesson_38_resource_loading",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «scene loaded» تماماً.",
-        "en": "Fix the code so it prints exactly “scene loaded”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في resource loading مقدار change إلى resource_count.",
+        "en": "Fix the operator so this resource loading calculation adds change to resource_count."
       },
-      "starterCode": "print(\"scene loaded!\")",
-      "solutionCode": "print(\"scene loaded\")",
+      "starterCode": "print(resource_count - change)",
+      "solutionCode": "print(resource_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "scene loaded"
+          "setupCode": "var resource_count = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 9\nvar change = 4",
+          "expectedOutput": "13"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -227,28 +295,45 @@
       "lessonId": "lesson_38_resource_loading",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «scene loaded» ثم done.",
-        "en": "Arrange output to show start, then “scene loaded”, then done."
+        "ar": "رتّب خطوات تتبع resource loading لتطبع resource_count ثم change ثم المجموع.",
+        "en": "Reorder the resource loading trace to print resource_count, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"scene loaded\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"scene loaded\")\nprint(\"done\")",
+      "starterCode": "print(resource_count + change)\nprint(change)\nprint(resource_count)",
+      "solutionCode": "print(resource_count)\nprint(change)\nprint(resource_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nscene loaded\ndone"
+          "setupCode": "var resource_count = 2\nvar change = 3",
+          "expectedOutput": "2\n3\n5"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var resource_count = 0\nvar change = 3",
+          "expectedOutput": "0\n3\n3"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var resource_count = 9\nvar change = 4",
+          "expectedOutput": "9\n4\n13"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -258,28 +343,45 @@
       "lessonId": "lesson_38_resource_loading",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع تحميل الموارد: «scene loaded».",
-        "en": "Write a program that records a result related to تحميل الموارد: “scene loaded”."
+        "ar": "اكتب حساباً في resource loading يضاعف resource_count ثم يضيف change ويطبع الناتج.",
+        "en": "Write a resource loading calculation that doubles resource_count, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"scene loaded\")",
+      "solutionCode": "var result = resource_count * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "scene loaded"
+          "setupCode": "var resource_count = 2\nvar change = 3",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -289,28 +391,45 @@
       "lessonId": "lesson_38_resource_loading",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nscene loaded",
-        "en": "Write a program that displays this sequence:\nscene loaded"
+        "ar": "تنبأ بنتيجة مضاعفة resource_count ثم إضافة change في مثال resource loading.",
+        "en": "Predict the result of doubling resource_count and then adding change in this resource loading example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"scene loaded\")",
+      "starterCode": "print(resource_count * 2 + change)",
+      "solutionCode": "print(resource_count * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "scene loaded"
+          "setupCode": "var resource_count = 2\nvar change = 3",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -320,28 +439,45 @@
       "lessonId": "lesson_38_resource_loading",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «scene loaded».",
-        "en": "Use a string variable named status and print its value “scene loaded”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف resource_count مضافاً إليه change في resource loading.",
+        "en": "Use a named result variable to calculate resource_count times two plus change for resource loading."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"scene loaded\"\nprint(status)",
+      "solutionCode": "var result = resource_count * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "scene loaded"
+          "setupCode": "var resource_count = 2\nvar change = 3",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var resource_count = 7\nvar change = 3",
+          "expectedOutput": "17"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9

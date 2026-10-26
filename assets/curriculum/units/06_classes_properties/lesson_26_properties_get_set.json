@@ -34,345 +34,430 @@
       "lessonId": "lesson_26_properties_get_set",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: تُقيّد قيمة الصحة إلى المجال من صفر إلى 100 عند تعيينها بواسطة setter صحيح.",
-        "en": "Predict the result in the example: A valid setter constrains health to the range from zero to 100 when it is assigned."
+        "ar": "أي قاعدة تصف property getters and setters بدقة؟",
+        "en": "Which rule accurately describes property getters and setters?"
       },
       "options": [
         {
-          "ar": "تُقيّد قيمة الصحة إلى المجال من صفر إلى 100 عند تعيينها بواسطة setter صحيح.",
-          "en": "A valid setter constrains health to the range from zero to 100 when it is assigned."
+          "ar": "يجب أن يعيّن setter الخاصية إلى نفسها كي يتجنب التكرار.",
+          "en": "A setter should assign to the same property to avoid recursion."
         },
         {
-          "ar": "يجب أن يحافظ setter على قيمة صالحة دون استدعاء نفسه بلا نهاية.",
-          "en": "A setter should maintain a valid value without recursively calling itself."
+          "ar": "يمكن لـ setter التحقق من القيمة ولـ getter إرجاع قيمة محسوبة.",
+          "en": "A setter can validate a value, and a getter can return a computed value."
         },
         {
-          "ar": "getter يطلق إشارة تلقائياً عند كل قراءة.",
-          "en": "A getter automatically emits a signal on every read."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة property getters and setters في المثال.",
+          "en": "Relate your answer to the role of property getters and setters in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_26_properties_get_set_02_identify",
       "lessonId": "lesson_26_properties_get_set",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «الخصائص وget / set»؟",
-        "en": "Which statement accurately identifies the core concept in “Properties and get / set”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن property getters and setters: أ",
+        "en": "Complete this hands-on Godot activity about property getters and setters: Add a setter that validates a value before updating backing data, then try valid and invalid assignments."
       },
-      "options": [
-        {
-          "ar": "الخاصية حالة مسماة؛ يمكن لـ`get` حساب قيمتها عند القراءة و`set` التحقق منها عند التعيين.",
-          "en": "A property is named state; `get` can calculate it when read and `set` can validate it when assigned."
-        },
-        {
-          "ar": "يجب أن يحافظ setter على قيمة صالحة دون استدعاء نفسه بلا نهاية.",
-          "en": "A setter should maintain a valid value without recursively calling itself."
-        },
-        {
-          "ar": "getter يطلق إشارة تلقائياً عند كل قراءة.",
-          "en": "A getter automatically emits a signal on every read."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أضف setter يتحقق من القيمة قبل تحديث البيانات وجرب قيماً صحيحة وغير صحيحة.",
+          "en": "Add a setter that validates a value before updating backing data, then try valid and invalid assignments."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_26_properties_get_set_03_choose",
       "lessonId": "lesson_26_properties_get_set",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ تحقق من أن قيمة الصحة ضمن مجال صالح قبل أن يستخدمها باقي الكائن.",
-        "en": "Which design choice fits this situation? Validate that health is in a valid range before the rest of the object uses it."
+        "ar": "تتبّع العملية في property access: اطبع speed بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this property access example: print speed after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "تحقق من أن قيمة الصحة ضمن مجال صالح قبل أن يستخدمها باقي الكائن.",
-          "en": "Validate that health is in a valid range before the rest of the object uses it."
-        },
-        {
-          "ar": "يجب أن يحافظ setter على قيمة صالحة دون استدعاء نفسه بلا نهاية.",
-          "en": "A setter should maintain a valid value without recursively calling itself."
-        },
-        {
-          "ar": "getter يطلق إشارة تلقائياً عند كل قراءة.",
-          "en": "A getter automatically emits a signal on every read."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(speed + change)",
+      "solutionCode": "print(speed + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "260"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "251"
+        }
+      ]
     },
     {
       "id": "ex_lesson_26_properties_get_set_04_complete",
       "lessonId": "lesson_26_properties_get_set",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: خاصية صحة مع حد أدنى وأقصى واضحين، وملاحظة تشرح ما يحدث عند إدخال قيمة خارجهما.",
-        "en": "Complete a short sketch or sequence that shows: A health property with clear minimum and maximum values and a note explaining out-of-range assignments."
+        "ar": "أكمل العامل لحساب speed بعد تطبيق change في property access.",
+        "en": "Fill the operator to calculate speed after applying change for property access."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: خاصية صحة مع حد أدنى وأقصى واضحين، وملاحظة تشرح ما يحدث عند إدخال قيمة خارجهما.",
-          "en": "Write the required essential parts: A health property with clear minimum and maximum values and a note explaining out-of-range assignments."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(speed ___ change)",
+      "solutionCode": "print(speed + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "260"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "251"
+        }
+      ]
     },
     {
       "id": "ex_lesson_26_properties_get_set_05_write",
       "lessonId": "lesson_26_properties_get_set",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: جرّب إسناد قيمة ضمن المجال وأخرى خارجه في مشروع تجريبي، ثم تحقق يدوياً من القيمة المخزنة.",
-        "en": "Write a short implementation plan for this application: Try assigning an in-range and out-of-range value in a test project, then manually check the stored value."
+        "ar": "اكتب شيفرة تحفظ speed مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores speed plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = speed + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "260"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "251"
+        }
+      ]
     },
     {
       "id": "ex_lesson_26_properties_get_set_06_fix",
       "lessonId": "lesson_26_properties_get_set",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «يمكن لـsetter استدعاء نفسه بلا نهاية دون أثر جانبي.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “A setter can call itself forever without side effects.” What is the best correction?"
+        "ar": "أي قاعدة تصف property getters and setters بدقة؟",
+        "en": "Which rule accurately describes property getters and setters?"
       },
       "options": [
         {
-          "ar": "تحقق من نمط property في إصدار Godot واستخدم تخزيناً داخلياً أو تعييناً آمناً يمنع إعادة الدخول.",
-          "en": "Check the property pattern for your Godot version and use backing storage or safe assignment to prevent re-entry."
+          "ar": "يجب أن يعيّن setter الخاصية إلى نفسها كي يتجنب التكرار.",
+          "en": "A setter should assign to the same property to avoid recursion."
         },
         {
-          "ar": "يمكن لـsetter استدعاء نفسه بلا نهاية دون أثر جانبي.",
-          "en": "A setter can call itself forever without side effects."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "getter يطلق إشارة تلقائياً عند كل قراءة.",
-          "en": "A getter automatically emits a signal on every read."
+          "ar": "يمكن لـ setter التحقق من القيمة ولـ getter إرجاع قيمة محسوبة.",
+          "en": "A setter can validate a value, and a getter can return a computed value."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة property getters and setters في المثال.",
+          "en": "Relate your answer to the role of property getters and setters in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_26_properties_get_set_07_apply",
       "lessonId": "lesson_26_properties_get_set",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: جرّب إسناد قيمة ضمن المجال وأخرى خارجه في مشروع تجريبي، ثم تحقق يدوياً من القيمة المخزنة. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Try assigning an in-range and out-of-range value in a test project, then manually check the stored value. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى speed عند حساب property access.",
+        "en": "Fix the operation so it adds change to speed for property access."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(speed - change)",
+      "solutionCode": "print(speed + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "260"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "251"
+        }
+      ]
     },
     {
       "id": "ex_lesson_26_properties_get_set_08_compare",
       "lessonId": "lesson_26_properties_get_set",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ `get` يعالج قراءة القيمة، بينما `set` يعالج تعيينها أو التحقق منها.",
-        "en": "What is the difference between the concepts in this lesson? `get` handles reading a value, while `set` handles assignment or validation."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن property getters and setters: أ",
+        "en": "Complete this hands-on Godot activity about property getters and setters: Add a getter for a computed display value and verify it reflects the stored property."
       },
-      "options": [
-        {
-          "ar": "`get` يعالج قراءة القيمة، بينما `set` يعالج تعيينها أو التحقق منها.",
-          "en": "`get` handles reading a value, while `set` handles assignment or validation."
-        },
-        {
-          "ar": "يجب أن يحافظ setter على قيمة صالحة دون استدعاء نفسه بلا نهاية.",
-          "en": "A setter should maintain a valid value without recursively calling itself."
-        },
-        {
-          "ar": "getter يطلق إشارة تلقائياً عند كل قراءة.",
-          "en": "A getter automatically emits a signal on every read."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "أضف getter لقيمة عرض محسوبة وتحقق من انعكاس قيمة الخاصية المخزنة.",
+          "en": "Add a getter for a computed display value and verify it reflects the stored property."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_26_properties_get_set_09_debug",
       "lessonId": "lesson_26_properties_get_set",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: setter يعيد تعيين القيمة بلا حصر أو تحقق ثم يفترض أنها صالحة. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A setter that assigns a value without bounds or validation and assumes it is valid. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع speed ثم change ثم المجموع.",
+        "en": "Reorder the lines to print speed, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(speed + change)\nprint(change)\nprint(speed)",
+      "solutionCode": "print(speed)\nprint(change)\nprint(speed + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "240\n20\n260"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "0\n20\n20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "247\n4\n251"
+        }
+      ]
     },
     {
       "id": "ex_lesson_26_properties_get_set_10_apply",
       "lessonId": "lesson_26_properties_get_set",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: استخدم setter لضبط الحالة وgetter لحساب وصف مشتق، ثم بيّن من يستفيد من الخاصية.",
-        "en": "Design an application that combines this concept with an earlier idea: Use a setter to constrain state and a getter to compute a derived description, then show who uses the property."
+        "ar": "اكتب شيفرة تضاعف speed ثم تضيف change وتطبع الناتج في مثال عن property access.",
+        "en": "Write code that doubles speed, adds change, and prints the result in a property access example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = speed * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 240\nvar change = 20",
+          "expectedOutput": "500"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 0\nvar change = 20",
+          "expectedOutput": "20"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var speed = 247\nvar change = 4",
+          "expectedOutput": "498"
+        }
+      ]
     }
   ]
 }

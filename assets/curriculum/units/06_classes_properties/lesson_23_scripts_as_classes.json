@@ -34,345 +34,430 @@
       "lessonId": "lesson_23_scripts_as_classes",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "توقع النتيجة في المثال: سيكون لكل نسخة من `InventoryItem` اسم وكمية مستقلان، مع استخدام دالة `describe` المعرفة في الصنف.",
-        "en": "Predict the result in the example: Each `InventoryItem` instance has its own name and quantity while using the function defined by the class."
+        "ar": "أي قاعدة تصف class and instances بدقة؟",
+        "en": "Which rule accurately describes class and instances?"
       },
       "options": [
         {
-          "ar": "سيكون لكل نسخة من `InventoryItem` اسم وكمية مستقلان، مع استخدام دالة `describe` المعرفة في الصنف.",
-          "en": "Each `InventoryItem` instance has its own name and quantity while using the function defined by the class."
+          "ar": "تعريف الصنف ينشئ تلقائياً نسخة واحدة مشتركة لكل المشاهد.",
+          "en": "Defining a class automatically creates one shared instance for every scene."
         },
         {
-          "ar": "الصنف يصف الهيكل والسلوك ولا ينشئ نسخة لمجرد تعريفه.",
-          "en": "A class describes structure and behavior; defining it does not create an instance."
+          "ar": "لكل نسخة قيم خصائصها، بينما يعرّف الصنف السلوك المشترك.",
+          "en": "Each instance keeps its own property values while the class defines shared behavior."
         },
         {
-          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
-          "en": "An instance is a scene file that holds no data."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "تتبع ما يحدث أولاً ثم النتيجة النهائية.",
-          "en": "Trace what happens first, then the final result."
+          "ar": "اربط الإجابة بوظيفة class and instances في المثال.",
+          "en": "Relate your answer to the role of class and instances in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 0
+      "order": 0,
+      "testCases": []
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_02_identify",
       "lessonId": "lesson_23_scripts_as_classes",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "أي عبارة تحدد بدقة المفهوم الأساسي في «السكربت بوصفه صنفاً»؟",
-        "en": "Which statement accurately identifies the core concept in “A Script as a Class”?"
+        "ar": "نفّذ في Godot نشاطاً عملياً عن class and instances: أ",
+        "en": "Complete this hands-on Godot activity about class and instances: Create an InventoryItem script with item_name and quantity, create two instances, then change only one quantity."
       },
-      "options": [
-        {
-          "ar": "الصنف وصف يجمع بيانات وسلوكاً؛ والنسخة كائن أنشئ وفق هذا الوصف.",
-          "en": "A class describes related data and behavior; an instance is an object created from that description."
-        },
-        {
-          "ar": "الصنف يصف الهيكل والسلوك ولا ينشئ نسخة لمجرد تعريفه.",
-          "en": "A class describes structure and behavior; defining it does not create an instance."
-        },
-        {
-          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
-          "en": "An instance is a scene file that holds no data."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن دور المصطلحات الرئيسية في المثال.",
-          "en": "Look for the role of the key terms in the example."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 1
+      "order": 1,
+      "steps": [
+        {
+          "ar": "أنشئ سكربت InventoryItem يحوي item_name وquantity، وأنشئ نسختين ثم غيّر كمية واحدة.",
+          "en": "Create an InventoryItem script with item_name and quantity, create two instances, then change only one quantity."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_03_choose",
       "lessonId": "lesson_23_scripts_as_classes",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أي قرار تصميم مناسب للحالة التالية؟ أنشئ نسختين من الصنف نفسه ثم أعط كل نسخة قيم خصائص مختلفة.",
-        "en": "Which design choice fits this situation? Create two instances of the same class and give each different property values."
+        "ar": "تتبّع العملية في class instances: اطبع quantity بعد إضافة change من القيم المعطاة.",
+        "en": "Trace this class instances example: print quantity after adding change from the supplied values."
       },
-      "options": [
-        {
-          "ar": "أنشئ نسختين من الصنف نفسه ثم أعط كل نسخة قيم خصائص مختلفة.",
-          "en": "Create two instances of the same class and give each different property values."
-        },
-        {
-          "ar": "الصنف يصف الهيكل والسلوك ولا ينشئ نسخة لمجرد تعريفه.",
-          "en": "A class describes structure and behavior; defining it does not create an instance."
-        },
-        {
-          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
-          "en": "An instance is a scene file that holds no data."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اختر ما يطابق الحاجة المحددة في السيناريو.",
-          "en": "Choose the option that matches the scenario’s stated need."
+          "ar": "عوّض بقيمتي المتغيرين ثم نفّذ الجمع.",
+          "en": "Substitute both variable values, then add them."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من الحالة التي تبدأ بصفر.",
+          "en": "Check the case that starts at zero."
         }
       ],
-      "order": 2
+      "order": 2,
+      "starterCode": "print(quantity + change)",
+      "solutionCode": "print(quantity + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_04_complete",
       "lessonId": "lesson_23_scripts_as_classes",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً أو تسلسلاً قصيراً يوضح: مخطط صنف `InventoryItem` يضم `item_name` و`quantity` ودالة `describe`.",
-        "en": "Complete a short sketch or sequence that shows: A sketch of an `InventoryItem` class with `item_name`, `quantity`, and `describe`."
+        "ar": "أكمل العامل لحساب quantity بعد تطبيق change في class instances.",
+        "en": "Fill the operator to calculate quantity after applying change for class instances."
       },
-      "steps": [
-        {
-          "ar": "اكتب الأجزاء الأساسية المطلوبة: مخطط صنف `InventoryItem` يضم `item_name` و`quantity` ودالة `describe`.",
-          "en": "Write the required essential parts: A sketch of an `InventoryItem` class with `item_name`, `quantity`, and `describe`."
-        },
-        {
-          "ar": "اربط العناصر بالترتيب أو العلاقة الصحيحة.",
-          "en": "Connect the elements in the correct order or relationship."
-        },
-        {
-          "ar": "راجع المخطط باستخدام تعريف الدرس.",
-          "en": "Review the sketch using the lesson definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "استخدم عامل الجمع بين القيمة والتغيير.",
+          "en": "Use the addition operator between the value and the change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "اختبر الإجابة مع الحالات الثلاث.",
+          "en": "Check your answer against all three cases."
         }
       ],
-      "order": 3
+      "order": 3,
+      "starterCode": "print(quantity ___ change)",
+      "solutionCode": "print(quantity + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_05_write",
       "lessonId": "lesson_23_scripts_as_classes",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "اكتب خطة تنفيذ قصيرة لهذا التطبيق: أنشئ نسختين تجريبيتين من عنصر المخزون، وغيّر كمية واحدة وتحقق أن الأخرى لم تتغير.",
-        "en": "Write a short implementation plan for this application: Create two test inventory-item instances, change one quantity, and verify the other did not change."
+        "ar": "اكتب شيفرة تحفظ quantity مضافاً إليه change في result ثم تطبعه.",
+        "en": "Write code that stores quantity plus change in result and prints it."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف والعناصر أو العقد التي تحتاجها.",
-          "en": "Identify the goal and the elements or nodes you need."
-        },
-        {
-          "ar": "اكتب الخطوات بترتيب التنفيذ.",
-          "en": "Write the steps in implementation order."
-        },
-        {
-          "ar": "اذكر كيف ستتحقق يدوياً من النتيجة.",
-          "en": "State how you will manually verify the result."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "أنشئ result من القيم المعطاة ثم اطبعه.",
+          "en": "Build result from the supplied values, then print it."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "لا تكتب الناتج العددي مباشرة.",
+          "en": "Do not hard-code the numeric result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "starterCode": "",
+      "solutionCode": "var result = quantity + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_06_fix",
       "lessonId": "lesson_23_scripts_as_classes",
       "type": "multipleChoice",
       "prompt": {
-        "ar": "اقرأ الاعتقاد الخاطئ: «تعريف صنف `InventoryItem` ينشئ تلقائياً عنصراً في المخزون.» ما التصحيح الأفضل؟",
-        "en": "Read this misconception: “Defining `InventoryItem` automatically creates an inventory item.” What is the best correction?"
+        "ar": "أي قاعدة تصف class and instances بدقة؟",
+        "en": "Which rule accurately describes class and instances?"
       },
       "options": [
         {
-          "ar": "التعريف قالب؛ أنشئ نسخة منفصلة عند الحاجة إلى كائن فعلي.",
-          "en": "The definition is a template; create an instance when you need an actual object."
+          "ar": "تعريف الصنف ينشئ تلقائياً نسخة واحدة مشتركة لكل المشاهد.",
+          "en": "Defining a class automatically creates one shared instance for every scene."
         },
         {
-          "ar": "تعريف صنف `InventoryItem` ينشئ تلقائياً عنصراً في المخزون.",
-          "en": "Defining `InventoryItem` automatically creates an inventory item."
+          "ar": "تختلف الإجابة بحسب المشروع وحده، ولا توجد قاعدة عامة.",
+          "en": "The answer depends only on the project; there is no general rule."
         },
         {
-          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
-          "en": "An instance is a scene file that holds no data."
+          "ar": "لكل نسخة قيم خصائصها، بينما يعرّف الصنف السلوك المشترك.",
+          "en": "Each instance keeps its own property values while the class defines shared behavior."
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 2,
       "hints": [
         {
-          "ar": "ميّز بين التعريف الصحيح والافتراض الخاطئ.",
-          "en": "Distinguish the correct definition from the mistaken assumption."
+          "ar": "اربط الإجابة بوظيفة class and instances في المثال.",
+          "en": "Relate your answer to the role of class and instances in the example."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "استبعد العبارة التي تصف سلوكاً لا يحدث في Godot.",
+          "en": "Eliminate the statement that describes behavior Godot does not perform."
         }
       ],
-      "order": 5
+      "order": 5,
+      "testCases": []
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_07_apply",
       "lessonId": "lesson_23_scripts_as_classes",
-      "type": "guidedTask",
+      "type": "fixBug",
       "prompt": {
-        "ar": "طبّق المفهوم يدوياً في مشروع تجريبي: أنشئ نسختين تجريبيتين من عنصر المخزون، وغيّر كمية واحدة وتحقق أن الأخرى لم تتغير. لا يُفحص إعداد المحرر تلقائياً.",
-        "en": "Apply the concept manually in a test project: Create two test inventory-item instances, change one quantity, and verify the other did not change. Editor setup is not automatically checked."
+        "ar": "أصلح العملية كي تضيف change إلى quantity عند حساب class instances.",
+        "en": "Fix the operation so it adds change to quantity for class instances."
       },
-      "steps": [
-        {
-          "ar": "أنشئ أصغر مثال يوضح الفكرة.",
-          "en": "Create the smallest example that demonstrates the idea."
-        },
-        {
-          "ar": "تحقق من الأسماء والإعدادات ذات الصلة داخل Godot.",
-          "en": "Check the relevant names and settings inside Godot."
-        },
-        {
-          "ar": "شغّل التجربة إن أمكن وسجّل ما لاحظته.",
-          "en": "Run the experiment if possible and record what you observe."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "قارن العامل الحالي بالعملية المطلوبة.",
+          "en": "Compare the current operator with the requested operation."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "تأكد أن الإصلاح يعمل مع أكثر من قيمة.",
+          "en": "Make sure the fix works with more than one value."
         }
       ],
-      "order": 6
+      "order": 6,
+      "starterCode": "print(quantity - change)",
+      "solutionCode": "print(quantity + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 2\nvar change = 3",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 9\nvar change = 4",
+          "expectedOutput": "13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_08_compare",
       "lessonId": "lesson_23_scripts_as_classes",
-      "type": "multipleChoice",
+      "type": "guidedTask",
       "prompt": {
-        "ar": "ما الفرق بين المفهومين في هذا الدرس؟ الصنف هو وصف مشترك، أما النسخة فلها قيم خصائصها الخاصة.",
-        "en": "What is the difference between the concepts in this lesson? The class is a shared description, while an instance has its own property values."
+        "ar": "نفّذ في Godot نشاطاً عملياً عن class and instances: أ",
+        "en": "Complete this hands-on Godot activity about class and instances: Create two InventoryItem instances, print their quantities, change one, and verify the second is unchanged."
       },
-      "options": [
-        {
-          "ar": "الصنف هو وصف مشترك، أما النسخة فلها قيم خصائصها الخاصة.",
-          "en": "The class is a shared description, while an instance has its own property values."
-        },
-        {
-          "ar": "الصنف يصف الهيكل والسلوك ولا ينشئ نسخة لمجرد تعريفه.",
-          "en": "A class describes structure and behavior; defining it does not create an instance."
-        },
-        {
-          "ar": "النسخة هي ملف المشهد الذي لا يحمل أي بيانات.",
-          "en": "An instance is a scene file that holds no data."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قارن وظيفة كل جزء لا اسمه فقط.",
-          "en": "Compare each part’s role, not just its name."
+          "ar": "ابدأ بمشهد تجريبي صغير وبأسماء عقد واضحة.",
+          "en": "Start with a small test scene and clear node names."
         },
         {
-          "ar": "ارجع إلى المثال والتعريف في الدرس.",
-          "en": "Review the example and definition in the lesson."
+          "ar": "تحقق من النتيجة داخل محرر Godot؛ هذا النشاط لا يُفحص آلياً.",
+          "en": "Verify the result in the Godot editor; this activity is not checked automatically."
         }
       ],
-      "order": 7
+      "order": 7,
+      "steps": [
+        {
+          "ar": "أنشئ نسختين من InventoryItem، اطبع الكميتين، غيّر إحداهما وتحقق أن الأخرى لم تتغير.",
+          "en": "Create two InventoryItem instances, print their quantities, change one, and verify the second is unchanged."
+        },
+        {
+          "ar": "شغّل المشهد أو التجربة ثم سجّل ما لاحظته.",
+          "en": "Run the scene or experiment and record what you observe."
+        },
+        {
+          "ar": "غيّر قيمة أو حالة واحدة وأعد التجربة للتحقق من السبب والنتيجة.",
+          "en": "Change one value or state and repeat the experiment to check cause and effect."
+        }
+      ],
+      "testCases": []
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_09_debug",
       "lessonId": "lesson_23_scripts_as_classes",
-      "type": "guidedTask",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "راجع الحالة المعيبة: مخطط يضع كمية كل العناصر في قيمة مشتركة واحدة داخل تعريف الصنف. اكتب طريقة تشخيصها وإصلاحها.",
-        "en": "Review this flawed setup: A sketch that stores every item’s quantity in one shared value in the class definition. Write how you would diagnose and fix it."
+        "ar": "رتّب الأسطر لتطبع quantity ثم change ثم المجموع.",
+        "en": "Reorder the lines to print quantity, then change, then the total."
       },
-      "steps": [
-        {
-          "ar": "حدد العنصر أو العلاقة غير الصحيحة.",
-          "en": "Identify the incorrect element or relationship."
-        },
-        {
-          "ar": "قارنها بما يتطلبه المفهوم.",
-          "en": "Compare it with what the concept requires."
-        },
-        {
-          "ar": "اكتب تصحيحاً وخطوة تحقق يدوية.",
-          "en": "Write a correction and a manual verification step."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "ابدأ بطباعة المتغيرين ثم احسب الناتج في السطر الأخير.",
+          "en": "Print both values first and calculate the total on the last line."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "حافظ على ترتيب الأسطر كما طلب السؤال.",
+          "en": "Keep the line order requested by the prompt."
         }
       ],
-      "order": 8
+      "order": 8,
+      "starterCode": "print(quantity + change)\nprint(change)\nprint(quantity)",
+      "solutionCode": "print(quantity)\nprint(change)\nprint(quantity + change)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 2\nvar change = 3",
+          "expectedOutput": "2\n3\n5"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 0\nvar change = 3",
+          "expectedOutput": "0\n3\n3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 9\nvar change = 4",
+          "expectedOutput": "9\n4\n13"
+        }
+      ]
     },
     {
       "id": "ex_lesson_23_scripts_as_classes_10_apply",
       "lessonId": "lesson_23_scripts_as_classes",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "صمم تطبيقاً يجمع هذا المفهوم مع فكرة سابقة: اربط صنف العنصر بدالة تصف بياناته، ثم وضّح كيف ينشئ نظام المخزون أكثر من نسخة.",
-        "en": "Design an application that combines this concept with an earlier idea: Connect the item class to a function that describes its data, then show how inventory can create multiple instances."
+        "ar": "اكتب شيفرة تضاعف quantity ثم تضيف change وتطبع الناتج في مثال عن class instances.",
+        "en": "Write code that doubles quantity, adds change, and prints the result in a class instances example."
       },
-      "steps": [
-        {
-          "ar": "اختر وظيفة واضحة للمثال المتكامل.",
-          "en": "Choose a clear purpose for the integrated example."
-        },
-        {
-          "ar": "حدد مسؤولية كل عقدة أو صنف أو جزء.",
-          "en": "Define the responsibility of each node, class, or part."
-        },
-        {
-          "ar": "ارسم تدفق البيانات أو الأحداث ثم راجعه ذاتياً.",
-          "en": "Sketch the data or event flow, then self-review it."
-        }
-      ],
       "hints": [
         {
-          "ar": "تحقق من النتيجة بمقارنتها بتعريف المفهوم في الدرس.",
-          "en": "Check your result against the concept definition in the lesson."
+          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
+          "en": "Double the value first, then add change."
         },
         {
-          "ar": "أنشطة المحرر تُراجع ذاتياً ولا تُفحص آلياً هنا.",
-          "en": "Editor activities are self-checked and are not automatically verified here."
+          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
+          "en": "Use the variables provided by each test."
         }
       ],
-      "order": 9
+      "order": 9,
+      "starterCode": "",
+      "solutionCode": "var result = quantity * 2 + change\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 2\nvar change = 3",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 0\nvar change = 3",
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "تتحقق النتيجة مع القيم المحددة.",
+            "en": "The result matches the supplied values."
+          },
+          "setupCode": "var quantity = 9\nvar change = 4",
+          "expectedOutput": "22"
+        }
+      ]
     }
   ]
 }

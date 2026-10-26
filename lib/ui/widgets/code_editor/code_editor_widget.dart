@@ -693,36 +693,6 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
             ].join('\n'),
             isError: !_runResult!.isSuccess,
           ),
-        // if (_diagnostics.isNotEmpty)
-        //   ConstrainedBox(
-        //     constraints: const BoxConstraints(maxHeight: 150),
-        //     child: Card(
-        //       child: ListView(
-        //         shrinkWrap: true,
-        //         children: [
-        //           for (final diagnostic in _diagnostics)
-        //             ListTile(
-        //               dense: true,
-        //               leading: Icon(
-        //                 diagnostic.severity == DiagnosticSeverity.error
-        //                     ? Icons.error_outline
-        //                     : diagnostic.severity == DiagnosticSeverity.warning
-        //                     ? Icons.warning_amber_outlined
-        //                     : Icons.info_outline,
-        //                 color: diagnostic.severity == DiagnosticSeverity.error
-        //                     ? Theme.of(context).colorScheme.error
-        //                     : Theme.of(context).colorScheme.tertiary,
-        //               ),
-        //               title: Text(diagnostic.message),
-        //               subtitle: Text(
-        //                 context.l10n.diagnosticLine(diagnostic.location.line),
-        //               ),
-        //               onTap: () => _selectDiagnostic(diagnostic),
-        //             ),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
       ],
     );
   }
@@ -898,31 +868,6 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
               context,
             ).bodySmall.copyWith(color: color, fontSize: 10, height: 1),
           ),
-          // child: Row(
-          //   children: [
-          //     Icon(
-          //       diagnostic.severity == DiagnosticSeverity.error
-          //           ? Icons.error_outline_rounded
-          //           : diagnostic.severity == DiagnosticSeverity.warning
-          //           ? Icons.warning_amber_rounded
-          //           : Icons.info_outline_rounded,
-          //       size: 13,
-          //       color: color,
-          //     ),
-          //     const SizedBox(width: 5),
-          //     Expanded(
-          //       child: Text(
-          //         message,
-          //         maxLines: 1,
-          //         overflow: TextOverflow.ellipsis,
-          //         textDirection: TextDirection.ltr,
-          //         style: CodeTextTheme.of(
-          //           context,
-          //         ).bodySmall.copyWith(color: color, fontSize: 10, height: 1),
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ),
       ),
     );
@@ -951,31 +896,31 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     return (12 + painter.width + 8).clamp(8.0, maxLeft).toDouble();
   }
 
-  void _selectDiagnostic(Diagnostic diagnostic) {
-    final start = diagnostic.location.offset.clamp(0, _controller.text.length);
-    final end = (start + diagnostic.location.length).clamp(
-      start,
-      _controller.text.length,
-    );
-    _setControllerValue(
-      TextEditingValue(
-        text: _controller.text,
-        selection: TextSelection(baseOffset: start, extentOffset: end),
-      ),
-    );
-    _refreshSignatureHelp();
-    _refreshMatchingBracket();
-    _scheduleHoverInfo();
-    widget.onSelectionChanged?.call(_controller.selection);
-    if (_editorScrollController.hasClients) {
-      _editorScrollController.animateTo(
-        (diagnostic.location.line - 1) * widget.fontSize * 1.5,
-        duration: const Duration(milliseconds: 120),
-        curve: Curves.easeOut,
-      );
-    }
-    setState(() {});
-  }
+  // void _selectDiagnostic(Diagnostic diagnostic) {
+  //   final start = diagnostic.location.offset.clamp(0, _controller.text.length);
+  //   final end = (start + diagnostic.location.length).clamp(
+  //     start,
+  //     _controller.text.length,
+  //   );
+  //   _setControllerValue(
+  //     TextEditingValue(
+  //       text: _controller.text,
+  //       selection: TextSelection(baseOffset: start, extentOffset: end),
+  //     ),
+  //   );
+  //   _refreshSignatureHelp();
+  //   _refreshMatchingBracket();
+  //   _scheduleHoverInfo();
+  //   widget.onSelectionChanged?.call(_controller.selection);
+  //   if (_editorScrollController.hasClients) {
+  //     _editorScrollController.animateTo(
+  //       (diagnostic.location.line - 1) * widget.fontSize * 1.5,
+  //       duration: const Duration(milliseconds: 120),
+  //       curve: Curves.easeOut,
+  //     );
+  //   }
+  //   setState(() {});
+  // }
 
   @override
   void dispose() {

@@ -39,19 +39,19 @@
       },
       "options": [
         {
-          "ar": "نوع عناصر المصفوفة",
-          "en": "The array element type"
-        },
-        {
           "ar": "حداً أقصى دائماً للعناصر",
           "en": "A permanent maximum length"
+        },
+        {
+          "ar": "نوع عناصر المصفوفة",
+          "en": "The array element type"
         },
         {
           "ar": "ترتيباً عشوائياً للعناصر",
           "en": "Random ordering"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
           "ar": "اربط الإجابة بوظيفة المفهوم في الدرس.",
@@ -70,7 +70,7 @@
       "type": "guidedTask",
       "prompt": {
         "ar": "نفّذ نشاطاً يدوياً عن المصفوفات المعرّفة الأنواع. هذه خطوات فحص ذاتي وليست اختباراً آلياً.",
-        "en": "Complete a hands-on activity about المصفوفات المعرّفة الأنواع. These are self-check steps, not an automated test."
+        "en": "Complete a hands-on activity about typed arrays. Follow the steps and check the result in Godot."
       },
       "steps": [
         {
@@ -103,28 +103,45 @@
       "lessonId": "lesson_46_typed_arrays",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب شيفرة تطبع «score 10» في سياق المصفوفات المعرّفة الأنواع.",
-        "en": "Write code that prints “score 10” as a المصفوفات المعرّفة الأنواع status."
+        "ar": "تتبّع هذه العملية في موضوع typed arrays باستخدام القيم المعطاة: اطبع item_count + change.",
+        "en": "Trace this typed arrays calculation using the supplied values: print(item_count + change)."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"score 10\")",
+      "starterCode": "print(item_count + change)",
+      "solutionCode": "print(item_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score 10"
+          "setupCode": "var item_count = 4\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 11\nvar change = 4",
+          "expectedOutput": "15"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 2
@@ -134,28 +151,45 @@
       "lessonId": "lesson_46_typed_arrays",
       "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل السطر ليطبع «score 10».",
-        "en": "Complete the line so it prints “score 10”."
+        "ar": "أكمل الفراغ ليضيف حساب typed arrays مقدار التغيير إلى item_count.",
+        "en": "Fill the blank so the typed arrays calculation adds the change to item_count."
       },
-      "starterCode": "print(\"___\")",
-      "solutionCode": "print(\"score 10\")",
+      "starterCode": "print(item_count ___ change)",
+      "solutionCode": "print(item_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score 10"
+          "setupCode": "var item_count = 4\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 11\nvar change = 4",
+          "expectedOutput": "15"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "استخدم العامل الذي يحقق عملية الجمع المطلوبة.",
+          "en": "Use the operator that performs the requested addition."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "اختبر التعبير مع القيم المختلفة في الحالات.",
+          "en": "Check the expression with the different supplied values."
         }
       ],
       "order": 3
@@ -165,28 +199,45 @@
       "lessonId": "lesson_46_typed_arrays",
       "type": "writeCode",
       "prompt": {
-        "ar": "اطبع سطرين يوضحان تقدماً في المصفوفات المعرّفة الأنواع: start ثم «score 10».",
-        "en": "Print two lines showing progress in المصفوفات المعرّفة الأنواع: start, then “score 10”."
+        "ar": "اكتب حساباً قصيراً في typed arrays يطبع item_count مضافاً إليه change.",
+        "en": "Write a short typed arrays calculation that prints item_count plus change."
       },
       "starterCode": "",
-      "solutionCode": "print(\"start\")\nprint(\"score 10\")",
+      "solutionCode": "var result = item_count + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "start\nscore 10"
+          "setupCode": "var item_count = 4\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 11\nvar change = 4",
+          "expectedOutput": "15"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 4
@@ -196,28 +247,45 @@
       "lessonId": "lesson_46_typed_arrays",
       "type": "fixBug",
       "prompt": {
-        "ar": "أصلح الشيفرة لتطبع «score 10» تماماً.",
-        "en": "Fix the code so it prints exactly “score 10”."
+        "ar": "أصلح العامل الحسابي ليضيف هذا الحساب في typed arrays مقدار change إلى item_count.",
+        "en": "Fix the operator so this typed arrays calculation adds change to item_count."
       },
-      "starterCode": "print(\"score 10!\")",
-      "solutionCode": "print(\"score 10\")",
+      "starterCode": "print(item_count - change)",
+      "solutionCode": "print(item_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score 10"
+          "setupCode": "var item_count = 4\nvar change = 1",
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 11\nvar change = 4",
+          "expectedOutput": "15"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "قارن العملية المطلوبة بالعامل الموجود في السطر.",
+          "en": "Compare the requested operation with the operator in the line."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "اختبر الحل بقيمتين مختلفتين، لا بقيمة واحدة فقط.",
+          "en": "Check the fix with different values, not just one."
         }
       ],
       "order": 5
@@ -227,28 +295,45 @@
       "lessonId": "lesson_46_typed_arrays",
       "type": "reorderSteps",
       "prompt": {
-        "ar": "رتّب المخرجات لتظهر start ثم «score 10» ثم done.",
-        "en": "Arrange output to show start, then “score 10”, then done."
+        "ar": "رتّب خطوات تتبع typed arrays لتطبع item_count ثم change ثم المجموع.",
+        "en": "Reorder the typed arrays trace to print item_count, then change, then their total."
       },
-      "starterCode": "print(\"done\")\nprint(\"score 10\")\nprint(\"start\")",
-      "solutionCode": "print(\"start\")\nprint(\"score 10\")\nprint(\"done\")",
+      "starterCode": "print(item_count + change)\nprint(change)\nprint(item_count)",
+      "solutionCode": "print(item_count)\nprint(change)\nprint(item_count + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
           },
-          "expectedOutput": "start\nscore 10\ndone"
+          "setupCode": "var item_count = 4\nvar change = 1",
+          "expectedOutput": "4\n1\n5"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var item_count = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1"
+        },
+        {
+          "description": {
+            "ar": "يطابق تسلسل القيم والمجموع.",
+            "en": "The values and total appear in the requested order."
+          },
+          "setupCode": "var item_count = 11\nvar change = 4",
+          "expectedOutput": "11\n4\n15"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "اطبع القيمتين قبل السطر الذي يحسب المجموع.",
+          "en": "Print both input values before the line that calculates their total."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "تأكد أن المجموع يأتي في السطر الأخير.",
+          "en": "Make sure the total appears on the last line."
         }
       ],
       "order": 6
@@ -258,28 +343,45 @@
       "lessonId": "lesson_46_typed_arrays",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب برنامجاً يسجل نتيجة مرتبطة بموضوع المصفوفات المعرّفة الأنواع: «score 10».",
-        "en": "Write a program that records a result related to المصفوفات المعرّفة الأنواع: “score 10”."
+        "ar": "اكتب حساباً في typed arrays يضاعف item_count ثم يضيف change ويطبع الناتج.",
+        "en": "Write a typed-array calculation that doubles item_count, adds change, and prints the result."
       },
       "starterCode": "",
-      "solutionCode": "print(\"score 10\")",
+      "solutionCode": "var result = item_count * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score 10"
+          "setupCode": "var item_count = 4\nvar change = 1",
+          "expectedOutput": "9"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 9\nvar change = 3",
+          "expectedOutput": "21"
         }
       ],
       "hints": [
         {
-          "ar": "افحص الاقتباسات وأسماء المتغيرات والمسافات البادئة.",
-          "en": "Check quotes, variable names, and indentation."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "أصلح السبب ثم شغّل الحل من جديد.",
-          "en": "Fix the cause, then run the solution again."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 7
@@ -289,28 +391,45 @@
       "lessonId": "lesson_46_typed_arrays",
       "type": "predictOutput",
       "prompt": {
-        "ar": "اكتب برنامجاً يعرض التسلسل التالي:\nscore 10",
-        "en": "Write a program that displays this sequence:\nscore 10"
+        "ar": "تنبأ بنتيجة مضاعفة item_count ثم إضافة change في مثال typed arrays.",
+        "en": "Predict the result of doubling item_count and then adding change in this typed arrays example."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"score 10\")",
+      "starterCode": "print(item_count * 2 + change)",
+      "solutionCode": "print(item_count * 2 + change)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score 10"
+          "setupCode": "var item_count = 4\nvar change = 1",
+          "expectedOutput": "9"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 9\nvar change = 3",
+          "expectedOutput": "21"
         }
       ],
       "hints": [
         {
-          "ar": "حدّد النتيجة أو الترتيب الذي يطلبه السؤال.",
-          "en": "Identify the requested result or ordering."
+          "ar": "ابدأ بقيم المتغيرين ثم طبّق العامل بالترتيب.",
+          "en": "Substitute both values first, then apply the operator in order."
         },
         {
-          "ar": "استخدم print لإظهار الخرج المطلوب حرفياً.",
-          "en": "Use print to display the requested output exactly."
+          "ar": "تأكد من حساب كل حالة اختبار، بما فيها الصفر.",
+          "en": "Check each test case, including the zero-value case."
         }
       ],
       "order": 8
@@ -320,28 +439,45 @@
       "lessonId": "lesson_46_typed_arrays",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً نصياً باسم status ثم اطبع قيمته «score 10».",
-        "en": "Use a string variable named status and print its value “score 10”."
+        "ar": "استخدم متغيراً باسم result لحساب ضعف item_count مضافاً إليه change في typed arrays.",
+        "en": "Use a named result variable to calculate item_count times two plus change for typed arrays."
       },
       "starterCode": "",
-      "solutionCode": "var status = \"score 10\"\nprint(status)",
+      "solutionCode": "var result = item_count * 2 + change\nprint(result)",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الخرج المتوقع.",
-            "en": "The output matches the expected result."
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
           },
-          "expectedOutput": "score 10"
+          "setupCode": "var item_count = 4\nvar change = 1",
+          "expectedOutput": "9"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 0\nvar change = 1",
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
+            "en": "The calculation matches the supplied values."
+          },
+          "setupCode": "var item_count = 9\nvar change = 3",
+          "expectedOutput": "21"
         }
       ],
       "hints": [
         {
-          "ar": "أبقِ الحل في مقطع GDScript صغير ومستقل.",
-          "en": "Keep the solution in a small standalone GDScript snippet."
+          "ar": "عرّف result من المتغيرين ثم اطبعه.",
+          "en": "Assign the expression to result, then print it."
         },
         {
-          "ar": "طابق النصوص المطبوعة مع الخرج المتوقع.",
-          "en": "Match printed text to the expected output."
+          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
+          "en": "Do not hard-code the result; use the values supplied by each test."
         }
       ],
       "order": 9
