@@ -64,9 +64,10 @@ sealed class ArabicIdeTheme {
   );
 
   static String codeFontFamily(BuildContext context) {
-    return Theme.of(context).extension<ArabicIdeSyntaxColors>() == null
-        ? 'monospace'
-        : 'JetBrains Mono';
+    return 'JetBrains Mono';
+    // return Theme.of(context).extension<ArabicIdeSyntaxColors>() == null
+    //     ? 'monospace'
+    //     : 'JetBrains Mono';
   }
 
   static ThemeData get light {

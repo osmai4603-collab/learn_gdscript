@@ -12,6 +12,7 @@ import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/providers/home_dashboard_provider.dart';
 import '../../../logic/services/code_runner_service.dart';
 import '../../widgets/code_editor/code_editor_widget.dart';
+import '../../widgets/code_editor/code_editor_run_overlay.dart';
 import '../../routers/app_routes.dart';
 import '../../widgets/academy_metric_badge.dart';
 
@@ -1433,7 +1434,8 @@ class _CurriculumOverviewSection extends StatelessWidget {
     );
     final pathAction = TextButton.icon(
       onPressed: onExploreCurriculum,
-      icon: const Icon(Icons.arrow_back_rounded, size: 16),
+
+      icon: Icon(Icons.arrow_back_rounded, size: 16, textDirection: Directionality.of(context) == .ltr ? .rtl : .ltr),
       label: Text(
         l10n.dashboardViewFullPath,
         style: const TextStyle(
@@ -1625,6 +1627,7 @@ class _UnitProgressTile extends StatelessWidget {
               color: unit.isLocked
                   ? const Color(0xFF478CBF).withValues(alpha: 0.2)
                   : const Color(0xFF94A3B8),
+              textDirection: Directionality.of(context) == .ltr ? .rtl : .ltr,
             ),
           ],
         ),
@@ -1857,15 +1860,22 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  CodeEditorWidget(
-                    initialCode: _code,
-                    fontSize: 13,
-                    showLineNumbers: true,
-                    showActionBar: false,
-                    onSyntaxHighlightsRequested: context
-                        .read<CodeRunnerService>()
-                        .getSyntaxHighlights,
-                    onChanged: _saveCode,
+                  CodeEditorRunOverlay(
+                    isRunning: _isRunning,
+                    onRun: _runCode,
+                    tooltip: _isRunning
+                        ? l10n.dashboardPlaygroundRunning
+                        : l10n.dashboardPlaygroundRun,
+                    editor: CodeEditorWidget(
+                      initialCode: _code,
+                      fontSize: 13,
+                      showLineNumbers: true,
+                      showActionBar: false,
+                      onSyntaxHighlightsRequested: context
+                          .read<CodeRunnerService>()
+                          .getSyntaxHighlights,
+                      onChanged: _saveCode,
+                    ),
                   ),
                 ],
               ),
@@ -1876,59 +1886,19 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
             color: const Color(0xFF252A32),
             child: Row(
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 4,
-                        backgroundColor: Color(0xFF4AE183),
-                      ),
-                      const SizedBox(width: 8),
-                      Flexible(
-                        child: Text(
-                          l10n.dashboardExampleTag,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontFamily: 'JetBrains Mono',
-                            fontSize: 10,
-                            color: Color(0xFFC0C7D0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                const CircleAvatar(
+                  radius: 4,
+                  backgroundColor: Color(0xFF4AE183),
                 ),
-                ElevatedButton.icon(
-                  onPressed: _isRunning ? null : _runCode,
-                  icon: Icon(
-                    _isRunning
-                        ? Icons.hourglass_top_rounded
-                        : Icons.play_arrow_rounded,
-                    size: 18,
-                    textDirection: Directionality.of(context) == .ltr
-                        ? .rtl
-                        : .ltr,
-                  ),
-                  iconAlignment: .end,
-                  label: Text(
-                    _isRunning
-                        ? l10n.dashboardPlaygroundRunning
-                        : l10n.dashboardPlaygroundRun,
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF91CDFF),
-                    foregroundColor: const Color(0xFF003350),
-                    textStyle: const TextStyle(
-                      fontFamily: 'IBM Plex Sans Arabic',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 10,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Text(
+                    l10n.dashboardExampleTag,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontFamily: 'JetBrains Mono',
+                      fontSize: 10,
+                      color: Color(0xFFC0C7D0),
                     ),
                   ),
                 ),

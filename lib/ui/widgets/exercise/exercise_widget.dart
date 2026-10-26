@@ -272,12 +272,12 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
                 widget.exerciseIndex + 1,
                 widget.exerciseCount,
               ),
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Text(
               exercise.prompt.resolve(locale),
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             const SizedBox(height: 12),
             if (isReorder)
@@ -336,17 +336,25 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
               ),
             ],
             if (isMultipleChoice) ...[
-              for (var index = 0; index < exercise.options.length; index++)
+              RadioGroup(
+                groupValue: _selectedOptionIndex,
+                onChanged: (value) {
+                        if (_predictionCorrect == true) return;
+                        setState(() => _selectedOptionIndex = value);
+                      },
+                child: Column(
+                  children: [
+                    for (var index = 0; index < exercise.options.length; index++)
                 RadioListTile<int>(
                   value: index,
-                  groupValue: _selectedOptionIndex,
-                  onChanged: _predictionCorrect == true
-                      ? null
-                      : (value) =>
-                            setState(() => _selectedOptionIndex = value),
                   title: Text(exercise.options[index].resolve(locale)),
                   contentPadding: EdgeInsets.zero,
+                  controlAffinity: ListTileControlAffinity.leading,
                 ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
               FilledButton(
                 onPressed: _predictionCorrect == true || _selectedOptionIndex == null
                     ? null

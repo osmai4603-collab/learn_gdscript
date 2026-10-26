@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'arabic_ide_theme.dart';
 
 @immutable

@@ -42,6 +42,7 @@ class DatabaseHelper {
     }
 
     final database = openSqliteDatabase(path, inMemory: inMemory);
+    debugPrint('SQLite database path: $path');
     try {
       database.execute('PRAGMA foreign_keys = ON');
       migrateDatabase(database);

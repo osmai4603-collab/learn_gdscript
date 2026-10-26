@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/services/code_runner_service.dart';
 import '../code_editor/code_editor_widget.dart';
+import '../code_editor/code_editor_run_overlay.dart';
 import '../output_panel/output_panel.dart';
 
 class QuickTryCard extends StatefulWidget {
@@ -61,27 +62,22 @@ class _QuickTryCardState extends State<QuickTryCard> {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 8),
-          CodeEditorWidget(
-            initialCode: _code,
-            fontSize: 14,
-            showLineNumbers: false,
-            showActionBar: false,
-            onSyntaxHighlightsRequested: context
-                .read<CodeRunnerService>()
-                .getSyntaxHighlights,
-            onDiagnosticsRequested: context
-                .read<CodeRunnerService>()
-                .getDiagnostics,
-            onChanged: (code) => _codeOrDefault = _code = code,
-          ),
-          const SizedBox(height: 8),
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: FilledButton.icon(
-              onPressed: _state == OutputState.running ? null : _run,
-              icon: const Icon(Icons.play_arrow),
-              iconAlignment: .end,
-              label: Text(context.l10n.runCode),
+          CodeEditorRunOverlay(
+            isRunning: _state == OutputState.running,
+            onRun: _run,
+            tooltip: context.l10n.runCode,
+            editor: CodeEditorWidget(
+              initialCode: _code,
+              fontSize: 14,
+              showLineNumbers: false,
+              showActionBar: false,
+              onSyntaxHighlightsRequested: context
+                  .read<CodeRunnerService>()
+                  .getSyntaxHighlights,
+              onDiagnosticsRequested: context
+                  .read<CodeRunnerService>()
+                  .getDiagnostics,
+              onChanged: (code) => _codeOrDefault = _code = code,
             ),
           ),
           const SizedBox(height: 8),

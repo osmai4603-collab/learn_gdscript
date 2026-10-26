@@ -14,6 +14,8 @@ import 'line_numbers.dart';
 import 'syntax_highlighter.dart';
 
 class CodeEditorWidget extends StatefulWidget {
+  static const defaultBackgroundColor = Color(0xFF090F15);
+
   const CodeEditorWidget({
     super.key,
     required this.initialCode,
@@ -39,6 +41,7 @@ class CodeEditorWidget extends StatefulWidget {
     this.fontSize = 14,
     this.showLineNumbers = true,
     this.showActionBar = true,
+    this.backgroundColor,
   });
 
   final String initialCode;
@@ -72,6 +75,7 @@ class CodeEditorWidget extends StatefulWidget {
   final double fontSize;
   final bool showLineNumbers;
   final bool showActionBar;
+  final Color? backgroundColor;
 
   @override
   State<CodeEditorWidget> createState() => _CodeEditorWidgetState();
@@ -719,11 +723,10 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     int lineCount,
     TextStyle textStyle,
   ) {
-
     return CodeDirectionality(
       child: Container(
         decoration: BoxDecoration(
-          color: colors.surface,
+          color: widget.backgroundColor ?? colors.surface,
           borderRadius: BorderRadius.circular(8),
         ),
         constraints: const BoxConstraints(minHeight: 132),
@@ -762,9 +765,16 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     filled: true,
-                    hoverColor: Color(0xFF090F15),
-                    fillColor: Color(0xFF090F15), // colors.surfaceContainerLowest,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 17),
+                    hoverColor:
+                        widget.backgroundColor ??
+                        CodeEditorWidget.defaultBackgroundColor,
+                    fillColor:
+                        widget.backgroundColor ??
+                        CodeEditorWidget.defaultBackgroundColor,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 17,
+                    ),
                   ),
                   enableSuggestions: false,
                   autocorrect: false,

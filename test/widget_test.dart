@@ -344,8 +344,9 @@ void main() {
     await tester.pumpWidget(LearnGdscriptApp(dependencies: dependencies));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 250));
-    await tester.ensureVisible(find.text('تشغيل الكود (F5)'));
-    await tester.tap(find.text('تشغيل الكود (F5)'));
+    final runButton = find.byTooltip('تشغيل الكود (F5)');
+    await tester.ensureVisible(runButton);
+    await tester.tap(runButton);
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 

@@ -1,30 +1,27 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/theme/arabic_ide_theme.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/exercise_models.dart';
 import '../../../data/models/gamification_models.dart';
 import '../../../data/models/lesson_models.dart';
 import '../../../data/models/progress_models.dart';
-import '../../../logic/providers/app_settings_provider.dart';
 import '../../../logic/providers/curriculum_provider.dart';
 import '../../../logic/providers/lesson_provider.dart';
 import '../../../logic/providers/progress_provider.dart';
 import '../../../logic/services/code_runner_service.dart';
-import '../../routers/app_routes.dart';
 import '../../layouts/adaptive_layout.dart';
 import '../../layouts/lesson_layout_mobile.dart';
-import 'desktop_lesson_ide_flutter_dart.dart';
-import '../../widgets/code_directionality.dart';
-import '../../widgets/code_editor/code_editor_widget.dart';
 import '../../widgets/common/empty_state.dart';
-import '../../widgets/exercise/exercise_widget.dart';
 import '../../widgets/output_panel/output_panel.dart';
+import '../../routers/app_routes.dart';
+import 'desktop_lesson_ide_flutter_dart.dart';
+import 'lesson_exercise_section.dart';
+import 'lesson_explanation.dart';
+import 'lesson_progress_status.dart';
 
 class LessonScreen extends StatefulWidget {
   const LessonScreen({super.key, required this.lessonId});
@@ -337,171 +334,62 @@ class _LessonScreenState extends State<LessonScreen> {
     }
   }
 
-  Widget _explanation(Lesson lesson) {
-    final locale = Localizations.localeOf(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          lesson.title.resolve(locale),
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          lesson.objective.resolve(locale),
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        const SizedBox(height: 20),
-        _MarkdownContent(markdown: lesson.contentMarkdown.resolve(locale)),
-        if (lesson.documentation case final documentation?) ...[
-          const SizedBox(height: 16),
-          Card(
-            child: ExpansionTile(
-              leading: const Icon(Icons.menu_book_outlined),
-              title: Text(
-                locale.languageCode == 'en'
-                    ? 'Lesson documentation'
-                    : 'توثيق الدرس',
-              ),
-              childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              children: [
-                _MarkdownContent(markdown: documentation.resolve(locale)),
-                if (lesson.documentationSources.isNotEmpty) ...[
-                  const Divider(height: 24),
-                  Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Text(
-                      locale.languageCode == 'en' ? 'Sources' : 'المصادر',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                  for (final source in lesson.documentationSources)
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(source.title.resolve(locale)),
-                      subtitle: SelectableText(
-                        source.url,
-                        textDirection: TextDirection.ltr,
-                      ),
-                      dense: true,
-                    ),
-                  Text(
-                    locale.languageCode == 'en'
-                        ? 'Based on Godot Engine Documentation, licensed under CC BY 3.0. This educational text is an independent adaptation and is not endorsed by Godot.'
-                        : 'يستند هذا المحتوى إلى توثيق Godot Engine المرخّص بموجب CC BY 3.0. هذا إعداد تعليمي مستقل وليس معتمداً من Godot.',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const SizedBox(height: 4),
-                  const SelectableText(
-                    'https://creativecommons.org/licenses/by/3.0/',
-                    textDirection: TextDirection.ltr,
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ],
-        if (lesson.exampleCode != null) ...[
-          const SizedBox(height: 20),
-          Text(
-            context.l10n.exampleLabel,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const SizedBox(height: 8),
-          CodeEditorWidget(
-            initialCode: _exampleCode ?? lesson.exampleCode!,
-            readOnly: false,
-            fontSize: context
-                .watch<AppSettingsProvider>()
-                .editorFontSize
-                .toDouble(),
-            showActionBar: false,
-            onChanged: (code) => _exampleCode = code,
-            onSyntaxHighlightsRequested: context
-                .read<CodeRunnerService>()
-                .getSyntaxHighlights,
-            onDiagnosticsRequested: context
-                .read<CodeRunnerService>()
-                .getDiagnostics,
-          ),
-          const SizedBox(height: 8),
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: FilledButton.icon(
-              onPressed: _exampleRunning ? null : _runExample,
-              icon: const Icon(Icons.play_arrow),
-              iconAlignment: .end,
-              label: Text(context.l10n.runExample),
-            ),
-          ),
-          OutputPanel(
-            state: _exampleState,
-            output: _exampleOutput,
-            errorMessage: _exampleError,
-          ),
-        ],
-      ],
-    );
-  }
+  Widget _explanation(Lesson lesson) => LessonExplanation(
+    lesson: lesson,
+    exampleCode: _exampleCode,
+    exampleRunning: _exampleRunning,
+    exampleOutput: _exampleOutput,
+    exampleError: _exampleError,
+    exampleState: _exampleState,
+    onExampleCodeChanged: (code) => _exampleCode = code,
+    onRunExample: _runExample,
+  );
 
-  Widget _exercise(Lesson lesson) {
-    if (lesson.exercises.isEmpty) {
-      return EmptyState(
-        icon: Icons.check_circle_outline,
-        message: context.l10n.noLessons,
+  Widget _exercise(Lesson lesson) => LessonExerciseSection(
+    lesson: lesson,
+    exerciseIndex: _exerciseIndex,
+    savedCode: _savedCode,
+    solutionViewedExerciseIds: _solutionViewedExerciseIds,
+    exerciseAttempts: _exerciseAttempts,
+    exerciseHints: _exerciseHints,
+    onCodeChanged: (code) {
+      _savedCode = code;
+      _persistLessonProgressInBackground(lesson, savedCode: code);
+    },
+    onProgressChanged: (exercise, attempts, hintsUsed) {
+      _exerciseAttempts[exercise.id] = attempts;
+      _exerciseHints[exercise.id] = hintsUsed;
+      _persistLessonProgressInBackground(
+        lesson,
+        attempts: _exerciseAttempts.values.fold<int>(
+          0,
+          (sum, item) => sum + item,
+        ),
+        hintsUsed: _exerciseHints.values.fold<int>(
+          0,
+          (sum, item) => sum + item,
+        ),
+        exerciseAttempts: _exerciseAttempts,
+        exerciseHints: _exerciseHints,
       );
-    }
-    final index = _exerciseIndex.clamp(0, lesson.exercises.length - 1).toInt();
-    final exercise = lesson.exercises[index];
-    return ExerciseWidget(
-      key: ValueKey(exercise.id),
-      exercise: exercise,
-      exerciseIndex: index,
-      exerciseCount: lesson.exercises.length,
-      initialCode: _savedCode,
-      initialSolutionViewed: _solutionViewedExerciseIds.contains(exercise.id),
-      initialAttempts: _exerciseAttempts[exercise.id] ?? 0,
-      initialHintsUsed: _exerciseHints[exercise.id] ?? 0,
-      onCodeChanged: (code) {
-        _savedCode = code;
-        _persistLessonProgressInBackground(lesson, savedCode: code);
-      },
-      onProgressChanged: (attempts, hintsUsed) {
-        _exerciseAttempts[exercise.id] = attempts;
-        _exerciseHints[exercise.id] = hintsUsed;
-        _persistLessonProgressInBackground(
+    },
+    onExerciseCompleted: (exercise, attempts, hintsUsed, usedSolution, code) =>
+        _onExerciseCompleted(
+          exercise,
           lesson,
-          attempts: _exerciseAttempts.values.fold<int>(
-            0,
-            (sum, item) => sum + item,
-          ),
-          hintsUsed: _exerciseHints.values.fold<int>(
-            0,
-            (sum, item) => sum + item,
-          ),
-          exerciseAttempts: _exerciseAttempts,
-          exerciseHints: _exerciseHints,
-        );
-      },
-      onExerciseCompleted: (attempts, hintsUsed, usedSolution, code) =>
-          _onExerciseCompleted(
-            exercise,
-            lesson,
-            attempts,
-            hintsUsed,
-            usedSolution,
-            code,
-          ),
-      onSolutionViewed: () {
-        _solutionViewedExerciseIds.add(exercise.id);
-        _persistLessonProgressInBackground(
-          lesson,
-          exercisesWithSolutionViewed: [..._solutionViewedExerciseIds],
-        );
-      },
-      fontSize: context.watch<AppSettingsProvider>().editorFontSize.toDouble(),
-    );
-  }
+          attempts,
+          hintsUsed,
+          usedSolution,
+          code,
+        ),
+    onSolutionViewed: (exerciseId) {
+      _solutionViewedExerciseIds.add(exerciseId);
+      _persistLessonProgressInBackground(
+        lesson,
+        exercisesWithSolutionViewed: [..._solutionViewedExerciseIds],
+      );
+    },
+  );
 
   static int _totalCount(
     Map<String, int> values,
@@ -517,38 +405,11 @@ class _LessonScreenState extends State<LessonScreen> {
     final unit = curriculum.units.firstWhere(
       (unit) => unit.id == lesson.unitId,
     );
-    final statusSection = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (_progressSaving) const LinearProgressIndicator(minHeight: 2),
-        if (_progressSaveError case final error?)
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              context.l10n.dashboardSaveError(error),
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
-          )
-        else if (!_progressSaving &&
-            _savedProgressSequence > 0 &&
-            _savedCode != null)
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.cloud_done_outlined,
-                  size: 16,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-                const SizedBox(width: 6),
-                Text(context.l10n.dashboardDraftAutoSaved),
-              ],
-            ),
-          ),
-        const SizedBox(height: 16),
-      ],
+    final statusSection = LessonProgressStatus(
+      saving: _progressSaving,
+      saveError: _progressSaveError,
+      savedProgressSequence: _savedProgressSequence,
+      savedCode: _savedCode,
     );
     return Scaffold(
       appBar: AppBar(
@@ -559,21 +420,24 @@ class _LessonScreenState extends State<LessonScreen> {
           icon: const Icon(Icons.arrow_back),
         ),
       ),
-      body: AdaptiveLayout(
-        breakpoint: 840,
-        mobileBuilder: (context) => LessonLayoutMobile(
-          explanationSection: _explanation(lesson),
-          editorSection: _exercise(lesson),
-          actionsSection: statusSection,
-          outputSection: const SizedBox.shrink(),
-        ),
-        desktopBuilder: (context) => DesktopLessonIdeLayout(
-          unitTitle: unit.title.resolve(Localizations.localeOf(context)),
-          estimatedMinutes: lesson.estimatedMinutes,
-          isEngineReady: true,
-          explanationSection: _explanation(lesson),
-          editorSection: _exercise(lesson),
-          statusSection: statusSection,
+      body: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        child: AdaptiveLayout(
+          breakpoint: 840,
+          mobileBuilder: (context) => LessonLayoutMobile(
+            explanationSection: _explanation(lesson),
+            editorSection: _exercise(lesson),
+            actionsSection: statusSection,
+            outputSection: const SizedBox.shrink(),
+          ),
+          desktopBuilder: (context) => DesktopLessonIdeLayout(
+            unitTitle: unit.title.resolve(Localizations.localeOf(context)),
+            estimatedMinutes: lesson.estimatedMinutes,
+            isEngineReady: true,
+            explanationSection: _explanation(lesson),
+            editorSection: _exercise(lesson),
+            statusSection: statusSection,
+          ),
         ),
       ),
     );
@@ -610,115 +474,4 @@ class _LessonScreenState extends State<LessonScreen> {
   void dispose() {
     super.dispose();
   }
-}
-
-class _MarkdownContent extends StatelessWidget {
-  const _MarkdownContent({required this.markdown});
-
-  final String markdown;
-
-  @override
-  Widget build(BuildContext context) {
-    final lines = markdown.split('\n');
-    final widgets = <Widget>[];
-    var inCodeBlock = false;
-    final codeLines = <String>[];
-    for (final line in lines) {
-      if (line.trimLeft().startsWith('```')) {
-        if (inCodeBlock) {
-          widgets.add(_CodeBlock(code: codeLines.join('\n')));
-          codeLines.clear();
-        }
-        inCodeBlock = !inCodeBlock;
-        continue;
-      }
-      if (inCodeBlock) {
-        codeLines.add(line);
-      } else if (line.startsWith('## ')) {
-        widgets.add(
-          Padding(
-            padding: const EdgeInsets.only(top: 12, bottom: 6),
-            child: Text(
-              line.substring(3),
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-        );
-      } else if (line.trim().isNotEmpty) {
-        widgets.add(
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3),
-            child: SelectableText.rich(_inlineCodeSpans(context, line)),
-          ),
-        );
-      }
-    }
-    if (codeLines.isNotEmpty) {
-      widgets.add(_CodeBlock(code: codeLines.join('\n')));
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: widgets,
-    );
-  }
-
-  static TextSpan _inlineCodeSpans(BuildContext context, String text) {
-    final spans = <TextSpan>[];
-    final pattern = RegExp(r'`([^`]+)`');
-    var offset = 0;
-    for (final match in pattern.allMatches(text)) {
-      if (match.start > offset) {
-        spans.add(TextSpan(text: text.substring(offset, match.start)));
-      }
-      spans.add(
-        TextSpan(
-          text: match.group(1),
-          style: TextStyle(
-            fontFamily: ArabicIdeTheme.codeFontFamily(context),
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
-      );
-      offset = match.end;
-    }
-    if (offset < text.length) spans.add(TextSpan(text: text.substring(offset)));
-    return TextSpan(
-      style: Theme.of(context).textTheme.bodyLarge,
-      children: spans,
-    );
-  }
-}
-
-class _CodeBlock extends StatelessWidget {
-  const _CodeBlock({required this.code});
-
-  final String code;
-
-  @override
-  Widget build(BuildContext context) => CodeDirectionality(
-    child: Card(
-      color: Theme.of(context).colorScheme.surfaceContainerHighest,
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: SelectableText(
-                code,
-                style: TextStyle(
-                  fontFamily: ArabicIdeTheme.codeFontFamily(context),
-                ),
-              ),
-            ),
-            IconButton(
-              tooltip: MaterialLocalizations.of(context).copyButtonLabel,
-              onPressed: () => Clipboard.setData(ClipboardData(text: code)),
-              icon: const Icon(Icons.copy),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
 }

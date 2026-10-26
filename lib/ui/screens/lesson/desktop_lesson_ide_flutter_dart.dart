@@ -3,7 +3,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 
-class DesktopLessonIdeLayout extends StatelessWidget {
+class DesktopLessonIdeLayout extends StatefulWidget {
   const DesktopLessonIdeLayout({
     super.key,
     required this.unitTitle,
@@ -21,9 +21,17 @@ class DesktopLessonIdeLayout extends StatelessWidget {
   final Widget editorSection;
   final Widget statusSection;
 
+  @override
+  State<DesktopLessonIdeLayout> createState() => _DesktopLessonIdeLayoutState();
+}
+
+class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
   static const _background = Color(0xFF0F141B);
   static const _panelColor = Color(0xFF131922);
   static const _border = Color(0xFF28323F);
+  static const _initialExplanationRatio = 0.65;
+
+  double _explanationRatio = _initialExplanationRatio;
 
   @override
   Widget build(BuildContext context) => ColoredBox(
@@ -31,9 +39,9 @@ class DesktopLessonIdeLayout extends StatelessWidget {
     child: Column(
       children: [
         _LessonContextBar(
-          unitTitle: unitTitle,
-          estimatedMinutes: estimatedMinutes,
-          isEngineReady: isEngineReady,
+          unitTitle: widget.unitTitle,
+          estimatedMinutes: widget.estimatedMinutes,
+          isEngineReady: widget.isEngineReady,
         ),
         const Divider(height: 1, color: _border),
         Expanded(
@@ -45,7 +53,7 @@ class DesktopLessonIdeLayout extends StatelessWidget {
                     Expanded(
                       flex: 5,
                       child: _panel(
-                        child: explanationSection,
+                        child: widget.explanationSection,
                         padding: const EdgeInsets.all(20),
                       ),
                     ),
@@ -63,16 +71,57 @@ class DesktopLessonIdeLayout extends StatelessWidget {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Expanded(
-                    flex: 5,
+                  SizedBox(
+                    key: const ValueKey('lesson_explanation_panel'),
+                    width: constraints.maxWidth * _explanationRatio,
                     child: _panel(
-                      child: explanationSection,
+                      child: widget.explanationSection,
                       padding: const EdgeInsets.all(24),
                     ),
                   ),
-                  const VerticalDivider(width: 1, color: _border),
+                  MouseRegion(
+                    cursor: SystemMouseCursors.resizeColumn,
+                    child: GestureDetector(
+                      key: const ValueKey('lesson_panel_resize_handle'),
+                      behavior: HitTestBehavior.translucent,
+                      onHorizontalDragUpdate: (details) {
+                        final direction = Directionality.of(context);
+                        final delta = direction == TextDirection.rtl
+                            ? -details.delta.dx
+                            : details.delta.dx;
+                        setState(() {
+                          _explanationRatio =
+                              (_explanationRatio +
+                                      delta / constraints.maxWidth)
+                                      .clamp(0.25, 0.75)
+                                  .toDouble();
+                        });
+                      },
+                      child: Tooltip(
+                        message:
+                            Localizations.localeOf(context).languageCode ==
+                                'ar'
+                            ? 'اسحب لتغيير عرض اللوحتين'
+                            : 'Drag to resize panels',
+                        child: const SizedBox(
+                          width: 20,
+                          child: Center(
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: Color(0xFF5B6878),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(2),
+                                ),
+                              ),
+                              child: SizedBox(width: 4, height: 40),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   Expanded(
-                    flex: 7,
+                    key: const ValueKey('lesson_editor_panel'),
                     child: _panel(
                       child: _editorContent,
                       padding: const EdgeInsets.all(20),
@@ -89,7 +138,11 @@ class DesktopLessonIdeLayout extends StatelessWidget {
 
   Widget get _editorContent => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [editorSection, const SizedBox(height: 12), statusSection],
+    children: [
+      widget.editorSection,
+      const SizedBox(height: 12),
+      widget.statusSection,
+    ],
   );
 
   Widget _panel({required Widget child, required EdgeInsets padding}) =>
