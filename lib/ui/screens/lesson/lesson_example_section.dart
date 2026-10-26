@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/theme/code_editor_theme.dart';
+import '../../../core/theme/editor_theme_extension.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/providers/app_settings_provider.dart';

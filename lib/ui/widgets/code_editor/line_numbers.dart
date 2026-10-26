@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theme/code_editor_theme.dart';
+import '../../../core/theme/editor_theme_extension.dart';
 
 class LineNumbers extends StatelessWidget {
   const LineNumbers({
@@ -35,7 +35,7 @@ class LineNumbers extends StatelessWidget {
                     '$line',
                     style: TextStyle(
                       color: editorTheme.lineNumber,
-                      fontFamily: 'JetBrains Mono',
+                      fontFamily: CodeEditorTheme.codeFontFamily,
                       fontSize: fontSize,
                       height: 1.5,
                     ),

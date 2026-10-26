@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:learn_gdscript/core/theme/blue_theme.dart';
+import 'package:learn_gdscript/core/theme/godot_arabic_ide_theme.dart';
 import 'package:provider/provider.dart';
 
 import 'app_dependencies.dart';
-import 'core/theme/arabic_ide_theme.dart';
 import 'core/theme/theme_data.dart';
 import 'data/models/app_settings.dart';
 import 'l10n/app_localizations.dart';
@@ -96,11 +97,11 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
             GlobalWidgetsLocalizations.delegate,
           ],
           theme: settings.themeVariant == AppThemeVariant.arabicIde
-              ? ArabicIdeTheme.light
-              : AppTheme.light,
+              ? GodotArabicIdeTheme().light
+              : BlueTheme().light,
           darkTheme: settings.themeVariant == AppThemeVariant.arabicIde
-              ? ArabicIdeTheme.dark
-              : AppTheme.dark,
+              ? GodotArabicIdeTheme().dark
+              : BlueTheme().dark,
           themeMode: settings.themeMode,
           routerConfig: _router,
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/theme/arabic_ide_theme.dart';
+import '../../../core/theme/editor_theme_extension.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/exercise_models.dart';
 import '../../../logic/services/code_runner_service.dart';
@@ -395,7 +395,7 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
                       option.isEmpty ? '""' : option,
                       textDirection: TextDirection.ltr,
                       style: TextStyle(
-                        fontFamily: ArabicIdeTheme.codeFontFamily(context),
+                        fontFamily: CodeEditorTheme.codeFontFamily,
                       ),
                     ),
                   ),
@@ -504,7 +504,7 @@ class _ReorderSteps extends StatelessWidget {
           lines[index],
           textDirection: TextDirection.ltr,
           style: TextStyle(
-            fontFamily: ArabicIdeTheme.codeFontFamily(context),
+            fontFamily: CodeEditorTheme.codeFontFamily,
           ),
         ),
       ),

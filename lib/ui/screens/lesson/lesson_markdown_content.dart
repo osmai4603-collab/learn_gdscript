@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/arabic_ide_theme.dart';
-import '../../../core/theme/code_editor_theme.dart';
+import '../../../core/theme/editor_theme_extension.dart';
 import '../../widgets/code_editor/syntax_highlighter.dart';
 import 'lesson_code_block.dart';
 
@@ -74,7 +73,7 @@ class LessonMarkdownContent extends StatelessWidget {
             ),
             const TextSpan(text: '\u2069'),
           ],
-          style: TextStyle(fontFamily: ArabicIdeTheme.codeFontFamily(context)),
+          style: TextStyle(fontFamily: CodeEditorTheme.codeFontFamily),
         ),
       );
       offset = match.end;

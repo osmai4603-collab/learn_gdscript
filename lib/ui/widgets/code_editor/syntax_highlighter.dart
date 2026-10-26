@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gdscript_engine/gdscript_engine.dart';
 
-import '../../../core/theme/code_editor_theme.dart';
+import '../../../core/theme/editor_theme_extension.dart';
 
 class GDScriptSyntaxHighlighter {
   static final _tokenPattern = RegExp(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gdscript_engine/gdscript_engine.dart';
 
-import '../../../core/theme/code_editor_theme.dart';
+import '../../../core/theme/editor_theme_extension.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/services/code_runner_service.dart';
 import '../code_directionality.dart';
@@ -578,7 +578,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     final lineCount = '\n'.allMatches(_controller.text).length + 1;
     final textStyle = TextStyle(
       color: theme.foreground,
-      fontFamily: 'JetBrains Mono',
+      fontFamily: CodeEditorTheme.codeFontFamily,
       fontSize: widget.fontSize,
       height: 1.5,
     );
@@ -600,7 +600,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
                 _signatureHelp!.signature,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(
-                  fontFamily: 'JetBrains Mono',
+                  fontFamily: CodeEditorTheme.codeFontFamily,
                   fontSize: widget.fontSize - 1,
                   color: theme.function,
                 ),

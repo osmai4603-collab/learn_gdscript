@@ -1,8 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:learn_gdscript/core/theme/gdscript_theme.dart';
-import 'package:learn_gdscript/core/theme/theme_data.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 
 final class BlueTheme implements GDScriptTheme {
+  static const editorLightTheme = CodeEditorTheme(
+    background: Color(0xFFF7F9FC),
+    foreground: Color(0xFF191D24),
+    lineNumber: Color(0xFF454E59),
+    selection: Color(0x33176B9A),
+    cursor: Color(0xFF176B9A),
+    keyword: Color(0xFF176B9A),
+    string: Color(0xFF18723D),
+    number: Color(0xFFA64F0A),
+    comment: Color(0xFF687482),
+    function: Color(0xFF176B9A),
+    type: Color(0xFF18723D),
+    operator: Color(0xFF191D24),
+    errorLine: Color(0x33BA1A1A),
+    matchedBracket: Color(0x55176B9A),
+    foldGutter: Color(0xFF687482),
+    success: Color(0xFF18723D),
+    achievement: Color(0xFFA64F0A),
+  );
+
+  static const editorDarkTheme = CodeEditorTheme(
+    background: Color(0xFF090F15),
+    foreground: Color(0xFFDEE2EC),
+    lineNumber: Color(0xFFC0C7D0),
+    selection: Color(0x3391CDFF),
+    cursor: Color(0xFF91CDFF),
+    keyword: Color(0xFF91CDFF),
+    string: Color(0xFF4AE183),
+    number: Color(0xFFFFB783),
+    comment: Color(0xFF8A919A),
+    function: Color(0xFF91CDFF),
+    type: Color(0xFF4AE183),
+    operator: Color(0xFFDEE2EC),
+    errorLine: Color(0x44FFB4AB),
+    matchedBracket: Color(0x5591CDFF),
+    foldGutter: Color(0xFF8A919A),
+    success: Color(0xFF4AE183),
+    achievement: Color(0xFFFFB783),
+  );
+
   static final _lightScheme = const ColorScheme.light().copyWith(
     primary: Color(0xFF176B9A),
     onPrimary: Color(0xFFFFFFFF),
@@ -186,27 +226,106 @@ final class BlueTheme implements GDScriptTheme {
     );
   }
 
+  ThemeData _buildThemeData({
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
+    required CodeEditorTheme editorTheme,
+  }) {
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: colorScheme,
+      brightness: colorScheme.brightness,
+      fontFamily: basicFontFamily,
+      fontFamilyFallback: const ['IBM Plex Sans Arabic'],
+      textTheme: textTheme,
+      extensions: <ThemeExtension<dynamic>>[editorTheme],
+      scaffoldBackgroundColor: colorScheme.surface,
+      canvasColor: colorScheme.surface,
+      cardColor: colorScheme.surfaceContainerLow,
+      cardTheme: CardThemeData(
+        color: colorScheme.surfaceContainerLow,
+        elevation: 0,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(color: colorScheme.outlineVariant),
+        ),
+      ),
+      dividerTheme: DividerThemeData(
+        color: colorScheme.outlineVariant,
+        thickness: 1,
+        space: 1,
+      ),
+      inputDecorationTheme: inputDecorationTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      elevatedButtonTheme: elevatedButtonTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      filledButtonTheme: filledButtonTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      outlinedButtonTheme: outlinedButtonTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      textButtonTheme: textButtonTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      appBarTheme: appBarTheme(colorScheme: colorScheme),
+      progressIndicatorTheme: progressIndicatorTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: colorScheme.surfaceContainerHigh,
+        contentTextStyle: textTheme.bodyMedium?.copyWith(
+          color: colorScheme.onSurface,
+        ),
+        behavior: SnackBarBehavior.floating,
+      ),
+      iconButtonTheme: iconButtonTheme(
+        colorScheme: colorScheme,
+        textTheme: textTheme,
+      ),
+      expansionTileTheme: ExpansionTileThemeData(
+        backgroundColor: colorScheme.surfaceContainerLow,
+        collapsedBackgroundColor: colorScheme.surfaceContainerLow,
+        collapsedShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    );
+  }
+
   @override
   ThemeData get light {
-    return AppTheme.buildThemeData(
+    return _buildThemeData(
       colorScheme: _lightScheme,
       textTheme: getTextTheme(
         colorScheme: _lightScheme,
         basicFontFamily: basicFontFamily,
         headingFontFamily: headingFontFamily,
       ),
+      editorTheme: editorLightTheme,
     );
   }
 
   @override
   ThemeData get dark {
-    return AppTheme.buildThemeData(
+    return _buildThemeData(
       colorScheme: _darkScheme,
       textTheme: getTextTheme(
         colorScheme: _darkScheme,
-        basicFontFamily: 'IBM Plex Sans',
-        headingFontFamily: 'IBM Plex Sans Arabic',
+        basicFontFamily: basicFontFamily,
+        headingFontFamily: headingFontFamily,
       ),
+      editorTheme: editorDarkTheme,
     );
   }
 
@@ -214,15 +333,16 @@ final class BlueTheme implements GDScriptTheme {
   String get basicFontFamily => 'IBM Plex Sans';
 
   @override
-  String get headingFontFamily => 'IBM Plex Sans Arabic';
+  String get headingFontFamily => 'IBM Plex Sans';
 
   @override
   AppBarTheme appBarTheme({required ColorScheme colorScheme}) {
     return AppBarTheme(
-      backgroundColor: _lightScheme.surfaceContainerLow,
-      foregroundColor: _lightScheme.onSurface,
+      backgroundColor: colorScheme.surface,
+      foregroundColor: colorScheme.onSurface,
       elevation: 0,
-      centerTitle: true,
+      scrolledUnderElevation: 0,
+      surfaceTintColor: Colors.transparent,
     );
   }
 
@@ -247,48 +367,47 @@ final class BlueTheme implements GDScriptTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
-        textStyle: TextStyle(
-          fontFamily: basicFontFamily,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.15,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        minimumSize: const Size(35, 35),
+        maximumSize: const Size.fromHeight(35),
+        elevation: 0,
         iconAlignment: .end,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius.medium),
-        ),
       ),
     );
   }
 
   @override
-  FilledButtonThemeData? filledButtonTheme({required ColorScheme colorScheme, required TextTheme textTheme}) {
+  FilledButtonThemeData? filledButtonTheme({
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
+  }) {
     return FilledButtonThemeData(
       style: FilledButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
-        textStyle: TextStyle(
-          fontFamily: basicFontFamily,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.15,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        minimumSize: const Size(48, 48),
+        elevation: 0,
         iconAlignment: .end,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius.medium),
-        ),
       ),
     );
   }
 
   @override
-  IconButtonThemeData? iconButtonTheme({required ColorScheme colorScheme, required TextTheme textTheme}) {
+  IconButtonThemeData? iconButtonTheme({
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
+  }) {
     return IconButtonThemeData(
       style: IconButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius.small),
-        ),
+        foregroundColor: colorScheme.onSurface,
+        fixedSize: const Size.square(30),
+        maximumSize: const Size.square(30),
+        minimumSize: const Size.square(30),
         iconSize: 17,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(4),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
       ),
     );
   }
@@ -300,22 +419,19 @@ final class BlueTheme implements GDScriptTheme {
   }) {
     return InputDecorationTheme(
       filled: true,
-      fillColor: colorScheme.surfaceContainer,
-      hintStyle: TextStyle(
-        fontFamily: basicFontFamily,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.25,
-      ),
-      labelStyle: TextStyle(
-        fontFamily: basicFontFamily,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.25,
-      ),
+      isDense: true,
+      fillColor: colorScheme.surfaceContainerLow,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(borderRadius.small),
-        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(8.0),
+        borderSide: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0),
+        borderSide: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8.0),
+        borderSide: BorderSide(color: colorScheme.primary, width: 1.5),
       ),
     );
   }
@@ -327,49 +443,47 @@ final class BlueTheme implements GDScriptTheme {
   }) {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius.medium),
-          side: BorderSide(color: colorScheme.primary),
-        ),
-        foregroundColor: colorScheme.onPrimary,
-        textStyle: TextStyle(
-          fontFamily: basicFontFamily,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.15,
-        ),
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        side: BorderSide(color: colorScheme.outlineVariant),
+        minimumSize: const Size(35, 35),
+        iconAlignment: .end,
       ),
     );
   }
 
   @override
-  TextButtonThemeData? textButtonTheme({required ColorScheme colorScheme, required TextTheme textTheme}) {
+  TextButtonThemeData? textButtonTheme({
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
+  }) {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: colorScheme.primary,
-        textStyle: TextStyle(
-          fontFamily: basicFontFamily,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.15,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius.medium),
-        ),
+        iconAlignment: .end,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
     );
   }
 
   @override
-  ListTileThemeData? listTileTheme({required ColorScheme colorScheme, required TextTheme textTheme}) {
-    // TODO: implement listTileTheme
-    throw UnimplementedError();
+  ListTileThemeData? listTileTheme({
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
+  }) {
+    return null;
   }
 
   @override
-  ProgressIndicatorThemeData? progressIndicatorTheme({required ColorScheme colorScheme, required TextTheme textTheme}) {
-    // TODO: implement progressIndicatorTheme
-    throw UnimplementedError();
+  ProgressIndicatorThemeData? progressIndicatorTheme({
+    required ColorScheme colorScheme,
+    required TextTheme textTheme,
+  }) {
+    return ProgressIndicatorThemeData(
+      color: colorScheme.primary,
+      linearTrackColor: colorScheme.surfaceContainerHigh,
+    );
   }
 }
 

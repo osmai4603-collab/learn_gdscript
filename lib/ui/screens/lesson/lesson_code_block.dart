@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../core/theme/arabic_ide_theme.dart';
-import '../../../core/theme/code_editor_theme.dart';
+import '../../../core/theme/editor_theme_extension.dart';
 import '../../widgets/code_directionality.dart';
 import '../../widgets/code_editor/syntax_highlighter.dart';
 
@@ -30,7 +29,7 @@ class LessonCodeBlock extends StatelessWidget {
                   TextSpan(
                     style: TextStyle(
                       color: codeTheme.foreground,
-                      fontFamily: ArabicIdeTheme.codeFontFamily(context),
+                      fontFamily: CodeEditorTheme.codeFontFamily,
                     ),
                     children: spans,
                   ),
