@@ -5,6 +5,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:learn_gdscript/data/models/review_schedule.dart';
 import 'package:learn_gdscript/ui/routers/app_routes.dart';
@@ -360,7 +361,10 @@ class _DesktopConceptMapSm2ScreenState
             dueTodayCount: widget.data.dueTodayCardsCount,
             retentionPercent: widget.data.averageRetentionRate,
           ),
-           Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
+          Divider(
+            height: 1,
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
 
           // 2. الهيكل الرئيسي لسطح المكتب
           Expanded(
@@ -399,7 +403,10 @@ class _DesktopConceptMapSm2ScreenState
                   return Row(
                     children: [
                       Expanded(flex: 7, child: main),
-                       VerticalDivider(width: 1, color: Theme.of(context).colorScheme.outlineVariant),
+                      VerticalDivider(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.outlineVariant,
+                      ),
                       SizedBox(width: 380, child: inspector),
                     ],
                   );
@@ -408,7 +415,10 @@ class _DesktopConceptMapSm2ScreenState
                   children: [
                     Expanded(flex: 6, child: main),
                     if (activeConcept != null) ...[
-                       Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
+                      Divider(
+                        height: 1,
+                        color: Theme.of(context).colorScheme.outlineVariant,
+                      ),
                       Expanded(flex: 4, child: inspector),
                     ],
                   ],
@@ -450,7 +460,7 @@ class _ConceptMapTopNav extends StatelessWidget {
           final title = Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-               Icon(
+              Icon(
                 Icons.psychology_rounded,
                 color: Theme.of(context).colorScheme.primary,
                 size: 24,
@@ -464,7 +474,7 @@ class _ConceptMapTopNav extends StatelessWidget {
                     'Concept Map & Spaced Repetition',
                   ),
                   overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -557,7 +567,7 @@ class _ConceptMapMainPanel extends StatelessWidget {
           isReviewDeckMode: isReviewDeckMode,
           onToggleMode: onToggleMode,
         ),
-         Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
+        Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
         Expanded(
           child: isReviewDeckMode
               ? _Sm2FlashcardDeckView(
@@ -605,7 +615,7 @@ class _MetricBadge extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             text,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 11,
               fontWeight: FontWeight.bold,
@@ -642,10 +652,12 @@ class _ConceptHeaderBanner extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child:  Icon(
+              child: Icon(
                 Icons.account_tree_rounded,
                 size: 20,
                 color: Theme.of(context).colorScheme.primary,
@@ -664,7 +676,7 @@ class _ConceptHeaderBanner extends StatelessWidget {
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style:  TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -680,7 +692,7 @@ class _ConceptHeaderBanner extends StatelessWidget {
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style:  TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 11,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -705,7 +717,7 @@ class _ConceptHeaderBanner extends StatelessWidget {
                     'بدء المراجعة ($dueCount)',
                     'Start review ($dueCount)',
                   ),
-            style: const TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -846,7 +858,9 @@ class _ConceptNodeWidget extends StatelessWidget {
         width: 170,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? Theme.of(context).colorScheme.surfaceContainerHigh : Theme.of(context).colorScheme.surfaceContainerLow,
+          color: isSelected
+              ? Theme.of(context).colorScheme.surfaceContainerHigh
+              : Theme.of(context).colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected
@@ -857,7 +871,9 @@ class _ConceptNodeWidget extends StatelessWidget {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.3),
                     blurRadius: 12,
                   ),
                 ]
@@ -884,7 +900,7 @@ class _ConceptNodeWidget extends StatelessWidget {
                         : node.category,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style:  TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 10,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -898,7 +914,7 @@ class _ConceptNodeWidget extends StatelessWidget {
               locale.languageCode == 'en' ? node.titleEn : node.titleAr,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -917,7 +933,7 @@ class _ConceptNodeWidget extends StatelessWidget {
                         'بعد ${node.daysUntilNextReview} يوم',
                         'In ${node.daysUntilNextReview} days',
                       ),
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 10,
                   color: node.daysUntilNextReview == 0
@@ -1037,7 +1053,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
             'لا توجد بطاقات مستحقة للمراجعة حالياً.',
             'There are no cards due for review.',
           ),
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 16,
             color: Theme.of(context).colorScheme.tertiary,
@@ -1058,12 +1074,14 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.shadow.withValues(
-                  alpha: 0.4,
-                ),
+                color: Theme.of(
+                  context,
+                ).colorScheme.shadow.withValues(alpha: 0.4),
                 blurRadius: 20,
                 offset: const Offset(0, 10),
               ),
@@ -1083,8 +1101,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                       'البطاقة ${currentIndex + 1} من ${cards.length}',
                       'Card ${currentIndex + 1} of ${cards.length}',
                     ),
-                    style:  TextStyle(
-                      fontFamily: 'JetBrains Mono',
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       fontSize: 12,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
@@ -1104,7 +1121,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                         'SM-2 • الفاصل ${card.currentIntervalDays} يوم',
                         'SM-2 • ${card.currentIntervalDays}-day interval',
                       ),
-                      style:  TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 10,
                         color: Theme.of(context).colorScheme.primary,
@@ -1120,7 +1137,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 locale.languageCode == 'en'
                     ? card.promptQuestionEn ?? card.promptQuestion
                     : card.promptQuestion,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -1137,14 +1154,15 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.outlineVariant,
+                  ),
                 ),
                 child: Directionality(
                   textDirection: TextDirection.ltr,
                   child: Text(
                     card.codeContext,
-                    style:  TextStyle(
-                      fontFamily: 'JetBrains Mono',
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       fontSize: 12,
                       color: Theme.of(context).colorScheme.primary,
                       height: 1.5,
@@ -1159,18 +1177,22 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.successContainer.withValues(alpha: 0.3),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.successContainer.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.4),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.tertiary.withValues(alpha: 0.4),
                     ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Text(
+                      Text(
                         'شرح الإجابة:',
-                        style: TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -1182,7 +1204,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                         locale.languageCode == 'en'
                             ? card.answerExplanationEn ?? card.answerExplanation
                             : card.answerExplanation,
-                        style:  TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 13,
                           color: Theme.of(context).colorScheme.onSurface,
@@ -1195,19 +1217,27 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                           width: double.infinity,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerLowest,
                             borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+                            border: Border.all(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.outlineVariant,
+                            ),
                           ),
                           child: Directionality(
                             textDirection: TextDirection.ltr,
                             child: Text(
                               card.answerCode,
-                              style:  TextStyle(
-                                fontFamily: 'JetBrains Mono',
-                                fontSize: 12,
-                                color: Theme.of(context).colorScheme.tertiary,
-                              ),
+                              style: CodeTextTheme.of(context).bodyMedium
+                                  .copyWith(
+                                    fontSize: 12,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.tertiary,
+                                  ),
                             ),
                           ),
                         ),
@@ -1264,7 +1294,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                     ),
                     child: Text(
                       _conceptMapCopy(context, 'كشف الإجابة', 'Reveal answer'),
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
@@ -1309,7 +1339,7 @@ class _Sm2RatingBtn extends StatelessWidget {
           child: Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -1346,10 +1376,12 @@ class _ConceptInspectorPanel extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child:  Icon(
+              child: Icon(
                 Icons.school_rounded,
                 color: Theme.of(context).colorScheme.primary,
                 size: 20,
@@ -1362,7 +1394,7 @@ class _ConceptInspectorPanel extends StatelessWidget {
                 children: [
                   Text(
                     isEnglish ? concept.titleEn : concept.titleAr,
-                    style:  TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -1371,7 +1403,7 @@ class _ConceptInspectorPanel extends StatelessWidget {
                   ),
                   Text(
                     _masteryLabel(context, concept.mastery),
-                    style:  TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 11,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1383,12 +1415,12 @@ class _ConceptInspectorPanel extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 18),
-         Divider(color: Theme.of(context).colorScheme.outlineVariant),
+        Divider(color: Theme.of(context).colorScheme.outlineVariant),
         const SizedBox(height: 14),
 
         Text(
           _conceptMapCopy(context, 'شرح المفهوم:', 'Concept overview:'),
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 12,
             fontWeight: FontWeight.bold,
@@ -1400,7 +1432,7 @@ class _ConceptInspectorPanel extends StatelessWidget {
           isEnglish
               ? concept.descriptionEn ?? concept.description
               : concept.description,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 12,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1412,7 +1444,7 @@ class _ConceptInspectorPanel extends StatelessWidget {
         if (concept.codeExample.isNotEmpty) ...[
           Text(
             _conceptMapCopy(context, 'مثال برمجي:', 'Code example:'),
-            style:  TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -1425,14 +1457,15 @@ class _ConceptInspectorPanel extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
             ),
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: Text(
                 concept.codeExample,
-                style:  TextStyle(
-                  fontFamily: 'JetBrains Mono',
+                style: CodeTextTheme.of(context).bodyMedium.copyWith(
                   fontSize: 11,
                   color: Theme.of(context).colorScheme.primary,
                   height: 1.5,
@@ -1447,14 +1480,16 @@ class _ConceptInspectorPanel extends StatelessWidget {
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 _conceptMapCopy(context, 'حالة المفهوم', 'Concept status'),
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1463,7 +1498,7 @@ class _ConceptInspectorPanel extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 _masteryLabel(context, concept.mastery),
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
@@ -1474,7 +1509,7 @@ class _ConceptInspectorPanel extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   '${_conceptMapCopy(context, 'آخر مراجعة:', 'Last reviewed:')} ${concept.lastReviewedDate}',
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 11,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1495,7 +1530,7 @@ class _ConceptInspectorPanel extends StatelessWidget {
                 'فتح الدرس المرتبط',
                 'Open linked lesson',
               ),
-              style: const TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
                 fontWeight: FontWeight.bold,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/repositories/workspace_repository.dart';
@@ -111,7 +112,11 @@ class _WorkspaceSearchScreenState extends State<WorkspaceSearchScreen> {
                 subtitle: SelectableText(
                   match['preview']! as String,
                   textDirection: TextDirection.ltr,
-                  style: const TextStyle(fontFamily: 'JetBrains Mono'),
+                  style: CodeTextTheme.of(context).bodySmall.copyWith(
+                    fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
+                    height: Theme.of(context).textTheme.bodySmall!.height,
+                    color: Theme.of(context).textTheme.bodySmall!.color,
+                  ),
                 ),
               ),
           ],

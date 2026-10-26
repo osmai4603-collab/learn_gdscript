@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../core/extensions/context_extensions.dart';
 
 class CodeActionsBar extends StatelessWidget {

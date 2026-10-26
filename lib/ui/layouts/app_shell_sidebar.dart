@@ -152,7 +152,7 @@ class SidebarItem extends StatelessWidget {
                 child: Text(
                   title,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: isActive ? 12 : 11.5,
                     fontWeight: isActive ? FontWeight.bold : FontWeight.w500,

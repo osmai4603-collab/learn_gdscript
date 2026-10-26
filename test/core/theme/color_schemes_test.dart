@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:learn_gdscript/core/theme/blue_theme.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
+import 'package:learn_gdscript/core/theme/godot_arabic_ide_theme.dart';
 import 'package:learn_gdscript/core/theme/theme_data.dart';
 
 void main() {
@@ -55,6 +58,24 @@ void main() {
         expect(luminances[index - 1], greaterThanOrEqualTo(luminances[index]));
       }
     });
+  });
+
+  test('all app themes provide code typography through ThemeData', () {
+    final themes = [
+      BlueTheme().light,
+      BlueTheme().dark,
+      GodotArabicIdeTheme().light,
+      GodotArabicIdeTheme().dark,
+    ];
+
+    for (final theme in themes) {
+      final codeTextTheme = theme.extension<CodeTextTheme>();
+      expect(codeTextTheme, isNotNull);
+      expect(
+        codeTextTheme!.bodyMedium.fontFamily,
+        CodeEditorTheme.codeFontFamily,
+      );
+    }
   });
 }
 

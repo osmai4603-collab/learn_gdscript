@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 import 'package:gdscript_engine/gdscript_engine.dart';
 
 class CodeCompletionOverlay extends StatelessWidget {
@@ -28,7 +29,10 @@ class CodeCompletionOverlay extends StatelessWidget {
             leading: const Icon(Icons.code, size: 18),
             title: Text(
               items[index].label,
-              style: const TextStyle(fontFamily: 'JetBrains Mono'),
+              style: CodeTextTheme.of(context).bodyMedium.copyWith(
+                fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
+                fontWeight: Theme.of(context).textTheme.titleMedium!.fontWeight,
+              ),
             ),
             subtitle: items[index].detail == null
                 ? null

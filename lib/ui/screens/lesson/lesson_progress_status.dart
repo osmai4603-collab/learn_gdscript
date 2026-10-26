@@ -26,7 +26,7 @@ class LessonProgressStatus extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Text(
             context.l10n.dashboardSaveError(error),
-            style: TextStyle(color: Theme.of(context).colorScheme.error),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.error),
           ),
         )
       else if (!saving && savedProgressSequence > 0 && savedCode != null)

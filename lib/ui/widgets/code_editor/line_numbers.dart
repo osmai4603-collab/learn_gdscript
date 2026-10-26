@@ -8,11 +8,15 @@ class LineNumbers extends StatelessWidget {
     required this.lineCount,
     required this.scrollController,
     required this.fontSize,
+    this.errorLines = const {},
+    this.warningLines = const {},
   });
 
   final int lineCount;
   final ScrollController scrollController;
   final double fontSize;
+  final Set<int> errorLines;
+  final Set<int> warningLines;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +37,13 @@ class LineNumbers extends StatelessWidget {
                   height: fontSize * 1.5,
                   child: Text(
                     '$line',
-                    style: TextStyle(
-                      color: editorTheme.lineNumber,
-                      fontFamily: CodeEditorTheme.codeFontFamily,
+                    textAlign: TextAlign.end,
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
+                      color: errorLines.contains(line)
+                          ? Theme.of(context).colorScheme.error
+                          : warningLines.contains(line)
+                          ? Theme.of(context).colorScheme.secondary
+                          : editorTheme.lineNumber,
                       fontSize: fontSize,
                       height: 1.5,
                     ),

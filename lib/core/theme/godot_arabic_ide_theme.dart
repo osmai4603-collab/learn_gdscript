@@ -247,32 +247,6 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
     );
   }
 
-  TextTheme getCodeTextTheme({required ColorScheme colorScheme}) {
-    return TextTheme(
-      bodyLarge: TextStyle(
-        fontFamily: codeFontFamily,
-        fontSize: 15,
-        fontWeight: FontWeight.w500,
-        height: 1.6,
-        color: colorScheme.onSurface,
-      ),
-      bodyMedium: TextStyle(
-        fontFamily: codeFontFamily,
-        fontSize: 13,
-        fontWeight: FontWeight.w400,
-        height: 1.54,
-        color: colorScheme.onSurface,
-      ),
-      bodySmall: TextStyle(
-        fontFamily: codeFontFamily,
-        fontSize: 11,
-        fontWeight: FontWeight.w400,
-        height: 1.45,
-        color: colorScheme.onSurface,
-      ),
-    );
-  }
-
   ThemeData _buildThemeData({
     required ColorScheme colorScheme,
     required CodeEditorTheme editorTheme,
@@ -290,7 +264,10 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
       fontFamily: basicFontFamily,
       fontFamilyFallback: const ['IBM Plex Sans Arabic'],
       textTheme: textTheme,
-      extensions: <ThemeExtension<dynamic>>[editorTheme],
+      extensions: <ThemeExtension<dynamic>>[
+        editorTheme,
+        CodeTextTheme.fromColorScheme(colorScheme),
+      ],
       scaffoldBackgroundColor: colorScheme.surface,
       canvasColor: colorScheme.surface,
       cardColor: colorScheme.surfaceContainerHigh,
@@ -362,17 +339,11 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
 
   @override
   ThemeData get light =>
-      _buildThemeData(
-        colorScheme: _lightScheme,
-        editorTheme: editorLightTheme,
-      );
+      _buildThemeData(colorScheme: _lightScheme, editorTheme: editorLightTheme);
 
   @override
   ThemeData get dark =>
-      _buildThemeData(
-        colorScheme: _darkScheme,
-        editorTheme: editorDarkTheme,
-      );
+      _buildThemeData(colorScheme: _darkScheme, editorTheme: editorDarkTheme);
 
   @override
   String get basicFontFamily => 'IBM Plex Sans';
@@ -401,8 +372,8 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
   }) {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: godotBlue,
-        foregroundColor: Colors.white,
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
         textStyle: textTheme.labelLarge,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius.medium),
@@ -421,8 +392,8 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
   }) {
     return FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        backgroundColor: godotBlue,
-        foregroundColor: Colors.white,
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
         textStyle: textTheme.labelLarge,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius.medium),
@@ -460,7 +431,7 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
   }) {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: godotBlue,
+        foregroundColor: colorScheme.primary,
         textStyle: textTheme.labelLarge,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius.medium),
@@ -477,13 +448,13 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
   }) {
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRadius.medium),
-      borderSide: const BorderSide(color: Color(0xFF3A4454)),
+      borderSide: BorderSide(color: colorScheme.outlineVariant),
     );
 
     return InputDecorationTheme(
       filled: true,
       isDense: true,
-      fillColor: const Color(0xFF171B20),
+      fillColor: colorScheme.surfaceContainerLow,
       hintStyle: textTheme.bodyMedium?.copyWith(
         color: colorScheme.onSurfaceVariant,
       ),
@@ -492,7 +463,7 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
       enabledBorder: border,
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius.medium),
-        borderSide: const BorderSide(color: godotBlue, width: 1.5),
+        borderSide: BorderSide(color: colorScheme.primary, width: 1.5),
       ),
     );
   }
@@ -551,7 +522,7 @@ final class GodotArabicIdeTheme implements GDScriptTheme {
     required TextTheme textTheme,
   }) {
     return ProgressIndicatorThemeData(
-      color: godotBlue,
+      color: colorScheme.primary,
       linearTrackColor: colorScheme.surfaceContainerHigh,
       circularTrackColor: colorScheme.surfaceContainerHigh,
     );

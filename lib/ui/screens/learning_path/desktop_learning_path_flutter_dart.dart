@@ -5,6 +5,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:learn_gdscript/ui/routers/app_routes.dart';
 
@@ -446,14 +447,12 @@ class _DesktopLearningPathScreenState extends State<DesktopLearningPathScreen>
                     children: [
                       _LearningPathPageHeader(
                         data: pathData,
-                        onShowConceptMap: () =>
-                            widget.onNavigateRoute?.call(
-                              AppRoutes.spacedRepetition,
-                            ),
-                        onStartReview: () =>
-                            widget.onNavigateRoute?.call(
-                              AppRoutes.spacedRepetition,
-                            ),
+                        onShowConceptMap: () => widget.onNavigateRoute?.call(
+                          AppRoutes.spacedRepetition,
+                        ),
+                        onStartReview: () => widget.onNavigateRoute?.call(
+                          AppRoutes.spacedRepetition,
+                        ),
                       ),
                       const SizedBox(height: 24),
                       _LearningPathProgressStrip(
@@ -481,10 +480,8 @@ class _DesktopLearningPathScreenState extends State<DesktopLearningPathScreen>
                                 activeLesson: activeLesson,
                                 onStartReview: () => widget.onNavigateRoute
                                     ?.call(AppRoutes.spacedRepetition),
-                                onOpenWorkspace: () =>
-                                    widget.onNavigateRoute?.call(
-                                      AppRoutes.workspace,
-                                    ),
+                                onOpenWorkspace: () => widget.onNavigateRoute
+                                    ?.call(AppRoutes.workspace),
                               ),
                             ),
                           ],
@@ -495,12 +492,11 @@ class _DesktopLearningPathScreenState extends State<DesktopLearningPathScreen>
                         _LearningPathInsights(
                           data: pathData,
                           activeLesson: activeLesson,
-                          onStartReview: () => widget.onNavigateRoute
-                              ?.call(AppRoutes.spacedRepetition),
+                          onStartReview: () => widget.onNavigateRoute?.call(
+                            AppRoutes.spacedRepetition,
+                          ),
                           onOpenWorkspace: () =>
-                              widget.onNavigateRoute?.call(
-                                AppRoutes.workspace,
-                              ),
+                              widget.onNavigateRoute?.call(AppRoutes.workspace),
                         ),
                       ],
                     ],
@@ -575,14 +571,20 @@ class _LearningPathPageHeader extends StatelessWidget {
         Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           spacing: 8,
-          children:  [
-            Text('أكاديمية جودو', style: _LearningPathTextStyles.breadcrumb(context)),
+          children: [
+            Text(
+              'أكاديمية جودو',
+              style: _LearningPathTextStyles.breadcrumb(context),
+            ),
             Icon(
               Icons.chevron_left_rounded,
               size: 16,
               color: Theme.of(context).colorScheme.outline,
             ),
-            Text('منهج 2025', style: _LearningPathTextStyles.breadcrumb(context)),
+            Text(
+              'منهج 2025',
+              style: _LearningPathTextStyles.breadcrumb(context),
+            ),
             Icon(
               Icons.chevron_left_rounded,
               size: 16,
@@ -608,7 +610,7 @@ class _LearningPathPageHeader extends StatelessWidget {
                 children: [
                   Text(
                     'مسار التعلّم وخريطة المفاهيم البرمجية',
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: MediaQuery.sizeOf(context).width < 700
                           ? 26
@@ -624,7 +626,7 @@ class _LearningPathPageHeader extends StatelessWidget {
                     runSpacing: 8,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                       _StatusPill(
+                      _StatusPill(
                         icon: Icons.verified_rounded,
                         label: 'Godot v4.3 Engine Verified',
                         color: Theme.of(context).colorScheme.tertiary,
@@ -672,11 +674,13 @@ class _LearningPathPageHeader extends StatelessWidget {
           ],
         ),
         if (totalLessons == 0)
-           Padding(
+          Padding(
             padding: EdgeInsets.only(top: 12),
             child: Text(
               'لا توجد دروس مضافة إلى هذا المسار بعد.',
-              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ),
       ],
@@ -715,7 +719,9 @@ class _LearningPathProgressStrip extends StatelessWidget {
         color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.45),
+          color: Theme.of(
+            context,
+          ).colorScheme.outlineVariant.withValues(alpha: 0.45),
         ),
       ),
       child: Column(
@@ -787,8 +793,10 @@ class _LearningPathProgressStrip extends StatelessWidget {
             child: LinearProgressIndicator(
               value: totalLessons == 0 ? 0 : curriculumProgress,
               minHeight: 8,
-              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
-              valueColor:  AlwaysStoppedAnimation(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHigh,
+              valueColor: AlwaysStoppedAnimation(
                 Theme.of(context).colorScheme.tertiary,
               ),
             ),
@@ -818,8 +826,10 @@ class _LearningPathProgressStrip extends StatelessWidget {
             child: LinearProgressIndicator(
               value: progressToNextLevel,
               minHeight: 3,
-              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
-              valueColor:  AlwaysStoppedAnimation(
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHigh,
+              valueColor: AlwaysStoppedAnimation(
                 Theme.of(context).colorScheme.primary,
               ),
             ),
@@ -873,7 +883,7 @@ class _ProgressMilestone extends StatelessWidget {
                 title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: color,
                   fontWeight: FontWeight.w600,
                   fontSize: 12,
@@ -950,7 +960,9 @@ class _ModuleCard extends StatelessWidget {
         border: Border.all(
           color: isActive
               ? accent.withValues(alpha: 0.75)
-              : Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.4),
+              : Theme.of(
+                  context,
+                ).colorScheme.outlineVariant.withValues(alpha: 0.4),
           width: isActive ? 1.3 : 1,
         ),
         boxShadow: isActive
@@ -982,12 +994,12 @@ class _ModuleCard extends StatelessWidget {
                         ? Icon(Icons.check_rounded, color: accent, size: 25)
                         : Text(
                             (index + 1).toString().padLeft(2, '0'),
-                            style: TextStyle(
-                              fontFamily: 'JetBrains Mono',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
-                              color: accent,
-                            ),
+                            style: CodeTextTheme.of(context).bodyMedium
+                                .copyWith(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: accent,
+                                ),
                           ),
                   ),
                 ),
@@ -1008,11 +1020,12 @@ class _ModuleCard extends StatelessWidget {
                             children: [
                               Text(
                                 module.moduleNumber,
-                                style: TextStyle(
-                                  color: accent,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium!
+                                    .copyWith(
+                                      color: accent,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                               ),
                               _ModuleStatusLabel(
                                 label: isCompleted
@@ -1027,24 +1040,27 @@ class _ModuleCard extends StatelessWidget {
                           const SizedBox(height: 5),
                           Text(
                             module.title,
-                            style: TextStyle(
-                              fontFamily: 'IBM Plex Sans Arabic',
-                              fontSize: 17,
-                              height: 1.5,
-                              fontWeight: FontWeight.w700,
-                              color: isLocked
-                                  ? Theme.of(context).colorScheme.onSurfaceVariant
-                                  : Theme.of(context).colorScheme.onSurface,
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium!
+                                .copyWith(
+                                  fontFamily: 'IBM Plex Sans Arabic',
+                                  fontSize: 17,
+                                  height: 1.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: isLocked
+                                      ? Theme.of(
+                                          context,
+                                        ).colorScheme.onSurfaceVariant
+                                      : Theme.of(context).colorScheme.onSurface,
+                                ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             module.subtitle,
-                            style:  TextStyle(
-                              fontFamily: 'JetBrains Mono',
-                              fontSize: 10,
-                              color: Theme.of(context).colorScheme.outline,
-                            ),
+                            style: CodeTextTheme.of(context).bodyMedium
+                                .copyWith(
+                                  fontSize: 10,
+                                  color: Theme.of(context).colorScheme.outline,
+                                ),
                           ),
                         ],
                       ),
@@ -1057,8 +1073,7 @@ class _ModuleCard extends StatelessWidget {
                   children: [
                     Text(
                       '${(module.progress * 100).round()}%',
-                      style: TextStyle(
-                        fontFamily: 'JetBrains Mono',
+                      style: CodeTextTheme.of(context).bodyMedium.copyWith(
                         color: accent,
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
@@ -1072,7 +1087,9 @@ class _ModuleCard extends StatelessWidget {
                         child: LinearProgressIndicator(
                           value: module.progress,
                           minHeight: 5,
-                          backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.surfaceContainerHigh,
                           valueColor: AlwaysStoppedAnimation(accent),
                         ),
                       ),
@@ -1094,7 +1111,7 @@ class _ModuleCard extends StatelessWidget {
               children: [
                 Text(
                   module.description,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                     height: 1.8,
@@ -1135,11 +1152,14 @@ class _ModuleCard extends StatelessWidget {
                           icon: const Icon(Icons.open_in_new_rounded, size: 15),
                           label: const Text('تفاصيل الوحدة'),
                           style: TextButton.styleFrom(
-                            foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                            textStyle: const TextStyle(
-                              fontFamily: 'IBM Plex Sans Arabic',
-                              fontSize: 11,
-                            ),
+                            foregroundColor: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
+                            textStyle: Theme.of(context).textTheme.bodyMedium!
+                                .copyWith(
+                                  fontFamily: 'IBM Plex Sans Arabic',
+                                  fontSize: 11,
+                                ),
                           ),
                         ),
                         TextButton.icon(
@@ -1154,12 +1174,15 @@ class _ModuleCard extends StatelessWidget {
                             isExpanded ? 'إخفاء الدروس' : 'عرض الدروس',
                           ),
                           style: TextButton.styleFrom(
-                            foregroundColor: Theme.of(context).colorScheme.primary,
-                            textStyle: const TextStyle(
-                              fontFamily: 'IBM Plex Sans Arabic',
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            foregroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
+                            textStyle: Theme.of(context).textTheme.bodyMedium!
+                                .copyWith(
+                                  fontFamily: 'IBM Plex Sans Arabic',
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                         ),
                       ],
@@ -1172,7 +1195,9 @@ class _ModuleCard extends StatelessWidget {
           if (isExpanded) ...[
             Divider(
               height: 1,
-              color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.45),
+              color: Theme.of(
+                context,
+              ).colorScheme.outlineVariant.withValues(alpha: 0.45),
             ),
             Padding(
               padding: const EdgeInsets.all(16),
@@ -1255,7 +1280,9 @@ class _LessonCard extends StatelessWidget {
             border: Border.all(
               color: isActive
                   ? accent.withValues(alpha: 0.6)
-                  : Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.35),
+                  : Theme.of(
+                      context,
+                    ).colorScheme.outlineVariant.withValues(alpha: 0.35),
             ),
           ),
           child: Column(
@@ -1299,7 +1326,7 @@ class _LessonCard extends StatelessWidget {
                           : isActive
                           ? 'الدرس الحالي'
                           : 'قريباً',
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: accent,
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
@@ -1317,7 +1344,7 @@ class _LessonCard extends StatelessWidget {
                 lesson.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   height: 1.55,
@@ -1330,7 +1357,7 @@ class _LessonCard extends StatelessWidget {
                 lesson.briefDescription,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   height: 1.65,
@@ -1391,7 +1418,7 @@ class _LearningPathInsights extends StatelessWidget {
         _InsightPanel(
           title: 'لوحة الإتقان والإحصائيات',
           icon: Icons.insights_rounded,
-          trailing:  _StatusPill(
+          trailing: _StatusPill(
             icon: Icons.circle,
             label: 'مباشر',
             color: Theme.of(context).colorScheme.tertiary,
@@ -1432,10 +1459,14 @@ class _LearningPathInsights extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.75),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.surface.withValues(alpha: 0.75),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.3),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outlineVariant.withValues(alpha: 0.3),
                   ),
                 ),
                 child: Column(
@@ -1452,28 +1483,36 @@ class _LearningPathInsights extends StatelessWidget {
                         height: 200,
                         child: CustomPaint(
                           painter: _MasteryRadarPainter(
-                            Theme.of(context).colorScheme,
+                            colorScheme: Theme.of(context).colorScheme,
+                            labelStyle: Theme.of(context).textTheme.bodySmall!
+                                .copyWith(
+                                  fontFamily: 'IBM Plex Sans Arabic',
+                                  fontSize: 10,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
+                                ),
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 4),
-                     Wrap(
+                    Wrap(
                       alignment: WrapAlignment.spaceBetween,
                       runSpacing: 4,
                       children: [
                         Text(
                           'أعلى مهارة: الصياغة والأوامر (95%)',
-                          style: TextStyle(
-                            fontFamily: 'IBM Plex Sans Arabic',
-                            fontSize: 9,
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(
+                                fontFamily: 'IBM Plex Sans Arabic',
+                                fontSize: 9,
+                                color: Theme.of(context).colorScheme.outline,
+                              ),
                         ),
                         Text(
                           'مستوى GDScript 4',
-                          style: TextStyle(
-                            fontFamily: 'JetBrains Mono',
+                          style: CodeTextTheme.of(context).bodyMedium.copyWith(
                             fontSize: 9,
                             color: Theme.of(context).colorScheme.primary,
                           ),
@@ -1487,10 +1526,14 @@ class _LearningPathInsights extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.75),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.surface.withValues(alpha: 0.75),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.3),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outlineVariant.withValues(alpha: 0.3),
                   ),
                 ),
                 child: Column(
@@ -1515,8 +1558,10 @@ class _LearningPathInsights extends StatelessWidget {
                                           1 << 30,
                                         ),
                               minHeight: 7,
-                              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
-                              valueColor:  AlwaysStoppedAnimation(
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.surfaceContainerHigh,
+                              valueColor: AlwaysStoppedAnimation(
                                 Theme.of(context).colorScheme.primary,
                               ),
                             ),
@@ -1525,8 +1570,7 @@ class _LearningPathInsights extends StatelessWidget {
                         const SizedBox(width: 10),
                         Text(
                           data.overallProgressPercent,
-                          style: TextStyle(
-                            fontFamily: 'JetBrains Mono',
+                          style: CodeTextTheme.of(context).bodyMedium.copyWith(
                             color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.w700,
                           ),
@@ -1548,7 +1592,7 @@ class _LearningPathInsights extends StatelessWidget {
         _InsightPanel(
           title: 'المراجعة التكرارية',
           icon: Icons.psychology_alt_rounded,
-          trailing:  _ModuleStatusLabel(
+          trailing: _ModuleStatusLabel(
             label: 'مراجعة يومية',
             color: Theme.of(context).colorScheme.secondary,
           ),
@@ -1558,7 +1602,9 @@ class _LearningPathInsights extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.75),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.surface.withValues(alpha: 0.75),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -1572,7 +1618,7 @@ class _LearningPathInsights extends StatelessWidget {
                     Text(
                       activeLesson?.title ??
                           'استكشف دروس المسار واختر ما تريد مراجعته.',
-                      style:  TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 14,
@@ -1584,7 +1630,7 @@ class _LearningPathInsights extends StatelessWidget {
                       const SizedBox(height: 6),
                       Text(
                         activeLesson!.briefDescription,
-                        style:  TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontSize: 11,
@@ -1602,10 +1648,12 @@ class _LearningPathInsights extends StatelessWidget {
                 iconAlignment: .end,
                 label: const Text('فتح خريطة المراجعة'),
                 style: FilledButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.secondaryContainer,
                   foregroundColor: Theme.of(context).colorScheme.onSecondary,
                   padding: const EdgeInsets.symmetric(vertical: 13),
-                  textStyle: const TextStyle(
+                  textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontWeight: FontWeight.w700,
                   ),
@@ -1677,22 +1725,25 @@ class _LearningPathInsights extends StatelessWidget {
             children: [
               Row(
                 children: [
-                   Icon(
+                  Icon(
                     Icons.circle,
                     size: 8,
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
                   const SizedBox(width: 8),
-                   Expanded(
+                  Expanded(
                     child: Text(
                       'محرك Godot متصل',
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 12,
                       ),
                     ),
                   ),
-                  Text('v4.3', style: _LearningPathTextStyles.monoMuted(context)),
+                  Text(
+                    'v4.3',
+                    style: _LearningPathTextStyles.monoMuted(context),
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -1702,7 +1753,7 @@ class _LearningPathInsights extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child:  Row(
+                child: Row(
                   children: [
                     Icon(
                       Icons.folder_rounded,
@@ -1713,7 +1764,7 @@ class _LearningPathInsights extends StatelessWidget {
                     Expanded(
                       child: Text(
                         'مساحة العمل جاهزة لتطبيق الدروس',
-                        style: TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontSize: 11,
@@ -1731,10 +1782,12 @@ class _LearningPathInsights extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Theme.of(context).colorScheme.onSurface,
                   side: BorderSide(
-                    color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.7),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outlineVariant.withValues(alpha: 0.7),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 12),
-                  textStyle: const TextStyle(
+                  textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -1753,9 +1806,13 @@ class _LearningPathInsights extends StatelessWidget {
 }
 
 class _MasteryRadarPainter extends CustomPainter {
-  const _MasteryRadarPainter(this.colorScheme);
+  const _MasteryRadarPainter({
+    required this.colorScheme,
+    required this.labelStyle,
+  });
 
   final ColorScheme colorScheme;
+  final TextStyle labelStyle;
 
   static const _outerRing = [
     Offset(100, 20),
@@ -1838,14 +1895,7 @@ class _MasteryRadarPainter extends CustomPainter {
     TextAlign align,
   ) {
     final textPainter = TextPainter(
-      text: TextSpan(
-        text: text,
-        style: TextStyle(
-          fontFamily: 'IBM Plex Sans Arabic',
-          fontSize: 10,
-          color: colorScheme.onSurfaceVariant,
-        ),
-      ),
+      text: TextSpan(text: text, style: labelStyle),
       textDirection: TextDirection.rtl,
       textAlign: align,
     )..layout();
@@ -1883,7 +1933,9 @@ class _InsightPanel extends StatelessWidget {
       color: Theme.of(context).colorScheme.surfaceContainerLow,
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
-        color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.4),
+        color: Theme.of(
+          context,
+        ).colorScheme.outlineVariant.withValues(alpha: 0.4),
       ),
     ),
     child: Column(
@@ -1896,7 +1948,7 @@ class _InsightPanel extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 14,
@@ -1944,8 +1996,7 @@ class _MiniStat extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             value,
-            style: TextStyle(
-              fontFamily: 'JetBrains Mono',
+            style: CodeTextTheme.of(context).bodyMedium.copyWith(
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: color,
@@ -1957,7 +2008,7 @@ class _MiniStat extends StatelessWidget {
           label,
           textAlign: TextAlign.center,
           maxLines: 2,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 9,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -2012,7 +2063,7 @@ class _AchievementTile extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
@@ -2024,10 +2075,12 @@ class _AchievementTile extends StatelessWidget {
                   subtitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 9,
-                    color: unlocked ? color : Theme.of(context).colorScheme.outline,
+                    color: unlocked
+                        ? color
+                        : Theme.of(context).colorScheme.outline,
                   ),
                 ),
               ],
@@ -2049,14 +2102,20 @@ class _FinalProjectCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
-      gradient:  LinearGradient(
-        colors: [Theme.of(context).colorScheme.surfaceContainerHigh, Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.surfaceContainerHigh],
-          begin: AlignmentGeometry.centerStart,
-          end: AlignmentGeometry.centerEnd,
+      gradient: LinearGradient(
+        colors: [
+          Theme.of(context).colorScheme.surfaceContainerHigh,
+          Theme.of(context).colorScheme.surfaceContainer,
+          Theme.of(context).colorScheme.surfaceContainerHigh,
+        ],
+        begin: AlignmentGeometry.centerStart,
+        end: AlignmentGeometry.centerEnd,
       ),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
-        color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.55),
+        color: Theme.of(
+          context,
+        ).colorScheme.outlineVariant.withValues(alpha: 0.55),
       ),
     ),
     child: Wrap(
@@ -2073,23 +2132,25 @@ class _FinalProjectCard extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.13),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.secondary.withValues(alpha: 0.13),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child:  Icon(
+                child: Icon(
                   Icons.military_tech_rounded,
                   color: Theme.of(context).colorScheme.secondary,
                   size: 26,
                 ),
               ),
               const SizedBox(width: 12),
-               Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'مشروع الإتقان النهائي',
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         color: Theme.of(context).colorScheme.secondary,
                         fontSize: 11,
@@ -2099,7 +2160,7 @@ class _FinalProjectCard extends StatelessWidget {
                     SizedBox(height: 4),
                     Text(
                       'لعبة مصغّرة متكاملة في Godot',
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 15,
@@ -2109,7 +2170,7 @@ class _FinalProjectCard extends StatelessWidget {
                     SizedBox(height: 3),
                     Text(
                       'طبّق ما تعلمته في مشروع واحد يجمع أساسيات GDScript.',
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 11,
@@ -2138,7 +2199,7 @@ class _FinalProjectCard extends StatelessWidget {
                 ? Theme.of(context).colorScheme.onPrimary
                 : Theme.of(context).colorScheme.outline,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
-            textStyle: const TextStyle(
+            textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
               fontWeight: FontWeight.w700,
@@ -2179,7 +2240,7 @@ class _StatusPill extends StatelessWidget {
         const SizedBox(width: 5),
         Text(
           label,
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             color: color,
             fontSize: 10,
@@ -2216,12 +2277,14 @@ class _HeaderAction extends StatelessWidget {
       icon: Icon(icon, size: 16),
       label: Text(label),
       style: TextButton.styleFrom(
-        foregroundColor: selected ? Theme.of(context).colorScheme.onPrimaryContainer : color,
+        foregroundColor: selected
+            ? Theme.of(context).colorScheme.onPrimaryContainer
+            : color,
         backgroundColor: selected
             ? Theme.of(context).colorScheme.primary
             : Theme.of(context).colorScheme.surfaceContainerLow,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-        textStyle: const TextStyle(
+        textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
           fontFamily: 'IBM Plex Sans Arabic',
           fontSize: 11,
           fontWeight: FontWeight.w600,
@@ -2247,7 +2310,7 @@ class _ModuleStatusLabel extends StatelessWidget {
     ),
     child: Text(
       label,
-      style: TextStyle(
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
         fontFamily: 'IBM Plex Sans Arabic',
         color: color,
         fontSize: 9,
@@ -2258,62 +2321,57 @@ class _ModuleStatusLabel extends StatelessWidget {
 }
 
 class _MetadataChip extends StatelessWidget {
-   const _MetadataChip({
-    required this.icon,
-    required this.label,
-     this.color,
-  });
+  const _MetadataChip({required this.icon, required this.label, this.color});
 
   final IconData icon;
   final String label;
-   final Color? color;
+  final Color? color;
 
   @override
-   Widget build(BuildContext context) {
-     final color = this.color ?? Theme.of(context).colorScheme.onSurfaceVariant;
-     return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
-    decoration: BoxDecoration(
-      color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.65),
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 13, color: color),
-        const SizedBox(width: 5),
-        Text(
-          label,
-          style: TextStyle(
-            fontFamily: 'IBM Plex Sans Arabic',
-            fontSize: 10,
-            color: color,
+  Widget build(BuildContext context) {
+    final color = this.color ?? Theme.of(context).colorScheme.onSurfaceVariant;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.65),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 13, color: color),
+          const SizedBox(width: 5),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontFamily: 'IBM Plex Sans Arabic',
+              fontSize: 10,
+              color: color,
+            ),
           ),
-        ),
-      ],
-    ),
+        ],
+      ),
     );
   }
 }
 
 class _LearningPathTextStyles {
-  static TextStyle breadcrumb(BuildContext context) => TextStyle(
-    fontFamily: 'IBM Plex Sans Arabic',
-    fontSize: 11,
-    color: Theme.of(context).colorScheme.outline,
-  );
+  static TextStyle breadcrumb(BuildContext context) =>
+      Theme.of(context).textTheme.bodyMedium!.copyWith(
+        fontFamily: 'IBM Plex Sans Arabic',
+        fontSize: 11,
+        color: Theme.of(context).colorScheme.outline,
+      );
 
-  static TextStyle monoMuted(BuildContext context) => TextStyle(
-    fontFamily: 'JetBrains Mono',
-    fontSize: 10,
-    color: Theme.of(context).colorScheme.onSurfaceVariant,
-  );
+  static TextStyle monoMuted(BuildContext context) =>
+      CodeTextTheme.of(context).bodyMedium.copyWith(
+        fontSize: 10,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
+      );
 
-  static TextStyle monoSubtle(BuildContext context) => TextStyle(
-    fontFamily: 'JetBrains Mono',
-    fontSize: 9,
-    color: Theme.of(context).colorScheme.outline,
-  );
+  static TextStyle monoSubtle(BuildContext context) => CodeTextTheme.of(context)
+      .bodyMedium
+      .copyWith(fontSize: 9, color: Theme.of(context).colorScheme.outline);
 }
 
 class _CapstoneProjectCard extends StatelessWidget {
@@ -2337,10 +2395,12 @@ class _CapstoneProjectCard extends StatelessWidget {
           width: 38,
           height: 38,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.12),
+            color: Theme.of(
+              context,
+            ).colorScheme.secondary.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(11),
           ),
-          child:  Icon(
+          child: Icon(
             Icons.military_tech_rounded,
             color: Theme.of(context).colorScheme.secondary,
             size: 20,
@@ -2353,7 +2413,7 @@ class _CapstoneProjectCard extends StatelessWidget {
             children: [
               Text(
                 project.title,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -2363,7 +2423,7 @@ class _CapstoneProjectCard extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 project.description,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 10,
                   height: 1.6,
@@ -2373,7 +2433,7 @@ class _CapstoneProjectCard extends StatelessWidget {
               const SizedBox(height: 5),
               Text(
                 'المكافأة: +${project.xpReward} XP • ${project.badgeReward}',
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 10,
                   color: Theme.of(context).colorScheme.secondary,

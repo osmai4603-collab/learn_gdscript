@@ -73,7 +73,9 @@ class LessonMarkdownContent extends StatelessWidget {
             ),
             const TextSpan(text: '\u2069'),
           ],
-          style: TextStyle(fontFamily: CodeEditorTheme.codeFontFamily),
+          style: CodeTextTheme.of(context).bodySmall.copyWith(
+            fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
+          ),
         ),
       );
       offset = match.end;

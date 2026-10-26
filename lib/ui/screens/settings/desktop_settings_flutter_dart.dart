@@ -6,6 +6,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:learn_gdscript/ui/routers/app_routes.dart';
 
@@ -94,38 +95,6 @@ class SettingsDataModel {
     required this.accountType,
   });
 
-  static SettingsDataModel sampleData() {
-    return const SettingsDataModel(
-      activeCategory: SettingsCategory.editor,
-      editor: EditorPreferencesModel(
-        fontSize: 14,
-        fontFamily: 'JetBrains Mono',
-        tabSize: 4,
-        insertSpaces: true,
-        showLineNumbers: true,
-        enableWordWrap: false,
-        highlightActiveLine: true,
-        autoCloseBrackets: true,
-      ),
-      engineLsp: EngineLspPreferencesModel(
-        godotBinaryPath: '/usr/local/bin/godot4',
-        lspServerAddress: '127.0.0.1',
-        lspPort: 6005,
-        autoStartLsp: true,
-        strictTypingWarnings: true,
-        unreachableCodeWarnings: true,
-        targetFpsLimit: 60,
-      ),
-      appearance: AppAppearancePreferencesModel(
-        themeMode: 'داكن (Godot 4 Dark)',
-        uiFont: 'IBM Plex Sans Arabic',
-        enableGpuVsync: true,
-        enableCodeMinimap: false,
-      ),
-      userEmail: 'tariq.godot@academy.dev',
-      accountType: 'Godot Developer Pro',
-    );
-  }
 }
 
 // -----------------------------------------------------------------------------
@@ -192,7 +161,7 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
         backgroundColor: Theme.of(context).colorScheme.successContainer,
         content: Text(
           'تم حفظ كافة التفضيلات بنجاح وتمت مزامنتها مع محرك Godot 4.3 ✓',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             color: Theme.of(context).colorScheme.onTertiaryContainer,
           ),
@@ -234,7 +203,7 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
                           ),
                           child: Text(
                             'أقسام التفضيلات',
-                            style: TextStyle(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -382,7 +351,7 @@ class _SettingsTopNav extends StatelessWidget {
               SizedBox(width: 8),
               Text(
                 'أكاديمية جودو',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -390,11 +359,11 @@ class _SettingsTopNav extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 8),
-              Text('/', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+              Text('/', style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
               SizedBox(width: 8),
               Text(
                 'الإعدادات وتفضيلات النظام وبيئة المحرك (Desktop Settings)',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 13,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -406,9 +375,9 @@ class _SettingsTopNav extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: onSave,
             icon: const Icon(Icons.save_rounded, size: 16),
-            label: const Text(
+            label: Text(
               'حفظ التغييرات (Ctrl+S) ↵',
-              style: TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -474,7 +443,7 @@ class _CategoryTabTile extends StatelessWidget {
               const SizedBox(width: 12),
               Text(
                 title,
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 13,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
@@ -523,7 +492,7 @@ class _EditorSettingsForm extends StatelessWidget {
       children: [
          Text(
           'تفضيلات محرر الكود (GDScript Editor)',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -533,7 +502,7 @@ class _EditorSettingsForm extends StatelessWidget {
         const SizedBox(height: 6),
          Text(
           'تخصيص مقاس الخط، التباعد، وسلوك الإكمال التلقائي في بيئة التطوير.',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -569,8 +538,7 @@ class _EditorSettingsForm extends StatelessWidget {
           control: DropdownButton<int>(
             value: tabSize,
             dropdownColor: Theme.of(context).colorScheme.surfaceContainerLow,
-            style:  TextStyle(
-              fontFamily: 'JetBrains Mono',
+            style: CodeTextTheme.of(context).bodyMedium.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
             items: const [
@@ -645,7 +613,7 @@ class _EngineLspSettingsForm extends StatelessWidget {
               children:  [
                 Text(
                   'خادم اللغة LSP ومحرك Godot 4.3',
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -655,7 +623,7 @@ class _EngineLspSettingsForm extends StatelessWidget {
                 SizedBox(height: 4),
                 Text(
                   'إدارة جسر الاتصال المحلي ومسارات تشغيل المحرك وبروتوكول JSON-RPC 2.0.',
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 13,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -666,9 +634,9 @@ class _EngineLspSettingsForm extends StatelessWidget {
             OutlinedButton.icon(
               onPressed: onOpenDiagnostics,
               icon: const Icon(Icons.monitor_heart_rounded, size: 16),
-              label: const Text(
+              label: Text(
                 'فتح سجل التشخيصات المباشر ↵',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
                 ),
@@ -690,7 +658,7 @@ class _EngineLspSettingsForm extends StatelessWidget {
         // مسار ملف Godot التنفيذي
          Text(
           'مسار المحرك التنفيذي (Godot Executable Path):',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
             fontWeight: FontWeight.bold,
@@ -709,8 +677,7 @@ class _EngineLspSettingsForm extends StatelessWidget {
             textDirection: TextDirection.ltr,
             child: TextField(
               controller: godotPathController,
-              style:  TextStyle(
-                fontFamily: 'JetBrains Mono',
+              style: CodeTextTheme.of(context).bodyMedium.copyWith(
                 fontSize: 13,
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -723,7 +690,7 @@ class _EngineLspSettingsForm extends StatelessWidget {
         // منفذ خادم LSP
          Text(
           'منفذ الاتصال المحلي (LSP Port):',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
             fontWeight: FontWeight.bold,
@@ -744,8 +711,7 @@ class _EngineLspSettingsForm extends StatelessWidget {
             child: TextField(
               controller: portController,
               keyboardType: TextInputType.number,
-              style:  TextStyle(
-                fontFamily: 'JetBrains Mono',
+              style: CodeTextTheme.of(context).bodyMedium.copyWith(
                 fontSize: 13,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
@@ -787,7 +753,7 @@ class _AppearanceSettingsForm extends StatelessWidget {
       children: [
          Text(
           'المظهر والسمة البصرية',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -797,7 +763,7 @@ class _AppearanceSettingsForm extends StatelessWidget {
         const SizedBox(height: 6),
          Text(
           'تخصيص نسق الألوان بما يطابق واجهة محرك Godot الرسمية وتفضيلات شاشتك.',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -820,7 +786,7 @@ class _AppearanceSettingsForm extends StatelessWidget {
             ),
             child: Text(
               appearance.themeMode,
-              style:  TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
                 color: Theme.of(context).colorScheme.primary,
@@ -836,7 +802,7 @@ class _AppearanceSettingsForm extends StatelessWidget {
           subtitle: 'خط معتمد عالي الوضوح للغة العربية في البرمجيات التقنية.',
           control: Text(
             appearance.uiFont,
-            style:  TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 13,
               color: Theme.of(context).colorScheme.onSurface,
@@ -866,7 +832,7 @@ class _AccountSettingsForm extends StatelessWidget {
       children: [
          Text(
           'الحساب والمسار الأكاديمي',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -876,7 +842,7 @@ class _AccountSettingsForm extends StatelessWidget {
         const SizedBox(height: 6),
          Text(
           'بيانات حساب المتعلّم وإعادة تقييم المستوى الأكاديمي.',
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -892,8 +858,7 @@ class _AccountSettingsForm extends StatelessWidget {
               'مرتبط بحساب حفظ ومزامنة مسارات التعلّم ومشاريع مساحة العمل.',
           control: Text(
             email,
-            style:  TextStyle(
-              fontFamily: 'JetBrains Mono',
+            style: CodeTextTheme.of(context).bodyMedium.copyWith(
               fontSize: 13,
               color: Theme.of(context).colorScheme.onSurface,
             ),
@@ -913,7 +878,7 @@ class _AccountSettingsForm extends StatelessWidget {
             ),
             child: Text(
               accountType,
-              style:  TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 11,
                 color: Theme.of(context).colorScheme.tertiary,
@@ -939,7 +904,7 @@ class _AccountSettingsForm extends StatelessWidget {
                 children:  [
                   Text(
                     'إعادة اختبار تحديد المستوى الأكاديمي',
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -949,7 +914,7 @@ class _AccountSettingsForm extends StatelessWidget {
                   SizedBox(height: 4),
                   Text(
                     'إعادة ضبط مسار التعلّم وخوض التقييم التشخيصي للبدء من نقطة انطلاق جديدة.',
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 12,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -966,9 +931,9 @@ class _AccountSettingsForm extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'إعادة التقييم ↵',
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                   ),
@@ -1004,7 +969,7 @@ class _SettingRow extends StatelessWidget {
             children: [
               Text(
                 title,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -1014,7 +979,7 @@ class _SettingRow extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 subtitle,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1053,7 +1018,7 @@ class _SettingSwitchRow extends StatelessWidget {
             children: [
               Text(
                 title,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -1063,7 +1028,7 @@ class _SettingSwitchRow extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 subtitle,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,

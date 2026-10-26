@@ -39,7 +39,7 @@ class ErrorDisplay extends StatelessWidget {
                     onTap: onLineTap,
                     child: Text(
                       context.l10n.errorLine(lineNumber!),
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.error,
                         fontWeight: FontWeight.bold,
                       ),

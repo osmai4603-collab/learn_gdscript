@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learn_gdscript/core/constants/app_constants.dart';
@@ -198,7 +199,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   children: [
                     Text(
                       l10n.onboardingRestoreError,
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
@@ -400,7 +401,7 @@ class _OnboardingTopBar extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             l10n.onboardingBrand,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -411,7 +412,7 @@ class _OnboardingTopBar extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               '/',
-              style: TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
@@ -421,7 +422,7 @@ class _OnboardingTopBar extends StatelessWidget {
                 l10n.onboardingPlacementLabel,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 13,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -434,7 +435,7 @@ class _OnboardingTopBar extends StatelessWidget {
             onPressed: busy ? null : onSkip,
             child: Text(
               l10n.onboardingSkip,
-              style: TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -506,8 +507,7 @@ class _OnboardingStepper extends StatelessWidget {
                               )
                             : Text(
                                 '${index + 1}',
-                                style: TextStyle(
-                                  fontFamily: 'JetBrains Mono',
+                                style: CodeTextTheme.of(context).bodyMedium.copyWith(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: isCurrent
@@ -525,7 +525,7 @@ class _OnboardingStepper extends StatelessWidget {
                         steps[index],
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 12,
                           fontWeight: isCurrent
@@ -592,7 +592,7 @@ class _WelcomeStepView extends StatelessWidget {
           Text(
             l10n.onboardingWelcomeHeading,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -603,7 +603,7 @@ class _WelcomeStepView extends StatelessWidget {
           Text(
             l10n.onboardingWelcomeBody,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 14,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -621,7 +621,7 @@ class _WelcomeStepView extends StatelessWidget {
             iconAlignment: .end,
             label: Text(
               l10n.onboardingWelcomeAction,
-              style: const TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -684,7 +684,7 @@ class _ExperienceTierStepView extends StatelessWidget {
         Text(
           l10n.onboardingExperiencePrompt,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -695,7 +695,7 @@ class _ExperienceTierStepView extends StatelessWidget {
         Text(
           l10n.onboardingExperienceDescription,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -749,7 +749,7 @@ class _ExperienceTierStepView extends StatelessWidget {
                       children: [
                         Text(
                           item.title,
-                          style: TextStyle(
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontFamily: 'IBM Plex Sans Arabic',
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -761,7 +761,7 @@ class _ExperienceTierStepView extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           item.description,
-                          style: TextStyle(
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontFamily: 'IBM Plex Sans Arabic',
                             fontSize: 12,
                             color: Theme.of(
@@ -802,7 +802,7 @@ class _ExperienceTierStepView extends StatelessWidget {
             child: Text(
               l10n.onboardingContinueAssessment,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 13,
                 fontWeight: FontWeight.bold,
@@ -863,8 +863,7 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                   questionIndex + 1,
                   questions.length,
                 ),
-                style: TextStyle(
-                  fontFamily: 'JetBrains Mono',
+                style: CodeTextTheme.of(context).bodyMedium.copyWith(
                   fontSize: 12,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -877,7 +876,7 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                 ),
                 child: Text(
                   l10n.onboardingAssessmentTag,
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 11,
                     color: Theme.of(context).colorScheme.primary,
@@ -889,7 +888,7 @@ class _DiagnosticQuizStepView extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             question.question,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -912,8 +911,7 @@ class _DiagnosticQuizStepView extends StatelessWidget {
               textDirection: TextDirection.ltr,
               child: Text(
                 question.code,
-                style: TextStyle(
-                  fontFamily: 'JetBrains Mono',
+                style: CodeTextTheme.of(context).bodyMedium.copyWith(
                   fontSize: 12,
                   color: Theme.of(context).colorScheme.primary,
                   height: 1.4,
@@ -977,8 +975,7 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                           textDirection: TextDirection.ltr,
                           child: Text(
                             question.options[optionIndex],
-                            style: TextStyle(
-                              fontFamily: 'JetBrains Mono',
+                            style: CodeTextTheme.of(context).bodyMedium.copyWith(
                               fontSize: 12,
                               color: isChosen
                                   ? Theme.of(context).colorScheme.onSurface
@@ -1012,7 +1009,7 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                   ),
                   child: Text(
                     l10n.onboardingPrevious,
-                    style: const TextStyle(fontFamily: 'IBM Plex Sans Arabic'),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontFamily: 'IBM Plex Sans Arabic'),
                   ),
                 )
               else
@@ -1036,7 +1033,7 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                   questionIndex == questions.length - 1
                       ? l10n.onboardingFinishAssessment
                       : l10n.onboardingNextQuestion,
-                  style: const TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -1106,7 +1103,7 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
           Text(
             l10n.onboardingRoadmapSuccess,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -1117,7 +1114,7 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
           Text(
             summary,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 13,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1150,7 +1147,7 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
                     children: [
                       Text(
                         l10n.onboardingRecommendedStart(unitLabel),
-                        style: TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -1160,7 +1157,7 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         title,
-                        style: TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -1187,7 +1184,7 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
               label: Text(
                 l10n.onboardingStartLearning,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,

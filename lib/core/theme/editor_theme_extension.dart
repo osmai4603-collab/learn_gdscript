@@ -149,3 +149,74 @@ class CodeEditorTheme extends ThemeExtension<CodeEditorTheme> {
     );
   }
 }
+
+@immutable
+class CodeTextTheme extends ThemeExtension<CodeTextTheme> {
+  const CodeTextTheme({
+    required this.bodyLarge,
+    required this.bodyMedium,
+    required this.bodySmall,
+  });
+
+  final TextStyle bodyLarge;
+  final TextStyle bodyMedium;
+  final TextStyle bodySmall;
+
+  static CodeTextTheme of(BuildContext context) {
+    final theme = Theme.of(context);
+    return theme.extension<CodeTextTheme>() ??
+        CodeTextTheme.fromColorScheme(theme.colorScheme);
+  }
+
+  factory CodeTextTheme.fromColorScheme(ColorScheme colorScheme) {
+    return CodeTextTheme(
+      bodyLarge: TextStyle(
+        fontFamily: CodeEditorTheme.codeFontFamily,
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        height: 1.6,
+        color: colorScheme.onSurface,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: CodeEditorTheme.codeFontFamily,
+        fontSize: 13,
+        fontWeight: FontWeight.w400,
+        height: 1.54,
+        color: colorScheme.onSurface,
+      ),
+      bodySmall: TextStyle(
+        fontFamily: CodeEditorTheme.codeFontFamily,
+        fontSize: 11,
+        fontWeight: FontWeight.w400,
+        height: 1.45,
+        color: colorScheme.onSurface,
+      ),
+    );
+  }
+
+  @override
+  CodeTextTheme copyWith({
+    TextStyle? bodyLarge,
+    TextStyle? bodyMedium,
+    TextStyle? bodySmall,
+  }) {
+    return CodeTextTheme(
+      bodyLarge: bodyLarge ?? this.bodyLarge,
+      bodyMedium: bodyMedium ?? this.bodyMedium,
+      bodySmall: bodySmall ?? this.bodySmall,
+    );
+  }
+
+  @override
+  CodeTextTheme lerp(
+    covariant ThemeExtension<CodeTextTheme>? other,
+    double t,
+  ) {
+    if (other is! CodeTextTheme) return this;
+    return CodeTextTheme(
+      bodyLarge: TextStyle.lerp(bodyLarge, other.bodyLarge, t)!,
+      bodyMedium: TextStyle.lerp(bodyMedium, other.bodyMedium, t)!,
+      bodySmall: TextStyle.lerp(bodySmall, other.bodySmall, t)!,
+    );
+  }
+}

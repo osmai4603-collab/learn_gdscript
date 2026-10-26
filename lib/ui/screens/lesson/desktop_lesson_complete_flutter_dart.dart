@@ -595,7 +595,7 @@ class _DetailsError extends StatelessWidget {
         color: scheme.errorContainer,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(message, style: TextStyle(color: scheme.onErrorContainer)),
+      child: Text(message, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: scheme.onErrorContainer)),
     );
   }
 }

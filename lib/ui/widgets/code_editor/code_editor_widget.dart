@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gdscript_engine/gdscript_engine.dart';
-
 import '../../../core/theme/editor_theme_extension.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/services/code_runner_service.dart';
@@ -39,6 +37,7 @@ class CodeEditorWidget extends StatefulWidget {
     this.fontSize = 14,
     this.showLineNumbers = true,
     this.showActionBar = true,
+    this.showRunResults = true,
     this.backgroundColor,
   });
 
@@ -73,6 +72,7 @@ class CodeEditorWidget extends StatefulWidget {
   final double fontSize;
   final bool showLineNumbers;
   final bool showActionBar;
+  final bool showRunResults;
   final Color? backgroundColor;
 
   @override
@@ -221,6 +221,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     _diagnosticsError = null;
     if (request == null) {
       _diagnostics = const [];
+      _controller.diagnostics = _diagnostics;
       return;
     }
     try {
@@ -229,11 +230,13 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
       _diagnostics = const [];
       _diagnosticsError = error;
     }
+    _controller.diagnostics = _diagnostics;
   }
 
   void _scheduleDiagnostics() {
     _diagnosticsDebounce?.cancel();
     _diagnostics = const [];
+    _controller.diagnostics = _diagnostics;
     _diagnosticsError = null;
     final request = widget.onDiagnosticsRequested;
     if (request == null) return;
@@ -254,6 +257,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
         }
         setState(() {
           _diagnostics = diagnostics;
+          _controller.diagnostics = diagnostics;
           _diagnosticsError = null;
         });
       } on Object catch (error) {
@@ -264,6 +268,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
         }
         setState(() {
           _diagnostics = const [];
+          _controller.diagnostics = _diagnostics;
           _diagnosticsError = error;
         });
       }
@@ -576,9 +581,8 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     _controller.editorTheme = theme;
     _controller.refreshSyntaxHighlights();
     final lineCount = '\n'.allMatches(_controller.text).length + 1;
-    final textStyle = TextStyle(
+    final textStyle = CodeTextTheme.of(context).bodyMedium.copyWith(
       color: theme.foreground,
-      fontFamily: CodeEditorTheme.codeFontFamily,
       fontSize: widget.fontSize,
       height: 1.5,
     );
@@ -599,8 +603,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
               child: Text(
                 _signatureHelp!.signature,
                 textDirection: TextDirection.ltr,
-                style: TextStyle(
-                  fontFamily: CodeEditorTheme.codeFontFamily,
+                style: CodeTextTheme.of(context).bodyMedium.copyWith(
                   fontSize: widget.fontSize - 1,
                   color: theme.function,
                 ),
@@ -617,7 +620,9 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
             padding: const EdgeInsets.only(top: 6),
             child: Text(
               '${context.l10n.executionFailed} $_hoverError',
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
             ),
           ),
         if (widget.showActionBar &&
@@ -652,7 +657,9 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
             padding: const EdgeInsets.only(top: 8),
             child: Text(
               '${context.l10n.executionFailed} $_editorError',
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
             ),
           ),
         if (_diagnosticsError != null)
@@ -660,16 +667,18 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
             padding: const EdgeInsets.only(top: 8),
             child: Text(
               '${context.l10n.executionFailed} $_diagnosticsError',
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
             ),
           ),
-        if (_runError != null)
+        if (widget.showRunResults && _runError != null)
           _ResultPanel(
             title: context.l10n.executionFailed,
             content: _runError.toString(),
             isError: true,
           ),
-        if (_runResult != null)
+        if (widget.showRunResults && _runResult != null)
           _ResultPanel(
             title: _runResult!.isSuccess
                 ? (Localizations.localeOf(context).languageCode == 'ar'
@@ -684,36 +693,36 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
             ].join('\n'),
             isError: !_runResult!.isSuccess,
           ),
-        if (_diagnostics.isNotEmpty)
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 150),
-            child: Card(
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  for (final diagnostic in _diagnostics)
-                    ListTile(
-                      dense: true,
-                      leading: Icon(
-                        diagnostic.severity == DiagnosticSeverity.error
-                            ? Icons.error_outline
-                            : diagnostic.severity == DiagnosticSeverity.warning
-                            ? Icons.warning_amber_outlined
-                            : Icons.info_outline,
-                        color: diagnostic.severity == DiagnosticSeverity.error
-                            ? Theme.of(context).colorScheme.error
-                            : Theme.of(context).colorScheme.tertiary,
-                      ),
-                      title: Text(diagnostic.message),
-                      subtitle: Text(
-                        context.l10n.diagnosticLine(diagnostic.location.line),
-                      ),
-                      onTap: () => _selectDiagnostic(diagnostic),
-                    ),
-                ],
-              ),
-            ),
-          ),
+        // if (_diagnostics.isNotEmpty)
+        //   ConstrainedBox(
+        //     constraints: const BoxConstraints(maxHeight: 150),
+        //     child: Card(
+        //       child: ListView(
+        //         shrinkWrap: true,
+        //         children: [
+        //           for (final diagnostic in _diagnostics)
+        //             ListTile(
+        //               dense: true,
+        //               leading: Icon(
+        //                 diagnostic.severity == DiagnosticSeverity.error
+        //                     ? Icons.error_outline
+        //                     : diagnostic.severity == DiagnosticSeverity.warning
+        //                     ? Icons.warning_amber_outlined
+        //                     : Icons.info_outline,
+        //                 color: diagnostic.severity == DiagnosticSeverity.error
+        //                     ? Theme.of(context).colorScheme.error
+        //                     : Theme.of(context).colorScheme.tertiary,
+        //               ),
+        //               title: Text(diagnostic.message),
+        //               subtitle: Text(
+        //                 context.l10n.diagnosticLine(diagnostic.location.line),
+        //               ),
+        //               onTap: () => _selectDiagnostic(diagnostic),
+        //             ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
       ],
     );
   }
@@ -724,6 +733,15 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
     int lineCount,
     TextStyle textStyle,
   ) {
+    final errorLines = <int>{};
+    final warningLines = <int>{};
+    for (final diagnostic in _diagnostics) {
+      if (diagnostic.severity == DiagnosticSeverity.error) {
+        errorLines.add(diagnostic.location.line);
+      } else if (diagnostic.severity == DiagnosticSeverity.warning) {
+        warningLines.add(diagnostic.location.line);
+      }
+    }
     return CodeDirectionality(
       child: Container(
         decoration: BoxDecoration(
@@ -741,43 +759,91 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
                   lineCount: lineCount,
                   scrollController: _lineScrollController,
                   fontSize: widget.fontSize,
+                  errorLines: errorLines,
+                  warningLines: warningLines,
                 ),
               ),
             Expanded(
               child: Focus(
                 onKeyEvent: _handleKey,
-                child: TextField(
-                  controller: _controller,
-                  focusNode: widget.focusNode,
-                  textAlignVertical: .top,
-                  scrollController: _editorScrollController,
-                  readOnly: widget.readOnly,
-                  minLines: widget.expands ? null : 5,
-                  maxLines: null,
-                  expands: widget.expands,
-                  keyboardType: TextInputType.multiline,
-                  inputFormatters: widget.readOnly
-                      ? null
-                      : const [_GDScriptInputFormatter()],
-                  style: textStyle,
-                  cursorColor: colors.primary,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    filled: true,
-                    hoverColor:
-                        widget.backgroundColor ?? editorTheme.background,
-                    fillColor:
-                        widget.backgroundColor ?? editorTheme.background,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 17,
-                    ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) => AnimatedBuilder(
+                    animation: _editorScrollController,
+                    builder: (context, _) {
+                      final lineHeight = widget.fontSize * 1.5;
+                      final scrollOffset = _editorScrollController.hasClients
+                          ? _editorScrollController.offset
+                          : 0.0;
+                      final diagnosticLines = <int, List<Diagnostic>>{};
+                      for (final diagnostic in _diagnostics) {
+                        diagnosticLines
+                            .putIfAbsent(diagnostic.location.line, () => [])
+                            .add(diagnostic);
+                      }
+                      final annotationWidth = (constraints.maxWidth - 16)
+                          .clamp(0.0, 320.0)
+                          .toDouble();
+                      return Stack(
+                        clipBehavior: Clip.hardEdge,
+                        children: [
+                          TextField(
+                            controller: _controller,
+                            focusNode: widget.focusNode,
+                            textAlignVertical: .top,
+                            scrollController: _editorScrollController,
+                            readOnly: widget.readOnly,
+                            minLines: widget.expands ? null : 5,
+                            maxLines: null,
+                            expands: widget.expands,
+                            keyboardType: TextInputType.multiline,
+                            inputFormatters: widget.readOnly
+                                ? null
+                                : const [_GDScriptInputFormatter()],
+                            style: textStyle,
+                            cursorColor: colors.primary,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              filled: true,
+                              hoverColor:
+                                  widget.backgroundColor ??
+                                  editorTheme.background,
+                              fillColor:
+                                  widget.backgroundColor ??
+                                  editorTheme.background,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 17,
+                              ),
+                            ),
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            textDirection: TextDirection.ltr,
+                          ),
+                          for (final entry in diagnosticLines.entries)
+                            _buildInlineDiagnostic(
+                              entry.key,
+                              entry.value,
+                              top:
+                                  15 +
+                                  (entry.key - 1) * lineHeight -
+                                  scrollOffset,
+                              left:
+                                  30 +
+                                  _diagnosticLeft(
+                                    _lineTextAt(entry.key),
+                                    textStyle,
+                                    constraints.maxWidth,
+                                    annotationWidth,
+                                  ),
+                              width: annotationWidth,
+                              colors: colors,
+                            ),
+                        ],
+                      );
+                    },
                   ),
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  textDirection: TextDirection.ltr,
                 ),
               ),
             ),
@@ -785,6 +851,104 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
         ),
       ),
     );
+  }
+
+  Widget _buildInlineDiagnostic(
+    int line,
+    List<Diagnostic> diagnostics, {
+    required double top,
+    required double left,
+    required double width,
+    required ColorScheme colors,
+  }) {
+    final diagnostic = diagnostics.firstWhere(
+      (item) => item.severity == DiagnosticSeverity.error,
+      orElse: () => diagnostics.first,
+    );
+    final color = switch (diagnostic.severity) {
+      DiagnosticSeverity.error => colors.error,
+      DiagnosticSeverity.warning => colors.secondary,
+      DiagnosticSeverity.hint || DiagnosticSeverity.info => colors.primary,
+    };
+    final message = diagnostics.map((item) => item.message).join(' · ');
+    if (width < 80) return const SizedBox.shrink();
+    return Positioned(
+      key: ValueKey('inline-diagnostic-line-$line'),
+      top: top,
+      left: left,
+      // width: width,
+      child: Tooltip(
+        message: message,
+        waitDuration: const Duration(milliseconds: 350),
+        child: Container(
+          height: 20,
+          alignment: AlignmentDirectional.topStart,
+          padding: const EdgeInsetsDirectional.only(start: 5, end: 7, top: 2),
+          decoration: BoxDecoration(
+            //color: colors.surface.withValues(alpha: 0.96),
+            borderRadius: BorderRadius.circular(4),
+            //border: Border.all(color: color.withValues(alpha: 0.55)),
+          ),
+          child: Text(
+            message,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textDirection: TextDirection.ltr,
+            style: CodeTextTheme.of(
+              context,
+            ).bodySmall.copyWith(color: color, fontSize: 10, height: 1),
+          ),
+          // child: Row(
+          //   children: [
+          //     Icon(
+          //       diagnostic.severity == DiagnosticSeverity.error
+          //           ? Icons.error_outline_rounded
+          //           : diagnostic.severity == DiagnosticSeverity.warning
+          //           ? Icons.warning_amber_rounded
+          //           : Icons.info_outline_rounded,
+          //       size: 13,
+          //       color: color,
+          //     ),
+          //     const SizedBox(width: 5),
+          //     Expanded(
+          //       child: Text(
+          //         message,
+          //         maxLines: 1,
+          //         overflow: TextOverflow.ellipsis,
+          //         textDirection: TextDirection.ltr,
+          //         style: CodeTextTheme.of(
+          //           context,
+          //         ).bodySmall.copyWith(color: color, fontSize: 10, height: 1),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+        ),
+      ),
+    );
+  }
+
+  String _lineTextAt(int line) {
+    final lines = _controller.text.split('\n');
+    if (line < 1 || line > lines.length) return '';
+    return lines[line - 1];
+  }
+
+  double _diagnosticLeft(
+    String lineText,
+    TextStyle textStyle,
+    double editorWidth,
+    double annotationWidth,
+  ) {
+    final painter = TextPainter(
+      text: TextSpan(text: lineText, style: textStyle),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    final maxLeft = (editorWidth - annotationWidth - 8).clamp(
+      8.0,
+      double.infinity,
+    );
+    return (12 + painter.width + 8).clamp(8.0, maxLeft).toDouble();
   }
 
   void _selectDiagnostic(Diagnostic diagnostic) {
@@ -840,8 +1004,17 @@ class _SyntaxTextController extends TextEditingController {
   final GDScriptSyntaxHighlighter _highlighter = GDScriptSyntaxHighlighter();
   List<SyntaxHighlight>? _syntaxHighlights;
   List<SemanticHighlight>? _semanticHighlights;
+  List<Diagnostic> _diagnostics = const [];
   (int, int)? matchingBracketOffsets;
   String? _highlightedText;
+
+  List<Diagnostic> get diagnostics => _diagnostics;
+
+  set diagnostics(List<Diagnostic> value) {
+    if (identical(_diagnostics, value)) return;
+    _diagnostics = value;
+    notifyListeners();
+  }
 
   void refreshSyntaxHighlights() {
     if (_highlightedText == text) return;
@@ -874,7 +1047,10 @@ class _SyntaxTextController extends TextEditingController {
         currentTheme,
         engineHighlights: _syntaxHighlights,
         semanticHighlights: _semanticHighlights,
+        diagnostics: diagnostics,
         matchingBracketOffsets: matchingBracketOffsets,
+        errorColor: Theme.of(context).colorScheme.error,
+        warningColor: Theme.of(context).colorScheme.secondary,
       ),
     );
   }
@@ -901,7 +1077,7 @@ class _ResultPanel extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: isError
                   ? Theme.of(context).colorScheme.error
                   : Theme.of(context).colorScheme.tertiary,
@@ -910,7 +1086,7 @@ class _ResultPanel extends StatelessWidget {
           const SizedBox(height: 4),
           SelectableText(
             content,
-            style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 12),
+            style: CodeTextTheme.of(context).bodySmall.copyWith(fontSize: 12),
           ),
         ],
       ),
@@ -937,7 +1113,7 @@ class _HoverInfoPanel extends StatelessWidget {
         SelectableText(
           info.signature,
           textDirection: TextDirection.ltr,
-          style: const TextStyle(fontFamily: 'JetBrains Mono', fontSize: 12),
+          style: CodeTextTheme.of(context).bodySmall.copyWith(fontSize: 12),
         ),
         if (info.type case final type?)
           Text(

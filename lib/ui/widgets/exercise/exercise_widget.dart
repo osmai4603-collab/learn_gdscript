@@ -370,7 +370,7 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
                     _predictionCorrect!
                         ? context.l10n.testPassed
                         : context.l10n.testFailed,
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: _predictionCorrect!
                           ? Theme.of(context).colorScheme.tertiary
                           : Theme.of(context).colorScheme.error,
@@ -394,8 +394,7 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
                     child: Text(
                       option.isEmpty ? '""' : option,
                       textDirection: TextDirection.ltr,
-                      style: TextStyle(
-                        fontFamily: CodeEditorTheme.codeFontFamily,
+                      style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       ),
                     ),
                   ),
@@ -405,7 +404,7 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
                   _predictionCorrect!
                       ? context.l10n.testPassed
                       : context.l10n.testFailed,
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: _predictionCorrect!
                         ? Theme.of(context).colorScheme.tertiary
                         : Theme.of(context).colorScheme.error,
@@ -503,8 +502,7 @@ class _ReorderSteps extends StatelessWidget {
         title: Text(
           lines[index],
           textDirection: TextDirection.ltr,
-          style: TextStyle(
-            fontFamily: CodeEditorTheme.codeFontFamily,
+          style: CodeTextTheme.of(context).bodyMedium.copyWith(
           ),
         ),
       ),

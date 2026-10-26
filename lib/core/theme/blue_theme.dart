@@ -238,7 +238,10 @@ final class BlueTheme implements GDScriptTheme {
       fontFamily: basicFontFamily,
       fontFamilyFallback: const ['IBM Plex Sans Arabic'],
       textTheme: textTheme,
-      extensions: <ThemeExtension<dynamic>>[editorTheme],
+      extensions: <ThemeExtension<dynamic>>[
+        editorTheme,
+        CodeTextTheme.fromColorScheme(colorScheme),
+      ],
       scaffoldBackgroundColor: colorScheme.surface,
       canvasColor: colorScheme.surface,
       cardColor: colorScheme.surfaceContainerLow,
@@ -372,6 +375,7 @@ final class BlueTheme implements GDScriptTheme {
         maximumSize: const Size.fromHeight(35),
         elevation: 0,
         iconAlignment: .end,
+        iconColor: colorScheme.onPrimary,
       ),
     );
   }

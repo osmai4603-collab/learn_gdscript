@@ -27,9 +27,9 @@ class LessonCodeBlock extends StatelessWidget {
               Expanded(
                 child: SelectableText.rich(
                   TextSpan(
-                    style: TextStyle(
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       color: codeTheme.foreground,
-                      fontFamily: CodeEditorTheme.codeFontFamily,
+                      fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
                     ),
                     children: spans,
                   ),

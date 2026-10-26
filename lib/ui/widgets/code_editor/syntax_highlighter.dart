@@ -13,33 +13,73 @@ class GDScriptSyntaxHighlighter {
     CodeEditorTheme theme, {
     List<SyntaxHighlight>? engineHighlights,
     List<SemanticHighlight>? semanticHighlights,
+    List<Diagnostic> diagnostics = const [],
     (int, int)? matchingBracketOffsets,
+    Color? errorColor,
+    Color? warningColor,
   }) {
+    final diagnosticLines = _diagnosticLines(code, diagnostics);
+    final resolvedErrorColor = errorColor ?? theme.errorLine;
+    final resolvedWarningColor = warningColor ?? theme.achievement;
     if (engineHighlights != null) {
       return _highlightEngineTokens(
         code,
         theme,
         engineHighlights,
         semanticHighlights ?? const [],
+        diagnostics,
+        diagnosticLines,
         matchingBracketOffsets,
+        resolvedErrorColor,
+        resolvedWarningColor,
       );
     }
     final spans = <TextSpan>[];
     var offset = 0;
     for (final match in _tokenPattern.allMatches(code)) {
       if (match.start > offset) {
-        spans.add(TextSpan(text: code.substring(offset, match.start)));
+        spans.addAll(
+          _decorateRange(
+            code,
+            offset,
+            match.start,
+            null,
+            diagnostics,
+            diagnosticLines,
+            resolvedErrorColor,
+            resolvedWarningColor,
+          ),
+        );
       }
       final token = match.group(0)!;
-      spans.add(
-        TextSpan(
-          text: token,
-          style: TextStyle(color: _colorFor(token, theme)),
+      spans.addAll(
+        _decorateRange(
+          code,
+          match.start,
+          match.end,
+          TextStyle(color: _colorFor(token, theme)),
+          diagnostics,
+          diagnosticLines,
+          resolvedErrorColor,
+          resolvedWarningColor,
         ),
       );
       offset = match.end;
     }
-    if (offset < code.length) spans.add(TextSpan(text: code.substring(offset)));
+    if (offset < code.length) {
+      spans.addAll(
+        _decorateRange(
+          code,
+          offset,
+          code.length,
+          null,
+          diagnostics,
+          diagnosticLines,
+          resolvedErrorColor,
+          resolvedWarningColor,
+        ),
+      );
+    }
     return spans;
   }
 
@@ -48,7 +88,11 @@ class GDScriptSyntaxHighlighter {
     CodeEditorTheme theme,
     List<SyntaxHighlight> highlights,
     List<SemanticHighlight> semanticHighlights,
+    List<Diagnostic> diagnostics,
+    List<_DiagnosticLineRange> diagnosticLines,
     (int, int)? matchingBracketOffsets,
+    Color errorColor,
+    Color warningColor,
   ) {
     final orderedSyntax = highlights.toList()
       ..sort((a, b) => a.offset.compareTo(b.offset));
@@ -69,15 +113,29 @@ class GDScriptSyntaxHighlighter {
           (highlight.offset + highlight.length).clamp(0, code.length).toInt(),
         );
     }
+    for (final diagnostic in diagnostics) {
+      boundaries
+        ..add(diagnostic.location.offset.clamp(0, code.length).toInt())
+        ..add(
+          (diagnostic.location.offset + diagnostic.location.length)
+              .clamp(0, code.length)
+              .toInt(),
+        );
+    }
+    for (final range in diagnosticLines) {
+      boundaries
+        ..add(range.start)
+        ..add(range.end);
+    }
     if (matchingBracketOffsets != null) {
-        for (final offset in matchingBracketOffsets.$1 ==
-                matchingBracketOffsets.$2
-            ? [matchingBracketOffsets.$1]
-            : [matchingBracketOffsets.$1, matchingBracketOffsets.$2]) {
-          boundaries
-            ..add(offset.clamp(0, code.length).toInt())
-            ..add((offset + 1).clamp(0, code.length).toInt());
-        }
+      for (final offset
+          in matchingBracketOffsets.$1 == matchingBracketOffsets.$2
+              ? [matchingBracketOffsets.$1]
+              : [matchingBracketOffsets.$1, matchingBracketOffsets.$2]) {
+        boundaries
+          ..add(offset.clamp(0, code.length).toInt())
+          ..add((offset + 1).clamp(0, code.length).toInt());
+      }
     }
     final offsets = boundaries.toList()..sort();
     final spans = <TextSpan>[];
@@ -124,10 +182,12 @@ class GDScriptSyntaxHighlighter {
           matchingBracketOffsets != null &&
           (start == matchingBracketOffsets.$1 ||
               start == matchingBracketOffsets.$2);
-      spans.add(
-        TextSpan(
-          text: code.substring(start, end),
-          style: color == null && !isMatchedBracket
+      spans.addAll(
+        _decorateRange(
+          code,
+          start,
+          end,
+          color == null && !isMatchedBracket
               ? null
               : TextStyle(
                   color: color,
@@ -135,10 +195,158 @@ class GDScriptSyntaxHighlighter {
                       ? theme.matchedBracket
                       : null,
                 ),
+          diagnostics,
+          diagnosticLines,
+          errorColor,
+          warningColor,
         ),
       );
     }
     return spans;
+  }
+
+  List<TextSpan> _decorateRange(
+    String code,
+    int start,
+    int end,
+    TextStyle? baseStyle,
+    List<Diagnostic> diagnostics,
+    List<_DiagnosticLineRange> diagnosticLines,
+    Color errorColor,
+    Color warningColor,
+  ) {
+    final boundaries = <int>{start, end};
+    for (final diagnostic in diagnostics) {
+      final diagnosticStart = diagnostic.location.offset
+          .clamp(start, end)
+          .toInt();
+      final diagnosticEnd =
+          (diagnostic.location.offset + diagnostic.location.length)
+              .clamp(start, end)
+              .toInt();
+      if (diagnosticStart > start && diagnosticStart < end) {
+        boundaries.add(diagnosticStart);
+      }
+      if (diagnosticEnd > start && diagnosticEnd < end) {
+        boundaries.add(diagnosticEnd);
+      }
+    }
+    for (final range in diagnosticLines) {
+      if (range.start > start && range.start < end) boundaries.add(range.start);
+      if (range.end > start && range.end < end) boundaries.add(range.end);
+    }
+
+    final offsets = boundaries.toList()..sort();
+    final spans = <TextSpan>[];
+    for (var index = 0; index < offsets.length - 1; index++) {
+      final sliceStart = offsets[index];
+      final sliceEnd = offsets[index + 1];
+      if (sliceStart >= sliceEnd) continue;
+
+      Diagnostic? activeDiagnostic;
+      for (final diagnostic in diagnostics) {
+        final diagnosticStart = diagnostic.location.offset;
+        final diagnosticEnd = diagnosticStart + diagnostic.location.length;
+        if (diagnosticStart < sliceEnd && diagnosticEnd > sliceStart) {
+          if (activeDiagnostic == null ||
+              (diagnostic.severity == DiagnosticSeverity.error &&
+                  activeDiagnostic.severity != DiagnosticSeverity.error)) {
+            activeDiagnostic = diagnostic;
+          }
+        }
+      }
+      final coveringRanges = diagnosticLines.where(
+        (range) => range.start <= sliceStart && sliceEnd <= range.end,
+      );
+      final hasErrorLine = coveringRanges.any((range) => range.isError);
+      final hasWarningLine =
+          !hasErrorLine && coveringRanges.any((range) => !range.isError);
+      final isError = activeDiagnostic?.severity == DiagnosticSeverity.error;
+      final isWarning =
+          activeDiagnostic?.severity == DiagnosticSeverity.warning;
+      final decorationColor = isError
+          ? errorColor
+          : isWarning
+          ? warningColor
+          : null;
+      final lineBackground = hasErrorLine
+          ? errorColor.withValues(alpha: 0.2)
+          : hasWarningLine
+          ? warningColor.withValues(alpha: 0.14)
+          : null;
+      final style =
+          (baseStyle ??
+                  (decorationColor != null || lineBackground != null
+                      ? const TextStyle()
+                      : null))
+              ?.copyWith(
+                backgroundColor: baseStyle?.backgroundColor ?? lineBackground,
+                decoration: decorationColor == null
+                    ? baseStyle?.decoration
+                    : TextDecoration.underline,
+                decorationColor: decorationColor ?? baseStyle?.decorationColor,
+                decorationStyle: decorationColor == null
+                    ? baseStyle?.decorationStyle
+                    : TextDecorationStyle.wavy,
+              );
+      spans.add(
+        TextSpan(
+          text: code.substring(sliceStart, sliceEnd),
+          style: style == null && lineBackground == null
+              ? null
+              : (style ?? const TextStyle()).copyWith(
+                  backgroundColor: style?.backgroundColor ?? lineBackground,
+                ),
+        ),
+      );
+    }
+    return spans;
+  }
+
+  List<_DiagnosticLineRange> _diagnosticLines(
+    String code,
+    List<Diagnostic> diagnostics,
+  ) {
+    if (diagnostics.isEmpty || code.isEmpty) return const [];
+    final severities = <int, bool>{};
+    for (final diagnostic in diagnostics) {
+      if (diagnostic.severity != DiagnosticSeverity.error &&
+          diagnostic.severity != DiagnosticSeverity.warning) {
+        continue;
+      }
+      final endOffset =
+          (diagnostic.location.offset + diagnostic.location.length)
+              .clamp(0, code.length)
+              .toInt();
+      final endLine = _lineAtOffset(code, endOffset);
+      for (var line = diagnostic.location.line; line <= endLine; line++) {
+        if (diagnostic.severity == DiagnosticSeverity.error ||
+            !severities.containsKey(line)) {
+          severities[line] = diagnostic.severity == DiagnosticSeverity.error;
+        }
+      }
+    }
+
+    final ranges = <_DiagnosticLineRange>[];
+    var offset = 0;
+    final lines = code.split('\n');
+    for (var index = 0; index < lines.length; index++) {
+      final isError = severities[index + 1];
+      final length = lines[index].length;
+      if (isError != null && length > 0) {
+        ranges.add(_DiagnosticLineRange(offset, offset + length, isError));
+      }
+      offset += length + 1;
+    }
+    return ranges;
+  }
+
+  int _lineAtOffset(String code, int offset) {
+    var line = 1;
+    for (var index = 0; index < offset; index++) {
+      if (code.codeUnitAt(index) == 0x0A) line++;
+    }
+    return line;
   }
 
   Color _colorForSemanticKind(String kind, CodeEditorTheme theme) =>
@@ -188,4 +396,12 @@ class GDScriptSyntaxHighlighter {
     }
     return theme.function;
   }
+}
+
+class _DiagnosticLineRange {
+  const _DiagnosticLineRange(this.start, this.end, this.isError);
+
+  final int start;
+  final int end;
+  final bool isError;
 }

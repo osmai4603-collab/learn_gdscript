@@ -88,7 +88,7 @@ void main() {
       matching: find.byType(TextField),
     );
     expect(editor, findsOneWidget);
-    const updatedCode = 'func run():\n    print("saved")';
+    const updatedCode = 'print("saved")';
     await tester.enterText(editor, updatedCode);
     await tester.pump();
     await tester.tap(find.byIcon(Icons.save_outlined));
@@ -96,6 +96,70 @@ void main() {
     await tester.pump(const Duration(milliseconds: 20));
 
     expect(repository.savedContent, updatedCode);
+
+    final resizeHandle = find.byKey(
+      const ValueKey('workspace-dock-resize-handle'),
+    );
+    expect(resizeHandle, findsOneWidget);
+    final initialHandleY = tester.getTopLeft(resizeHandle).dy;
+    await tester.drag(resizeHandle, const Offset(0, -40));
+    await tester.pump();
+    expect(tester.getTopLeft(resizeHandle).dy, lessThan(initialHandleY - 25));
+
+    await tester.tap(find.byIcon(Icons.play_arrow));
+    for (var frame = 0; frame < 5; frame++) {
+      await tester.pump(const Duration(milliseconds: 20));
+    }
+    expect(find.text('saved'), findsOneWidget);
+    await tester.tap(find.byIcon(Icons.delete_sweep_outlined));
+    await tester.pump();
+    expect(find.text('saved'), findsNothing);
+
+    await tester.enterText(editor, 'var value: =');
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(
+      find.byKey(const ValueKey('inline-diagnostic-line-1')),
+      findsOneWidget,
+    );
+    await tester.tap(find.byIcon(Icons.play_arrow));
+    for (var frame = 0; frame < 5; frame++) {
+      await tester.pump(const Duration(milliseconds: 20));
+    }
+    final errorOutputs = tester
+        .widgetList<SelectableText>(find.byType(SelectableText))
+        .where((entry) => entry.data!.contains('ERROR'))
+        .toList();
+    expect(errorOutputs, isNotEmpty);
+    expect(
+      errorOutputs.every(
+        (entry) =>
+            entry.style?.color ==
+            Theme.of(
+              tester.element(find.byType(Scaffold).last),
+            ).colorScheme.error,
+      ),
+      isTrue,
+    );
+
+    await tester.tap(find.text('Problems'));
+    await tester.pump();
+    expect(find.byIcon(Icons.error_outline_rounded), findsWidgets);
+
+    await tester.enterText(editor, 'func run():\n    var unused = 1\n    pass');
+    await tester.pump(const Duration(milliseconds: 300));
+    final warningAnnotation = find.byKey(
+      const ValueKey('inline-diagnostic-line-2'),
+    );
+    expect(warningAnnotation, findsOneWidget);
+    final warningText = tester.widget<Text>(
+      find.descendant(of: warningAnnotation, matching: find.byType(Text)),
+    );
+    expect(
+      warningText.style?.color,
+      Theme.of(
+        tester.element(find.byType(Scaffold).last),
+      ).colorScheme.secondary,
+    );
     expect(tester.takeException(), isNull);
   });
 }

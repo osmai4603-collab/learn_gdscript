@@ -5,6 +5,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:provider/provider.dart';
@@ -501,8 +502,7 @@ class DashboardTopNav extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     statusText,
-                    style: TextStyle(
-                      fontFamily: 'JetBrains Mono',
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       fontSize: 10,
                       color: statusColor,
                     ),
@@ -542,7 +542,7 @@ class DashboardTopNav extends StatelessWidget {
                       child: Center(
                         child: Text(
                           userName.isEmpty ? '?' : userName[0],
-                          style:  TextStyle(
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontFamily: 'IBM Plex Sans Arabic',
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -553,7 +553,7 @@ class DashboardTopNav extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       userName,
-                      style:  TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 13,
                         color: Theme.of(context).colorScheme.onSurface,
@@ -591,7 +591,7 @@ class _GreetingBanner extends StatelessWidget {
       children: [
         Text(
           l10n.dashboardWelcomeBack(userName),
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -601,7 +601,7 @@ class _GreetingBanner extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           l10n.dashboardWelcomeMessage,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 14,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -667,8 +667,7 @@ class _GreetingBanner extends StatelessWidget {
                   Center(
                     child: Text(
                       '${(userProgress.levelProgress * 100).toInt()}%',
-                      style:  TextStyle(
-                        fontFamily: 'JetBrains Mono',
+                      style: CodeTextTheme.of(context).bodyMedium.copyWith(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
@@ -683,7 +682,7 @@ class _GreetingBanner extends StatelessWidget {
               children: [
                 Text(
                   l10n.dashboardNextLevel,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -696,7 +695,7 @@ class _GreetingBanner extends StatelessWidget {
                     userProgress.completedLessons,
                     userProgress.totalLessons,
                   ),
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                     color: Theme.of(context).colorScheme.outline,
@@ -705,8 +704,7 @@ class _GreetingBanner extends StatelessWidget {
                 const SizedBox(height: 3),
                 Text(
                   l10n.dashboardXpToNextLevel(userProgress.nextLevelXp),
-                  style:  TextStyle(
-                    fontFamily: 'JetBrains Mono',
+                  style: CodeTextTheme.of(context).bodyMedium.copyWith(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.tertiary,
                   ),
@@ -785,7 +783,7 @@ class _WelcomeMetric extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -799,7 +797,7 @@ class _WelcomeMetric extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   color: color,
@@ -813,7 +811,7 @@ class _WelcomeMetric extends StatelessWidget {
                 value!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   color: color,
@@ -852,7 +850,7 @@ class _ContinueLearningHeroCard extends StatelessWidget {
               ),
               child: Text(
                 continueData.unitTitle,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -871,7 +869,7 @@ class _ContinueLearningHeroCard extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text(
                   continueData.estimatedTime,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -890,7 +888,7 @@ class _ContinueLearningHeroCard extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text(
                   '+${continueData.xpReward} XP',
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -904,7 +902,7 @@ class _ContinueLearningHeroCard extends StatelessWidget {
         const SizedBox(height: 12),
         Text(
           continueData.lessonTitle,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 22,
             fontWeight: FontWeight.w800,
@@ -932,7 +930,7 @@ class _ContinueLearningHeroCard extends StatelessWidget {
               l10n.dashboardPercentComplete(
                 (continueData.progress * 100).toInt(),
               ),
-              style:  TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -943,7 +941,7 @@ class _ContinueLearningHeroCard extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           l10n.dashboardContinueDescription,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 12,
             color: Theme.of(context).colorScheme.outline,
@@ -964,30 +962,20 @@ class _ContinueLearningHeroCard extends StatelessWidget {
               size: 20,
               textDirection: Directionality.of(context) == .ltr ? .rtl : .ltr,
             ),
-            iconAlignment: .end,
             label: Text(
               l10n.dashboardContinueAction,
-              style: const TextStyle(
-                fontFamily: 'IBM Plex Sans Arabic',
-                fontSize: 15,
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: ColorScheme.of(context).onPrimary,
                 fontWeight: FontWeight.bold,
-              ),
+              )
             ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              foregroundColor: Theme.of(context).colorScheme.onPrimary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 3,
-            ),
+            
           ),
         ),
         const SizedBox(height: 10),
         Text(
           l10n.dashboardDraftAutoSaved,
-          style:  TextStyle(
-            fontFamily: 'JetBrains Mono',
+          style: CodeTextTheme.of(context).bodyMedium.copyWith(
             fontSize: 10,
             color: Theme.of(context).colorScheme.outline,
           ),
@@ -1064,7 +1052,7 @@ class DashboardDailyChallengeCard extends StatelessWidget {
                   SizedBox(width: 8),
                   Text(
                     'تحدي اليوم السريع',
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -1089,8 +1077,7 @@ class DashboardDailyChallengeCard extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       challenge.timeRemaining,
-                      style:  TextStyle(
-                        fontFamily: 'JetBrains Mono',
+                      style: CodeTextTheme.of(context).bodyMedium.copyWith(
                         fontSize: 11,
                         color: Theme.of(context).colorScheme.secondary,
                       ),
@@ -1103,7 +1090,7 @@ class DashboardDailyChallengeCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             challenge.title,
-            style:  TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -1113,7 +1100,7 @@ class DashboardDailyChallengeCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             challenge.description,
-            style:  TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1126,7 +1113,7 @@ class DashboardDailyChallengeCard extends StatelessWidget {
             children: [
               Text(
                 'شارك ${challenge.participantsCount} مطوراً اليوم',
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1148,7 +1135,7 @@ class DashboardDailyChallengeCard extends StatelessWidget {
                 ),
                 child: Text(
                   'خوض التحدي (+${challenge.xpBonus} XP)',
-                  style: const TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                   ),
@@ -1195,7 +1182,7 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
               SizedBox(width: 8),
               Text(
                 'المراجعة الذكية (SM-2)',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -1207,7 +1194,7 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             'لديك ${review.dueCardsCount} بطاقات مفاهيم مستحقة للمراجعة اليوم لتثبيت الذاكرة طويلة المدى.',
-            style:  TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1225,7 +1212,7 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
                 ),
                 child: Text(
                   'معدل الاسترجاع ${review.retentionRatePercent}%',
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 11,
                     color: Theme.of(context).colorScheme.tertiary,
@@ -1236,7 +1223,7 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 '~${review.estimatedMinutes} دقائق',
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1258,9 +1245,9 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'بدء جلسة المراجعة السريعة',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
                 ),
@@ -1309,7 +1296,7 @@ class DashboardQuickStatsCard extends StatelessWidget {
                   SizedBox(width: 8),
                   Text(
                     'إحصائياتك البرمجية',
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -1322,7 +1309,7 @@ class DashboardQuickStatsCard extends StatelessWidget {
                 onTap: onViewBadges,
                 child:  Text(
                   'الأوسمة ↵',
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 11,
                     color: Theme.of(context).colorScheme.primary,
@@ -1377,7 +1364,7 @@ class _StatRow extends StatelessWidget {
       children: [
         Text(
           title,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 11,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1385,7 +1372,7 @@ class _StatRow extends StatelessWidget {
         ),
         Text(
           value,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 11,
             fontWeight: FontWeight.bold,
@@ -1417,7 +1404,7 @@ class _CurriculumOverviewSection extends StatelessWidget {
       children: [
         Text(
           l10n.dashboardCurriculumTitle,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -1427,7 +1414,7 @@ class _CurriculumOverviewSection extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           l10n.dashboardCurriculumDescription,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 12,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1441,7 +1428,7 @@ class _CurriculumOverviewSection extends StatelessWidget {
       icon: Icon(Icons.arrow_back_rounded, size: 16, textDirection: Directionality.of(context) == .ltr ? .rtl : .ltr),
       label: Text(
         l10n.dashboardViewFullPath,
-        style: const TextStyle(
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
           fontFamily: 'IBM Plex Sans Arabic',
           fontSize: 13,
         ),
@@ -1548,8 +1535,7 @@ class _UnitProgressTile extends StatelessWidget {
                       )
                     : Text(
                         unit.number,
-                        style:  TextStyle(
-                          fontFamily: 'JetBrains Mono',
+                        style: CodeTextTheme.of(context).bodyMedium.copyWith(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.primary,
@@ -1566,7 +1552,7 @@ class _UnitProgressTile extends StatelessWidget {
                 children: [
                   Text(
                     unit.title,
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: unit.isActive
@@ -1578,7 +1564,7 @@ class _UnitProgressTile extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     unit.description,
-                    style:  TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 12,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1596,8 +1582,7 @@ class _UnitProgressTile extends StatelessWidget {
                 children: [
                   Text(
                     '${(unit.progress * 100).toInt()}%',
-                    style: TextStyle(
-                      fontFamily: 'JetBrains Mono',
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                       color: unit.isCompleted
@@ -1743,8 +1728,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                  Expanded(
                   child: Text(
                     'player_controller.gd',
-                    style: TextStyle(
-                      fontFamily: 'JetBrains Mono',
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1775,15 +1759,14 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                     number: '1',
                     child: RichText(
                       text: TextSpan(
-                        style:  TextStyle(
-                          fontFamily: 'JetBrains Mono',
+                        style: CodeTextTheme.of(context).bodyMedium.copyWith(
                           fontSize: 14,
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                         children: [
                            TextSpan(
                             text: 'var ',
-                            style: TextStyle(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.w600,
                             ),
@@ -1791,7 +1774,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                           const TextSpan(text: 'player_health = '),
                           TextSpan(
                             text: '75',
-                            style:  TextStyle(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.bold,
                             ),
@@ -1804,25 +1787,24 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                     number: '2',
                     child: RichText(
                       text:  TextSpan(
-                        style: TextStyle(
-                          fontFamily: 'JetBrains Mono',
+                        style: CodeTextTheme.of(context).bodyMedium.copyWith(
                           fontSize: 14,
                         ),
                         children: [
                           TextSpan(
                             text: 'if ',
-                            style: TextStyle(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           TextSpan(
                             text: 'player_health ',
-                            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                           ),
                           TextSpan(
                             text: '> 50:',
-                            style: TextStyle(color: Theme.of(context).colorScheme.outline),
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline),
                           ),
                         ],
                       ),
@@ -1832,21 +1814,20 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                     number: '3',
                     child: RichText(
                       text:  TextSpan(
-                        style: TextStyle(
-                          fontFamily: 'JetBrains Mono',
+                        style: CodeTextTheme.of(context).bodyMedium.copyWith(
                           fontSize: 14,
                         ),
                         children: [
                           TextSpan(
                             text: '    print',
-                            style: TextStyle(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context).colorScheme.tertiary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           TextSpan(
                             text: '("اللاعب بصحة جيدة! ❤️")',
-                            style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.tertiary),
                           ),
                         ],
                       ),
@@ -1855,8 +1836,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                   const SizedBox(height: 12),
                    Text(
                     '# جرّب التشغيل لتغيير قيمة صحة اللاعب',
-                    style: TextStyle(
-                      fontFamily: 'JetBrains Mono',
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       fontSize: 10,
                       fontStyle: FontStyle.italic,
                       color: Theme.of(context).colorScheme.outline,
@@ -1898,8 +1878,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                   child: Text(
                     l10n.dashboardExampleTag,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: 'JetBrains Mono',
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       fontSize: 10,
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
@@ -1925,7 +1904,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                     Expanded(
                       child: Text(
                         l10n.dashboardPlaygroundOutputTitle,
-                        style: TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 11,
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1969,7 +1948,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                                 : _output?.isNotEmpty == true
                                 ? _output!
                                 : l10n.dashboardPlaygroundOutputSuccess,
-                            style: TextStyle(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 12,
                               color: _lastRunSucceeded == false
@@ -1983,8 +1962,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                         if (_runCount > 0)
                           Text(
                             '$_runCount',
-                            style:  TextStyle(
-                              fontFamily: 'JetBrains Mono',
+                            style: CodeTextTheme.of(context).bodyMedium.copyWith(
                               fontSize: 10,
                               color: Theme.of(context).colorScheme.outline,
                             ),
@@ -2019,8 +1997,7 @@ class _CodeLine extends StatelessWidget {
             width: 28,
             child: Text(
               number,
-              style:  TextStyle(
-                fontFamily: 'JetBrains Mono',
+              style: CodeTextTheme.of(context).bodyMedium.copyWith(
                 fontSize: 12,
                 color: Theme.of(context).colorScheme.outline,
               ),
@@ -2077,8 +2054,7 @@ class _MonoTag extends StatelessWidget {
       ),
       child: Text(
         label,
-        style:  TextStyle(
-          fontFamily: 'JetBrains Mono',
+        style: CodeTextTheme.of(context).bodyMedium.copyWith(
           fontSize: 9,
           color: Theme.of(context).colorScheme.outline,
         ),
@@ -2194,7 +2170,7 @@ class _AchievementsCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   l10n.dashboardRecentBadges,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -2209,8 +2185,7 @@ class _AchievementsCard extends StatelessWidget {
                     stats.earnedBadges,
                     stats.totalBadges,
                   ),
-                  style:  TextStyle(
-                    fontFamily: 'JetBrains Mono',
+                  style: CodeTextTheme.of(context).bodyMedium.copyWith(
                     fontSize: 10,
                     color: Theme.of(context).colorScheme.outline,
                   ),
@@ -2266,7 +2241,7 @@ class _AchievementBadge extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(emoji, style: const TextStyle(fontSize: 22)),
+          Text(emoji, style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 22)),
           const SizedBox(width: 7),
           Expanded(
             child: Column(
@@ -2276,7 +2251,7 @@ class _AchievementBadge extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
@@ -2287,7 +2262,7 @@ class _AchievementBadge extends StatelessWidget {
                   subtitle,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 9,
                     color: Theme.of(context).colorScheme.outline,
@@ -2340,7 +2315,7 @@ class _StreakCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   l10n.dashboardStreak,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -2350,8 +2325,7 @@ class _StreakCard extends StatelessWidget {
               ),
               Text(
                 l10n.dashboardConsecutiveDays(streakDays),
-                style:  TextStyle(
-                  fontFamily: 'JetBrains Mono',
+                style: CodeTextTheme.of(context).bodyMedium.copyWith(
                   fontSize: 10,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
@@ -2407,8 +2381,7 @@ class _StreakDay extends StatelessWidget {
             child: Center(
               child: Text(
                 isDone ? '✓' : '○',
-                style: TextStyle(
-                  fontFamily: 'JetBrains Mono',
+                style: CodeTextTheme.of(context).bodyMedium.copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: isToday && isDone ? Theme.of(context).colorScheme.onSecondary : color,
@@ -2419,7 +2392,7 @@ class _StreakDay extends StatelessWidget {
           const SizedBox(height: 5),
           Text(
             day,
-            style: TextStyle(
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 9,
               color: isToday
@@ -2477,7 +2450,7 @@ class _EngineStatusCard extends StatelessWidget {
                   Expanded(
                     child: Text(
                       l10n.dashboardEngineTitle,
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
@@ -2489,8 +2462,7 @@ class _EngineStatusCard extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(
                     statusLabel,
-                    style: TextStyle(
-                      fontFamily: 'JetBrains Mono',
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
                       fontSize: 10,
                       color: statusColor,
                     ),
@@ -2552,8 +2524,7 @@ class _EngineDetail extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style:  TextStyle(
-              fontFamily: 'JetBrains Mono',
+            style: CodeTextTheme.of(context).bodyMedium.copyWith(
               fontSize: 9,
               color: Theme.of(context).colorScheme.outline,
             ),
@@ -2565,8 +2536,7 @@ class _EngineDetail extends StatelessWidget {
             value,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.end,
-            style: TextStyle(
-              fontFamily: 'JetBrains Mono',
+            style: CodeTextTheme.of(context).bodyMedium.copyWith(
               fontSize: 9,
               color: valueColor,
             ),

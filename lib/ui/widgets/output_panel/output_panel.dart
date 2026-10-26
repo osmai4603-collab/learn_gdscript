@@ -81,7 +81,9 @@ class _OutputText extends StatelessWidget {
     child: SingleChildScrollView(
       child: SelectableText(
         text,
-        style: TextStyle(fontFamily: CodeEditorTheme.codeFontFamily),
+        style: CodeTextTheme.of(context).bodyMedium.copyWith(
+          fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
+        ),
       ),
     ),
   );

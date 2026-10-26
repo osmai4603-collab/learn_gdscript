@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../core/theme/editor_theme_extension.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../routers/app_routes.dart';
 import '../../widgets/common/navigation_bar.dart';
@@ -689,8 +690,8 @@ class _CodeCard extends StatelessWidget {
                 child: SelectableText(
                   code,
                   textDirection: TextDirection.ltr,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontFamily: 'JetBrains Mono',
+                  style: CodeTextTheme.of(context).bodyMedium.copyWith(
+                    fontSize: theme.textTheme.bodyMedium!.fontSize,
                   ),
                 ),
               ),

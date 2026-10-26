@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -240,7 +241,7 @@ class _PageHeader extends StatelessWidget {
                 children: [
                   Text(
                     l10n.learningPathHeading,
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: MediaQuery.sizeOf(context).width < 700
                           ? 26
@@ -313,7 +314,7 @@ class _PageHeader extends StatelessWidget {
             padding: const EdgeInsets.only(top: 12),
             child: Text(
               l10n.learningPathEmpty,
-              style:  TextStyle(color: Theme.of(context).colorScheme.secondary),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.secondary),
             ),
           ),
       ],
@@ -486,7 +487,7 @@ class _ProgressMilestone extends StatelessWidget {
                 title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: color,
                   fontWeight: FontWeight.w600,
                   fontSize: 12,
@@ -598,8 +599,7 @@ class _ModuleCard extends StatelessWidget {
                         ? Icon(Icons.lock_outline_rounded, color: accent)
                         : Text(
                             (index + 1).toString().padLeft(2, '0'),
-                            style: TextStyle(
-                              fontFamily: 'JetBrains Mono',
+                            style: CodeTextTheme.of(context).bodyMedium.copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
                               color: accent,
@@ -624,7 +624,7 @@ class _ModuleCard extends StatelessWidget {
                             children: [
                               Text(
                                 l10n.moduleNumber(unit.order + 1),
-                                style: TextStyle(
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                   color: accent,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
@@ -648,7 +648,7 @@ class _ModuleCard extends StatelessWidget {
                             key: ValueKey(
                               'learning_path_module_title_${unit.id}',
                             ),
-                            style: TextStyle(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 17,
                               height: 1.5,
@@ -661,7 +661,7 @@ class _ModuleCard extends StatelessWidget {
                           const SizedBox(height: 4),
                           Text(
                             unit.description.resolve(locale),
-                            style:  TextStyle(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 11,
                               height: 1.6,
@@ -679,8 +679,7 @@ class _ModuleCard extends StatelessWidget {
                   children: [
                     Text(
                       '${lessonCount == 0 ? 0 : (completedCount * 100 / lessonCount).round()}%',
-                      style: TextStyle(
-                        fontFamily: 'JetBrains Mono',
+                      style: CodeTextTheme.of(context).bodyMedium.copyWith(
                         color: accent,
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
@@ -755,7 +754,7 @@ class _ModuleCard extends StatelessWidget {
                       ),
                       style: TextButton.styleFrom(
                         foregroundColor: Theme.of(context).colorScheme.primary,
-                        textStyle: const TextStyle(
+                        textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
@@ -886,7 +885,7 @@ class _LessonCard extends StatelessWidget {
                           : isActive
                           ? l10n.lessonStatusCurrent
                           : l10n.lessonStatusAvailable,
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: accent,
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
@@ -904,7 +903,7 @@ class _LessonCard extends StatelessWidget {
                 lesson?.title.resolve(locale) ?? _readableLessonId(lessonId),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   height: 1.55,
@@ -917,7 +916,7 @@ class _LessonCard extends StatelessWidget {
                 lesson?.objective.resolve(locale) ?? '',
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   height: 1.65,
@@ -1053,7 +1052,7 @@ class _LearningInsights extends StatelessWidget {
                             Localizations.localeOf(context),
                           ) ??
                           context.l10n.learningPathEmpty,
-                      style:  TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 14,
@@ -1127,7 +1126,7 @@ class _LearningInsights extends StatelessWidget {
                   Expanded(
                     child: Text(
                       context.l10n.workspaceReady,
-                      style:  TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 12,
                       ),
@@ -1270,8 +1269,7 @@ class _UnitProgressPanel extends StatelessWidget {
               const SizedBox(width: 10),
               Text(
                 '${(data.progressRatio * 100).round()}%',
-                style:  TextStyle(
-                  fontFamily: 'JetBrains Mono',
+                style: CodeTextTheme.of(context).bodyMedium.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w700,
                 ),
@@ -1400,7 +1398,7 @@ class _InsightPanel extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style:  TextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontFamily: 'IBM Plex Sans Arabic',
                   color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 14,
@@ -1448,8 +1446,7 @@ class _MiniStat extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             value,
-            style: TextStyle(
-              fontFamily: 'JetBrains Mono',
+            style: CodeTextTheme.of(context).bodyMedium.copyWith(
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: color,
@@ -1461,7 +1458,7 @@ class _MiniStat extends StatelessWidget {
           label,
           textAlign: TextAlign.center,
           maxLines: 2,
-          style:  TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 9,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1516,7 +1513,7 @@ class _AchievementTile extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
@@ -1528,7 +1525,7 @@ class _AchievementTile extends StatelessWidget {
                   subtitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 9,
                     color: unlocked ? color : Theme.of(context).colorScheme.outline,
@@ -1590,7 +1587,7 @@ class _FinalProjectCard extends StatelessWidget {
                   children: [
                     Text(
                       context.l10n.capstoneTitle,
-                      style:  TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         color: Theme.of(context).colorScheme.secondary,
                         fontSize: 11,
@@ -1600,7 +1597,7 @@ class _FinalProjectCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       context.l10n.capstoneDescription,
-                      style:  TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 13,
@@ -1645,7 +1642,7 @@ class _ModuleStatusLabel extends StatelessWidget {
     ),
     child: Text(
       label,
-      style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w700),
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color, fontSize: 10, fontWeight: FontWeight.w700),
     ),
   );
 }
@@ -1673,8 +1670,7 @@ class _MetadataChip extends StatelessWidget {
           const SizedBox(width: 5),
           Text(
             label,
-            style: TextStyle(
-              fontFamily: 'JetBrains Mono',
+            style: CodeTextTheme.of(context).bodyMedium.copyWith(
               fontSize: 9,
               color: foreground,
             ),
@@ -1711,7 +1707,7 @@ class _StatusPill extends StatelessWidget {
         const SizedBox(width: 5),
         Text(
           label,
-          style: TextStyle(
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 10,
             color: color,
@@ -1755,7 +1751,7 @@ class _HeaderAction extends StatelessWidget {
               : Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.65),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-        textStyle: const TextStyle(
+        textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
           fontFamily: 'IBM Plex Sans Arabic',
           fontSize: 11,
           fontWeight: FontWeight.w600,
@@ -1967,20 +1963,21 @@ class _SkeletonBlock extends StatelessWidget {
 }
 
 class _PathText {
-  static TextStyle breadcrumb(BuildContext context) => TextStyle(
+  static TextStyle breadcrumb(BuildContext context) =>
+      Theme.of(context).textTheme.bodyMedium!.copyWith(
     fontFamily: 'IBM Plex Sans Arabic',
     fontSize: 11,
     color: Theme.of(context).colorScheme.outline,
   );
 
-  static TextStyle monoMuted(BuildContext context) => TextStyle(
-    fontFamily: 'JetBrains Mono',
+  static TextStyle monoMuted(BuildContext context) =>
+      CodeTextTheme.of(context).bodyMedium.copyWith(
     fontSize: 10,
     color: Theme.of(context).colorScheme.onSurfaceVariant,
   );
 
-  static TextStyle monoSubtle(BuildContext context) => TextStyle(
-    fontFamily: 'JetBrains Mono',
+  static TextStyle monoSubtle(BuildContext context) =>
+      CodeTextTheme.of(context).bodyMedium.copyWith(
     fontSize: 9,
     color: Theme.of(context).colorScheme.outline,
   );

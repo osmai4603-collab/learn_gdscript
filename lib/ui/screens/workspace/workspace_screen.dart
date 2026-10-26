@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:gdscript_engine/gdscript_engine.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/extensions/context_extensions.dart';
@@ -333,11 +334,10 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
         .split(RegExp(r'[/\\]'))
         .last;
     final diagnostics = activeFile == null
-        ? const <String>[]
-        : codeRunner!
-              .getDiagnostics(_drafts[_activeFilePath] ?? activeFile.content)
-              .map((diagnostic) => diagnostic.message)
-              .toList(growable: false);
+        ? const <Diagnostic>[]
+        : codeRunner!.getDiagnostics(
+            _drafts[_activeFilePath] ?? activeFile.content,
+          );
     return WorkspaceDataModel(
       projectName: projectName.isEmpty
           ? context.l10n.workspaceTitle
@@ -364,7 +364,7 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
       cursorLine: 1,
       cursorColumn: 1,
       diagnosticsCount: diagnostics.length,
-      diagnosticMessages: diagnostics,
+      diagnostics: diagnostics,
     );
   }
 
