@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import '../../../core/theme/arabic_ide_theme.dart';
 import '../../../core/theme/code_editor_theme.dart';
 import '../../widgets/code_directionality.dart';
-import '../../widgets/code_editor/code_editor_widget.dart';
 import '../../widgets/code_editor/syntax_highlighter.dart';
 
 class LessonCodeBlock extends StatelessWidget {
@@ -20,7 +19,7 @@ class LessonCodeBlock extends StatelessWidget {
     final spans = _syntaxHighlighter.highlight(code, codeTheme);
     return CodeDirectionality(
       child: Card(
-        color: CodeEditorWidget.defaultBackgroundColor,
+        color: CodeEditorTheme.of(context).background,
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(

@@ -18,8 +18,8 @@ class AcademyStatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final color = switch (kind) {
-      AcademyStatusKind.success => Color(0xFF2ECC71),
-      AcademyStatusKind.warning => Color(0xFFF39C12),
+      AcademyStatusKind.success => Theme.of(context).colorScheme.tertiary,
+      AcademyStatusKind.warning => Theme.of(context).colorScheme.secondary,
       AcademyStatusKind.error => colors.error,
       AcademyStatusKind.info => colors.primary,
       AcademyStatusKind.neutral => colors.onSurfaceVariant,

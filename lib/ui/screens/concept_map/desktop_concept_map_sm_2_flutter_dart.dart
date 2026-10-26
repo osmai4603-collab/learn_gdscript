@@ -5,6 +5,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:learn_gdscript/data/models/review_schedule.dart';
 import 'package:learn_gdscript/ui/routers/app_routes.dart';
 
@@ -318,7 +319,7 @@ class _DesktopConceptMapSm2ScreenState
       if (remainingCards <= 1) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Color(0xFF14532D),
+            backgroundColor: Theme.of(context).colorScheme.successContainer,
             content: Text(
               _conceptMapCopy(
                 context,
@@ -349,7 +350,7 @@ class _DesktopConceptMapSm2ScreenState
   Widget build(BuildContext context) {
     final activeConcept = widget.data.activeConcept;
     return Scaffold(
-      backgroundColor: const Color(0xFF0F141B),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
           // 1. الشريط العلوي العام
@@ -359,7 +360,7 @@ class _DesktopConceptMapSm2ScreenState
             dueTodayCount: widget.data.dueTodayCardsCount,
             retentionPercent: widget.data.averageRetentionRate,
           ),
-          const Divider(height: 1, color: Color(0xFF28323F)),
+           Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
 
           // 2. الهيكل الرئيسي لسطح المكتب
           Expanded(
@@ -398,7 +399,7 @@ class _DesktopConceptMapSm2ScreenState
                   return Row(
                     children: [
                       Expanded(flex: 7, child: main),
-                      const VerticalDivider(width: 1, color: Color(0xFF28323F)),
+                       VerticalDivider(width: 1, color: Theme.of(context).colorScheme.outlineVariant),
                       SizedBox(width: 380, child: inspector),
                     ],
                   );
@@ -407,7 +408,7 @@ class _DesktopConceptMapSm2ScreenState
                   children: [
                     Expanded(flex: 6, child: main),
                     if (activeConcept != null) ...[
-                      const Divider(height: 1, color: Color(0xFF28323F)),
+                       Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
                       Expanded(flex: 4, child: inspector),
                     ],
                   ],
@@ -443,15 +444,15 @@ class _ConceptMapTopNav extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(minHeight: 56),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      color: const Color(0xFF131922),
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       child: LayoutBuilder(
         builder: (context, constraints) {
           final title = Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+               Icon(
                 Icons.psychology_rounded,
-                color: Color(0xFF478CBF),
+                color: Theme.of(context).colorScheme.primary,
                 size: 24,
               ),
               const SizedBox(width: 8),
@@ -463,11 +464,11 @@ class _ConceptMapTopNav extends StatelessWidget {
                     'Concept Map & Spaced Repetition',
                   ),
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFE2E8F0),
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -482,7 +483,7 @@ class _ConceptMapTopNav extends StatelessWidget {
                   icon: Icons.bolt_rounded,
                   text:
                       '${_conceptMapCopy(context, 'معدل الاسترجاع', 'Recall')}: ${(retentionPercent! * 100).toInt()}%',
-                  color: const Color(0xFF38BDF8),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               _MetricBadge(
                 icon: Icons.local_fire_department_rounded,
@@ -491,12 +492,12 @@ class _ConceptMapTopNav extends StatelessWidget {
                   '$streakDays أيام',
                   '$streakDays days',
                 ),
-                color: const Color(0xFFFB923C),
+                color: Theme.of(context).colorScheme.secondary,
               ),
               _MetricBadge(
                 icon: Icons.diamond_rounded,
                 text: '$xp XP',
-                color: const Color(0xFFA855F7),
+                color: Theme.of(context).colorScheme.achievement,
               ),
             ],
           );
@@ -546,7 +547,7 @@ class _ConceptMapMainPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    color: const Color(0xFF0A0D12),
+    color: Theme.of(context).colorScheme.surfaceContainerLowest,
     child: Column(
       children: [
         _ConceptHeaderBanner(
@@ -556,7 +557,7 @@ class _ConceptMapMainPanel extends StatelessWidget {
           isReviewDeckMode: isReviewDeckMode,
           onToggleMode: onToggleMode,
         ),
-        const Divider(height: 1, color: Color(0xFF28323F)),
+         Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
         Expanded(
           child: isReviewDeckMode
               ? _Sm2FlashcardDeckView(
@@ -594,9 +595,9 @@ class _MetricBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFF171C23),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFF28323F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         children: [
@@ -641,13 +642,13 @@ class _ConceptHeaderBanner extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFF478CBF).withValues(alpha: 0.2),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(
+              child:  Icon(
                 Icons.account_tree_rounded,
                 size: 20,
-                color: Color(0xFF478CBF),
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(width: 12),
@@ -663,11 +664,11 @@ class _ConceptHeaderBanner extends StatelessWidget {
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFE2E8F0),
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -679,10 +680,10 @@ class _ConceptHeaderBanner extends StatelessWidget {
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 11,
-                      color: Color(0xFF94A3B8),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -712,11 +713,11 @@ class _ConceptHeaderBanner extends StatelessWidget {
           ),
           style: ElevatedButton.styleFrom(
             backgroundColor: isReviewDeckMode
-                ? const Color(0xFF1F2630)
-                : const Color(0xFF38BDF8),
+                ? Theme.of(context).colorScheme.surfaceContainer
+                : Theme.of(context).colorScheme.primary,
             foregroundColor: isReviewDeckMode
-                ? const Color(0xFFE2E8F0)
-                : Colors.black,
+                ? Theme.of(context).colorScheme.onSurface
+                : Theme.of(context).colorScheme.onPrimary,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -725,7 +726,7 @@ class _ConceptHeaderBanner extends StatelessWidget {
         );
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          color: const Color(0xFF131922),
+          color: Theme.of(context).colorScheme.surfaceContainerLow,
           child: constraints.maxWidth < 700
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -764,6 +765,7 @@ class _InteractiveGraphCanvas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return InteractiveViewer(
       constrained: false,
       minScale: 0.55,
@@ -776,7 +778,11 @@ class _InteractiveGraphCanvas extends StatelessWidget {
           children: [
             // شبكة خلفية هندسية
             Positioned.fill(
-              child: CustomPaint(painter: _GraphBackgroundGridPainter()),
+              child: CustomPaint(
+                painter: _GraphBackgroundGridPainter(
+                  color: colorScheme.surfaceContainer,
+                ),
+              ),
             ),
 
             // رسم خطوط الترابط بين العقد (Connections)
@@ -785,6 +791,7 @@ class _InteractiveGraphCanvas extends StatelessWidget {
                 painter: _GraphConnectionsPainter(
                   concepts: concepts,
                   selectedConceptId: selectedConceptId,
+                  color: colorScheme.primary,
                 ),
               ),
             ),
@@ -824,13 +831,13 @@ class _ConceptNodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
-    Color statusColor = const Color(0xFF22C55E); // mastered
+    Color statusColor = Theme.of(context).colorScheme.tertiary; // mastered
     if (node.mastery == ConceptMasteryLevel.reviewing)
-      statusColor = const Color(0xFFF59E0B);
+      statusColor = Theme.of(context).colorScheme.secondary;
     if (node.mastery == ConceptMasteryLevel.learning)
-      statusColor = const Color(0xFF38BDF8);
+      statusColor = Theme.of(context).colorScheme.primary;
     if (node.mastery == ConceptMasteryLevel.locked)
-      statusColor = const Color(0xFF64748B);
+      statusColor = Theme.of(context).colorScheme.onSurfaceVariant;
 
     return InkWell(
       onTap: onTap,
@@ -839,18 +846,18 @@ class _ConceptNodeWidget extends StatelessWidget {
         width: 170,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF1E2837) : const Color(0xFF131922),
+          color: isSelected ? Theme.of(context).colorScheme.surfaceContainerHigh : Theme.of(context).colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected
-                ? const Color(0xFF478CBF)
+                ? Theme.of(context).colorScheme.primary
                 : statusColor.withValues(alpha: 0.4),
             width: isSelected ? 2 : 1,
           ),
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: const Color(0xFF478CBF).withValues(alpha: 0.3),
+                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
                     blurRadius: 12,
                   ),
                 ]
@@ -877,10 +884,10 @@ class _ConceptNodeWidget extends StatelessWidget {
                         : node.category,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 10,
-                      color: Color(0xFF64748B),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -896,8 +903,8 @@ class _ConceptNodeWidget extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: isSelected
-                    ? const Color(0xFF38BDF8)
-                    : const Color(0xFFE2E8F0),
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 6),
@@ -914,8 +921,8 @@ class _ConceptNodeWidget extends StatelessWidget {
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 10,
                   color: node.daysUntilNextReview == 0
-                      ? const Color(0xFFF59E0B)
-                      : const Color(0xFF94A3B8),
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
           ],
@@ -926,10 +933,14 @@ class _ConceptNodeWidget extends StatelessWidget {
 }
 
 class _GraphBackgroundGridPainter extends CustomPainter {
+  _GraphBackgroundGridPainter({required this.color});
+
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFF1E2632).withValues(alpha: 0.2)
+      ..color = color.withValues(alpha: 0.2)
       ..strokeWidth = 1;
 
     const spacing = 30.0;
@@ -948,10 +959,12 @@ class _GraphBackgroundGridPainter extends CustomPainter {
 class _GraphConnectionsPainter extends CustomPainter {
   final List<KnowledgeConceptNodeModel> concepts;
   final String selectedConceptId;
+  final Color color;
 
   _GraphConnectionsPainter({
     required this.concepts,
     required this.selectedConceptId,
+    required this.color,
   });
 
   @override
@@ -969,9 +982,7 @@ class _GraphConnectionsPainter extends CustomPainter {
               (selected?.prerequisites.contains(node.id) ?? false) ||
               (selected?.prerequisites.contains(preId) ?? false);
           final paint = Paint()
-            ..color = const Color(
-              0xFF478CBF,
-            ).withValues(alpha: isRelated ? 0.82 : 0.16)
+            ..color = color.withValues(alpha: isRelated ? 0.82 : 0.16)
             ..strokeWidth = isRelated ? 2.2 : 1.2
             ..style = PaintingStyle.stroke;
           final p1 = Offset(
@@ -1029,7 +1040,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 16,
-            color: Color(0xFF22C55E),
+            color: Theme.of(context).colorScheme.tertiary,
           ),
         ),
       );
@@ -1045,12 +1056,14 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
           margin: const EdgeInsets.all(28),
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: const Color(0xFF131922),
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: const Color(0xFF28323F)),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.4),
+                color: Theme.of(context).colorScheme.shadow.withValues(
+                  alpha: 0.4,
+                ),
                 blurRadius: 20,
                 offset: const Offset(0, 10),
               ),
@@ -1070,10 +1083,10 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                       'البطاقة ${currentIndex + 1} من ${cards.length}',
                       'Card ${currentIndex + 1} of ${cards.length}',
                     ),
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'JetBrains Mono',
                       fontSize: 12,
-                      color: Color(0xFF64748B),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   Container(
@@ -1082,7 +1095,7 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                       vertical: 3,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF0F141B),
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
@@ -1091,10 +1104,10 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                         'SM-2 • الفاصل ${card.currentIntervalDays} يوم',
                         'SM-2 • ${card.currentIntervalDays}-day interval',
                       ),
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 10,
-                        color: Color(0xFF38BDF8),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),
@@ -1107,11 +1120,11 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 locale.languageCode == 'en'
                     ? card.promptQuestionEn ?? card.promptQuestion
                     : card.promptQuestion,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFE2E8F0),
+                  color: Theme.of(context).colorScheme.onSurface,
                   height: 1.5,
                 ),
               ),
@@ -1122,18 +1135,18 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF0A0D12),
+                  color: Theme.of(context).colorScheme.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xFF28323F)),
+                  border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                 ),
                 child: Directionality(
                   textDirection: TextDirection.ltr,
                   child: Text(
                     card.codeContext,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'JetBrains Mono',
                       fontSize: 12,
-                      color: Color(0xFF38BDF8),
+                      color: Theme.of(context).colorScheme.primary,
                       height: 1.5,
                     ),
                   ),
@@ -1146,22 +1159,22 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF14532D).withValues(alpha: 0.3),
+                    color: Theme.of(context).colorScheme.successContainer.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: const Color(0xFF22C55E).withValues(alpha: 0.4),
+                      color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.4),
                     ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                       Text(
                         'شرح الإجابة:',
                         style: TextStyle(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF22C55E),
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -1169,10 +1182,10 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                         locale.languageCode == 'en'
                             ? card.answerExplanationEn ?? card.answerExplanation
                             : card.answerExplanation,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 13,
-                          color: Color(0xFFCBD5E1),
+                          color: Theme.of(context).colorScheme.onSurface,
                           height: 1.5,
                         ),
                       ),
@@ -1182,18 +1195,18 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                           width: double.infinity,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF0A0D12),
+                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
                             borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: const Color(0xFF28323F)),
+                            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                           ),
                           child: Directionality(
                             textDirection: TextDirection.ltr,
                             child: Text(
                               card.answerCode,
-                              style: const TextStyle(
+                              style:  TextStyle(
                                 fontFamily: 'JetBrains Mono',
                                 fontSize: 12,
-                                color: Color(0xFF86EFAC),
+                                color: Theme.of(context).colorScheme.tertiary,
                               ),
                             ),
                           ),
@@ -1209,28 +1222,28 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                   children: [
                     _Sm2RatingBtn(
                       label: _conceptMapCopy(context, 'إعادة', 'Again'),
-                      color: const Color(0xFFEF4444),
+                      color: Theme.of(context).colorScheme.error,
                       enabled: !isSavingRating,
                       onTap: () => onRate(Sm2Rating.again),
                     ),
                     const SizedBox(width: 8),
                     _Sm2RatingBtn(
                       label: _conceptMapCopy(context, 'صعب', 'Hard'),
-                      color: const Color(0xFFF59E0B),
+                      color: Theme.of(context).colorScheme.secondary,
                       enabled: !isSavingRating,
                       onTap: () => onRate(Sm2Rating.hard),
                     ),
                     const SizedBox(width: 8),
                     _Sm2RatingBtn(
                       label: _conceptMapCopy(context, 'جيد', 'Good'),
-                      color: const Color(0xFF38BDF8),
+                      color: Theme.of(context).colorScheme.primary,
                       enabled: !isSavingRating,
                       onTap: () => onRate(Sm2Rating.good),
                     ),
                     const SizedBox(width: 8),
                     _Sm2RatingBtn(
                       label: _conceptMapCopy(context, 'سهل', 'Easy'),
-                      color: const Color(0xFF22C55E),
+                      color: Theme.of(context).colorScheme.tertiary,
                       enabled: !isSavingRating,
                       onTap: () => onRate(Sm2Rating.easy),
                     ),
@@ -1242,8 +1255,8 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: isSavingRating ? null : onRevealAnswer,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF478CBF),
-                      foregroundColor: Colors.white,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -1333,12 +1346,12 @@ class _ConceptInspectorPanel extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFF478CBF).withValues(alpha: 0.2),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(
+              child:  Icon(
                 Icons.school_rounded,
-                color: Color(0xFF478CBF),
+                color: Theme.of(context).colorScheme.primary,
                 size: 20,
               ),
             ),
@@ -1349,19 +1362,19 @@ class _ConceptInspectorPanel extends StatelessWidget {
                 children: [
                   Text(
                     isEnglish ? concept.titleEn : concept.titleAr,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFE2E8F0),
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   Text(
                     _masteryLabel(context, concept.mastery),
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 11,
-                      color: Color(0xFF64748B),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -1370,16 +1383,16 @@ class _ConceptInspectorPanel extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 18),
-        const Divider(color: Color(0xFF28323F)),
+         Divider(color: Theme.of(context).colorScheme.outlineVariant),
         const SizedBox(height: 14),
 
         Text(
           _conceptMapCopy(context, 'شرح المفهوم:', 'Concept overview:'),
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 6),
@@ -1387,10 +1400,10 @@ class _ConceptInspectorPanel extends StatelessWidget {
           isEnglish
               ? concept.descriptionEn ?? concept.description
               : concept.description,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 12,
-            color: Color(0xFF94A3B8),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             height: 1.5,
           ),
         ),
@@ -1399,29 +1412,29 @@ class _ConceptInspectorPanel extends StatelessWidget {
         if (concept.codeExample.isNotEmpty) ...[
           Text(
             _conceptMapCopy(context, 'مثال برمجي:', 'Code example:'),
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFE2E8F0),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 6),
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF0A0D12),
+              color: Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: const Color(0xFF28323F)),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: Text(
                 concept.codeExample,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'JetBrains Mono',
                   fontSize: 11,
-                  color: Color(0xFF38BDF8),
+                  color: Theme.of(context).colorScheme.primary,
                   height: 1.5,
                 ),
               ),
@@ -1432,39 +1445,39 @@ class _ConceptInspectorPanel extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: const Color(0xFF0F141B),
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color(0xFF28323F)),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 _conceptMapCopy(context, 'حالة المفهوم', 'Concept status'),
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
-                  color: Color(0xFF64748B),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 6),
               Text(
                 _masteryLabel(context, concept.mastery),
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFE2E8F0),
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               if (concept.lastReviewedDate.isNotEmpty) ...[
                 const SizedBox(height: 8),
                 Text(
                   '${_conceptMapCopy(context, 'آخر مراجعة:', 'Last reviewed:')} ${concept.lastReviewedDate}',
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 11,
-                    color: Color(0xFF94A3B8),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -1489,8 +1502,8 @@ class _ConceptInspectorPanel extends StatelessWidget {
               ),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF478CBF),
-              foregroundColor: Colors.white,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               padding: const EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),

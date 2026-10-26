@@ -14,8 +14,6 @@ import 'line_numbers.dart';
 import 'syntax_highlighter.dart';
 
 class CodeEditorWidget extends StatefulWidget {
-  static const defaultBackgroundColor = Color(0xFF090F15);
-
   const CodeEditorWidget({
     super.key,
     required this.initialCode,
@@ -588,9 +586,11 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (widget.expands)
-          Expanded(child: _buildEditorField(colors, lineCount, textStyle))
+          Expanded(
+            child: _buildEditorField(colors, theme, lineCount, textStyle),
+          )
         else
-          _buildEditorField(colors, lineCount, textStyle),
+          _buildEditorField(colors, theme, lineCount, textStyle),
         if (_signatureHelp != null)
           Padding(
             padding: const EdgeInsets.only(top: 6),
@@ -720,6 +720,7 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
 
   Widget _buildEditorField(
     ColorScheme colors,
+    CodeEditorTheme editorTheme,
     int lineCount,
     TextStyle textStyle,
   ) {
@@ -766,11 +767,9 @@ class _CodeEditorWidgetState extends State<CodeEditorWidget> {
                     enabledBorder: InputBorder.none,
                     filled: true,
                     hoverColor:
-                        widget.backgroundColor ??
-                        CodeEditorWidget.defaultBackgroundColor,
+                        widget.backgroundColor ?? editorTheme.background,
                     fillColor:
-                        widget.backgroundColor ??
-                        CodeEditorWidget.defaultBackgroundColor,
+                        widget.backgroundColor ?? editorTheme.background,
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: 12,
                       vertical: 17,

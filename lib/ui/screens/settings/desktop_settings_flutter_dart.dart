@@ -6,6 +6,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:learn_gdscript/ui/routers/app_routes.dart';
 
 // -----------------------------------------------------------------------------
@@ -187,13 +188,13 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
 
   void _saveSettings() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor: Color(0xFF14532D),
+      SnackBar(
+        backgroundColor: Theme.of(context).colorScheme.successContainer,
         content: Text(
           'تم حفظ كافة التفضيلات بنجاح وتمت مزامنتها مع محرك Godot 4.3 ✓',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.onTertiaryContainer,
           ),
         ),
       ),
@@ -203,7 +204,7 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F141B),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
           // 1. الشريط العلوي العام
@@ -211,7 +212,7 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
             onSave: _saveSettings,
             onNavigate: widget.onNavigateRoute,
           ),
-          const Divider(height: 1, color: Color(0xFF28323F)),
+           Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
 
           // 2. الهيكل الرئيسي (Settings Categories Nav + Detail Form)
           Expanded(
@@ -221,12 +222,12 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
                 SizedBox(
                   width: 280,
                   child: Container(
-                    color: const Color(0xFF131922),
+                    color: Theme.of(context).colorScheme.surfaceContainerLow,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                         Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 20,
                             vertical: 8,
@@ -237,7 +238,7 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF94A3B8),
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
@@ -288,12 +289,12 @@ class _DesktopSettingsScreenState extends State<DesktopSettingsScreen> {
                   ),
                 ),
 
-                const VerticalDivider(width: 1, color: Color(0xFF28323F)),
+                 VerticalDivider(width: 1, color: Theme.of(context).colorScheme.outlineVariant),
 
                 // لوحة النماذج وتعديل الإعدادات
                 Expanded(
                   child: Container(
-                    color: const Color(0xFF0F141B),
+                    color: Theme.of(context).colorScheme.surface,
                     child: ListView(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 36,
@@ -372,12 +373,12 @@ class _SettingsTopNav extends StatelessWidget {
     return Container(
       height: 56,
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      color: const Color(0xFF131922),
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       child: Row(
         children: [
           Row(
-            children: const [
-              Icon(Icons.settings_rounded, color: Color(0xFF478CBF), size: 24),
+            children:  [
+              Icon(Icons.settings_rounded, color: Theme.of(context).colorScheme.primary, size: 24),
               SizedBox(width: 8),
               Text(
                 'أكاديمية جودو',
@@ -385,18 +386,18 @@ class _SettingsTopNav extends StatelessWidget {
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFE2E8F0),
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SizedBox(width: 8),
-              Text('/', style: TextStyle(color: Color(0xFF64748B))),
+              Text('/', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant)),
               SizedBox(width: 8),
               Text(
                 'الإعدادات وتفضيلات النظام وبيئة المحرك (Desktop Settings)',
                 style: TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 13,
-                  color: Color(0xFF94A3B8),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -414,8 +415,8 @@ class _SettingsTopNav extends StatelessWidget {
               ),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF478CBF),
-              foregroundColor: Colors.white,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6),
@@ -453,11 +454,11 @@ class _CategoryTabTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           decoration: BoxDecoration(
-            color: isSelected ? const Color(0xFF1E2837) : Colors.transparent,
+            color: isSelected ? Theme.of(context).colorScheme.surfaceContainerHigh : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: isSelected
                 ? Border.all(
-                    color: const Color(0xFF478CBF).withValues(alpha: 0.5),
+                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
                   )
                 : null,
           ),
@@ -467,8 +468,8 @@ class _CategoryTabTile extends StatelessWidget {
                 icon,
                 size: 18,
                 color: isSelected
-                    ? const Color(0xFF38BDF8)
-                    : const Color(0xFF94A3B8),
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: 12),
               Text(
@@ -478,8 +479,8 @@ class _CategoryTabTile extends StatelessWidget {
                   fontSize: 13,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                   color: isSelected
-                      ? const Color(0xFFE2E8F0)
-                      : const Color(0xFF94A3B8),
+                      ? Theme.of(context).colorScheme.onSurface
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -520,26 +521,26 @@ class _EditorSettingsForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+         Text(
           'تفضيلات محرر الكود (GDScript Editor)',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 6),
-        const Text(
+         Text(
           'تخصيص مقاس الخط، التباعد، وسلوك الإكمال التلقائي في بيئة التطوير.',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
-            color: Color(0xFF94A3B8),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: 24),
-        const Divider(color: Color(0xFF28323F)),
+         Divider(color: Theme.of(context).colorScheme.outlineVariant),
         const SizedBox(height: 20),
 
         // مقاس الخط البرمجي
@@ -554,7 +555,7 @@ class _EditorSettingsForm extends StatelessWidget {
               min: 11,
               max: 20,
               divisions: 9,
-              activeColor: const Color(0xFF478CBF),
+              activeColor: Theme.of(context).colorScheme.primary,
               onChanged: onFontSizeChanged,
             ),
           ),
@@ -567,10 +568,10 @@ class _EditorSettingsForm extends StatelessWidget {
           subtitle: 'المعيار الرسمي في GDScript 2.0 هو 4 مسافات مسافية.',
           control: DropdownButton<int>(
             value: tabSize,
-            dropdownColor: const Color(0xFF171C23),
-            style: const TextStyle(
+            dropdownColor: Theme.of(context).colorScheme.surfaceContainerLow,
+            style:  TextStyle(
               fontFamily: 'JetBrains Mono',
-              color: Color(0xFFE2E8F0),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             items: const [
               DropdownMenuItem(value: 2, child: Text('2 مسافات')),
@@ -641,14 +642,14 @@ class _EngineLspSettingsForm extends StatelessWidget {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children:  [
                 Text(
                   'خادم اللغة LSP ومحرك Godot 4.3',
                   style: TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFE2E8F0),
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 SizedBox(height: 4),
@@ -657,7 +658,7 @@ class _EngineLspSettingsForm extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 13,
-                    color: Color(0xFF94A3B8),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -673,8 +674,8 @@ class _EngineLspSettingsForm extends StatelessWidget {
                 ),
               ),
               style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF38BDF8),
-                side: const BorderSide(color: Color(0xFF38BDF8)),
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                side:  BorderSide(color: Theme.of(context).colorScheme.primary),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(6),
                 ),
@@ -683,35 +684,35 @@ class _EngineLspSettingsForm extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 24),
-        const Divider(color: Color(0xFF28323F)),
+         Divider(color: Theme.of(context).colorScheme.outlineVariant),
         const SizedBox(height: 20),
 
         // مسار ملف Godot التنفيذي
-        const Text(
+         Text(
           'مسار المحرك التنفيذي (Godot Executable Path):',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: const Color(0xFF131922),
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color(0xFF28323F)),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: TextField(
               controller: godotPathController,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontFamily: 'JetBrains Mono',
                 fontSize: 13,
-                color: Color(0xFF38BDF8),
+                color: Theme.of(context).colorScheme.primary,
               ),
               decoration: const InputDecoration(border: InputBorder.none),
             ),
@@ -720,13 +721,13 @@ class _EngineLspSettingsForm extends StatelessWidget {
         const SizedBox(height: 20),
 
         // منفذ خادم LSP
-        const Text(
+         Text(
           'منفذ الاتصال المحلي (LSP Port):',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -734,19 +735,19 @@ class _EngineLspSettingsForm extends StatelessWidget {
           width: 200,
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
-            color: const Color(0xFF131922),
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color(0xFF28323F)),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: TextField(
               controller: portController,
               keyboardType: TextInputType.number,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontFamily: 'JetBrains Mono',
                 fontSize: 13,
-                color: Color(0xFFE2E8F0),
+                color: Theme.of(context).colorScheme.onSurface,
               ),
               decoration: const InputDecoration(border: InputBorder.none),
             ),
@@ -784,26 +785,26 @@ class _AppearanceSettingsForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+         Text(
           'المظهر والسمة البصرية',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 6),
-        const Text(
+         Text(
           'تخصيص نسق الألوان بما يطابق واجهة محرك Godot الرسمية وتفضيلات شاشتك.',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
-            color: Color(0xFF94A3B8),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: 24),
-        const Divider(color: Color(0xFF28323F)),
+         Divider(color: Theme.of(context).colorScheme.outlineVariant),
         const SizedBox(height: 20),
 
         _SettingRow(
@@ -813,16 +814,16 @@ class _AppearanceSettingsForm extends StatelessWidget {
           control: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: const Color(0xFF171C23),
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: const Color(0xFF28323F)),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
             ),
             child: Text(
               appearance.themeMode,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
-                color: Color(0xFF38BDF8),
+                color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -835,10 +836,10 @@ class _AppearanceSettingsForm extends StatelessWidget {
           subtitle: 'خط معتمد عالي الوضوح للغة العربية في البرمجيات التقنية.',
           control: Text(
             appearance.uiFont,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 13,
-              color: Color(0xFFE2E8F0),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),
@@ -863,26 +864,26 @@ class _AccountSettingsForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+         Text(
           'الحساب والمسار الأكاديمي',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 6),
-        const Text(
+         Text(
           'بيانات حساب المتعلّم وإعادة تقييم المستوى الأكاديمي.',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
-            color: Color(0xFF94A3B8),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: 24),
-        const Divider(color: Color(0xFF28323F)),
+         Divider(color: Theme.of(context).colorScheme.outlineVariant),
         const SizedBox(height: 20),
 
         _SettingRow(
@@ -891,10 +892,10 @@ class _AccountSettingsForm extends StatelessWidget {
               'مرتبط بحساب حفظ ومزامنة مسارات التعلّم ومشاريع مساحة العمل.',
           control: Text(
             email,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'JetBrains Mono',
               fontSize: 13,
-              color: Color(0xFFCBD5E1),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),
@@ -907,15 +908,15 @@ class _AccountSettingsForm extends StatelessWidget {
           control: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: const Color(0xFF14532D),
+              color: Theme.of(context).colorScheme.successContainer,
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(
               accountType,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 11,
-                color: Color(0xFF4ADE80),
+                color: Theme.of(context).colorScheme.tertiary,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -926,23 +927,23 @@ class _AccountSettingsForm extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFF171C23),
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFF28323F)),
+            border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children:  [
                   Text(
                     'إعادة اختبار تحديد المستوى الأكاديمي',
                     style: TextStyle(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFE2E8F0),
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   SizedBox(height: 4),
@@ -951,7 +952,7 @@ class _AccountSettingsForm extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 12,
-                      color: Color(0xFF94A3B8),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -959,8 +960,8 @@ class _AccountSettingsForm extends StatelessWidget {
               OutlinedButton(
                 onPressed: onResetPlacement,
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFFFB923C),
-                  side: const BorderSide(color: Color(0xFFFB923C)),
+                  foregroundColor: Theme.of(context).colorScheme.secondary,
+                  side:  BorderSide(color: Theme.of(context).colorScheme.secondary),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
                   ),
@@ -1003,20 +1004,20 @@ class _SettingRow extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFE2E8F0),
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 subtitle,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
-                  color: Color(0xFF94A3B8),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -1052,20 +1053,20 @@ class _SettingSwitchRow extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFE2E8F0),
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 subtitle,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
-                  color: Color(0xFF94A3B8),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -1073,7 +1074,7 @@ class _SettingSwitchRow extends StatelessWidget {
         ),
         Switch(
           value: value,
-          activeThumbColor: const Color(0xFF478CBF),
+          activeThumbColor: Theme.of(context).colorScheme.primary,
           onChanged: onChanged,
         ),
       ],

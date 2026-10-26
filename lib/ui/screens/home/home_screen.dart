@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final wide = MediaQuery.sizeOf(context).width >= 840;
     final l10n = context.l10n;
     return Scaffold(
-      backgroundColor: const Color(0xFF0F141B),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Consumer<HomeDashboardProvider>(
         builder: (context, dashboardProvider, _) {
           final state = dashboardProvider.state;
@@ -282,7 +282,7 @@ class _HomeDashboardLoadingSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     final skeleton = Column(
       children: [
-          Container(height: 60, color: const Color(0xFF1B2027)),
+          Container(height: 60, color: Theme.of(context).colorScheme.surfaceContainer),
           Expanded(
             child: LayoutBuilder(
               builder: (context, constraints) {
@@ -369,8 +369,8 @@ class _HomeDashboardLoadingSkeleton extends StatelessWidget {
       ],
     );
     return Shimmer.fromColors(
-      baseColor: const Color(0xFF1B2027),
-      highlightColor: const Color(0xFF30353D),
+      baseColor: Theme.of(context).colorScheme.surfaceContainer,
+      highlightColor: Theme.of(context).colorScheme.surfaceContainerHighest,
       enabled: !MediaQuery.disableAnimationsOf(context),
       child: skeleton,
     );
@@ -387,9 +387,9 @@ class _SkeletonBlock extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     height: height,
     decoration: BoxDecoration(
-      color: const Color(0xFF1B2027),
+      color: Theme.of(context).colorScheme.surfaceContainer,
       borderRadius: BorderRadius.circular(radius),
-      border: Border.all(color: const Color(0xFF30353D)),
+      border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHighest),
     ),
   );
 }

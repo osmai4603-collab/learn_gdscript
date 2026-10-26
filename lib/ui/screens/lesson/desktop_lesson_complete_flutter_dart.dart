@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/extensions/context_extensions.dart';
@@ -305,26 +306,30 @@ class _CelebrationBadge extends StatelessWidget {
           height: 100,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: const LinearGradient(
-              colors: [Color(0xFFF59E0B), Color(0xFFD97706), Color(0xFF78350F)],
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.secondaryContainer,
+                Theme.of(context).colorScheme.onSecondary,
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(
-                  0xFFF59E0B,
-                ).withValues(alpha: 0.4 * glowAnimation.value),
+                color: Theme.of(context).colorScheme.secondary.withValues(
+                  alpha: 0.4 * glowAnimation.value,
+                ),
                 blurRadius: 30,
                 spreadRadius: 8,
               ),
             ],
-            border: Border.all(color: const Color(0xFFFCD34D), width: 3),
+            border: Border.all(color: Theme.of(context).colorScheme.secondary, width: 3),
           ),
-          child: const Icon(
+          child: Icon(
             Icons.military_tech_rounded,
             size: 54,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.onSecondary,
           ),
         ),
       ),
@@ -343,28 +348,28 @@ class _MetricsGrid extends StatelessWidget {
     final metrics = <_RewardMetric>[
       _RewardMetric(
         icon: Icons.diamond_rounded,
-        color: const Color(0xFFA855F7),
+        color: Theme.of(context).colorScheme.achievement,
         label: l10n.xpAwarded(data.earnedXp),
       ),
       _RewardMetric(
         icon: Icons.check_circle_rounded,
-        color: const Color(0xFF22C55E),
+        color: Theme.of(context).colorScheme.tertiary,
         label: l10n.exercisesSolved(data.exercisesCompleted),
       ),
       _RewardMetric(
         icon: Icons.lightbulb_outline_rounded,
-        color: const Color(0xFFF59E0B),
+        color: Theme.of(context).colorScheme.secondary,
         label: l10n.hintsUsed(data.hintsUsedCount),
       ),
       _RewardMetric(
         icon: Icons.timer_outlined,
-        color: const Color(0xFF38BDF8),
+        color: Theme.of(context).colorScheme.primary,
         label: l10n.timeSpent(data.timeSpentMinutes),
       ),
       if (data.currentStreak != null)
         _RewardMetric(
           icon: Icons.local_fire_department_rounded,
-          color: const Color(0xFFFB923C),
+          color: Theme.of(context).colorScheme.secondary,
           label: l10n.currentStreakDays(data.currentStreak!),
         ),
     ];
@@ -539,14 +544,14 @@ class _UnlockedBadgeBanner extends StatelessWidget {
         color: theme.colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: const Color(0xFFF59E0B).withValues(alpha: 0.5),
+          color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.5),
         ),
       ),
       child: Row(
         children: [
-          const Icon(
+           Icon(
             Icons.workspace_premium_rounded,
-            color: Color(0xFFF59E0B),
+            color: Theme.of(context).colorScheme.secondary,
             size: 26,
           ),
           const SizedBox(width: 14),

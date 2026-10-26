@@ -1,14 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:learn_gdscript/core/theme/text_theme.dart';
 
 sealed class AppTheme {
+  static final _lightScheme = const ColorScheme.light().copyWith(
+    primary: Color(0xFF176B9A),
+    onPrimary: Color(0xFFFFFFFF),
+    primaryContainer: Color(0xFFD9EDFA),
+    onPrimaryContainer: Color(0xFF103B56),
+    secondary: Color(0xFFA64F0A),
+    onSecondary: Color(0xFFFFFFFF),
+    secondaryContainer: Color(0xFFFFE3CC),
+    onSecondaryContainer: Color(0xFF542600),
+    tertiary: Color(0xFF18723D),
+    onTertiary: Color(0xFFFFFFFF),
+    tertiaryContainer: Color(0xFFD9F4E2),
+    onTertiaryContainer: Color(0xFF103C22),
+    error: Color(0xFFBA1A1A),
+    onError: Color(0xFFFFFFFF),
+    errorContainer: Color(0xFFFFDAD6),
+    onErrorContainer: Color(0xFF410002),
+    surface: Color(0xFFF7F9FC),
+    onSurface: Color(0xFF191D24),
+    onSurfaceVariant: Color(0xFF454E59),
+    inverseSurface: Color(0xFF2E333B),
+    onInverseSurface: Color(0xFFF0F1F4),
+    inversePrimary: Color(0xFF91CDFF),
+    surfaceDim: Color(0xFFD8DDE5),
+    surfaceBright: Color(0xFFFFFFFF),
+    surfaceContainerLowest: Color(0xFFFFFFFF),
+    surfaceContainerLow: Color(0xFFF3F6FA),
+    surfaceContainer: Color(0xFFEDF1F6),
+    surfaceContainerHigh: Color(0xFFE6EBF2),
+    surfaceContainerHighest: Color(0xFFDDE4EC),
+    outline: Color(0xFF687482),
+    outlineVariant: Color(0xFFC2CBD5),
+    surfaceTint: Color(0xFF176B9A),
+  );
+
+  static final _darkScheme = const ColorScheme.dark().copyWith(
+    primary: Color(0xFF91CDFF),
+    onPrimary: Color(0xFF003350),
+    primaryContainer: Color(0xFF5397CA),
+    onPrimaryContainer: Color(0xFF002C46),
+    secondary: Color(0xFFFFB783),
+    onSecondary: Color(0xFF4F2500),
+    secondaryContainer: Color(0xFFDB7619),
+    onSecondaryContainer: Color(0xFF451F00),
+    tertiary: Color(0xFF4AE183),
+    onTertiary: Color(0xFF003919),
+    tertiaryContainer: Color(0xFF00A657),
+    onTertiaryContainer: Color(0xFF003115),
+    error: Color(0xFFFFB4AB),
+    onError: Color(0xFF690005),
+    surface: Color(0xFF0F141B),
+    onSurface: Color(0xFFDEE2EC),
+    onSurfaceVariant: Color(0xFFC0C7D0),
+    surfaceDim: Color(0xFF0F141B),
+    surfaceBright: Color(0xFF343941),
+    surfaceContainerLowest: Color(0xFF090F15),
+    surfaceContainerLow: Color(0xFF171C23),
+    surfaceContainer: Color(0xFF1B2027),
+    surfaceContainerHigh: Color(0xFF252A32),
+    surfaceContainerHighest: Color(0xFF30353D),
+    outline: Color(0xFF8A919A),
+    outlineVariant: Color(0xFF40484F),
+    surfaceTint: Color(0xFF91CDFF),
+  );
+
   static ThemeData get light {
-    final colorScheme = AppColorScheme.light;
-    return _buildThemeData(
-      colorScheme: colorScheme,
+    return buildThemeData(
+      colorScheme: _lightScheme,
       textTheme: AppTextTheme.getTextTheme(
-        colorScheme: colorScheme,
+        colorScheme: _lightScheme,
         basicFontFamily: 'IBM Plex Sans',
         headingFontFamily: 'IBM Plex Sans',
       ),
@@ -16,18 +79,17 @@ sealed class AppTheme {
   }
 
   static ThemeData get dark {
-    final colorScheme = AppColorScheme.dark;
-    return _buildThemeData(
-      colorScheme: colorScheme,
+    return buildThemeData(
+      colorScheme: _darkScheme,
       textTheme: AppTextTheme.getTextTheme(
-        colorScheme: colorScheme,
+        colorScheme: _darkScheme,
         basicFontFamily: 'IBM Plex Sans',
         headingFontFamily: 'IBM Plex Sans',
       ),
     );
   }
 
-  static ThemeData _buildThemeData({
+  static ThemeData buildThemeData({
     required ColorScheme colorScheme,
     required TextTheme textTheme,
   }) {
@@ -79,10 +141,7 @@ sealed class AppTheme {
         collapsedShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     );
   }

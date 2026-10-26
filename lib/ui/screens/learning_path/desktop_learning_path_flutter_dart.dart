@@ -5,6 +5,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:learn_gdscript/ui/routers/app_routes.dart';
 
 // -----------------------------------------------------------------------------
@@ -419,7 +420,7 @@ class _DesktopLearningPathScreenState extends State<DesktopLearningPathScreen>
         : activeLessons.first;
 
     return Scaffold(
-      backgroundColor: _LearningPathColors.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: LayoutBuilder(
         builder: (context, constraints) {
           final isWide = constraints.maxWidth >= 1050;
@@ -547,21 +548,6 @@ class _DesktopLearningPathScreenState extends State<DesktopLearningPathScreen>
   }
 }
 
-class _LearningPathColors {
-  static const background = Color(0xFF0F141B);
-  static const surface = Color(0xFF171C23);
-  static const surfaceRaised = Color(0xFF1B2027);
-  static const surfaceHigh = Color(0xFF252A32);
-  static const border = Color(0xFF40484F);
-  static const text = Color(0xFFDEE2EC);
-  static const muted = Color(0xFFC0C7D0);
-  static const subtle = Color(0xFF8A919A);
-  static const primary = Color(0xFF91CDFF);
-  static const green = Color(0xFF4AE183);
-  static const orange = Color(0xFFFFB783);
-  static const purple = Color(0xFFCAA7FF);
-}
-
 class _LearningPathPageHeader extends StatelessWidget {
   const _LearningPathPageHeader({
     required this.data,
@@ -589,22 +575,22 @@ class _LearningPathPageHeader extends StatelessWidget {
         Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           spacing: 8,
-          children: const [
-            Text('أكاديمية جودو', style: _LearningPathTextStyles.breadcrumb),
+          children:  [
+            Text('أكاديمية جودو', style: _LearningPathTextStyles.breadcrumb(context)),
             Icon(
               Icons.chevron_left_rounded,
               size: 16,
-              color: _LearningPathColors.subtle,
+              color: Theme.of(context).colorScheme.outline,
             ),
-            Text('منهج 2025', style: _LearningPathTextStyles.breadcrumb),
+            Text('منهج 2025', style: _LearningPathTextStyles.breadcrumb(context)),
             Icon(
               Icons.chevron_left_rounded,
               size: 16,
-              color: _LearningPathColors.subtle,
+              color: Theme.of(context).colorScheme.outline,
             ),
             Text(
               'GDScript 4.3 Core Curriculum',
-              style: _LearningPathTextStyles.monoMuted,
+              style: _LearningPathTextStyles.monoMuted(context),
             ),
           ],
         ),
@@ -629,7 +615,7 @@ class _LearningPathPageHeader extends StatelessWidget {
                           : 34,
                       fontWeight: FontWeight.w700,
                       height: 1.3,
-                      color: _LearningPathColors.text,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -638,22 +624,22 @@ class _LearningPathPageHeader extends StatelessWidget {
                     runSpacing: 8,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      const _StatusPill(
+                       _StatusPill(
                         icon: Icons.verified_rounded,
                         label: 'Godot v4.3 Engine Verified',
-                        color: _LearningPathColors.green,
+                        color: Theme.of(context).colorScheme.tertiary,
                       ),
                       _StatusPill(
                         icon: Icons.check_circle_rounded,
                         label:
                             '$completedModules من ${data.modules.length} وحدات مكتملة',
-                        color: _LearningPathColors.muted,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       _StatusPill(
                         icon: Icons.menu_book_rounded,
                         label:
                             '${data.totalLessonsCompleted} من ${data.totalLessonsCount} درساً',
-                        color: _LearningPathColors.muted,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ],
                   ),
@@ -678,7 +664,7 @@ class _LearningPathPageHeader extends StatelessWidget {
                 _HeaderAction(
                   icon: Icons.psychology_alt_rounded,
                   label: 'مراجعة ذكية',
-                  accent: _LearningPathColors.orange,
+                  accent: Theme.of(context).colorScheme.secondary,
                   onPressed: onStartReview,
                 ),
               ],
@@ -686,11 +672,11 @@ class _LearningPathPageHeader extends StatelessWidget {
           ],
         ),
         if (totalLessons == 0)
-          const Padding(
+           Padding(
             padding: EdgeInsets.only(top: 12),
             child: Text(
               'لا توجد دروس مضافة إلى هذا المسار بعد.',
-              style: TextStyle(color: _LearningPathColors.orange),
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
           ),
       ],
@@ -726,10 +712,10 @@ class _LearningPathProgressStrip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: _LearningPathColors.surface,
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: _LearningPathColors.border.withValues(alpha: 0.45),
+          color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.45),
         ),
       ),
       child: Column(
@@ -801,9 +787,9 @@ class _LearningPathProgressStrip extends StatelessWidget {
             child: LinearProgressIndicator(
               value: totalLessons == 0 ? 0 : curriculumProgress,
               minHeight: 8,
-              backgroundColor: _LearningPathColors.surfaceHigh,
-              valueColor: const AlwaysStoppedAnimation(
-                _LearningPathColors.green,
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+              valueColor:  AlwaysStoppedAnimation(
+                Theme.of(context).colorScheme.tertiary,
               ),
             ),
           ),
@@ -812,17 +798,17 @@ class _LearningPathProgressStrip extends StatelessWidget {
             alignment: WrapAlignment.spaceBetween,
             runSpacing: 6,
             children: [
-              const Text(
+              Text(
                 '0 XP • البداية',
-                style: _LearningPathTextStyles.monoSubtle,
+                style: _LearningPathTextStyles.monoSubtle(context),
               ),
               Text(
                 '${data.earnedXp} / 650 XP للمستوى التالي',
-                style: _LearningPathTextStyles.monoMuted,
+                style: _LearningPathTextStyles.monoMuted(context),
               ),
               Text(
                 'المشروع النهائي • ${data.modules.fold<int>(0, (sum, module) => sum + (module.capstoneProject?.xpReward ?? 0))} XP',
-                style: _LearningPathTextStyles.monoSubtle,
+                style: _LearningPathTextStyles.monoSubtle(context),
               ),
             ],
           ),
@@ -832,9 +818,9 @@ class _LearningPathProgressStrip extends StatelessWidget {
             child: LinearProgressIndicator(
               value: progressToNextLevel,
               minHeight: 3,
-              backgroundColor: _LearningPathColors.surfaceHigh,
-              valueColor: const AlwaysStoppedAnimation(
-                _LearningPathColors.primary,
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+              valueColor:  AlwaysStoppedAnimation(
+                Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -862,9 +848,9 @@ class _ProgressMilestone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = switch (state) {
-      _MilestoneState.completed => _LearningPathColors.green,
-      _MilestoneState.active => _LearningPathColors.primary,
-      _MilestoneState.locked => _LearningPathColors.subtle,
+      _MilestoneState.completed => Theme.of(context).colorScheme.tertiary,
+      _MilestoneState.active => Theme.of(context).colorScheme.primary,
+      _MilestoneState.locked => Theme.of(context).colorScheme.outline,
     };
 
     return Row(
@@ -897,7 +883,7 @@ class _ProgressMilestone extends StatelessWidget {
                 subtitle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: _LearningPathTextStyles.monoSubtle,
+                style: _LearningPathTextStyles.monoSubtle(context),
               ),
             ],
           ),
@@ -915,7 +901,7 @@ class _MilestoneConnector extends StatelessWidget {
     width: 26,
     height: 1,
     margin: const EdgeInsets.symmetric(horizontal: 8),
-    color: _LearningPathColors.border,
+    color: Theme.of(context).colorScheme.outlineVariant,
   );
 }
 
@@ -946,15 +932,15 @@ class _ModuleCard extends StatelessWidget {
     );
     final isLocked = !isCompleted && !isActive;
     final accent = isCompleted
-        ? _LearningPathColors.green
+        ? Theme.of(context).colorScheme.tertiary
         : isActive
-        ? _LearningPathColors.primary
-        : _LearningPathColors.subtle;
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.outline;
     final background = isActive
-        ? _LearningPathColors.surfaceRaised
+        ? Theme.of(context).colorScheme.surfaceContainer
         : isLocked
-        ? const Color(0xFF11161D)
-        : _LearningPathColors.surface;
+        ? Theme.of(context).colorScheme.surface
+        : Theme.of(context).colorScheme.surfaceContainerLow;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
@@ -964,7 +950,7 @@ class _ModuleCard extends StatelessWidget {
         border: Border.all(
           color: isActive
               ? accent.withValues(alpha: 0.75)
-              : _LearningPathColors.border.withValues(alpha: 0.4),
+              : Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.4),
           width: isActive ? 1.3 : 1,
         ),
         boxShadow: isActive
@@ -1047,17 +1033,17 @@ class _ModuleCard extends StatelessWidget {
                               height: 1.5,
                               fontWeight: FontWeight.w700,
                               color: isLocked
-                                  ? _LearningPathColors.muted
-                                  : _LearningPathColors.text,
+                                  ? Theme.of(context).colorScheme.onSurfaceVariant
+                                  : Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             module.subtitle,
-                            style: const TextStyle(
+                            style:  TextStyle(
                               fontFamily: 'JetBrains Mono',
                               fontSize: 10,
-                              color: _LearningPathColors.subtle,
+                              color: Theme.of(context).colorScheme.outline,
                             ),
                           ),
                         ],
@@ -1086,7 +1072,7 @@ class _ModuleCard extends StatelessWidget {
                         child: LinearProgressIndicator(
                           value: module.progress,
                           minHeight: 5,
-                          backgroundColor: _LearningPathColors.surfaceHigh,
+                          backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
                           valueColor: AlwaysStoppedAnimation(accent),
                         ),
                       ),
@@ -1094,7 +1080,7 @@ class _ModuleCard extends StatelessWidget {
                     const SizedBox(height: 5),
                     Text(
                       '${module.lessons.length} دروس',
-                      style: _LearningPathTextStyles.monoSubtle,
+                      style: _LearningPathTextStyles.monoSubtle(context),
                     ),
                   ],
                 ),
@@ -1108,11 +1094,11 @@ class _ModuleCard extends StatelessWidget {
               children: [
                 Text(
                   module.description,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                     height: 1.8,
-                    color: _LearningPathColors.muted,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: 14),
@@ -1149,7 +1135,7 @@ class _ModuleCard extends StatelessWidget {
                           icon: const Icon(Icons.open_in_new_rounded, size: 15),
                           label: const Text('تفاصيل الوحدة'),
                           style: TextButton.styleFrom(
-                            foregroundColor: _LearningPathColors.muted,
+                            foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
                             textStyle: const TextStyle(
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 11,
@@ -1168,7 +1154,7 @@ class _ModuleCard extends StatelessWidget {
                             isExpanded ? 'إخفاء الدروس' : 'عرض الدروس',
                           ),
                           style: TextButton.styleFrom(
-                            foregroundColor: _LearningPathColors.primary,
+                            foregroundColor: Theme.of(context).colorScheme.primary,
                             textStyle: const TextStyle(
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 11,
@@ -1186,7 +1172,7 @@ class _ModuleCard extends StatelessWidget {
           if (isExpanded) ...[
             Divider(
               height: 1,
-              color: _LearningPathColors.border.withValues(alpha: 0.45),
+              color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.45),
             ),
             Padding(
               padding: const EdgeInsets.all(16),
@@ -1247,13 +1233,13 @@ class _LessonCard extends StatelessWidget {
     final isActive = lesson.status == LessonNodeStatus.active;
     final isCompleted = lesson.status == LessonNodeStatus.completed;
     final accent = isCompleted
-        ? _LearningPathColors.green
+        ? Theme.of(context).colorScheme.tertiary
         : isActive
-        ? _LearningPathColors.primary
-        : _LearningPathColors.subtle;
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.outline;
     final background = isActive
-        ? const Color(0xFF252A32)
-        : _LearningPathColors.surface;
+        ? Theme.of(context).colorScheme.surfaceContainerHigh
+        : Theme.of(context).colorScheme.surfaceContainerLow;
 
     return Material(
       color: background,
@@ -1269,7 +1255,7 @@ class _LessonCard extends StatelessWidget {
             border: Border.all(
               color: isActive
                   ? accent.withValues(alpha: 0.6)
-                  : _LearningPathColors.border.withValues(alpha: 0.35),
+                  : Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.35),
             ),
           ),
           child: Column(
@@ -1322,7 +1308,7 @@ class _LessonCard extends StatelessWidget {
                   ),
                   Text(
                     '#${lesson.lessonNumber}',
-                    style: _LearningPathTextStyles.monoSubtle,
+                    style: _LearningPathTextStyles.monoSubtle(context),
                   ),
                 ],
               ),
@@ -1331,12 +1317,12 @@ class _LessonCard extends StatelessWidget {
                 lesson.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   height: 1.55,
                   fontWeight: FontWeight.w700,
-                  color: _LearningPathColors.text,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 5),
@@ -1344,11 +1330,11 @@ class _LessonCard extends StatelessWidget {
                 lesson.briefDescription,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   height: 1.65,
-                  color: _LearningPathColors.muted,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 12),
@@ -1364,7 +1350,7 @@ class _LessonCard extends StatelessWidget {
                   _MetadataChip(
                     icon: Icons.bolt_rounded,
                     label: '+${lesson.xpReward} XP',
-                    color: _LearningPathColors.purple,
+                    color: Theme.of(context).colorScheme.achievementVariant,
                   ),
                 ],
               ),
@@ -1405,10 +1391,10 @@ class _LearningPathInsights extends StatelessWidget {
         _InsightPanel(
           title: 'لوحة الإتقان والإحصائيات',
           icon: Icons.insights_rounded,
-          trailing: const _StatusPill(
+          trailing:  _StatusPill(
             icon: Icons.circle,
             label: 'مباشر',
-            color: _LearningPathColors.green,
+            color: Theme.of(context).colorScheme.tertiary,
           ),
           child: Column(
             children: [
@@ -1419,7 +1405,7 @@ class _LearningPathInsights extends StatelessWidget {
                       value: '${data.earnedXp}',
                       label: 'مجموع XP',
                       icon: Icons.diamond_rounded,
-                      color: _LearningPathColors.primary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -1428,7 +1414,7 @@ class _LearningPathInsights extends StatelessWidget {
                       value: '${data.streakDays}',
                       label: 'أيام متتالية',
                       icon: Icons.local_fire_department_rounded,
-                      color: _LearningPathColors.orange,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -1437,7 +1423,7 @@ class _LearningPathInsights extends StatelessWidget {
                       value: '$completedModules/${data.modules.length}',
                       label: 'وحدات مكتملة',
                       icon: Icons.check_circle_rounded,
-                      color: _LearningPathColors.green,
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                   ),
                 ],
@@ -1446,29 +1432,33 @@ class _LearningPathInsights extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: _LearningPathColors.background.withValues(alpha: 0.75),
+                  color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.75),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: _LearningPathColors.border.withValues(alpha: 0.3),
+                    color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.3),
                   ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
+                    Text(
                       'توزيع المهارات المكتسبة',
-                      style: _LearningPathTextStyles.monoSubtle,
+                      style: _LearningPathTextStyles.monoSubtle(context),
                     ),
                     const SizedBox(height: 8),
-                    const Center(
+                    Center(
                       child: SizedBox(
                         width: 200,
                         height: 200,
-                        child: CustomPaint(painter: _MasteryRadarPainter()),
+                        child: CustomPaint(
+                          painter: _MasteryRadarPainter(
+                            Theme.of(context).colorScheme,
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 4),
-                    const Wrap(
+                     Wrap(
                       alignment: WrapAlignment.spaceBetween,
                       runSpacing: 4,
                       children: [
@@ -1477,7 +1467,7 @@ class _LearningPathInsights extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'IBM Plex Sans Arabic',
                             fontSize: 9,
-                            color: _LearningPathColors.subtle,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                         ),
                         Text(
@@ -1485,7 +1475,7 @@ class _LearningPathInsights extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'JetBrains Mono',
                             fontSize: 9,
-                            color: _LearningPathColors.primary,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ],
@@ -1497,18 +1487,18 @@ class _LearningPathInsights extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: _LearningPathColors.background.withValues(alpha: 0.75),
+                  color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.75),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: _LearningPathColors.border.withValues(alpha: 0.3),
+                    color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.3),
                   ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
+                    Text(
                       'تقدّم الدروس',
-                      style: _LearningPathTextStyles.monoMuted,
+                      style: _LearningPathTextStyles.monoMuted(context),
                     ),
                     const SizedBox(height: 10),
                     Row(
@@ -1525,9 +1515,9 @@ class _LearningPathInsights extends StatelessWidget {
                                           1 << 30,
                                         ),
                               minHeight: 7,
-                              backgroundColor: _LearningPathColors.surfaceHigh,
-                              valueColor: const AlwaysStoppedAnimation(
-                                _LearningPathColors.primary,
+                              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+                              valueColor:  AlwaysStoppedAnimation(
+                                Theme.of(context).colorScheme.primary,
                               ),
                             ),
                           ),
@@ -1535,9 +1525,9 @@ class _LearningPathInsights extends StatelessWidget {
                         const SizedBox(width: 10),
                         Text(
                           data.overallProgressPercent,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: 'JetBrains Mono',
-                            color: _LearningPathColors.primary,
+                            color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -1546,7 +1536,7 @@ class _LearningPathInsights extends StatelessWidget {
                     const SizedBox(height: 7),
                     Text(
                       '${data.totalLessonsCompleted} من ${data.totalLessonsCount} درساً أُنجزت',
-                      style: _LearningPathTextStyles.monoSubtle,
+                      style: _LearningPathTextStyles.monoSubtle(context),
                     ),
                   ],
                 ),
@@ -1558,9 +1548,9 @@ class _LearningPathInsights extends StatelessWidget {
         _InsightPanel(
           title: 'المراجعة التكرارية',
           icon: Icons.psychology_alt_rounded,
-          trailing: const _ModuleStatusLabel(
+          trailing:  _ModuleStatusLabel(
             label: 'مراجعة يومية',
-            color: _LearningPathColors.orange,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1568,23 +1558,23 @@ class _LearningPathInsights extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: _LearningPathColors.background.withValues(alpha: 0.75),
+                  color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.75),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'خطوتك التالية',
-                      style: _LearningPathTextStyles.monoSubtle,
+                      style: _LearningPathTextStyles.monoSubtle(context),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       activeLesson?.title ??
                           'استكشف دروس المسار واختر ما تريد مراجعته.',
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
-                        color: _LearningPathColors.text,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 14,
                         height: 1.6,
                         fontWeight: FontWeight.w600,
@@ -1594,9 +1584,9 @@ class _LearningPathInsights extends StatelessWidget {
                       const SizedBox(height: 6),
                       Text(
                         activeLesson!.briefDescription,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontFamily: 'IBM Plex Sans Arabic',
-                          color: _LearningPathColors.muted,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontSize: 11,
                           height: 1.7,
                         ),
@@ -1612,8 +1602,8 @@ class _LearningPathInsights extends StatelessWidget {
                 iconAlignment: .end,
                 label: const Text('فتح خريطة المراجعة'),
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFFDB7619),
-                  foregroundColor: const Color(0xFF301400),
+                  backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                  foregroundColor: Theme.of(context).colorScheme.onSecondary,
                   padding: const EdgeInsets.symmetric(vertical: 13),
                   textStyle: const TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
@@ -1633,7 +1623,7 @@ class _LearningPathInsights extends StatelessWidget {
           icon: Icons.workspace_premium_rounded,
           trailing: Text(
             '${data.totalLessonsCompleted} درساً',
-            style: _LearningPathTextStyles.monoSubtle,
+            style: _LearningPathTextStyles.monoSubtle(context),
           ),
           child: Wrap(
             spacing: 8,
@@ -1646,8 +1636,8 @@ class _LearningPathInsights extends StatelessWidget {
                     ? 'بدأت التعلّم'
                     : 'ابدأ أول درس',
                 color: data.totalLessonsCompleted > 0
-                    ? _LearningPathColors.green
-                    : _LearningPathColors.subtle,
+                    ? Theme.of(context).colorScheme.tertiary
+                    : Theme.of(context).colorScheme.outline,
                 unlocked: data.totalLessonsCompleted > 0,
               ),
               _AchievementTile(
@@ -1655,8 +1645,8 @@ class _LearningPathInsights extends StatelessWidget {
                 title: 'المثابرة',
                 subtitle: '${data.streakDays} أيام متتالية',
                 color: data.streakDays > 0
-                    ? _LearningPathColors.orange
-                    : _LearningPathColors.subtle,
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.outline,
                 unlocked: data.streakDays > 0,
               ),
               _AchievementTile(
@@ -1664,15 +1654,15 @@ class _LearningPathInsights extends StatelessWidget {
                 title: 'إتقان وحدة',
                 subtitle: '$completedModules من ${data.modules.length} مكتملة',
                 color: completedModules > 0
-                    ? _LearningPathColors.primary
-                    : _LearningPathColors.subtle,
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.outline,
                 unlocked: completedModules > 0,
               ),
               _AchievementTile(
                 icon: Icons.menu_book_rounded,
                 title: 'متعلم نشط',
                 subtitle: '$totalLessons درساً في المسار',
-                color: _LearningPathColors.muted,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 unlocked: false,
               ),
             ],
@@ -1687,36 +1677,36 @@ class _LearningPathInsights extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(
+                   Icon(
                     Icons.circle,
                     size: 8,
-                    color: _LearningPathColors.green,
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                   const SizedBox(width: 8),
-                  const Expanded(
+                   Expanded(
                     child: Text(
                       'محرك Godot متصل',
                       style: TextStyle(
-                        color: _LearningPathColors.muted,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 12,
                       ),
                     ),
                   ),
-                  Text('v4.3', style: _LearningPathTextStyles.monoMuted),
+                  Text('v4.3', style: _LearningPathTextStyles.monoMuted(context)),
                 ],
               ),
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: _LearningPathColors.background,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Row(
+                child:  Row(
                   children: [
                     Icon(
                       Icons.folder_rounded,
-                      color: _LearningPathColors.green,
+                      color: Theme.of(context).colorScheme.tertiary,
                       size: 16,
                     ),
                     SizedBox(width: 8),
@@ -1725,7 +1715,7 @@ class _LearningPathInsights extends StatelessWidget {
                         'مساحة العمل جاهزة لتطبيق الدروس',
                         style: TextStyle(
                           fontFamily: 'IBM Plex Sans Arabic',
-                          color: _LearningPathColors.muted,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                           fontSize: 11,
                         ),
                       ),
@@ -1739,9 +1729,9 @@ class _LearningPathInsights extends StatelessWidget {
                 icon: const Icon(Icons.terminal_rounded, size: 17),
                 label: const Text('فتح مساحة العمل'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: _LearningPathColors.text,
+                  foregroundColor: Theme.of(context).colorScheme.onSurface,
                   side: BorderSide(
-                    color: _LearningPathColors.border.withValues(alpha: 0.7),
+                    color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.7),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   textStyle: const TextStyle(
@@ -1763,7 +1753,9 @@ class _LearningPathInsights extends StatelessWidget {
 }
 
 class _MasteryRadarPainter extends CustomPainter {
-  const _MasteryRadarPainter();
+  const _MasteryRadarPainter(this.colorScheme);
+
+  final ColorScheme colorScheme;
 
   static const _outerRing = [
     Offset(100, 20),
@@ -1794,18 +1786,18 @@ class _MasteryRadarPainter extends CustomPainter {
     canvas.scale(scale, scale);
 
     final gridPaint = Paint()
-      ..color = _LearningPathColors.border
+      ..color = colorScheme.outlineVariant
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2;
     _drawPolygon(canvas, _outerRing, gridPaint);
     _drawPolygon(canvas, _innerRing, gridPaint..strokeWidth = 0.9);
 
     final skillPaint = Paint()
-      ..color = _LearningPathColors.primary
+      ..color = colorScheme.primary
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     final skillFillPaint = Paint()
-      ..color = _LearningPathColors.primary.withValues(alpha: 0.22)
+      ..color = colorScheme.primary.withValues(alpha: 0.22)
       ..style = PaintingStyle.fill;
     final skillPath = _polygonPath(_skillPoints);
     canvas.drawPath(skillPath, skillFillPaint);
@@ -1813,8 +1805,8 @@ class _MasteryRadarPainter extends CustomPainter {
 
     for (var index = 0; index < _skillPoints.length; index++) {
       final pointColor = index == 2 || index == 4
-          ? _LearningPathColors.green
-          : _LearningPathColors.primary;
+          ? colorScheme.tertiary
+          : colorScheme.primary;
       canvas.drawCircle(_skillPoints[index], 3.5, Paint()..color = pointColor);
     }
 
@@ -1848,10 +1840,10 @@ class _MasteryRadarPainter extends CustomPainter {
     final textPainter = TextPainter(
       text: TextSpan(
         text: text,
-        style: const TextStyle(
+        style: TextStyle(
           fontFamily: 'IBM Plex Sans Arabic',
           fontSize: 10,
-          color: _LearningPathColors.muted,
+          color: colorScheme.onSurfaceVariant,
         ),
       ),
       textDirection: TextDirection.rtl,
@@ -1867,7 +1859,8 @@ class _MasteryRadarPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _MasteryRadarPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _MasteryRadarPainter oldDelegate) =>
+      oldDelegate.colorScheme != colorScheme;
 }
 
 class _InsightPanel extends StatelessWidget {
@@ -1887,10 +1880,10 @@ class _InsightPanel extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: _LearningPathColors.surface,
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
-        color: _LearningPathColors.border.withValues(alpha: 0.4),
+        color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.4),
       ),
     ),
     child: Column(
@@ -1898,14 +1891,14 @@ class _InsightPanel extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, size: 20, color: _LearningPathColors.primary),
+            Icon(icon, size: 20, color: Theme.of(context).colorScheme.primary),
             const SizedBox(width: 8),
             Expanded(
               child: Text(
                 title,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
-                  color: _LearningPathColors.text,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
                 ),
@@ -1939,7 +1932,7 @@ class _MiniStat extends StatelessWidget {
     constraints: const BoxConstraints(minHeight: 92),
     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 9),
     decoration: BoxDecoration(
-      color: _LearningPathColors.surfaceRaised,
+      color: Theme.of(context).colorScheme.surfaceContainer,
       borderRadius: BorderRadius.circular(11),
     ),
     child: Column(
@@ -1964,10 +1957,10 @@ class _MiniStat extends StatelessWidget {
           label,
           textAlign: TextAlign.center,
           maxLines: 2,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 9,
-            color: _LearningPathColors.muted,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ],
@@ -1996,7 +1989,7 @@ class _AchievementTile extends StatelessWidget {
     child: Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: _LearningPathColors.surfaceRaised,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(11),
       ),
       child: Row(
@@ -2019,11 +2012,11 @@ class _AchievementTile extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
-                    color: _LearningPathColors.text,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 3),
@@ -2034,7 +2027,7 @@ class _AchievementTile extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 9,
-                    color: unlocked ? color : _LearningPathColors.subtle,
+                    color: unlocked ? color : Theme.of(context).colorScheme.outline,
                   ),
                 ),
               ],
@@ -2056,14 +2049,14 @@ class _FinalProjectCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
-      gradient: const LinearGradient(
-        colors: [Color(0xFF252A32), Color(0xFF1B2027), Color(0xFF252A32)],
+      gradient:  LinearGradient(
+        colors: [Theme.of(context).colorScheme.surfaceContainerHigh, Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.surfaceContainerHigh],
           begin: AlignmentGeometry.centerStart,
           end: AlignmentGeometry.centerEnd,
       ),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
-        color: _LearningPathColors.border.withValues(alpha: 0.55),
+        color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.55),
       ),
     ),
     child: Wrap(
@@ -2080,17 +2073,17 @@ class _FinalProjectCard extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: _LearningPathColors.orange.withValues(alpha: 0.13),
+                  color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.13),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: const Icon(
+                child:  Icon(
                   Icons.military_tech_rounded,
-                  color: _LearningPathColors.orange,
+                  color: Theme.of(context).colorScheme.secondary,
                   size: 26,
                 ),
               ),
               const SizedBox(width: 12),
-              const Expanded(
+               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -2098,7 +2091,7 @@ class _FinalProjectCard extends StatelessWidget {
                       'مشروع الإتقان النهائي',
                       style: TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
-                        color: _LearningPathColors.orange,
+                        color: Theme.of(context).colorScheme.secondary,
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                       ),
@@ -2108,7 +2101,7 @@ class _FinalProjectCard extends StatelessWidget {
                       'لعبة مصغّرة متكاملة في Godot',
                       style: TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
-                        color: _LearningPathColors.text,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
                       ),
@@ -2118,7 +2111,7 @@ class _FinalProjectCard extends StatelessWidget {
                       'طبّق ما تعلمته في مشروع واحد يجمع أساسيات GDScript.',
                       style: TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
-                        color: _LearningPathColors.muted,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         fontSize: 11,
                         height: 1.5,
                       ),
@@ -2139,11 +2132,11 @@ class _FinalProjectCard extends StatelessWidget {
           label: Text(isUnlocked ? 'ابدأ المشروع' : 'أكمل المسار لفتحه'),
           style: FilledButton.styleFrom(
             backgroundColor: isUnlocked
-                ? _LearningPathColors.primary
-                : _LearningPathColors.surfaceHigh,
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.surfaceContainerHigh,
             foregroundColor: isUnlocked
-                ? const Color(0xFF003350)
-                : _LearningPathColors.subtle,
+                ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).colorScheme.outline,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
             textStyle: const TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
@@ -2216,17 +2209,17 @@ class _HeaderAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = selected
-        ? _LearningPathColors.primary
-        : accent ?? _LearningPathColors.muted;
+        ? Theme.of(context).colorScheme.primary
+        : accent ?? Theme.of(context).colorScheme.onSurfaceVariant;
     return TextButton.icon(
       onPressed: onPressed,
       icon: Icon(icon, size: 16),
       label: Text(label),
       style: TextButton.styleFrom(
-        foregroundColor: selected ? const Color(0xFF002C46) : color,
+        foregroundColor: selected ? Theme.of(context).colorScheme.onPrimaryContainer : color,
         backgroundColor: selected
-            ? _LearningPathColors.primary
-            : _LearningPathColors.surface,
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.surfaceContainerLow,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
         textStyle: const TextStyle(
           fontFamily: 'IBM Plex Sans Arabic',
@@ -2265,21 +2258,23 @@ class _ModuleStatusLabel extends StatelessWidget {
 }
 
 class _MetadataChip extends StatelessWidget {
-  const _MetadataChip({
+   const _MetadataChip({
     required this.icon,
     required this.label,
-    this.color = _LearningPathColors.muted,
+     this.color,
   });
 
   final IconData icon;
   final String label;
-  final Color color;
+   final Color? color;
 
   @override
-  Widget build(BuildContext context) => Container(
+   Widget build(BuildContext context) {
+     final color = this.color ?? Theme.of(context).colorScheme.onSurfaceVariant;
+     return Container(
     padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
     decoration: BoxDecoration(
-      color: _LearningPathColors.background.withValues(alpha: 0.65),
+      color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.65),
       borderRadius: BorderRadius.circular(8),
     ),
     child: Row(
@@ -2297,24 +2292,27 @@ class _MetadataChip extends StatelessWidget {
         ),
       ],
     ),
-  );
+    );
+  }
 }
 
 class _LearningPathTextStyles {
-  static const breadcrumb = TextStyle(
+  static TextStyle breadcrumb(BuildContext context) => TextStyle(
     fontFamily: 'IBM Plex Sans Arabic',
     fontSize: 11,
-    color: _LearningPathColors.subtle,
+    color: Theme.of(context).colorScheme.outline,
   );
-  static const monoMuted = TextStyle(
+
+  static TextStyle monoMuted(BuildContext context) => TextStyle(
     fontFamily: 'JetBrains Mono',
     fontSize: 10,
-    color: _LearningPathColors.muted,
+    color: Theme.of(context).colorScheme.onSurfaceVariant,
   );
-  static const monoSubtle = TextStyle(
+
+  static TextStyle monoSubtle(BuildContext context) => TextStyle(
     fontFamily: 'JetBrains Mono',
     fontSize: 9,
-    color: _LearningPathColors.subtle,
+    color: Theme.of(context).colorScheme.outline,
   );
 }
 
@@ -2327,10 +2325,10 @@ class _CapstoneProjectCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(14),
     decoration: BoxDecoration(
-      color: _LearningPathColors.surfaceRaised,
+      color: Theme.of(context).colorScheme.surfaceContainer,
       borderRadius: BorderRadius.circular(12),
       border: Border.all(
-        color: _LearningPathColors.orange.withValues(alpha: 0.25),
+        color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.25),
       ),
     ),
     child: Row(
@@ -2339,12 +2337,12 @@ class _CapstoneProjectCard extends StatelessWidget {
           width: 38,
           height: 38,
           decoration: BoxDecoration(
-            color: _LearningPathColors.orange.withValues(alpha: 0.12),
+            color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(11),
           ),
-          child: const Icon(
+          child:  Icon(
             Icons.military_tech_rounded,
-            color: _LearningPathColors.orange,
+            color: Theme.of(context).colorScheme.secondary,
             size: 20,
           ),
         ),
@@ -2355,30 +2353,30 @@ class _CapstoneProjectCard extends StatelessWidget {
             children: [
               Text(
                 project.title,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: _LearningPathColors.text,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 project.description,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 10,
                   height: 1.6,
-                  color: _LearningPathColors.muted,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 5),
               Text(
                 'المكافأة: +${project.xpReward} XP • ${project.badgeReward}',
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 10,
-                  color: _LearningPathColors.orange,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ],

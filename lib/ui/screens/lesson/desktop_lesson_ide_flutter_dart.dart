@@ -26,16 +26,13 @@ class DesktopLessonIdeLayout extends StatefulWidget {
 }
 
 class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
-  static const _background = Color(0xFF0F141B);
-  static const _panelColor = Color(0xFF131922);
-  static const _border = Color(0xFF28323F);
   static const _initialExplanationRatio = 0.65;
 
   double _explanationRatio = _initialExplanationRatio;
 
   @override
   Widget build(BuildContext context) => ColoredBox(
-    color: _background,
+    color: Theme.of(context).colorScheme.surface,
     child: Column(
       children: [
         _LessonContextBar(
@@ -43,7 +40,10 @@ class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
           estimatedMinutes: widget.estimatedMinutes,
           isEngineReady: widget.isEngineReady,
         ),
-        const Divider(height: 1, color: _border),
+        Divider(
+          height: 1,
+          color: Theme.of(context).colorScheme.outlineVariant,
+        ),
         Expanded(
           child: LayoutBuilder(
             builder: (context, constraints) {
@@ -53,14 +53,19 @@ class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
                     Expanded(
                       flex: 5,
                       child: _panel(
+                        context: context,
                         child: widget.explanationSection,
                         padding: const EdgeInsets.all(20),
                       ),
                     ),
-                    const Divider(height: 1, color: _border),
+                    Divider(
+                      height: 1,
+                      color: Theme.of(context).colorScheme.outlineVariant,
+                    ),
                     Expanded(
                       flex: 6,
                       child: _panel(
+                        context: context,
                         child: _editorContent,
                         padding: const EdgeInsets.all(16),
                       ),
@@ -75,6 +80,7 @@ class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
                     key: const ValueKey('lesson_explanation_panel'),
                     width: constraints.maxWidth * _explanationRatio,
                     child: _panel(
+                      context: context,
                       child: widget.explanationSection,
                       padding: const EdgeInsets.all(24),
                     ),
@@ -103,12 +109,12 @@ class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
                                 'ar'
                             ? 'اسحب لتغيير عرض اللوحتين'
                             : 'Drag to resize panels',
-                        child: const SizedBox(
+                        child:  SizedBox(
                           width: 20,
                           child: Center(
                             child: DecoratedBox(
                               decoration: BoxDecoration(
-                                color: Color(0xFF5B6878),
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(2),
                                 ),
@@ -123,6 +129,7 @@ class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
                   Expanded(
                     key: const ValueKey('lesson_editor_panel'),
                     child: _panel(
+                      context: context,
                       child: _editorContent,
                       padding: const EdgeInsets.all(20),
                     ),
@@ -145,9 +152,13 @@ class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
     ],
   );
 
-  Widget _panel({required Widget child, required EdgeInsets padding}) =>
+  Widget _panel({
+    required BuildContext context,
+    required Widget child,
+    required EdgeInsets padding,
+  }) =>
       Container(
-        color: _panelColor,
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         padding: padding,
         child: SingleChildScrollView(child: child),
       );
@@ -167,16 +178,17 @@ class _LessonContextBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final colorScheme = Theme.of(context).colorScheme;
     final statusColor = isEngineReady
-        ? const Color(0xFF22C55E)
-        : const Color(0xFFF59E0B);
+        ? colorScheme.tertiary
+        : colorScheme.secondary;
     return Container(
       height: 52,
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      color: const Color(0xFF131922),
+      color: colorScheme.surfaceContainerLow,
       child: Row(
         children: [
-          const Icon(Icons.menu_book_rounded, color: Color(0xFF478CBF)),
+          Icon(Icons.menu_book_rounded, color: colorScheme.primary),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
@@ -184,7 +196,7 @@ class _LessonContextBar extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: const Color(0xFFE2E8F0),
+                color: colorScheme.onSurface,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -216,20 +228,23 @@ class _ContextBadge extends StatelessWidget {
   const _ContextBadge({
     required this.icon,
     required this.label,
-    this.color = const Color(0xFF94A3B8),
+    this.color,
   });
 
   final IconData icon;
   final String label;
-  final Color color;
+  final Color? color;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) {
+    final color = this.color ?? Theme.of(context).colorScheme.onSurfaceVariant;
+    final colorScheme = Theme.of(context).colorScheme;
+    return Container(
     padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
     decoration: BoxDecoration(
-      color: const Color(0xFF171C23),
+      color: colorScheme.surfaceContainerLow,
       borderRadius: BorderRadius.circular(6),
-      border: Border.all(color: const Color(0xFF28323F)),
+      border: Border.all(color: colorScheme.outlineVariant),
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
@@ -242,7 +257,8 @@ class _ContextBadge extends StatelessWidget {
         ),
       ],
     ),
-  );
+    );
+  }
 }
 
 class LessonLoadingSkeleton extends StatelessWidget {
@@ -310,8 +326,8 @@ class LessonLoadingSkeleton extends StatelessWidget {
               ),
       );
       return Shimmer.fromColors(
-        baseColor: const Color(0xFF1B2027),
-        highlightColor: const Color(0xFF30353D),
+        baseColor: Theme.of(context).colorScheme.surfaceContainer,
+        highlightColor: Theme.of(context).colorScheme.surfaceContainerHighest,
         enabled: !MediaQuery.disableAnimationsOf(context),
         child: isDesktop ? skeleton : SingleChildScrollView(child: skeleton),
       );
@@ -328,9 +344,9 @@ class _SkeletonPanel extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
-      color: const Color(0xFF131922),
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       borderRadius: BorderRadius.circular(10),
-      border: Border.all(color: const Color(0xFF28323F)),
+      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -352,9 +368,9 @@ class _SkeletonBlock extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: const Color(0xFF1B2027),
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFF30353D)),
+        border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHighest),
       ),
     ),
   );

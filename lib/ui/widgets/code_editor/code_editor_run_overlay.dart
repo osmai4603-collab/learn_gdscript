@@ -28,7 +28,7 @@ class CodeEditorRunOverlay extends StatelessWidget {
           icon: Icon(
             isRunning ? Icons.hourglass_top_rounded : Icons.play_arrow_rounded,
             size: 20,
-            color: const Color(0xFF089B0D),
+            color: Theme.of(context).colorScheme.tertiary,
           ),
         ),
       ),

@@ -5,6 +5,7 @@
 // ==============================================================================
 
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:provider/provider.dart';
 
@@ -326,7 +327,7 @@ class _DesktopHomeDashboardScreenState extends State<DesktopHomeDashboardScreen>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF0F141B),
+      color: Theme.of(context).colorScheme.surface,
       child: Column(
         children: [
           DashboardTopNav(
@@ -460,10 +461,10 @@ class DashboardTopNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final statusColor = isEngineConnecting
-        ? const Color(0xFFFFB783)
+        ? Theme.of(context).colorScheme.secondary
         : isEngineConnected
-        ? const Color(0xFF4AE183)
-        : const Color(0xFF8A919A);
+        ? Theme.of(context).colorScheme.tertiary
+        : Theme.of(context).colorScheme.outline;
     final statusText = isEngineConnecting
         ? l10n.dashboardEngineConnecting
         : isEngineConnected
@@ -472,8 +473,8 @@ class DashboardTopNav extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F141B).withValues(alpha: 0.94),
-        border: const Border(bottom: BorderSide(color: Color(0xFF252A32))),
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.94),
+        border:  Border(bottom: BorderSide(color: Theme.of(context).colorScheme.surfaceContainerHigh)),
       ),
       child: Wrap(
         alignment: WrapAlignment.spaceBetween,
@@ -487,7 +488,7 @@ class DashboardTopNav extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
               decoration: BoxDecoration(
-                color: const Color(0xFF1B2027),
+                color: Theme.of(context).colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Wrap(
@@ -516,13 +517,13 @@ class DashboardTopNav extends StatelessWidget {
               AcademyMetricBadge(
                 icon: Icons.local_fire_department_rounded,
                 text: l10n.dashboardDays(streakDays),
-                color: const Color(0xFFFFB783),
+                color: Theme.of(context).colorScheme.secondary,
               ),
               const SizedBox(width: 8),
               AcademyMetricBadge(
                 icon: Icons.diamond_rounded,
                 text: '$xp XP',
-                color: const Color(0xFFFFB783),
+                color: Theme.of(context).colorScheme.secondary,
               ),
               const SizedBox(width: 16),
               InkWell(
@@ -535,16 +536,16 @@ class DashboardTopNav extends StatelessWidget {
                       width: 34,
                       height: 34,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF5397CA),
+                        color: Theme.of(context).colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Center(
                         child: Text(
                           userName.isEmpty ? '?' : userName[0],
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontFamily: 'IBM Plex Sans Arabic',
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF002C46),
+                            color: Theme.of(context).colorScheme.onPrimaryContainer,
                           ),
                         ),
                       ),
@@ -552,10 +553,10 @@ class DashboardTopNav extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       userName,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 13,
-                        color: Color(0xFFDEE2EC),
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -590,20 +591,20 @@ class _GreetingBanner extends StatelessWidget {
       children: [
         Text(
           l10n.dashboardWelcomeBack(userName),
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           l10n.dashboardWelcomeMessage,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 14,
-            color: Color(0xFFC0C7D0),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: 16),
@@ -615,19 +616,19 @@ class _GreetingBanner extends StatelessWidget {
               icon: Icons.account_tree_rounded,
               label: l10n.dashboardCurrentUnit,
               value: userProgress.currentUnitTitle,
-              color: const Color(0xFF91CDFF),
+              color: Theme.of(context).colorScheme.primary,
             ),
             _WelcomeMetric(
               icon: Icons.trending_up_rounded,
               label: l10n.dashboardPercentComplete(
                 (userProgress.overallProgress * 100).toInt(),
               ),
-              color: const Color(0xFF4AE183),
+              color: Theme.of(context).colorScheme.tertiary,
             ),
             _WelcomeMetric(
               icon: Icons.military_tech_rounded,
               label: userProgress.userLevel,
-              color: const Color(0xFFFFB783),
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ],
         ),
@@ -638,11 +639,11 @@ class _GreetingBanner extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: const Color(0xFF090F15),
+          color: Theme.of(context).colorScheme.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(12),
-          boxShadow: const [
+          boxShadow:  [
             BoxShadow(
-              color: Color(0x33000000),
+              color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.2),
               blurRadius: 16,
               offset: Offset(0, 4),
             ),
@@ -660,17 +661,17 @@ class _GreetingBanner extends StatelessWidget {
                   CircularProgressIndicator(
                     value: userProgress.levelProgress,
                     strokeWidth: 4,
-                    backgroundColor: const Color(0xFF252A32),
-                    valueColor: const AlwaysStoppedAnimation(Color(0xFF91CDFF)),
+                    backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+                    valueColor:  AlwaysStoppedAnimation(Theme.of(context).colorScheme.primary),
                   ),
                   Center(
                     child: Text(
                       '${(userProgress.levelProgress * 100).toInt()}%',
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontFamily: 'JetBrains Mono',
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFFDEE2EC),
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -682,11 +683,11 @@ class _GreetingBanner extends StatelessWidget {
               children: [
                 Text(
                   l10n.dashboardNextLevel,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFFDEE2EC),
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 3),
@@ -695,19 +696,19 @@ class _GreetingBanner extends StatelessWidget {
                     userProgress.completedLessons,
                     userProgress.totalLessons,
                   ),
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
-                    color: Color(0xFF8A919A),
+                    color: Theme.of(context).colorScheme.outline,
                   ),
                 ),
                 const SizedBox(height: 3),
                 Text(
                   l10n.dashboardXpToNextLevel(userProgress.nextLevelXp),
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'JetBrains Mono',
                     fontSize: 10,
-                    color: Color(0xFF4AE183),
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                 ),
               ],
@@ -719,13 +720,13 @@ class _GreetingBanner extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF252A32), Color(0xFF1B2027), Color(0xFF171C23)],
+        gradient:  LinearGradient(
+          colors: [Theme.of(context).colorScheme.surfaceContainerHigh, Theme.of(context).colorScheme.surfaceContainer, Theme.of(context).colorScheme.surfaceContainerLow],
           begin: AlignmentGeometry.centerStart,
           end: AlignmentGeometry.centerEnd,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF40484F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: LayoutBuilder(
         builder: (context, constraints) => constraints.maxWidth < 760
@@ -770,7 +771,7 @@ class _WelcomeMetric extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: const Color(0xFF30353D).withValues(alpha: 0.7),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -784,11 +785,11 @@ class _WelcomeMetric extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFFDEE2EC),
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             )
@@ -846,34 +847,34 @@ class _ContinueLearningHeroCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: const Color(0xFF91CDFF).withValues(alpha: 0.15),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
                 continueData.unitTitle,
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF91CDFF),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
+                 Icon(
                   Icons.timer_outlined,
                   size: 14,
-                  color: Color(0xFF94A3B8),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(width: 4),
                 Text(
                   continueData.estimatedTime,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
-                    color: Color(0xFF94A3B8),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -881,19 +882,19 @@ class _ContinueLearningHeroCard extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
+                 Icon(
                   Icons.diamond_rounded,
                   size: 14,
-                  color: Color(0xFFA855F7),
+                  color: Theme.of(context).colorScheme.achievement,
                 ),
                 const SizedBox(width: 4),
                 Text(
                   '+${continueData.xpReward} XP',
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFA855F7),
+                    color: Theme.of(context).colorScheme.achievement,
                   ),
                 ),
               ],
@@ -903,11 +904,11 @@ class _ContinueLearningHeroCard extends StatelessWidget {
         const SizedBox(height: 12),
         Text(
           continueData.lessonTitle,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 22,
             fontWeight: FontWeight.w800,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 12),
@@ -919,9 +920,9 @@ class _ContinueLearningHeroCard extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value: continueData.progress,
                   minHeight: 6,
-                  backgroundColor: const Color(0xFF1F2630),
-                  valueColor: const AlwaysStoppedAnimation<Color>(
-                    Color(0xFF22C55E),
+                  backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                  valueColor:  AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).colorScheme.tertiary,
                   ),
                 ),
               ),
@@ -931,10 +932,10 @@ class _ContinueLearningHeroCard extends StatelessWidget {
               l10n.dashboardPercentComplete(
                 (continueData.progress * 100).toInt(),
               ),
-              style: const TextStyle(
+              style:  TextStyle(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
-                color: Color(0xFF94A3B8),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -942,10 +943,10 @@ class _ContinueLearningHeroCard extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           l10n.dashboardContinueDescription,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 12,
-            color: Color(0xFF8A919A),
+            color: Theme.of(context).colorScheme.outline,
           ),
         ),
       ],
@@ -973,8 +974,8 @@ class _ContinueLearningHeroCard extends StatelessWidget {
               ),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF91CDFF),
-              foregroundColor: const Color(0xFF003350),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -985,22 +986,24 @@ class _ContinueLearningHeroCard extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           l10n.dashboardDraftAutoSaved,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'JetBrains Mono',
             fontSize: 10,
-            color: Color(0xFF8A919A),
+            color: Theme.of(context).colorScheme.outline,
           ),
         ),
       ],
     );
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1B2027),
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF30353D)),
+        border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHighest),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.16),
+            color: Theme.of(context).colorScheme.shadow.withValues(
+              alpha: 0.16,
+            ),
             blurRadius: 18,
             offset: const Offset(0, 6),
           ),
@@ -1041,9 +1044,9 @@ class DashboardDailyChallengeCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF131922),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF28323F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1052,11 +1055,11 @@ class DashboardDailyChallengeCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children: const [
+                children:  [
                   Icon(
                     Icons.military_tech_rounded,
                     size: 20,
-                    color: Color(0xFFF59E0B),
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                   SizedBox(width: 8),
                   Text(
@@ -1065,7 +1068,7 @@ class DashboardDailyChallengeCard extends StatelessWidget {
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFE2E8F0),
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -1073,23 +1076,23 @@ class DashboardDailyChallengeCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1F2630),
+                  color: Theme.of(context).colorScheme.surfaceContainer,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Row(
                   children: [
-                    const Icon(
+                     Icon(
                       Icons.timer_outlined,
                       size: 12,
-                      color: Color(0xFFFB923C),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       challenge.timeRemaining,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontFamily: 'JetBrains Mono',
                         fontSize: 11,
-                        color: Color(0xFFFB923C),
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ],
@@ -1100,20 +1103,20 @@ class DashboardDailyChallengeCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             challenge.title,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Color(0xFFE2E8F0),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 6),
           Text(
             challenge.description,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
-              color: Color(0xFF94A3B8),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               height: 1.5,
             ),
           ),
@@ -1123,18 +1126,18 @@ class DashboardDailyChallengeCard extends StatelessWidget {
             children: [
               Text(
                 'شارك ${challenge.participantsCount} مطوراً اليوم',
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
-                  color: Color(0xFF64748B),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               ElevatedButton(
                 onPressed: onStartChallenge,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1F2630),
-                  foregroundColor: const Color(0xFFF59E0B),
-                  side: const BorderSide(color: Color(0xFFF59E0B), width: 0.8),
+                  backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                  foregroundColor: Theme.of(context).colorScheme.secondary,
+                  side:  BorderSide(color: Theme.of(context).colorScheme.secondary, width: 0.8),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 14,
                     vertical: 6,
@@ -1175,19 +1178,19 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF131922),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF28323F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: const [
+            children:  [
               Icon(
                 Icons.psychology_rounded,
                 size: 20,
-                color: Color(0xFF38BDF8),
+                color: Theme.of(context).colorScheme.primary,
               ),
               SizedBox(width: 8),
               Text(
@@ -1196,7 +1199,7 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFE2E8F0),
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ],
@@ -1204,10 +1207,10 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             'لديك ${review.dueCardsCount} بطاقات مفاهيم مستحقة للمراجعة اليوم لتثبيت الذاكرة طويلة المدى.',
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 12,
-              color: Color(0xFF94A3B8),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               height: 1.5,
             ),
           ),
@@ -1217,15 +1220,15 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF14532D),
+                  color: Theme.of(context).colorScheme.successContainer,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   'معدل الاسترجاع ${review.retentionRatePercent}%',
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 11,
-                    color: Color(0xFF22C55E),
+                    color: Theme.of(context).colorScheme.tertiary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -1233,10 +1236,10 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 '~${review.estimatedMinutes} دقائق',
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 11,
-                  color: Color(0xFF64748B),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -1247,9 +1250,9 @@ class DashboardSpacedRepetitionCard extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onStartReview,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1F2630),
-                foregroundColor: const Color(0xFF38BDF8),
-                side: const BorderSide(color: Color(0xFF38BDF8), width: 0.8),
+                backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                side:  BorderSide(color: Theme.of(context).colorScheme.primary, width: 0.8),
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(6),
@@ -1286,9 +1289,9 @@ class DashboardQuickStatsCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF131922),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF28323F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1297,11 +1300,11 @@ class DashboardQuickStatsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children: const [
+                children:  [
                   Icon(
                     Icons.insights_rounded,
                     size: 20,
-                    color: Color(0xFFA855F7),
+                    color: Theme.of(context).colorScheme.achievement,
                   ),
                   SizedBox(width: 8),
                   Text(
@@ -1310,19 +1313,19 @@ class DashboardQuickStatsCard extends StatelessWidget {
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFE2E8F0),
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ],
               ),
               InkWell(
                 onTap: onViewBadges,
-                child: const Text(
+                child:  Text(
                   'الأوسمة ↵',
                   style: TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 11,
-                    color: Color(0xFF478CBF),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -1349,9 +1352,9 @@ class DashboardQuickStatsCard extends StatelessWidget {
             child: LinearProgressIndicator(
               value: stats.earnedBadges / stats.totalBadges,
               minHeight: 5,
-              backgroundColor: const Color(0xFF1F2630),
-              valueColor: const AlwaysStoppedAnimation<Color>(
-                Color(0xFFA855F7),
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+              valueColor:  AlwaysStoppedAnimation<Color>(
+                Theme.of(context).colorScheme.achievement,
               ),
             ),
           ),
@@ -1374,19 +1377,19 @@ class _StatRow extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 11,
-            color: Color(0xFF94A3B8),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         Text(
           value,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 11,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ],
@@ -1414,20 +1417,20 @@ class _CurriculumOverviewSection extends StatelessWidget {
       children: [
         Text(
           l10n.dashboardCurriculumTitle,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           l10n.dashboardCurriculumDescription,
-          style: const TextStyle(
+          style:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 12,
-            color: Color(0xFF94A3B8),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ],
@@ -1443,7 +1446,7 @@ class _CurriculumOverviewSection extends StatelessWidget {
           fontSize: 13,
         ),
       ),
-      style: TextButton.styleFrom(foregroundColor: const Color(0xFF478CBF)),
+      style: TextButton.styleFrom(foregroundColor: Theme.of(context).colorScheme.primary),
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1496,18 +1499,18 @@ class _UnitProgressTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color borderColor = const Color(0xFF28323F);
-    Color badgeColor = const Color(0xFF1F2630);
-    Color textColor = const Color(0xFFE2E8F0);
+    Color borderColor = Theme.of(context).colorScheme.outlineVariant;
+    Color badgeColor = Theme.of(context).colorScheme.surfaceContainer;
+    Color textColor = Theme.of(context).colorScheme.onSurface;
 
     if (unit.isActive) {
-      borderColor = const Color(0xFF478CBF);
-      badgeColor = const Color(0xFF478CBF).withValues(alpha: 0.2);
+      borderColor = Theme.of(context).colorScheme.primary;
+      badgeColor = Theme.of(context).colorScheme.primary.withValues(alpha: 0.2);
     } else if (unit.isCompleted) {
-      borderColor = const Color(0xFF22C55E).withValues(alpha: 0.4);
-      badgeColor = const Color(0xFF14532D);
+      borderColor = Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.4);
+      badgeColor = Theme.of(context).colorScheme.successContainer;
     } else if (unit.isLocked) {
-      textColor = const Color(0xFF64748B);
+      textColor = Theme.of(context).colorScheme.onSurfaceVariant;
     }
 
     return InkWell(
@@ -1516,7 +1519,7 @@ class _UnitProgressTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: const Color(0xFF131922),
+          color: Theme.of(context).colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: borderColor),
         ),
@@ -1532,24 +1535,24 @@ class _UnitProgressTile extends StatelessWidget {
               ),
               child: Center(
                 child: unit.isCompleted
-                    ? const Icon(
+                    ?  Icon(
                         Icons.check_rounded,
-                        color: Color(0xFF22C55E),
+                        color: Theme.of(context).colorScheme.tertiary,
                         size: 20,
                       )
                     : unit.isLocked
-                    ? const Icon(
+                    ?  Icon(
                         Icons.lock_rounded,
-                        color: Color(0xFF64748B),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         size: 18,
                       )
                     : Text(
                         unit.number,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontFamily: 'JetBrains Mono',
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF478CBF),
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
               ),
@@ -1575,10 +1578,10 @@ class _UnitProgressTile extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     unit.description,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontFamily: 'IBM Plex Sans Arabic',
                       fontSize: 12,
-                      color: Color(0xFF94A3B8),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -1598,8 +1601,8 @@ class _UnitProgressTile extends StatelessWidget {
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                       color: unit.isCompleted
-                          ? const Color(0xFF22C55E)
-                          : const Color(0xFF94A3B8),
+                          ? Theme.of(context).colorScheme.tertiary
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -1608,11 +1611,11 @@ class _UnitProgressTile extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: unit.progress,
                       minHeight: 4,
-                      backgroundColor: const Color(0xFF1F2630),
+                      backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
                       valueColor: AlwaysStoppedAnimation<Color>(
                         unit.isCompleted
-                            ? const Color(0xFF22C55E)
-                            : const Color(0xFF478CBF),
+                            ? Theme.of(context).colorScheme.tertiary
+                            : Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),
@@ -1625,8 +1628,8 @@ class _UnitProgressTile extends StatelessWidget {
                   ? Icons.arrow_back_rounded
                   : Icons.chevron_left_rounded,
               color: unit.isLocked
-                  ? const Color(0xFF478CBF).withValues(alpha: 0.2)
-                  : const Color(0xFF94A3B8),
+                  ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.2)
+                  : Theme.of(context).colorScheme.onSurfaceVariant,
               textDirection: Directionality.of(context) == .ltr ? .rtl : .ltr,
             ),
           ],
@@ -1709,12 +1712,12 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
     final l10n = context.l10n;
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1B2027),
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF30353D)),
-        boxShadow: const [
+        border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHighest),
+        boxShadow:  [
           BoxShadow(
-            color: Color(0x22000000),
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.13),
             blurRadius: 12,
             offset: Offset(0, 4),
           ),
@@ -1726,25 +1729,25 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            color: const Color(0xFF252A32),
+            color: Theme.of(context).colorScheme.surfaceContainerHigh,
             child: Row(
               children: [
                 const _WindowDots(),
                 const SizedBox(width: 12),
-                const Icon(
+                 Icon(
                   Icons.data_object_rounded,
                   size: 18,
-                  color: Color(0xFF91CDFF),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 const SizedBox(width: 8),
-                const Expanded(
+                 Expanded(
                   child: Text(
                     'player_controller.gd',
                     style: TextStyle(
                       fontFamily: 'JetBrains Mono',
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFFC0C7D0),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -1753,7 +1756,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                   tooltip: l10n.dashboardPlaygroundReset,
                   onPressed: _resetCode,
                   icon: const Icon(Icons.restart_alt_rounded, size: 20),
-                  color: const Color(0xFF8A919A),
+                  color: Theme.of(context).colorScheme.outline,
                   visualDensity: VisualDensity.compact,
                 ),
               ],
@@ -1762,7 +1765,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(18, 18, 18, 22),
-            color: const Color(0xFF090F15),
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
             child: Directionality(
               textDirection: .ltr,
               child: Column(
@@ -1772,24 +1775,24 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                     number: '1',
                     child: RichText(
                       text: TextSpan(
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontFamily: 'JetBrains Mono',
                           fontSize: 14,
-                          color: Color(0xFFDEE2EC),
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                         children: [
-                          const TextSpan(
+                           TextSpan(
                             text: 'var ',
                             style: TextStyle(
-                              color: Color(0xFFFFB783),
+                              color: Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           const TextSpan(text: 'player_health = '),
                           TextSpan(
                             text: '75',
-                            style: const TextStyle(
-                              color: Color(0xFFFFB783),
+                            style:  TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -1800,7 +1803,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                   _CodeLine(
                     number: '2',
                     child: RichText(
-                      text: const TextSpan(
+                      text:  TextSpan(
                         style: TextStyle(
                           fontFamily: 'JetBrains Mono',
                           fontSize: 14,
@@ -1809,17 +1812,17 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                           TextSpan(
                             text: 'if ',
                             style: TextStyle(
-                              color: Color(0xFF91CDFF),
+                              color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           TextSpan(
                             text: 'player_health ',
-                            style: TextStyle(color: Color(0xFFDEE2EC)),
+                            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                           ),
                           TextSpan(
                             text: '> 50:',
-                            style: TextStyle(color: Color(0xFF8A919A)),
+                            style: TextStyle(color: Theme.of(context).colorScheme.outline),
                           ),
                         ],
                       ),
@@ -1828,7 +1831,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                   _CodeLine(
                     number: '3',
                     child: RichText(
-                      text: const TextSpan(
+                      text:  TextSpan(
                         style: TextStyle(
                           fontFamily: 'JetBrains Mono',
                           fontSize: 14,
@@ -1837,26 +1840,26 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                           TextSpan(
                             text: '    print',
                             style: TextStyle(
-                              color: Color(0xFF4AE183),
+                              color: Theme.of(context).colorScheme.tertiary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           TextSpan(
                             text: '("اللاعب بصحة جيدة! ❤️")',
-                            style: TextStyle(color: Color(0xFF6BFE9C)),
+                            style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
                           ),
                         ],
                       ),
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Text(
+                   Text(
                     '# جرّب التشغيل لتغيير قيمة صحة اللاعب',
                     style: TextStyle(
                       fontFamily: 'JetBrains Mono',
                       fontSize: 10,
                       fontStyle: FontStyle.italic,
-                      color: Color(0xFF8A919A),
+                      color: Theme.of(context).colorScheme.outline,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -1883,12 +1886,12 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            color: const Color(0xFF252A32),
+            color: Theme.of(context).colorScheme.surfaceContainerHigh,
             child: Row(
               children: [
-                const CircleAvatar(
+                 CircleAvatar(
                   radius: 4,
-                  backgroundColor: Color(0xFF4AE183),
+                  backgroundColor: Theme.of(context).colorScheme.tertiary,
                 ),
                 const SizedBox(width: 8),
                 Flexible(
@@ -1898,7 +1901,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                     style: TextStyle(
                       fontFamily: 'JetBrains Mono',
                       fontSize: 10,
-                      color: Color(0xFFC0C7D0),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -1907,16 +1910,16 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
           ),
           Container(
             padding: const EdgeInsets.all(16),
-            color: const Color(0xFF090F15),
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
                   children: [
-                    const Icon(
+                     Icon(
                       Icons.terminal_rounded,
                       size: 16,
-                      color: Color(0xFF4AE183),
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -1925,7 +1928,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                         style: TextStyle(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 11,
-                          color: Color(0xFFC0C7D0),
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -1936,7 +1939,7 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1B2027),
+                    color: Theme.of(context).colorScheme.surfaceContainer,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Directionality(
@@ -1951,10 +1954,10 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                               : Icons.warning_amber_rounded,
                           size: 16,
                           color: _lastRunSucceeded == null
-                              ? const Color(0xFF8A919A)
+                              ? Theme.of(context).colorScheme.outline
                               : _lastRunSucceeded!
-                              ? const Color(0xFF4AE183)
-                              : const Color(0xFFFFB783),
+                              ? Theme.of(context).colorScheme.tertiary
+                              : Theme.of(context).colorScheme.secondary,
                         ),
                         const SizedBox(width: 8),
                         Expanded(
@@ -1970,20 +1973,20 @@ class _QuickTryPlaygroundState extends State<_QuickTryPlayground> {
                               fontFamily: 'IBM Plex Sans Arabic',
                               fontSize: 12,
                               color: _lastRunSucceeded == false
-                                  ? const Color(0xFFFFB783)
+                                  ? Theme.of(context).colorScheme.secondary
                                   : _lastRunSucceeded == true
-                                  ? const Color(0xFF4AE183)
-                                  : const Color(0xFFC0C7D0),
+                                  ? Theme.of(context).colorScheme.tertiary
+                                  : Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
                         if (_runCount > 0)
                           Text(
                             '$_runCount',
-                            style: const TextStyle(
+                            style:  TextStyle(
                               fontFamily: 'JetBrains Mono',
                               fontSize: 10,
-                              color: Color(0xFF8A919A),
+                              color: Theme.of(context).colorScheme.outline,
                             ),
                           ),
                       ],
@@ -2016,10 +2019,10 @@ class _CodeLine extends StatelessWidget {
             width: 28,
             child: Text(
               number,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontFamily: 'JetBrains Mono',
                 fontSize: 12,
-                color: Color(0xFF8A919A),
+                color: Theme.of(context).colorScheme.outline,
               ),
             ),
           ),
@@ -2035,14 +2038,14 @@ class _WindowDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return  Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _WindowDot(color: Color(0xFFFFB4AB)),
+        _WindowDot(color: Theme.of(context).colorScheme.error),
         SizedBox(width: 5),
-        _WindowDot(color: Color(0xFFFFB783)),
+        _WindowDot(color: Theme.of(context).colorScheme.secondary),
         SizedBox(width: 5),
-        _WindowDot(color: Color(0xFF4AE183)),
+        _WindowDot(color: Theme.of(context).colorScheme.tertiary),
       ],
     );
   }
@@ -2069,15 +2072,15 @@ class _MonoTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFF30353D),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Text(
         label,
-        style: const TextStyle(
+        style:  TextStyle(
           fontFamily: 'JetBrains Mono',
           fontSize: 9,
-          color: Color(0xFF8A919A),
+          color: Theme.of(context).colorScheme.outline,
         ),
       ),
     );
@@ -2151,12 +2154,12 @@ class _DashboardPanel extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1B2027),
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF30353D)),
-        boxShadow: const [
+        border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHighest),
+        boxShadow:  [
           BoxShadow(
-            color: Color(0x18000000),
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.09),
             blurRadius: 10,
             offset: Offset(0, 3),
           ),
@@ -2182,20 +2185,20 @@ class _AchievementsCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(
+               Icon(
                 Icons.workspace_premium_rounded,
                 size: 20,
-                color: Color(0xFFFFB783),
+                color: Theme.of(context).colorScheme.secondary,
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   l10n.dashboardRecentBadges,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFFDEE2EC),
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -2206,10 +2209,10 @@ class _AchievementsCard extends StatelessWidget {
                     stats.earnedBadges,
                     stats.totalBadges,
                   ),
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'JetBrains Mono',
                     fontSize: 10,
-                    color: Color(0xFF8A919A),
+                    color: Theme.of(context).colorScheme.outline,
                   ),
                 ),
               ),
@@ -2258,7 +2261,7 @@ class _AchievementBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: const Color(0xFF252A32),
+        color: Theme.of(context).colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -2273,21 +2276,21 @@ class _AchievementBadge extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFDEE2EC),
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 Text(
                   subtitle,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 9,
-                    color: Color(0xFF8A919A),
+                    color: Theme.of(context).colorScheme.outline,
                   ),
                 ),
               ],
@@ -2328,29 +2331,29 @@ class _StreakCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(
+               Icon(
                 Icons.local_fire_department_rounded,
                 size: 20,
-                color: Color(0xFFDB7619),
+                color: Theme.of(context).colorScheme.secondaryContainer,
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   l10n.dashboardStreak,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFFDEE2EC),
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
               Text(
                 l10n.dashboardConsecutiveDays(streakDays),
-                style: const TextStyle(
+                style:  TextStyle(
                   fontFamily: 'JetBrains Mono',
                   fontSize: 10,
-                  color: Color(0xFFFFB783),
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ],
@@ -2389,7 +2392,7 @@ class _StreakDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isDone ? const Color(0xFFFFB783) : const Color(0xFF30353D);
+    final color = isDone ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.surfaceContainerHighest;
     return Opacity(
       opacity: isDone ? 1 : 0.45,
       child: Column(
@@ -2408,7 +2411,7 @@ class _StreakDay extends StatelessWidget {
                   fontFamily: 'JetBrains Mono',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: isToday && isDone ? const Color(0xFF4F2500) : color,
+                  color: isToday && isDone ? Theme.of(context).colorScheme.onSecondary : color,
                 ),
               ),
             ),
@@ -2420,8 +2423,8 @@ class _StreakDay extends StatelessWidget {
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 9,
               color: isToday
-                  ? const Color(0xFFDEE2EC)
-                  : const Color(0xFF8A919A),
+                  ? Theme.of(context).colorScheme.onSurface
+                  : Theme.of(context).colorScheme.outline,
             ),
           ),
         ],
@@ -2445,10 +2448,10 @@ class _EngineStatusCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final statusColor = isConnecting
-        ? const Color(0xFFFFB783)
+        ? Theme.of(context).colorScheme.secondary
         : isConnected
-        ? const Color(0xFF4AE183)
-        : const Color(0xFF8A919A);
+        ? Theme.of(context).colorScheme.tertiary
+        : Theme.of(context).colorScheme.outline;
     final statusLabel = isConnecting
         ? l10n.dashboardEngineConnecting
         : isConnected
@@ -2468,7 +2471,7 @@ class _EngineStatusCard extends StatelessWidget {
                   Icon(
                     Icons.memory_rounded,
                     size: 20,
-                    color: Color(0xFF91CDFF),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   SizedBox(width: 8),
                   Expanded(
@@ -2478,7 +2481,7 @@ class _EngineStatusCard extends StatelessWidget {
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFFDEE2EC),
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -2500,7 +2503,7 @@ class _EngineStatusCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFF090F15),
+              color: Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
@@ -2519,7 +2522,7 @@ class _EngineStatusCard extends StatelessWidget {
                 _EngineDetail(
                   label: '${l10n.dashboardWorkspace}:',
                   value: '—',
-                  valueColor: Color(0xFF91CDFF),
+                  valueColor: Theme.of(context).colorScheme.primary,
                 ),
               ],
             ),
@@ -2531,27 +2534,28 @@ class _EngineStatusCard extends StatelessWidget {
 }
 
 class _EngineDetail extends StatelessWidget {
-  const _EngineDetail({
+   const _EngineDetail({
     required this.label,
     required this.value,
-    this.valueColor = const Color(0xFFDEE2EC),
+     this.valueColor,
   });
 
   final String label;
   final String value;
-  final Color valueColor;
+   final Color? valueColor;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+     final valueColor = this.valueColor ?? Theme.of(context).colorScheme.onSurface;
+     return Row(
       children: [
         Expanded(
           child: Text(
             label,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'JetBrains Mono',
               fontSize: 9,
-              color: Color(0xFF8A919A),
+              color: Theme.of(context).colorScheme.outline,
             ),
           ),
         ),

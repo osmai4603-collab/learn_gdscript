@@ -292,10 +292,10 @@ class _ConceptMapErrorView extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+               Icon(
                 Icons.error_outline,
                 size: 42,
-                color: Colors.redAccent,
+                color: Theme.of(context).colorScheme.error,
               ),
               const SizedBox(height: 12),
               Text(

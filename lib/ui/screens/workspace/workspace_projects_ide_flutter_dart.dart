@@ -277,7 +277,7 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
     );
     final cursor = _cursorPosition(code, selection);
     return Scaffold(
-      backgroundColor: const Color(0xFF0F141B),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
           _WorkspaceTopNav(
@@ -285,7 +285,7 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
             pulseAnimation: _pulseAnimation,
             onOpenSettings: widget.onOpenSettings,
           ),
-          const Divider(height: 1, color: Color(0xFF28323F)),
+           Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 14, 20, 12),
             child: LayoutBuilder(
@@ -300,27 +300,27 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                       children: [
                         Text(
                           _localized(context, 'مساحة العمل', 'Workspace'),
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontFamily: 'IBM Plex Sans Arabic',
-                            color: Color(0xFFC0C7D0),
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
                             fontSize: 13,
                           ),
                         ),
-                        const Icon(
+                         Icon(
                           Icons.chevron_left_rounded,
-                          color: Color(0xFF8A919A),
+                          color: Theme.of(context).colorScheme.outline,
                           size: 18,
                         ),
-                        const Icon(
+                         Icon(
                           Icons.folder_open_rounded,
-                          color: Color(0xFF91CDFF),
+                          color: Theme.of(context).colorScheme.primary,
                           size: 18,
                         ),
                         Text(
                           widget.data.projectName,
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontFamily: 'IBM Plex Sans Arabic',
-                            color: Color(0xFFDEE2EC),
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.w600,
                             fontSize: 15,
                           ),
@@ -328,7 +328,7 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                         if (widget.data.godotVersion.isNotEmpty)
                           _WorkspaceChip(
                             label: widget.data.godotVersion,
-                            color: const Color(0xFF91CDFF),
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                       ],
                     ),
@@ -344,7 +344,7 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                             '${_countFiles(widget.data.fileTree)} ملف مفهرس',
                             '${_countFiles(widget.data.fileTree)} indexed files',
                           ),
-                          color: const Color(0xFF4AE183),
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ],
                     ),
@@ -538,22 +538,22 @@ class _WorkspaceTopNav extends StatelessWidget {
     return Container(
       height: 64,
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      color: const Color(0xFF0F141B),
+      color: Theme.of(context).colorScheme.surface,
       child: Row(
         children: [
           AnimatedBuilder(
             animation: pulseAnimation,
             builder: (context, _) {
               final statusColor = isEngineReady
-                  ? const Color(0xFF4AE183)
-                  : const Color(0xFFFFB783);
+                  ? Theme.of(context).colorScheme.tertiary
+                  : Theme.of(context).colorScheme.secondary;
               return Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 7,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1B2027),
+                  color: Theme.of(context).colorScheme.surfaceContainer,
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
                     color: statusColor.withValues(alpha: pulseAnimation.value),
@@ -683,17 +683,17 @@ class _WorkspaceActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
       onPressed: onPressed,
-      icon: Icon(icon, size: 17, color: const Color(0xFF91CDFF)),
+      icon: Icon(icon, size: 17, color: Theme.of(context).colorScheme.primary),
       label: Text(
         label,
-        style: const TextStyle(
+        style:  TextStyle(
           fontFamily: 'IBM Plex Sans Arabic',
           fontSize: 11,
-          color: Color(0xFFDEE2EC),
+          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
       style: OutlinedButton.styleFrom(
-        backgroundColor: const Color(0xFF252A32),
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
         side: BorderSide.none,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 11),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -736,9 +736,9 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
           flex: 6,
           child: Container(
             decoration: BoxDecoration(
-              color: const Color(0xFF171C23),
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFF252A32)),
+              border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHigh),
             ),
             child: Column(
               children: [
@@ -750,7 +750,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(3),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF090F15),
+                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -761,7 +761,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                     vertical: 7,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF252A32),
+                                    color: Theme.of(context).colorScheme.surfaceContainerHigh,
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Row(
@@ -770,7 +770,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                       Icon(
                                         Icons.folder_copy_outlined,
                                         size: 15,
-                                        color: Color(0xFF91CDFF),
+                                        color: Theme.of(context).colorScheme.primary,
                                       ),
                                       SizedBox(width: 5),
                                       Flexible(
@@ -784,7 +784,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                           style: TextStyle(
                                             fontFamily: 'IBM Plex Sans Arabic',
                                             fontSize: 11,
-                                            color: Color(0xFF91CDFF),
+                                            color: Theme.of(context).colorScheme.primary,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -809,7 +809,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                         Icon(
                                           Icons.search_rounded,
                                           size: 15,
-                                          color: Color(0xFFC0C7D0),
+                                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                                         ),
                                         SizedBox(width: 5),
                                         Flexible(
@@ -824,7 +824,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                               fontFamily:
                                                   'IBM Plex Sans Arabic',
                                               fontSize: 11,
-                                              color: Color(0xFFC0C7D0),
+                                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                                             ),
                                           ),
                                         ),
@@ -844,9 +844,9 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                           'Search project files',
                         ),
                         onPressed: onToggleSearch,
-                        icon: const Icon(
+                        icon:  Icon(
                           Icons.manage_search_rounded,
-                          color: Color(0xFF8A919A),
+                          color: Theme.of(context).colorScheme.outline,
                           size: 19,
                         ),
                       ),
@@ -859,17 +859,17 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(12, 0, 12, 6),
                     child: Row(
                       children: [
-                        const Icon(
+                         Icon(
                           Icons.account_tree_rounded,
-                          color: Color(0xFF91CDFF),
+                          color: Theme.of(context).colorScheme.primary,
                           size: 16,
                         ),
                         const SizedBox(width: 7),
-                        const Text(
+                         Text(
                           'res://',
                           style: TextStyle(
                             fontFamily: 'JetBrains Mono',
-                            color: Color(0xFFDEE2EC),
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
                           ),
@@ -877,9 +877,9 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                         const Spacer(),
                         Text(
                           '${_countFiles(data.fileTree)} ${_localized(context, 'ملف', 'files')}',
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontFamily: 'IBM Plex Sans Arabic',
-                            color: Color(0xFF8A919A),
+                            color: Theme.of(context).colorScheme.outline,
                             fontSize: 10,
                           ),
                         ),
@@ -887,7 +887,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Divider(height: 1, color: Color(0xFF252A32)),
+                 Divider(height: 1, color: Theme.of(context).colorScheme.surfaceContainerHigh),
                 Expanded(
                   child: ListView(
                     padding: const EdgeInsets.symmetric(vertical: 6),
@@ -911,9 +911,9 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
           flex: 4,
           child: Container(
             decoration: BoxDecoration(
-              color: const Color(0xFF171C23),
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFF252A32)),
+              border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHigh),
             ),
             child: Padding(
               padding: const EdgeInsets.all(10),
@@ -922,10 +922,10 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(
+                       Icon(
                         Icons.manage_search_rounded,
                         size: 17,
-                        color: Color(0xFF91CDFF),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       const SizedBox(width: 6),
                       Expanded(
@@ -937,9 +937,9 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                 : 'الملفات المطابقة',
                             searchOpen ? 'Search files' : 'Matching files',
                           ),
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontFamily: 'IBM Plex Sans Arabic',
-                            color: Color(0xFFDEE2EC),
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontSize: 11,
                             fontWeight: FontWeight.w600,
                           ),
@@ -947,7 +947,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                       ),
                       _WorkspaceChip(
                         label: '${matchingFiles.length}',
-                        color: const Color(0xFF91CDFF),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ],
                   ),
@@ -960,22 +960,22 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final file = matchingFiles[index];
                         return Material(
-                          color: const Color(0xFF171C23),
+                          color: Theme.of(context).colorScheme.surfaceContainerLow,
                           child: ListTile(
                             dense: true,
-                            leading: const Icon(
+                            leading:  Icon(
                               Icons.code_rounded,
                               size: 15,
-                              color: Color(0xFF38BDF8),
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                             title: Text(
                               file.path,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textDirection: TextDirection.ltr,
-                              style: const TextStyle(
+                              style:  TextStyle(
                                 fontFamily: 'JetBrains Mono',
-                                color: Color(0xFFC0C7D0),
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                                 fontSize: 9,
                               ),
                             ),
@@ -1035,12 +1035,12 @@ class _WorkspaceEditorPanel extends StatelessWidget {
     final service = editorService;
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF090F15),
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF252A32)),
-        boxShadow: const [
+        border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHigh),
+        boxShadow:  [
           BoxShadow(
-            color: Color(0x33000000),
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.2),
             blurRadius: 14,
             offset: Offset(0, 5),
           ),
@@ -1050,7 +1050,7 @@ class _WorkspaceEditorPanel extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            color: const Color(0xFF171C23),
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             padding: const EdgeInsetsDirectional.only(start: 8, end: 8, top: 6),
             child: Row(
               children: [
@@ -1070,16 +1070,16 @@ class _WorkspaceEditorPanel extends StatelessWidget {
                       )
                       ? onSaveFile
                       : null,
-                  icon: const Icon(
+                  icon:  Icon(
                     Icons.save_outlined,
-                    color: Color(0xFF91CDFF),
+                    color: Theme.of(context).colorScheme.primary,
                     size: 18,
                   ),
                 ),
               ],
             ),
           ),
-          const Divider(height: 1, color: Color(0xFF252A32)),
+           Divider(height: 1, color: Theme.of(context).colorScheme.surfaceContainerHigh),
           Expanded(
             child: CodeEditorWidget(
               key: const ValueKey('workspace-code-editor'),
@@ -1127,7 +1127,7 @@ class _WorkspaceInspectorPanel extends StatelessWidget {
     return _WorkspaceInfoCard(
       title: _localized(context, 'معلومات الملف', 'File information'),
       icon: Icons.description_outlined,
-      iconColor: const Color(0xFF91CDFF),
+      iconColor: Theme.of(context).colorScheme.primary,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1136,9 +1136,9 @@ class _WorkspaceInspectorPanel extends StatelessWidget {
                 ? _localized(context, 'لا يوجد ملف مفتوح', 'No file is open')
                 : activeTab.first.filePath,
             textDirection: TextDirection.ltr,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'JetBrains Mono',
-              color: Color(0xFF91CDFF),
+              color: Theme.of(context).colorScheme.primary,
               fontSize: 10,
             ),
           ),
@@ -1149,9 +1149,9 @@ class _WorkspaceInspectorPanel extends StatelessWidget {
               'الأسطر: ${code.split('\n').length}',
               'Lines: ${code.split('\n').length}',
             ),
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
-              color: Color(0xFFC0C7D0),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 10,
             ),
           ),
@@ -1162,9 +1162,9 @@ class _WorkspaceInspectorPanel extends StatelessWidget {
               'الحجم: ${code.length} محرف',
               'Size: ${code.length} characters',
             ),
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
-              color: Color(0xFFC0C7D0),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontSize: 10,
             ),
           ),
@@ -1192,9 +1192,9 @@ class _WorkspaceInfoCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: const Color(0xFF171C23),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF252A32)),
+        border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHigh),
       ),
       child: Column(
         children: [
@@ -1207,9 +1207,9 @@ class _WorkspaceInfoCard extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
-                    color: Color(0xFFDEE2EC),
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
                   ),
@@ -1234,16 +1234,16 @@ class _WorkspaceDockPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF171C23),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF252A32)),
+        border: Border.all(color: Theme.of(context).colorScheme.surfaceContainerHigh),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-            color: const Color(0xFF1B2027),
+            color: Theme.of(context).colorScheme.surfaceContainer,
             child: Row(
               children: [
                 _DockTab(
@@ -1266,15 +1266,15 @@ class _WorkspaceDockPanel extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     color: data.isEngineReady
-                        ? const Color(0xFF4AE183)
-                        : const Color(0xFFFFB783),
+                        ? Theme.of(context).colorScheme.tertiary
+                        : Theme.of(context).colorScheme.secondary,
                     fontSize: 10,
                   ),
                 ),
               ],
             ),
           ),
-          const Divider(height: 1, color: Color(0xFF252A32)),
+           Divider(height: 1, color: Theme.of(context).colorScheme.surfaceContainerHigh),
           Expanded(
             child: data.diagnosticMessages.isEmpty
                 ? Center(
@@ -1284,9 +1284,9 @@ class _WorkspaceDockPanel extends StatelessWidget {
                         'لا توجد تشخيصات للملف المفتوح.',
                         'No diagnostics for the open file.',
                       ),
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontFamily: 'IBM Plex Sans Arabic',
-                        color: Color(0xFF8A919A),
+                        color: Theme.of(context).colorScheme.outline,
                         fontSize: 11,
                       ),
                     ),
@@ -1302,9 +1302,9 @@ class _WorkspaceDockPanel extends StatelessWidget {
                       child: Text(
                         data.diagnosticMessages[index],
                         textDirection: TextDirection.ltr,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontFamily: 'JetBrains Mono',
-                          color: Color(0xFFFFB783),
+                          color: Theme.of(context).colorScheme.secondary,
                           fontSize: 10,
                         ),
                       ),
@@ -1335,7 +1335,7 @@ class _DockTab extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
       decoration: BoxDecoration(
-        color: active ? const Color(0xFF252A32) : Colors.transparent,
+        color: active ? Theme.of(context).colorScheme.surfaceContainerHigh : Colors.transparent,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Row(
@@ -1344,7 +1344,7 @@ class _DockTab extends StatelessWidget {
           Icon(
             icon,
             size: 15,
-            color: active ? const Color(0xFF91CDFF) : const Color(0xFFC0C7D0),
+            color: active ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
           ),
           const SizedBox(width: 5),
           Text(
@@ -1352,16 +1352,16 @@ class _DockTab extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 10,
-              color: active ? const Color(0xFF91CDFF) : const Color(0xFFC0C7D0),
+              color: active ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           if (count != null) ...[
             const SizedBox(width: 5),
             Text(
               count!,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontFamily: 'JetBrains Mono',
-                color: Color(0xFFFFB783),
+                color: Theme.of(context).colorScheme.secondary,
                 fontSize: 9,
               ),
             ),
@@ -1381,16 +1381,16 @@ class _QuickSearchInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1E2632),
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFF28323F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: TextField(
         controller: controller,
-        style: const TextStyle(
+        style:  TextStyle(
           fontFamily: 'IBM Plex Sans Arabic',
           fontSize: 11,
-          color: Color(0xFFE2E8F0),
+          color: Theme.of(context).colorScheme.onSurface,
         ),
         decoration: InputDecoration(
           hintText: _localized(
@@ -1398,15 +1398,15 @@ class _QuickSearchInput extends StatelessWidget {
             'ابحث عن ملف أو سكربت...',
             'Search files or scripts...',
           ),
-          hintStyle: const TextStyle(
+          hintStyle:  TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 11,
-            color: Color(0xFF64748B),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
           prefixIcon: Icon(
             Icons.filter_list_rounded,
             size: 14,
-            color: Color(0xFF94A3B8),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
           border: InputBorder.none,
           isDense: true,
@@ -1440,14 +1440,14 @@ class _FileTreeNodeTile extends StatelessWidget {
           leading: Icon(
             node.isExpanded ? Icons.folder_open_rounded : Icons.folder_rounded,
             size: 16,
-            color: const Color(0xFFF59E0B),
+            color: Theme.of(context).colorScheme.secondary,
           ),
           title: Text(
             node.name,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'JetBrains Mono',
               fontSize: 12,
-              color: Color(0xFFCBD5E1),
+              color: Theme.of(context).colorScheme.onSurface,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -1465,34 +1465,34 @@ class _FileTreeNodeTile extends StatelessWidget {
     }
 
     IconData fileIcon = Icons.insert_drive_file_rounded;
-    Color iconColor = const Color(0xFF94A3B8);
+    Color iconColor = Theme.of(context).colorScheme.onSurfaceVariant;
 
     if (node.type == FileType.gdscript) {
       fileIcon = Icons.code_rounded;
-      iconColor = const Color(0xFF38BDF8);
+      iconColor = Theme.of(context).colorScheme.primary;
     } else if (node.type == FileType.scene) {
       fileIcon = Icons.view_in_ar_rounded;
-      iconColor = const Color(0xFF22C55E);
+      iconColor = Theme.of(context).colorScheme.tertiary;
     }
 
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: Material(
-        color: const Color(0xFF171C23),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         child: ListTile(
           dense: true,
           contentPadding: const EdgeInsets.symmetric(horizontal: 8),
           leading: Icon(fileIcon, size: 15, color: iconColor),
           title: Text(
             node.name,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'JetBrains Mono',
               fontSize: 12,
-              color: Color(0xFF94A3B8),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           selected: node.path == activeFilePath,
-          selectedTileColor: const Color(0xFF1E2837),
+          selectedTileColor: Theme.of(context).colorScheme.surfaceContainerHigh,
           onTap: () => onOpenFile?.call(node.path),
         ),
       ),
@@ -1517,7 +1517,7 @@ class _EditorTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 40,
-      color: const Color(0xFF131922),
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: tabs.length,
@@ -1531,16 +1531,16 @@ class _EditorTabBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 14),
               decoration: BoxDecoration(
                 color: isActive
-                    ? const Color(0xFF0A0D12)
-                    : const Color(0xFF131922),
+                    ? Theme.of(context).colorScheme.surfaceContainerLowest
+                    : Theme.of(context).colorScheme.surfaceContainerLow,
                 border: Border(
                   top: BorderSide(
                     color: isActive
-                        ? const Color(0xFF478CBF)
+                        ? Theme.of(context).colorScheme.primary
                         : Colors.transparent,
                     width: 2,
                   ),
-                  left: const BorderSide(color: Color(0xFF1E2632), width: 1),
+                  left:  BorderSide(color: Theme.of(context).colorScheme.surfaceContainer, width: 1),
                 ),
               ),
               child: Row(
@@ -1551,8 +1551,8 @@ class _EditorTabBar extends StatelessWidget {
                         : Icons.view_in_ar_rounded,
                     size: 14,
                     color: isActive
-                        ? const Color(0xFF478CBF)
-                        : const Color(0xFF64748B),
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 8),
                   Text(
@@ -1564,27 +1564,27 @@ class _EditorTabBar extends StatelessWidget {
                           ? FontWeight.bold
                           : FontWeight.normal,
                       color: isActive
-                          ? const Color(0xFFE2E8F0)
-                          : const Color(0xFF94A3B8),
+                          ? Theme.of(context).colorScheme.onSurface
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   if (tab.isDirty) ...[
                     const SizedBox(width: 6),
-                    const CircleAvatar(
+                     CircleAvatar(
                       radius: 3,
-                      backgroundColor: Color(0xFF38BDF8),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                   ],
                   const SizedBox(width: 8),
                   InkWell(
                     onTap: () => onCloseTab?.call(tab.filePath),
                     borderRadius: BorderRadius.circular(10),
-                    child: const Padding(
+                    child:  Padding(
                       padding: EdgeInsets.all(2),
                       child: Icon(
                         Icons.close_rounded,
                         size: 14,
-                        color: Color(0xFF64748B),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -1614,15 +1614,15 @@ class _WorkspaceStatusBar extends StatelessWidget {
     return Container(
       height: 26,
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      color: const Color(0xFF090F15),
+      color: Theme.of(context).colorScheme.surfaceContainerLowest,
       child: Row(
         children: [
           Icon(
             Icons.bolt_rounded,
             size: 14,
             color: engineReady
-                ? const Color(0xFF4AE183)
-                : const Color(0xFFFFB783),
+                ? Theme.of(context).colorScheme.tertiary
+                : Theme.of(context).colorScheme.secondary,
           ),
           const SizedBox(width: 6),
           Text(
@@ -1637,8 +1637,8 @@ class _WorkspaceStatusBar extends StatelessWidget {
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 11,
               color: engineReady
-                  ? const Color(0xFF94A3B8)
-                  : const Color(0xFFFFB783),
+                  ? Theme.of(context).colorScheme.onSurfaceVariant
+                  : Theme.of(context).colorScheme.secondary,
             ),
           ),
           const Spacer(),
@@ -1648,21 +1648,21 @@ class _WorkspaceStatusBar extends StatelessWidget {
               'السطر $cursorLine، العمود $cursorCol',
               'Line $cursorLine, column $cursorCol',
             ),
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 11,
-              color: Color(0xFF64748B),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(width: 14),
-          const Directionality(
+           Directionality(
             textDirection: TextDirection.ltr,
             child: Text(
               'UTF-8 • Tab: 4 spaces • LF',
               style: TextStyle(
                 fontFamily: 'JetBrains Mono',
                 fontSize: 11,
-                color: Color(0xFF64748B),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),

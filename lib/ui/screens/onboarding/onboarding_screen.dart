@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_gdscript/core/theme/color_schemes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learn_gdscript/core/constants/app_constants.dart';
 import 'package:provider/provider.dart';
@@ -189,7 +190,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     if (draft == null) {
       final l10n = context.l10n;
       return Scaffold(
-        backgroundColor: const Color(0xFF0A0D12),
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         body: Center(
           child: onboarding.loadError != null
               ? Column(
@@ -197,7 +198,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   children: [
                     Text(
                       l10n.onboardingRestoreError,
-                      style: const TextStyle(color: Color(0xFFE2E8F0)),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     const SizedBox(height: 12),
                     FilledButton(
@@ -216,11 +219,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0D12),
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
       body: Column(
         children: [
           _OnboardingTopBar(busy: _busy, onSkip: () => _finish(skipped: true)),
-          const Divider(height: 1, color: Color(0xFF28323F)),
+          Divider(
+            height: 1,
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
           Expanded(
             child: Center(
               child: SingleChildScrollView(
@@ -383,33 +389,42 @@ class _OnboardingTopBar extends StatelessWidget {
     return Container(
       height: 56,
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      color: const Color(0xFF131922),
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       child: Row(
         children: [
-          const Icon(Icons.gamepad_rounded, color: Color(0xFF478CBF), size: 24),
+          Icon(
+            Icons.gamepad_rounded,
+            color: Theme.of(context).colorScheme.primary,
+            size: 24,
+          ),
           const SizedBox(width: 8),
           Text(
             l10n.onboardingBrand,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFE2E8F0),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           if (MediaQuery.sizeOf(context).width >= 720) ...[
             const SizedBox(width: 8),
-            const Text('/', style: TextStyle(color: Color(0xFF64748B))),
+            Text(
+              '/',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
             const SizedBox(width: 8),
             Expanded(
               child: Text(
                 l10n.onboardingPlacementLabel,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'IBM Plex Sans Arabic',
                   fontSize: 13,
-                  color: Color(0xFF94A3B8),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -419,10 +434,10 @@ class _OnboardingTopBar extends StatelessWidget {
             onPressed: busy ? null : onSkip,
             child: Text(
               l10n.onboardingSkip,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontSize: 12,
-                color: Color(0xFF64748B),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),
@@ -452,20 +467,20 @@ class _OnboardingStepper extends StatelessWidget {
         final isCompleted = index < activeStep;
         final isCurrent = index == activeStep;
         final circleColor = isCompleted
-            ? const Color(0xFF14532D)
+            ? Theme.of(context).colorScheme.successContainer
             : isCurrent
-            ? const Color(0xFF478CBF)
-            : const Color(0xFF171C23);
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.surfaceContainerLow;
         final borderColor = isCompleted
-            ? const Color(0xFF22C55E)
+            ? Theme.of(context).colorScheme.tertiary
             : isCurrent
-            ? const Color(0xFF38BDF8)
-            : const Color(0xFF28323F);
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.outlineVariant;
         final textColor = isCompleted
-            ? const Color(0xFF22C55E)
+            ? Theme.of(context).colorScheme.tertiary
             : isCurrent
-            ? const Color(0xFFE2E8F0)
-            : const Color(0xFF64748B);
+            ? Theme.of(context).colorScheme.onSurface
+            : Theme.of(context).colorScheme.onSurfaceVariant;
 
         return Expanded(
           child: Row(
@@ -484,10 +499,10 @@ class _OnboardingStepper extends StatelessWidget {
                       ),
                       child: Center(
                         child: isCompleted
-                            ? const Icon(
+                            ? Icon(
                                 Icons.check_rounded,
                                 size: 16,
-                                color: Color(0xFF22C55E),
+                                color: Theme.of(context).colorScheme.tertiary,
                               )
                             : Text(
                                 '${index + 1}',
@@ -496,8 +511,10 @@ class _OnboardingStepper extends StatelessWidget {
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: isCurrent
-                                      ? Colors.white
-                                      : const Color(0xFF94A3B8),
+                                      ? Theme.of(context).colorScheme.onPrimary
+                                      : Theme.of(
+                                          context,
+                                        ).colorScheme.onSurfaceVariant,
                                 ),
                               ),
                       ),
@@ -526,8 +543,8 @@ class _OnboardingStepper extends StatelessWidget {
                   width: 32,
                   height: 2,
                   color: isCompleted
-                      ? const Color(0xFF22C55E)
-                      : const Color(0xFF28323F),
+                      ? Theme.of(context).colorScheme.tertiary
+                      : Theme.of(context).colorScheme.outlineVariant,
                 ),
             ],
           ),
@@ -549,9 +566,9 @@ class _WelcomeStepView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: const Color(0xFF131922),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF28323F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         children: [
@@ -559,35 +576,37 @@ class _WelcomeStepView extends StatelessWidget {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: const Color(0xFF478CBF).withValues(alpha: 0.15),
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: 0.15),
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFF478CBF)),
+              border: Border.all(color: Theme.of(context).colorScheme.primary),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.rocket_launch_rounded,
               size: 40,
-              color: Color(0xFF38BDF8),
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           const SizedBox(height: 20),
           Text(
             l10n.onboardingWelcomeHeading,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFE2E8F0),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 10),
           Text(
             l10n.onboardingWelcomeBody,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 14,
-              color: Color(0xFF94A3B8),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               height: 1.6,
             ),
           ),
@@ -609,8 +628,8 @@ class _WelcomeStepView extends StatelessWidget {
               ),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF478CBF),
-              foregroundColor: Colors.white,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -665,21 +684,21 @@ class _ExperienceTierStepView extends StatelessWidget {
         Text(
           l10n.onboardingExperiencePrompt,
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFE2E8F0),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 6),
         Text(
           l10n.onboardingExperienceDescription,
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 13,
-            color: Color(0xFF94A3B8),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: 24),
@@ -693,13 +712,13 @@ class _ExperienceTierStepView extends StatelessWidget {
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                 color: isSelected
-                    ? const Color(0xFF1E2837)
-                    : const Color(0xFF131922),
+                    ? Theme.of(context).colorScheme.surfaceContainerHigh
+                    : Theme.of(context).colorScheme.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isSelected
-                      ? const Color(0xFF478CBF)
-                      : const Color(0xFF28323F),
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.outlineVariant,
                   width: isSelected ? 1.6 : 1,
                 ),
               ),
@@ -709,16 +728,18 @@ class _ExperienceTierStepView extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? const Color(0xFF478CBF).withValues(alpha: 0.2)
-                          : const Color(0xFF171C23),
+                          ? Theme.of(
+                              context,
+                            ).colorScheme.primary.withValues(alpha: 0.2)
+                          : Theme.of(context).colorScheme.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
                       item.icon,
                       size: 24,
                       color: isSelected
-                          ? const Color(0xFF38BDF8)
-                          : const Color(0xFF94A3B8),
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -733,17 +754,19 @@ class _ExperienceTierStepView extends StatelessWidget {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: isSelected
-                                ? const Color(0xFFE2E8F0)
-                                : const Color(0xFFCBD5E1),
+                                ? Theme.of(context).colorScheme.onSurface
+                                : Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           item.description,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: 'IBM Plex Sans Arabic',
                             fontSize: 12,
-                            color: Color(0xFF94A3B8),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                             height: 1.4,
                           ),
                         ),
@@ -755,8 +778,8 @@ class _ExperienceTierStepView extends StatelessWidget {
                         ? Icons.radio_button_checked_rounded
                         : Icons.radio_button_off_rounded,
                     color: isSelected
-                        ? const Color(0xFF478CBF)
-                        : const Color(0xFF64748B),
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -769,8 +792,8 @@ class _ExperienceTierStepView extends StatelessWidget {
           child: ElevatedButton(
             onPressed: busy ? null : onContinue,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF478CBF),
-              foregroundColor: Colors.white,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -825,9 +848,9 @@ class _DiagnosticQuizStepView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: const Color(0xFF131922),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF28323F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -840,24 +863,24 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                   questionIndex + 1,
                   questions.length,
                 ),
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'JetBrains Mono',
                   fontSize: 12,
-                  color: Color(0xFF64748B),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF171C23),
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   l10n.onboardingAssessmentTag,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'IBM Plex Sans Arabic',
                     fontSize: 11,
-                    color: Color(0xFF478CBF),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -866,11 +889,11 @@ class _DiagnosticQuizStepView extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             question.question,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFE2E8F0),
+              color: Theme.of(context).colorScheme.onSurface,
               height: 1.5,
             ),
           ),
@@ -879,18 +902,20 @@ class _DiagnosticQuizStepView extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF0A0D12),
+              color: Theme.of(context).colorScheme.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: const Color(0xFF28323F)),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outlineVariant,
+              ),
             ),
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: Text(
                 question.code,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'JetBrains Mono',
                   fontSize: 12,
-                  color: Color(0xFF38BDF8),
+                  color: Theme.of(context).colorScheme.primary,
                   height: 1.4,
                 ),
               ),
@@ -911,13 +936,13 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: isChosen
-                        ? const Color(0xFF1E2837)
-                        : const Color(0xFF171C23),
+                        ? Theme.of(context).colorScheme.surfaceContainerHigh
+                        : Theme.of(context).colorScheme.surfaceContainerLow,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: isChosen
-                          ? const Color(0xFF478CBF)
-                          : const Color(0xFF28323F),
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.outlineVariant,
                     ),
                   ),
                   child: Row(
@@ -927,20 +952,22 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                         height: 22,
                         decoration: BoxDecoration(
                           color: isChosen
-                              ? const Color(0xFF478CBF)
+                              ? Theme.of(context).colorScheme.primary
                               : Colors.transparent,
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: isChosen
-                                ? const Color(0xFF478CBF)
-                                : const Color(0xFF64748B),
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
                           ),
                         ),
                         child: isChosen
-                            ? const Icon(
+                            ? Icon(
                                 Icons.check,
                                 size: 14,
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.onPrimary,
                               )
                             : null,
                       ),
@@ -954,8 +981,10 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                               fontFamily: 'JetBrains Mono',
                               fontSize: 12,
                               color: isChosen
-                                  ? const Color(0xFFE2E8F0)
-                                  : const Color(0xFF94A3B8),
+                                  ? Theme.of(context).colorScheme.onSurface
+                                  : Theme.of(
+                                      context,
+                                    ).colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
@@ -974,8 +1003,12 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                 OutlinedButton(
                   onPressed: busy ? null : onPrevQuestion,
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF94A3B8),
-                    side: const BorderSide(color: Color(0xFF28323F)),
+                    foregroundColor: Theme.of(
+                      context,
+                    ).colorScheme.onSurfaceVariant,
+                    side: BorderSide(
+                      color: Theme.of(context).colorScheme.outlineVariant,
+                    ),
                   ),
                   child: Text(
                     l10n.onboardingPrevious,
@@ -989,8 +1022,8 @@ class _DiagnosticQuizStepView extends StatelessWidget {
                     ? onNextQuestion
                     : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF478CBF),
-                  foregroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 10,
@@ -1048,44 +1081,46 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: const Color(0xFF131922),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF28323F)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: const Color(0xFF14532D).withValues(alpha: 0.3),
+              color: Theme.of(
+                context,
+              ).colorScheme.successContainer.withValues(alpha: 0.3),
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFF22C55E)),
+              border: Border.all(color: Theme.of(context).colorScheme.tertiary),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.verified_rounded,
               size: 40,
-              color: Color(0xFF22C55E),
+              color: Theme.of(context).colorScheme.tertiary,
             ),
           ),
           const SizedBox(height: 18),
           Text(
             l10n.onboardingRoadmapSuccess,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFE2E8F0),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             summary,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 13,
-              color: Color(0xFF94A3B8),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               height: 1.6,
             ),
           ),
@@ -1093,18 +1128,20 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF0F141B),
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: const Color(0xFF478CBF).withValues(alpha: 0.4),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.4),
               ),
             ),
             child: Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.play_circle_filled_rounded,
                   size: 28,
-                  color: Color(0xFF38BDF8),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -1113,21 +1150,21 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
                     children: [
                       Text(
                         l10n.onboardingRecommendedStart(unitLabel),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF38BDF8),
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
                         title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'IBM Plex Sans Arabic',
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFE2E8F0),
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -1157,8 +1194,8 @@ class _RoadmapRecommendationStepView extends StatelessWidget {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF22C55E),
-                foregroundColor: Colors.white,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                foregroundColor: Theme.of(context).colorScheme.onTertiary,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
                   vertical: 14,

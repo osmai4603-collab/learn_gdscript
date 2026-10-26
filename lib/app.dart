@@ -97,7 +97,7 @@ class _LearnGdscriptAppState extends State<LearnGdscriptApp> {
           ],
           theme: settings.themeVariant == AppThemeVariant.arabicIde
               ? ArabicIdeTheme.light
-              : AppTheme.dark,
+              : AppTheme.light,
           darkTheme: settings.themeVariant == AppThemeVariant.arabicIde
               ? ArabicIdeTheme.dark
               : AppTheme.dark,

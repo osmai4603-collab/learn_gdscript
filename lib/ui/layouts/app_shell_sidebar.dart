@@ -129,7 +129,7 @@ class SidebarItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isActive ? const Color(0xFF1F2630) : Colors.transparent,
+            color: isActive ? Theme.of(context).colorScheme.surfaceContainer : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: isActive
                 ? Border.all(
@@ -145,7 +145,7 @@ class SidebarItem extends StatelessWidget {
                 size: 18,
                 color: isActive
                     ? colors.primary
-                    : const Color(0xFF94A3B8),
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -157,8 +157,8 @@ class SidebarItem extends StatelessWidget {
                     fontSize: isActive ? 12 : 11.5,
                     fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
                     color: isActive
-                        ? const Color(0xFFE2E8F0)
-                        : const Color(0xFF94A3B8),
+                        ? Theme.of(context).colorScheme.onSurface
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
