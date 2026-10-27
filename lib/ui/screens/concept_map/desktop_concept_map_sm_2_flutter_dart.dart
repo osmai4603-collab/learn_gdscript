@@ -349,7 +349,12 @@ class _DesktopConceptMapSm2ScreenState
 
   @override
   Widget build(BuildContext context) {
-    final activeConcept = widget.data.activeConcept;
+    final selectedConcept = widget.data.concepts.where(
+      (concept) => concept.id == _selectedConceptId,
+    );
+    final activeConcept = selectedConcept.isEmpty
+        ? widget.data.activeConcept
+        : selectedConcept.first;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
@@ -388,6 +393,15 @@ class _DesktopConceptMapSm2ScreenState
                   onSelectConcept: (id) {
                     setState(() => _selectedConceptId = id);
                     widget.onSelectConcept?.call(id);
+                    final selectedConcept = widget.data.concepts.firstWhere(
+                      (concept) => concept.id == id,
+                    );
+                    if (selectedConcept.mastery != ConceptMasteryLevel.locked &&
+                        selectedConcept.lessonId != null) {
+                      widget.onNavigateRoute(
+                        AppRoutes.lessonPath(selectedConcept.lessonId!),
+                      );
+                    }
                   },
                   selectedConceptId: _selectedConceptId,
                 );
@@ -803,7 +817,7 @@ class _InteractiveGraphCanvas extends StatelessWidget {
                 painter: _GraphConnectionsPainter(
                   concepts: concepts,
                   selectedConceptId: selectedConceptId,
-                  color: colorScheme.primary,
+                  colorScheme: colorScheme,
                 ),
               ),
             ),
@@ -975,12 +989,12 @@ class _GraphBackgroundGridPainter extends CustomPainter {
 class _GraphConnectionsPainter extends CustomPainter {
   final List<KnowledgeConceptNodeModel> concepts;
   final String selectedConceptId;
-  final Color color;
+  final ColorScheme colorScheme;
 
   _GraphConnectionsPainter({
     required this.concepts,
     required this.selectedConceptId,
-    required this.color,
+    required this.colorScheme,
   });
 
   @override
@@ -997,8 +1011,14 @@ class _GraphConnectionsPainter extends CustomPainter {
               preId == selectedConceptId ||
               (selected?.prerequisites.contains(node.id) ?? false) ||
               (selected?.prerequisites.contains(preId) ?? false);
+          final edgeColor = switch (node.mastery) {
+            ConceptMasteryLevel.mastered => colorScheme.tertiary,
+            ConceptMasteryLevel.learning ||
+            ConceptMasteryLevel.reviewing => colorScheme.primary,
+            ConceptMasteryLevel.locked => colorScheme.onSurfaceVariant,
+          };
           final paint = Paint()
-            ..color = color.withValues(alpha: isRelated ? 0.82 : 0.16)
+            ..color = edgeColor.withValues(alpha: isRelated ? 0.82 : 0.16)
             ..strokeWidth = isRelated ? 2.2 : 1.2
             ..style = PaintingStyle.stroke;
           final p1 = Offset(
@@ -1023,7 +1043,8 @@ class _GraphConnectionsPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _GraphConnectionsPainter oldDelegate) =>
       oldDelegate.concepts != concepts ||
-      oldDelegate.selectedConceptId != selectedConceptId;
+      oldDelegate.selectedConceptId != selectedConceptId ||
+      oldDelegate.colorScheme != colorScheme;
 }
 
 class _Sm2FlashcardDeckView extends StatelessWidget {

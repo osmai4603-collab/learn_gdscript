@@ -6,7 +6,7 @@ warnings so the existing curriculum can be baselined and migrated incrementally.
 `--strict` makes warnings fail the command.
 
 | Rule | Check | Current behavior |
-|---|---|---|
+| --- | --- | --- |
 | 1 | Schema integrity | Parse manifests, units, lessons, exercises, test cases, and documentation sources with project models; reject malformed values. |
 | 2 | Identifier integrity | Match unit and lesson files to manifest IDs and validate lesson/exercise references and uniqueness. |
 | 3 | Five-section structure | Look for the required Arabic concept, rules, example, errors, and summary sections. |

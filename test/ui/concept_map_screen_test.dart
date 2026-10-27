@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learn_gdscript/data/models/async_state.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:learn_gdscript/data/models/progress_models.dart';
@@ -72,6 +73,11 @@ void main() {
       ))[ratedCardId]?.repetitionCount,
       1,
     );
+    await tester.tap(find.text('Back to map'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('The Editor and Your First Program').first);
+    await tester.pumpAndSettle();
+    expect(find.text('Opened lesson_01_hello'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }
@@ -98,6 +104,7 @@ class _ConceptMapHarness {
     required this.progressProvider,
     required this.provider,
     required this.scheduleRepository,
+    required this.router,
   });
 
   static const visitorId = 'concept-map-widget-visitor';
@@ -107,6 +114,7 @@ class _ConceptMapHarness {
   final ProgressProvider progressProvider;
   final ConceptMapProvider provider;
   final ReviewScheduleRepository scheduleRepository;
+  final GoRouter router;
 
   static Future<_ConceptMapHarness> create() async {
     final database = DatabaseHelper(inMemory: true);
@@ -144,12 +152,28 @@ class _ConceptMapHarness {
       visitorId: visitorId,
       clock: () => DateTime.utc(2026, 10, 25, 9),
     );
+    final router = GoRouter(
+      initialLocation: '/concept-map',
+      routes: [
+        GoRoute(
+          path: '/concept-map',
+          builder: (_, _) => const ConceptMapScreen(),
+        ),
+        GoRoute(
+          path: '/lesson/:lessonId',
+          builder: (_, state) => Scaffold(
+            body: Text('Opened ${state.pathParameters['lessonId']}'),
+          ),
+        ),
+      ],
+    );
     return _ConceptMapHarness(
       database: database,
       curriculumProvider: curriculumProvider,
       progressProvider: progressProvider,
       provider: provider,
       scheduleRepository: scheduleRepository,
+      router: router,
     );
   }
 
@@ -157,7 +181,7 @@ class _ConceptMapHarness {
     providers: [
       ChangeNotifierProvider<ConceptMapProvider>.value(value: provider),
     ],
-    child: MaterialApp(
+    child: MaterialApp.router(
       locale: locale,
       supportedLocales: const [Locale('ar'), Locale('en')],
       localizationsDelegates: const [
@@ -165,11 +189,12 @@ class _ConceptMapHarness {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      home: const ConceptMapScreen(),
+      routerConfig: router,
     ),
   );
 
   void dispose() {
+    router.dispose();
     provider.dispose();
     curriculumProvider.dispose();
     progressProvider.dispose();
