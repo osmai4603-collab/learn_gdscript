@@ -5,29 +5,49 @@
   "homeWelcome": "Learn GDScript step by step",
   "dashboardDays": "{days} days",
   "@dashboardDays": {
-    "placeholders": {"days": {"type": "int"}}
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
   },
   "dashboardWelcomeBack": "Welcome back, {name} 👋",
   "@dashboardWelcomeBack": {
-    "placeholders": {"name": {"type": "String"}}
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "dashboardWelcomeMessage": "You are one step away from mastering game branching. Keep writing code and controlling node behavior today!",
   "dashboardCurrentUnit": "Current unit:",
   "dashboardPercentComplete": "{percent}% complete",
   "@dashboardPercentComplete": {
-    "placeholders": {"percent": {"type": "int"}}
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
   },
   "dashboardNextLevel": "Progress to next level",
   "dashboardLessonsCompleted": "{completed} of {total} lessons",
   "@dashboardLessonsCompleted": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "dashboardXpToNextLevel": "{xp} XP to next level",
   "@dashboardXpToNextLevel": {
-    "placeholders": {"xp": {"type": "int"}}
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
   },
   "dashboardContinueDescription": "Pick up where you left off. Your progress is saved automatically.",
   "dashboardContinueAction": "Continue learning",
@@ -39,8 +59,12 @@
   "dashboardBadgeCount": "{earned} of {total}",
   "@dashboardBadgeCount": {
     "placeholders": {
-      "earned": {"type": "int"},
-      "total": {"type": "int"}
+      "earned": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "dashboardNoBadges": "No badges yet",
@@ -48,7 +72,11 @@
   "dashboardStreak": "Learning streak",
   "dashboardConsecutiveDays": "{days} consecutive days 🔥",
   "@dashboardConsecutiveDays": {
-    "placeholders": {"days": {"type": "int"}}
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
   },
   "dashboardEngineTitle": "GDScript engine",
   "dashboardEngineConnecting": "Connecting",
@@ -66,11 +94,19 @@
   "dashboardPlaygroundOutputSuccess": "Executed successfully with no output.",
   "dashboardSaveError": "Could not save the draft: {error}",
   "@dashboardSaveError": {
-    "placeholders": {"error": {"type": "String"}}
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "dashboardExecutionError": "Could not execute the code: {error}",
   "@dashboardExecutionError": {
-    "placeholders": {"error": {"type": "String"}}
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "dashboardExecutionFailed": "Could not execute the code.",
   "dashboardExampleTag": "Example",
@@ -82,21 +118,31 @@
   "curriculumVersion": "GDScript {version} curriculum",
   "@curriculumVersion": {
     "placeholders": {
-      "version": {"type": "String"}
+      "version": {
+        "type": "String"
+      }
     }
   },
   "completedUnitsSummary": "{completed} of {total} units completed",
   "@completedUnitsSummary": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "completedLessonsSummary": "{completed} of {total} lessons completed",
   "@completedLessonsSummary": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "milestoneCompleted": "Completed",
@@ -105,31 +151,41 @@
   "completedModulesCount": "{count} completed",
   "@completedModulesCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "upcomingModulesCount": "{count} remaining",
   "@upcomingModulesCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "moduleNumber": "Module {number}",
   "@moduleNumber": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "moduleLessonCount": "{count} lessons",
   "@moduleLessonCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "moduleDurationHours": "{hours} min total",
   "@moduleDurationHours": {
     "placeholders": {
-      "hours": {"type": "int"}
+      "hours": {
+        "type": "int"
+      }
     }
   },
   "lessonStatusCurrent": "Current lesson",
@@ -145,7 +201,9 @@
   "earnedBadgesSummary": "{count} badges earned",
   "@earnedBadgesSummary": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "reviewNextStep": "Your next lesson",
@@ -273,7 +331,11 @@
   "engineDiagnosticsEmpty": "There are no diagnostics in the indexed workspace files.",
   "engineDiagnosticsSummary": "{count} diagnostics",
   "@engineDiagnosticsSummary": {
-    "placeholders": {"count": {"type": "int"}}
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "startLearning": "Start Learning",
   "newUserWelcome": "Welcome! Start your programming journey",
@@ -312,18 +374,46 @@
   "badgesCompletionSummary": "{unlocked} of {total} badges earned",
   "@badgesCompletionSummary": {
     "placeholders": {
-      "unlocked": {"type": "int"},
-      "total": {"type": "int"}
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "badgeFilterAll": "All ({count})",
-  "@badgeFilterAll": {"placeholders": {"count": {"type": "int"}}},
+  "@badgeFilterAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeFilterEarned": "Earned ({count})",
-  "@badgeFilterEarned": {"placeholders": {"count": {"type": "int"}}},
+  "@badgeFilterEarned": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeFilterInProgress": "In progress ({count})",
-  "@badgeFilterInProgress": {"placeholders": {"count": {"type": "int"}}},
+  "@badgeFilterInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeFilterLocked": "Locked ({count})",
-  "@badgeFilterLocked": {"placeholders": {"count": {"type": "int"}}},
+  "@badgeFilterLocked": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeFilterEmpty": "No badges in this category.",
   "badgeCatalogEmpty": "No badges are available right now.",
   "badgeDetailsTitle": "Badge details",
@@ -361,8 +451,12 @@
   "onboardingQuestionProgress": "Question {current} of {total}",
   "@onboardingQuestionProgress": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "onboardingAssessmentTag": "Academic placement",
@@ -391,13 +485,17 @@
   "onboardingRecommendedStart": "Recommended starting point: {unit}",
   "@onboardingRecommendedStart": {
     "placeholders": {
-      "unit": {"type": "String"}
+      "unit": {
+        "type": "String"
+      }
     }
   },
   "onboardingUnitLabel": "Unit {number}",
   "@onboardingUnitLabel": {
     "placeholders": {
-      "number": {"type": "String"}
+      "number": {
+        "type": "String"
+      }
     }
   },
   "onboardingSummaryBeginner": "We will start with the fundamentals to build a strong foundation in programming and GDScript.",
@@ -420,14 +518,20 @@
   "syntaxExplorerCount": "{count} documented entries",
   "@syntaxExplorerCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "syntaxExplorerVisibleCount": "Showing {visible} of {total}",
   "@syntaxExplorerVisibleCount": {
     "placeholders": {
-      "visible": {"type": "int"},
-      "total": {"type": "int"}
+      "visible": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "syntaxExplorerLoadMore": "Load more",
@@ -442,12 +546,354 @@
   "syntaxExplorerCopied": "Copied {item}",
   "@syntaxExplorerCopied": {
     "placeholders": {
-      "item": {"type": "String"}
+      "item": {
+        "type": "String"
+      }
     }
   },
   "syntaxExplorerOpenLesson": "Open lesson",
   "syntaxExplorerOpenWorkspace": "Open workspace",
   "syntaxExplorerRelatedConcepts": "Related concepts",
   "syntaxExplorerLessonUnavailable": "No related lesson is available for this entry.",
-  "syntaxExplorerClearSearch": "Clear search"
+  "syntaxExplorerClearSearch": "Clear search",
+  "workspaceIndexedFilesCount": "{count, plural, =0{0 indexed files} =1{1 indexed file} other{{count} indexed files}}",
+  "@workspaceIndexedFilesCount": {
+    "description": "Number of indexed files in the workspace",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceFileCountSummary": "{count, plural, =0{0 files} =1{1 file} other{{count} files}}",
+  "@workspaceFileCountSummary": {
+    "description": "Simple file count summary",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceSettings": "Workspace settings",
+  "workspaceReindex": "Reindex",
+  "workspaceEngineReady": "GDScript engine ready",
+  "workspaceEngineUnavailable": "GDScript engine unavailable",
+  "workspaceFilesTab": "Files",
+  "workspaceSearchTab": "Search",
+  "workspaceSearchProjectFiles": "Search project files",
+  "workspaceSearchFiles": "Search files",
+  "workspaceMatchingFiles": "Matching files",
+  "workspaceSaveFile": "Save file",
+  "workspaceFileInfoTitle": "File information",
+  "workspaceNoFileOpen": "No file is open",
+  "workspaceFileLinesCount": "Lines: {count}",
+  "@workspaceFileLinesCount": {
+    "description": "Number of lines in the open file",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceFileSizeCharacters": "Size: {count} characters",
+  "@workspaceFileSizeCharacters": {
+    "description": "Size of the open file in characters",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceOutputTab": "Output",
+  "workspaceProblemsTab": "Problems",
+  "workspaceCopyOutput": "Copy output",
+  "workspaceClearOutput": "Clear output",
+  "workspaceEngineStatusReady": "Ready",
+  "workspaceEngineStatusUnavailable": "Unavailable",
+  "workspaceExecutionRunning": "Running...",
+  "workspaceEmptyOutput": "No output yet. Run the script to see results.",
+  "workspaceNoProblems": "No problems detected in the open file.",
+  "workspaceSearchFilterPlaceholder": "Search for a file or script...",
+  "workspaceEngineUnavailableNotice": "GDScript 2.0 • engine unavailable",
+  "workspaceStatusBarCoordinates": "Line {line}, column {column}",
+  "@workspaceStatusBarCoordinates": {
+    "description": "Cursor line and column position in code editor",
+    "placeholders": {
+      "line": {
+        "type": "int"
+      },
+      "column": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceUnsavedChangesWarning": "This file has unsaved changes. Close it and discard them?",
+  "workspaceDirectInspectAction": "Direct in-process analysis and editing",
+  "conceptMapHeroTitle": "Concept Map & SM-2 Spaced Repetition",
+  "conceptMapHeroSubtitle": "Track your progress through the knowledge tree and strengthen memory with spaced repetition.",
+  "conceptMapQuickReviewSession": "Quick Review Session",
+  "conceptMapRecallRate": "Recall: {rate}%",
+  "@conceptMapRecallRate": {
+    "description": "Memory retention recall rate percentage",
+    "placeholders": {
+      "rate": {
+        "type": "int"
+      }
+    }
+  },
+  "conceptMapDueCardsToday": "{count, plural, =0{No cards due today} =1{1 card due today} other{{count} cards due today}}",
+  "@conceptMapDueCardsToday": {
+    "description": "Number of cards due for review today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "conceptMapStartReviewAction": "Start review now",
+  "conceptMapBackToMap": "Back to map",
+  "conceptMapDueTodayBadge": "Due today",
+  "conceptMapRemainingCards": "Remaining cards: {count}",
+  "@conceptMapRemainingCards": {
+    "description": "Remaining cards count in review session",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "conceptMapSm2RatingAgain": "Again",
+  "conceptMapSm2RatingHard": "Hard",
+  "conceptMapSm2RatingGood": "Good",
+  "conceptMapSm2RatingEasy": "Easy",
+  "conceptMapRevealAnswer": "Reveal answer",
+  "conceptMapOverviewHeading": "Concept overview:",
+  "conceptMapCodeExampleHeading": "Code example:",
+  "conceptMapStatusHeading": "Concept status",
+  "conceptMapLastReviewedDate": "Last reviewed: {date}",
+  "@conceptMapLastReviewedDate": {
+    "description": "Date when concept was last reviewed",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "conceptMasteryLocked": "Locked",
+  "conceptMasteryLearning": "Learning",
+  "conceptMasteryReviewing": "Reviewing",
+  "conceptMasteryMastered": "Mastered",
+  "conceptMapEmptyState": "No concepts are available yet.",
+  "conceptMapRetryAction": "Retry",
+  "settingsSavedSuccessToast": "All preferences saved successfully and synced with Godot 4.3 ✓",
+  "settingsPreferencesSections": "Preference sections",
+  "settingsTabCodeEditor": "Code editor & fonts",
+  "settingsTabLspEngine": "LSP server & engine path",
+  "settingsTabAppearanceTheme": "Appearance & visual theme",
+  "settingsTabAccountAcademic": "Account & learning progress",
+  "settingsDesktopTitle": "Desktop Settings & Engine Environment",
+  "settingsSaveShortcutAction": "Save changes (Ctrl+S) ↵",
+  "settingsEditorPrefsTitle": "GDScript Editor Preferences",
+  "settingsEditorPrefsSubtitle": "Customize font size, tab spacing, and auto-completion behavior.",
+  "settingsEditorFontSize": "Editor font size ({size} px):",
+  "@settingsEditorFontSize": {
+    "description": "Editor font size in pixels",
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsEditorFontSizeHint": "Applied to the JetBrains Mono font dedicated to GDScript.",
+  "settingsEditorTabSize": "Tab size:",
+  "settingsEditorTabSizeStandard": "The official standard in GDScript 2.0 is 4 spaces.",
+  "settingsTabSpacesCount": "{count, plural, =1{1 space} other{{count} spaces}}",
+  "@settingsTabSpacesCount": {
+    "description": "Tab size in spaces",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTabSpacesRecommended": "4 spaces (Recommended)",
+  "settingsShowLineNumbersTitle": "Show line numbers",
+  "settingsShowLineNumbersSubtitle": "Display line numbers column for easier tracing and diagnostics.",
+  "settingsHighlightActiveLineTitle": "Highlight active line",
+  "settingsHighlightActiveLineSubtitle": "Highlight the background of the line where cursor is placed.",
+  "settingsAutoCloseBracketsTitle": "Auto-close brackets and quotes",
+  "settingsAutoCloseBracketsSubtitle": "Automatically complete parentheses, brackets, braces, and quotes as you type.",
+  "settingsLspSectionTitle": "Language Server Protocol & Godot 4.3",
+  "settingsLspSectionSubtitle": "Manage local connection bridge, engine paths, and JSON-RPC 2.0.",
+  "settingsOpenDiagnosticsLog": "Open live diagnostics log ↵",
+  "settingsGodotExecutablePath": "Godot executable path:",
+  "settingsLspPort": "LSP connection port:",
+  "settingsStrictTypingTitle": "Enforce strict typing warnings",
+  "settingsStrictTypingSubtitle": "Raise instant warnings when dynamic Variant variables lack explicit type.",
+  "settingsAutoStartLspTitle": "Automatically start LSP server on launch",
+  "settingsAutoStartLspSubtitle": "Initialize and launch local bridge in background upon application start.",
+  "settingsAppearanceSectionTitle": "Appearance & Visual Theme",
+  "settingsAppearanceSectionSubtitle": "Customize color schemes to match official Godot editor interface.",
+  "settingsActiveThemeLabel": "Active theme:",
+  "settingsDarkThemeGodotDesc": "Dark theme with official Godot blue and dark grey tones #0F141B.",
+  "settingsArabicFontTitle": "Arabic UI font:",
+  "settingsArabicFontSubtitle": "High-clarity accredited font for technical software interfaces.",
+  "learningPathAcademyBrand": "Godot Academy",
+  "learningPathCurriculumYear": "2025 Curriculum",
+  "learningPathCourseTab": "Course Path",
+  "learningPathConceptMapTab": "Concept Map",
+  "learningPathSmartReviewTab": "Smart Review",
+  "learningPathNoLessonsYet": "No lessons have been added to this path yet.",
+  "learningPathStageFundamentals": "Fundamentals",
+  "learningPathStageJourneyStart": "Start of the journey",
+  "learningPathStageLogicMaker": "Logic Maker",
+  "learningPathStageNextPhase": "Next phase",
+  "learningPathStageEngineExpert": "Engine Expert",
+  "learningPathStageAdvancedPhase": "Advanced phase",
+  "learningPathUnitStatusDone": "Completed",
+  "learningPathUnitStatusCurrent": "Current unit",
+  "learningPathUnitStatusLocked": "Locked",
+  "learningPathCompletePrevious": "Complete previous unit first",
+  "learningPathHideLessons": "Hide lessons",
+  "learningPathShowLessonsAction": "Show lessons",
+  "learningPathLessonStatusDone": "Completed",
+  "learningPathLessonStatusCurrent": "Current lesson",
+  "learningPathLessonStatusSoon": "Coming soon",
+  "learningPathMasteryDashboard": "Mastery Dashboard & Statistics",
+  "dashboardDailyChallengeTitle": "Daily Speed Challenge",
+  "dashboardChallengeParticipants": "{count, plural, =1{1 developer participated today} other{{count} developers participated today}}",
+  "@dashboardChallengeParticipants": {
+    "description": "Number of developers participating in daily challenge",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardChallengeStartAction": "Take challenge (+{xp} XP)",
+  "@dashboardChallengeStartAction": {
+    "description": "Start daily challenge button label",
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardSmartReviewCardTitle": "Smart Spaced Review (SM-2)",
+  "dashboardSmartReviewCardBody": "You have {count} concept cards due for review today to consolidate long-term memory.",
+  "@dashboardSmartReviewCardBody": {
+    "description": "Smart review due cards notice",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardSmartReviewRetention": "Recall rate {percent}%",
+  "@dashboardSmartReviewRetention": {
+    "description": "Retention rate percentage",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardSmartReviewDuration": "~{minutes} mins",
+  "@dashboardSmartReviewDuration": {
+    "description": "Estimated review duration in minutes",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStartQuickReview": "Start quick review session",
+  "dashboardCodingStatsTitle": "Your Programming Statistics",
+  "dashboardViewBadgesAction": "Badges ↵",
+  "dashboardStatsLinesWritten": "GDScript lines written:",
+  "dashboardStatsLinesCount": "{count, plural, =1{1 line} other{{count} lines}}",
+  "@dashboardStatsLinesCount": {
+    "description": "Code lines written count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStatsChallengesPassed": "Challenges completed:",
+  "dashboardStatsChallengesCount": "{count, plural, =1{1 challenge} other{{count} challenges}}",
+  "@dashboardStatsChallengesCount": {
+    "description": "Challenges passed count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStatsBadgesEarned": "Accredited badges earned:",
+  "dashboardStatsBadgesRatio": "{earned} of {total} badges",
+  "@dashboardStatsBadgesRatio": {
+    "description": "Badges earned ratio",
+    "placeholders": {
+      "earned": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "calloutOfficialWarning": "Official Warning",
+  "calloutBestPractice": "Best Practice",
+  "calloutTechnicalNote": "Technical Note",
+  "calloutGoldenRule": "Golden Rule",
+  "lessonDocumentationHeader": "Lesson documentation",
+  "lessonDocumentationSources": "Sources",
+  "lessonDocumentationLicenseNotice": "Based on Godot Engine Documentation, licensed under CC BY 3.0. This educational text is an independent adaptation and is not endorsed by Godot.",
+  "lessonSplitterDragTooltip": "Drag to resize panes",
+  "reviewScreenTitle": "Smart Review",
+  "reviewScreenTodayHeader": "Today's Review",
+  "reviewDueItemsCount": "{count, plural, =0{No due items} =1{1 due item} other{{count} due items}}",
+  "@reviewDueItemsCount": {
+    "description": "Number of items due for smart review",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewEmptyStateMessage": "No reviews due today. Check back later.",
+  "reviewIntervalDays": "Interval: {days} days",
+  "@reviewIntervalDays": {
+    "description": "Review interval in days",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewLessonReference": "Lesson: {lessonId}",
+  "@reviewLessonReference": {
+    "description": "Referenced lesson id in review schedule",
+    "placeholders": {
+      "lessonId": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewCardUpdatedNotice": "Updated {title} → {date}",
+  "@reviewCardUpdatedNotice": {
+    "description": "Notice after rating a review card",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "capstoneScreenTitle": "Integrated Capstone Project",
+  "exerciseActionCheckAnswer": "Check answer",
+  "exerciseActionRun": "Run code"
 }

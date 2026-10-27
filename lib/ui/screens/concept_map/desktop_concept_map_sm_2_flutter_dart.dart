@@ -1108,222 +1108,233 @@ class _Sm2FlashcardDeckView extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // عداد البطاقات
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    _conceptMapCopy(
-                      context,
-                      'البطاقة ${currentIndex + 1} من ${cards.length}',
-                      'Card ${currentIndex + 1} of ${cards.length}',
-                    ),
-                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
-                      fontSize: 12,
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 3,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // عداد البطاقات
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
                       _conceptMapCopy(
                         context,
-                        'SM-2 • الفاصل ${card.currentIntervalDays} يوم',
-                        'SM-2 • ${card.currentIntervalDays}-day interval',
+                        'البطاقة ${currentIndex + 1} من ${cards.length}',
+                        'Card ${currentIndex + 1} of ${cards.length}',
                       ),
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontFamily: 'IBM Plex Sans Arabic',
-                        fontSize: 10,
-                        color: Theme.of(context).colorScheme.primary,
+                      style: CodeTextTheme.of(context).bodyMedium.copyWith(
+                        fontSize: 12,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 18),
-
-              // السؤال
-              Text(
-                locale.languageCode == 'en'
-                    ? card.promptQuestionEn ?? card.promptQuestion
-                    : card.promptQuestion,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontFamily: 'IBM Plex Sans Arabic',
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
-                  height: 1.5,
-                ),
-              ),
-              const SizedBox(height: 14),
-
-              // سياق الكود البرمجي
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.outlineVariant,
-                  ),
-                ),
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Text(
-                    card.codeContext,
-                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
-                      fontSize: 12,
-                      color: Theme.of(context).colorScheme.primary,
-                      height: 1.5,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        _conceptMapCopy(
+                          context,
+                          'SM-2 • الفاصل ${card.currentIntervalDays} يوم',
+                          'SM-2 • ${card.currentIntervalDays}-day interval',
+                        ),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontFamily: 'IBM Plex Sans Arabic',
+                          fontSize: 10,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
                     ),
+                  ],
+                ),
+                const SizedBox(height: 18),
+
+                // السؤال
+                Text(
+                  locale.languageCode == 'en'
+                      ? card.promptQuestionEn ?? card.promptQuestion
+                      : card.promptQuestion,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                    height: 1.5,
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
+                const SizedBox(height: 14),
 
-              // الإجابة والشرح عند الكشف
-              if (isAnswerRevealed) ...[
+                // سياق الكود البرمجي
                 Container(
+                  width: double.infinity,
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.successContainer.withValues(alpha: 0.3),
+                    color: Theme.of(context).colorScheme.surfaceContainerLowest,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.tertiary.withValues(alpha: 0.4),
+                      color: Theme.of(context).colorScheme.outlineVariant,
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'شرح الإجابة:',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontFamily: 'IBM Plex Sans Arabic',
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Text(
+                      card.codeContext,
+                      style: CodeTextTheme.of(context).bodyMedium.copyWith(
+                        fontSize: 12,
+                        color: Theme.of(context).colorScheme.primary,
+                        height: 1.5,
                       ),
-                      const SizedBox(height: 6),
-                      Text(
-                        locale.languageCode == 'en'
-                            ? card.answerExplanationEn ?? card.answerExplanation
-                            : card.answerExplanation,
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontFamily: 'IBM Plex Sans Arabic',
-                          fontSize: 13,
-                          color: Theme.of(context).colorScheme.onSurface,
-                          height: 1.5,
-                        ),
-                      ),
-                      if (card.answerCode.isNotEmpty) ...[
-                        const SizedBox(height: 10),
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.surfaceContainerLowest,
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.outlineVariant,
-                            ),
-                          ),
-                          child: Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: Text(
-                              card.answerCode,
-                              style: CodeTextTheme.of(context).bodyMedium
-                                  .copyWith(
-                                    fontSize: 12,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.tertiary,
-                                  ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
 
-                // أزرار تقييم SM-2 الأربعة
-                Row(
-                  children: [
-                    _Sm2RatingBtn(
-                      label: _conceptMapCopy(context, 'إعادة', 'Again'),
-                      color: Theme.of(context).colorScheme.error,
-                      enabled: !isSavingRating,
-                      onTap: () => onRate(Sm2Rating.again),
-                    ),
-                    const SizedBox(width: 8),
-                    _Sm2RatingBtn(
-                      label: _conceptMapCopy(context, 'صعب', 'Hard'),
-                      color: Theme.of(context).colorScheme.secondary,
-                      enabled: !isSavingRating,
-                      onTap: () => onRate(Sm2Rating.hard),
-                    ),
-                    const SizedBox(width: 8),
-                    _Sm2RatingBtn(
-                      label: _conceptMapCopy(context, 'جيد', 'Good'),
-                      color: Theme.of(context).colorScheme.primary,
-                      enabled: !isSavingRating,
-                      onTap: () => onRate(Sm2Rating.good),
-                    ),
-                    const SizedBox(width: 8),
-                    _Sm2RatingBtn(
-                      label: _conceptMapCopy(context, 'سهل', 'Easy'),
-                      color: Theme.of(context).colorScheme.tertiary,
-                      enabled: !isSavingRating,
-                      onTap: () => onRate(Sm2Rating.easy),
-                    ),
-                  ],
-                ),
-              ] else
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: isSavingRating ? null : onRevealAnswer,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                // الإجابة والشرح عند الكشف
+                if (isAnswerRevealed) ...[
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.successContainer.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.tertiary.withValues(alpha: 0.4),
                       ),
                     ),
-                    child: Text(
-                      _conceptMapCopy(context, 'كشف الإجابة', 'Reveal answer'),
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontFamily: 'IBM Plex Sans Arabic',
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'شرح الإجابة:',
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(
+                                fontFamily: 'IBM Plex Sans Arabic',
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          locale.languageCode == 'en'
+                              ? card.answerExplanationEn ??
+                                    card.answerExplanation
+                              : card.answerExplanation,
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(
+                                fontFamily: 'IBM Plex Sans Arabic',
+                                fontSize: 13,
+                                color: Theme.of(context).colorScheme.onSurface,
+                                height: 1.5,
+                              ),
+                        ),
+                        if (card.answerCode.isNotEmpty) ...[
+                          const SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.surfaceContainerLowest,
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.outlineVariant,
+                              ),
+                            ),
+                            child: Directionality(
+                              textDirection: TextDirection.ltr,
+                              child: Text(
+                                card.answerCode,
+                                style: CodeTextTheme.of(context).bodyMedium
+                                    .copyWith(
+                                      fontSize: 12,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.tertiary,
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // أزرار تقييم SM-2 الأربعة
+                  Row(
+                    children: [
+                      _Sm2RatingBtn(
+                        label: _conceptMapCopy(context, 'إعادة', 'Again'),
+                        color: Theme.of(context).colorScheme.error,
+                        enabled: !isSavingRating,
+                        onTap: () => onRate(Sm2Rating.again),
+                      ),
+                      const SizedBox(width: 8),
+                      _Sm2RatingBtn(
+                        label: _conceptMapCopy(context, 'صعب', 'Hard'),
+                        color: Theme.of(context).colorScheme.secondary,
+                        enabled: !isSavingRating,
+                        onTap: () => onRate(Sm2Rating.hard),
+                      ),
+                      const SizedBox(width: 8),
+                      _Sm2RatingBtn(
+                        label: _conceptMapCopy(context, 'جيد', 'Good'),
+                        color: Theme.of(context).colorScheme.primary,
+                        enabled: !isSavingRating,
+                        onTap: () => onRate(Sm2Rating.good),
+                      ),
+                      const SizedBox(width: 8),
+                      _Sm2RatingBtn(
+                        label: _conceptMapCopy(context, 'سهل', 'Easy'),
+                        color: Theme.of(context).colorScheme.tertiary,
+                        enabled: !isSavingRating,
+                        onTap: () => onRate(Sm2Rating.easy),
+                      ),
+                    ],
+                  ),
+                ] else
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: isSavingRating ? null : onRevealAnswer,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor: Theme.of(
+                          context,
+                        ).colorScheme.onPrimary,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        _conceptMapCopy(
+                          context,
+                          'كشف الإجابة',
+                          'Reveal answer',
+                        ),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontFamily: 'IBM Plex Sans Arabic',
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

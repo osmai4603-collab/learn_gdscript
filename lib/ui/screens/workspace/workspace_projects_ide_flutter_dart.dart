@@ -9,12 +9,12 @@ import 'package:flutter/services.dart';
 import 'package:gdscript_engine/gdscript_engine.dart';
 import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 
+import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/services/code_runner_service.dart';
 import '../../widgets/code_editor/code_editor_widget.dart';
 import '../../widgets/output_panel/error_display.dart';
 
-String _localized(BuildContext context, String arabic, String english) =>
-    Localizations.localeOf(context).languageCode == 'ar' ? arabic : english;
+
 
 int _countFiles(List<ProjectFileNodeModel> nodes) {
   var total = 0;
@@ -390,7 +390,7 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                       runSpacing: 4,
                       children: [
                         Text(
-                          _localized(context, 'مساحة العمل', 'Workspace'),
+                          context.l10n.workspaceTitle,
                           style: Theme.of(context).textTheme.bodyMedium!
                               .copyWith(
                                 fontFamily: 'IBM Plex Sans Arabic',
@@ -434,10 +434,8 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                       children: [
                         _WorkspaceMeta(
                           icon: Icons.insert_drive_file_outlined,
-                          text: _localized(
-                            context,
-                            '${_countFiles(widget.data.fileTree)} ملف مفهرس',
-                            '${_countFiles(widget.data.fileTree)} indexed files',
+                          text: context.l10n.workspaceIndexedFilesCount(
+                            _countFiles(widget.data.fileTree),
                           ),
                           color: Theme.of(context).colorScheme.tertiary,
                         ),
@@ -451,16 +449,12 @@ class _DesktopWorkspaceIdeScreenState extends State<DesktopWorkspaceIdeScreen>
                   children: [
                     _WorkspaceActionButton(
                       icon: Icons.create_new_folder_outlined,
-                      label: _localized(
-                        context,
-                        'إعداد مساحة العمل',
-                        'Workspace settings',
-                      ),
+                      label: context.l10n.workspaceSettings,
                       onPressed: widget.onOpenSettings,
                     ),
                     _WorkspaceActionButton(
                       icon: Icons.sync_rounded,
-                      label: _localized(context, 'إعادة الفهرسة', 'Reindex'),
+                      label: context.l10n.workspaceReindex,
                       onPressed: widget.onReindex,
                     ),
                   ],
@@ -678,16 +672,8 @@ class _WorkspaceTopNav extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       isEngineReady
-                          ? _localized(
-                              context,
-                              'محرك GDScript جاهز',
-                              'GDScript engine ready',
-                            )
-                          : _localized(
-                              context,
-                              'محرك GDScript غير متاح',
-                              'GDScript engine unavailable',
-                            ),
+                          ? context.l10n.workspaceEngineReady
+                          : context.l10n.workspaceEngineUnavailable,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontFamily: 'IBM Plex Sans Arabic',
                         fontSize: 11,
@@ -702,11 +688,7 @@ class _WorkspaceTopNav extends StatelessWidget {
           ),
           const Spacer(),
           IconButton(
-            tooltip: _localized(
-              context,
-              'إعدادات مساحة العمل',
-              'Workspace settings',
-            ),
+            tooltip: context.l10n.workspaceSettings,
             onPressed: onOpenSettings,
             icon: const Icon(Icons.settings_outlined),
           ),
@@ -889,11 +871,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                       SizedBox(width: 5),
                                       Flexible(
                                         child: Text(
-                                          _localized(
-                                            context,
-                                            'الملفات',
-                                            'Files',
-                                          ),
+                                          context.l10n.workspaceFilesTab,
                                           overflow: TextOverflow.ellipsis,
                                           style: Theme.of(context)
                                               .textTheme
@@ -936,11 +914,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                                         SizedBox(width: 5),
                                         Flexible(
                                           child: Text(
-                                            _localized(
-                                              context,
-                                              'البحث',
-                                              'Search',
-                                            ),
+                                            context.l10n.workspaceSearchTab,
                                             overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context)
                                                 .textTheme
@@ -965,11 +939,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        tooltip: _localized(
-                          context,
-                          'بحث في ملفات المشروع',
-                          'Search project files',
-                        ),
+                        tooltip: context.l10n.workspaceSearchProjectFiles,
                         onPressed: onToggleSearch,
                         icon: Icon(
                           Icons.manage_search_rounded,
@@ -1002,7 +972,7 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          '${_countFiles(data.fileTree)} ${_localized(context, 'ملف', 'files')}',
+                          context.l10n.workspaceFileCountSummary(_countFiles(data.fileTree)),
                           style: Theme.of(context).textTheme.bodyMedium!
                               .copyWith(
                                 fontFamily: 'IBM Plex Sans Arabic',
@@ -1062,13 +1032,9 @@ class _WorkspaceExplorerPanel extends StatelessWidget {
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
-                          _localized(
-                            context,
-                            searchOpen
-                                ? 'البحث في الملفات'
-                                : 'الملفات المطابقة',
-                            searchOpen ? 'Search files' : 'Matching files',
-                          ),
+                          searchOpen
+                            ? context.l10n.workspaceSearchFiles
+                            : context.l10n.workspaceMatchingFiles,
                           style: Theme.of(context).textTheme.bodyMedium!
                               .copyWith(
                                 fontFamily: 'IBM Plex Sans Arabic',
@@ -1204,7 +1170,7 @@ class _WorkspaceEditorPanel extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  tooltip: _localized(context, 'حفظ الملف', 'Save file'),
+                  tooltip: context.l10n.workspaceSaveFile,
                   onPressed:
                       data.openTabs.any(
                         (tab) => tab.fileId == activeTabId && tab.isDirty,
@@ -1270,7 +1236,7 @@ class _WorkspaceInspectorPanel extends StatelessWidget {
     );
     final code = data.activeCodeContent;
     return _WorkspaceInfoCard(
-      title: _localized(context, 'معلومات الملف', 'File information'),
+      title: context.l10n.workspaceFileInfoTitle,
       icon: Icons.description_outlined,
       iconColor: Theme.of(context).colorScheme.primary,
       child: Column(
@@ -1278,7 +1244,7 @@ class _WorkspaceInspectorPanel extends StatelessWidget {
         children: [
           Text(
             activeTab.isEmpty
-                ? _localized(context, 'لا يوجد ملف مفتوح', 'No file is open')
+                ? context.l10n.workspaceNoFileOpen
                 : activeTab.first.filePath,
             textDirection: TextDirection.ltr,
             style: CodeTextTheme.of(context).bodyMedium.copyWith(
@@ -1288,11 +1254,7 @@ class _WorkspaceInspectorPanel extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            _localized(
-              context,
-              'الأسطر: ${code.split('\n').length}',
-              'Lines: ${code.split('\n').length}',
-            ),
+            context.l10n.workspaceFileLinesCount(code.split('\n').length),
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1301,11 +1263,7 @@ class _WorkspaceInspectorPanel extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            _localized(
-              context,
-              'الحجم: ${code.length} محرف',
-              'Size: ${code.length} characters',
-            ),
+            context.l10n.workspaceFileSizeCharacters(code.length),
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -1468,7 +1426,7 @@ class _WorkspaceDockPanelState extends State<_WorkspaceDockPanel> {
                   onTap: () => setState(() => _selectedTab = 0),
                   child: _DockTab(
                     icon: Icons.terminal_rounded,
-                    label: _localized(context, 'المخرجات', 'Output'),
+                    label: context.l10n.workspaceOutputTab,
                     count: '${widget.consoleLogs.length}',
                     active: _selectedTab == 0,
                   ),
@@ -1479,7 +1437,7 @@ class _WorkspaceDockPanelState extends State<_WorkspaceDockPanel> {
                   onTap: () => setState(() => _selectedTab = 1),
                   child: _DockTab(
                     icon: Icons.warning_amber_rounded,
-                    label: _localized(context, 'المشكلات', 'Problems'),
+                    label: context.l10n.workspaceProblemsTab,
                     count: '${widget.data.diagnosticsCount}',
                     active: _selectedTab == 1,
                   ),
@@ -1523,7 +1481,7 @@ class _WorkspaceDockPanelState extends State<_WorkspaceDockPanel> {
                   ),
                 if (_selectedTab == 0 && widget.consoleLogs.isNotEmpty)
                   IconButton(
-                    tooltip: _localized(context, 'نسخ المخرجات', 'Copy output'),
+                    tooltip: context.l10n.workspaceCopyOutput,
                     visualDensity: VisualDensity.compact,
                     onPressed: () => Clipboard.setData(
                       ClipboardData(
@@ -1536,21 +1494,15 @@ class _WorkspaceDockPanelState extends State<_WorkspaceDockPanel> {
                   ),
                 if (_selectedTab == 0 && widget.consoleLogs.isNotEmpty)
                   IconButton(
-                    tooltip: _localized(
-                      context,
-                      'مسح المخرجات',
-                      'Clear output',
-                    ),
+                    tooltip: context.l10n.workspaceClearOutput,
                     visualDensity: VisualDensity.compact,
                     onPressed: widget.onClearConsole,
                     icon: const Icon(Icons.delete_sweep_outlined, size: 16),
                   ),
                 Text(
-                  _localized(
-                    context,
-                    widget.data.isEngineReady ? 'جاهز' : 'غير متاح',
-                    widget.data.isEngineReady ? 'Ready' : 'Unavailable',
-                  ),
+                  widget.data.isEngineReady
+                      ? context.l10n.workspaceEngineStatusReady
+                      : context.l10n.workspaceEngineStatusUnavailable,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontFamily: 'IBM Plex Sans Arabic',
                     color: widget.data.isEngineReady
@@ -1589,12 +1541,8 @@ class _WorkspaceDockPanelState extends State<_WorkspaceDockPanel> {
             const SizedBox(width: 8),
             Text(
               widget.isRunning
-                  ? _localized(context, 'جارٍ التنفيذ...', 'Running...')
-                  : _localized(
-                      context,
-                      'لا توجد مخرجات بعد. شغّل السكربت لعرضها.',
-                      'No output yet. Run the script to see its output.',
-                    ),
+                  ? context.l10n.workspaceExecutionRunning
+                  : context.l10n.workspaceEmptyOutput,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 fontFamily: 'IBM Plex Sans Arabic',
                 color: colors.outline,
@@ -1636,11 +1584,7 @@ class _WorkspaceDockPanelState extends State<_WorkspaceDockPanel> {
     if (widget.data.diagnostics.isEmpty) {
       return Center(
         child: Text(
-          _localized(
-            context,
-            'لا توجد مشكلات للملف المفتوح.',
-            'No problems detected in the open file.',
-          ),
+          context.l10n.workspaceNoProblems,
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             color: colors.outline,
@@ -1790,11 +1734,7 @@ class _QuickSearchInput extends StatelessWidget {
           color: Theme.of(context).colorScheme.onSurface,
         ),
         decoration: InputDecoration(
-          hintText: _localized(
-            context,
-            'ابحث عن ملف أو سكربت...',
-            'Search files or scripts...',
-          ),
+          hintText: context.l10n.workspaceSearchFilterPlaceholder,
           hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: 'IBM Plex Sans Arabic',
             fontSize: 11,
@@ -2025,11 +1965,7 @@ class _WorkspaceStatusBar extends StatelessWidget {
           Text(
             engineReady
                 ? 'GDScript 2.0 • gdscript_engine'
-                : _localized(
-                    context,
-                    'GDScript 2.0 • المحرك غير متاح',
-                    'GDScript 2.0 • engine unavailable',
-                  ),
+                : context.l10n.workspaceEngineUnavailableNotice,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 11,
@@ -2040,11 +1976,7 @@ class _WorkspaceStatusBar extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            _localized(
-              context,
-              'السطر $cursorLine، العمود $cursorCol',
-              'Line $cursorLine, column $cursorCol',
-            ),
+            context.l10n.workspaceStatusBarCoordinates(cursorLine, cursorCol),
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontFamily: 'IBM Plex Sans Arabic',
               fontSize: 11,

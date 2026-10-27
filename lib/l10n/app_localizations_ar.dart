@@ -994,4 +994,566 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get syntaxExplorerClearSearch => 'مسح البحث';
+
+  @override
+  String workspaceIndexedFilesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ملف مفهرس',
+      many: '$count ملفاً مفهرساً',
+      few: '$count ملفات مفهرسة',
+      two: 'ملفان مفهرسان',
+      one: 'ملف واحد مفهرس',
+      zero: 'لا توجد ملفات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String workspaceFileCountSummary(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ملف',
+      many: '$count ملفاً',
+      few: '$count ملفات',
+      two: 'ملفان',
+      one: 'ملف واحد',
+      zero: 'لا توجد ملفات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get workspaceSettings => 'إعداد مساحة العمل';
+
+  @override
+  String get workspaceReindex => 'إعادة الفهرسة';
+
+  @override
+  String get workspaceEngineReady => 'محرك GDScript جاهز';
+
+  @override
+  String get workspaceEngineUnavailable => 'محرك GDScript غير متاح';
+
+  @override
+  String get workspaceFilesTab => 'الملفات';
+
+  @override
+  String get workspaceSearchTab => 'البحث';
+
+  @override
+  String get workspaceSearchProjectFiles => 'بحث في ملفات المشروع';
+
+  @override
+  String get workspaceSearchFiles => 'البحث في الملفات';
+
+  @override
+  String get workspaceMatchingFiles => 'الملفات المطابقة';
+
+  @override
+  String get workspaceSaveFile => 'حفظ الملف';
+
+  @override
+  String get workspaceFileInfoTitle => 'معلومات الملف';
+
+  @override
+  String get workspaceNoFileOpen => 'لا يوجد ملف مفتوح';
+
+  @override
+  String workspaceFileLinesCount(int count) {
+    return 'الأسطر: $count';
+  }
+
+  @override
+  String workspaceFileSizeCharacters(int count) {
+    return 'الحجم: $count محرف';
+  }
+
+  @override
+  String get workspaceOutputTab => 'المخرجات';
+
+  @override
+  String get workspaceProblemsTab => 'المشكلات';
+
+  @override
+  String get workspaceCopyOutput => 'نسخ المخرجات';
+
+  @override
+  String get workspaceClearOutput => 'مسح المخرجات';
+
+  @override
+  String get workspaceEngineStatusReady => 'جاهز';
+
+  @override
+  String get workspaceEngineStatusUnavailable => 'غير متاح';
+
+  @override
+  String get workspaceExecutionRunning => 'جارٍ التنفيذ...';
+
+  @override
+  String get workspaceEmptyOutput => 'لا توجد مخرجات بعد. شغّل السكربت لعرضها.';
+
+  @override
+  String get workspaceNoProblems => 'لا توجد مشكلات للملف المفتوح.';
+
+  @override
+  String get workspaceSearchFilterPlaceholder => 'ابحث عن ملف أو سكربت...';
+
+  @override
+  String get workspaceEngineUnavailableNotice => 'GDScript 2.0 • المحرك غير متاح';
+
+  @override
+  String workspaceStatusBarCoordinates(int line, int column) {
+    return 'السطر $line، العمود $column';
+  }
+
+  @override
+  String get workspaceUnsavedChangesWarning => 'هناك تعديلات غير محفوظة. هل تريد إغلاق الملف والتخلص منها؟';
+
+  @override
+  String get workspaceDirectInspectAction => 'تحليل وتحرير مباشر داخل التطبيق';
+
+  @override
+  String get conceptMapHeroTitle => 'خريطة المفاهيم وخوارزمية التكرار المتباعد SM-2';
+
+  @override
+  String get conceptMapHeroSubtitle => 'تتبع تقدمك في شجرة المعرفة وثبّت المفاهيم البرمجية في الذاكرة طويلة المدى.';
+
+  @override
+  String get conceptMapQuickReviewSession => 'جلسة مراجعة سريعة';
+
+  @override
+  String conceptMapRecallRate(int rate) {
+    return 'معدل الاسترجاع: $rate%';
+  }
+
+  @override
+  String conceptMapDueCardsToday(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count بطاقة مستحقة اليوم',
+      many: '$count بطاقة مستحقة اليوم',
+      few: '$count بطاقات مستحقة اليوم',
+      two: 'بطاقتان مستحقتان اليوم',
+      one: 'بطاقة واحدة مستحقة اليوم',
+      zero: 'لا توجد بطاقات مستحقة اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get conceptMapStartReviewAction => 'بدء المراجعة الآن';
+
+  @override
+  String get conceptMapBackToMap => 'العودة للخريطة';
+
+  @override
+  String get conceptMapDueTodayBadge => 'مستحق اليوم';
+
+  @override
+  String conceptMapRemainingCards(int count) {
+    return 'البطاقات المتبقية: $count';
+  }
+
+  @override
+  String get conceptMapSm2RatingAgain => 'إعادة';
+
+  @override
+  String get conceptMapSm2RatingHard => 'صعب';
+
+  @override
+  String get conceptMapSm2RatingGood => 'جيد';
+
+  @override
+  String get conceptMapSm2RatingEasy => 'سهل';
+
+  @override
+  String get conceptMapRevealAnswer => 'كشف الإجابة';
+
+  @override
+  String get conceptMapOverviewHeading => 'شرح المفهوم:';
+
+  @override
+  String get conceptMapCodeExampleHeading => 'مثال برمجي:';
+
+  @override
+  String get conceptMapStatusHeading => 'حالة المفهوم';
+
+  @override
+  String conceptMapLastReviewedDate(String date) {
+    return 'آخر مراجعة: $date';
+  }
+
+  @override
+  String get conceptMasteryLocked => 'مقفل';
+
+  @override
+  String get conceptMasteryLearning => 'قيد التعلم';
+
+  @override
+  String get conceptMasteryReviewing => 'قيد المراجعة';
+
+  @override
+  String get conceptMasteryMastered => 'متقن';
+
+  @override
+  String get conceptMapEmptyState => 'لا توجد مفاهيم متاحة حالياً.';
+
+  @override
+  String get conceptMapRetryAction => 'إعادة المحاولة';
+
+  @override
+  String get settingsSavedSuccessToast => 'تم حفظ كافة التفضيلات بنجاح وتمت مزامنتها مع محرك Godot 4.3 ✓';
+
+  @override
+  String get settingsPreferencesSections => 'أقسام التفضيلات';
+
+  @override
+  String get settingsTabCodeEditor => 'محرر الأكواد والخطوط';
+
+  @override
+  String get settingsTabLspEngine => 'خادم LSP ومسار المحرك';
+
+  @override
+  String get settingsTabAppearanceTheme => 'المظهر والسمة البصرية';
+
+  @override
+  String get settingsTabAccountAcademic => 'الحساب والمسار الأكاديمي';
+
+  @override
+  String get settingsDesktopTitle => 'الإعدادات وتفضيلات النظام وبيئة المحرك';
+
+  @override
+  String get settingsSaveShortcutAction => 'حفظ التغييرات (Ctrl+S) ↵';
+
+  @override
+  String get settingsEditorPrefsTitle => 'تفضيلات محرر الكود (GDScript Editor)';
+
+  @override
+  String get settingsEditorPrefsSubtitle => 'تخصيص مقاس الخط، التباعد، وسلوك الإكمال التلقائي في بيئة التطوير.';
+
+  @override
+  String settingsEditorFontSize(int size) {
+    return 'مقاس خط المحرر البرمجي ($size px):';
+  }
+
+  @override
+  String get settingsEditorFontSizeHint => 'يتم تطبيق المقاس على خط JetBrains Mono المخصص لكتابة GDScript.';
+
+  @override
+  String get settingsEditorTabSize => 'مسافة الإزاحة (Tab Size):';
+
+  @override
+  String get settingsEditorTabSizeStandard => 'المعيار الرسمي في GDScript 2.0 هو 4 مسافات مسافية.';
+
+  @override
+  String settingsTabSpacesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مسافة',
+      few: '$count مسافات',
+      two: 'مسافتان',
+      one: 'مسافة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get settingsTabSpacesRecommended => '4 مسافات (موصى به)';
+
+  @override
+  String get settingsShowLineNumbersTitle => 'إظهار أرقام الأسطر (Line Numbers)';
+
+  @override
+  String get settingsShowLineNumbersSubtitle => 'عرض عمود الأرقام على يمين المحرر لسهولة التتبع والتشخيص.';
+
+  @override
+  String get settingsHighlightActiveLineTitle => 'إبراز السطر النشط (Highlight Active Line)';
+
+  @override
+  String get settingsHighlightActiveLineSubtitle => 'تظليل خلفية السطر الذي يقف عليه المؤشر بلون مغاير.';
+
+  @override
+  String get settingsAutoCloseBracketsTitle => 'إغلاق الأقواس وعلامات التنصيص تلقائياً';
+
+  @override
+  String get settingsAutoCloseBracketsSubtitle => 'إكمال الأقواس المتنوعة وعلامات التنصيص تلقائياً فور كتابتها.';
+
+  @override
+  String get settingsLspSectionTitle => 'خادم اللغة LSP ومحرك Godot 4.3';
+
+  @override
+  String get settingsLspSectionSubtitle => 'إدارة جسر الاتصال المحلي ومسارات تشغيل المحرك وبروتوكول JSON-RPC 2.0.';
+
+  @override
+  String get settingsOpenDiagnosticsLog => 'فتح سجل التشخيصات المباشر ↵';
+
+  @override
+  String get settingsGodotExecutablePath => 'مسار المحرك التنفيذي (Godot Executable Path):';
+
+  @override
+  String get settingsLspPort => 'منفذ الاتصال المحلي (LSP Port):';
+
+  @override
+  String get settingsStrictTypingTitle => 'فرض تحذيرات الأنواع غير الصارمة (Strict Typing)';
+
+  @override
+  String get settingsStrictTypingSubtitle => 'إطلاق تحذيرات فورية عند كتابة متغيرات Variant ديناميكية بدون تصريح نوع صريح.';
+
+  @override
+  String get settingsAutoStartLspTitle => 'بدء تشغيل خادم LSP تلقائياً عند فتح الأكاديمية';
+
+  @override
+  String get settingsAutoStartLspSubtitle => 'تهيئة وإطلاق جسر الاتصال في الخلفية بمجرد تشغيل الواجهة.';
+
+  @override
+  String get settingsAppearanceSectionTitle => 'المظهر والسمة البصرية';
+
+  @override
+  String get settingsAppearanceSectionSubtitle => 'تخصيص نسق الألوان بما يطابق واجهة محرك Godot الرسمية وتفضيلات شاشتك.';
+
+  @override
+  String get settingsActiveThemeLabel => 'السمة النشطة:';
+
+  @override
+  String get settingsDarkThemeGodotDesc => 'الوضع الداكن المعتمد بدرجات الأزرق والرمادي الداكن #0F141B.';
+
+  @override
+  String get settingsArabicFontTitle => 'خط الواجهة العربي:';
+
+  @override
+  String get settingsArabicFontSubtitle => 'خط معتمد عالي الوضوح للغة العربية في البرمجيات التقنية.';
+
+  @override
+  String get learningPathAcademyBrand => 'أكاديمية جودو';
+
+  @override
+  String get learningPathCurriculumYear => 'منهج 2025';
+
+  @override
+  String get learningPathCourseTab => 'مسار المنهج';
+
+  @override
+  String get learningPathConceptMapTab => 'خريطة المفاهيم';
+
+  @override
+  String get learningPathSmartReviewTab => 'مراجعة ذكية';
+
+  @override
+  String get learningPathNoLessonsYet => 'لا توجد دروس مضافة إلى هذا المسار بعد.';
+
+  @override
+  String get learningPathStageFundamentals => 'الأساسيات';
+
+  @override
+  String get learningPathStageJourneyStart => 'بداية الرحلة';
+
+  @override
+  String get learningPathStageLogicMaker => 'صانع المنطق';
+
+  @override
+  String get learningPathStageNextPhase => 'المرحلة التالية';
+
+  @override
+  String get learningPathStageEngineExpert => 'خبير المحرك';
+
+  @override
+  String get learningPathStageAdvancedPhase => 'المرحلة المتقدمة';
+
+  @override
+  String get learningPathUnitStatusDone => 'مكتملة';
+
+  @override
+  String get learningPathUnitStatusCurrent => 'الوحدة الحالية';
+
+  @override
+  String get learningPathUnitStatusLocked => 'مغلقة';
+
+  @override
+  String get learningPathCompletePrevious => 'أكمل الوحدة السابقة';
+
+  @override
+  String get learningPathHideLessons => 'إخفاء الدروس';
+
+  @override
+  String get learningPathShowLessonsAction => 'عرض الدروس';
+
+  @override
+  String get learningPathLessonStatusDone => 'تم الإنجاز';
+
+  @override
+  String get learningPathLessonStatusCurrent => 'الدرس الحالي';
+
+  @override
+  String get learningPathLessonStatusSoon => 'قريباً';
+
+  @override
+  String get learningPathMasteryDashboard => 'لوحة الإتقان والإحصائيات';
+
+  @override
+  String get dashboardDailyChallengeTitle => 'تحدي اليوم السريع';
+
+  @override
+  String dashboardChallengeParticipants(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'شارك $count مطور اليوم',
+      many: 'شارك $count مطوراً اليوم',
+      few: 'شارك $count مطورين اليوم',
+      two: 'شارك مطوران اليوم',
+      one: 'شارك مطور واحد اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dashboardChallengeStartAction(int xp) {
+    return 'خوض التحدي (+$xp XP)';
+  }
+
+  @override
+  String get dashboardSmartReviewCardTitle => 'المراجعة الذكية (SM-2)';
+
+  @override
+  String dashboardSmartReviewCardBody(int count) {
+    return 'لديك $count بطاقات مفاهيم مستحقة للمراجعة اليوم لتثبيت الذاكرة طويلة المدى.';
+  }
+
+  @override
+  String dashboardSmartReviewRetention(int percent) {
+    return 'معدل الاسترجاع $percent%';
+  }
+
+  @override
+  String dashboardSmartReviewDuration(int minutes) {
+    return '~$minutes دقائق';
+  }
+
+  @override
+  String get dashboardStartQuickReview => 'بدء جلسة المراجعة السريعة';
+
+  @override
+  String get dashboardCodingStatsTitle => 'إحصائياتك البرمجية';
+
+  @override
+  String get dashboardViewBadgesAction => 'الأوسمة ↵';
+
+  @override
+  String get dashboardStatsLinesWritten => 'أسطر كود GDScript مكتوبة:';
+
+  @override
+  String dashboardStatsLinesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سطر',
+      many: '$count سطراً',
+      few: '$count أسطر',
+      two: 'سطران',
+      one: 'سطر واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dashboardStatsChallengesPassed => 'تحديات برمجية تم اجتيازها:';
+
+  @override
+  String dashboardStatsChallengesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count تحدٍّ',
+      many: '$count تحدياً',
+      few: '$count تحديات',
+      two: 'تحديان',
+      one: 'تحدٍّ واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dashboardStatsBadgesEarned => 'أوسمة مكتسبة معتمدة:';
+
+  @override
+  String dashboardStatsBadgesRatio(int earned, int total) {
+    return '$earned من $total أوسمة';
+  }
+
+  @override
+  String get calloutOfficialWarning => 'تحذير رسمي';
+
+  @override
+  String get calloutBestPractice => 'توصية وممارسة فضلى';
+
+  @override
+  String get calloutTechnicalNote => 'معلومة هندسية';
+
+  @override
+  String get calloutGoldenRule => 'القاعدة الذهبية';
+
+  @override
+  String get lessonDocumentationHeader => 'توثيق الدرس';
+
+  @override
+  String get lessonDocumentationSources => 'المصادر';
+
+  @override
+  String get lessonDocumentationLicenseNotice => 'يستند هذا المحتوى إلى توثيق Godot Engine المرخّص بموجب CC BY 3.0. هذا إعداد تعليمي مستقل وليس معتمداً من Godot.';
+
+  @override
+  String get lessonSplitterDragTooltip => 'اسحب لتغيير عرض اللوحتين';
+
+  @override
+  String get reviewScreenTitle => 'المراجعة الذكية';
+
+  @override
+  String get reviewScreenTodayHeader => 'استعراض اليوم';
+
+  @override
+  String reviewDueItemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count عنصر مستحق',
+      many: '$count عنصراً مستحقاً',
+      few: '$count عناصر مستحقة',
+      two: 'عنصران مستحقان',
+      one: 'عنصر واحد مستحق',
+      zero: 'لا توجد عناصر مستحقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewEmptyStateMessage => 'لا توجد مراجعات مستحقة اليوم. عد لاحقاً.';
+
+  @override
+  String reviewIntervalDays(int days) {
+    return 'فاصل $days يوم';
+  }
+
+  @override
+  String reviewLessonReference(String lessonId) {
+    return 'درس: $lessonId';
+  }
+
+  @override
+  String reviewCardUpdatedNotice(String title, String date) {
+    return 'تم تحديث $title → $date';
+  }
+
+  @override
+  String get capstoneScreenTitle => 'مشروع التطوير التكاملي';
+
+  @override
+  String get exerciseActionCheckAnswer => 'تحقق من الإجابة';
+
+  @override
+  String get exerciseActionRun => 'تشغيل الكود';
 }

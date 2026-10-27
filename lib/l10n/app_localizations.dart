@@ -1876,6 +1876,888 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Clear search'**
   String get syntaxExplorerClearSearch;
+
+  /// Number of indexed files in the workspace
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 indexed files} =1{1 indexed file} other{{count} indexed files}}'**
+  String workspaceIndexedFilesCount(int count);
+
+  /// Simple file count summary
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 files} =1{1 file} other{{count} files}}'**
+  String workspaceFileCountSummary(int count);
+
+  /// No description provided for @workspaceSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Workspace settings'**
+  String get workspaceSettings;
+
+  /// No description provided for @workspaceReindex.
+  ///
+  /// In en, this message translates to:
+  /// **'Reindex'**
+  String get workspaceReindex;
+
+  /// No description provided for @workspaceEngineReady.
+  ///
+  /// In en, this message translates to:
+  /// **'GDScript engine ready'**
+  String get workspaceEngineReady;
+
+  /// No description provided for @workspaceEngineUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'GDScript engine unavailable'**
+  String get workspaceEngineUnavailable;
+
+  /// No description provided for @workspaceFilesTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Files'**
+  String get workspaceFilesTab;
+
+  /// No description provided for @workspaceSearchTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get workspaceSearchTab;
+
+  /// No description provided for @workspaceSearchProjectFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Search project files'**
+  String get workspaceSearchProjectFiles;
+
+  /// No description provided for @workspaceSearchFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Search files'**
+  String get workspaceSearchFiles;
+
+  /// No description provided for @workspaceMatchingFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Matching files'**
+  String get workspaceMatchingFiles;
+
+  /// No description provided for @workspaceSaveFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Save file'**
+  String get workspaceSaveFile;
+
+  /// No description provided for @workspaceFileInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'File information'**
+  String get workspaceFileInfoTitle;
+
+  /// No description provided for @workspaceNoFileOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'No file is open'**
+  String get workspaceNoFileOpen;
+
+  /// Number of lines in the open file
+  ///
+  /// In en, this message translates to:
+  /// **'Lines: {count}'**
+  String workspaceFileLinesCount(int count);
+
+  /// Size of the open file in characters
+  ///
+  /// In en, this message translates to:
+  /// **'Size: {count} characters'**
+  String workspaceFileSizeCharacters(int count);
+
+  /// No description provided for @workspaceOutputTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Output'**
+  String get workspaceOutputTab;
+
+  /// No description provided for @workspaceProblemsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Problems'**
+  String get workspaceProblemsTab;
+
+  /// No description provided for @workspaceCopyOutput.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy output'**
+  String get workspaceCopyOutput;
+
+  /// No description provided for @workspaceClearOutput.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear output'**
+  String get workspaceClearOutput;
+
+  /// No description provided for @workspaceEngineStatusReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get workspaceEngineStatusReady;
+
+  /// No description provided for @workspaceEngineStatusUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable'**
+  String get workspaceEngineStatusUnavailable;
+
+  /// No description provided for @workspaceExecutionRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Running...'**
+  String get workspaceExecutionRunning;
+
+  /// No description provided for @workspaceEmptyOutput.
+  ///
+  /// In en, this message translates to:
+  /// **'No output yet. Run the script to see results.'**
+  String get workspaceEmptyOutput;
+
+  /// No description provided for @workspaceNoProblems.
+  ///
+  /// In en, this message translates to:
+  /// **'No problems detected in the open file.'**
+  String get workspaceNoProblems;
+
+  /// No description provided for @workspaceSearchFilterPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a file or script...'**
+  String get workspaceSearchFilterPlaceholder;
+
+  /// No description provided for @workspaceEngineUnavailableNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'GDScript 2.0 • engine unavailable'**
+  String get workspaceEngineUnavailableNotice;
+
+  /// Cursor line and column position in code editor
+  ///
+  /// In en, this message translates to:
+  /// **'Line {line}, column {column}'**
+  String workspaceStatusBarCoordinates(int line, int column);
+
+  /// No description provided for @workspaceUnsavedChangesWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This file has unsaved changes. Close it and discard them?'**
+  String get workspaceUnsavedChangesWarning;
+
+  /// No description provided for @workspaceDirectInspectAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Direct in-process analysis and editing'**
+  String get workspaceDirectInspectAction;
+
+  /// No description provided for @conceptMapHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Concept Map & SM-2 Spaced Repetition'**
+  String get conceptMapHeroTitle;
+
+  /// No description provided for @conceptMapHeroSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your progress through the knowledge tree and strengthen memory with spaced repetition.'**
+  String get conceptMapHeroSubtitle;
+
+  /// No description provided for @conceptMapQuickReviewSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Review Session'**
+  String get conceptMapQuickReviewSession;
+
+  /// Memory retention recall rate percentage
+  ///
+  /// In en, this message translates to:
+  /// **'Recall: {rate}%'**
+  String conceptMapRecallRate(int rate);
+
+  /// Number of cards due for review today
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No cards due today} =1{1 card due today} other{{count} cards due today}}'**
+  String conceptMapDueCardsToday(int count);
+
+  /// No description provided for @conceptMapStartReviewAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Start review now'**
+  String get conceptMapStartReviewAction;
+
+  /// No description provided for @conceptMapBackToMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to map'**
+  String get conceptMapBackToMap;
+
+  /// No description provided for @conceptMapDueTodayBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Due today'**
+  String get conceptMapDueTodayBadge;
+
+  /// Remaining cards count in review session
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining cards: {count}'**
+  String conceptMapRemainingCards(int count);
+
+  /// No description provided for @conceptMapSm2RatingAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Again'**
+  String get conceptMapSm2RatingAgain;
+
+  /// No description provided for @conceptMapSm2RatingHard.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard'**
+  String get conceptMapSm2RatingHard;
+
+  /// No description provided for @conceptMapSm2RatingGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get conceptMapSm2RatingGood;
+
+  /// No description provided for @conceptMapSm2RatingEasy.
+  ///
+  /// In en, this message translates to:
+  /// **'Easy'**
+  String get conceptMapSm2RatingEasy;
+
+  /// No description provided for @conceptMapRevealAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal answer'**
+  String get conceptMapRevealAnswer;
+
+  /// No description provided for @conceptMapOverviewHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Concept overview:'**
+  String get conceptMapOverviewHeading;
+
+  /// No description provided for @conceptMapCodeExampleHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Code example:'**
+  String get conceptMapCodeExampleHeading;
+
+  /// No description provided for @conceptMapStatusHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Concept status'**
+  String get conceptMapStatusHeading;
+
+  /// Date when concept was last reviewed
+  ///
+  /// In en, this message translates to:
+  /// **'Last reviewed: {date}'**
+  String conceptMapLastReviewedDate(String date);
+
+  /// No description provided for @conceptMasteryLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get conceptMasteryLocked;
+
+  /// No description provided for @conceptMasteryLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning'**
+  String get conceptMasteryLearning;
+
+  /// No description provided for @conceptMasteryReviewing.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewing'**
+  String get conceptMasteryReviewing;
+
+  /// No description provided for @conceptMasteryMastered.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastered'**
+  String get conceptMasteryMastered;
+
+  /// No description provided for @conceptMapEmptyState.
+  ///
+  /// In en, this message translates to:
+  /// **'No concepts are available yet.'**
+  String get conceptMapEmptyState;
+
+  /// No description provided for @conceptMapRetryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get conceptMapRetryAction;
+
+  /// No description provided for @settingsSavedSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'All preferences saved successfully and synced with Godot 4.3 ✓'**
+  String get settingsSavedSuccessToast;
+
+  /// No description provided for @settingsPreferencesSections.
+  ///
+  /// In en, this message translates to:
+  /// **'Preference sections'**
+  String get settingsPreferencesSections;
+
+  /// No description provided for @settingsTabCodeEditor.
+  ///
+  /// In en, this message translates to:
+  /// **'Code editor & fonts'**
+  String get settingsTabCodeEditor;
+
+  /// No description provided for @settingsTabLspEngine.
+  ///
+  /// In en, this message translates to:
+  /// **'LSP server & engine path'**
+  String get settingsTabLspEngine;
+
+  /// No description provided for @settingsTabAppearanceTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance & visual theme'**
+  String get settingsTabAppearanceTheme;
+
+  /// No description provided for @settingsTabAccountAcademic.
+  ///
+  /// In en, this message translates to:
+  /// **'Account & learning progress'**
+  String get settingsTabAccountAcademic;
+
+  /// No description provided for @settingsDesktopTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop Settings & Engine Environment'**
+  String get settingsDesktopTitle;
+
+  /// No description provided for @settingsSaveShortcutAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes (Ctrl+S) ↵'**
+  String get settingsSaveShortcutAction;
+
+  /// No description provided for @settingsEditorPrefsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'GDScript Editor Preferences'**
+  String get settingsEditorPrefsTitle;
+
+  /// No description provided for @settingsEditorPrefsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize font size, tab spacing, and auto-completion behavior.'**
+  String get settingsEditorPrefsSubtitle;
+
+  /// Editor font size in pixels
+  ///
+  /// In en, this message translates to:
+  /// **'Editor font size ({size} px):'**
+  String settingsEditorFontSize(int size);
+
+  /// No description provided for @settingsEditorFontSizeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Applied to the JetBrains Mono font dedicated to GDScript.'**
+  String get settingsEditorFontSizeHint;
+
+  /// No description provided for @settingsEditorTabSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Tab size:'**
+  String get settingsEditorTabSize;
+
+  /// No description provided for @settingsEditorTabSizeStandard.
+  ///
+  /// In en, this message translates to:
+  /// **'The official standard in GDScript 2.0 is 4 spaces.'**
+  String get settingsEditorTabSizeStandard;
+
+  /// Tab size in spaces
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 space} other{{count} spaces}}'**
+  String settingsTabSpacesCount(int count);
+
+  /// No description provided for @settingsTabSpacesRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'4 spaces (Recommended)'**
+  String get settingsTabSpacesRecommended;
+
+  /// No description provided for @settingsShowLineNumbersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show line numbers'**
+  String get settingsShowLineNumbersTitle;
+
+  /// No description provided for @settingsShowLineNumbersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Display line numbers column for easier tracing and diagnostics.'**
+  String get settingsShowLineNumbersSubtitle;
+
+  /// No description provided for @settingsHighlightActiveLineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Highlight active line'**
+  String get settingsHighlightActiveLineTitle;
+
+  /// No description provided for @settingsHighlightActiveLineSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Highlight the background of the line where cursor is placed.'**
+  String get settingsHighlightActiveLineSubtitle;
+
+  /// No description provided for @settingsAutoCloseBracketsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-close brackets and quotes'**
+  String get settingsAutoCloseBracketsTitle;
+
+  /// No description provided for @settingsAutoCloseBracketsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically complete parentheses, brackets, braces, and quotes as you type.'**
+  String get settingsAutoCloseBracketsSubtitle;
+
+  /// No description provided for @settingsLspSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Server Protocol & Godot 4.3'**
+  String get settingsLspSectionTitle;
+
+  /// No description provided for @settingsLspSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage local connection bridge, engine paths, and JSON-RPC 2.0.'**
+  String get settingsLspSectionSubtitle;
+
+  /// No description provided for @settingsOpenDiagnosticsLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Open live diagnostics log ↵'**
+  String get settingsOpenDiagnosticsLog;
+
+  /// No description provided for @settingsGodotExecutablePath.
+  ///
+  /// In en, this message translates to:
+  /// **'Godot executable path:'**
+  String get settingsGodotExecutablePath;
+
+  /// No description provided for @settingsLspPort.
+  ///
+  /// In en, this message translates to:
+  /// **'LSP connection port:'**
+  String get settingsLspPort;
+
+  /// No description provided for @settingsStrictTypingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enforce strict typing warnings'**
+  String get settingsStrictTypingTitle;
+
+  /// No description provided for @settingsStrictTypingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Raise instant warnings when dynamic Variant variables lack explicit type.'**
+  String get settingsStrictTypingSubtitle;
+
+  /// No description provided for @settingsAutoStartLspTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically start LSP server on launch'**
+  String get settingsAutoStartLspTitle;
+
+  /// No description provided for @settingsAutoStartLspSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Initialize and launch local bridge in background upon application start.'**
+  String get settingsAutoStartLspSubtitle;
+
+  /// No description provided for @settingsAppearanceSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance & Visual Theme'**
+  String get settingsAppearanceSectionTitle;
+
+  /// No description provided for @settingsAppearanceSectionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize color schemes to match official Godot editor interface.'**
+  String get settingsAppearanceSectionSubtitle;
+
+  /// No description provided for @settingsActiveThemeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Active theme:'**
+  String get settingsActiveThemeLabel;
+
+  /// No description provided for @settingsDarkThemeGodotDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark theme with official Godot blue and dark grey tones #0F141B.'**
+  String get settingsDarkThemeGodotDesc;
+
+  /// No description provided for @settingsArabicFontTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic UI font:'**
+  String get settingsArabicFontTitle;
+
+  /// No description provided for @settingsArabicFontSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'High-clarity accredited font for technical software interfaces.'**
+  String get settingsArabicFontSubtitle;
+
+  /// No description provided for @learningPathAcademyBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Godot Academy'**
+  String get learningPathAcademyBrand;
+
+  /// No description provided for @learningPathCurriculumYear.
+  ///
+  /// In en, this message translates to:
+  /// **'2025 Curriculum'**
+  String get learningPathCurriculumYear;
+
+  /// No description provided for @learningPathCourseTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Course Path'**
+  String get learningPathCourseTab;
+
+  /// No description provided for @learningPathConceptMapTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Concept Map'**
+  String get learningPathConceptMapTab;
+
+  /// No description provided for @learningPathSmartReviewTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart Review'**
+  String get learningPathSmartReviewTab;
+
+  /// No description provided for @learningPathNoLessonsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No lessons have been added to this path yet.'**
+  String get learningPathNoLessonsYet;
+
+  /// No description provided for @learningPathStageFundamentals.
+  ///
+  /// In en, this message translates to:
+  /// **'Fundamentals'**
+  String get learningPathStageFundamentals;
+
+  /// No description provided for @learningPathStageJourneyStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start of the journey'**
+  String get learningPathStageJourneyStart;
+
+  /// No description provided for @learningPathStageLogicMaker.
+  ///
+  /// In en, this message translates to:
+  /// **'Logic Maker'**
+  String get learningPathStageLogicMaker;
+
+  /// No description provided for @learningPathStageNextPhase.
+  ///
+  /// In en, this message translates to:
+  /// **'Next phase'**
+  String get learningPathStageNextPhase;
+
+  /// No description provided for @learningPathStageEngineExpert.
+  ///
+  /// In en, this message translates to:
+  /// **'Engine Expert'**
+  String get learningPathStageEngineExpert;
+
+  /// No description provided for @learningPathStageAdvancedPhase.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced phase'**
+  String get learningPathStageAdvancedPhase;
+
+  /// No description provided for @learningPathUnitStatusDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get learningPathUnitStatusDone;
+
+  /// No description provided for @learningPathUnitStatusCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current unit'**
+  String get learningPathUnitStatusCurrent;
+
+  /// No description provided for @learningPathUnitStatusLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get learningPathUnitStatusLocked;
+
+  /// No description provided for @learningPathCompletePrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete previous unit first'**
+  String get learningPathCompletePrevious;
+
+  /// No description provided for @learningPathHideLessons.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide lessons'**
+  String get learningPathHideLessons;
+
+  /// No description provided for @learningPathShowLessonsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Show lessons'**
+  String get learningPathShowLessonsAction;
+
+  /// No description provided for @learningPathLessonStatusDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get learningPathLessonStatusDone;
+
+  /// No description provided for @learningPathLessonStatusCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current lesson'**
+  String get learningPathLessonStatusCurrent;
+
+  /// No description provided for @learningPathLessonStatusSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon'**
+  String get learningPathLessonStatusSoon;
+
+  /// No description provided for @learningPathMasteryDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Mastery Dashboard & Statistics'**
+  String get learningPathMasteryDashboard;
+
+  /// No description provided for @dashboardDailyChallengeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Speed Challenge'**
+  String get dashboardDailyChallengeTitle;
+
+  /// Number of developers participating in daily challenge
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 developer participated today} other{{count} developers participated today}}'**
+  String dashboardChallengeParticipants(int count);
+
+  /// Start daily challenge button label
+  ///
+  /// In en, this message translates to:
+  /// **'Take challenge (+{xp} XP)'**
+  String dashboardChallengeStartAction(int xp);
+
+  /// No description provided for @dashboardSmartReviewCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart Spaced Review (SM-2)'**
+  String get dashboardSmartReviewCardTitle;
+
+  /// Smart review due cards notice
+  ///
+  /// In en, this message translates to:
+  /// **'You have {count} concept cards due for review today to consolidate long-term memory.'**
+  String dashboardSmartReviewCardBody(int count);
+
+  /// Retention rate percentage
+  ///
+  /// In en, this message translates to:
+  /// **'Recall rate {percent}%'**
+  String dashboardSmartReviewRetention(int percent);
+
+  /// Estimated review duration in minutes
+  ///
+  /// In en, this message translates to:
+  /// **'~{minutes} mins'**
+  String dashboardSmartReviewDuration(int minutes);
+
+  /// No description provided for @dashboardStartQuickReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Start quick review session'**
+  String get dashboardStartQuickReview;
+
+  /// No description provided for @dashboardCodingStatsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Programming Statistics'**
+  String get dashboardCodingStatsTitle;
+
+  /// No description provided for @dashboardViewBadgesAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Badges ↵'**
+  String get dashboardViewBadgesAction;
+
+  /// No description provided for @dashboardStatsLinesWritten.
+  ///
+  /// In en, this message translates to:
+  /// **'GDScript lines written:'**
+  String get dashboardStatsLinesWritten;
+
+  /// Code lines written count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 line} other{{count} lines}}'**
+  String dashboardStatsLinesCount(int count);
+
+  /// No description provided for @dashboardStatsChallengesPassed.
+  ///
+  /// In en, this message translates to:
+  /// **'Challenges completed:'**
+  String get dashboardStatsChallengesPassed;
+
+  /// Challenges passed count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 challenge} other{{count} challenges}}'**
+  String dashboardStatsChallengesCount(int count);
+
+  /// No description provided for @dashboardStatsBadgesEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'Accredited badges earned:'**
+  String get dashboardStatsBadgesEarned;
+
+  /// Badges earned ratio
+  ///
+  /// In en, this message translates to:
+  /// **'{earned} of {total} badges'**
+  String dashboardStatsBadgesRatio(int earned, int total);
+
+  /// No description provided for @calloutOfficialWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Official Warning'**
+  String get calloutOfficialWarning;
+
+  /// No description provided for @calloutBestPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Practice'**
+  String get calloutBestPractice;
+
+  /// No description provided for @calloutTechnicalNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical Note'**
+  String get calloutTechnicalNote;
+
+  /// No description provided for @calloutGoldenRule.
+  ///
+  /// In en, this message translates to:
+  /// **'Golden Rule'**
+  String get calloutGoldenRule;
+
+  /// No description provided for @lessonDocumentationHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson documentation'**
+  String get lessonDocumentationHeader;
+
+  /// No description provided for @lessonDocumentationSources.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources'**
+  String get lessonDocumentationSources;
+
+  /// No description provided for @lessonDocumentationLicenseNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on Godot Engine Documentation, licensed under CC BY 3.0. This educational text is an independent adaptation and is not endorsed by Godot.'**
+  String get lessonDocumentationLicenseNotice;
+
+  /// No description provided for @lessonSplitterDragTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag to resize panes'**
+  String get lessonSplitterDragTooltip;
+
+  /// No description provided for @reviewScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart Review'**
+  String get reviewScreenTitle;
+
+  /// No description provided for @reviewScreenTodayHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Review'**
+  String get reviewScreenTodayHeader;
+
+  /// Number of items due for smart review
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No due items} =1{1 due item} other{{count} due items}}'**
+  String reviewDueItemsCount(int count);
+
+  /// No description provided for @reviewEmptyStateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews due today. Check back later.'**
+  String get reviewEmptyStateMessage;
+
+  /// Review interval in days
+  ///
+  /// In en, this message translates to:
+  /// **'Interval: {days} days'**
+  String reviewIntervalDays(int days);
+
+  /// Referenced lesson id in review schedule
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson: {lessonId}'**
+  String reviewLessonReference(String lessonId);
+
+  /// Notice after rating a review card
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {title} → {date}'**
+  String reviewCardUpdatedNotice(String title, String date);
+
+  /// No description provided for @capstoneScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Integrated Capstone Project'**
+  String get capstoneScreenTitle;
+
+  /// No description provided for @exerciseActionCheckAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Check answer'**
+  String get exerciseActionCheckAnswer;
+
+  /// No description provided for @exerciseActionRun.
+  ///
+  /// In en, this message translates to:
+  /// **'Run code'**
+  String get exerciseActionRun;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

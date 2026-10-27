@@ -198,11 +198,7 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
         context: context,
         builder: (context) => AlertDialog(
           title: Text(context.l10n.workspaceTitle),
-          content: Text(
-            Localizations.localeOf(context).languageCode == 'ar'
-                ? 'هناك تعديلات غير محفوظة. هل تريد إغلاق الملف والتخلص منها؟'
-                : 'This file has unsaved changes. Close it and discard them?',
-          ),
+          content: Text(context.l10n.workspaceUnsavedChangesWarning),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
@@ -415,22 +411,14 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
           FilledButton.icon(
             onPressed: _openWorkspace,
             icon: const Icon(Icons.folder_open),
-            label: Text(
-              Localizations.localeOf(context).languageCode == 'ar'
-                  ? 'فتح مساحة العمل'
-                  : 'Open workspace',
-            ),
+            label: Text(l10n.openWorkspace),
           ),
           const SizedBox(height: 16),
           Card(
             child: ListTile(
               leading: const Icon(Icons.memory),
               title: const Text('gdscript_engine'),
-              subtitle: Text(
-                Localizations.localeOf(context).languageCode == 'ar'
-                    ? 'تحليل وتحرير مباشر داخل التطبيق'
-                    : 'Direct in-process analysis and editing',
-              ),
+              subtitle: Text(l10n.workspaceDirectInspectAction),
             ),
           ),
           if (_error != null) ...[
@@ -472,11 +460,7 @@ class _WorkspaceScreenState extends State<WorkspaceScreen> {
               Navigator.pop(context);
               await _openWorkspace();
             },
-            child: Text(
-              Localizations.localeOf(context).languageCode == 'ar'
-                  ? 'فتح مساحة العمل'
-                  : 'Open workspace',
-            ),
+            child: Text(context.l10n.openWorkspace),
           ),
         ],
       ),

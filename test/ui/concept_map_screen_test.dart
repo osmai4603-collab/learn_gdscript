@@ -58,6 +58,7 @@ void main() {
     await tester.pump();
     await tester.tap(find.text('Reveal answer'));
     await tester.pump();
+    await tester.ensureVisible(find.text('Good'));
     await tester.tap(find.text('Good'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));

@@ -5,29 +5,49 @@
   "homeWelcome": "تعلّم GDScript خطوة بخطوة",
   "dashboardDays": "{days} أيام",
   "@dashboardDays": {
-    "placeholders": {"days": {"type": "int"}}
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
   },
   "dashboardWelcomeBack": "مرحباً بعودتك، {name} 👋",
   "@dashboardWelcomeBack": {
-    "placeholders": {"name": {"type": "String"}}
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "dashboardWelcomeMessage": "خطوة واحدة تفصلك عن إتقان منطق تفرع اللعبة. لنواصل كتابة الأكواد والتحكم بسلوك العقد اليوم!",
   "dashboardCurrentUnit": "الوحدة الحالية:",
   "dashboardPercentComplete": "{percent}% مكتمل",
   "@dashboardPercentComplete": {
-    "placeholders": {"percent": {"type": "int"}}
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
   },
   "dashboardNextLevel": "التقدم للمستوى التالي",
   "dashboardLessonsCompleted": "{completed} من {total} درساً",
   "@dashboardLessonsCompleted": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "dashboardXpToNextLevel": "{xp} XP للمستوى التالي",
   "@dashboardXpToNextLevel": {
-    "placeholders": {"xp": {"type": "int"}}
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
   },
   "dashboardContinueDescription": "تابع من حيث توقفت، وسيتم حفظ تقدمك تلقائياً.",
   "dashboardContinueAction": "تابع التعلم الآن",
@@ -39,8 +59,12 @@
   "dashboardBadgeCount": "{earned} من {total}",
   "@dashboardBadgeCount": {
     "placeholders": {
-      "earned": {"type": "int"},
-      "total": {"type": "int"}
+      "earned": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "dashboardNoBadges": "لا توجد أوسمة بعد",
@@ -48,7 +72,11 @@
   "dashboardStreak": "سلسلة الالتزام (Streak)",
   "dashboardConsecutiveDays": "{days} أيام متتالية 🔥",
   "@dashboardConsecutiveDays": {
-    "placeholders": {"days": {"type": "int"}}
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
   },
   "dashboardEngineTitle": "محرك GDScript",
   "dashboardEngineConnecting": "جارٍ الاتصال",
@@ -66,11 +94,19 @@
   "dashboardPlaygroundOutputSuccess": "تم التنفيذ بنجاح دون مخرجات.",
   "dashboardSaveError": "تعذر حفظ المسودة: {error}",
   "@dashboardSaveError": {
-    "placeholders": {"error": {"type": "String"}}
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "dashboardExecutionError": "تعذر تنفيذ الشيفرة: {error}",
   "@dashboardExecutionError": {
-    "placeholders": {"error": {"type": "String"}}
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "dashboardExecutionFailed": "تعذر تنفيذ الشيفرة.",
   "dashboardExampleTag": "عرض تجريبي",
@@ -82,21 +118,31 @@
   "curriculumVersion": "منهج GDScript إصدار {version}",
   "@curriculumVersion": {
     "placeholders": {
-      "version": {"type": "String"}
+      "version": {
+        "type": "String"
+      }
     }
   },
   "completedUnitsSummary": "أكملت {completed} من {total} وحدات",
   "@completedUnitsSummary": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "completedLessonsSummary": "أكملت {completed} من {total} دروس",
   "@completedLessonsSummary": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "milestoneCompleted": "مكتمل",
@@ -105,31 +151,41 @@
   "completedModulesCount": "{count} مكتملة",
   "@completedModulesCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "upcomingModulesCount": "{count} متبقية",
   "@upcomingModulesCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "moduleNumber": "الوحدة {number}",
   "@moduleNumber": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "moduleLessonCount": "{count} دروس",
   "@moduleLessonCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "moduleDurationHours": "مجموع {hours} دقيقة",
   "@moduleDurationHours": {
     "placeholders": {
-      "hours": {"type": "int"}
+      "hours": {
+        "type": "int"
+      }
     }
   },
   "lessonStatusCurrent": "الدرس الحالي",
@@ -145,7 +201,9 @@
   "earnedBadgesSummary": "اكتسبت {count} شارات",
   "@earnedBadgesSummary": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "reviewNextStep": "درسك التالي",
@@ -273,7 +331,11 @@
   "engineDiagnosticsEmpty": "لا توجد تشخيصات في ملفات مساحة العمل المفهرسة.",
   "engineDiagnosticsSummary": "عدد التشخيصات: {count}",
   "@engineDiagnosticsSummary": {
-    "placeholders": {"count": {"type": "int"}}
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "startLearning": "ابدأ التعلّم",
   "newUserWelcome": "مرحباً! ابدأ رحلتك في تعلّم البرمجة",
@@ -312,18 +374,46 @@
   "badgesCompletionSummary": "اكتسبت {unlocked} من أصل {total} شارات",
   "@badgesCompletionSummary": {
     "placeholders": {
-      "unlocked": {"type": "int"},
-      "total": {"type": "int"}
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "badgeFilterAll": "الكل ({count})",
-  "@badgeFilterAll": {"placeholders": {"count": {"type": "int"}}},
+  "@badgeFilterAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeFilterEarned": "المكتسبة ({count})",
-  "@badgeFilterEarned": {"placeholders": {"count": {"type": "int"}}},
+  "@badgeFilterEarned": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeFilterInProgress": "قيد التقدم ({count})",
-  "@badgeFilterInProgress": {"placeholders": {"count": {"type": "int"}}},
+  "@badgeFilterInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeFilterLocked": "المقفلة ({count})",
-  "@badgeFilterLocked": {"placeholders": {"count": {"type": "int"}}},
+  "@badgeFilterLocked": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeFilterEmpty": "لا توجد شارات ضمن هذه الفئة.",
   "badgeCatalogEmpty": "لا توجد شارات متاحة حالياً.",
   "badgeDetailsTitle": "تفاصيل الشارة",
@@ -361,8 +451,12 @@
   "onboardingQuestionProgress": "السؤال {current} من أصل {total}",
   "@onboardingQuestionProgress": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "onboardingAssessmentTag": "تحديد المستوى الأكاديمي",
@@ -391,13 +485,17 @@
   "onboardingRecommendedStart": "نقطة الانطلاق الموصى بها: {unit}",
   "@onboardingRecommendedStart": {
     "placeholders": {
-      "unit": {"type": "String"}
+      "unit": {
+        "type": "String"
+      }
     }
   },
   "onboardingUnitLabel": "الوحدة {number}",
   "@onboardingUnitLabel": {
     "placeholders": {
-      "number": {"type": "String"}
+      "number": {
+        "type": "String"
+      }
     }
   },
   "onboardingSummaryBeginner": "سنبدأ معك من الأساسيات لبناء قاعدة قوية في البرمجة وGDScript.",
@@ -420,14 +518,20 @@
   "syntaxExplorerCount": "{count} عنصر موثّق",
   "@syntaxExplorerCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "syntaxExplorerVisibleCount": "عرض {visible} من أصل {total}",
   "@syntaxExplorerVisibleCount": {
     "placeholders": {
-      "visible": {"type": "int"},
-      "total": {"type": "int"}
+      "visible": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "syntaxExplorerLoadMore": "تحميل المزيد",
@@ -442,12 +546,354 @@
   "syntaxExplorerCopied": "تم نسخ {item}",
   "@syntaxExplorerCopied": {
     "placeholders": {
-      "item": {"type": "String"}
+      "item": {
+        "type": "String"
+      }
     }
   },
   "syntaxExplorerOpenLesson": "فتح الدرس",
   "syntaxExplorerOpenWorkspace": "فتح مساحة العمل",
   "syntaxExplorerRelatedConcepts": "مفاهيم مرتبطة",
   "syntaxExplorerLessonUnavailable": "لا يتوفر درس مرتبط بهذا العنصر.",
-  "syntaxExplorerClearSearch": "مسح البحث"
+  "syntaxExplorerClearSearch": "مسح البحث",
+  "workspaceIndexedFilesCount": "{count, plural, =0{لا توجد ملفات} =1{ملف واحد مفهرس} =2{ملفان مفهرسان} few{{count} ملفات مفهرسة} many{{count} ملفاً مفهرساً} other{{count} ملف مفهرس}}",
+  "@workspaceIndexedFilesCount": {
+    "description": "Number of indexed files in the workspace",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceFileCountSummary": "{count, plural, =0{لا توجد ملفات} =1{ملف واحد} =2{ملفان} few{{count} ملفات} many{{count} ملفاً} other{{count} ملف}}",
+  "@workspaceFileCountSummary": {
+    "description": "Simple file count summary",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceSettings": "إعداد مساحة العمل",
+  "workspaceReindex": "إعادة الفهرسة",
+  "workspaceEngineReady": "محرك GDScript جاهز",
+  "workspaceEngineUnavailable": "محرك GDScript غير متاح",
+  "workspaceFilesTab": "الملفات",
+  "workspaceSearchTab": "البحث",
+  "workspaceSearchProjectFiles": "بحث في ملفات المشروع",
+  "workspaceSearchFiles": "البحث في الملفات",
+  "workspaceMatchingFiles": "الملفات المطابقة",
+  "workspaceSaveFile": "حفظ الملف",
+  "workspaceFileInfoTitle": "معلومات الملف",
+  "workspaceNoFileOpen": "لا يوجد ملف مفتوح",
+  "workspaceFileLinesCount": "الأسطر: {count}",
+  "@workspaceFileLinesCount": {
+    "description": "Number of lines in the open file",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceFileSizeCharacters": "الحجم: {count} محرف",
+  "@workspaceFileSizeCharacters": {
+    "description": "Size of the open file in characters",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceOutputTab": "المخرجات",
+  "workspaceProblemsTab": "المشكلات",
+  "workspaceCopyOutput": "نسخ المخرجات",
+  "workspaceClearOutput": "مسح المخرجات",
+  "workspaceEngineStatusReady": "جاهز",
+  "workspaceEngineStatusUnavailable": "غير متاح",
+  "workspaceExecutionRunning": "جارٍ التنفيذ...",
+  "workspaceEmptyOutput": "لا توجد مخرجات بعد. شغّل السكربت لعرضها.",
+  "workspaceNoProblems": "لا توجد مشكلات للملف المفتوح.",
+  "workspaceSearchFilterPlaceholder": "ابحث عن ملف أو سكربت...",
+  "workspaceEngineUnavailableNotice": "GDScript 2.0 • المحرك غير متاح",
+  "workspaceStatusBarCoordinates": "السطر {line}، العمود {column}",
+  "@workspaceStatusBarCoordinates": {
+    "description": "Cursor line and column position in code editor",
+    "placeholders": {
+      "line": {
+        "type": "int"
+      },
+      "column": {
+        "type": "int"
+      }
+    }
+  },
+  "workspaceUnsavedChangesWarning": "هناك تعديلات غير محفوظة. هل تريد إغلاق الملف والتخلص منها؟",
+  "workspaceDirectInspectAction": "تحليل وتحرير مباشر داخل التطبيق",
+  "conceptMapHeroTitle": "خريطة المفاهيم وخوارزمية التكرار المتباعد SM-2",
+  "conceptMapHeroSubtitle": "تتبع تقدمك في شجرة المعرفة وثبّت المفاهيم البرمجية في الذاكرة طويلة المدى.",
+  "conceptMapQuickReviewSession": "جلسة مراجعة سريعة",
+  "conceptMapRecallRate": "معدل الاسترجاع: {rate}%",
+  "@conceptMapRecallRate": {
+    "description": "Memory retention recall rate percentage",
+    "placeholders": {
+      "rate": {
+        "type": "int"
+      }
+    }
+  },
+  "conceptMapDueCardsToday": "{count, plural, =0{لا توجد بطاقات مستحقة اليوم} =1{بطاقة واحدة مستحقة اليوم} =2{بطاقتان مستحقتان اليوم} few{{count} بطاقات مستحقة اليوم} many{{count} بطاقة مستحقة اليوم} other{{count} بطاقة مستحقة اليوم}}",
+  "@conceptMapDueCardsToday": {
+    "description": "Number of cards due for review today",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "conceptMapStartReviewAction": "بدء المراجعة الآن",
+  "conceptMapBackToMap": "العودة للخريطة",
+  "conceptMapDueTodayBadge": "مستحق اليوم",
+  "conceptMapRemainingCards": "البطاقات المتبقية: {count}",
+  "@conceptMapRemainingCards": {
+    "description": "Remaining cards count in review session",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "conceptMapSm2RatingAgain": "إعادة",
+  "conceptMapSm2RatingHard": "صعب",
+  "conceptMapSm2RatingGood": "جيد",
+  "conceptMapSm2RatingEasy": "سهل",
+  "conceptMapRevealAnswer": "كشف الإجابة",
+  "conceptMapOverviewHeading": "شرح المفهوم:",
+  "conceptMapCodeExampleHeading": "مثال برمجي:",
+  "conceptMapStatusHeading": "حالة المفهوم",
+  "conceptMapLastReviewedDate": "آخر مراجعة: {date}",
+  "@conceptMapLastReviewedDate": {
+    "description": "Date when concept was last reviewed",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "conceptMasteryLocked": "مقفل",
+  "conceptMasteryLearning": "قيد التعلم",
+  "conceptMasteryReviewing": "قيد المراجعة",
+  "conceptMasteryMastered": "متقن",
+  "conceptMapEmptyState": "لا توجد مفاهيم متاحة حالياً.",
+  "conceptMapRetryAction": "إعادة المحاولة",
+  "settingsSavedSuccessToast": "تم حفظ كافة التفضيلات بنجاح وتمت مزامنتها مع محرك Godot 4.3 ✓",
+  "settingsPreferencesSections": "أقسام التفضيلات",
+  "settingsTabCodeEditor": "محرر الأكواد والخطوط",
+  "settingsTabLspEngine": "خادم LSP ومسار المحرك",
+  "settingsTabAppearanceTheme": "المظهر والسمة البصرية",
+  "settingsTabAccountAcademic": "الحساب والمسار الأكاديمي",
+  "settingsDesktopTitle": "الإعدادات وتفضيلات النظام وبيئة المحرك",
+  "settingsSaveShortcutAction": "حفظ التغييرات (Ctrl+S) ↵",
+  "settingsEditorPrefsTitle": "تفضيلات محرر الكود (GDScript Editor)",
+  "settingsEditorPrefsSubtitle": "تخصيص مقاس الخط، التباعد، وسلوك الإكمال التلقائي في بيئة التطوير.",
+  "settingsEditorFontSize": "مقاس خط المحرر البرمجي ({size} px):",
+  "@settingsEditorFontSize": {
+    "description": "Editor font size in pixels",
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsEditorFontSizeHint": "يتم تطبيق المقاس على خط JetBrains Mono المخصص لكتابة GDScript.",
+  "settingsEditorTabSize": "مسافة الإزاحة (Tab Size):",
+  "settingsEditorTabSizeStandard": "المعيار الرسمي في GDScript 2.0 هو 4 مسافات مسافية.",
+  "settingsTabSpacesCount": "{count, plural, =1{مسافة واحدة} =2{مسافتان} few{{count} مسافات} other{{count} مسافة}}",
+  "@settingsTabSpacesCount": {
+    "description": "Tab size in spaces",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTabSpacesRecommended": "4 مسافات (موصى به)",
+  "settingsShowLineNumbersTitle": "إظهار أرقام الأسطر (Line Numbers)",
+  "settingsShowLineNumbersSubtitle": "عرض عمود الأرقام على يمين المحرر لسهولة التتبع والتشخيص.",
+  "settingsHighlightActiveLineTitle": "إبراز السطر النشط (Highlight Active Line)",
+  "settingsHighlightActiveLineSubtitle": "تظليل خلفية السطر الذي يقف عليه المؤشر بلون مغاير.",
+  "settingsAutoCloseBracketsTitle": "إغلاق الأقواس وعلامات التنصيص تلقائياً",
+  "settingsAutoCloseBracketsSubtitle": "إكمال الأقواس المتنوعة وعلامات التنصيص تلقائياً فور كتابتها.",
+  "settingsLspSectionTitle": "خادم اللغة LSP ومحرك Godot 4.3",
+  "settingsLspSectionSubtitle": "إدارة جسر الاتصال المحلي ومسارات تشغيل المحرك وبروتوكول JSON-RPC 2.0.",
+  "settingsOpenDiagnosticsLog": "فتح سجل التشخيصات المباشر ↵",
+  "settingsGodotExecutablePath": "مسار المحرك التنفيذي (Godot Executable Path):",
+  "settingsLspPort": "منفذ الاتصال المحلي (LSP Port):",
+  "settingsStrictTypingTitle": "فرض تحذيرات الأنواع غير الصارمة (Strict Typing)",
+  "settingsStrictTypingSubtitle": "إطلاق تحذيرات فورية عند كتابة متغيرات Variant ديناميكية بدون تصريح نوع صريح.",
+  "settingsAutoStartLspTitle": "بدء تشغيل خادم LSP تلقائياً عند فتح الأكاديمية",
+  "settingsAutoStartLspSubtitle": "تهيئة وإطلاق جسر الاتصال في الخلفية بمجرد تشغيل الواجهة.",
+  "settingsAppearanceSectionTitle": "المظهر والسمة البصرية",
+  "settingsAppearanceSectionSubtitle": "تخصيص نسق الألوان بما يطابق واجهة محرك Godot الرسمية وتفضيلات شاشتك.",
+  "settingsActiveThemeLabel": "السمة النشطة:",
+  "settingsDarkThemeGodotDesc": "الوضع الداكن المعتمد بدرجات الأزرق والرمادي الداكن #0F141B.",
+  "settingsArabicFontTitle": "خط الواجهة العربي:",
+  "settingsArabicFontSubtitle": "خط معتمد عالي الوضوح للغة العربية في البرمجيات التقنية.",
+  "learningPathAcademyBrand": "أكاديمية جودو",
+  "learningPathCurriculumYear": "منهج 2025",
+  "learningPathCourseTab": "مسار المنهج",
+  "learningPathConceptMapTab": "خريطة المفاهيم",
+  "learningPathSmartReviewTab": "مراجعة ذكية",
+  "learningPathNoLessonsYet": "لا توجد دروس مضافة إلى هذا المسار بعد.",
+  "learningPathStageFundamentals": "الأساسيات",
+  "learningPathStageJourneyStart": "بداية الرحلة",
+  "learningPathStageLogicMaker": "صانع المنطق",
+  "learningPathStageNextPhase": "المرحلة التالية",
+  "learningPathStageEngineExpert": "خبير المحرك",
+  "learningPathStageAdvancedPhase": "المرحلة المتقدمة",
+  "learningPathUnitStatusDone": "مكتملة",
+  "learningPathUnitStatusCurrent": "الوحدة الحالية",
+  "learningPathUnitStatusLocked": "مغلقة",
+  "learningPathCompletePrevious": "أكمل الوحدة السابقة",
+  "learningPathHideLessons": "إخفاء الدروس",
+  "learningPathShowLessonsAction": "عرض الدروس",
+  "learningPathLessonStatusDone": "تم الإنجاز",
+  "learningPathLessonStatusCurrent": "الدرس الحالي",
+  "learningPathLessonStatusSoon": "قريباً",
+  "learningPathMasteryDashboard": "لوحة الإتقان والإحصائيات",
+  "dashboardDailyChallengeTitle": "تحدي اليوم السريع",
+  "dashboardChallengeParticipants": "{count, plural, =1{شارك مطور واحد اليوم} =2{شارك مطوران اليوم} few{شارك {count} مطورين اليوم} many{شارك {count} مطوراً اليوم} other{شارك {count} مطور اليوم}}",
+  "@dashboardChallengeParticipants": {
+    "description": "Number of developers participating in daily challenge",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardChallengeStartAction": "خوض التحدي (+{xp} XP)",
+  "@dashboardChallengeStartAction": {
+    "description": "Start daily challenge button label",
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardSmartReviewCardTitle": "المراجعة الذكية (SM-2)",
+  "dashboardSmartReviewCardBody": "لديك {count} بطاقات مفاهيم مستحقة للمراجعة اليوم لتثبيت الذاكرة طويلة المدى.",
+  "@dashboardSmartReviewCardBody": {
+    "description": "Smart review due cards notice",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardSmartReviewRetention": "معدل الاسترجاع {percent}%",
+  "@dashboardSmartReviewRetention": {
+    "description": "Retention rate percentage",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardSmartReviewDuration": "~{minutes} دقائق",
+  "@dashboardSmartReviewDuration": {
+    "description": "Estimated review duration in minutes",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStartQuickReview": "بدء جلسة المراجعة السريعة",
+  "dashboardCodingStatsTitle": "إحصائياتك البرمجية",
+  "dashboardViewBadgesAction": "الأوسمة ↵",
+  "dashboardStatsLinesWritten": "أسطر كود GDScript مكتوبة:",
+  "dashboardStatsLinesCount": "{count, plural, =1{سطر واحد} =2{سطران} few{{count} أسطر} many{{count} سطراً} other{{count} سطر}}",
+  "@dashboardStatsLinesCount": {
+    "description": "Code lines written count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStatsChallengesPassed": "تحديات برمجية تم اجتيازها:",
+  "dashboardStatsChallengesCount": "{count, plural, =1{تحدٍّ واحد} =2{تحديان} few{{count} تحديات} many{{count} تحدياً} other{{count} تحدٍّ}}",
+  "@dashboardStatsChallengesCount": {
+    "description": "Challenges passed count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStatsBadgesEarned": "أوسمة مكتسبة معتمدة:",
+  "dashboardStatsBadgesRatio": "{earned} من {total} أوسمة",
+  "@dashboardStatsBadgesRatio": {
+    "description": "Badges earned ratio",
+    "placeholders": {
+      "earned": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "calloutOfficialWarning": "تحذير رسمي",
+  "calloutBestPractice": "توصية وممارسة فضلى",
+  "calloutTechnicalNote": "معلومة هندسية",
+  "calloutGoldenRule": "القاعدة الذهبية",
+  "lessonDocumentationHeader": "توثيق الدرس",
+  "lessonDocumentationSources": "المصادر",
+  "lessonDocumentationLicenseNotice": "يستند هذا المحتوى إلى توثيق Godot Engine المرخّص بموجب CC BY 3.0. هذا إعداد تعليمي مستقل وليس معتمداً من Godot.",
+  "lessonSplitterDragTooltip": "اسحب لتغيير عرض اللوحتين",
+  "reviewScreenTitle": "المراجعة الذكية",
+  "reviewScreenTodayHeader": "استعراض اليوم",
+  "reviewDueItemsCount": "{count, plural, =0{لا توجد عناصر مستحقة} =1{عنصر واحد مستحق} =2{عنصران مستحقان} few{{count} عناصر مستحقة} many{{count} عنصراً مستحقاً} other{{count} عنصر مستحق}}",
+  "@reviewDueItemsCount": {
+    "description": "Number of items due for smart review",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewEmptyStateMessage": "لا توجد مراجعات مستحقة اليوم. عد لاحقاً.",
+  "reviewIntervalDays": "فاصل {days} يوم",
+  "@reviewIntervalDays": {
+    "description": "Review interval in days",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewLessonReference": "درس: {lessonId}",
+  "@reviewLessonReference": {
+    "description": "Referenced lesson id in review schedule",
+    "placeholders": {
+      "lessonId": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewCardUpdatedNotice": "تم تحديث {title} → {date}",
+  "@reviewCardUpdatedNotice": {
+    "description": "Notice after rating a review card",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "capstoneScreenTitle": "مشروع التطوير التكاملي",
+  "exerciseActionCheckAnswer": "تحقق من الإجابة",
+  "exerciseActionRun": "تشغيل الكود"
 }
