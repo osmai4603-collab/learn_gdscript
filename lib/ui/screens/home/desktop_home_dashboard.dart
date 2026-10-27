@@ -516,61 +516,65 @@ class DashboardTopNav extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
+              Wrap(
+                alignment: WrapAlignment.end,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 8,
                 children: [
                   AcademyMetricBadge(
                     icon: Icons.local_fire_department_rounded,
                     text: l10n.dashboardDays(streakDays),
                     color: Theme.of(context).colorScheme.secondary,
                   ),
-                  const SizedBox(width: 8),
                   AcademyMetricBadge(
                     icon: Icons.diamond_rounded,
                     text: '$xp XP',
                     color: Theme.of(context).colorScheme.secondary,
                   ),
-                  const SizedBox(width: 16),
-                  InkWell(
-                    onTap: () => onNavigate?.call(AppRoutes.settings),
-                    borderRadius: BorderRadius.circular(8),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          width: 34,
-                          height: 34,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primaryContainer,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Text(
-                              userName.isEmpty ? '?' : userName[0],
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontFamily: 'IBM Plex Sans Arabic',
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 8),
+                    child: InkWell(
+                      onTap: () => onNavigate?.call(AppRoutes.settings),
+                      borderRadius: BorderRadius.circular(8),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 34,
+                            height: 34,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primaryContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(
+                              child: Text(
+                                userName.isEmpty ? '?' : userName[0],
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  fontFamily: 'IBM Plex Sans Arabic',
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 90),
-                          child: Text(
-                            userName,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontFamily: 'IBM Plex Sans Arabic',
-                              fontSize: 13,
-                              color: Theme.of(context).colorScheme.onSurface,
-                              fontWeight: FontWeight.w500,
+                          const SizedBox(width: 8),
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 90),
+                            child: Text(
+                              userName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                fontFamily: 'IBM Plex Sans Arabic',
+                                fontSize: 13,
+                                color: Theme.of(context).colorScheme.onSurface,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
