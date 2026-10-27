@@ -3,28 +3,28 @@
   "unitId": "unit_01_first_program",
   "title": {
     "ar": "المحرر وأول برنامج",
-    "en": "The editor and your first program"
+    "en": "The Editor and Your First Program"
   },
   "objective": {
-    "ar": "أنشئ سكربتاً بسيطاً في المحرر واستخدم `print()` لعرض رسالة.",
-    "en": "Create a small script in the editor and use `print()` to display a message."
+    "ar": "إنشاء أول سكربت في محرر Godot، فهم دورة حياة دالة _ready()، واستخدام print() لعرض الرسائل في لوحة الإخراج.",
+    "en": "Create your first script in the Godot editor, understand the _ready() lifecycle function, and use print() to display messages in the output panel."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## المحرر وأول برنامج\n\nيكتب GDScript تعليمات تُنفّذ بالترتيب. أنشئ ملف سكربت من محرر Godot، واستخدم `print()` لعرض نتيجة في لوحة الإخراج. احفظ تغييراتك وشغّل السكربت، ثم اقرأ الرسالة. ابدأ بمثال مستقل قبل ربط السكربت بعقدة أو مشهد.\n\n### مثال عملي\n\n```gdscript\nprint(\"Hello, Godot!\")\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## The editor and your first program\n\nGDScript runs instructions in order. Create a script file in the Godot editor and use `print()` to display a result in the output panel. Save your changes and run the script, then read the message. Start with a standalone example before attaching a script to a node or scene.\n\n### Practical example\n\n```gdscript\nprint(\"Hello, Godot!\")\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## المحرر وأول برنامج في Godot\n\n### 1. المفهوم في سياق الألعاب\nفي صناعة الألعاب، السكربت (Script) هو بمثابة 'عقل' الشخصية أو العنصر؛ فهو يخبر محرك الألعاب بما يجب فعله عند بدء اللعبة أو حدوث تفاعل. في محرك Godot، نكتب السكربت بلغة **GDScript** ونقوم بإلحاقه بعقدة (Node) داخل شجرة المشهد (Scene Tree).\n\n### 2. القواعد والصياغة\n- دالة `_ready()` هي نقطة البداية الأساسية؛ حيث يستدعيها المحرك تلقائياً مرة واحدة فور دخول العقدة إلى شجرة المشهد.\n- دالة `print(\"رسالة\")` تقوم بطباعة النصوص أو القيم الحسابية في **لوحة الإخراج (Output Dock)** أسفل المحرر.\n- النصوص يجب أن تُحاط بعلامات تنصيص مزدوجة `\"...\"` أو مفردة `'...'`.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\n# يتم تنفيذ هذه الدالة تلقائياً عند تشغيل المشهد\nfunc _ready():\n    print(\"مرحباً بك في عالم تطوير الألعاب مع Godot!\")\n    print(2026)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** نسيان وضع الأقواس `()` أو علامات التنصيص `\"\"` يمنع تشغيل السكربت ويظهر خطأ صياغة فوري (Syntax Error).\n- ℹ️ **معلومة هندسية:** دالة `_ready()` تُستدعى تلقائياً من قِبل المحرك؛ لا تقم باستدعائها يدوياً ما لم يكن لديك حاجة متقدمة لتجاوز السلوك الافتراضي.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** السكربت المستقل لا يعمل في لعبتك الحقيقية ما لم يُرفق بعقدة (Node) موجودة داخل مشهد نشط (Scene). دائماً ابدأ أبسط سكربت، اختبره عبر لوحة الإخراج، ثم ابنِ عليه.",
+    "en": "## The Editor and Your First Program in Godot\n\n### 1. Concept in Game Context\nIn game development, a script acts as the 'brain' of a character or object, telling the game engine what to do when the game starts or when an interaction occurs. In Godot, we write scripts in **GDScript** and attach them to a Node within the Scene Tree.\n\n### 2. Rules and Syntax\n- The `_ready()` function is the primary entry point called automatically by the engine once the node enters the scene tree.\n- The `print(\"message\")` function outputs text or values to the **Output Dock** at the bottom of the editor.\n- Strings must be enclosed in double `\"...\"` or single `'...'` quotes.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\n# This function executes automatically when the scene runs\nfunc _ready():\n    print(\"Welcome to game development with Godot!\")\n    print(2026)\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Forgetting parentheses `()` or quotes `\"\"` prevents execution and triggers an immediate Syntax Error.\n- ℹ️ **Engineering Note:** `_ready()` is called automatically by the engine; do not call it manually unless overriding default behavior.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** A standalone script will not run in your actual game unless attached to a Node inside an active Scene. Always start with the simplest script, test it via the output dock, then build upon it."
   },
-  "exampleCode": "print(\"Hello, Godot!\")",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    print(\"مرحباً بك في عالم تطوير الألعاب مع Godot!\")\n    print(2026)",
   "documentation": {
-    "ar": "### المحرر وأول برنامج\n\nيكتب GDScript تعليمات تُنفّذ بالترتيب. أنشئ ملف سكربت من محرر Godot، واستخدم `print()` لعرض نتيجة في لوحة الإخراج. احفظ تغييراتك وشغّل السكربت، ثم اقرأ الرسالة. ابدأ بمثال مستقل قبل ربط السكربت بعقدة أو مشهد.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### The editor and your first program\n\nGDScript runs instructions in order. Create a script file in the Godot editor and use `print()` to display a result in the output panel. Save your changes and run the script, then read the message. Start with a standalone example before attaching a script to a node or scene.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع التوثيق الرسمي لـ GDScript\n\n- **تنفيذ _ready():** تُعد الدالة المرجع الأساسي لإعداد العقد وتهيئة المتغيرات فور تحميل المشهد.\n- **لوحة الإخراج:** النافذة المخصصة لاستقبال مخرجات `print()` وتشخيص حالة السكربت.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Official GDScript Reference\n\n- **_ready() Execution:** The core hook for initializing nodes and properties when a scene loads.\n- **Output Panel:** The dedicated dock for `print()` diagnostics and runtime feedback.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل سكربتات Godot الرسمي",
+        "en": "Godot Scripting Guide"
       },
       "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
     }
@@ -36,32 +36,36 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "متى يتم استدعاء دالة _ready() تلقائياً؟",
+        "en": "When is _ready() called automatically?"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "في محرك Godot، متى يُنفّذ محرك الألعاب دالة `_ready()` الخاصة بالعقدة؟",
+        "en": "In Godot, when does the engine execute a node's `_ready()` function?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "فوراَ عند دخول العقدة وشملها داخل شجرة المشهد النشطة",
+          "en": "Immediately when the node enters the active scene tree"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "عندما يضغط اللاعب على زر الخروج من اللعبة",
+          "en": "When the player clicks the exit game button"
+        },
+        {
+          "ar": "فقط عند تصدير اللعبة لنظام التشغيل النهائي",
+          "en": "Only when exporting the game to the final OS"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "تذكر أن `_ready()` تعني أن العقدة أصبحت جاهزة ودخلت شجرة المشهد.",
+          "en": "Remember that `_ready()` signifies the node is ready and entered the scene tree."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول يصف بدقة دورة حياة الدالة عند تشغيل المشهد.",
+          "en": "The first option accurately describes the function's lifecycle when the scene runs."
         }
       ]
     },
@@ -71,32 +75,36 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "أين تظهر رسائل دالة print()؟",
+        "en": "Where do print() messages appear?"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "عندما تستخدم الأمر `print(\"Hello\")` أثناء تشغيل السكربت في محرر Godot، أين ستظهر هذه الرسالة؟",
+        "en": "When you use `print(\"Hello\")` while running a script in Godot, where does the message appear?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "في نافذة إعدادات المشروع الرئيسية Project Settings",
+          "en": "In the main Project Settings window"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "في لوحة الإخراج (Output Dock) أسفل المحرر",
+          "en": "In the Output Dock at the bottom of the editor"
+        },
+        {
+          "ar": "في مجلد ملفات اللعبة على القرص الثابت",
+          "en": "In the game's file folder on the hard drive"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "ابحث عن اللوحة المخصصة لعرض السجلات ومخرجات النظام في أسفل شاشة Godot.",
+          "en": "Look for the dedicated panel displaying system logs at the bottom of Godot."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "لوحة الإخراج Output Dock هي المكان المخصص لعرض نصوص print().",
+          "en": "The Output Dock is the designated place for print() outputs."
         }
       ]
     },
@@ -106,32 +114,36 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "دور السكربت في تطوير الألعاب",
+        "en": "Role of scripts in game development"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "ما هو الدور الأساسي للسكربت المكتوب بلغة GDScript في مشروع Godot؟",
+        "en": "What is the primary role of a GDScript script in a Godot project?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "التحكم بسلوك العقد والمنطق البرمجي وتفاعل اللعبة",
+          "en": "Controlling node behavior, game logic, and player interaction"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "رسم رسوميات الشخصيات ثلاثية الأبعاد فقط",
+          "en": "Rendering 3D character graphics exclusively"
+        },
+        {
+          "ar": "ضغط ملفات الصوت والصورة للتصدير النهائي",
+          "en": "Compressing audio and image files for final export"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "السكربت يمثل عقل العنصر والمسؤول عن اتخاذ القرارات وحركة اللعبة.",
+          "en": "A script represents the object's brain and handles decisions and movement."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "اختر الخيار الذي يشير إلى المنطق والسلوك البرمجي.",
+          "en": "Choose the option pointing to code logic and behavior."
         }
       ]
     },
@@ -141,35 +153,35 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: إنشاء أول سكربت وتشغيله",
+        "en": "Guided Task: Create and Run Your First Script"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "اتبع الخطوات العملية لتفعيل أول سكربت في مشهد Godot الخاص بك واختباره.",
+        "en": "Follow the practical steps to activate and test your first script in a Godot scene."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "أنشئ مشهداً جديداً يحتوي على عقدة جذر من نوع Node.",
+          "en": "Create a new scene with a root Node."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
+          "ar": "أضف سكربت جديداً مرتبطاً بالعقدة واكتب دالة _ready() مطبوعاً فيها \"Ready\".",
+          "en": "Attach a new script to the node and write a _ready() function printing \"Ready\"."
         },
         {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "شغّل المشهد وافحص لوحة الإخراج للتأكد من ظهور الكلمة بنجاح.",
+          "en": "Run the scene and inspect the output dock to verify the word appears."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
+          "ar": "تأكد من حفظ المشهد (Scene) قبل محاولة تشغيله بالضغط على F6.",
+          "en": "Make sure to save the scene before attempting to run it by pressing F6."
         },
         {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "لاحظ أن المخرجات تظهر فوراً في لوحة الإخراج الأسفل.",
+          "en": "Notice that outputs appear immediately in the bottom output dock."
         }
       ]
     },
@@ -179,32 +191,32 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "كتابة أمر طباعة ترحيبي",
+        "en": "Writing a Greeting Print Statement"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Hello!`",
-        "en": "Write or complete the example so its output is:\n\n`Hello!`"
+        "ar": "اكتب دالة `_ready()` تطبع بالضبط النص التالي عند بدء اللعبة:\n\n`Game Started`",
+        "en": "Write a `_ready()` function that prints exactly the following text when the game starts:\n\n`Game Started`"
       },
-      "starterCode": "",
-      "solutionCode": "print(\"Hello!\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    # اكتب أمر الطباعة هنا\n    pass",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"Game Started\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "استخدم دالة `print()` وضع النص بداخله بين علامات تنصيص مزدوجة.",
+          "en": "Use the `print()` function and place the text inside with double quotes."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "الصيغة: `print(\"Game Started\")` داخل دالة `_ready()`.",
+          "en": "Syntax: `print(\"Game Started\")` inside the `_ready()` function."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة النص الترحيبي الصحيح",
+            "en": "Verifying correct greeting text output"
           },
-          "expectedOutput": "Hello!"
+          "expectedOutput": "Game Started"
         }
       ]
     },
@@ -214,32 +226,32 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "طباعة قيمة رقمية وإصدار اللعبة",
+        "en": "Printing Number and Game Version"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nGodot",
-        "en": "Write code that applies the lesson idea and produces this output:\n\nGodot"
+        "ar": "اكتب سكربتاً يطبع رقم الإصدار `1` في دالة `_ready()`.",
+        "en": "Write a script that prints version number `1` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"Godot\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(1)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "الأرقام لا تحتاج إلى علامات تنصيص عند طباعتها.",
+          "en": "Numbers do not require quotes when printed."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اكتب `print(1)`.",
+          "en": "Write `print(1)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة القيمة الرقمية الصحيحة",
+            "en": "Verifying correct numeric output"
           },
-          "expectedOutput": "Godot"
+          "expectedOutput": "1"
         }
       ]
     },
@@ -249,32 +261,32 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "تصحيح خطأ إملائي في دالة الطباعة",
+        "en": "Fixing Spelling Error in Print Function"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`5`",
-        "en": "Write or complete the example so its output is:\n\n`5`"
+        "ar": "الشيفرة التالية تحتوي على خطأ في كتابة اسم دالة الطباعة. أصلحها لتعرض `Ready` بنجاح:",
+        "en": "The following code contains a typo in the print function name. Fix it to successfully display `Ready`:"
       },
-      "starterCode": "pront(2 + 3)",
-      "solutionCode": "print(2 + 3)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    pront(\"Ready\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"Ready\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "دالة الطباعة في GDScript اسمها `print` وليست `pront`.",
+          "en": "The print function in GDScript is named `print`, not `pront`."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استبدل الحرف o بالحرف i لتصبح `print`.",
+          "en": "Replace the letter o with i to become `print`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من إصلاح الخطأ وإخراج النص بنجاح",
+            "en": "Verifying error fix and successful text output"
           },
-          "expectedOutput": "5"
+          "expectedOutput": "Ready"
         }
       ]
     },
@@ -284,32 +296,32 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بالناتج المتوقع للسكربت",
+        "en": "Predict the Expected Script Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`Start`",
-        "en": "What output does this example display?\n\n`Start`"
+        "ar": "ما الذي سيظهر في لوحة الإخراج عند تشغيل هذا السكربت؟\n\n```gdscript\nextends Node\nfunc _ready():\n    print(\"Godot 4.3\")\n```",
+        "en": "What will appear in the output panel when running this script?\n\n```gdscript\nextends Node\nfunc _ready():\n    print(\"Godot 4.3\")\n```"
       },
-      "starterCode": "print(\"Start\")",
-      "solutionCode": "print(\"Start\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    print(\"Godot 4.3\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"Godot 4.3\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "انظر إلى النص الموجود بين علامات التنصيص داخل دالة الطباعة.",
+          "en": "Look at the text enclosed in quotes inside the print function."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "الناتج هو النص حرفياً كما كتبناه.",
+          "en": "The output is the exact text as written."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع المخرجات",
+            "en": "Verifying output prediction match"
           },
-          "expectedOutput": "Start"
+          "expectedOutput": "Godot 4.3"
         }
       ]
     },
@@ -319,32 +331,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "طباعة رسالة جاهزية المحرك",
+        "en": "Printing Engine Readiness Message"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`7`",
-        "en": "Write or complete the example so its output is:\n\n`7`"
+        "ar": "اكتب دالة `_ready()` التي تطبع النص `Loading` عند بدء التشغيل.",
+        "en": "Write a `_ready()` function that prints the text `Loading` upon startup."
       },
-      "starterCode": "",
-      "solutionCode": "print(7)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"Loading\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `print(\"Loading\")`.",
+          "en": "Use `print(\"Loading\")`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة رسالة التحميل",
+            "en": "Verifying loading message output"
           },
-          "expectedOutput": "7"
+          "expectedOutput": "Loading"
         }
       ]
     },
@@ -354,32 +362,32 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي ترحيب الوحدة الأول",
+        "en": "Unit 01 First Greeting Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Done`",
-        "en": "Write or complete the example so its output is:\n\n`Done`"
+        "ar": "اكتب برنامجاً كاملاً يطبع رسالتين متتاليتين في `_ready()`:\n1. `Initializing Game`\n2. `Ready`",
+        "en": "Write a complete program that prints two consecutive messages in `_ready()`:\n1. `Initializing Game`\n2. `Ready`"
       },
-      "starterCode": "",
-      "solutionCode": "print(\"Done\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"Initializing Game\")\n    print(\"Ready\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "يمكنك كتابة أمري طباعة (`print`) في أسطر منفصلة داخل الدالة.",
+          "en": "You can write two `print` statements on separate lines inside the function."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "تأكد من مراعاة المسافات البادئة (Indentation) تحت دالة `_ready()`.",
+          "en": "Ensure proper indentation under the `_ready()` function."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة الرسالتين بالترتيب الصحيح",
+            "en": "Verifying both messages print in correct order"
           },
-          "expectedOutput": "Done"
+          "expectedOutput": "Initializing Game\nReady"
         }
       ]
     }

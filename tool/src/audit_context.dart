@@ -83,11 +83,15 @@ class AuditConceptDefinition {
     required this.id,
     required this.lessonId,
     required this.prerequisiteIds,
+    required this.x,
+    required this.y,
   });
 
   final String id;
   final String lessonId;
   final List<String> prerequisiteIds;
+  final double x;
+  final double y;
 }
 
 class LessonRecord {
@@ -310,13 +314,15 @@ class AuditContext {
         final prerequisites = item['prerequisiteIds'] == null
             ? <String>[]
             : _stringList(item, 'prerequisiteIds');
-        _requiredNumber(item, 'x');
-        _requiredNumber(item, 'y');
+        final x = _requiredNumber(item, 'x');
+        final y = _requiredNumber(item, 'y');
         concepts.add(
           AuditConceptDefinition(
             id: id,
             lessonId: lessonId,
             prerequisiteIds: prerequisites,
+            x: x,
+            y: y,
           ),
         );
       }

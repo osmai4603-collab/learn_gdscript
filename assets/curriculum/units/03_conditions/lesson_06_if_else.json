@@ -2,31 +2,31 @@
   "id": "lesson_06_if_else",
   "unitId": "unit_03_conditions",
   "title": {
-    "ar": "الشروط if / elif / else",
-    "en": "if / elif / else conditions"
+    "ar": "الشروط البسيطة if / else",
+    "en": "Simple if / else Conditions"
   },
   "objective": {
-    "ar": "اختر مساراً من عدة مسارات باستخدام الشروط والتفرع.",
-    "en": "Choose among several paths using conditions and branching."
+    "ar": "إتقان استخدام البنية الشرطية `if / else` لاتخاذ القرارات، مع فهم الفارق الجوهري والخطير بين إعلام الإسناد `=` ومقارنة المساواة `==`.",
+    "en": "Master using `if / else` conditional branches for decision-making, understanding the critical difference between assignment `=` and equality comparison `==`."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## الشروط if / elif / else\n\nيفحص `if` الشرط وينفذ كتلته إذا كان صحيحاً؛ وإذا لم يتحقق، تفحص فروع `elif` بالترتيب ثم يأتي `else` للحالة المتبقية. تحدد المسافات البادئة الكتل في GDScript. للاختيار القصير يمكن استخدام التعبير `value_if_true if condition else value_if_false`، بينما تكون الفروع العادية أوضح عند وجود خطوات متعددة.\n\n### مثال عملي\n\n```gdscript\nvar age = 20\nvar label = \"Adult\" if age >= 18 else \"Child\"\nprint(label)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## if / elif / else conditions\n\n`if` checks a condition and runs its block when true. Otherwise, `elif` branches are checked in order, followed by `else` for the remaining case. Indentation defines blocks in GDScript. A short choice can use `value_if_true if condition else value_if_false`, while regular branches are clearer for multiple actions.\n\n### Practical example\n\n```gdscript\nvar age = 20\nvar label = \"Adult\" if age >= 18 else \"Child\"\nprint(label)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## الشروط البسيطة if / else في GDScript\n\n### 1. المفهوم في سياق الألعاب\nالألعاب مليئة بالخيارات المبنية على شروط: **إذا** امتلك اللاعب درعاً كافياً، **فإن** الضربة لا تقتله، **وإلا** ينقص من طاقته. البنية `if / else` تمكن لعبتك من تفريع المسارات بناءً على حالة البيانات.\n\n### 2. القواعد والصياغة والتحذير الأهم\n- تُكتب الشروط متبوعة بنقطتين رأسيتين `:` مع الالتزام بالمسافات البادئة (Indentation) للكتل التابعة.\n- ⚠️ **تحذير رسمي حرج (الفارق بين `=` و `==`):** \n  - علامة الإسناد الفردية `=` تستخدم لتخزين قيمة في متغير (مثل `var x = 5`).\n  - علامة المساواة المزدوجة `==` تستخدم للمقارنة والتحقق من التساوي (مثل `if x == 5:`). الخلط بينهما يسبب خطأ صياغة يمنع تشغيل اللعبة.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var player_health = 0\n    # التحقق من حالة حياة اللاعب\n    if player_health > 0:\n        print(\"Hero is alive\")\n    else:\n        print(\"Game Over\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** إهمال المسافات البادئة أو استخدام مسافات غير متطابقة يسبب خطأ المسافة البادئة (IndentationError).\n- ℹ️ **معلومة تقنية:** يمكنك استخدام التعبير المختصر للتصريح السريع مثل `\"Alive\" if health > 0 else \"Dead\"`.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم `if` عندما تريد تنفيذ شيفرة بشرط تحقق الحالة، واجعل `else` البديل الافتراضي لكل الحالات الأخرى.",
+    "en": "## Simple if / else Conditions in GDScript\n\n### 1. Concept in Game Context\nGames are filled with conditional choices: **If** the player has sufficient armor, **then** the hit doesn't kill them, **otherwise** their health decreases. The `if / else` construct enables your game to branch paths based on data states.\n\n### 2. Rules, Syntax, and Critical Warning\n- Conditions are followed by a colon `:` with proper indentation for code blocks.\n- ⚠️ **Critical Official Warning (Assignment `=` vs Equality `==`):**\n  - Single equals `=` is used for assigning values to variables (e.g., `var x = 5`).\n  - Double equals `==` is used for comparison and equality checking (e.g., `if x == 5:`). Mixing them triggers a syntax error blocking execution.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    var player_health = 0\n    # Check player liveness state\n    if player_health > 0:\n        print(\"Hero is alive\")\n    else:\n        print(\"Game Over\")\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Forgetting indentation or mixing spaces and tabs causes an IndentationError.\n- ℹ️ **Tech Note:** You can use ternary shorthand expressions for quick assignments like `\"Alive\" if health > 0 else \"Dead\"`.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Use `if` when you want code to run upon condition validation, and make `else` the default fallback for all other cases."
   },
-  "exampleCode": "var age = 20\nvar label = \"Adult\" if age >= 18 else \"Child\"\nprint(label)",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var player_health = 0\n    if player_health > 0:\n        print(\"Hero is alive\")\n    else:\n        print(\"Game Over\")",
   "documentation": {
-    "ar": "### الشروط if / elif / else\n\nيفحص `if` الشرط وينفذ كتلته إذا كان صحيحاً؛ وإذا لم يتحقق، تفحص فروع `elif` بالترتيب ثم يأتي `else` للحالة المتبقية. تحدد المسافات البادئة الكتل في GDScript. للاختيار القصير يمكن استخدام التعبير `value_if_true if condition else value_if_false`، بينما تكون الفروع العادية أوضح عند وجود خطوات متعددة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### if / elif / else conditions\n\n`if` checks a condition and runs its block when true. Otherwise, `elif` branches are checked in order, followed by `else` for the remaining case. Indentation defines blocks in GDScript. A short choice can use `value_if_true if condition else value_if_false`, while regular branches are clearer for multiple actions.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع الشروط البسيطة في GDScript\n\n- بناء `if / else` والنقاط الرأسية `:ابتدائية`.\n- خطر الخلط بين الإسناد `=` والمقارنة `==`.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Simple Conditions Reference in GDScript\n\n- `if / else` structure and initial colons.\n- Risk of mixing assignment `=` and comparison `==`.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل التحكم في التدفق بـ Godot",
+        "en": "Godot Control Flow Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif"
     }
   ],
   "exercises": [
@@ -36,32 +36,32 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "الفارق بين علامة الإسناد والمقارنة",
+        "en": "Difference Between Assignment and Comparison"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "أي من العبارات التالية تُمثل الاختبار الصحيح لمقارنة متغير `score` بالقيمة 10 داخل عبارة شرطية `if`؟",
+        "en": "Which of the following represents the correct test for comparing variable `score` to 10 inside an `if` condition?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "استخدام علامة المساواة المزدوجة `if score == 10:`",
+          "en": "Using double equality `if score == 10:`"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "استخدام علامة الإسناد المفردة `if score = 10:`",
+          "en": "Using single assignment `if score = 10:`"
+        },
+        {
+          "ar": "استخدام كلمة equals `if score equals 10:`",
+          "en": "Using word equals `if score equals 10:`"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "المقارنة تتطلب `==` بينما الإسناد يستخدم `=ابتدائية`.",
+          "en": "Comparison requires `==` while assignment uses `=`."
         }
       ]
     },
@@ -71,32 +71,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "أهمية المسافات البادئة Indentation",
+        "en": "Importance of Indentation"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "لماذا تُعتبر المسافات البادئة (Indentation) ركيزة إجبارية تحت الشروط في لغة GDScript؟",
+        "en": "Why is indentation mandatory under conditions in GDScript?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "لأنها تحدد بوضوح الكتل البرمجية التابعة لكتلة الشرط بدقة",
+          "en": "Because it clearly defines code blocks belonging to the conditional branch"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "لأنها تحسن ألوان ظهور النصوص في المحرر فقط",
+          "en": "Because it only improves editor syntax highlighting colors"
+        },
+        {
+          "ar": "لأن المحرك يتجاهل الكود الذي بلا مسافات عشوائية",
+          "en": "Because the engine ignores code without random spaces"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "تعتمد لغة GDScript على المسافات لتحديد حدود كتل الأوامر التنفيذية.",
+          "en": "GDScript relies on indentation to determine execution block boundaries."
         }
       ]
     },
@@ -106,32 +106,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "متى يتم تنفيذ كتلة else؟",
+        "en": "When Does the else Block Execute?"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "في البنية الشرطية `if / else`، متى يتم تنفيذ الأوامر الموجودة داخل فرع `else`؟",
+        "en": "In an `if / else` construct, when do commands inside the `else` branch execute?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "فقط عندما يكون شرط `if` السابق غير متحقق (false)",
+          "en": "Only when the preceding `if` condition evaluates to false"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "دائماً قبل تنفيذ شرط if",
+          "en": "Always before executing the if condition"
+        },
+        {
+          "ar": "عندما يفوز اللاعب باللعبة حصراً",
+          "en": "Exclusively when the player wins the game"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "فرع else يمثل الحالة الافتراضية البديلة عند فشل شرط if.",
+          "en": "The else branch acts as the fallback when the if condition fails."
         }
       ]
     },
@@ -141,35 +141,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: كتابة شرط فحص فتح الأبواب",
+        "en": "Guided Task: Writing Door Unlock Condition"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على كتابة شرط بسيط لفحص امتلاك مفتاح فتح الباب.",
+        "en": "Practice writing a simple condition checking for door key ownership."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "عرّف متغيراً `var has_key = true`.",
+          "en": "Define `var has_key = true`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "اكتب شرطاً `if has_key:` يطبع \"Door Open\" وإلا يطبع \"Locked\".",
+          "en": "Write condition `if has_key:` printing \"Door Open\" else \"Locked\"."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "تأكد من وضع النقطتين الرأسيتين `:` بعد الشرط ومراعاة المسافة البادئة.",
+          "en": "Ensure placing colon `:` after condition and correct indentation."
         }
       ]
     },
@@ -179,32 +171,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "كتابة شرط فحص النجاح",
+        "en": "Writing Success Check Condition"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Big`",
-        "en": "Write or complete the example so its output is:\n\n`Big`"
+        "ar": "اكتب سكربتاً بفحص متغير `var points = 60`؛ إذا كانت أكبر من أو تساوي 50، اطبع `Pass` وإلا اطبع `Fail` داخل دالة `_ready()`.",
+        "en": "Write a script checking `var points = 60`; if greater than or equal to 50, print `Pass` else print `Fail` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "var n = 4\nif n > 2:\n    print(\"Big\")\nelse:\n    print(\"Small\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var points = 60\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var points = 60\n    if points >= 50:\n        print(\"Pass\")\n    else:\n        print(\"Fail\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `if points >= 50:` ثم اطبع Pass وتحت else اطبع Fail.",
+          "en": "Use `if points >= 50:` then print Pass and under else print Fail."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة Pass بنجاح لاجتياز النقاط الحدية",
+            "en": "Verifying successful Pass output for passing score boundary"
           },
-          "expectedOutput": "Big"
+          "expectedOutput": "Pass"
         }
       ]
     },
@@ -214,32 +202,28 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "اختبار حالة الفشل في الشرط",
+        "en": "Testing Failure State in Condition"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nSmall",
-        "en": "Write code that applies the lesson idea and produces this output:\n\nSmall"
+        "ar": "اكتب سكربتاً يفحص `var health = 0`؛ إذا كانت `health > 0` اطبع `Alive` وإلا اطبع `Dead`.",
+        "en": "Write a script checking `var health = 0`; if `health > 0` print `Alive` else `Dead`."
       },
-      "starterCode": "",
-      "solutionCode": "var n = 1\nif n > 2:\n    print(\"Big\")\nelse:\n    print(\"Small\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var health = 0\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var health = 0\n    if health > 0:\n        print(\"Alive\")\n    else:\n        print(\"Dead\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "عندما تكون health تساوي 0 سينفذ فرع else ويطبع Dead.",
+          "en": "When health is 0 the else branch executes and prints Dead."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة Dead عندما تكون الطاقة صفرًا",
+            "en": "Verifying Dead output when health is zero"
           },
-          "expectedOutput": "Small"
+          "expectedOutput": "Dead"
         }
       ]
     },
@@ -249,32 +233,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ استخدام علامة الإسناد في الشرط",
+        "en": "Fixing Assignment Operator Bug in Condition"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`B`",
-        "en": "Write or complete the example so its output is:\n\n`B`"
+        "ar": "الشيفرة التالية تخطئ وتستخدم علامة إسناد فردية `=` في الشرط بدلاً من `==`. أصلحها لتعرض `Equal`:",
+        "en": "The following code mistakenly uses single assignment `=` in condition instead of `==`. Fix it to display `Equal`:"
       },
-      "starterCode": "var score = 75\nif score >= 80:\n    pront(\"A\")\nelif score >= 50:\n    print(\"B\")\nelse:\n    print(\"C\")",
-      "solutionCode": "var score = 75\nif score >= 80:\n    print(\"A\")\nelif score >= 50:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var level = 5\n    if level = 5:\n        print(\"Equal\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var level = 5\n    if level == 5:\n        print(\"Equal\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استبدل `=` المفردة بـ `==` المزدوجة للمقارنة.",
+          "en": "Replace single `=` with double `==` for comparison."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الشرط بشكل صحيح بعد استخدام ==",
+            "en": "Verifying condition operation correctly after using =="
           },
-          "expectedOutput": "B"
+          "expectedOutput": "Equal"
         }
       ]
     },
@@ -284,32 +264,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج فحص الشرط البسيط",
+        "en": "Predict Simple Condition Check Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`0`",
-        "en": "What output does this example display?\n\n`0`"
+        "ar": "ما الذي سيطبعه هذا السكربت عند تنفيذه:\n\n```gdscript\nextends Node\nfunc _ready():\n    var coins = 10\n    if coins >= 10:\n        print(\"Rich\")\n    else:\n        print(\"Poor\")\n```",
+        "en": "What will this script print when executed:\n\n```gdscript\nextends Node\nfunc _ready():\n    var coins = 10\n    if coins >= 10:\n        print(\"Rich\")\n    else:\n        print(\"Poor\")\n```"
       },
-      "starterCode": "var n = 0\nif n > 0:\n    print(\"+\")\nelif n < 0:\n    print(\"-\")\nelse:\n    print(\"0\")",
-      "solutionCode": "var n = 0\nif n > 0:\n    print(\"+\")\nelif n < 0:\n    print(\"-\")\nelse:\n    print(\"0\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var coins = 10\n    if coins >= 10:\n        print(\"Rich\")\n    else:\n        print(\"Poor\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var coins = 10\n    if coins >= 10:\n        print(\"Rich\")\n    else:\n        print(\"Poor\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "بما أن 10 أكبر من أو تساوي 10، فسيتحقق شرط if.",
+          "en": "Since 10 is greater than or equal to 10, the if condition passes."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع الناتج (Rich)",
+            "en": "Verifying output prediction match (Rich)"
           },
-          "expectedOutput": "0"
+          "expectedOutput": "Rich"
         }
       ]
     },
@@ -319,32 +295,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "استخدام التعبير الشرطي المختصر",
+        "en": "Using Ternary Shorthand Condition"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Adult`",
-        "en": "Write or complete the example so its output is:\n\n`Adult`"
+        "ar": "اكتب سكربتاً يستخدم التعبير المختصر لطباعة `Open` إذا كان متغير `var open = true` صحيحاً وإلا `Closed`.",
+        "en": "Write a script using shorthand expression to print `Open` if `var open = true` is true else `Closed`."
       },
-      "starterCode": "",
-      "solutionCode": "var age = 20\nprint(\"Adult\" if age >= 18 else \"Child\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var open = true\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var open = true\n    print(\"Open\" if open else \"Closed\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `print(\"Open\" if open else \"Closed\")`.",
+          "en": "Use `print(\"Open\" if open else \"Closed\")`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة ناتج التعبير المختصر (Open)",
+            "en": "Verifying shorthand expression result correctness (Open)"
           },
-          "expectedOutput": "Adult"
+          "expectedOutput": "Open"
         }
       ]
     },
@@ -354,32 +326,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي الشروط البسيطة الشامل",
+        "en": "Comprehensive Simple Conditions Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Retry`",
-        "en": "Write or complete the example so its output is:\n\n`Retry`"
+        "ar": "اكتب سكربتاً يعرّف `var player_score = 120`؛ إذا كانت أكبر من 100 اطبع `Bonus Unlocked` وإلا اطبع `Standard`.",
+        "en": "Write a script defining `var player_score = 120`; if greater than 100 print `Bonus Unlocked` else `Standard`."
       },
-      "starterCode": "",
-      "solutionCode": "var score = 20\nprint(\"Pass\" if score >= 50 else \"Retry\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var player_score = 120\n    if player_score > 100:\n        print(\"Bonus Unlocked\")\n    else:\n        print(\"Standard\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم شرط `player_score > 100` مع الفروع المناسبة.",
+          "en": "Use condition `player_score > 100` with appropriate branches."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من مطابقة طباعة Bonus Unlocked بنجاح",
+            "en": "Verifying successful Bonus Unlocked output match"
           },
-          "expectedOutput": "Retry"
+          "expectedOutput": "Bonus Unlocked"
         }
       ]
     }

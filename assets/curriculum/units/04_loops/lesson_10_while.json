@@ -2,31 +2,31 @@
   "id": "lesson_10_while",
   "unitId": "unit_04_loops",
   "title": {
-    "ar": "حلقة while",
-    "en": "The while loop"
+    "ar": "حلقة while ومخاطر التكرار اللانهائي",
+    "en": "The while Loop and Infinite Loop Hazards"
   },
   "objective": {
-    "ar": "كرّر التعليمات ما دام الشرط صحيحاً مع تحديث الحالة لإنهاء الحلقة.",
-    "en": "Repeat statements while a condition is true, updating state so the loop ends."
+    "ar": "إتقان استخدام حلقة `while` لتنفيذ الأوامر شرطياً، مع الانتباه التام للتحذير الحرج لتجنب تجميد المحرك بسبب الحلقات اللانهائية.",
+    "en": "Master using the `while` loop for conditional repetition, paying strict attention to the critical warning preventing engine freezes from infinite loops."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## حلقة while\n\nتستمر `while` ما دام شرطها صحيحاً؛ لذا حدّث الحالة داخل الحلقة حتى تنتهي. استخدمها عندما يعتمد عدد التكرارات على شرط لا على عدد معروف. افحص حالة البداية وحدّ التوقف، وتجنب حلقة لا نهائية بتغيير قيمة تدخل في الشرط.\n\n### مثال عملي\n\n```gdscript\nvar i = 0\nwhile i < 3:\n    print(i)\n    i += 1\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## The while loop\n\n`while` continues as long as its condition is true, so update state inside the loop to make it finish. Use it when repetition depends on a condition rather than a known count. Check the initial state and stopping boundary, and avoid an infinite loop by changing a value used in the condition.\n\n### Practical example\n\n```gdscript\nvar i = 0\nwhile i < 3:\n    print(i)\n    i += 1\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## حلقة while ومخاطر الحلقات اللانهائية في GDScript\n\n### 1. المفهوم في سياق الألعاب\nحلقة `while` تستمر في التكرار **ما دام الشرط يحافظ على كونه صحيحاً (`true`)**. تُستخدم عندما لا تكون متأكداً من عدد المرات المطلوبة، بل تعتمد على حدث ديناميكي (مثل الانتظار حتى نفاد طاقة العدو أو انتهاء العد التنازلي).\n\n### 2. القواعد والصياغة والتحذير الحرج\n- تُكتب بالشكل `while condition:` مع تحديث متغير الشرط داخل الجسم البرمجي.\n- ⚠️ **تحذير حرج جداً (تجميد المحرك):** إذا نسيت تحديث المتغير الذي يعتمد عليه الشرط (مثل نسيان كتابة `i += 1`)، ستدخل اللعبة في **حلقة لانهائية (Infinite Loop)** تقوم بتجميد خيط معالجة اللعبة بالكامل وتتطلب إغلاق محرك Godot قسرياً!\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var countdown = 3\n    while countdown > 0:\n        print(countdown)\n        # تحديث الحالة لمنع التجميد اللانهائي\n        countdown -= 1\n    print(\"Liftoff!\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تأكد دائماً من وجود مسار واضح يجعل الشرط يتحول إلى `false` خلال عدد محدد من الخطوات.\n- ℹ️ **معلومة تقنية:** في ألعاب الفيديو، تجنب استخدام `while` طويلة داخل خيط المعالجة الرئيسي (Main Thread) لتفادي حدوث هبوط مفاجئ في معدل الإطارات (Lag Spike).\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** مع كل حلقة `while`، اسأل نفسك فوراً: *متى وأين يتحول هذا الشرط إلى false؟* وضَع دائماً آلية لتحديث وتغيير الحالة.",
+    "en": "## The while Loop and Infinite Loop Hazards in GDScript\n\n### 1. Concept in Game Context\nThe `while` loop keeps repeating **as long as its condition remains true (`true`)**. It is used when you don't know the exact count in advance, but rely on a dynamic event (like waiting until enemy health is zero or a countdown finishes).\n\n### 2. Rules, Syntax, and Critical Warning\n- Written as `while condition:` with mandatory state updates inside the body.\n- ⚠️ **Critical Official Warning (Engine Freeze):** If you forget to update the condition variable (like forgetting `i += 1`), your game enters an **Infinite Loop** that completely freezes the game thread and forces a hard close of Godot!\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    var countdown = 3\n    while countdown > 0:\n        print(countdown)\n        # Update state to prevent infinite freeze\n        countdown -= 1\n    print(\"Liftoff!\")\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Always ensure a clear path exists where the condition evaluates to `false` within bounded steps.\n- ℹ️ **Tech Note:** In video games, avoid heavy `while` loops inside the main rendering thread to prevent severe lag spikes.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** With every `while` loop, instantly ask yourself: *When and where does this condition become false?* Always implement a state-update mechanism."
   },
-  "exampleCode": "var i = 0\nwhile i < 3:\n    print(i)\n    i += 1",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var countdown = 3\n    while countdown > 0:\n        print(countdown)\n        countdown -= 1\n    print(\"Liftoff!\")",
   "documentation": {
-    "ar": "### حلقة while\n\nتستمر `while` ما دام شرطها صحيحاً؛ لذا حدّث الحالة داخل الحلقة حتى تنتهي. استخدمها عندما يعتمد عدد التكرارات على شرط لا على عدد معروف. افحص حالة البداية وحدّ التوقف، وتجنب حلقة لا نهائية بتغيير قيمة تدخل في الشرط.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### The while loop\n\n`while` continues as long as its condition is true, so update state inside the loop to make it finish. Use it when repetition depends on a condition rather than a known count. Check the initial state and stopping boundary, and avoid an infinite loop by changing a value used in the condition.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع حلقة while في GDScript\n\n- التكرار الشرطي المستمر.\n- خطورة الحلقات اللانهائية وتجميد المعالج.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### while Loop Reference in GDScript\n\n- Conditional continuous iteration.\n- Danger of infinite loops and thread freezing.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل حلقة while في Godot",
+        "en": "Godot while Loop Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#while"
     }
   ],
   "exercises": [
@@ -36,32 +36,32 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "خطر الحلقات اللانهائية في while",
+        "en": "Danger of Infinite Loops in while"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "ما الذي يحدث للعبة أو المحرك إذا كتبت حلقة `while` بشرط لا ينتهي أبداً ولا يُحدث متغيراته؟",
+        "en": "What happens to the game or engine if you write a `while` loop with an unending condition and unmutated variables?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "تحدث حلقة لانهائية (Infinite Loop) تجمد خيط المعالجة بالكامل وتتطلب إغلاق المحرك قسرياً",
+          "en": "An infinite loop occurs, completely freezing the game thread and forcing a hard engine close"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "يتجاهل المحرك الحلقة تلقائياً ويستمر في العمل بسلاسة",
+          "en": "The engine automatically ignores the loop and runs smoothly"
+        },
+        {
+          "ar": "تتضاعف سرعة اللعبة أضعافاً مضاعفة",
+          "en": "Game speed doubles exponentially"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "حلقة while تتطلب دائماً تحديث المتغير لإنهاء الشرط.",
+          "en": "A while loop always requires variable updates to terminate the condition."
         }
       ]
     },
@@ -71,32 +71,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "متى نفضل استخدام حلقة while؟",
+        "en": "When Do We Prefer while Loop?"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "في أي ظرف برمجي يكون استخدام حلقة `while` مناسباً أكثر من حلقة `for`؟",
+        "en": "In what coding context is a `while` loop more appropriate than a `for` loop?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "عندما يعتمد التكرار على تحقق شرط ديناميكي غير معلوم عدد خطواته مسبقاً",
+          "en": "When repetition depends on a dynamic condition with unknown step counts beforehand"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "عند تكرار عملية لعدد محدود وثابت من المرات مثل 10 مرات",
+          "en": "When repeating for a fixed count like 10 times"
+        },
+        {
+          "ar": "عند رسم واجهات المستخدم الرسومية فقط",
+          "en": "When drawing GUI widgets exclusively"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "while مخصصة للشروط الديناميكية المستمرة.",
+          "en": "while is tailored for ongoing dynamic conditions."
         }
       ]
     },
@@ -106,32 +106,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "كيفية إنهاء حلقة while بأمان",
+        "en": "How to Safely Terminate while Loop"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "ما هي الممارسة الإجبارية لمنع تجميد المعالج داخل حلقة `while`؟",
+        "en": "What is the mandatory practice to prevent thread freezing inside a `while` loop?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "تحديث وتغيير قيمة المتغير الذي يعتمد عليه شرط الاستمرار في كل دورة",
+          "en": "Updating and changing the condition variable value on every single iteration"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "وضع تعليق عادي `#` داخل الحلقة",
+          "en": "Placing a normal comment `#` inside the loop"
+        },
+        {
+          "ar": "تسمية المتغير بحروف كبيرة بالكامل",
+          "en": "Naming the variable in full uppercase"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "يجب أن يتغير شرط التوقف بمرور الدورات.",
+          "en": "The stopping condition must change across iterations."
         }
       ]
     },
@@ -141,35 +141,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: كتابة عداد تنازلي آمن بـ while",
+        "en": "Guided Task: Writing Safe Countdown with while"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على كتابة حلقة `while` آمنة مع تحديث العداد لتجنب التجميد.",
+        "en": "Practice writing a safe `while` loop updating the counter to avoid freezing."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "عرّف متغيراً `var count = 2`.",
+          "en": "Define `var count = 2`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "اكتب `while count > 0:` واطبع القيمة ثم انقص `count -= 1`.",
+          "en": "Write `while count > 0:` print value then decrement `count -= 1`."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "تأكد دائماً من وجود سطر النقصان أو الزيادة داخل كتلة while.",
+          "en": "Always ensure the decrement or increment line exists inside the while block."
         }
       ]
     },
@@ -179,32 +171,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تطبيق حلقة while تنازلية",
+        "en": "Applying Descending while Loop"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`1\n2\n3`",
-        "en": "Write or complete the example so its output is:\n\n`1\n2\n3`"
+        "ar": "اكتب سكربتاً يستخدم حلقة `while` لطياعة العد التنازلي من 2 إلى 1 بالشكل:\n`2\n1`\nداخل دالة `_ready()`.",
+        "en": "Write a script using a `while` loop printing countdown from 2 down to 1 as:\n`2\n1`\ninside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "var i = 1\nwhile i <= 3:\n    print(i)\n    i += 1",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var n = 2\n    while n > 0:\n        print(n)\n        n -= 1",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `var n = 2` ثم `while n > 0:` مع طباعة وطرح `n -= 1`.",
+          "en": "Use `var n = 2` then `while n > 0:` printing and subtracting `n -= 1`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة العد التنازلي 2 ثم 1 بنجاح",
+            "en": "Verifying successful countdown output of 2 then 1"
           },
-          "expectedOutput": "1\n2\n3"
+          "expectedOutput": "2\n1"
         }
       ]
     },
@@ -214,32 +202,28 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تضاعف القيمة حتى حد معين بـ while",
+        "en": "Doubling Value Up to Threshold with while"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nRound\nRound",
-        "en": "Write code that applies the lesson idea and produces this output:\n\nRound\nRound"
+        "ar": "اكتب سكربتاً يبدأ بـ `var val = 1` ويستمر في مضاعفة قيمته (`val *= 2`) طالما `val < 8` مع طباعة كل قيمة.",
+        "en": "Write a script starting with `var val = 1` doubling its value (`val *= 2`) while `val < 8` printing each value."
       },
-      "starterCode": "",
-      "solutionCode": "var i = 0\nwhile i < 2:\n    print(\"Round\")\n    i += 1",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var val = 1\n    while val < 8:\n        print(val)\n        val *= 2",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "سيطبع السكربت 1 ثم 2 ثم 4.",
+          "en": "The script will print 1 then 2 then 4."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة القيم المتضاعفة 1 و 2 و 4",
+            "en": "Verifying doubled values 1, 2, and 4 print correctly"
           },
-          "expectedOutput": "Round\nRound"
+          "expectedOutput": "1\n2\n4"
         }
       ]
     },
@@ -249,32 +233,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح نقص تحديث العداد لمنع التجميد",
+        "en": "Fixing Missing Counter Update to Prevent Freeze"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`3\n2\n1`",
-        "en": "Write or complete the example so its output is:\n\n`3\n2\n1`"
+        "ar": "الشيفرة التالية تنسى تحديث المتغير مما يسبب تجميداً. أصلحها بإضافة خطوة الزيادة لتعرض 0 ثم 1:",
+        "en": "The following code forgets updating the variable causing a freeze. Fix it by adding increment to display 0 then 1:"
       },
-      "starterCode": "var n = 3\nwhile n > 0:\n    pront(n)\n    n -= 1",
-      "solutionCode": "var n = 3\nwhile n > 0:\n    print(n)\n    n -= 1",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var i = 0\n    while i < 2:\n        print(i)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var i = 0\n    while i < 2:\n        print(i)\n        i += 1",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "أضف سطر `i += 1` داخل حلقة while لتحديث الحالة.",
+          "en": "Add line `i += 1` inside the while loop to update state."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الحلقة بأمان بعد إضافة التحديث",
+            "en": "Verifying safe loop operation after adding state update"
           },
-          "expectedOutput": "3\n2\n1"
+          "expectedOutput": "0\n1"
         }
       ]
     },
@@ -284,32 +264,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج حلقة while الشرطية",
+        "en": "Predict Conditional while Loop Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`6`",
-        "en": "What output does this example display?\n\n`6`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nfunc _ready():\n    var steps = 3\n    while steps > 1:\n        print(steps)\n        steps -= 1\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nfunc _ready():\n    var steps = 3\n    while steps > 1:\n        print(steps)\n        steps -= 1\n```"
       },
-      "starterCode": "var total = 0\nvar i = 1\nwhile i <= 3:\n    total += i\n    i += 1\nprint(total)",
-      "solutionCode": "var total = 0\nvar i = 1\nwhile i <= 3:\n    total += i\n    i += 1\nprint(total)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var steps = 3\n    while steps > 1:\n        print(steps)\n        steps -= 1",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var steps = 3\n    while steps > 1:\n        print(steps)\n        steps -= 1",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "يبدأ بـ 3 ثم يطبعها ويصبح 2، وعندما يصبح 1 يتوقف الشرط steps > 1.",
+          "en": "Starts at 3, prints it becomes 2, and when 1 stops condition steps > 1."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع الناتج (3 ثم 2)",
+            "en": "Verifying output prediction match (3 then 2)"
           },
-          "expectedOutput": "6"
+          "expectedOutput": "3\n2"
         }
       ]
     },
@@ -319,32 +295,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "حلقة while للوصول إلى الهدف",
+        "en": "while Loop Reaching Target"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n1`",
-        "en": "Write or complete the example so its output is:\n\n`0\n1`"
+        "ar": "اكتب سكربتاً يبدأ بـ `var x = 0` ويستمر في زيادة `x += 2` طالما `x < 5` مع طباعة كل قيمة.",
+        "en": "Write a script starting with `var x = 0` incrementing `x += 2` while `x < 5` printing each value."
       },
-      "starterCode": "",
-      "solutionCode": "var i = 0\nwhile i < 2:\n    print(i)\n    i += 1",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var x = 0\n    while x < 5:\n        print(x)\n        x += 2",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "سيطبع السكربت 0 ثم 2 ثم 4.",
+          "en": "The script prints 0 then 2 then 4."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة القيم 0 و 2 و 4",
+            "en": "Verifying values 0, 2, and 4 print correctly"
           },
-          "expectedOutput": "0\n1"
+          "expectedOutput": "0\n2\n4"
         }
       ]
     },
@@ -354,32 +326,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي حلقة while الآمنة الشامل",
+        "en": "Comprehensive Safe while Loop Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`2`",
-        "en": "Write or complete the example so its output is:\n\n`2`"
+        "ar": "اكتب سكربتاً يحاكي استهلاك الطاقة بـ while؛ يبدأ `var energy = 30` وينقص `10` في كل دورة طالما `energy > 0` مع طباعة قيمة الطاقة المتبقية في كل خطوة.\nالخرج المتوقع:\n`30\n20\n10`",
+        "en": "Write a script simulating energy depletion with while; starts `var energy = 30` decrementing `10` each iteration while `energy > 0` printing remaining energy at each step.\nExpected output:\n`30\n20\n10`"
       },
-      "starterCode": "",
-      "solutionCode": "var n = 5\nwhile n > 2:\n    n -= 1\nprint(n)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var energy = 30\n    while energy > 0:\n        print(energy)\n        energy -= 10",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اطبع energy ثم انقص 10 في كل دورة حتى تصبح صفرًا.",
+          "en": "Print energy then subtract 10 each iteration until zero."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من مطاعة استهلاك الطاقة بالتدرج السليم",
+            "en": "Verifying energy consumption progression match"
           },
-          "expectedOutput": "2"
+          "expectedOutput": "30\n20\n10"
         }
       ]
     }

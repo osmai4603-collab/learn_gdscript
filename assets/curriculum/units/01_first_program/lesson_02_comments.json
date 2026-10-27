@@ -2,31 +2,31 @@
   "id": "lesson_02_comments",
   "unitId": "unit_01_first_program",
   "title": {
-    "ar": "التعليقات والطباعة",
-    "en": "Comments and printing"
+    "ar": "التعليقات والتوثيق",
+    "en": "Comments and Documentation"
   },
   "objective": {
-    "ar": "استخدم التعليقات لتوضيح الشيفرة و`print()` لعرض قيم مفيدة.",
-    "en": "Use comments to clarify code and `print()` to display useful values."
+    "ar": "استخدام التعليقات الفردية `#` لتوضيح الشيفرة والتعليقات التوثيقية `##` لتوليد مساعدة محرر Godot.",
+    "en": "Use single-line comments `#` to clarify code and documentation comments `##` to generate Godot editor tooltips."
   },
   "estimatedMinutes": 8,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## التعليقات والطباعة\n\nيبدأ التعليق في GDScript بالرمز `#`، ولا ينفذه المحرك. استخدمه لشرح سبب قرار أو لتقسيم مثال، لا لإعادة وصف كل سطر. تعرض `print()` قيمة في لوحة الإخراج، ويمكن كتابة عدة أوامر في أسطر منفصلة.\n\n### مثال عملي\n\n```gdscript\n# A short note\nprint(\"Ready\")\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Comments and printing\n\nA GDScript comment begins with `#` and is ignored by the engine. Use it to explain a decision or divide an example, not to restate every line. `print()` displays a value in the output panel, and multiple statements can be written on separate lines.\n\n### Practical example\n\n```gdscript\n# A short note\nprint(\"Ready\")\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## التعليقات والتوثيق في GDScript\n\n### 1. المفهوم في سياق الألعاب\nعندما تبرمج لعبة ضخمة، قد تعود لملف الشيفرة بعد أسابيع أو ينضم إليك مبرمج آخر في الفريق. التعليقات (Comments) هي ملاحظات بشرية لا ينفذها محرك Godط، بل تساعد في توضيح *سبب* كتابة الكود لا مجرد *ماذا* يفعل.\n\n### 2. القواعد والصياغة\n- **التعليق العادي:** يبدأ بالرمز `#` ويتجاهله المفسر تماماً عند التشغيل.\n- **التعليق التوثيقي:** يبدأ بالرمز المزدوج `##` فوق الدوال أو المتغيرات، ويستخدمه محرر Godot لعرض شروح جاهزة في نافذة الفحص (Inspector) والإكمال التلقائي.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\n## سرعة حركة اللاعب بالبكسل في الثانية\nconst PLAYER_SPEED: float = 300.0\n\nfunc _ready():\n    # طباعة رسالة تؤكد تحميل نظام الإعدادات\n    print(\"Settings loaded successfully\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تجنب كتابة تعليق يعيد تكرار السطر حرفياً (مثل `var x = 5 # ضع 5 في x`). اكتب بدلاً من ذلك *السبب* (مثل `var x = 5 # الحد الأقصى لمحاولات اللعب`).\n- ℹ️ **معلومة تقنية:** يمكنك استخدام التعليقات مؤقتاً لتعطيل سطر شيفرة يشك في وجود خطأ به (ما يُعرف بـ Commenting Out).\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** التعليقات الواضحة هي لغة التواصل بين المبرمج وزملائه (أو نسختك المستقبلية). وثّق الأجزاء المعقدة دائماً بـ `##` والدلائل بـ `#`.",
+    "en": "## Comments and Documentation in GDScript\n\n### 1. Concept in Game Context\nWhen building a large game, you might revisit code weeks later or collaborate with other programmers. Comments are human notes ignored by the Godot engine that clarify *why* code was written, not just *what* it does.\n\n### 2. Rules and Syntax\n- **Standard Comment:** Starts with `#` and is entirely ignored by the interpreter during execution.\n- **Documentation Comment:** Starts with `##` above functions or variables, used by the Godot editor to display tooltips in the Inspector and autocomplete.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\n## Player movement speed in pixels per second\nconst PLAYER_SPEED: float = 300.0\n\nfunc _ready():\n    # Print confirmation that settings loaded\n    print(\"Settings loaded successfully\")\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Avoid comments that merely restate the line literally (e.g., `var x = 5 # set x to 5`). Instead, explain *why* (e.g., `var x = 5 # Max retry attempts`).\n- ℹ️ **Tech Note:** You can temporarily comment out lines of code to isolate bugs.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Clear comments are communication between developers. Always document complex parts with `##` and logic hints with `#`."
   },
-  "exampleCode": "# A short note\nprint(\"Ready\")",
+  "exampleCode": "extends Node\n\n## Player movement speed in pixels per second\nconst PLAYER_SPEED: float = 300.0\n\nfunc _ready():\n    # Print confirmation that settings loaded\n    print(\"Settings loaded successfully\")",
   "documentation": {
-    "ar": "### التعليقات والطباعة\n\nيبدأ التعليق في GDScript بالرمز `#`، ولا ينفذه المحرك. استخدمه لشرح سبب قرار أو لتقسيم مثال، لا لإعادة وصف كل سطر. تعرض `print()` قيمة في لوحة الإخراج، ويمكن كتابة عدة أوامر في أسطر منفصلة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Comments and printing\n\nA GDScript comment begins with `#` and is ignored by the engine. Use it to explain a decision or divide an example, not to restate every line. `print()` displays a value in the output panel, and multiple statements can be written on separate lines.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع التوثيق الرسمي لتعليقات GDScript\n\n- استخدام `#` للتعليقات الداخلية.\n- استخدام `##` لتوثيق واجهة برمجة السكربت (API) وإتاحتها في نافذة مساعدة Godot.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Official GDScript Comments Reference\n\n- Use `#` for internal code comments.\n- Use `##` to document script APIs and expose tooltips in Godot help.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل الأسلوب الرسمي في GDScript",
+        "en": "GDScript Style Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_style_guide.html"
     }
   ],
   "exercises": [
@@ -36,32 +36,36 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "الرمز المخصص للتعليقات العادية",
+        "en": "Symbol for Standard Comments"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "ما هو الرمز الذي تبدأ به التعليقات الداخلية في لغة GDScript لكي يتجاهلها محرك الألعاب تماماً؟",
+        "en": "What symbol starts internal comments in GDScript so the engine entirely ignores them?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "الرمز `#`",
+          "en": "The `#` symbol"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "الرمز `//` أو الرمزين `/*`",
+          "en": "The `//` or `/*` symbols"
+        },
+        {
+          "ar": "العلامة الاقتصادية `$`",
+          "en": "The `$` sign"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "تستخدم لغة GDScript الرمز المفرد `#` للتعليقات.",
+          "en": "GDScript uses the single `#` symbol for comments."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول هو الرمز الصحيح في GDScript.",
+          "en": "The first option is the correct symbol in GDScript."
         }
       ]
     },
@@ -71,32 +75,36 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "الغرض من التعليقات التوثيقية ##",
+        "en": "Purpose of Documentation Comments ##"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "لماذا يُفضل استخدام الرمز المزدوج `##` فوق المتغيرات والدوال في Godot 4؟",
+        "en": "Why is it recommended to use double hash `##` above variables and functions in Godot 4?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "لزيادة سرعة معالج الرسوميات وتوليد ظلال حية",
+          "en": "To increase GPU speed and generate live shadows"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "لتوليد توثيق تلقائي يظهر في نافذة المساعدة ومحرك Godot",
+          "en": "To generate automatic documentation shown in Godot's help and tooltips"
+        },
+        {
+          "ar": "لإيقاف السكربت عن العمل مؤقتاً أثناء الاختبار",
+          "en": "To temporarily pause the script during testing"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "الرمز `##` مخصص للتوثيق المساعد (Documentation Comments).",
+          "en": "The `##` symbol is dedicated to documentation comments."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "يستخدم محرر Godot هذا التوثيق لإظهار معلومات للعاملين على المشروع.",
+          "en": "The Godot editor uses this documentation to display info to project developers."
         }
       ]
     },
@@ -106,32 +114,36 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "أفضل ممارسة لكتابة التعليقات",
+        "en": "Best Practice for Writing Comments"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "أي من العبارات التالية تمثل أفضل ممارسة عند إضافة تعليق داخل الشيفرة البرمجية؟",
+        "en": "Which of the following represents the best practice when adding a comment in code?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "شرح *السبب* من وراء كتابة الشيفرة أو القرار الهندسي المتخذ",
+          "en": "Explaining the *reason* behind code or the engineering decision made"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "إعادة كتابة كل سطر برمجي بحرفيته بلغة عربية أو إنجليزية",
+          "en": "Rewriting every single line of code literally word for word"
+        },
+        {
+          "ar": "وضع تعليق بجانب كل رقم وقوس في السكربت",
+          "en": "Placing a comment beside every number and bracket in the script"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "الكود الجيد يشرح نفسه بنفسه، والتعليق يوضح *السبب* والأهداف لا الـ *كيف* الواضحة.",
+          "en": "Good code speaks for itself; comments explain *why* rather than obvious *how*."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول يجسد القاعدة الاحترافية للتعليقات.",
+          "en": "The first option embodies the professional commenting rule."
         }
       ]
     },
@@ -141,35 +153,35 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: توثيق وتعطيل سطر مؤقتاً",
+        "en": "Guided Task: Documenting and Temporarily Disabling a Line"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تدرب على إضافة تعليق توثيقي وتعليق لتجربة تعطيل أمر طباعة.",
+        "en": "Practice adding a documentation comment and a comment to test disabling a print statement."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "أنشئ سكربتاً جديداً وأضف تعليقاً توثيقياً `##` في أعلى السكربت.",
+          "en": "Create a new script and add a documentation comment `##` at the top."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
+          "ar": "اكتب أمر `print(\"Debug\")` ثم حوّله مؤقتاً إلى تعليق باستخدام `#` وشغّل السكربت.",
+          "en": "Write `print(\"Debug\")` then temporarily comment it out using `#` and run."
         },
         {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "أزل الرمز `#` لملاحظة عودة الطباعة للعمل.",
+          "en": "Remove the `#` to observe printing resume functioning."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
+          "ar": "إضافة `#` في بداية أي سطر تمنع تشغيله.",
+          "en": "Adding `#` at the start of any line prevents its execution."
         },
         {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "التعليق المؤقت مفيد جداً في اختبار الأخطاء.",
+          "en": "Temporary commenting is very useful in bug testing."
         }
       ]
     },
@@ -179,30 +191,30 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "إضافة تعليق توضيحي قبل الطباعة",
+        "en": "Adding an Explanatory Comment Before Printing"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Ready`",
-        "en": "Write or complete the example so its output is:\n\n`Ready`"
+        "ar": "اكتب سكربتاً يبدأ بتعليق عادي `# Game Ready` ثم يطبع النص `Ready` في دالة `_ready()`.",
+        "en": "Write a script starting with a standard comment `# Game Ready` then prints `Ready` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"Ready\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    # اكتب التعليق هنا\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    # Game Ready\n    print(\"Ready\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "اجعل السطر الأول داخل الدالة يبدأ بـ `# Game Ready` والسطر الثاني `print(\"Ready\")`.",
+          "en": "Make the first line inside the function start with `# Game Ready` and the second `print(\"Ready\")`."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "تأكد من كتابة المسافات البادئة بشكل متطابق.",
+          "en": "Ensure matching indentation."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة النص مع وجود التعليق",
+            "en": "Verifying text output with comment present"
           },
           "expectedOutput": "Ready"
         }
@@ -214,32 +226,32 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "كتابة تعليق توثيقي فوق متغير",
+        "en": "Writing a Documentation Comment Above a Variable"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nGo",
-        "en": "Write code that applies the lesson idea and produces this output:\n\nGo"
+        "ar": "اكتب متغيراً باسم `score` وقيمته `100` وضع فوقه تعليقاً توثيقياً يوضح أنه يمثل نقاط اللاعب باستخدام `##`.",
+        "en": "Write a variable named `score` with value `100` and place a documentation comment above it explaining it represents player points using `##`."
       },
-      "starterCode": "",
-      "solutionCode": "# A note\nprint(\"Go\")",
+      "starterCode": "extends Node\n\n## Player score points\nvar score = 100\n\nfunc _ready():\n    print(score)",
+      "solutionCode": "extends Node\n\n## Player score points\nvar score = 100\n\nfunc _ready():\n    print(score)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "استخدم `##` قبل المتغير مباشرة.",
+          "en": "Use `##` directly before the variable."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اطبع المتغير في `_ready()` للتأكد.",
+          "en": "Print the variable in `_ready()` to verify."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة قيمة المتغير الموثق",
+            "en": "Verifying documented variable output"
           },
-          "expectedOutput": "Go"
+          "expectedOutput": "100"
         }
       ]
     },
@@ -249,32 +261,32 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "تصحيح رمز تعليق غير صالح",
+        "en": "Fixing Invalid Comment Symbol"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`A\nB`",
-        "en": "Write or complete the example so its output is:\n\n`A\nB`"
+        "ar": "الشيفرة التالية تستخدم رمز تعليق خاطئ (`//`). قم بتصحيحه إلى الرمز الصحيح في GDScript لتعمل الطباعة بسلاسة:",
+        "en": "The following code uses an invalid comment symbol (`//`). Fix it to the correct GDScript symbol for smooth printing:"
       },
-      "starterCode": "pront(\"A\")\nprint(\"B\")",
-      "solutionCode": "print(\"A\")\nprint(\"B\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    // This is a note\n    print(\"OK\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    # This is a note\n    print(\"OK\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "رمز التعليق في GDScript هو `#` وليس `//`.",
+          "en": "The comment symbol in GDScript is `#`, not `//`."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استبدل `//` بـ `#`.",
+          "en": "Replace `//` with `#`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تصحيح التعليق وإخراج الناتج الصحيح",
+            "en": "Verifying comment fix and correct output"
           },
-          "expectedOutput": "A\nB"
+          "expectedOutput": "OK"
         }
       ]
     },
@@ -284,32 +296,32 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بالناتج مع وجود تعليقات",
+        "en": "Predict Output with Comments Present"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`5`",
-        "en": "What output does this example display?\n\n`5`"
+        "ar": "ما الذي سيظهر في لوحة الإخراج عند تشغيل هذا السكربت؟\n\n```gdscript\nextends Node\nfunc _ready():\n    # print(\"Hidden\")\n    print(\"Visible\")\n```",
+        "en": "What will appear in the output panel when running this script?\n\n```gdscript\nextends Node\nfunc _ready():\n    # print(\"Hidden\")\n    print(\"Visible\")\n```"
       },
-      "starterCode": "print(4 + 1)",
-      "solutionCode": "print(4 + 1)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    # print(\"Hidden\")\n    print(\"Visible\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    # print(\"Hidden\")\n    print(\"Visible\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "الأسطر التي تبدأ بـ `#` يتم تجاهلها تماماً ولا تُطبع.",
+          "en": "Lines starting with `#` are entirely ignored and not printed."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "فقط السطر غير المعلق سيتم تنفيذه.",
+          "en": "Only the non-commented line executes."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تجاهل الأسطر المعلقة وإخراج السطر الفعال",
+            "en": "Verifying ignored commented lines and output of active line"
           },
-          "expectedOutput": "5"
+          "expectedOutput": "Visible"
         }
       ]
     },
@@ -319,32 +331,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "تنظيم كود مع تعليقات متعددة",
+        "en": "Organizing Code with Multiple Comments"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Run`",
-        "en": "Write or complete the example so its output is:\n\n`Run`"
+        "ar": "اكتب دالة `_ready()` تتضمن تعليقين في سطرين منفصلين `# Step 1` و `# Step 2` ثم تطبع `Done`.",
+        "en": "Write a `_ready()` function including two comments on separate lines `# Step 1` and `# Step 2` then prints `Done`."
       },
-      "starterCode": "",
-      "solutionCode": "# ignored\nprint(\"Run\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    # Step 1\n    # Step 2\n    print(\"Done\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "ضع كل تعليق في سطر مسبوق بـ `#` ثم أمر الطباعة.",
+          "en": "Place each comment on a separate line prefixed by `#` followed by print."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة الكلمة الأخيرة بنجاح",
+            "en": "Verifying final word output successfully"
           },
-          "expectedOutput": "Run"
+          "expectedOutput": "Done"
         }
       ]
     },
@@ -354,32 +362,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي توثيق الخصائص والمخرجات",
+        "en": "Properties and Output Documentation Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`End`",
-        "en": "Write or complete the example so its output is:\n\n`End`"
+        "ar": "اكتب سكربتاً يضم تعليقاً توثيقياً `## System Active` قبل دالة `_ready()` التي تطبع `Active`.",
+        "en": "Write a script featuring a documentation comment `## System Active` before `_ready()` which prints `Active`."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"End\")",
+      "starterCode": "extends Node\n\n## System Active\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\n## System Active\nfunc _ready():\n    print(\"Active\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `## System Active` قبل الدالة، ثم `print(\"Active\")` داخلها.",
+          "en": "Use `## System Active` before the function, then `print(\"Active\")` inside."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من الإخراج السليم للتوثيق والطباعة",
+            "en": "Verifying clean output of documentation and print"
           },
-          "expectedOutput": "End"
+          "expectedOutput": "Active"
         }
       ]
     }

@@ -3,30 +3,30 @@
   "unitId": "unit_02_variables",
   "title": {
     "ar": "المتغيرات والثوابت",
-    "en": "Variables and constants"
+    "en": "Variables and Constants"
   },
   "objective": {
-    "ar": "خزّن قيمة في متغير، وميّزها عن قيمة ثابتة لا يعاد إسنادها.",
-    "en": "Store a value in a variable and distinguish it from a constant that cannot be reassigned."
+    "ar": "استخدام الكلمة `var` لتعريف متغيرات قابلة للتغيير و`const` للثوابت، مع تطبيق قواعد التسمية القياسية بأسلوب `snake_case`.",
+    "en": "Use `var` to define mutable variables and `const` for constants, applying standard `snake_case` naming conventions."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## المتغيرات والثوابت\n\nيعرّف `var` متغيراً يمكن تغيير قيمته، بينما يعرّف `const` قيمة ثابتة لا يعاد إسنادها. اختر أسماء تصف المعنى مثل `health` أو `score` وابدأ أسماء المتغيرات بحروف صغيرة. استخدم الثابت للقيم التي لا تتغير مثل حدّ أعلى أو قيمة إعداد.\n\n### مثال عملي\n\n```gdscript\nvar score = 10\nscore = score + 5\nprint(score)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Variables and constants\n\n`var` declares a variable whose value can change, while `const` declares a fixed value that cannot be reassigned. Choose meaningful names such as `health` or `score`, and use lowercase variable names. Use a constant for values that should not change, such as a limit or setting.\n\n### Practical example\n\n```gdscript\nvar score = 10\nscore = score + 5\nprint(score)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## المتغيرات والثوابت في GDScript\n\n### 1. المفهوم في سياق الألعاب\nالمتغير (Variable) يشبه صندوقاً في الذاكرة نحتفظ بداخله ببيانات تتغير أثناء اللعب، مثل نقاط الصحة (`health`)، عدد العملات الذهبية (`coins`)، أو موقع الشخصية. أما الثابت (Constant) فهو قيمة لا تتغير طوال فترة تشغيل اللعبة (مثل أقصى سرعة ممكنة أو إصدار اللعبة).\n\n### 2. القواعد والصياغة\n- **المتغيرات:** تُعرّف بالكلمة المفتاحية `var` ويُفضل تسميتها بأحرف صغيرة مفصولة بشرطة سفلية مثل `player_score`.\n- **الثوابت:** تُعرّف بالكلمة المفتاحية `const` وعادةً تكتب بأحرف كبيرة بالكامل مثل `MAX_HEALTH = 100`.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    # تعريف متغير لعدد النقاط الابتدائية\n    var score: int = 10\n    # إضافة نقاط جديدة عند جمع جوائز\n    score = score + 5\n    print(score)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** محاولة إعادة إسناد قيمة جديدة إلى ثابت (`const`) ستؤدي إلى خطأ صياغة يوقف تشغيل السكربت فوراً.\n- ℹ️ **معلومة تقنية:** اختيار أسماء معبرة للمتغيرات (مثل `current_ammo` بدلاً من `x`) يجعل الكود قابلاً للصراءة والقراءة الفورية.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم `var` لكل قيمة تتغير بمرور الزمن داخل اللعبة، واستخدم `const` للقيم الثابتة التي يجب ألا تتغير أبداً.",
+    "en": "## Variables and Constants in GDScript\n\n### 1. Concept in Game Context\nA variable acts like a box in memory holding data that changes during gameplay, such as health points (`health`), coin counts (`coins`), or position. A constant is a fixed value that never changes throughout the game lifecycle (like max speed or version).\n\n### 2. Rules and Syntax\n- **Variables:** Declared with `var`, preferably named in lowercase with underscores like `player_score`.\n- **Constants:** Declared with `const`, typically written in full uppercase like `MAX_HEALTH = 100`.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    # Define initial score variable\n    var score: int = 10\n    # Add points upon collecting rewards\n    score = score + 5\n    print(score)\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Reassigning a new value to a constant (`const`) triggers an immediate syntax error halting script execution.\n- ℹ️ **Tech Note:** Choosing descriptive variable names (like `current_ammo` instead of `x`) makes code readable and maintainable.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Use `var` for any value changing over time in game, and `const` for fixed settings that should never be altered."
   },
-  "exampleCode": "var score = 10\nscore = score + 5\nprint(score)",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var score: int = 10\n    score = score + 5\n    print(score)",
   "documentation": {
-    "ar": "### المتغيرات والثوابت\n\nيعرّف `var` متغيراً يمكن تغيير قيمته، بينما يعرّف `const` قيمة ثابتة لا يعاد إسنادها. اختر أسماء تصف المعنى مثل `health` أو `score` وابدأ أسماء المتغيرات بحروف صغيرة. استخدم الثابت للقيم التي لا تتغير مثل حدّ أعلى أو قيمة إعداد.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Variables and constants\n\n`var` declares a variable whose value can change, while `const` declares a fixed value that cannot be reassigned. Choose meaningful names such as `health` or `score`, and use lowercase variable names. Use a constant for values that should not change, such as a limit or setting.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع تعريف المتغيرات والثوابت\n\n- `var`: متغير قابل للتعديل.\n- `const`: ثابت قيمي غير قابل للتغيير.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Variables and Constants Reference\n\n- `var`: Mutable variable.\n- `const`: Immutable constant value.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل المتغيرات في Godot",
+        "en": "Godot Variables Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#variables"
     }
   ],
   "exercises": [
@@ -36,32 +36,36 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "الفرق بين var و const",
+        "en": "Difference Between var and const"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "ما هو الفارق الجوهري بين استخدام الكلمة المفتاحية `var` والكلمة المفتاحية `const` في GDScript؟",
+        "en": "What is the core difference between `var` and `const` in GDScript?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "متغيرات `var` قابلة لتغيير قيمتها عبر الزمن، بينما ثوابت `const` ثابتة لا يمكن تعديلها",
+          "en": "`var` values can change over time, whereas `const` values are fixed and unmodifiable"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "ثوابت `const` مخصصة للعب فقط بينما `var` مخصصة لتصدير اللعبة",
+          "en": "`const` is for gameplay only while `var` is for exporting"
+        },
+        {
+          "ar": "لا يوجد أي فرق بينهما سوى عدد الحروف",
+          "en": "There is no difference except letter count"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "تذكر أن كلمة Variable تعني متغير و Constant تعني ثابت.",
+          "en": "Remember that Variable means changeable and Constant means fixed."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول يعبر بدقة عن الغرض من كليهما.",
+          "en": "The first option accurately captures their purpose."
         }
       ]
     },
@@ -71,32 +75,36 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "أفضل ممارسة لتسمية المتغيرات",
+        "en": "Best Practice for Naming Variables"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "وفقاً لدليل أسلوب البرمجة الرسمي في GDScript، كيف يُفضل تسمية المتغيرات المتعددة الكلمات؟",
+        "en": "According to the official GDScript style guide, how should multi-word variables be named?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "باستخدام الحروف الكبيرة بالكامل بدون مسافات",
+          "en": "Using full uppercase without spaces"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "باستخدام أسلوب الحروف الصغيرة الفاصلة بالشرطة السفلية (snake_case)",
+          "en": "Using lowercase separated by underscores (snake_case)"
+        },
+        {
+          "ar": "باستخدام مسافات حقيقية بين الكلمات",
+          "en": "Using actual spaces between words"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "نمط `snake_case` مثل `player_health` هو المعيار المعتمد في GDScript.",
+          "en": "The `snake_case` pattern like `player_health` is the standard in GDScript."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "اختر الخيار الذي يشير إلى الشرطة السفلية والحروف الصغيرة.",
+          "en": "Choose the option pointing to underscores and lowercase."
         }
       ]
     },
@@ -106,32 +114,36 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "ماذا يحدث عند محاولة تعديل ثابت const؟",
+        "en": "What Happens When Modifying a const?"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "إذا قمت بتعريف ثابت `const MAX_LIVES = 3` ثم كتبت في السطر التالي `MAX_LIVES = 5`، ماذا سيحدث؟",
+        "en": "If you define `const MAX_LIVES = 3` then write `MAX_LIVES = 5` next, what happens?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "يتجاهل المحرك السطر الثاني ويستمر التشغيل بصورة طبيعية",
+          "en": "The engine ignores the second line and runs normally"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "يصدر المترجم خطأ صياغة (Error) يمنع التشغيل لأن الثابت لا يقبل إعادة الإسناد",
+          "en": "The compiler triggers a syntax error blocking execution because constants cannot be reassigned"
+        },
+        {
+          "ar": "تتضاعف قيمة الثابت تلقائياً لتصبح 8",
+          "en": "The constant value automatically doubles to 8"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "الثوابت لا تقبل التغيير بعد إسنادها الأول.",
+          "en": "Constants cannot be modified after initial assignment."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "المحرك يمنع ذلك فوراً بخطأ صياغة.",
+          "en": "The engine immediately prevents this with a syntax error."
         }
       ]
     },
@@ -141,35 +153,31 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: تتبع تغير قيمة المتغير عبر الزمن",
+        "en": "Guided Task: Tracking Variable Value Changes Over Time"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "قم بإنشاء وتعديل متغير نقاط الصحة واختبار طباعة قيمته قبل وبعد الخصم.",
+        "en": "Create and modify a health points variable and test printing its value before and after deduction."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "عرّف متغيراً `var health = 100` داخل دالة `_ready()`.",
+          "en": "Define `var health = 100` inside `_ready()`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
+          "ar": "اطبع القيمة الأولية، ثم اطرح منها 20 واطبع القيمة الجديدة.",
+          "en": "Print the initial value, subtract 20, and print the new value."
         },
         {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "شغّل السكربت وتأكد من تتبع التغير في لوحة الإخراج.",
+          "en": "Run the script and verify the change tracking in output."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "المتغير يسمح بتخزين وحساب القيم الجديدة باستمرار.",
+          "en": "Variables allow storing and computing new values continuously."
         }
       ]
     },
@@ -179,32 +187,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تعريف وطباعة متغير عملات اللاعب",
+        "en": "Defining and Printing Player Coins Variable"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`4`",
-        "en": "Write or complete the example so its output is:\n\n`4`"
+        "ar": "اكتب سكربتاً يعرّف متغيراً `var coins = 50` ثم يطبع قيمته داخل دالة `_ready()`.",
+        "en": "Write a script defining `var coins = 50` then prints its value inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "var score = 4\nprint(score)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var coins = 50\n    print(coins)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "الصيغة: `var coins = 50` ثم `print(coins)`.",
+          "en": "Syntax: `var coins = 50` then `print(coins)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة قيمة متغير العملات بنجاح",
+            "en": "Verifying successful coins variable value output"
           },
-          "expectedOutput": "4"
+          "expectedOutput": "50"
         }
       ]
     },
@@ -214,32 +218,28 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تحديث قيمة المتغير وطباعتها",
+        "en": "Updating Variable Value and Printing"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\n2",
-        "en": "Write code that applies the lesson idea and produces this output:\n\n2"
+        "ar": "عرف متغيراً `var score = 10`، أضف إليه 5 ليصبح 15، ثم اطبع الناتج.",
+        "en": "Define `var score = 10`, add 5 to make it 15, then print the result."
       },
-      "starterCode": "",
-      "solutionCode": "var lives = 3\nlives = lives - 1\nprint(lives)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var score = 10\n    score = score + 5\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var score = 10\n    score = score + 5\n    print(score)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `score = score + 5` ثم `print(score)`.",
+          "en": "Use `score = score + 5` then `print(score)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة تحديث المتغير وطباعة الناتج (15)",
+            "en": "Verifying correct variable update and output (15)"
           },
-          "expectedOutput": "2"
+          "expectedOutput": "15"
         }
       ]
     },
@@ -249,32 +249,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ تعريف المتغير",
+        "en": "Fixing Variable Definition Error"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`8`",
-        "en": "Write or complete the example so its output is:\n\n`8`"
+        "ar": "الشيفرة التالية تحاول تعريف متغير بدون الكلمة المفتاحية `var`. أصلحها لتعمل وتطبع `100`:",
+        "en": "The following code attempts to define a variable without `var`. Fix it to run and print `100`:"
       },
-      "starterCode": "const MAX = 8\npront(MAX)",
-      "solutionCode": "const MAX = 8\nprint(MAX)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    speed = 100\n    print(speed)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var speed = 100\n    print(speed)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "يجب استخدام الكلمة المفتاحية `var` عند إنشاء متغير جديد.",
+          "en": "You must use the `var` keyword when creating a new variable."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الشيفرة بعد إضافة var",
+            "en": "Verifying code operation after adding var"
           },
-          "expectedOutput": "8"
+          "expectedOutput": "100"
         }
       ]
     },
@@ -284,32 +280,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج تعديل متغير السرعة",
+        "en": "Predict Output of Speed Variable Modification"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`5`",
-        "en": "What output does this example display?\n\n`5`"
+        "ar": "ما الناتج الذي يعرضه هذا السكربت عند تنفيذه؟\n\n```gdscript\nextends Node\nfunc _ready():\n    var velocity = 50\n    velocity = velocity * 2\n    print(velocity)\n```",
+        "en": "What output does this script display upon execution?\n\n```gdscript\nextends Node\nfunc _ready():\n    var velocity = 50\n    velocity = velocity * 2\n    print(velocity)\n```"
       },
-      "starterCode": "var coins = 2\ncoins = coins + 3\nprint(coins)",
-      "solutionCode": "var coins = 2\ncoins = coins + 3\nprint(coins)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var velocity = 50\n    velocity = velocity * 2\n    print(velocity)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var velocity = 50\n    velocity = velocity * 2\n    print(velocity)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اضرب القيمة الأولية 50 في 2.",
+          "en": "Multiply the initial value 50 by 2."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة حساب وتوقع ناتج الضرب",
+            "en": "Verifying calculation and expected multiplication output"
           },
-          "expectedOutput": "5"
+          "expectedOutput": "100"
         }
       ]
     },
@@ -319,32 +311,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "استخدام ثابت قيمته معلومة",
+        "en": "Using a Known Constant Value"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Lina`",
-        "en": "Write or complete the example so its output is:\n\n`Lina`"
+        "ar": "عرف ثابتاً `const MAX_LEVEL = 10` واطبع قيمته.",
+        "en": "Define constant `const MAX_LEVEL = 10` and print its value."
       },
-      "starterCode": "",
-      "solutionCode": "var name = \"Lina\"\nprint(name)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    const MAX_LEVEL = 10\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    const MAX_LEVEL = 10\n    print(MAX_LEVEL)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `const MAX_LEVEL = 10` ثم `print(MAX_LEVEL)`.",
+          "en": "Use `const MAX_LEVEL = 10` then `print(MAX_LEVEL)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة الثابت بدقة",
+            "en": "Verifying constant output accurately"
           },
-          "expectedOutput": "Lina"
+          "expectedOutput": "10"
         }
       ]
     },
@@ -354,32 +342,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي المتغيرات والثوابت المشترك",
+        "en": "Combined Variables and Constants Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`true`",
-        "en": "Write or complete the example so its output is:\n\n`true`"
+        "ar": "اكتب سكربتاً يعرّف ثابتاً `const BASE_POINTS = 50` ومتغيراً `var bonus = 25`، ثم اطبع مجموعهما داخل دالة `_ready()`.",
+        "en": "Write a script defining constant `const BASE_POINTS = 50` and variable `var bonus = 25`, then print their sum inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "var ready = true\nprint(ready)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    const BASE_POINTS = 50\n    var bonus = 25\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    const BASE_POINTS = 50\n    var bonus = 25\n    print(BASE_POINTS + bonus)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اطبع ناتج `BASE_POINTS + bonus`.",
+          "en": "Print the result of `BASE_POINTS + bonus`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة جمع الثابت والمتغير وإخراج المجموع (75)",
+            "en": "Verifying correct addition of constant and variable output (75)"
           },
-          "expectedOutput": "true"
+          "expectedOutput": "75"
         }
       ]
     }

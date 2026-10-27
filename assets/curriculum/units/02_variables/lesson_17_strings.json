@@ -2,38 +2,31 @@
   "id": "lesson_17_strings",
   "unitId": "unit_02_variables",
   "title": {
-    "ar": "النصوص والتنسيق",
-    "en": "Strings and formatting"
+    "ar": "النصوص وتنسيقها المتقدم",
+    "en": "Strings and Advanced Formatting"
   },
   "objective": {
-    "ar": "ادمج النصوص وحوّل القيم إلى نصوص لتكوين رسائل واضحة.",
-    "en": "Combine strings and convert values to text to build clear messages."
+    "ar": "إتقان دمج النصوص، استخدام دالة `str()` للتنسيق، وتطبيق تنسيق النصوص المتقدم عبر `%s` وطريقة `String.format()` لدعم تعدد اللغات.",
+    "en": "Master string concatenation, `str()` formatting, and advanced formatting using `%s` and `String.format()` for localization support."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 3,
   "contentMarkdown": {
-    "ar": "## النصوص والتنسيق\n\nالنصوص محاطة بعلامتي اقتباس ويمكن دمجها باستخدام `+`. استخدم `str(value)` لتحويل قيمة إلى نص. يوفر `String.format()` عناصر نائبة مسماة لتنسيق عدة قيم؛ طابق أسماء العناصر النائبة مع مفاتيح القاموس واكتب رسالة واضحة.\n\n### مثال عملي\n\n```gdscript\nvar player = \"Sam\"\nvar score = 12\nprint(\"Player \" + player + \", score: \" + str(score))\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Strings and formatting\n\nStrings are quoted and can be joined with `+`. Use `str(value)` to convert a value to text. `String.format()` provides named placeholders for formatting several values; match placeholder names to dictionary keys and keep the message clear.\n\n### Practical example\n\n```gdscript\nvar player = \"Sam\"\nvar score = 12\nprint(\"Player \" + player + \", score: \" + str(score))\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## النصوص وتنسيقها المتقدم في GDScript\n\n### 1. المفهوم في سياق الألعاب\nفي الألعاب، كل رسالة تظهر على الشاشة (مثل اسم البطل، النقاط، أو رسائل الحوار) تعتمد على النصوص (`String`). لتصميم واجهات قابلة للترجمة وسهلة الصيانة، نحتاج إلى أساليب احترافية لتنسيق النصوص بدلاً من الدمج البسيط العشوائي.\n\n### 2. القواعد والصياغة\n- **الدمج البسيط:** باستخدام العامل `+` مع تحويل الأرقام إلى نصوص عبر `str()`.\n- **التنسيق عبر العناصر النائبة (`%s`):** وضع عناصر نائبة يتم تعويضها بالقيم تباعاً.\n- **التنسيق عبر القواميس (`String.format()`):** تمرير قاموس يحمل مفاتيح واضحة لتعبئة النصوص بأمان تام ودعم الترجمة.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var player_name = \"Alex\"\n    var score = 150\n    # استخدام التنسيق المتقدم بالقاموس\n    var msg = \"Player {name} scored {points} pts\".format({\"name\": player_name, \"points\": score})\n    print(msg)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تجنب ربط النصوص المتكرر بـ `+` داخل الحلقات الطويلة لأنه يستهلك الذاكرة بإنشاء كائنات جديدة، واستخدم التنسيق أو المصفوفات النصية.\n- ℹ️ **معلومة تقنية:** دعم تعدد اللغات (Localization) يعتمد كلياً على استخدام العناصر النائبة المسمّاة بدلاً من دمج النصوص يدوياً.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** نسّق رسائلك دائماً باستخدام `String.format()` في النصوص المعقدة؛ فهذا يجعل الكود أنظف وأسهل في الترجمة والصيانة.",
+    "en": "## Strings and Advanced Formatting in GDScript\n\n### 1. Concept in Game Context\nIn games, every on-screen message (player names, score, dialogue) relies on strings (`String`). To design maintainable and localizable UIs, we need professional formatting methods rather than clumsy concatenation.\n\n### 2. Rules and Syntax\n- **Simple Concatenation:** Using `+` with `str()` conversions for numbers.\n- **Placeholder Formatting (`%s`):** Inserting values sequentially into placeholders.\n- **Dictionary Formatting (`String.format()`):** Passing a dictionary with clear keys to populate text safely and support localization.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    var player_name = \"Alex\"\n    var score = 150\n    # Using dictionary-based advanced formatting\n    var msg = \"Player {name} scored {points} pts\".format({\"name\": player_name, \"points\": score})\n    print(msg)\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Avoid repetitive string joining with `+` inside large loops as it creates redundant string objects in memory; prefer formatting or arrays.\n- ℹ️ **Tech Note:** Localization depends entirely on named placeholders rather than hardcoded string concatenation.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Always format complex messages using `String.format()`; it keeps code clean, maintainable, and ready for translation."
   },
-  "exampleCode": "var player = \"Sam\"\nvar score = 12\nprint(\"Player \" + player + \", score: \" + str(score))",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var player_name = \"Alex\"\n    var score = 150\n    var msg = \"Player {name} scored {points} pts\".format({\"name\": player_name, \"points\": score})\n    print(msg)",
   "documentation": {
-    "ar": "### النصوص والتنسيق\n\nالنصوص محاطة بعلامتي اقتباس ويمكن دمجها باستخدام `+`. استخدم `str(value)` لتحويل قيمة إلى نص. يوفر `String.format()` عناصر نائبة مسماة لتنسيق عدة قيم؛ طابق أسماء العناصر النائبة مع مفاتيح القاموس واكتب رسالة واضحة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Strings and formatting\n\nStrings are quoted and can be joined with `+`. Use `str(value)` to convert a value to text. `String.format()` provides named placeholders for formatting several values; match placeholder names to dictionary keys and keep the message clear.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع تنسيق النصوص في GDScript\n\n- دمج النصوص عبر `+` و `str()`.\n- تنسيق متقدم عبر `String.format()`.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### String Formatting Reference in GDScript\n\n- Joining strings via `+` and `str()`.\n- Advanced formatting via `String.format()`.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "تنسيق النصوص في GDScript",
-        "en": "GDScript format strings"
+        "ar": "دليل تنسيق النصوص في Godot",
+        "en": "Godot String Formatting Guide"
       },
       "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_format_string.html"
-    },
-    {
-      "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
-      },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ],
   "exercises": [
@@ -43,32 +36,36 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "أفضل طريقة لتنسيق الرسائل المعقدة ودعم الترجمة",
+        "en": "Best Way to Format Complex Messages and Localization"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "أي من الأساليب التالية يعتبر الأفضل هندسياً لتنسيق نصوص اللعبة وتسهيل ترجمتها لاحقاً لعدة لغات؟",
+        "en": "Which approach is considered architecturally best for game text formatting and localization?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "استخدام طريقة `String.format()` مع عناصر نائبة مسماة وقاموس بيانات",
+          "en": "Using `String.format()` with named placeholders and a data dictionary"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "كتابة نصوص ثابتة لكل لغة بدون أي متغيرات",
+          "en": "Writing hardcoded static text for every language without variables"
+        },
+        {
+          "ar": "تجنب طباعة أي نصوص في اللعبة نهائياً",
+          "en": "Avoiding printing any text in the game entirely"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "طريقة String.format() مع مفاتيح مسمّاة تدعم الترجمة وتمنع أخطاء الترتيب.",
+          "en": "String.format() with named keys supports localization and prevents order bugs."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول يعبر عن الممارسة الاحترافية.",
+          "en": "The first option expresses professional practice."
         }
       ]
     },
@@ -78,32 +75,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "كيفية دمج عدد مع نص بشكل آمن",
+        "en": "How to Safely Combine Number with Text"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "عندما تريد دمج متغير رقمي مع نص باستخدام العامل `+`، ماذا يجب عليك فعله أولاً لتجنب خطأ التداخل؟",
+        "en": "When combining a numeric variable with text using `+`, what must you do first to avoid type mismatch?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "تحويل الرقم إلى نص باستخدام دالة `str()`",
+          "en": "Convert the number to text using `str()` function"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "ضرب الرقم في صفر",
+          "en": "Multiply the number by zero"
+        },
+        {
+          "ar": "حذف النص واستخدام الأرقام فقط",
+          "en": "Delete text and use numbers only"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "استخدام `str()` ضروري عند دمج الأرقام بالنصوص بـ `+`.",
+          "en": "Using `str()` is required when combining numbers with text using `+`."
         }
       ]
     },
@@ -113,32 +110,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "مخاطر ربط النصوص المتكرر بـ + داخل الحلقات",
+        "en": "Risks of Repetitive String Joining with + in Loops"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "لماذا يُحذر من ربط السلاسل النصية بـ `+` داخل الحلقات التكرارية الضخمة؟",
+        "en": "Why is joining strings with `+` discouraged inside large loops?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "لأنه يستهلك الذاكرة ويؤدي لإنشاء كائنات نصية زائدة تؤثر على الأداء",
+          "en": "Because it wastes memory and creates redundant string objects hurting performance"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "لأن المحرك سيقوم بحذف اللعبة من حاسوبك",
+          "en": "Because the engine will delete the game from your computer"
+        },
+        {
+          "ar": "لأنه يغير لغة النظام تلقائياً",
+          "en": "Because it automatically changes system language"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "النصوص في الذاكرة ثابتة، وكل ربط بـ + ينشئ نصاً جديداً في الذاكرة.",
+          "en": "Strings in memory are immutable, and every + join creates a new string in memory."
         }
       ]
     },
@@ -148,35 +145,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: بناء رسالة لاعب منسقة",
+        "en": "Guided Task: Building a Formatted Player Message"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على إنشاء رسالة ترحيب مدمجة بالاسم والرقم.",
+        "en": "Practice creating a greeting message combining name and number."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "عرّف متغيراً للاسم `var n = \"Sam\"` والنقاط `var p = 50`.",
+          "en": "Define name variable `var n = \"Sam\"` and points `var p = 50`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "اطبع رسالة منسقة باستخدام دالة `str()` والربط النصي.",
+          "en": "Print a formatted message using `str()` and string concatenation."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "تأكد من تحويل النقاط إلى نص بـ `str(p)` قبل دمجها.",
+          "en": "Ensure converting points to string with `str(p)` before combining."
         }
       ]
     },
@@ -186,32 +175,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "دمج النص والرقم للوحة النتائج",
+        "en": "Combining Text and Number for Scoreboard"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Hello Noor`",
-        "en": "Write or complete the example so its output is:\n\n`Hello Noor`"
+        "ar": "اكتب سكربتاً يعرّف `var score = 100` ويطبع النص `Score: 100` باستخدام `str()` داخل دالة `_ready()`.",
+        "en": "Write a script defining `var score = 100` and prints `Score: 100` using `str()` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"Hello \" + \"Noor\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var score = 100\n    print(\"Score: \" + str(score))",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `print(\"Score: \" + str(score))`.",
+          "en": "Use `print(\"Score: \" + str(score))`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة النتيجة النصية مع الرقم بدقة",
+            "en": "Verifying text output with number accurately"
           },
-          "expectedOutput": "Hello Noor"
+          "expectedOutput": "Score: 100"
         }
       ]
     },
@@ -221,32 +206,28 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "استخدام التنسيق المتقدم String.format()",
+        "en": "Using Advanced String.format()"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nScore: 8",
-        "en": "Write code that applies the lesson idea and produces this output:\n\nScore: 8"
+        "ar": "اكتب سكربتاً يستخدم التنسيق المتقدم لطباعة `Item: Sword` باستخدام القاموس `{\"item\": \"Sword\"}` والعبارة المنسقة `\"Item: {item}\"`.",
+        "en": "Write a script using advanced formatting to print `Item: Sword` using dictionary `{\"item\": \"Sword\"}` and format string `\"Item: {item}\"`."
       },
-      "starterCode": "",
-      "solutionCode": "var score = 8\nprint(\"Score: \" + str(score))",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var msg = \"Item: {item}\".format({\"item\": \"Sword\"})\n    print(msg)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم العبارة مع `.format({\"item\": \"Sword\"})`.",
+          "en": "Use the string with `.format({\"item\": \"Sword\"})`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة ناتج التنسيق المتقدم بالقاموس",
+            "en": "Verifying advanced dictionary formatting output accuracy"
           },
-          "expectedOutput": "Score: 8"
+          "expectedOutput": "Item: Sword"
         }
       ]
     },
@@ -256,32 +237,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ عدم تحويل الرقم لـ str()",
+        "en": "Fixing Missing str() Number Conversion Bug"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Hi Omar`",
-        "en": "Write or complete the example so its output is:\n\n`Hi Omar`"
+        "ar": "الشيفرة التالية تحاول دمج نص ورقم مباشرة بدون `str()` مما يسبب خطأ. أصلحها لتعرض `Level: 5`:",
+        "en": "The following code tries joining text and number directly without `str()` causing an error. Fix it to display `Level: 5`:"
       },
-      "starterCode": "var name = \"Omar\"\npront(\"Hi \" + name)",
-      "solutionCode": "var name = \"Omar\"\nprint(\"Hi \" + name)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var lvl = 5\n    print(\"Level: \" + lvl)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var lvl = 5\n    print(\"Level: \" + str(lvl))",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "أضف `str(lvl)` لتتحول الأرقام إلى نصوص صالحة للدمج.",
+          "en": "Add `str(lvl)` so numbers convert to valid strings for joining."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الشيفرة بعد استخدام str() بنجاح",
+            "en": "Verifying code operation after successful str() usage"
           },
-          "expectedOutput": "Hi Omar"
+          "expectedOutput": "Level: 5"
         }
       ]
     },
@@ -291,32 +268,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج تنسيق النصوص المتقدم",
+        "en": "Predict Advanced String Formatting Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`3 items`",
-        "en": "What output does this example display?\n\n`3 items`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nfunc _ready():\n    var res = \"Gold: {amount}\".format({\"amount\": 500})\n    print(res)\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nfunc _ready():\n    var res = \"Gold: {amount}\".format({\"amount\": 500})\n    print(res)\n```"
       },
-      "starterCode": "var count = 3\nprint(str(count) + \" items\")",
-      "solutionCode": "var count = 3\nprint(str(count) + \" items\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var res = \"Gold: {amount}\".format({\"amount\": 500})\n    print(res)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var res = \"Gold: {amount}\".format({\"amount\": 500})\n    print(res)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "يتم تعويض `{amount}` بالقيمة 500 تلقائياً.",
+          "en": "{amount} is replaced by value 500 automatically."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع تنسيق القاموس",
+            "en": "Verifying dictionary format output prediction match"
           },
-          "expectedOutput": "3 items"
+          "expectedOutput": "Gold: 500"
         }
       ]
     },
@@ -326,32 +299,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "دمج عدة نصوص ثابتة",
+        "en": "Joining Multiple Static Strings"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`ABC`",
-        "en": "Write or complete the example so its output is:\n\n`ABC`"
+        "ar": "اكتب سكربت يدمج الكلمات الثلاث `\"Game\"`, `\" Over\"`, `\"!\"` في نص واحد ويطبعه.",
+        "en": "Write a script joining three words `\"Game\"`, `\" Over\"`, `\"!\"` into one string and prints it."
       },
-      "starterCode": "",
-      "solutionCode": "print(\"A\" + \"B\" + \"C\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"Game\" + \" Over\" + \"!\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `print(\"Game\" + \" Over\" + \"!\")`.",
+          "en": "Use `print(\"Game\" + \" Over\" + \"!\")`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من دمج النصوص الثلاثة بدقة",
+            "en": "Verifying accurate joining of all three strings"
           },
-          "expectedOutput": "ABC"
+          "expectedOutput": "Game Over!"
         }
       ]
     },
@@ -361,32 +330,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي النصوص والتنسيق المتقدم الشامل",
+        "en": "Comprehensive Strings and Advanced Formatting Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Level 2`",
-        "en": "Write or complete the example so its output is:\n\n`Level 2`"
+        "ar": "اكتب سكربتاً يستخدم `String.format()` لطباعة تقرير لاعب بالصيغة:\n`Player: Hero | Health: 100`\nمستخدماً القاموس المناسب.",
+        "en": "Write a script using `String.format()` to print player report in format:\n`Player: Hero | Health: 100`\nusing appropriate dictionary."
       },
-      "starterCode": "",
-      "solutionCode": "var level = 2\nprint(\"Level \" + str(level))",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var text = \"Player: {p} | Health: {h}\".format({\"p\": \"Hero\", \"h\": 100})\n    print(text)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم مفاتيح `p` و `h` في القاموس داخل دالة `.format()`.",
+          "en": "Use keys `p` and `h` in dictionary inside `.format()`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من مطابقة تقرير اللاعب المنسق بالكامل",
+            "en": "Verifying fully formatted player report match"
           },
-          "expectedOutput": "Level 2"
+          "expectedOutput": "Player: Hero | Health: 100"
         }
       ]
     }

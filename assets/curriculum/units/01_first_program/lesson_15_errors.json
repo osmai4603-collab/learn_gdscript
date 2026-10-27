@@ -2,31 +2,32 @@
   "id": "lesson_15_errors",
   "unitId": "unit_01_first_program",
   "title": {
-    "ar": "قراءة الأخطاء وتشغيل السكربت",
-    "en": "Reading errors and running a script"
+    "ar": "قراءة الأخطاء وتشخيصها (تحدي الوحدة 1)",
+    "en": "Reading Errors and Debugging (Unit 1 Capstone)"
   },
   "objective": {
-    "ar": "استخدم رسالة الخطأ ورقم السطر لتحديد المشكلة ثم أعد التشغيل للتحقق.",
-    "en": "Use an error message and line number to locate a problem, then rerun to verify."
+    "ar": "استخدام نافذة المراجع وأخطاء المحرر لتشخيص الأخطاء البرمجية وإنجاز التحدي التراكمي للوحدة الأولى.",
+    "en": "Use the debugger and editor diagnostics to troubleshoot code errors and complete the Unit 1 capstone challenge."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## قراءة الأخطاء وتشغيل السكربت\n\nقد يظهر خطأ صياغة قبل تشغيل السكربت، بينما يحدث خطأ وقت التشغيل أثناء تنفيذ سطر. ابدأ بأول رسالة، وافحص السطر المذكور وما حوله بحثاً عن قوس أو اقتباس أو اسم غير صحيح. أصلح سبباً واحداً في كل مرة ثم أعد التشغيل للتحقق من السلوك.\n\n### مثال عملي\n\n```gdscript\nvar total = 4 + 6\nprint(total)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Reading errors and running a script\n\nA syntax error may appear before a script runs, while a runtime error occurs as a line executes. Start with the first message and inspect the indicated line and nearby punctuation or names. Fix one cause at a time, then run again to verify behavior.\n\n### Practical example\n\n```gdscript\nvar total = 4 + 6\nprint(total)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## قراءة الأخطاء وتشخيصها في Godot\n\n### 1. المفهوم في سياق الألعاب\nكل مبرمج ألعاب يواجه أخطاء برمجية باستمرار؛ والفرق بين المبرمج المحترف والمبتدئ هو مدى كفاءته في قراءة رسائل الخطأ واستغلال نافذة التصحيح (Debugger) بدلاً من التخمين العشوائي.\n\n### 2. القواعد والصياغة\n- **أخطاء الصياغة (Syntax Errors):** تظهر باللون الأحمر قبل تشغيل اللعبة (مثل فقدان قوس أو علامة تنصيص)، وتمنع تشغيل المشهد تماماً.\n- **أخطاء وقت التشغيل (Runtime Errors):** تحدث أثناء لعب اللعبة (مثل قسمة عدد على صفر أو محاولة قراءة كائن غير موجود)، وتوقف تنفيذ السكربت.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    # حساب مجموع النقاط الأولي\n    var initial_score = 50 + 50\n    print(initial_score)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تحذيرات المترجم الصفراء (Warnings) لا تمنع تشغيل اللعبة فوراً، ولكن تجاهلها غالباً يؤدي إلى انهيارات مفاجئة عند تصدير اللعبة للمستخدمين.\n- ℹ️ **معلومة تقنية:** اقرأ رقم السطر ورسالة الخطأ بعناية فائقة؛ وغالباً ما يكون الخطأ في السطر المشار إليه أو السطر الذي يسبقه مباشرة.\n\n### 5. الملخص والقاعدة الذهبية (تحدي الوحدة 1)\n> **قاعدة ذهبية وتحدي الوحدة:** عند ظهور خطأ، ابدأ دائماً بالخطأ الأول في القائمة. وفي ختام هذه الوحدة، سننجز **تحدي بطاقة هوية اللعبة (Game Splash Card)** لدمج مفاهيم الطباعة والتعليقات وتشخيص الأخطاء.",
+    "en": "## Reading Errors and Debugging in Godot\n\n### 1. Concept in Game Context\nEvery game developer encounters bugs constantly; the difference between a pro and a beginner is how efficiently they read error messages and use the Debugger instead of random guessing.\n\n### 2. Rules and Syntax\n- **Syntax Errors:** Appear in red before running the game (e.g., missing parenthesis or quote), preventing scene execution entirely.\n- **Runtime Errors:** Occur while playing (e.g., division by zero or accessing a null object), halting script execution.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    # Calculate initial score total\n    var initial_score = 50 + 50\n    print(initial_score)\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Yellow compiler warnings do not block immediate play, but ignoring them often causes sudden crashes when exporting games for players.\n- ℹ️ **Tech Note:** Read the line number and error message carefully; the bug is usually on the indicated line or right above it.\n\n### 5. Summary and Golden Rule (Unit 1 Capstone)\n> **Golden Rule & Capstone:** When facing errors, always start with the first error in the list. In this lesson's capstone, we accomplish the **Game Splash Card** challenge integrating printing, comments, and debugging.",
+    "ar_translation_note": "تحدي الوحدة 1 التراكمي يدمج الطباعة والتنظيم والأخطاء."
   },
-  "exampleCode": "var total = 4 + 6\nprint(total)",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var initial_score = 50 + 50\n    print(initial_score)",
   "documentation": {
-    "ar": "### قراءة الأخطاء وتشغيل السكربت\n\nقد يظهر خطأ صياغة قبل تشغيل السكربت، بينما يحدث خطأ وقت التشغيل أثناء تنفيذ سطر. ابدأ بأول رسالة، وافحص السطر المذكور وما حوله بحثاً عن قوس أو اقتباس أو اسم غير صحيح. أصلح سبباً واحداً في كل مرة ثم أعد التشغيل للتحقق من السلوك.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Reading errors and running a script\n\nA syntax error may appear before a script runs, while a runtime error occurs as a line executes. Start with the first message and inspect the indicated line and nearby punctuation or names. Fix one cause at a time, then run again to verify behavior.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع تشخيص الأخطاء في Godot\n\n- **نافذة الـ Debugger:** تتبع المكدس (Stack Trace) ورسائل الأخطاء الحمراء والصفراء.\n- **إصلاح الأخطاء:** معالجة المشاكل تصاعدياً من الأعلى للأفل.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0), وليس محتوى معتمداً من Godot.",
+    "en": "### Godot Debugging Reference\n\n- **Debugger Panel:** Track stack traces and red/yellow error diagnostics.\n- **Bug Fixing:** Address issues top-down sequentially.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل تصحيح الأخطاء في Godot",
+        "en": "Godot Debugger Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation.html"
     }
   ],
   "exercises": [
@@ -36,32 +37,36 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "الفرق بين أخطاء الصياغة وأخطاء التشغيل",
+        "en": "Difference Between Syntax and Runtime Errors"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "متى تظهر أخطاء الصياغة (Syntax Errors) في محرك Godot عادةً؟",
+        "en": "When do syntax errors typically appear in the Godot engine?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "قبل تشغيل اللعبة وتمنع تشغيل المشهد باللون الأحمر",
+          "en": "Before running the game, blocking scene execution in red"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "فقط بعد إغلاق اللعبة بـ 5 دقائق",
+          "en": "Only 5 minutes after closing the game"
+        },
+        {
+          "ar": "عندما يربح اللاعب المرحلة النهائية",
+          "en": "When the player wins the final stage"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "أخطاء الصياغة تمنع تشغيل المشهد قبل البدء.",
+          "en": "Syntax errors prevent scene startup before execution."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول يعبر بدقة عن طبيعة أخطاء الصياغة.",
+          "en": "The first option accurately describes syntax errors."
         }
       ]
     },
@@ -71,32 +76,36 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "التعامل مع تحذيرات المترجم الصفراء",
+        "en": "Handling Yellow Compiler Warnings"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "كيف يجب أن تتعامل مع تحذيرات المترجم الصفراء (Warnings) في نافذة السكربت؟",
+        "en": "How should you handle yellow compiler warnings in the script editor?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "تجاهلها تماماً لأنها لا تؤثر أبداً على تصدير اللعبة",
+          "en": "Ignore them completely as they never affect game export"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "فحصها ومعالجتها مبكراً لتجنب انهيارات مفاجئة مستقبلاً",
+          "en": "Inspect and resolve them early to avoid future unexpected crashes"
+        },
+        {
+          "ar": "حذف ملف السكربت وإعادة تثبيت المحرك فور ظهورها",
+          "en": "Delete the script file and reinstall the engine upon appearance"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "التحذيرات تشير إلى مشاك محتملة قد تتفاقم لاحقاً.",
+          "en": "Warnings point to potential issues that could escalate later."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الثاني هو التصرف الاحترافي الهندسي.",
+          "en": "The second option is the professional engineering approach."
         }
       ]
     },
@@ -106,32 +115,36 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "أول خطوة عند حدوث خطأ برمجي",
+        "en": "First Step When Encountering an Error"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "عندما يظهر خطأ برمجي مفاجئ أثناء اختبار اللعبة، ما هو الإجراء الأصح للبدء في حله؟",
+        "en": "When a sudden code error occurs during playtesting, what is the correct starting action?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "قراءة أول رسالة خطأ في القائمة ورقم السطر المشار إليه",
+          "en": "Read the first error message in the list and the indicated line number"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "تعديل جميع أسطر الكود بشكل عشوائي حتى يختفي الخطأ",
+          "en": "Randomly modify all code lines until the error disappears"
+        },
+        {
+          "ar": "إيقاف تشغيل حاسوبك المكتبي فوراً",
+          "en": "Shut down your desktop computer immediately"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "رسائل الخطأ ورقم السطر هي دليلك المباشر لحل المشكلة.",
+          "en": "Error messages and line numbers are your direct guide to solving the issue."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "ابدأ دائماً بقراءة الخطأ الأول ورقم السطر.",
+          "en": "Always start by reading the first error and line number."
         }
       ]
     },
@@ -141,35 +154,35 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: تتبع وتشخيص خطأ متعمد",
+        "en": "Guided Task: Tracking and Diagnosing a Deliberate Bug"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على اكتشاف خطأ صياغة وإصلاحه عبر رسالة المحرر.",
+        "en": "Practice discovering a syntax error and fixing it via the editor message."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "اكتب سكربتاً يحتوي على خطأ متعمد (مثل `print(\"Test)` بدون إغلاق علامة التنصيص).",
+          "en": "Write a script with a deliberate bug (e.g. `print(\"Test)` without closing quote)."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
+          "ar": "لاحظ ظهور خطأ باللون الأحمر في شريط المخرجات مع رقم السطر.",
+          "en": "Observe the red error in the output bar with the line number."
         },
         {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "أصلح الخطأ بإغلاق علامة التنصيص وشغّل المشهد بنجاح.",
+          "en": "Fix the error by closing the quote and run the scene successfully."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
+          "ar": "أخطاء الصياغة الحمراء تمنع التشغيل الفوري.",
+          "en": "Red syntax errors prevent immediate execution."
         },
         {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "إصلاح النقص البسيط يعيد السكربت للعمل.",
+          "en": "Fixing minor omissions restores script operation."
         }
       ]
     },
@@ -179,32 +192,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تصحيح وكتابة شيفرة خالية من الأخطاء",
+        "en": "Correcting and Writing Bug-Free Code"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`4`",
-        "en": "Write or complete the example so its output is:\n\n`4`"
+        "ar": "اكتب دالة `_ready()` سليمة تطبع النتيجة الصحيحة لعملية حسابية `10 + 20`:",
+        "en": "Write a sound `_ready()` function that prints the correct result of the calculation `10 + 20`:"
       },
-      "starterCode": "",
-      "solutionCode": "print(2 + 2)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    print(10 + 20)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(10 + 20)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "العملية الحسابية داخل print() لا تحتاج علامات تنصيص لتطبع ناتجها (30).",
+          "en": "Arithmetic inside print() doesn't need quotes to print its result (30)."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة ناتج حساب المجموع",
+            "en": "Verifying calculation sum result correctness"
           },
-          "expectedOutput": "4"
+          "expectedOutput": "30"
         }
       ]
     },
@@ -214,30 +223,26 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "كتابة متغير وحساب رسالة خالية من الأخطاء",
+        "en": "Writing Variable and Calculating Error-Free Message"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\n3",
-        "en": "Write code that applies the lesson idea and produces this output:\n\n3"
+        "ar": "عرف متغيراً باسم `item_count = 3` ثم اطبع قيمته.",
+        "en": "Define a variable named `item_count = 3` and then print its value."
       },
-      "starterCode": "",
-      "solutionCode": "var total = 3\nprint(total)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var item_count = 3\n    print(item_count)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var item_count = 3\n    print(item_count)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "تعريف المتغير بـ `var` ثم استخدامه بـ `print(item_count)`.",
+          "en": "Define variable with `var` then use with `print(item_count)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة قيمة المتغير بدقة",
+            "en": "Verifying variable value output accurately"
           },
           "expectedOutput": "3"
         }
@@ -249,32 +254,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح قوس ناقص في دالة الطباعة",
+        "en": "Fixing Missing Parenthesis in Print"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Valid`",
-        "en": "Write or complete the example so its output is:\n\n`Valid`"
+        "ar": "الشيفرة التالية تفتقر إلى قوس الإغلاق. أصلحها لتعمل وتطبع `Debug OK`:",
+        "en": "The following code lacks a closing parenthesis. Fix it to run and print `Debug OK`:"
       },
-      "starterCode": "pront(\"Valid\")",
-      "solutionCode": "print(\"Valid\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    print(\"Debug OK\"",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"Debug OK\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "أضف قوس الإغلاق `)` في نهاية السطر.",
+          "en": "Add closing parenthesis `)` at the end of the line."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الشيفرة بعد إضافة القوس",
+            "en": "Verifying code function after adding parenthesis"
           },
-          "expectedOutput": "Valid"
+          "expectedOutput": "Debug OK"
         }
       ]
     },
@@ -284,32 +285,32 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بالناتج بعد إصلاح الأخطاء",
+        "en": "Predict Output After Fixing Errors"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`6`",
-        "en": "What output does this example display?\n\n`6`"
+        "ar": "ما الذي سيعرضه هذا السكربت الخالي من الأخطاء؟\n\n```gdscript\nextends Node\nfunc _ready():\n    var level = 1\n    print(\"Level: \", level)\n```",
+        "en": "What will this error-free script display?\n\n```gdscript\nextends Node\nfunc _ready():\n    var level = 1\n    print(\"Level: \", level)\n```"
       },
-      "starterCode": "var count = 5\nprint(count + 1)",
-      "solutionCode": "var count = 5\nprint(count + 1)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var level = 1\n    print(\"Level: \", level)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var level = 1\n    print(\"Level: \", level)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "دالة print في Godot تقبل عدة قيم مفصولة بفاصلة.",
+          "en": "The print function in Godot accepts multiple comma-separated values."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "الناتج يدمج النص والرقم بمسافة افتراضية.",
+          "en": "Output combines text and number with a default space."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة النص المدمج مع المتغير",
+            "en": "Verifying concatenated text and variable output"
           },
-          "expectedOutput": "6"
+          "expectedOutput": "Level: 1"
         }
       ]
     },
@@ -319,32 +320,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "فحص متغير حالة النظام",
+        "en": "Checking System State Variable"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`5.0`",
-        "en": "Write or complete the example so its output is:\n\n`5.0`"
+        "ar": "اكتب سكربتاً يعرّف متغيراً منطقياً `var is_active = true` ويطبع قيمته.",
+        "en": "Write a script defining boolean variable `var is_active = true` and prints its value."
       },
-      "starterCode": "",
-      "solutionCode": "print(10 / 2)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var is_active = true\n    print(is_active)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var is_active = true\n    print(is_active)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `var is_active = true` ثم `print(is_active)`.",
+          "en": "Use `var is_active = true` then `print(is_active)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة القيمة المنطقية true",
+            "en": "Verifying boolean true output"
           },
-          "expectedOutput": "5.0"
+          "expectedOutput": "true"
         }
       ]
     },
@@ -354,32 +351,32 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي الوحدة 1 التراكمي: بطاقة هوية اللعبة (Game Splash Card)",
+        "en": "Unit 1 Capstone Challenge: Game Splash Card"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`true`",
-        "en": "Write or complete the example so its output is:\n\n`true`"
+        "ar": "أنجز التحدي التراكمي للوحدة الأولى: اكتب سكربتاً يضم تعليقاً توثيقياً للعنوان `## Game Splash Card` وفي دالة `_ready()` يطبع تباعاً في ثلاثة أسطر منفصلة:\n1. `Title: Cyber Runner`\n2. `Version: 1.0`\n3. `Status: Ready`",
+        "en": "Complete the Unit 1 capstone challenge: Write a script featuring documentation comment `## Game Splash Card` and inside `_ready()` prints consecutively in three separate lines:\n1. `Title: Cyber Runner`\n2. `Version: 1.0`\n3. `Status: Ready`"
       },
-      "starterCode": "",
-      "solutionCode": "var ready = true\nprint(ready)",
+      "starterCode": "extends Node\n\n## Game Splash Card\nfunc _ready():\n    # اكتب الأوامر هنا\n    ",
+      "solutionCode": "extends Node\n\n## Game Splash Card\nfunc _ready():\n    print(\"Title: Cyber Runner\")\n    print(\"Version: 1.0\")\n    print(\"Status: Ready\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "اكتب ثلاثة أوامر `print()` متتالية داخل دالة `_ready()` مع مراعاة النصوص بدقة.",
+          "en": "Write three consecutive `print()` statements inside `_ready()` with exact text."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "هذا التحدي يدمج مهارات الطباعة والتعليقات وتجنب أخطاء الصياغة بنجاح.",
+          "en": "This challenge successfully integrates printing, comments, and syntax error prevention."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من مطابقة بطاقة هوية اللعبة بكافة أسطرها الثلاثة",
+            "en": "Verifying game splash card output matching all three lines"
           },
-          "expectedOutput": "true"
+          "expectedOutput": "Title: Cyber Runner\nVersion: 1.0\nStatus: Ready"
         }
       ]
     }

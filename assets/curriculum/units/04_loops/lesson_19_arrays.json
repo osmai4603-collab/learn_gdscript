@@ -2,38 +2,31 @@
   "id": "lesson_19_arrays",
   "unitId": "unit_04_loops",
   "title": {
-    "ar": "المصفوفات Array",
-    "en": "Arrays"
+    "ar": "المصفوفات Array والعمليات عليها",
+    "en": "Arrays and Operations"
   },
   "objective": {
-    "ar": "أنشئ مصفوفة واقرأ عناصرها وأضف إليها وكرّر عليها.",
-    "en": "Create an array, read its items, add to it, and iterate over it."
+    "ar": "إتقان إنشاء واستخدام المصفوفات، فهم انتقالها بالمرجع (Pass-by-reference)، والالتزام بتحذير عدم تعديل المصفوفة أثناء الدوران عليها.",
+    "en": "Master creating and using arrays, understand Pass-by-reference semantics, and adhere to the warning against mutating arrays while iterating."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 3,
   "contentMarkdown": {
-    "ar": "## المصفوفات Array\n\nالمصفوفة تسلسل مرتب من القيم، ويبدأ فهرس أول عنصر من صفر. استخدم `array[index]` للقراءة أو الإسناد، و`append()` لإضافة عنصر. يجب أن يقع الفهرس بين صفر و`size() - 1`. يمكنك التكرار على العناصر مباشرة باستخدام `for`.\n\n### مثال عملي\n\n```gdscript\nvar fruits = [\"Apple\", \"Banana\"]\nfruits.append(\"Pear\")\nprint(fruits[1])\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Arrays\n\nAn array is an ordered sequence of values whose first index is zero. Use `array[index]` to read or assign an item and `append()` to add one. An index must be between zero and `size() - 1`. You can iterate directly over items with `for`.\n\n### Practical example\n\n```gdscript\nvar fruits = [\"Apple\", \"Banana\"]\nfruits.append(\"Pear\")\nprint(fruits[1])\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## المصفوفات Array والعمليات عليها في GDScript\n\n### 1. المفهوم في سياق الألعاب\nالمصفوفة (Array) هي حاوية مرتبة تخزن مجموعة عناصر متسلسلة تحت اسم واحد (مثل قائمة مقتنيات اللاعب `inventory` أو أعداء الشاشة). تبدأ الفهارس (Indices) في GDScript دائماً من الرقم `0`.\n\n### 2. القواعد والصياغة والتحذيرات الهامة\n- **الإضافة والحذف:** استخدام `append(item)` لإضافة عنصر للنهاية، واستخدام `remove_at(index)` أو `erase(item)` للحذف.\n- ⚠️ **تحذير رسمي (Pass-by-reference):** المصفوفات تُمرر **بالمرجع** وليس بالقيمة؛ أي أن نسخ مصفوفة إلى متغير آخر يجعل كلاً منهما يشير لنفس بيانات الذاكرة.\n- ⚠️ **تحذير أداء خطير:** **يحظر منعاً باتاً** حذف عناصر من المصفوفة أثناء التكرار عليها في حلقة `for` مباشرة لأن ذلك يغير الفهارس ويسبب انهياراً أو أخطاء خفية؛ استخدم حلقة عكسية أو انسخ القائمة أولاً.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var inventory = [\"Sword\", \"Shield\"]\n    inventory.append(\"Potion\")\n    print(inventory[0])\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** محاولة الوصول إلى فهرس أكبر من حجم المصفوفة `size() - 1` تسبب خطأ وقت التشغيل (Index out of bounds).\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** حافظ على نظافة فهارس المصفوفات وتجنب تعديلها أثناء التكرار عليها تفادياً للأخطاء والمشاكل البرمجية.",
+    "en": "## Arrays and Operations in GDScript\n\n### 1. Concept in Game Context\nAn Array is an ordered container storing sequential items under a single name (like player `inventory` or active screen enemies). Indices in GDScript always start at `0`.\n\n### 2. Rules, Syntax, and Crucial Warnings\n- **Adding and Removing:** Use `append(item)` to add to the end, and `remove_at(index)` or `erase(item)` to remove.\n- ⚠️ **Official Warning (Pass-by-reference):** Arrays are passed **by reference**, not by value; assigning an array to another variable makes both point to the exact same memory data.\n- ⚠️ **Critical Performance Warning:** **Strictly prohibit** removing elements from an array while iterating over it directly in a `for` loop as it shifts indices and causes subtle bugs or crashes; use a reversed loop or copy first.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    var inventory = [\"Sword\", \"Shield\"]\n    inventory.append(\"Potion\")\n    print(inventory[0])\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Accessing an index greater than `size() - 1` triggers a runtime error (Index out of bounds).\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Keep array indexing clean and avoid mutating arrays while iterating over them to prevent elusive bugs."
   },
-  "exampleCode": "var fruits = [\"Apple\", \"Banana\"]\nfruits.append(\"Pear\")\nprint(fruits[1])",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var inventory = [\"Sword\", \"Shield\"]\n    inventory.append(\"Potion\")\n    print(inventory[0])",
   "documentation": {
-    "ar": "### المصفوفات Array\n\nالمصفوفة تسلسل مرتب من القيم، ويبدأ فهرس أول عنصر من صفر. استخدم `array[index]` للقراءة أو الإسناد، و`append()` لإضافة عنصر. يجب أن يقع الفهرس بين صفر و`size() - 1`. يمكنك التكرار على العناصر مباشرة باستخدام `for`.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Arrays\n\nAn array is an ordered sequence of values whose first index is zero. Use `array[index]` to read or assign an item and `append()` to add one. An index must be between zero and `size() - 1`. You can iterate directly over items with `for`.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع المصفوفات في GDScript\n\n- تخزين وعرض وعمليات `append()`, `size()`.\n- الانتقال بالمرجع Pass-by-reference.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Arrays Reference in GDScript\n\n- Storage, access, and operations like `append()`, `size()`.\n- Pass-by-reference semantics.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل المصفوفات في Godot",
+        "en": "Godot Arrays Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
-    },
-    {
-      "title": {
-        "ar": "GDScript المتقدم",
-        "en": "Advanced GDScript"
-      },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_advanced.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#array"
     }
   ],
   "exercises": [
@@ -43,32 +36,32 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "بم تبدأ فهارس المصفوفات في GDScript؟",
+        "en": "What Index Do Arrays Start At in GDScript?"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "عند إنشاء مصفوفة في لغة GDScript، برقم ماذا يبدأ فهرس (Index) أول عنصر مخزن فيها؟",
+        "en": "When creating an array in GDScript, what index does the first stored element start at?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "الرقم `0` (الفهارس يبدأ عدها دائماً من الصفر)",
+          "en": "The number `0` (indices always start counting from zero)"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "الرقم `1`",
+          "en": "The number `1`"
+        },
+        {
+          "ar": "الرقم `-1`",
+          "en": "The number `-1`"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "فهارس الحاويات تبدأ من 0 في GDScript.",
+          "en": "Container indices start at 0 in GDScript."
         }
       ]
     },
@@ -78,32 +71,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "كيفية إضافة عنصر لنهاية المصفوفة",
+        "en": "How to Add Item to End of Array"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "ما هي الدالة المخصصة لإضافة عنصر جديد إلى نهاية المصفوفة في GDScript؟",
+        "en": "What function is used to add a new item to the end of an array in GDScript?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "الدالة `append(item)`",
+          "en": "The `append(item)` function"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "الدالة `push_front()`",
+          "en": "The `push_front()` function"
+        },
+        {
+          "ar": "الدالة `delete()`",
+          "en": "The `delete()` function"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "append تضيف العنصر ذيله.",
+          "en": "append adds the item to the tail."
         }
       ]
     },
@@ -113,32 +106,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "مخاطر تعديل المصفوفة أثناء الدوران عليها",
+        "en": "Hazards of Mutating Array During Iteration"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "لماذا يُمنع حذف عناصر من المصفوفة مباشرة أثناء حلقة التكرار `for` عليها؟",
+        "en": "Why is removing items from an array directly inside its `for` iteration forbidden?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "لأن ذلك يزيح الفهارس ويسبب أخطاء غير متوقعة أو انهيار البرنامج",
+          "en": "Because it shifts indices causing unexpected bugs or crashes"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "لأن المحرك سيزيد سرعة اللعبة أضعافاً",
+          "en": "Because the engine accelerates the game"
+        },
+        {
+          "ar": "لا توجد أي مشكلة في ذلك نهائياً",
+          "en": "There is no issue whatsoever"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "تغيير الحجم والفهارس أثناء الدوران يربك حلقة الـ for.",
+          "en": "Mutating size and indices during iteration confuses the for loop."
         }
       ]
     },
@@ -148,35 +141,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: إنشاء مصفوفة وإضافة وإرجاع عنصر",
+        "en": "Guided Task: Creating Array, Adding and Returning Item"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على إنشاء مصفوفة عناصر، إضاف عنصر جديد، وقراءته بالفهرس الصحيح.",
+        "en": "Practice creating an item array, appending a new item, and reading by correct index."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "أنشئ مصفوفة `var items = [\"Sword\"]`.",
+          "en": "Create array `var items = [\"Sword\"]`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "أضف العنصر `\"Shield\"` بـ `append()` واطبع العنصر الأول `items[0]`.",
+          "en": "Append `\"Shield\"` with `append()` and print first item `items[0]`."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "استخدم append لإضافة العنصر واقرا بالفهرس 0.",
+          "en": "Use append to add item and read at index 0."
         }
       ]
     },
@@ -186,32 +171,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "قراءة عنصر من المصفوفة بالفهرس",
+        "en": "Reading Array Item by Index"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`2`",
-        "en": "Write or complete the example so its output is:\n\n`2`"
+        "ar": "اكتب سكربتاً يعرّف مصفوفة أسلحة `var weapons = [\"Bow\", \"Staff\"]` ويطبع العنصر الأول `weapons[0]` داخل دالة `_ready()`.",
+        "en": "Write a script defining weapon array `var weapons = [\"Bow\", \"Staff\"]` and prints first item `weapons[0]` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "var a = [2, 4]\nprint(a[0])",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var weapons = [\"Bow\", \"Staff\"]\n    print(weapons[0])",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `print(weapons[0])` لطباعة Bow.",
+          "en": "Use `print(weapons[0])` to print Bow."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة العنصر الأول Bow بنجاح",
+            "en": "Verifying successful print of first item Bow"
           },
-          "expectedOutput": "2"
+          "expectedOutput": "Bow"
         }
       ]
     },
@@ -221,32 +202,28 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "إضافة عنصر جديد وقياس حجم المصفوفة",
+        "en": "Appending New Item and Measuring Array Size"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nB",
-        "en": "Write code that applies the lesson idea and produces this output:\n\nB"
+        "ar": "اكتب سكربتاً يعرّف مصفوفة فارغة `var list = []`، يضيف إليها عنصرين بـ `append()`، ثم يطبع حجمها `size()`.",
+        "en": "Write a script defining empty array `var list = []`, appends two items with `append()`, then prints `size()`."
       },
-      "starterCode": "",
-      "solutionCode": "var a = [\"A\", \"B\"]\nprint(a[1])",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var list = []\n    list.append(10)\n    list.append(20)\n    print(list.size())",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم append مرتين ثم list.size() لطباعة 2.",
+          "en": "Use append twice then list.size() to print 2."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة حجم المصفوفة الإجمالي (2)",
+            "en": "Verifying total array size correctness (2)"
           },
-          "expectedOutput": "B"
+          "expectedOutput": "2"
         }
       ]
     },
@@ -256,32 +233,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ استدعاء الطباعة مع المصفوفة",
+        "en": "Fixing Print Call Bug with Array"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`3`",
-        "en": "Write or complete the example so its output is:\n\n`3`"
+        "ar": "الشيفرة التالية تخطئ في إملاء دالة الطباعة. أصلحها لتعرض العنصر `Gold`:",
+        "en": "The following code has a typo in print function. Fix it to display item `Gold`:"
       },
-      "starterCode": "var a = [1, 2]\na.append(3)\npront(a.size())",
-      "solutionCode": "var a = [1, 2]\na.append(3)\nprint(a.size())",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var loot = [\"Gold\", \"Silver\"]\n    pront(loot[0])",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var loot = [\"Gold\", \"Silver\"]\n    print(loot[0])",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استبدل `pront` بـ `print` الصحيحة.",
+          "en": "Replace `pront` with correct `print`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة Gold بنجاح بعد التصحيح",
+            "en": "Verifying successful Gold print after fix"
           },
-          "expectedOutput": "3"
+          "expectedOutput": "Gold"
         }
       ]
     },
@@ -291,32 +264,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج الدوران على عناصر المصفوفة",
+        "en": "Predict Array Element Iteration Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`9`",
-        "en": "What output does this example display?\n\n`9`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nfunc _ready():\n    for n in [5, 10]:\n        print(n * 2)\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nfunc _ready():\n    for n in [5, 10]:\n        print(n * 2)\n```"
       },
-      "starterCode": "var total = 0\nfor n in [2, 3, 4]:\n    total += n\nprint(total)",
-      "solutionCode": "var total = 0\nfor n in [2, 3, 4]:\n    total += n\nprint(total)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    for n in [5, 10]:\n        print(n * 2)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for n in [5, 10]:\n        print(n * 2)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "يتم ضرب كل عنصر في 2 وطباعته (10 ثم 20).",
+          "en": "Each element is multiplied by 2 and printed (10 then 20)."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع الناتج (10 ثم 20)",
+            "en": "Verifying output prediction match (10 then 20)"
           },
-          "expectedOutput": "9"
+          "expectedOutput": "10\n20"
         }
       ]
     },
@@ -326,32 +295,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "تحديث قيمة عنصر في المصفوفة",
+        "en": "Updating Array Element Value"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`3`",
-        "en": "Write or complete the example so its output is:\n\n`3`"
+        "ar": "اكتب سكربتاً يعرّف مصفوفة `var scores = [10, 20]`، يقوم بتعديل العنصر الثاني ليصبح `25`، ثم يطبعه.",
+        "en": "Write a script defining array `var scores = [10, 20]`, modifies second item to become `25`, then prints it."
       },
-      "starterCode": "",
-      "solutionCode": "var a = [5, 6, 7]\nprint(a.size())",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var scores = [10, 20]\n    scores[1] = 25\n    print(scores[1])",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `scores[1] = 25` ثم اطبع `scores[1]`.",
+          "en": "Use `scores[1] = 25` then print `scores[1]`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة القيمة المحدثة 25 بنجاح",
+            "en": "Verifying successful updated value 25 output"
           },
-          "expectedOutput": "3"
+          "expectedOutput": "25"
         }
       ]
     },
@@ -361,32 +326,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي المصفوفات الشامل",
+        "en": "Comprehensive Arrays Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`9`",
-        "en": "Write or complete the example so its output is:\n\n`9`"
+        "ar": "اكتب سكربتاً ينشئ مصفوفة مستويات فارغة `var levels = []`، يضيف إليها الأرقام `1`, `2`, `3` تباعاً بـ `append()`، ثم يحسب ويطبع حجمها الإجمالي عبر `size()`.\nالناتج:\n`3`",
+        "en": "Write a script creating empty levels array `var levels = []`, appends numbers `1`, `2`, `3` consecutively with `append()`, then calculates and prints total size via `size()`.\nOutput:\n`3`"
       },
-      "starterCode": "",
-      "solutionCode": "var a = [1, 2]\na[0] = 9\nprint(a[0])",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var levels = []\n    levels.append(1)\n    levels.append(2)\n    levels.append(3)\n    print(levels.size())",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "أضف العناصر الثلاثة بـ append ثم اطبع levels.size().",
+          "en": "Append all three items then print levels.size()."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من نجاح إضافة العناصر وقياس حجم المصفوفة (3)",
+            "en": "Verifying item appending success and array size measurement (3)"
           },
-          "expectedOutput": "9"
+          "expectedOutput": "3"
         }
       ]
     }

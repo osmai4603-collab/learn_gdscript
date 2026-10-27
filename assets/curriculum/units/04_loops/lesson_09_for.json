@@ -2,31 +2,31 @@
   "id": "lesson_09_for",
   "unitId": "unit_04_loops",
   "title": {
-    "ar": "for وrange",
-    "en": "for and range"
+    "ar": "حلقة for ونطاقات range",
+    "en": "The for Loop and range"
   },
   "objective": {
-    "ar": "كرّر كتلة عدداً محدداً من المرات باستخدام `for` و`range()`.",
-    "en": "Repeat a block a fixed number of times with `for` and `range()`."
+    "ar": "إتقان تكرار تنفيذ الأوامر لعدد محدد من المرات باستخدام حلقة `for` ودالة النطاق `range()`.",
+    "en": "Master repeating statement execution for a fixed number of times using the `for` loop and `range()` function."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## for وrange\n\nتكرر `for` كتلة لكل عنصر في تسلسل. تنتج `range(n)` أعداداً تبدأ من صفر وتتوقف قبل `n`، لذلك تحتوي `range(4)` الأعداد 0 إلى 3. يمكن تحديد بداية ونهاية وخطوة. تحقق من حدود النطاق لتجنب تكرار ناقص أو زائد.\n\n### مثال عملي\n\n```gdscript\nfor i in range(3):\n    print(i)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## for and range\n\n`for` repeats a block for each item in a sequence. `range(n)` produces numbers starting at zero and stopping before `n`, so `range(4)` contains 0 through 3. You can specify a start, end, and step. Check the range bounds to avoid too few or too many repetitions.\n\n### Practical example\n\n```gdscript\nfor i in range(3):\n    print(i)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## حلقة for ونطاقات range في GDScript\n\n### 1. المفهوم في سياق الألعاب\nبدلاً من تكرار كتابة أمر طباعة رسالة ترحيب 10 مرات يدوياً، تمكنك الحلقات (Loops) من تنفيذ نفس كتلة الأوامر مئات المرات بكفاءة تامة. حلقة `for` هي الخيار الأول عندما تكون مسبقاً على علم بعدد مرات التكرار المطلوبة.\n\n### 2. القواعد والصياغة\n- **استخدام range(n):** تولد تسلسلاً أعداداً تبدأ من `0` وتتوقف قبل الرقم `n` (أي أن `range(3)` تنتج الأعداد `0, 1, 2`).\n- صيغة النطاق المتقدمة `range(start, end, step)` تسمح بتحديد البداية، النهاية، ومقدار الخطوة (تنازلي أو تصاعدي).\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    # تكرار العد من 0 إلى 2\n    for i in range(3):\n        print(\"Wave: \" + str(i))\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تذكر أن النهاية في `range(n)` تكون غير مشمولة (Exclusive)؛ أي أن `range(5)` تنتهي عند الرقم 4 ولا تصل إلى 5.\n- ℹ️ **معلومة تقنية:** يمكنك أيضاً الدوران مباشرة على عناصر المصفوفات بدون استخدام range عبر `for item in array:`.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم حلقة `for` دائماً عندما يكون عدد مرات التكرار محدداً ومعلوماً، واحرص على تفقد حدود range بدقة.",
+    "en": "## The for Loop and range in GDScript\n\n### 1. Concept in Game Context\nInstead of manually repeating a welcome print statement 10 times, loops enable you to execute the same code block hundreds of times efficiently. The `for` loop is your primary choice when you already know the exact repetition count in advance.\n\n### 2. Rules and Syntax\n- **Using range(n):** Generates a sequence starting at `0` and stopping before `n` (meaning `range(3)` produces `0, 1, 2`).\n- Advanced range `range(start, end, step)` lets you specify start, stop, and step increments (ascending or descending).\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    # Count waves from 0 to 2\n    for i in range(3):\n        print(\"Wave: \" + str(i))\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Remember that the stop boundary in `range(n)` is exclusive; meaning `range(5)` stops at 4 and does not include 5.\n- ℹ️ **Tech Note:** You can also iterate directly over array items without range using `for item in array:`.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Always use a `for` loop when repetition count is fixed and known, and carefully verify your range boundaries."
   },
-  "exampleCode": "for i in range(3):\n    print(i)",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    for i in range(3):\n        print(\"Wave: \" + str(i))",
   "documentation": {
-    "ar": "### for وrange\n\nتكرر `for` كتلة لكل عنصر في تسلسل. تنتج `range(n)` أعداداً تبدأ من صفر وتتوقف قبل `n`، لذلك تحتوي `range(4)` الأعداد 0 إلى 3. يمكن تحديد بداية ونهاية وخطوة. تحقق من حدود النطاق لتجنب تكرار ناقص أو زائد.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### for and range\n\n`for` repeats a block for each item in a sequence. `range(n)` produces numbers starting at zero and stopping before `n`, so `range(4)` contains 0 through 3. You can specify a start, end, and step. Check the range bounds to avoid too few or too many repetitions.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع حلقة for ونطاق range في GDScript\n\n- استخدام `for i in range(n)` للتكرار المحدود.\n- استخدام `range(start, end, step)` للخطوات المخصصة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### for Loop and range Reference in GDScript\n\n- Using `for i in range(n)` for bounded iteration.\n- Using `range(start, end, step)` for custom steps.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل الحلقات في Godot",
+        "en": "Godot Loops Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#for"
     }
   ],
   "exercises": [
@@ -36,32 +36,32 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "ما الذي تنتجه دالة range(4)؟",
+        "en": "What Does range(4) Produce?"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "عند تنفيذ التعبير `range(4)` في حلقة `for`، ما هي الأعداد الصحيحة التي يتم توليدها ضمنياً؟",
+        "en": "When executing `range(4)` in a `for` loop, what integers are implicitly generated?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "الأعداد `0, 1, 2, 3` (تبدأ من صفر وتتوقف قبل 4)",
+        "en": "The numbers `0, 1, 2, 3` (starts at zero and stops before 4)"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "الأعداد `1, 2, 3, 4`",
+          "en": "The numbers `1, 2, 3, 4`"
+        },
+        {
+          "ar": "الأعداد من 0 إلى 4 شاملة الرقم 4",
+          "en": "Numbers from 0 to 4 inclusive"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "نطاق range يبدأ دائماً من 0 ولا يشمل الرقم الأخير.",
+          "en": "Range always starts at 0 and excludes the stop boundary."
         }
       ]
     },
@@ -71,32 +71,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "متى نستخدم حلقة for بالتحديد؟",
+        "en": "When Specifically to Use for Loop?"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "في أي سيناريو برمجي تعتبر حلقة `for` هي الخيار الأمثل والأنسب؟",
+        "en": "In which programming scenario is the `for` loop the ideal choice?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "عندما يكون عدد مرات التكرار أو عناصر المجموعة معلوماً ومحدداً مسبقاً",
+          "en": "When the repetition count or collection items are known and fixed beforehand"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "عندما نريد تكرار كود حتى يضغط اللاعب على زر الخروج عشوائياً",
+          "en": "When repeating code until the player randomly clicks exit"
+        },
+        {
+          "ar": "لتعريف متغيرات عامة في اللعبة",
+          "en": "To define global game variables"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "حلقة for مخصصة للتكرار المحدود ومعالجة العناصر.",
+          "en": "The for loop is dedicated to bounded iteration and element processing."
         }
       ]
     },
@@ -106,32 +106,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "دور الوسيط الثالث في range(start, end, step)",
+        "en": "Role of Third Argument in range"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "ما الذي يمثله الوسيط الثالث في دالة النطاق `range(0, 10, 2)`؟",
+        "en": "What does the third argument represent in `range(0, 10, 2)`?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "مقدار الخطوة أو القفزة بين كل عدد والذي يليه (تزيد بمقدار 2)",
+          "en": "The step size or jump increment between numbers (advancing by 2)"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "عدد مرات تكرار الحلقة الإجمالي",
+          "en": "Total loop repetition count"
+        },
+        {
+          "ar": "رقم البداية الفعلي",
+          "en": "Actual start number"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الوسيط الثالث هو مقدار الخطوة (Step).",
+          "en": "The third argument is the step amount."
         }
       ]
     },
@@ -141,35 +141,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: طباعة عداد التصاعدي بـ for",
+        "en": "Guided Task: Printing Ascending Counter with for"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على استخدام حلقة `for` لطباعة أرقام من 0 إلى 2.",
+        "en": "Practice using a `for` loop to print numbers from 0 to 2."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "اكتب حلقة `for i in range(3):`",
+          "en": "Write loop `for i in range(3):`"
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "اطبع قيمة المتغير `i` داخل الحلقة.",
+          "en": "Print variable `i` inside the loop."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "تأكد من مراعاة المسافة البادئة تحت حلقة for.",
+          "en": "Ensure proper indentation under the for loop."
         }
       ]
     },
@@ -179,30 +171,26 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "طباعة أرقام النطاق البسيط",
+        "en": "Printing Simple Range Numbers"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n1\n2`",
-        "en": "Write or complete the example so its output is:\n\n`0\n1\n2`"
+        "ar": "اكتب سكربتاً يستخدم حلقة `for` مع `range(3)` لطباعة الأرقام من 0 إلى 2 تباعاً في أسطر منفصلة داخل دالة `_ready()`.",
+        "en": "Write a script using a `for` loop with `range(3)` to print numbers 0 through 2 consecutively on separate lines inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "for i in range(3):\n    print(i)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(3):\n        print(i)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `for i in range(3): print(i)` مع مسافة بادئة صحيحة.",
+          "en": "Use `for i in range(3): print(i)` with proper indentation."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة الأرقام 0 ثم 1 ثم 2 تباعاً",
+            "en": "Verifying numbers 0 then 1 then 2 print consecutively"
           },
           "expectedOutput": "0\n1\n2"
         }
@@ -212,34 +200,30 @@
       "id": "ex_09_for_06",
       "lessonId": "lesson_09_for",
       "order": 5,
-      "type": "fillBlank",
+      "type": "writeCode",
       "title": {
-        "ar": "أكمل المثال",
-        "en": "Complete the example"
+        "ar": "التكرار بخطوات مخصصة بـ range",
+        "en": "Iterating with Custom Step in range"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`1\n2\n3`",
-        "en": "Write or complete the example so its output is:\n\n`1\n2\n3`"
+        "ar": "اكتب سكربتاً يطبع الأعداد الزوجية من 0 إلى 4 باستخدام `range(0, 5, 2)`.",
+        "en": "Write a script printing even numbers from 0 to 4 using `range(0, 5, 2)`."
       },
-      "starterCode": "for i in range(1, ___):\n    print(i)",
-      "solutionCode": "for i in range(1, 4):\n    print(i)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(0, 5, 2):\n        print(i)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `for i in range(0, 5, 2): print(i)` لطباعة 0 و 2 و 4.",
+          "en": "Use `for i in range(0, 5, 2): print(i)` to print 0, 2, and 4."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة الأعداد 0 و 2 و 4 بنجاح",
+            "en": "Verifying numbers 0, 2, and 4 print successfully"
           },
-          "expectedOutput": "1\n2\n3"
+          "expectedOutput": "0\n2\n4"
         }
       ]
     },
@@ -249,32 +233,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ المسافة البادئة في حلقة for",
+        "en": "Fixing Indentation Bug in for Loop"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Hi\nHi`",
-        "en": "Write or complete the example so its output is:\n\n`Hi\nHi`"
+        "ar": "الشيفرة التالية تخطئ وتنسى المسافة البادئة في أمر الطباعة تحت حلقة for. أصلحها لتعرض الأرقام 0 ثم 1:",
+        "en": "The following code misses indentation for the print statement under for loop. Fix it to display 0 then 1:"
       },
-      "starterCode": "for i in range(2):\n    pront(\"Hi\")",
-      "solutionCode": "for i in range(2):\n    print(\"Hi\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    for i in range(2):\nprint(i)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(2):\n        print(i)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "أضف مسافة بادئة (Tab أو 4 مسافات) قبل أمر print.",
+          "en": "Add indentation (Tab or 4 spaces) before print statement."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الحلقة بعد ضبط المسافة البادئة",
+            "en": "Verifying loop operation after fixing indentation"
           },
-          "expectedOutput": "Hi\nHi"
+          "expectedOutput": "0\n1"
         }
       ]
     },
@@ -284,32 +264,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج التكرار المباشر على العناصر",
+        "en": "Predict Direct Element Iteration Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`2\n4\n6`",
-        "en": "What output does this example display?\n\n`2\n4\n6`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nfunc _ready():\n    for fruit in [\"Apple\", \"Banana\"]:\n        print(fruit)\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nfunc _ready():\n    for fruit in [\"Apple\", \"Banana\"]:\n        print(fruit)\n```"
       },
-      "starterCode": "for i in range(2, 7, 2):\n    print(i)",
-      "solutionCode": "for i in range(2, 7, 2):\n    print(i)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    for fruit in [\"Apple\", \"Banana\"]:\n        print(fruit)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for fruit in [\"Apple\", \"Banana\"]:\n        print(fruit)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "يتم الدوران على كل عنصر في المصفوفة وطباعته في سطر مستقل.",
+          "en": "Iterates over each item in array printing on separate lines."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة الفواكه بالترتيب",
+            "en": "Verifying fruits print in order"
           },
-          "expectedOutput": "2\n4\n6"
+          "expectedOutput": "Apple\nBanana"
         }
       ]
     },
@@ -319,30 +295,26 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "حساب المجموع التراكمي بـ for",
+        "en": "Calculating Cumulative Sum with for"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`6`",
-        "en": "Write or complete the example so its output is:\n\n`6`"
+        "ar": "اكتب سكربتاً يجمع الأرقام من 1 إلى 3 باستخدام حلقة `for` ويطبع الناتج الإجمالي (6).",
+        "en": "Write a script summing numbers 1 through 3 using a `for` loop and printing total sum (6)."
       },
-      "starterCode": "",
-      "solutionCode": "var total = 0\nfor i in range(1, 4):\n    total += i\nprint(total)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var sum = 0\n    for i in range(1, 4):\n        sum += i\n    print(sum)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم متغير sum وجمع عناصر range(1, 4) بداخله.",
+          "en": "Use sum variable and add range(1, 4) elements inside."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة المجموع الإجمالي التراكمي (6)",
+            "en": "Verifying cumulative total sum accuracy (6)"
           },
           "expectedOutput": "6"
         }
@@ -354,32 +326,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي حلقة for الشامل",
+        "en": "Comprehensive for Loop Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Apple\nPear`",
-        "en": "Write or complete the example so its output is:\n\n`Apple\nPear`"
+        "ar": "اكتب سكربتاً يطبع العد التنازلي من 3 إلى 1 ثم يطبع `Go!` في السطر الأخير:\n`3\n2\n1\nGo!`",
+        "en": "Write a script printing countdown from 3 down to 1 then prints `Go!` on the last line:\n`3\n2\n1\nGo!`"
       },
-      "starterCode": "",
-      "solutionCode": "for item in [\"Apple\", \"Pear\"]:\n    print(item)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(3, 0, -1):\n        print(i)\n    print(\"Go!\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `range(3, 0, -1)` للعد التنازلي ثم أمر طباعة منفصل لـ Go!.",
+          "en": "Use `range(3, 0, -1)` for countdown then separate print for Go!."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من مطابقة العد التنازلي مع رسالة الانطلاق",
+            "en": "Verifying countdown match with start message"
           },
-          "expectedOutput": "Apple\nPear"
+          "expectedOutput": "3\n2\n1\nGo!"
         }
       ]
     }

@@ -780,12 +780,12 @@ class _InteractiveGraphCanvas extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return InteractiveViewer(
       constrained: false,
-      minScale: 0.55,
-      maxScale: 1.5,
+      minScale: 0.4,
+      maxScale: 2,
       boundaryMargin: const EdgeInsets.all(120),
       child: SizedBox(
-        width: 930,
-        height: 850,
+        width: 2440,
+        height: 1500,
         child: Stack(
           children: [
             // شبكة خلفية هندسية

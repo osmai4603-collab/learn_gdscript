@@ -2,31 +2,31 @@
   "id": "lesson_07_elif",
   "unitId": "unit_03_conditions",
   "title": {
-    "ar": "فروع elif للحالات المتعددة",
-    "en": "elif branches for multiple cases"
+    "ar": "الشروط المتعددة elif والترتيب الهرمي",
+    "en": "Multiple elif Conditions and Hierarchical Ordering"
   },
   "objective": {
-    "ar": "رتّب شروط `elif` من الحالة الأخص إلى الأعم واختر أول فرع مطابق.",
-    "en": "Order `elif` conditions from most specific to broadest and choose the first match."
+    "ar": "إتقان ترتيب شروط `elif` من الحالة الأخص إلى الأعم لتجنب حجب الفروع الإيجابية.",
+    "en": "Master ordering `elif` conditions from most specific to broadest to prevent blocking positive branches."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## فروع elif للحالات المتعددة\n\nتُفحص فروع `if` و`elif` من الأعلى إلى الأسفل، ولا ينفذ إلا أول فرع صحيح. ضع الشروط الأخص أولاً كي لا يحجب شرط عام حالة أدق، وأضف `else` عند الحاجة لمعالجة الحالات المتبقية. جرّب قيم الحدود مثل 49 و50 لتتأكد من ترتيبك.\n\n### مثال عملي\n\n```gdscript\nvar score = 72\nif score >= 80:\n    print(\"Great\")\nelif score >= 50:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## elif branches for multiple cases\n\n`if` and `elif` branches are checked from top to bottom, and only the first true branch runs. Put specific conditions first so a broad condition does not hide a more precise case; add `else` for remaining cases. Try boundary values such as 49 and 50 to verify your ordering.\n\n### Practical example\n\n```gdscript\nvar score = 72\nif score >= 80:\n    print(\"Great\")\nelif score >= 50:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## الشروط المتعددة elif في GDScript\n\n### 1. المفهوم في سياق الألعاب\nعندما يكون لديك مسارات متعددة للعبة (مثل مستويات تقييم الأداء: ممتاز، جيد، مقبول، راسب)، فإنك تحتاج إلى فروع متسلسلة باستخدام `elif`. يقوم المحرك بفحص الشروط من الأعلى إلى الأسفل وينفذ **أول فرع صحيح يصادفه** ثم يخرج من الهيكل تماماً.\n\n### 2. القواعد والصياغة والترتيب الهرمي\n- **القاعدة الذهبية للترتيب:** ابدأ دائماً بالشروط **الأخص** (الأضيق) أولاً، ثم الشروط الأكثر عمومية. على سبيل المثال، فحص `score >= 90` يجب أن يوضع قبل `score >= 50`؛ وإلا فإن أي علامة 95 سيتم التقاطها فوراً عند 50 ويتم تخطي تقدير الممتاز.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var health_percentage = 15\n    if health_percentage <= 10:\n        print(\"Critical Danger\")\n    elif health_percentage <= 50:\n        print(\"Warning\")\n    else:\n        print(\"Healthy\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** وضع الشروط العامة في الأعلى يحجب بالكامل الشروط الأخص تحتها ولا يُنفذ الكود التابع لها أبداً.\n- ℹ️ **معلومة تقنية:** فرع `else` في نهاية السلسلة اختياري، ولكن يفضل إضافته لضمان معالجة الحالات غير المتوقعة (Catch-all).\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** رتب شروطك دائماً من الأخص إلى الأعم، وتأكد من اختبار الحدود والأرقام الحدية (مثل 50 و 49).",
+    "en": "## Multiple elif Conditions in GDScript\n\n### 1. Concept in Game Context\nWhen you have multiple gameplay paths (such as performance rating tiers: Great, Good, Pass, Fail), you need chained branches using `elif`. The engine evaluates conditions top-to-bottom and executes **the very first true branch encountered** before exiting the construct entirely.\n\n### 2. Rules, Syntax, and Hierarchical Ordering\n- **Ordering Golden Rule:** Always place the **most specific** (narrowest) conditions first, followed by broader ones. For example, checking `score >= 90` must precede `score >= 50`; otherwise, any score of 95 would be prematurely caught by 50, bypassing the 'Great' rating.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    var health_percentage = 15\n    if health_percentage <= 10:\n        print(\"Critical Danger\")\n    elif health_percentage <= 50:\n        print(\"Warning\")\n    else:\n        print(\"Healthy\")\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Putting broad conditions at the top completely blocks and hides more specific conditions beneath them, making them unreachable.\n- ℹ️ **Tech Note:** The `else` branch at the end of the chain is optional but recommended as a catch-all for unexpected states.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Always order your conditions from most specific to broadest, and verify boundary values (like 50 and 49)."
   },
-  "exampleCode": "var score = 72\nif score >= 80:\n    print(\"Great\")\nelif score >= 50:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var health_percentage = 15\n    if health_percentage <= 10:\n        print(\"Critical Danger\")\n    elif health_percentage <= 50:\n        print(\"Warning\")\n    else:\n        print(\"Healthy\")",
   "documentation": {
-    "ar": "### فروع elif للحالات المتعددة\n\nتُفحص فروع `if` و`elif` من الأعلى إلى الأسفل، ولا ينفذ إلا أول فرع صحيح. ضع الشروط الأخص أولاً كي لا يحجب شرط عام حالة أدق، وأضف `else` عند الحاجة لمعالجة الحالات المتبقية. جرّب قيم الحدود مثل 49 و50 لتتأكد من ترتيبك.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### elif branches for multiple cases\n\n`if` and `elif` branches are checked from top to bottom, and only the first true branch runs. Put specific conditions first so a broad condition does not hide a more precise case; add `else` for remaining cases. Try boundary values such as 49 and 50 to verify your ordering.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع الشروط المتعددة في GDScript\n\n- فحص الشروط تصاعدياً من الأعلى للأسفل.\n- ترتيب الأخص أولاً ثم الأعم.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Multiple Conditions Reference in GDScript\n\n- Evaluating conditions top-to-bottom sequentially.\n- Ordering specific conditions first then broader ones.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل الشروط المتعددة في Godot",
+        "en": "Godot Multiple Conditions Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif"
     }
   ],
   "exercises": [
@@ -36,32 +36,32 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "القاعدة الأساسية لترتيب شروط elif",
+        "en": "Golden Rule of Ordering elif Conditions"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "عند كتابة عدة فروع `elif` لفحص تقييم النقاط، كيف يجب ترتيب الشروط هرمياً؟",
+        "en": "When writing multiple `elif` branches to evaluate score ratings, how should conditions be ordered hierarchically?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "ترتيبها من الحالة الأخص (الأضيق والأعلى) إلى الحالة الأعم (الأوسع)",
+          "en": "Ordering from the most specific (narrowest/highest) to the broadest"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "ترتيب الشروط بشكل عشوائي تماماً",
+          "en": "Ordering conditions completely at random"
+        },
+        {
+          "ar": "وضع الشروط العامة دائماً في الأعلى",
+          "en": "Always placing broad conditions at the top"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "وضع الشروط الأخص أولاً يمنع حجبها بالشروط العامة.",
+          "en": "Placing specific conditions first prevents broad ones from shadowing them."
         }
       ]
     },
@@ -71,32 +71,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "كيفية اختيار المحرك للفرع المناسب",
+        "en": "How Engine Selects Matching Branch"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "ما الذي يفعله محرك Godot بمجرد أن يجد أول فرع `if` أو `elif` يحقق الشرط بصورة صحيحة؟",
+        "en": "What does the Godot engine do as soon as it finds the first `if` or `elif` branch satisfying the condition?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "ينفذ كتلته الخاصة ثم يخرج تماماً من كامل السلسلة دون فحص الباقي",
+          "en": "Executes its block and exits the entire chain completely without checking the rest"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "يستمر في فحص جميع الشروط التالية بغض النظر عن النتيجة",
+          "en": "Continues checking all subsequent conditions regardless"
+        },
+        {
+          "ar": "يعيد تشغيل اللعبة فوراً",
+          "en": "Restarts the game immediately"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "المحرك ينفذ أول فرع مطابق فقط ويتخطى بقية الفروع.",
+          "en": "The engine executes only the first matching branch and skips the rest."
         }
       ]
     },
@@ -106,32 +106,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "دور فرع else الأخير",
+        "en": "Role of the Final else Branch"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "ما هو الغرض من وضع فرع `else` في نهاية سلسلة فروع `if / elif`؟",
+        "en": "What is the purpose of placing an `else` branch at the end of an `if / elif` chain?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "التعامل مع أي حالة افتراضية متبقية لم تحقق الشروط السابقة",
+          "en": "Handling any remaining fallback state not caught by preceding conditions"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "إجبار اللعبة على التوقف عند حدوث خطأ",
+          "en": "Forcing the game to halt upon error"
+        },
+        {
+          "ar": "تسريع أداء معالج الرسوميات",
+          "en": "Speeding up GPU performance"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "else يعمل كحالة آمنة أخيرة (Catch-all).",
+          "en": "else acts as a safe final catch-all."
         }
       ]
     },
@@ -141,35 +141,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: تדרیب على تسلسل الشروط المتعددة",
+        "en": "Guided Task: Practicing Multiple Condition Chaining"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "قم بكتابة تسلسل `elif` لفحص مستويات طاقة الشخصية وترتيبها تصاعدياً بدقة.",
+        "en": "Write an `elif` chain evaluating character energy levels and ordering them precisely."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "عرّف متغيراً `var energy = 75`.",
+          "en": "Define `var energy = 75`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "اكتب شروطاً تفحص إذا كانت الطاقة >= 80 (High)، >= 50 (Medium)، وإلا (Low).",
+          "en": "Write conditions checking if energy >= 80 (High), >= 50 (Medium), else (Low)."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "رتب الشروط من الأكبر للأصغر لضمان الصحة المنطقية.",
+          "en": "Order conditions from largest to smallest to ensure logical correctness."
         }
       ]
     },
@@ -179,32 +171,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "كتابة شروط التقييم الهرمية",
+        "en": "Writing Hierarchical Evaluation Conditions"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Big`",
-        "en": "Write or complete the example so its output is:\n\n`Big`"
+        "ar": "اكتب سكربتاً يفحص `var score = 92`؛ إذا كانت `>= 90` اطبع `Gold`، وإذا كانت `>= 75` اطبع `Silver`، وإلا اطبع `Bronze` داخل دالة `_ready()`.",
+        "en": "Write a script checking `var score = 92`; if `>= 90` print `Gold`, if `>= 75` print `Silver`, else print `Bronze` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "var n = 4\nif n > 5:\n    print(\"Very big\")\nelif n > 2:\n    print(\"Big\")\nelse:\n    print(\"Small\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var score = 92\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var score = 92\n    if score >= 90:\n        print(\"Gold\")\n    elif score >= 75:\n        print(\"Silver\")\n    else:\n        print(\"Bronze\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `if score >= 90:` ثم `elif score >= 75:` ثم `else:`.",
+          "en": "Use `if score >= 90:` then `elif score >= 75:` then `else:`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة Gold بنجاح للعلامة 92",
+            "en": "Verifying successful Gold output for score 92"
           },
-          "expectedOutput": "Big"
+          "expectedOutput": "Gold"
         }
       ]
     },
@@ -214,32 +202,28 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "فحص الفئة المتوسطة بالترتيب الهرمي",
+        "en": "Checking Middle Tier in Hierarchical Order"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\nA",
-        "en": "Write code that applies the lesson idea and produces this output:\n\nA"
+        "ar": "اكتب سكربتاً بنفس الهيكل السابق بقيمة `score = 80` وتأكد أنه يطبع `Silver`.",
+        "en": "Write a script with the same structure using `score = 80` verifying it prints `Silver`."
       },
-      "starterCode": "",
-      "solutionCode": "var score = 90\nif score >= 80:\n    print(\"A\")\nelif score >= 50:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var score = 80\n    if score >= 90:\n        print(\"Gold\")\n    elif score >= 75:\n        print(\"Silver\")\n    else:\n        print(\"Bronze\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var score = 80\n    if score >= 90:\n        print(\"Gold\")\n    elif score >= 75:\n        print(\"Silver\")\n    else:\n        print(\"Bronze\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "القيمة 80 تحقق شرط >= 75 ولا تحقق >= 90، لذا تطبع Silver.",
+        "en": "Score 80 satisfies >= 75 and not >= 90, so it prints Silver."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة Silver للعلامة 80",
+            "en": "Verifying Silver output for score 80"
           },
-          "expectedOutput": "A"
+          "expectedOutput": "Silver"
         }
       ]
     },
@@ -249,32 +233,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ الكلمة المفتاحية elif",
+        "en": "Fixing elif Keyword Spelling Bug"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`B`",
-        "en": "Write or complete the example so its output is:\n\n`B`"
+        "ar": "الشيفرة التالية تستخدم كتابة خاطئة `else if` بدلاً من الكلمة المعتمدة في GDScript. أصلحها لتعرض `Valid`:",
+        "en": "The following code mistakenly uses `else if` instead of GDScript keyword. Fix it to display `Valid`:"
       },
-      "starterCode": "var score = 60\nif score >= 80:\n    pront(\"A\")\nelif score >= 50:\n    print(\"B\")\nelse:\n    print(\"C\")",
-      "solutionCode": "var score = 60\nif score >= 80:\n    print(\"A\")\nelif score >= 50:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var val = 10\n    if val > 20:\n        print(\"High\")\n    else if val > 5:\n        print(\"Valid\")\n    else:\n        print(\"Low\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var val = 10\n    if val > 20:\n        print(\"High\")\n    elif val > 5:\n        print(\"Valid\")\n    else:\n        print(\"Low\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+            "ar": "الكلمة المختصرة في GDScript هي `elif` وليست `else if`.",
+            "en": "The keyword in GDScript is `elif`, not `else if`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الشيفرة بعد تصحيح else if إلى elif",
+            "en": "Verifying code operation after correcting else if to elif"
           },
-          "expectedOutput": "B"
+          "expectedOutput": "Valid"
         }
       ]
     },
@@ -284,32 +264,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج تسلسل الشروط المتعددة",
+        "en": "Predict Multiple Conditions Chain Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`0`",
-        "en": "What output does this example display?\n\n`0`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nfunc _ready():\n    var temp = 25\n    if temp > 35:\n        print(\"Hot\")\n    elif temp > 20:\n        print(\"Warm\")\n    else:\n        print(\"Cold\")\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nfunc _ready():\n    var temp = 25\n    if temp > 35:\n        print(\"Hot\")\n    elif temp > 20:\n        print(\"Warm\")\n    else:\n        print(\"Cold\")\n```"
       },
-      "starterCode": "var n = 0\nif n > 0:\n    print(\"+\")\nelif n < 0:\n    print(\"-\")\nelse:\n    print(\"0\")",
-      "solutionCode": "var n = 0\nif n > 0:\n    print(\"+\")\nelif n < 0:\n    print(\"-\")\nelse:\n    print(\"0\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var temp = 25\n    if temp > 35:\n        print(\"Hot\")\n    elif temp > 20:\n        print(\"Warm\")\n    else:\n        print(\"Cold\")",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var temp = 25\n    if temp > 35:\n        print(\"Hot\")\n    elif temp > 20:\n        print(\"Warm\")\n    else:\n        print(\"Cold\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "القيمة 25 ليست أكبر من 35، لكنها أكبر من 20، لذا يتحقق فرع elif الثاني.",
+          "en": "25 is not > 35, but is > 20, so the second elif branch triggers."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع الناتج (Warm)",
+            "en": "Verifying output prediction match (Warm)"
           },
-          "expectedOutput": "0"
+          "expectedOutput": "Warm"
         }
       ]
     },
@@ -319,32 +295,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "فحص الحالات الحدودية الثلاثية",
+        "en": "Checking Three-Way Boundary Cases"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Child`",
-        "en": "Write or complete the example so its output is:\n\n`Child`"
+        "ar": "اكتب سكربتاً يفحص `var x = 0`؛ إذا كانت `x > 0` اطبع `Positive`، وإذا كانت `x < 0` اطبع `Negative`، وإلا اطبع `Zero`.",
+        "en": "Write a script checking `var x = 0`; if `x > 0` print `Positive`, if `x < 0` print `Negative`, else print `Zero`."
       },
-      "starterCode": "",
-      "solutionCode": "var age = 12\nif age >= 18:\n    print(\"Adult\")\nelif age >= 13:\n    print(\"Teen\")\nelse:\n    print(\"Child\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var x = 0\n    if x > 0:\n        print(\"Positive\")\n    elif x < 0:\n        print(\"Negative\")\n    else:\n        print(\"Zero\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "عندما x تساوي 0 سيلتقطها فرع else ويطبع Zero.",
+          "en": "When x equals 0 the else branch catches and prints Zero."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة Zero للحالة الصفرية الحدية",
+            "en": "Verifying Zero output for boundary zero state"
           },
-          "expectedOutput": "Child"
+          "expectedOutput": "Zero"
         }
       ]
     },
@@ -354,32 +326,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي الشروط المتعددة الهرمية الشامل",
+        "en": "Comprehensive Hierarchical Multiple Conditions Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Over`",
-        "en": "Write or complete the example so its output is:\n\n`Over`"
+        "ar": "اكتب سكربتاً يصنف عمر الشخصية `var age = 15` بالاعتماد على الفروع الهرمية الآتية:\n- إذا `>= 18` اطبع `Adult`\n- إذا `>= 13` اطبع `Teen`\n- وإلا اطبع `Child`",
+        "en": "Write a script classifying character age `var age = 15` using hierarchical branches:\n- If `>= 18` print `Adult`\n- If `>= 13` print `Teen`\n- Else print `Child`"
       },
-      "starterCode": "",
-      "solutionCode": "var lives = 0\nif lives > 1:\n    print(\"Remaining\")\nelif lives == 1:\n    print(\"Last\")\nelse:\n    print(\"Over\")",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var age = 15\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var age = 15\n    if age >= 18:\n        print(\"Adult\")\n    elif age >= 13:\n        print(\"Teen\")\n    else:\n        print(\"Child\")",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم الترتب الهرمي السليم للأعمار لطباعة Teen بنجاح.",
+          "en": "Use proper hierarchical age ordering to successfully print Teen."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة Teen بنجاح للعمر 15",
+            "en": "Verifying successful Teen output for age 15"
           },
-          "expectedOutput": "Over"
+          "expectedOutput": "Teen"
         }
       ]
     }

@@ -2,31 +2,31 @@
   "id": "lesson_05_operations",
   "unitId": "unit_03_conditions",
   "title": {
-    "ar": "الحساب والمقارنة والمنطق",
-    "en": "Arithmetic, comparison, and logic"
+    "ar": "العمليات الحسابية والمنطقية",
+    "en": "Arithmetic and Logical Operations"
   },
   "objective": {
-    "ar": "كوّن تعبيرات حسابية ومنطقية وقارن القيم لإنشاء نتيجة صحيحة أو خاطئة.",
-    "en": "Build arithmetic and logical expressions and compare values to produce true or false results."
+    "ar": "إتقان استخدام المعاملات الحسابية، وعمليات المقارنة، والمعاملات المنطقية (`and`, `or`, `not`) لبناء تعبيرات دقيقة.",
+    "en": "Master arithmetic operators, comparison operators, and logical operators (`and`, `or`, `not`) to build precise expressions."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## الحساب والمقارنة والمنطق\n\nتنتج عوامل الحساب مثل `+` و`*` قيمة عددية، بينما تنتج المقارنة مثل `>=` قيمة منطقية. تربط `and` شرطين يجب أن يصحّا معاً، ويكفي `or` لصحة أحدهما، ويعكس `not` النتيجة. استخدم الأقواس لتوضيح ترتيب التعبير المركب.\n\n### مثال عملي\n\n```gdscript\nvar score = 12\nvar has_key = true\nprint(score >= 10 and has_key)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Arithmetic, comparison, and logic\n\nArithmetic operators such as `+` and `*` produce numbers, while comparisons such as `>=` produce booleans. `and` requires both conditions to be true, `or` needs either one, and `not` reverses the result. Use parentheses to make a complex expression’s order clear.\n\n### Practical example\n\n```gdscript\nvar score = 12\nvar has_key = true\nprint(score >= 10 and has_key)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## العمليات الحسابية والمنطقية في GDScript\n\n### 1. المفهوم في سياق الألعاب\nكل قرار في اللعبة يعتمد على تقييم الشروط: هل نقاط الصحة أكبر من صفر؟ هل يمتلك اللاعب مفتاحاً **و** درعاً؟ العمليات الحسابية والمنطقية هي الأدوات التي تحول أرقام اللعبة إلى قرارات (`true` أو `false`).\n\n### 2. القواعد والصياغة\n- **الحسابية:** `+`, `-`, `*`, `/`, و `%` (باقي القسمة، ومفيد جداً لدورات الحركة وتبديل الأدوار).\n- **المقارنة:** `==` (تساوي)، `!=` (لا تساوي)، `>`, `<`, `>=`, `<=`).\n- **المنطقية:** `and` (كلا الشرطين صحيحين)، `or` (أحدهما على الأقل صحيح)، `not` (عكس النتيجة).\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var score = 85\n    var has_bonus = true\n    # التحقق من اجتياز الاختبار ووجود مكافأة\n    var is_victorious = (score >= 80) and has_bonus\n    print(is_victorious)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** لا تعتمد على التخمين في أسبقية العمليات؛ استخدم دائماً الأقواس `()` لتوضيح الترتيب وحماية منطق اللعبة من أخطاء الأسبقية.\n- ℹ️ **معلومة تقنية:** باقي القسمة `%` يُستخدم كثيراً في الألعاب لتحديد الأعداد الزوجية والفردية أو تكرار المؤثرات بعد عدد محدد من الخطوات.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة الذهبية:** ابنِ الشروط المعقدة بدمج `and` و `or` داخل أقواس واضحة؛ فهذا يمنع التباس الأسبقية ويحافظ على صحة منطق اللعبة.",
+    "en": "## Arithmetic and Logical Operations in GDScript\n\n### 1. Concept in Game Context\nEvery game decision relies on evaluating conditions: Is health greater than zero? Does the player have a key **and** armor? Arithmetic and logical operators transform game numbers into decisions (`true` or `false`).\n\n### 2. Rules and Syntax\n- **Arithmetic:** `+`, `-`, `*`, `/`, and `%` (modulo/remainder, extremely useful for cycles and alternating turns).\n- **Comparison:** `==` (equal), `!=` (not equal), `>`, `<`, `>=`, `<=`).\n- **Logical:** `and` (both true), `or` (at least one true), `not` (reverses result).\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    var score = 85\n    var has_bonus = true\n    # Check passing score and bonus presence\n    var is_victorious = (score >= 80) and has_bonus\n    print(is_victorious)\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Never guess operator precedence; always use parentheses `()` to clarify order and protect your game logic from precedence bugs.\n- ℹ️ **Tech Note:** Modulo `%` is widely used in games for detecting even/odd frames or repeating cycles after specific step counts.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Build complex conditions combining `and` and `or` within clear parentheses; this prevents precedence ambiguity and preserves game logic correctness."
   },
-  "exampleCode": "var score = 12\nvar has_key = true\nprint(score >= 10 and has_key)",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var score = 85\n    var has_bonus = true\n    var is_victorious = (score >= 80) and has_bonus\n    print(is_victorious)",
   "documentation": {
-    "ar": "### الحساب والمقارنة والمنطق\n\nتنتج عوامل الحساب مثل `+` و`*` قيمة عددية، بينما تنتج المقارنة مثل `>=` قيمة منطقية. تربط `and` شرطين يجب أن يصحّا معاً، ويكفي `or` لصحة أحدهما، ويعكس `not` النتيجة. استخدم الأقواس لتوضيح ترتيب التعبير المركب.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Arithmetic, comparison, and logic\n\nArithmetic operators such as `+` and `*` produce numbers, while comparisons such as `>=` produce booleans. `and` requires both conditions to be true, `or` needs either one, and `not` reverses the result. Use parentheses to make a complex expression’s order clear.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع العمليات الحسابية والمنطقية في GDScript\n\n- معاملات المقارنة والمنطق `and`, `or`, `not`.\n- أسبقية العمليات والأقواس.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Arithmetic and Logical Operations Reference in GDScript\n\n- Comparison and logical operators `and`, `or`, `not`.\n- Operator precedence and parentheses.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "عوامل وقواعد GDScript",
+        "en": "GDScript Operators Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#operators"
     }
   ],
   "exercises": [
@@ -36,32 +36,32 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "متى يعطي المعامل and القيمة true؟",
+        "en": "When Does the and Operator Return true?"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "في منطق GDScript، متى يتم تقييم التعبير المكون من معاملين مرتبطين بـ `and` ليكون الناتج `true`؟",
+        "en": "In GDScript logic, when does an expression joined by `and` evaluate to `true`?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "عندما يكون كلا الشرطين أو الطرفين صحيحين تماماً (true)",
+          "en": "When both conditions/operands are strictly true"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "عندما يكون أحد الشرطين فقط صحيحاً",
+          "en": "When only one condition is true"
+        },
+        {
+          "ar": "عندما يكون كلاهما خطأ (false)",
+          "en": "When both are false"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "المعامل and (و) يتطلب تحقق الطرفين معاً.",
+          "en": "The and operator requires both sides to hold true."
         }
       ]
     },
@@ -71,32 +71,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "متى يعطي المعامل or القيمة true؟",
+        "en": "When Does the or Operator Return true?"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "متى يرجع التعبير المرتبط بـ `or` القيمة `true`؟",
+        "en": "When does an expression joined by `or` return `true`?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "إذا تحقق واحداً على الأقل من الشرطين (أو كلاهما)",
+          "en": "If at least one condition holds true (or both)"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "فقط إذا كان كلاهما خطأ",
+          "en": "Only if both are false"
+        },
+        {
+          "ar": "يجب أن يكون كلاهما صحيحاً حصراً",
+          "en": "Both must be strictly true"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "المعامل or (أو) يكفيه تحقق طرف واحد فقط ليكون الناتج true.",
+          "en": "The or operator only needs one side to be true."
         }
       ]
     },
@@ -106,32 +106,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "عمل باقي القسمة %",
+        "en": "Modulo Operation %"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "ما هو الناتج الذي يعطيه معامل باقي القسمة في تعبير مثل `7 % 3`؟",
+        "en": "What does the modulo operator yield in an expression like `7 % 3`?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "القيمة `1` (وهي الباقي بعد قسمة 7 على 3)",
+          "en": "The value `1` (the remainder after dividing 7 by 3)"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "القيمة `2`",
+          "en": "The value `2`"
+        },
+        {
+          "ar": "القيمة `0`",
+          "en": "The value `0`"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "7 فيها كم 3؟ فيها مرتان (6) والباقي 1.",
+          "en": "How many 3s in 7? Two (6) with remainder 1."
         }
       ]
     },
@@ -141,35 +141,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: فحص شرط مركب بالمعاملات المنطقية",
+        "en": "Guided Task: Evaluating Compound Condition with Logical Operators"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على دمج شروط الطاقة والمفتاح لتقييم إمكانية دخول الباب.",
+        "en": "Practice combining health and key conditions to evaluate door entry permission."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "عرّف متغيراً للطاقة `var hp = 50` وللمفتاح `var key = true`.",
+          "en": "Define health `var hp = 50` and key `var key = true`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "افحص شرط `(hp > 0 and key)` واطبع النتيجة.",
+          "en": "Evaluate condition `(hp > 0 and key)` and print result."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "استخدام الأقواس يوضح أسبقية التقييم المنطقي.",
+          "en": "Using parentheses clarifies logical evaluation precedence."
         }
       ]
     },
@@ -179,32 +171,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تقييم معامل and المنطقي",
+        "en": "Evaluating Logical and Operator"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`11`",
-        "en": "Write or complete the example so its output is:\n\n`11`"
+        "ar": "اكتب سكربتاً يطبع ناتج التقييم المنطقي لـ `(10 > 5 and 3 < 8)` داخل دالة `_ready()`.",
+        "en": "Write a script printing logical evaluation of `(10 > 5 and 3 < 8)` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "print(3 + 4 * 2)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(10 > 5 and 3 < 8)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "كلا الشرطين صحيحان، إذن الناتج سيكون `true`.",
+          "en": "Both conditions are true, so output is `true`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة تقييم التعبير بـ true",
+            "en": "Verifying expression evaluation correctness as true"
           },
-          "expectedOutput": "11"
+          "expectedOutput": "true"
         }
       ]
     },
@@ -212,34 +200,30 @@
       "id": "ex_05_operations_06",
       "lessonId": "lesson_05_operations",
       "order": 5,
-      "type": "fillBlank",
+      "type": "writeCode",
       "title": {
-        "ar": "أكمل المثال",
-        "en": "Complete the example"
+        "ar": "استخدام معامل باقي القسمة %",
+        "en": "Using Modulo Operator %"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`true`",
-        "en": "Write or complete the example so its output is:\n\n`true`"
+        "ar": "اكتب سكربتاً يطبع باقي قسمة الرقم `10` على `4` باستخدام المودولو `%`.",
+        "en": "Write a script printing remainder of `10` divided by `4` using modulo `%`."
       },
-      "starterCode": "print(5 > ___)",
-      "solutionCode": "print(5 > 2)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(10 % 4)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `print(10 % 4)` وسيكون الناتج 2.",
+          "en": "Use `print(10 % 4)` and result will be 2."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة حساب باقي القسمة (2)",
+            "en": "Verifying correct modulo calculation output (2)"
           },
-          "expectedOutput": "true"
+          "expectedOutput": "2"
         }
       ]
     },
@@ -249,32 +233,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ استدعاء الطباعة في العمليات",
+        "en": "Fixing Print Call in Operations"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`false`",
-        "en": "Write or complete the example so its output is:\n\n`false`"
+        "ar": "الشيفرة التالية تحتوي على خطأ إملائي في أمر الطباعة. أصلحها لتعرض `true`:",
+        "en": "The following code has a typo in the print statement. Fix it to display `true`:"
       },
-      "starterCode": "pront(3 == 4)",
-      "solutionCode": "print(3 == 4)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    pront(20 >= 20)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(20 >= 20)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استبدل `pront` بـ `print`.",
+          "en": "Replace `pront` with `print`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الشيفرة بعد التصحيح",
+            "en": "Verifying code operation after fix"
           },
-          "expectedOutput": "false"
+          "expectedOutput": "true"
         }
       ]
     },
@@ -284,32 +264,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج المعاملات المنطقية المركبة",
+        "en": "Predict Compound Logical Operators Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`false`",
-        "en": "What output does this example display?\n\n`false`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nfunc _ready():\n    print(not (5 > 10))\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nfunc _ready():\n    print(not (5 > 10))\n```"
       },
-      "starterCode": "print(true and false)",
-      "solutionCode": "print(true and false)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    print(not (5 > 10))",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(not (5 > 10))",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "العبارة `5 > 10` خاطئة (false)، وعكسها بـ not يعطي true.",
+          "en": "The expression `5 > 10` is false, and reversing it with not yields true."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع الناتج المنطقي (true)",
+            "en": "Verifying logical output prediction match (true)"
           },
-          "expectedOutput": "false"
+          "expectedOutput": "true"
         }
       ]
     },
@@ -319,30 +295,26 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "استخدام المعامل or",
+        "en": "Using or Operator"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`true`",
-        "en": "Write or complete the example so its output is:\n\n`true`"
+        "ar": "اكتب سكربتاً يطبع ناتج تقييم `(false or true)` داخل دالة `_ready()`.",
+        "en": "Write a script printing evaluation of `(false or true)` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "print(true or false)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(false or true)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "يكفي تحقق أحد الطرفين في or ليكون الناتج `true`.",
+          "en": "One side being true in or makes the result `true`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة الناتج بـ true",
+            "en": "Verifying correct true output"
           },
           "expectedOutput": "true"
         }
@@ -354,30 +326,26 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي العمليات الحسابية والمنطقية الشامل",
+        "en": "Comprehensive Arithmetic and Logical Operations Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`true`",
-        "en": "Write or complete the example so its output is:\n\n`true`"
+        "ar": "اكتب سكربتاً يقيم تعبيراً مركباً ويطبعه:\n`(100 / 2 == 50) and (30 % 10 == 0)`",
+        "en": "Write a script evaluating and printing compound expression:\n`(100 / 2 == 50) and (30 % 10 == 0)`"
       },
-      "starterCode": "",
-      "solutionCode": "print(not false)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print((100 / 2 == 50) and (30 % 10 == 0))",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "كلا الشارين صحيحان، إذن الناتج النهائي سيكون `true`.",
+          "en": "Both conditions are true, so final output is `true`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة التقييم المركب للتعبييرين",
+            "en": "Verifying compound evaluation correctness for both expressions"
           },
           "expectedOutput": "true"
         }

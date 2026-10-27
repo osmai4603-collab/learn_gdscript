@@ -2,31 +2,31 @@
   "id": "lesson_11_break_continue",
   "unitId": "unit_04_loops",
   "title": {
-    "ar": "التحكم بالحلقات: break وcontinue",
-    "en": "Loop control: break and continue"
+    "ar": "التحكم بالحلقات: break و continue",
+    "en": "Loop Control: break and continue"
   },
   "objective": {
-    "ar": "اخرج من الحلقة باستخدام `break` أو تخطَّ الدورة الحالية باستخدام `continue`.",
-    "en": "Exit a loop with `break` or skip the current iteration with `continue`."
+    "ar": "إتقان استخدام الكلمات المفتاحية `break` للخروج المبكر من الحلقة و`continue` لتخطي الدورة الحالية والانتقال للتالية.",
+    "en": "Master using keywords `break` for early loop exit and `continue` to skip the current iteration and proceed to the next."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## التحكم بالحلقات: break وcontinue\n\nتنهي `break` أقرب حلقة فوراً. أما `continue` فتتجاوز بقية جسم الدورة الحالية وتنتقل إلى التالية. استخدمهما عندما يوضحان الحالة، وتأكد أن تخطي تحديث متغير الحلقة لا يسبب تكراراً لا نهائياً.\n\n### مثال عملي\n\n```gdscript\nfor i in range(5):\n    if i == 3:\n        break\n    print(i)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Loop control: break and continue\n\n`break` immediately exits the innermost loop. `continue` skips the rest of the current body and moves to the next iteration. Use them when they clarify a case, and ensure skipping a loop-variable update cannot create an infinite loop.\n\n### Practical example\n\n```gdscript\nfor i in range(5):\n    if i == 3:\n        break\n    print(i)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## التحكم بالحلقات: break و continue في GDScript\n\n### 1. المفهوم في سياق الألعاب\nأحياناً أثناء البحث في قائمة عناصر أو تكرار خطوات اللعبة، تجد ما تبحث عنه مبكراً وتريد إيقاف البحث تماماً، أو تريد تجاهل عنصر تالف وتخطي دورته. هنا تأتي أدوات التحكم الاحترافية:\n- **`break`:** تنهي وتخرج من أقرب حلقة فوراً.\n- **`continue`:** تتجاوز وتتخطى بقية الأوامر في الدورة الحالية وتنتقل للدورة التلالية فوراً.\n\n### 2. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    for i in range(5):\n        # تخطي الرقم 2 والانتقال للذي يليه\n        if i == 2:\n            continue\n        # الخروج النهائي عند الوصول لـ 4\n        if i == 4:\n            break\n        print(i)\n```\n\n### 3. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** عند استخدام `continue` داخل حلقة `while`، تأكد تماماً من تحديث متغير العداد قبل القفز بـ continue وإلا ستتسبب في حلقة لانهائية مجمدة!\n- ℹ️ **معلومة تقنية:** استخدام `break` يوفر الكثير من أداء المعالج عند البحث في المصفوفات الكبيرة بمجرد إيجاد الهدف المطلوب.\n\n### 4. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم `break` للخروج السريع عند إيجاد الهدف، واستخدم `continue` لتنقية وتخطي العناصر غير المرغوبة بدقة.",
+    "en": "## Loop Control: break and continue in GDScript\n\n### 1. Concept in Game Context\nSometimes while searching through item lists or repeating game steps, you find what you need early and want to stop searching entirely, or you want to skip a damaged item and bypass its cycle. These professional control tools help:\n- **`break`:** Immediately terminates and exits the innermost loop.\n- **`continue`:** Skips the remaining statements in the current iteration and jumps directly to the next.\n\n### 2. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    for i in range(5):\n        # Skip number 2 and proceed to next\n        if i == 2:\n            continue\n        # Final exit when reaching 4\n        if i == 4:\n            break\n        print(i)\n```\n\n### 3. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** When using `continue` in a `while` loop, ensure you update the counter variable before jumping with continue, otherwise you cause an infinite freeze loop!\n- ℹ️ **Tech Note:** Using `break` saves massive CPU cycles when searching large arrays the moment a target is found.\n\n### 4. Summary and Golden Rule\n> **Golden Rule:** Use `break` for quick exits upon finding targets, and use `continue` to filter and skip unwanted items cleanly."
   },
-  "exampleCode": "for i in range(5):\n    if i == 3:\n        break\n    print(i)",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    for i in range(5):\n        if i == 2:\n            continue\n        if i == 4:\n            break\n        print(i)",
   "documentation": {
-    "ar": "### التحكم بالحلقات: break وcontinue\n\nتنهي `break` أقرب حلقة فوراً. أما `continue` فتتجاوز بقية جسم الدورة الحالية وتنتقل إلى التالية. استخدمهما عندما يوضحان الحالة، وتأكد أن تخطي تحديث متغير الحلقة لا يسبب تكراراً لا نهائياً.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Loop control: break and continue\n\n`break` immediately exits the innermost loop. `continue` skips the rest of the current body and moves to the next iteration. Use them when they clarify a case, and ensure skipping a loop-variable update cannot create an infinite loop.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع التحكم بالحلقات في GDScript\n\n- `break` للخروج المبكر.\n- `continue` لتخطي الدورة الحالية.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Loop Control Reference in GDScript\n\n- `break` for early exit.\n- `continue` to skip current iteration.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
+        "ar": "دليل التحكم في التدفق والحلقات في Godot",
+        "en": "Godot Control Flow Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#break-and-continue"
     }
   ],
   "exercises": [
@@ -36,32 +36,32 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "ما دور الكلمة المفتاحية break؟",
+        "en": "What is the Role of break Keyword?"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "ماذا تفعل الكلمة المفتاحية `break` عند تنفيذها داخل حلقة تكرارية؟",
+        "en": "What does the `break` keyword do when executed inside a loop?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "تنهي وتخرج من أقرب حلقة تكرارية فوراً وتنتقل للكود الذي يليها",
+          "en": "Immediately terminates and exits the innermost loop, proceeding to subsequent code"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "تعيد تشغيل اللعبة من البداية",
+          "en": "Restarts the game from the beginning"
+        },
+        {
+          "ar": "تتخطى دورة واحدة فقط",
+          "en": "Skips a single iteration only"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "break تكسر الحلقة وتخرج منها كلياً.",
+          "en": "break breaks out of the loop entirely."
         }
       ]
     },
@@ -71,32 +71,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "ما دور الكلمة المفتاحية continue؟",
+        "en": "What is the Role of continue Keyword?"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "ما الذي تفعله الكلمة المفتاحية `continue` عند مواجهتها داخل حلقة تكرارية؟",
+        "en": "What does the `continue` keyword do when encountered inside a loop?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "تتجاوز وتتخطى الأوامر المتبقية في الدورة الحالية وتنتقل للدورة التالية مباشرة",
+          "en": "Skips remaining statements in the current iteration and jumps directly to the next"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "توقف الحلقة وتخرج منها نهائياً",
+          "en": "Stops and exits the loop permanently"
+        },
+        {
+          "ar": "تضاعف سرعة الحلقة عشرة أضعاف",
+          "en": "Multiplies loop speed tenfold"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "continue تتخطى الدورة الحالية فقط.",
+          "en": "continue skips the current iteration only."
         }
       ]
     },
@@ -106,32 +106,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "خطر continue مع حلقة while",
+        "en": "Hazard of continue with while Loop"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "لماذا يجب توخي الحذر الشديد عند استخدام `continue` داخل حلقة `while`؟",
+        "en": "Why must one exercise extreme caution when using `continue` inside a `while` loop?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "لأن تخطي التحديث قد يؤدي لتخطي سطر زيادة العداد مما يتسبب في حلقة لانهائية مجمدة",
+          "en": "Because skipping updates can bypass counter increments causing a frozen infinite loop"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "لأنها تحول لغة السكربت إلى لغة أخرى",
+          "en": "Because it converts script language to another"
+        },
+        {
+          "ar": "لأنها تمنع طباعة أي رسالة نهائياً",
+          "en": "Because it prevents printing any message permanently"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "إذا تخطيت سطر زيادة العداد بـ continue في while، يثبت الشرط للأبد.",
+          "en": "If you skip the counter increment via continue in while, the condition locks forever."
         }
       ]
     },
@@ -141,35 +141,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: الخروج المبكر بـ break",
+        "en": "Guided Task: Early Exit with break"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على استخدام `break` لإيقاف حلقة عند القيمة المستهدفة.",
+        "en": "Practice using `break` to stop a loop at a target value."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "اكتب حلقة `for i in range(5):`",
+          "en": "Write loop `for i in range(5):`"
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "ضع شرط `if i == 2: break` وطبع القيمة قبله.",
+          "en": "Place condition `if i == 2: break` and print value before it."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "ستتوقف الطباعة عند الرقم 2 وتخرج الحلقة.",
+          "en": "Printing stops at 2 and the loop exits."
         }
       ]
     },
@@ -179,30 +171,26 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "إيقاف الحلقة بـ break المبكر",
+        "en": "Halting Loop with Early break"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n1\n2`",
-        "en": "Write or complete the example so its output is:\n\n`0\n1\n2`"
+        "ar": "اكتب سكربتاً يطبع الأرقام من 0 حتى 2 باستخدام حلقة `for range(5)` مع استخدام `break` عند الوصول إلى الرقم `3` داخل دالة `_ready()`.",
+        "en": "Write a script printing numbers 0 through 2 using `for range(5)` with `break` upon reaching `3` inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "for i in range(5):\n    if i == 3:\n        break\n    print(i)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(5):\n        if i == 3:\n            break\n        print(i)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم if i == 3: break قبل أمر الطباعة.",
+          "en": "Use if i == 3: break before the print statement."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة 0 ثم 1 ثم 2 ثم التوقف بـ break",
+            "en": "Verifying print of 0, 1, 2 then stopping with break"
           },
           "expectedOutput": "0\n1\n2"
         }
@@ -212,34 +200,30 @@
       "id": "ex_11_break_continue_06",
       "lessonId": "lesson_11_break_continue",
       "order": 5,
-      "type": "fillBlank",
+      "type": "writeCode",
       "title": {
-        "ar": "أكمل المثال",
-        "en": "Complete the example"
+        "ar": "تخطي عنصر محدد بـ continue",
+        "en": "Skipping Specific Item with continue"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n2\n3`",
-        "en": "Write or complete the example so its output is:\n\n`0\n2\n3`"
+        "ar": "اكتب سكربتاً يطبع الأرقام من 0 إلى 3 باستثناء الرقم `2` باستخدام `continue`.",
+        "en": "Write a script printing numbers 0 to 3 excluding number `2` using `continue`."
       },
-      "starterCode": "for i in range(___):\n    if i == 1:\n        continue\n    print(i)",
-      "solutionCode": "for i in range(4):\n    if i == 1:\n        continue\n    print(i)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(4):\n        if i == 2:\n            continue\n        print(i)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم if i == 2: continue لتتخطى طباعة الرقم 2.",
+          "en": "Use if i == 2: continue to skip printing number 2."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة 0 و 1 و 3 مع تخطي 2",
+            "en": "Verifying print of 0, 1, and 3 skipping 2"
           },
-          "expectedOutput": "0\n2\n3"
+          "expectedOutput": "0\n1\n3"
         }
       ]
     },
@@ -249,32 +233,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ تخطي الطباعة الخاطئة",
+        "en": "Fixing Incorrect Skip Print Bug"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`1\n2`",
-        "en": "Write or complete the example so its output is:\n\n`1\n2`"
+        "ar": "الشيفرة التالية تخطئ وتضع أمر الطباعة قبل فحص continue. أصلحها لتعرض 1 فقط عندما يكون نطاق range من 0 إلى 2:",
+        "en": "The following code places print before checking continue. Fix it to display 1 only when range is 0 to 2:"
       },
-      "starterCode": "for i in range(3):\n    if i == 0:\n        continue\n    pront(i)",
-      "solutionCode": "for i in range(3):\n    if i == 0:\n        continue\n    print(i)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    for i in range(2):\n        print(i)\n        if i == 0:\n            continue",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(2):\n        if i == 0:\n            continue\n        print(i)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "ضع شرط continue قبل أمر print ليتخطى الرقم 0.",
+          "en": "Place continue condition before print to skip number 0."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة الرقم 1 فقط بنجاح",
+            "en": "Verifying successful printing of number 1 only"
           },
-          "expectedOutput": "1\n2"
+          "expectedOutput": "1"
         }
       ]
     },
@@ -284,32 +264,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج استخدام break داخل حلقة",
+        "en": "Predict Output of break Inside Loop"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`1\n2`",
-        "en": "What output does this example display?\n\n`1\n2`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nfunc _ready():\n    for n in [10, 20, 30, 40]:\n        if n == 30:\n            break\n        print(n)\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nfunc _ready():\n    for n in [10, 20, 30, 40]:\n        if n == 30:\n            break\n        print(n)\n```"
       },
-      "starterCode": "var i = 0\nwhile i < 5:\n    i += 1\n    if i == 3:\n        break\n    print(i)",
-      "solutionCode": "var i = 0\nwhile i < 5:\n    i += 1\n    if i == 3:\n        break\n    print(i)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    for n in [10, 20, 30, 40]:\n        if n == 30:\n            break\n        print(n)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for n in [10, 20, 30, 40]:\n        if n == 30:\n            break\n        print(n)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "تتوقف الحلقة تماماً عند الوصول لـ 30، مطبوعة 10 و 20 فقط.",
+          "en": "Loop stops entirely upon reaching 30, printing 10 and 20 only."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع الناتج (10 ثم 20)",
+            "en": "Verifying output prediction match (10 then 20)"
           },
-          "expectedOutput": "1\n2"
+          "expectedOutput": "10\n20"
         }
       ]
     },
@@ -319,30 +295,26 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "تخطي العناصر الزوجية بـ continue",
+        "en": "Skipping Even Numbers with continue"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`1\n3`",
-        "en": "Write or complete the example so its output is:\n\n`1\n3`"
+        "ar": "اكتب سكربتاً يطبع الأرقام الفردية من 0 إلى 4 باستخدام حلقة range(5) وcontinue لتخطي الأعداد الزوجية (حيث `i % 2 == 0`).",
+        "en": "Write a script printing odd numbers 0 through 4 using range(5) and continue to skip evens (`i % 2 == 0`)."
       },
-      "starterCode": "",
-      "solutionCode": "for n in [1, 2, 3]:\n    if n == 2:\n        continue\n    print(n)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(5):\n        if i % 2 == 0:\n            continue\n        print(i)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `if i % 2 == 0: continue` لتتخطى 0 و 2 و 4 وتطبع 1 و 3.",
+          "en": "Use `if i % 2 == 0: continue` to skip 0, 2, 4 and print 1, 3."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة الأعداد الفردية 1 و 3 بنجاح",
+            "en": "Verifying odd numbers 1 and 3 print successfully"
           },
           "expectedOutput": "1\n3"
         }
@@ -354,32 +326,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي التحكم بالحلقات الشامل",
+        "en": "Comprehensive Loop Control Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0\n1`",
-        "en": "Write or complete the example so its output is:\n\n`0\n1`"
+        "ar": "اكتب سكربتاً يبحث عن رقم في نطاق `range(10)`؛ إذا وجد العدد `7` يطبع `Found 7` ويخرج بـ `break`، وإلا يتخطى الأعداد الأقل من 5 بـ `continue`. (الناتج للرقم 7 حصراً):\n`Found 7`",
+        "en": "Write a script searching `range(10)`; if number `7` is found prints `Found 7` and breaks, else skips numbers < 5 with `continue`. (Output for 7 exclusively):\n`Found 7`"
       },
-      "starterCode": "",
-      "solutionCode": "for i in range(4):\n    if i >= 2:\n        break\n    print(i)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(10):\n        if i < 5:\n            continue\n        if i == 7:\n            print(\"Found 7\")\n            break",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اجمع بين continue للأرقام تحت 5 و break عند إيجاد 7.",
+          "en": "Combine continue for numbers under 5 and break upon finding 7."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من إيجاد الرقم 7 والخروج الناجح بـ break",
+            "en": "Verifying finding number 7 and successful exit with break"
           },
-          "expectedOutput": "0\n1"
+          "expectedOutput": "Found 7"
         }
       ]
     }

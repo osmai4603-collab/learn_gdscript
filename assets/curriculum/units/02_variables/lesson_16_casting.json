@@ -2,38 +2,31 @@
   "id": "lesson_16_casting",
   "unitId": "unit_02_variables",
   "title": {
-    "ar": "التحويل وفحص الأنواع",
-    "en": "Casting and type checks"
+    "ar": "تحويل الأنواع وفحصها",
+    "en": "Type Casting and Inspection"
   },
   "objective": {
-    "ar": "حوّل القيم بين الأنواع الأساسية وافحص النوع عند الحاجة.",
-    "en": "Convert values between basic types and check a value’s type when needed."
+    "ar": "إتقان التحويل الصريح بين أنواع البيانات باستخدام `int()`, `float()`, `str()` وفهم مخاطر اقتطاع `int(float)` وتدقيق نوع البيانات أثناء التشغيل.",
+    "en": "Master explicit type conversion using `int()`, `float()`, `str()` and understand truncation risks of `int(float)` and runtime type inspection."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## التحويل وفحص الأنواع\n\nيجعل التحويل الصريح مقصد الشيفرة واضحاً: `int(\"12\")` يحول النص الرقمي إلى عدد صحيح، و`str(12)` يحول العدد إلى نص. استخدم `typeof(value)` عند الحاجة إلى فحص النوع أثناء التشغيل، لكن فضّل التصريح الواضح بالأنواع عندما يكون ممكناً.\n\n### مثال عملي\n\n```gdscript\nvar amount = int(\"12\")\nprint(amount + 3)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Casting and type checks\n\nExplicit conversion makes intent clear: `int(\"12\")` converts numeric text to an integer, while `str(12)` converts a number to text. Use `typeof(value)` when you need to inspect a runtime type, but prefer clear type declarations when possible.\n\n### Practical example\n\n```gdscript\nvar amount = int(\"12\")\nprint(amount + 3)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## تحويل الأنواع وفحصها في GDScript\n\n### 1. المفهوم في سياق الألعاب\nأحياناً تتلقى بيانات من المستخدم أو من ملف حفظ على هيئة نص (`String`) وتريد جمعها كأرقام، أو العكس تريد عرض نقاط اللعب في واجهة نصية. هنا يأتي دور **التحويل الصريح (Type Casting)**.\n\n### 2. القواعد والصياغة والتحذيرات\n- `int(\"12\")` تحول النص إلى عدد صحيح.\n- `float(\"3.5\")` تحول النص إلى عدد عشري.\n- `str(100)` تحول العدد إلى نص لدمجه مع نصوص أخرى.\n- ⚠️ **تحذير رسمي (اقتطاع الكسور):** تحويل عدد عشري إلى صحيح عبر `int(7.9)` **يقتطع الكسر كلياً ولا يقرب الرقم للأقرب**، ليصبح الناتج `7` تماماً!\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var text_score = \"45\"\n    # تحويل النص إلى عدد لجمع نقاط إضافية\n    var final_score = int(text_score) + 5\n    print(final_score)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** محاولة تحويل نص غير رقمي مثل `int(\"Hello\")` ستفشل وتنتج القيمة `0` أو تسبب خطأ تشغيلي.\n- ℹ️ **معلومة تقنية:** استخدام دالة `typeof(value)` يسمح بفحص نوع القيمة برمجياً عند الحاجة.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم التحويل الصريح متى ما احتجت دمج النصوص بالأرقام أو معالجة المدخلات، وتذكر دائماً أن `int()` يقتطع الكسور تماماً.",
+    "en": "## Type Casting and Inspection in GDScript\n\n### 1. Concept in Game Context\nSometimes you receive data from players or save files as strings (`String`) and need to perform arithmetic, or vice versa display scores in UI text. This is where **Type Casting** comes in.\n\n### 2. Rules, Syntax, and Warnings\n- `int(\"12\")` converts string to integer.\n- `float(\"3.5\")` converts string to decimal.\n- `str(100)` converts number to string for text merging.\n- ⚠️ **Official Warning (Fraction Truncation):** Casting float to int via `int(7.9)` **truncates the fraction entirely without rounding**, resulting in exactly `7`!\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    var text_score = \"45\"\n    # Convert string to int to add bonus points\n    var final_score = int(text_score) + 5\n    print(final_score)\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Converting non-numeric strings like `int(\"Hello\")` fails, returning `0` or triggering a runtime error.\n- ℹ️ **Tech Note:** `typeof(value)` allows inspecting runtime types when needed.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Use explicit casting whenever merging text with numbers or processing inputs, and always remember `int()` truncates fractions completely."
   },
-  "exampleCode": "var amount = int(\"12\")\nprint(amount + 3)",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var text_score = \"45\"\n    var final_score = int(text_score) + 5\n    print(final_score)",
   "documentation": {
-    "ar": "### التحويل وفحص الأنواع\n\nيجعل التحويل الصريح مقصد الشيفرة واضحاً: `int(\"12\")` يحول النص الرقمي إلى عدد صحيح، و`str(12)` يحول العدد إلى نص. استخدم `typeof(value)` عند الحاجة إلى فحص النوع أثناء التشغيل، لكن فضّل التصريح الواضح بالأنواع عندما يكون ممكناً.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Casting and type checks\n\nExplicit conversion makes intent clear: `int(\"12\")` converts numeric text to an integer, while `str(12)` converts a number to text. Use `typeof(value)` when you need to inspect a runtime type, but prefer clear type declarations when possible.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع التحويل والفحص في GDScript\n\n- التحويل الصريح بـ `int()`, `float()`, `str()`.\n- خطر اقتطاع الكسور عند التحويل من عشري لصحيح.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Casting and Inspection Reference in GDScript\n\n- Explicit casting via `int()`, `float()`, `str()`.\n- Fraction truncation risk when casting float to int.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "الأنواع الساكنة في GDScript",
-        "en": "Static typing in GDScript"
+        "ar": "تحويل الأنواع في GDScript",
+        "en": "GDScript Type Conversion"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html"
-    },
-    {
-      "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
-      },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#type-conversion"
     }
   ],
   "exercises": [
@@ -43,32 +36,36 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "نتيجة تحويل العدد العشري إلى صحيح int(7.9)",
+        "en": "Result of Casting Float to Int int(7.9)"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "ما الذي ينتج عن تنفيذ عملية التحويل التالية في GDScript: `int(7.9)`؟",
+        "en": "What does casting `int(7.9)` yield in GDScript?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "العدد الصحيح `7` (يتم اقتطاع الجزء العشري دون تقريب)",
+          "en": "The integer `7` (fractional part is truncated without rounding)"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "العدد `8` (تقريب إلى القريب للأعلى)",
+          "en": "The number `8` (rounded up)"
+        },
+        {
+          "ar": "خطأ صياغة يوقف اللعبة",
+          "en": "A syntax error stopping the game"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "دالة int() تقتطع الفاصلة العشرية بالكامل ولا تقرب الرقم.",
+          "en": "The int() function entirely truncates the decimal point without rounding."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول يعبر عن قاعدة اقتطاع الكسور في int().",
+          "en": "The first option expresses the int() truncation rule."
         }
       ]
     },
@@ -78,32 +75,36 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "الغرض من دالة str()",
+        "en": "Purpose of str() Function"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "لماذا نستخدم دالة `str()` في لغة GDScript؟",
+        "en": "Why do we use the `str()` function in GDScript?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "لتحويل الأرقام أو القيم الأخرى إلى نص String لدمجها وعرضها",
+          "en": "To convert numbers or other values into a String for concatenation and display"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "لحذف النصوص والملفات نهائياً من القرص الصلب",
+          "en": "To permanently delete text and files from the hard drive"
+        },
+        {
+          "ar": "لتسريع سرعة معالج الرسوميات بنسبة 50%",
+          "en": "To accelerate GPU speed by 50%"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "دالة str() اختصار لـ String وتستخدم لتحويل أي قيمة إلى نص.",
+          "en": "str() stands for String and is used to convert any value to text."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول يشرح الاستخدام الصحيح.",
+          "en": "The first option explains correct usage."
         }
       ]
     },
@@ -113,32 +114,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "كيفية تحويل نص رقمي إلى عدد صحيح",
+        "en": "How to Convert Numeric String to Integer"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "إذا كان لديك متغير نصي يحمل قيمة عددية مثل `var s = \"25\"` وتريد استخدامه في حسابات رياضية، كيف تحوله إلى عدد صحيح؟",
+        "en": "If you have a string variable like `var s = \"25\"` and want to use it in math, how do you convert it to an integer?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "باستخدام التحويل الصحيح `int(s)`",
+          "en": "Using explicit cast `int(s)`"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "باستخدام الدالة `float(s)` حصراً",
+          "en": "Using `float(s)` exclusively"
+        },
+        {
+          "ar": "بضرب النص في عدد",
+          "en": "By multiplying the string by a number"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "استخدم دالة `int()` لتتحول القيمة النصية الرقمية إلى عدد صحيح.",
+          "en": "Use the `int()` function to convert numeric string values to integers."
         }
       ]
     },
@@ -148,35 +149,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: تحويل النص الرقمي وجمعه",
+        "en": "Guided Task: Casting Numeric String and Adding"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على تحويل نص مستلم من المدخلات إلى عدد صحيح ثم إجراء عملية جمع.",
+        "en": "Practice casting input string to integer then performing addition."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "عرّف متغيراً نصياً يحمل رقمًا مثل `var input = \"10\"`.",
+          "en": "Define string variable holding number like `var input = \"10\"`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "حوّله إلى عدد بـ `int(input)` واجمع عليه 5 واطبع المجموع.",
+          "en": "Cast it using `int(input)` add 5 and print sum."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "التحويل الصريح يمنع أخطاء تداخل الأنواع.",
+          "en": "Explicit casting prevents type mismatch errors."
         }
       ]
     },
@@ -186,32 +179,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تحويل نص إلى عدد وإجراء عملية حسابية",
+        "en": "Casting String to Number and Calculating"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`10`",
-        "en": "Write or complete the example so its output is:\n\n`10`"
+        "ar": "اكتب سكربتاً يحول النص `\"50\"` إلى عدد صحيح ويضيف إليه `5` ثم يطبع الناتج داخل دالة `_ready()`.",
+        "en": "Write a script converting string `\"50\"` to integer, adding `5`, and printing result inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "print(int(\"8\") + 2)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var val = int(\"50\") + 5\n    print(val)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `int(\"50\") + 5` واطبع الناتج.",
+          "en": "Use `int(\"50\") + 5` and print result."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة ناتج التحويل والجمع (55)",
+            "en": "Verifying correct cast and addition result (55)"
           },
-          "expectedOutput": "10"
+          "expectedOutput": "55"
         }
       ]
     },
@@ -219,34 +208,30 @@
       "id": "ex_16_casting_06",
       "lessonId": "lesson_16_casting",
       "order": 5,
-      "type": "fillBlank",
+      "type": "writeCode",
       "title": {
-        "ar": "أكمل المثال",
-        "en": "Complete the example"
+        "ar": "تحويل عدد إلى نص وعرضه",
+        "en": "Casting Number to String and Displaying"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`12`",
-        "en": "Write or complete the example so its output is:\n\n`12`"
+        "ar": "اكتب سكربتاً يحول الرقم `500` إلى نص باستخدام `str()` ويطبعه.",
+        "en": "Write a script converting number `500` to string using `str()` and prints it."
       },
-      "starterCode": "print(str(___))",
-      "solutionCode": "print(str(12))",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var text_val = str(500)\n    print(text_val)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `str(500)` ثم اطبع المتغير.",
+          "en": "Use `str(500)` then print the variable."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة النص الناتج من التحويل",
+            "en": "Verifying text output resulting from cast"
           },
-          "expectedOutput": "12"
+          "expectedOutput": "500"
         }
       ]
     },
@@ -256,32 +241,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح خطأ استدعاء دالة التحويل",
+        "en": "Fixing Cast Function Call Error"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`2.5`",
-        "en": "Write or complete the example so its output is:\n\n`2.5`"
+        "ar": "الشيفرة التالية تحتوي على خطأ إملائي في اسم دالة التحويل لعدد صحيح. أصلحها لتعمل وتطبع `15`:",
+        "en": "The following code has a typo in integer cast function name. Fix it to run and print `15`:"
       },
-      "starterCode": "var value = float(\"2.5\")\npront(value)",
-      "solutionCode": "var value = float(\"2.5\")\nprint(value)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var x = integer(\"10\") + 5\n    print(x)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var x = int(\"10\") + 5\n    print(x)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "دالة التحويل لعدد صحيح اسمها `int` وليست `integer`.",
+          "en": "The integer cast function is named `int`, not `integer`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الشيفرة بعد تصحيح اسم دالة int",
+            "en": "Verifying code operation after correcting int function name"
           },
-          "expectedOutput": "2.5"
+          "expectedOutput": "15"
         }
       ]
     },
@@ -291,32 +272,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج تحويل عشري إلى صحيح",
+        "en": "Predict Float to Int Cast Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`4`",
-        "en": "What output does this example display?\n\n`4`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nfunc _ready():\n    var score = int(9.99)\n    print(score)\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nfunc _ready():\n    var score = int(9.99)\n    print(score)\n```"
       },
-      "starterCode": "var value = int(4.9)\nprint(value)",
-      "solutionCode": "var value = int(4.9)\nprint(value)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var score = int(9.99)\n    print(score)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var score = int(9.99)\n    print(score)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "تذكر أن التحويل بـ int() يقتطع الكسر كلياً.",
+          "en": "Remember casting with int() truncates the fraction entirely."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من ناتج الاقتطاع السليم (9)",
+            "en": "Verifying correct truncation result (9)"
           },
-          "expectedOutput": "4"
+          "expectedOutput": "9"
         }
       ]
     },
@@ -326,32 +303,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "تحويل نص عشري إلى float",
+        "en": "Casting Decimal String to float"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`7 points`",
-        "en": "Write or complete the example so its output is:\n\n`7 points`"
+        "ar": "اكتب سكربتاً يحول النص `\"4.25\"` إلى عدد عشري باستخدام `float()` ويطبعه.",
+        "en": "Write a script converting string `\"4.25\"` to decimal using `float()` and prints it."
       },
-      "starterCode": "",
-      "solutionCode": "var value = str(7) + \" points\"\nprint(value)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var val = float(\"4.25\")\n    print(val)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `float(\"4.25\")` ثم اطبع الناتج.",
+          "en": "Use `float(\"4.25\")` then print result."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة العدد العشري بدقة",
+            "en": "Verifying decimal float output accurately"
           },
-          "expectedOutput": "7 points"
+          "expectedOutput": "4.25"
         }
       ]
     },
@@ -361,32 +334,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي تحويل الأنواع ودمجها",
+        "en": "Type Casting and Combination Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يطبع نوع القيمة `int`.",
-        "en": "Write or complete the example so it prints the type `int`."
+        "ar": "اكتب سكربتاً يحول الرقم `100` إلى نص ويدمجه مع النص `\" Points\"` ليصبح الناتج `100 Points`.",
+        "en": "Write a script converting number `100` to string and combining with `\" Points\"` yielding `100 Points`."
       },
-      "starterCode": "",
-      "solutionCode": "var kind = typeof(3)\nprint(kind)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var msg = str(100) + \" Points\"\n    print(msg)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `str(100) + \" Points\"`.",
+          "en": "Use `str(100) + \" Points\"`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من مطاعة النتيجة المدمجة للرقم والنص",
+            "en": "Verifying concatenated number and text output match"
           },
-          "expectedOutput": "int"
+          "expectedOutput": "100 Points"
         }
       ]
     }

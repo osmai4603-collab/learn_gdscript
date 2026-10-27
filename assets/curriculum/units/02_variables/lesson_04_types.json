@@ -2,38 +2,31 @@
   "id": "lesson_04_types",
   "unitId": "unit_02_variables",
   "title": {
-    "ar": "الأنواع والاستدلال على النوع",
-    "en": "Types and type inference"
+    "ar": "أنواع البيانات وقسمة الأعداد",
+    "en": "Data Types and Integer Division"
   },
   "objective": {
-    "ar": "تعرّف الأنواع الأساسية واستفد من استدلال GDScript أو التصريح الصريح.",
-    "en": "Recognize basic types and use GDScript inference or explicit declarations."
+    "ar": "إتقان أنواع البيانات الأساسية (`int`, `float`, `String`, `bool`) وفهم التحذير الحرج لقسمة الأعداد الصحيحة `int / int` ومخاطر سقوط الكسور.",
+    "en": "Master basic data types (`int`, `float`, `String`, `bool`) and understand the critical warning for `int / int` division truncation."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## الأنواع والاستدلال على النوع\n\nتصف الأنواع شكل القيمة والعمليات الملائمة لها: `int` للأعداد الصحيحة، و`float` للأعداد العشرية، و`String` للنص، و`bool` للصواب والخطأ. يستنتج GDScript النوع غالباً من القيمة الأولى، ويمكنك التصريح به مثل `var speed: float = 3.5`. لا تخلط النص والعدد في عملية حسابية من دون تحويل.\n\n### مثال عملي\n\n```gdscript\nvar speed: float = 3.5\nvar label: String = \"Speed\"\nprint(speed)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Types and type inference\n\nTypes describe a value and the operations that fit it: `int` for whole numbers, `float` for decimals, `String` for text, and `bool` for true/false. GDScript often infers a type from the initial value; you can also declare it, as in `var speed: float = 3.5`. Convert values before mixing text and numbers in arithmetic.\n\n### Practical example\n\n```gdscript\nvar speed: float = 3.5\nvar label: String = \"Speed\"\nprint(speed)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## أنواع البيانات وقسمة الأعداد في GDScript\n\n### 1. المفهوم في سياق الألعاب\nلكل معلومة في لعبتك نوع محدد يحدد طبيعتها وكيفية التعامل معها: الأعداد الصحيحة (`int`) لحساب عدد الأرواح، الأعداد العشرية (`float`) لسرعة الحركة الدقيقة، النصوص (`String`) لعرض أسماء اللاعبين، والقيم المنطقية (`bool`) لتمثيل حالات التشغيل أو الإيقاف (true/false).\n\n### 2. القواعد والصياغة والتحذير الأهم\n- **الاستدلال الساكن والمكتوب:** يمكنك إسناد القيمة مباشرة أو تحديد النوع هكذا: `var gravity: float = 9.8`.\n- ⚠️ **تحذير رسمي حرج (قسْم الأعداد الصحيحة):** في GDScript (مثل لغات البرمجة الكبرى)، قسمة عدد صحيح على عدد صحيح `int / int` تُسقط الكسر تماماً! فمثلاً `5 / 2` يعطي `2` وليس `2.5`. للحصول على كسر عشري، يجب تحويل أحد الطرفين إلى `float` (مثل `5.0 / 2`).\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var total_gold: int = 7\n    var party_members: int = 2\n    # تجنب سقوط الكسر بتحويل أحد الطرفين لـ float\n    var share = float(total_gold) / party_members\n    print(share)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** خلط النص بالعدد في العمليات الحسابية بدون تحويل `str()` يسبب توقف السكربت.\n- ℹ️ **معلومة تقنية:** استخدام الأنواع المحددة (Static Typing) يحسن أداء المحرك ويمنع الأخطاء البصرية مبكراً.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** احذر دائماً عند قسمة الأعداد الصحيحة `int / int`. حوّل أحد الأطراف إلى `float` متى ما احتفظت بناتج عشري دقيق.",
+    "en": "## Data Types and Integer Division in GDScript\n\n### 1. Concept in Game Context\nEvery piece of data in your game has a type determining its nature: Integers (`int`) for counting lives, floats (`float`) for precise movement speed, Strings (`String`) for player names, and Booleans (`bool`) for on/off states (true/false).\n\n### 2. Rules, Syntax, and Critical Warning\n- **Type Inference & Declaration:** You can assign directly or specify type: `var gravity: float = 9.8`.\n- ⚠️ **Critical Official Warning (Integer Division):** In GDScript, dividing an integer by an integer `int / int` truncates the fractional part entirely! For example, `5 / 2` yields `2` not `2.5`. To get a decimal, cast one operand to `float` (e.g., `5.0 / 2`).\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nfunc _ready():\n    var total_gold: int = 7\n    var party_members: int = 2\n    # Prevent fraction truncation by casting to float\n    var share = float(total_gold) / party_members\n    print(share)\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Mixing text and numbers in arithmetic without `str()` casting halts execution.\n- ℹ️ **Tech Note:** Static typing improves engine performance and catches bugs early.\n\n### 5. Summary and Golden Rule\n> **Golden Rule:** Always beware of integer division `int / int`. Cast an operand to `float` whenever you need accurate decimal results."
   },
-  "exampleCode": "var speed: float = 3.5\nvar label: String = \"Speed\"\nprint(speed)",
+  "exampleCode": "extends Node\n\nfunc _ready():\n    var total_gold: int = 7\n    var party_members: int = 2\n    var share = float(total_gold) / party_members\n    print(share)",
   "documentation": {
-    "ar": "### الأنواع والاستدلال على النوع\n\nتصف الأنواع شكل القيمة والعمليات الملائمة لها: `int` للأعداد الصحيحة، و`float` للأعداد العشرية، و`String` للنص، و`bool` للصواب والخطأ. يستنتج GDScript النوع غالباً من القيمة الأولى، ويمكنك التصريح به مثل `var speed: float = 3.5`. لا تخلط النص والعدد في عملية حسابية من دون تحويل.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Types and type inference\n\nTypes describe a value and the operations that fit it: `int` for whole numbers, `float` for decimals, `String` for text, and `bool` for true/false. GDScript often infers a type from the initial value; you can also declare it, as in `var speed: float = 3.5`. Convert values before mixing text and numbers in arithmetic.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع أنواع البيانات في GDScript\n\n- `int`, `float`, `String`, `bool`.\n- حذر من اقتطاع الكسور في قسمة الأعداد الصحيحة.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Data Types Reference in GDScript\n\n- `int`, `float`, `String`, `bool`.\n- Beware of fraction truncation in integer division.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "الأنواع الساكنة في GDScript",
-        "en": "Static typing in GDScript"
+        "ar": "الأنواع الساكنة وقسمة الأعداد في Godot",
+        "en": "Godot Static Typing and Operators"
       },
       "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html"
-    },
-    {
-      "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
-      },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ],
   "exercises": [
@@ -43,32 +36,36 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "خطر قسمة الأعداد الصحيحة int / int",
+        "en": "Danger of Integer Division int / int"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "ما الذي ينتج عن تنفيذ عملية القسمة التالية في GDScript: `5 / 2`؟",
+        "en": "What does the division `5 / 2` yield in GDScript?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "العدد الصحيح `2` (لأن الكسر يتم إسقاطه كلياً)",
+          "en": "The integer `2` (because the fraction is completely truncated)"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "العدد العشري الدقيق `2.5`",
+          "en": "The exact decimal `2.5`"
+        },
+        {
+          "ar": "خطأ صياغة يمنع عمل اللعبة",
+          "en": "A syntax error stopping the game"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "قسمة عددين صحيحين في GDScript تعطي دائماً عدداً صحيحاً وتُسقط باقي القسمة العشري.",
+          "en": "Dividing two integers in GDScript always yields an integer, dropping the decimal remainder."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الأول يعبر عن قاعدة قسمة الصحيحين.",
+          "en": "The first option expresses the integer division rule."
         }
       ]
     },
@@ -78,32 +75,36 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "النوع المناسب لسرعة الحركة الدقيقة",
+        "en": "Appropriate Type for Precise Movement Speed"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "أي من أنواع البيانات التالية هو الأنسب لتخزين سرعة حركة الشخصية بدقة تحتوي على كسور عشرية مثل `3.14`؟",
+        "en": "Which data type is best suited to store a character's movement speed with decimals like `3.14`?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "نوع `int` الصحيح",
+          "en": "The `int` type"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "نوع `float` العشري",
+          "en": "The `float` type"
+        },
+        {
+          "ar": "نوع `bool` المنطقي",
+          "en": "The `bool` type"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "القيم ذات الفواصل العشرية تُحفظ في متغيرات من نوع `float`.",
+          "en": "Values with decimal points are stored in `float` variables."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الثاني هو النوع العشري `float`.",
+          "en": "The second option is the decimal `float` type."
         }
       ]
     },
@@ -113,32 +114,36 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "الغرض من نوع البيانات bool",
+        "en": "Purpose of Boolean Data Type"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "ما هي القيم الممكنة التي يمكن تخزينها في متغير من نوع `bool` في GDScript؟",
+        "en": "What are the possible values storable in a `bool` variable in GDScript?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "أي رقم عشري بين 0 و 100",
+          "en": "Any decimal number between 0 and 100"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "قيمتان فقط هما `true` (صواب) أو `false` (خطأ)",
+          "en": "Only two values: `true` or `false`"
+        },
+        {
+          "ar": "نصوص طويلة فقط",
+          "en": "Long strings exclusively"
         }
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": 1,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
+          "ar": "المتغيرات المنطقية (Booleans) تمثل حالتين فقط.",
+          "en": "Booleans represent only two states."
         },
         {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الخيار الثاني يمثل `true` و `false`.",
+          "en": "The second option represents `true` and `false`."
         }
       ]
     },
@@ -148,35 +153,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: تجنب قسمة الأعداد الصحيحة",
+        "en": "Guided Task: Avoiding Integer Division Truncation"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "قم باختبار الفرق بين قسمة الصحيحين وقسمة الأعداد العشرية في Godot.",
+        "en": "Test the difference between integer division and decimal division in Godot."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "اطبع ناتج `9 / 2` ولاحظ كيف يسقط الكسر ويعطي `4`.",
+          "en": "Print `9 / 2` and notice how the fraction truncates to give `4`."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "اطبع ناتج `9.0 / 2` ولاحظ كيف يعطي الناتج الصحيح `4.5`.",
+          "en": "Print `9.0 / 2` and notice how it yields the correct `4.5`."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "تحويل أحد الأطراف لـ float يحافظ على دقة الحسابات العشرية.",
+          "en": "Casting one operand to float preserves decimal precision."
         }
       ]
     },
@@ -186,32 +183,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "حساب الناتج العشري الصحيح",
+        "en": "Calculating Correct Decimal Result"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`6`",
-        "en": "Write or complete the example so its output is:\n\n`6`"
+        "ar": "اكتب سكربتاً يطبع ناتج القسمة الصحيحة لـ `9.0 / 2` للحصول على كسر عشري دقيق.",
+        "en": "Write a script printing the decimal division result of `9.0 / 2` for precise decimals."
       },
-      "starterCode": "",
-      "solutionCode": "var n = 6\nprint(n)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(9.0 / 2)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `print(9.0 / 2)`.",
+          "en": "Use `print(9.0 / 2)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة الناتج العشري (4.5)",
+            "en": "Verifying correct decimal output (4.5)"
           },
-          "expectedOutput": "6"
+          "expectedOutput": "4.5"
         }
       ]
     },
@@ -221,32 +214,28 @@
       "order": 5,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تعريف متغير صريح النوع للسرعة",
+        "en": "Defining Explicitly Typed Speed Variable"
       },
       "prompt": {
-        "ar": "اكتب الشيفرة التي تطبق فكرة الدرس ويكون خرجها:\n\n1.5",
-        "en": "Write code that applies the lesson idea and produces this output:\n\n1.5"
+        "ar": "عرّف متغيراً نوعه صريح `var speed: float = 125.5` ثم اطبع قيمته داخل دالة `_ready()`.",
+        "en": "Define explicitly typed `var speed: float = 125.5` then print its value inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "var ratio: float = 1.5\nprint(ratio)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var speed: float = 125.5\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var speed: float = 125.5\n    print(speed)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اطبع المتغير بـ `print(speed)`.",
+          "en": "Print the variable using `print(speed)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة السرعة العشرية بنجاح",
+            "en": "Verifying decimal speed output successfully"
           },
-          "expectedOutput": "1.5"
+          "expectedOutput": "125.5"
         }
       ]
     },
@@ -256,32 +245,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح طباعة القيمة المنطقية",
+        "en": "Fixing Boolean Value Print"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Ready`",
-        "en": "Write or complete the example so its output is:\n\n`Ready`"
+        "ar": "الشيفرة التالية تحتوي على خطأ إملائي في أمر الطباعة. أصلحها لتعرض `true`:",
+        "en": "The following code has a typo in the print statement. Fix it to display `true`:"
       },
-      "starterCode": "var label: String = \"Ready\"\npront(label)",
-      "solutionCode": "var label: String = \"Ready\"\nprint(label)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var is_alive: bool = true\n    pront(is_alive)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var is_alive: bool = true\n    print(is_alive)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استبدل `pront` بـ `print`.",
+          "en": "Replace `pront` with `print`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من صحة إخراج القيمة المنطقية true",
+            "en": "Verifying correct true boolean output"
           },
-          "expectedOutput": "Ready"
+          "expectedOutput": "true"
         }
       ]
     },
@@ -291,32 +276,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بناتج قسمة الأعداد الصحيحة",
+        "en": "Predict Integer Division Output"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`false`",
-        "en": "What output does this example display?\n\n`false`"
+        "ar": "ما الذي سيطبعه هذا السكربت عند تنفيذه:\n\n```gdscript\nextends Node\nfunc _ready():\n    print(7 / 3)\n```",
+        "en": "What will this script print when executed:\n\n```gdscript\nextends Node\nfunc _ready():\n    print(7 / 3)\n```"
       },
-      "starterCode": "var active: bool = false\nprint(active)",
-      "solutionCode": "var active: bool = false\nprint(active)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    print(7 / 3)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(7 / 3)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "تذكر أن قسمة عددين صحيحين تُسقط الكسر.",
+          "en": "Remember that integer division truncates the fraction."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع القسمة الصحيحة (2)",
+            "en": "Verifying integer division prediction match (2)"
           },
-          "expectedOutput": "false"
+          "expectedOutput": "2"
         }
       ]
     },
@@ -326,32 +307,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "استخدام نوع النص String",
+        "en": "Using String Type"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`3`",
-        "en": "Write or complete the example so its output is:\n\n`3`"
+        "ar": "عرف متغيراً نصياً `var player_name: String = \"Hero\"` واطبع قيمته.",
+        "en": "Define string variable `var player_name: String = \"Hero\"` and print its value."
       },
-      "starterCode": "",
-      "solutionCode": "var count = 2\nprint(count + 1)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var player_name: String = \"Hero\"\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var player_name: String = \"Hero\"\n    print(player_name)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اطبع بـ `print(player_name)`.",
+          "en": "Print using `print(player_name)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة اسم البطل بنجاح",
+            "en": "Verifying hero name output successfully"
           },
-          "expectedOutput": "3"
+          "expectedOutput": "Hero"
         }
       ]
     },
@@ -361,32 +338,28 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي أنواع البيانات والعمليات",
+        "en": "Data Types and Operations Challenge"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`GDScript`",
-        "en": "Write or complete the example so its output is:\n\n`GDScript`"
+        "ar": "اكتب سكربتاً يحسب ناتج قسمة دقيقة لـ `15.0 / 4` ويطبع الناتج.",
+        "en": "Write a script calculating precise division of `15.0 / 4` and printing the result."
       },
-      "starterCode": "",
-      "solutionCode": "var word = \"GDScript\"\nprint(word)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(15.0 / 4)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `print(15.0 / 4)` للحصول على `3.75`.",
+          "en": "Use `print(15.0 / 4)` to get `3.75`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من دقة الناتج العشري (3.75)",
+            "en": "Verifying decimal result precision (3.75)"
           },
-          "expectedOutput": "GDScript"
+          "expectedOutput": "3.75"
         }
       ]
     }

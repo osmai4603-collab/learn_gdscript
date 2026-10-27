@@ -2,38 +2,32 @@
   "id": "lesson_18_enums",
   "unitId": "unit_02_variables",
   "title": {
-    "ar": "الثوابت والتعدادات",
-    "en": "Constants and enums"
+    "ar": "الثوابت والتعدادات (تحدي الوحدة 2)",
+    "en": "Constants and Enums (Unit 2 Capstone)"
   },
   "objective": {
-    "ar": "استخدم `const` للقيم الثابتة وتعرّف على `enum` لتسمية الخيارات.",
-    "en": "Use `const` for fixed values and learn how `enum` names choices."
+    "ar": "إتقان استخدام التعدادات المسماة (Named Enums) والثوابت للقضاء على الأرقام السحرية وإنجاز التحدي التراكمي للوحدة الثانية.",
+    "en": "Master named enums and constants to eliminate magic numbers and complete the Unit 2 capstone challenge."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 4,
   "contentMarkdown": {
-    "ar": "## الثوابت والتعدادات\n\nتمنع `const` تغيير قيمة إعداد ثابت وتساعد على تجنب الأرقام السحرية. يعرّف `enum` مجموعة أسماء مترابطة مثل حالات اللعبة؛ لكل اسم قيمة عددية افتراضية. استخدم الاسم المقروء بدلاً من رقم مبهم، واحتفظ بالثوابت في نطاق مناسب.\n\n### مثال عملي\n\n```gdscript\nconst MAX_SCORE = 100\nenum State { READY, PLAYING, DONE }\nprint(MAX_SCORE)\nprint(State.READY)\n```\n\nغيّر قيمة واحدة وشغّل السكربت لملاحظة أثرها.",
-    "en": "## Constants and enums\n\n`const` prevents a fixed setting from changing and helps avoid magic numbers. An `enum` names a related set of choices, such as game states; each name has a default integer value. Prefer a readable name to an unexplained number, and keep constants at an appropriate scope.\n\n### Practical example\n\n```gdscript\nconst MAX_SCORE = 100\nenum State { READY, PLAYING, DONE }\nprint(MAX_SCORE)\nprint(State.READY)\n```\n\nChange one value and run the script to observe its effect."
+    "ar": "## الثوابت والتعدادات في GDScript\n\n### 1. المفهوم في سياق الألعاب\nعندما تبرمج لعبة، قد تستخدم أرقاماً مبهمة مثل استخدام الرقم `0` لتمثيل حالة الوقوف، و`1` للحركة، و`2` للقفز. هذه تسمى في البرمجة **الأرقام السحرية (Magic Numbers)** لأنها غامضة. الحل الاحترافي هو استخدام **التعدادات (Enums)** لتسمية هذه الحالات بوضوح.\n\n### 2. القواعد والصياغة\n- **الثوابت:** تُعرّف بـ `const` لضمان عدم تغير إعدادات اللعبة الحرجة.\n- **التعدادات:** تُعرّف بـ `enum State { IDLE, RUN, JUMP }`، وتمنح كل خيار رقماً تسلسلياً تلقائياً يبدأ من الصفر، مع إمكانية قراءتها بأسماء مفهومة.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nenum PlayerState { IDLE, RUNNING, JUMPING }\n\nfunc _ready():\n    var current_state = PlayerState.RUNNING\n    print(current_state)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تجنب استخدام الأرقام المجردة في الشروط والحالات؛ استخدم دائماً أسماء التعدادات (Enums) لسهولة الصيانة وتجنب الأخطاء.\n- ℹ️ **معلومة تقنية:** التعدادات في GDScript توفر إكمالاً تلقائياً ممتازاً في محرر Godot.\n\n### 5. الملخص والقاعدة الذهبية (تحدي الوحدة 2)\n> **قاعدة ذهبية وتحدي الوحدة:** التعدادات والثوابت تحمي لعبتك من الأخطاء الغامضة. في ختام هذه الوحدة، سننجز **تحدي بطاقة شخصية اللاعب وسجل المقتنيات (Player Inventory & Character Card)** لدمج المتغيرات والأنواع والتنسيق والتعدادات.",
+    "en": "## Constants and Enums in GDScript\n\n### 1. Concept in Game Context\nWhen programming games, you might use obscure numbers like `0` for idle state, `1` for running, `2` for jumping. These are called **Magic Numbers** because they lack context. The professional solution is using **Enums** to name these states clearly.\n\n### 2. Rules and Syntax\n- **Constants:** Defined with `const` to ensure critical settings never mutate.\n- **Enums:** Defined as `enum State { IDLE, RUN, JUMP }`, assigning sequential integers starting from zero automatically while offering readable names.\n\n### 3. Line-by-Line Explained Example\n```gdscript\nextends Node\n\nenum PlayerState { IDLE, RUNNING, JUMPING }\n\nfunc _ready():\n    var current_state = PlayerState.RUNNING\n    print(current_state)\n```\n\n### 4. Common Errors and Official Warnings\n- ⚠️ **Official Warning:** Avoid raw magic numbers in conditionals and states; always use Enum names for maintainability and clarity.\n- ℹ️ **Tech Note:** GDScript enums provide fantastic autocomplete support in the Godot editor.\n\n### 5. Summary and Golden Rule (Unit 2 Capstone)\n> **Golden Rule & Capstone:** Enums and constants protect your game from obscure bugs. In this lesson's capstone, we accomplish the **Player Inventory & Character Card** challenge integrating variables, types, formatting, and enums.",
+    "ar_translation_note": "تحدي الوحدة 2 التراكمي يدمج المتغيرات، الأنواع، التنسيق، والثوابت والتعدادات."
   },
-  "exampleCode": "const MAX_SCORE = 100\nenum State { READY, PLAYING, DONE }\nprint(MAX_SCORE)\nprint(State.READY)",
+  "exampleCode": "extends Node\n\nenum PlayerState { IDLE, RUNNING, JUMPING }\n\nfunc _ready():\n    var current_state = PlayerState.RUNNING\n    print(current_state)",
   "documentation": {
-    "ar": "### الثوابت والتعدادات\n\nتمنع `const` تغيير قيمة إعداد ثابت وتساعد على تجنب الأرقام السحرية. يعرّف `enum` مجموعة أسماء مترابطة مثل حالات اللعبة؛ لكل اسم قيمة عددية افتراضية. استخدم الاسم المقروء بدلاً من رقم مبهم، واحتفظ بالثوابت في نطاق مناسب.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
-    "en": "### Constants and enums\n\n`const` prevents a fixed setting from changing and helps avoid magic numbers. An `enum` names a related set of choices, such as game states; each name has a default integer value. Prefer a readable name to an unexplained number, and keep constants at an appropriate scope.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
+    "ar": "### مرجع الثوابت والتعدادات في GDScript\n\n- استخدام `const` للثوابت القيمة.\n- استخدام `enum` لحالات اللعبة والقضاء على الأرقام السحرية.\n\n**قاعدة عملية:** ابدأ بأصغر مثال، واختبره بعد كل تعديل. استخدم أسماء واضحة وافحص القيم والحالات الحدية قبل توسيع الحل.\n\nهذا شرح تعليمي أصلي مُعاد الصياغة بالاستناد إلى توثيق Godot Engine الرسمي ومساهميه (CC BY 3.0)، وليس محتوى معتمداً من Godot.",
+    "en": "### Constants and Enums Reference in GDScript\n\n- Use `const` for value constants.\n- Use `enum` for game states eliminating magic numbers.\n\n**Practical rule:** Begin with the smallest example and test after each change. Use clear names and inspect values and boundary cases before extending the solution.\n\nThis is original instructional text rephrased with reference to the official Godot Engine documentation and its contributors (CC BY 3.0); it is not endorsed by Godot."
   },
   "documentationSources": [
     {
       "title": {
-        "ar": "GDScript المتقدم",
-        "en": "Advanced GDScript"
+        "ar": "دليل التعدادات في Godot",
+        "en": "Godot Enums Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_advanced.html"
-    },
-    {
-      "title": {
-        "ar": "أساسيات GDScript",
-        "en": "GDScript basics"
-      },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#enumerations"
     }
   ],
   "exercises": [
@@ -43,32 +37,32 @@
       "order": 0,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 1",
-        "en": "Check the idea 1"
+        "ar": "ما هي الأرقام السحرية Magic Numbers؟",
+        "en": "What are Magic Numbers?"
       },
       "prompt": {
-        "ar": "ما الفكرة الأساسية في هذا الدرس؟",
-        "en": "What is the main idea of this lesson?"
+        "ar": "في برمجة الألعاب، ماذا يقصد مصطلح الأرقام السحرية (Magic Numbers) ولماذا يُحذر منها؟",
+        "en": "In game programming, what do Magic Numbers refer to and why are they discouraged?"
       },
       "options": [
         {
-          "ar": "فهم القاعدة وتطبيقها في السياق الصحيح",
-          "en": "Understand the rule and apply it in the right context"
+          "ar": "استخدام أرقام خام مبهمة (مثل 0 و 1) بدلاً من أسماء واضحة، مما يغمض معنى الشيفرة",
+          "en": "Using raw obscure numbers (like 0 and 1) instead of clear names, obscuring code meaning"
         },
         {
-          "ar": "تجاهل ترتيب التنفيذ والقواعد",
-          "en": "Ignore execution order and rules"
+          "ar": "أرقام تزيد سرعة اللعبة أضعافاً مضاعفة سحرياً",
+          "en": "Numbers that magically multiply game speed"
+        },
+        {
+          "ar": "أخطاء تصدير اللعبة لنظام التشغيل",
+          "en": "Errors exporting the game to OS"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الأرقام المجردة بدون سياق تسمى أرقاماً سحرية ويتم استبدالها بـ Enums.",
+          "en": "Contextless raw numbers are called magic numbers and replaced by Enums."
         }
       ]
     },
@@ -78,32 +72,32 @@
       "order": 1,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 2",
-        "en": "Check the idea 2"
+        "ar": "القيم الافتراضية لعناصر التعداد Enum",
+        "en": "Default Values of Enum Elements"
       },
       "prompt": {
-        "ar": "أي ممارسة تساعد على استخدام المفهوم بوضوح؟",
-        "en": "Which practice helps use the concept clearly?"
+        "ar": "في التعداد `enum Direction { UP, DOWN, LEFT, RIGHT }`، ما هي القيمة العددية التلقائية للعنصر `DOWN`؟",
+        "en": "In the enum `enum Direction { UP, DOWN, LEFT, RIGHT }`, what is the default integer value of `DOWN`?"
       },
       "options": [
         {
-          "ar": "اختيار صياغة واضحة والتحقق من النتيجة",
-          "en": "Choose a clear form and check the result"
+          "ar": "القيمة `1` (لأنها تبدأ من 0 لل عنصر الأول وتتزايد تسلسلياً)",
+          "en": "The value `1` (because it starts at 0 for the first element and increments sequentially)"
         },
         {
-          "ar": "نسخ صياغة دون فهمها",
-          "en": "Copy a form without understanding it"
+          "ar": "القيمة `0`",
+          "en": "The value `0`"
+        },
+        {
+          "ar": "القيمة `-1`",
+          "en": "The value `-1`"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "UP هو 0، إذن DOWN هو 1 تتابعياً.",
+          "en": "UP is 0, so DOWN is 1 sequentially."
         }
       ]
     },
@@ -113,32 +107,32 @@
       "order": 2,
       "type": "multipleChoice",
       "title": {
-        "ar": "تحقق من الفكرة 3",
-        "en": "Check the idea 3"
+        "ar": "الفرق بين الثوابت والمتغيرات",
+        "en": "Difference Between Constants and Variables"
       },
       "prompt": {
-        "ar": "ما الذي يقلل الأخطاء عند تطبيق المفهوم؟",
-        "en": "What helps reduce mistakes when applying the concept?"
+        "ar": "متى يجب عليك استخدام الثابت `const` بدلاً من المتغير `var` في سكربت اللعبة؟",
+        "en": "When should you use a constant `const` instead of a variable `var` in a game script?"
       },
       "options": [
         {
-          "ar": "اتباع القواعد ومراجعة الحدود والحالات",
-          "en": "Follow the rules and review boundaries and cases"
+          "ar": "عندما تكون القيمة ثابتة ولا تتغير أبداً طوال دورة حياة اللعبة",
+          "en": "When the value is fixed and never changes throughout the game lifecycle"
         },
         {
-          "ar": "افتراض أن كل الحالات متطابقة",
-          "en": "Assume all cases are identical"
+          "ar": "عندما تتغير القيمة مع كل ضغطة زر من اللاعب",
+          "en": "When the value changes with every button click from the player"
+        },
+        {
+          "ar": "عندما تكون القيمة عبارة عن نص حواري طويل متغیر",
+          "en": "When the value is a changing long dialogue text"
         }
       ],
       "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "اربط الإجابة بهدف الدرس والمثال.",
-          "en": "Connect the answer to the lesson goal and example."
-        },
-        {
-          "ar": "اربط السؤال بقاعدة محددة في الدرس، ثم تحقق من الاختيار باستخدام المثال.",
-          "en": "Connect the question to a specific lesson rule, then check your choice against the example."
+          "ar": "الثوابت مخصصة للقيم الثابتة غير القابلة للتعديل.",
+          "en": "Constants are dedicated to unchanging fixed values."
         }
       ]
     },
@@ -148,35 +142,27 @@
       "order": 3,
       "type": "guidedTask",
       "title": {
-        "ar": "مهمة تطبيقية موجّهة",
-        "en": "Guided practice"
+        "ar": "مهمة تطبيقية: تعريف واستخدام تعداد الحالات",
+        "en": "Guided Task: Defining and Using State Enum"
       },
       "prompt": {
-        "ar": "طبّق المفهوم في محرر Godot باستخدام مثال الدرس. هذه مهمة تدريب ذاتي وليست فحصاً آلياً.",
-        "en": "Apply the concept in the Godot editor using the lesson example. This is self-guided practice, not an automated check."
+        "ar": "تمرن على تعريف تعداد لحالة البطل وطباعة قيمته المرقمة.",
+        "en": "Practice defining an enum for hero state and printing its enumerated value."
       },
       "steps": [
         {
-          "ar": "أنشئ أو افتح سكربتاً تدريبياً مستقلاً.",
-          "en": "Create or open a separate practice script."
+          "ar": "عرف تعداداً `enum Mode { COMBAT, EXPLORE }` في السكربت.",
+          "en": "Define enum `enum Mode { COMBAT, EXPLORE }` in script."
         },
         {
-          "ar": "اكتب المثال وغيّر قيمة أو حالة واحدة.",
-          "en": "Write the example and change one value or case."
-        },
-        {
-          "ar": "شغّل السكربت وافحص الناتج وصحّح أي خطأ بنفسك.",
-          "en": "Run the script, inspect the output, and correct any mistake yourself."
+          "ar": "أسند الحالة `Mode.EXPLORE` لمتغير واطبع قيمتها.",
+          "en": "Assign state `Mode.EXPLORE` to a variable and print its value."
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بنسخ المثال ثم غيّر شيئاً واحداً كل مرة.",
-          "en": "Start from the example and change one thing at a time."
-        },
-        {
-          "ar": "نفّذ الخطوات واحدةً واحدة، ثم افحص المشهد أو الناتج قبل المتابعة.",
-          "en": "Follow the steps one at a time, then inspect the scene or output before continuing."
+          "ar": "التعدادات تمنح أسماء واضحة ومقروءة للحالات العددية.",
+          "en": "Enums provide clear readable names for numeric states."
         }
       ]
     },
@@ -186,32 +172,28 @@
       "order": 4,
       "type": "writeCode",
       "title": {
-        "ar": "اكتب الشيفرة",
-        "en": "Write the code"
+        "ar": "تعريف ثابت أقصى عدد للأعداء",
+        "en": "Defining Max Enemies Constant"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`5`",
-        "en": "Write or complete the example so its output is:\n\n`5`"
+        "ar": "اكتب سكربتاً يعرّف ثابتاً `const MAX_ENEMIES = 10` ويطبع قيمته داخل دالة `_ready()`.",
+        "en": "Write a script defining constant `const MAX_ENEMIES = 10` and prints its value inside `_ready()`."
       },
-      "starterCode": "",
-      "solutionCode": "const LIMIT = 5\nprint(LIMIT)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    const MAX_ENEMIES = 10\n    print(MAX_ENEMIES)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `const MAX_ENEMIES = 10` ثم `print(MAX_ENEMIES)`.",
+          "en": "Use `const MAX_ENEMIES = 10` then `print(MAX_ENEMIES)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة ثابت أقصى عدد أعداء بنجاح",
+            "en": "Verifying successful max enemies constant output"
           },
-          "expectedOutput": "5"
+          "expectedOutput": "10"
         }
       ]
     },
@@ -219,34 +201,30 @@
       "id": "ex_18_enums_06",
       "lessonId": "lesson_18_enums",
       "order": 5,
-      "type": "fillBlank",
+      "type": "writeCode",
       "title": {
-        "ar": "أكمل المثال",
-        "en": "Complete the example"
+        "ar": "طباعة قيمة من التعداد",
+        "en": "Printing Enum Element Value"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`12`",
-        "en": "Write or complete the example so its output is:\n\n`12`"
+        "ar": "اكتب سكربتاً يعرّف تعداداً `enum Status { IDLE, ACTIVE }` ويطبع قيمة `Status.ACTIVE`.",
+        "en": "Write a script defining enum `enum Status { IDLE, ACTIVE }` and prints `Status.ACTIVE` value."
       },
-      "starterCode": "const BONUS = 10\nprint(BONUS + ___)",
-      "solutionCode": "const BONUS = 10\nprint(BONUS + 2)",
+      "starterCode": "extends Node\n\nenum Status { IDLE, ACTIVE }\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nenum Status { IDLE, ACTIVE }\n\nfunc _ready():\n    print(Status.ACTIVE)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "اطبع `Status.ACTIVE` وسترى الرقم 1.",
+          "en": "Print `Status.ACTIVE` and you will see number 1."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة القيمة الرقمية للتعداد (1)",
+            "en": "Verifying numeric enum value output (1)"
           },
-          "expectedOutput": "12"
+          "expectedOutput": "1"
         }
       ]
     },
@@ -256,32 +234,28 @@
       "order": 6,
       "type": "fixBug",
       "title": {
-        "ar": "أصلح المثال",
-        "en": "Fix the example"
+        "ar": "إصلاح تعريف الثابت const",
+        "en": "Fixing const Definition Bug"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`0`",
-        "en": "Write or complete the example so its output is:\n\n`0`"
+        "ar": "الشيفرة التالية تحاول تعريف ثابتي خاطئ بكلمة `var`. أصلحها لتصبح بالكلمة المفتاحية `const` لتعرض `300`:",
+        "en": "The following code attempts defining a constant wrongly with `var`. Fix it to `const` to display `300`:"
       },
-      "starterCode": "enum State { READY, DONE }\npront(State.READY)",
-      "solutionCode": "enum State { READY, DONE }\nprint(State.READY)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var GRAVITY = 300\n    print(GRAVITY)",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    const GRAVITY = 300\n    print(GRAVITY)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استبدل `var` بـ `const` لأن الجاذبية هنا ثابتة.",
+          "en": "Replace `var` with `const` since gravity here is constant."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من عمل الشيفرة بعد استخدام const",
+            "en": "Verifying code operation after using const"
           },
-          "expectedOutput": "0"
+          "expectedOutput": "300"
         }
       ]
     },
@@ -291,32 +265,28 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بالناتج",
-        "en": "Predict the output"
+        "ar": "تنبأ بقيمة التعداد المرتّب",
+        "en": "Predict Sequenced Enum Value"
       },
       "prompt": {
-        "ar": "ما الناتج الذي يعرضه هذا المثال؟\n\n`1`",
-        "en": "What output does this example display?\n\n`1`"
+        "ar": "ما الذي سيطبعه هذا السكربت:\n\n```gdscript\nextends Node\nenum Element { FIRE, WATER, EARTH }\nfunc _ready():\n    print(Element.EARTH)\n```",
+        "en": "What will this script print:\n\n```gdscript\nextends Node\nenum Element { FIRE, WATER, EARTH }\nfunc _ready():\n    print(Element.EARTH)\n```"
       },
-      "starterCode": "enum State { READY, DONE }\nprint(State.DONE)",
-      "solutionCode": "enum State { READY, DONE }\nprint(State.DONE)",
+      "starterCode": "extends Node\n\nenum Element { FIRE, WATER, EARTH }\n\nfunc _ready():\n    print(Element.EARTH)",
+      "solutionCode": "extends Node\n\nenum Element { FIRE, WATER, EARTH }\n\nfunc _ready():\n    print(Element.EARTH)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "FIRE هو 0، WATER هو 1، إذن EARTH هو 2.",
+          "en": "FIRE is 0, WATER is 1, so EARTH is 2."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق توقع قيمة العنصر الثالث في التعداد (2)",
+            "en": "Verifying third enum element value prediction match (2)"
           },
-          "expectedOutput": "1"
+          "expectedOutput": "2"
         }
       ]
     },
@@ -326,32 +296,28 @@
       "order": 8,
       "type": "writeCode",
       "title": {
-        "ar": "طبّق الفكرة",
-        "en": "Apply the idea"
+        "ar": "تعريف ثابت إعدادات اللعبة",
+        "en": "Defining Game Settings Constant"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`3`",
-        "en": "Write or complete the example so its output is:\n\n`3`"
+        "ar": "اكتب سكربتاً يعرّف ثابتاً `const TITLE = \"CyberGame\"` ويطبعه.",
+        "en": "Write a script defining constant `const TITLE = \"CyberGame\"` and prints it."
       },
-      "starterCode": "",
-      "solutionCode": "const START = 3\nprint(START)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    const TITLE = \"CyberGame\"\n    print(TITLE)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
-        },
-        {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "استخدم `const TITLE = \"CyberGame\"` ثم `print(TITLE)`.",
+          "en": "Use `const TITLE = \"CyberGame\"` then `print(TITLE)`."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من طباعة عنوان الثابت النصي بنجاح",
+            "en": "Verifying string constant title output successfully"
           },
-          "expectedOutput": "3"
+          "expectedOutput": "CyberGame"
         }
       ]
     },
@@ -361,32 +327,32 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدٍ إضافي",
-        "en": "Extra challenge"
+        "ar": "تحدي الوحدة 2 التراكمي: سجل مقتنيات البطاقة وبطاقة الشخصية (Player Inventory Sheet)",
+        "en": "Unit 2 Capstone: Player Inventory Sheet and Character Card"
       },
       "prompt": {
-        "ar": "اكتب أو أكمل المثال بحيث يكون الناتج:\n\n`Begin`",
-        "en": "Write or complete the example so its output is:\n\n`Begin`"
+        "ar": "أنجز التحدي التراكمي للوحدة الثانية: اكتب سكربتاً يضم ثابتاً `const MAX_HP = 100`، وتعداداً `enum Class { WARRIOR, MAGE }`، ومتغيرات للاحة (`var p_name = \"Aria\"`, `var gold = 250`)، وقم بطباعة بطاقة منسقة بالكامل عبر `String.format()` تطابق الناتج التالي تماماً:\n`Hero: Aria | Gold: 250 | MaxHP: 100`",
+        "en": "Complete Unit 2 capstone: Write a script featuring constant `const MAX_HP = 100`, enum `enum Class { WARRIOR, MAGE }`, variables (`var p_name = \"Aria\"`, `var gold = 250`), and print a fully formatted card via `String.format()` matching exactly:\n`Hero: Aria | Gold: 250 | MaxHP: 100`"
       },
-      "starterCode": "",
-      "solutionCode": "const LABEL = \"Begin\"\nprint(LABEL)",
+      "starterCode": "extends Node\n\nconst MAX_HP = 100\nenum Class { WARRIOR, MAGE }\n\nfunc _ready():\n    # اكتب الأوامر وتنسيق البطاقة هنا\n    ",
+      "solutionCode": "extends Node\n\nconst MAX_HP = 100\nenum Class { WARRIOR, MAGE }\n\nfunc _ready():\n    var p_name = \"Aria\"\n    var gold = 250\n    var card = \"Hero: {name} | Gold: {g} | MaxHP: {hp}\".format({\"name\": p_name, \"g\": gold, \"hp\": MAX_HP})\n    print(card)",
       "hints": [
         {
-          "ar": "راجع قاعدة الدرس وتتبع تنفيذ الأسطر بالترتيب.",
-          "en": "Review the lesson rule and trace the lines in order."
+          "ar": "استخدم String.format() مع قاموس يربط المفاتيح بمتغيرات الثابت والشخصية والذهب.",
+          "en": "Use String.format() with a dictionary linking keys to constant, character, and gold variables."
         },
         {
-          "ar": "قارن القيمة التي تتوقعها بالخرج المحدد.",
-          "en": "Compare your expected value with the specified output."
+          "ar": "هذا التحدي يدمج المتغيرات والأنواع والتنسيق والثوابت والتعدادات بنجاح تام.",
+          "en": "This challenge successfully integrates variables, types, formatting, constants, and enums."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "يطابق خرج التنفيذ الناتج المطلوب.",
-            "en": "Execution output matches the requested result."
+            "ar": "التحقق من تطابق بطاقة الشخصية وسجل المقتنيات تماماً",
+            "en": "Verifying player character card and inventory sheet exact match"
           },
-          "expectedOutput": "Begin"
+          "expectedOutput": "Hero: Aria | Gold: 250 | MaxHP: 100"
         }
       ]
     }

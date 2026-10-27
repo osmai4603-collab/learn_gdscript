@@ -1,102 +1,55 @@
 {
   "concepts": [
-    {
-      "id": "concept_hello",
-      "lessonId": "lesson_01_hello",
-      "prerequisiteIds": [],
-      "x": 48,
-      "y": 76
-    },
-    {
-      "id": "concept_comments",
-      "lessonId": "lesson_02_comments",
-      "prerequisiteIds": ["concept_hello"],
-      "x": 268,
-      "y": 76
-    },
-    {
-      "id": "concept_variables",
-      "lessonId": "lesson_03_variables",
-      "prerequisiteIds": ["concept_comments"],
-      "x": 488,
-      "y": 76
-    },
-    {
-      "id": "concept_types",
-      "lessonId": "lesson_04_types",
-      "prerequisiteIds": ["concept_variables"],
-      "x": 708,
-      "y": 76
-    },
-    {
-      "id": "concept_operations",
-      "lessonId": "lesson_05_operations",
-      "prerequisiteIds": ["concept_types"],
-      "x": 48,
-      "y": 266
-    },
-    {
-      "id": "concept_if_else",
-      "lessonId": "lesson_06_if_else",
-      "prerequisiteIds": ["concept_operations"],
-      "x": 268,
-      "y": 266
-    },
-    {
-      "id": "concept_elif",
-      "lessonId": "lesson_07_elif",
-      "prerequisiteIds": ["concept_if_else"],
-      "x": 488,
-      "y": 266
-    },
-    {
-      "id": "concept_match",
-      "lessonId": "lesson_08_match",
-      "prerequisiteIds": ["concept_elif"],
-      "x": 708,
-      "y": 266
-    },
-    {
-      "id": "concept_for",
-      "lessonId": "lesson_09_for",
-      "prerequisiteIds": ["concept_match"],
-      "x": 48,
-      "y": 456
-    },
-    {
-      "id": "concept_while",
-      "lessonId": "lesson_10_while",
-      "prerequisiteIds": ["concept_for"],
-      "x": 268,
-      "y": 456
-    },
-    {
-      "id": "concept_loop_control",
-      "lessonId": "lesson_11_break_continue",
-      "prerequisiteIds": ["concept_while"],
-      "x": 488,
-      "y": 456
-    },
-    {
-      "id": "concept_functions",
-      "lessonId": "lesson_12_func_basics",
-      "prerequisiteIds": ["concept_loop_control"],
-      "x": 708,
-      "y": 456
-    },
-    {
-      "id": "concept_parameters",
-      "lessonId": "lesson_13_parameters",
-      "prerequisiteIds": ["concept_functions"],
-      "x": 158,
-      "y": 646
-    },
-    {
-      "id": "concept_returns",
-      "lessonId": "lesson_14_return",
-      "prerequisiteIds": ["concept_parameters"],
-      "x": 598,
-      "y": 646
-    }
+    {"id": "concept_hello", "lessonId": "lesson_01_hello", "prerequisiteIds": [], "x": 80, "y": 80},
+    {"id": "concept_comments", "lessonId": "lesson_02_comments", "prerequisiteIds": ["concept_hello"], "x": 320, "y": 80},
+    {"id": "concept_errors", "lessonId": "lesson_15_errors", "prerequisiteIds": ["concept_comments"], "x": 560, "y": 80},
+    {"id": "concept_variables", "lessonId": "lesson_03_variables", "prerequisiteIds": ["concept_errors"], "x": 800, "y": 80},
+    {"id": "concept_types", "lessonId": "lesson_04_types", "prerequisiteIds": ["concept_variables"], "x": 80, "y": 260},
+    {"id": "concept_casting", "lessonId": "lesson_16_casting", "prerequisiteIds": ["concept_types"], "x": 320, "y": 260},
+    {"id": "concept_strings", "lessonId": "lesson_17_strings", "prerequisiteIds": ["concept_casting"], "x": 560, "y": 260},
+    {"id": "concept_enums", "lessonId": "lesson_18_enums", "prerequisiteIds": ["concept_strings"], "x": 800, "y": 260},
+    {"id": "concept_operations", "lessonId": "lesson_05_operations", "prerequisiteIds": ["concept_types"], "x": 1040, "y": 260},
+    {"id": "concept_if_else", "lessonId": "lesson_06_if_else", "prerequisiteIds": ["concept_operations"], "x": 1280, "y": 260},
+    {"id": "concept_elif", "lessonId": "lesson_07_elif", "prerequisiteIds": ["concept_if_else"], "x": 80, "y": 440},
+    {"id": "concept_match", "lessonId": "lesson_08_match", "prerequisiteIds": ["concept_elif", "concept_enums"], "x": 320, "y": 440},
+    {"id": "concept_for", "lessonId": "lesson_09_for", "prerequisiteIds": ["concept_match"], "x": 560, "y": 440},
+    {"id": "concept_while", "lessonId": "lesson_10_while", "prerequisiteIds": ["concept_for"], "x": 800, "y": 440},
+    {"id": "concept_loop_control", "lessonId": "lesson_11_break_continue", "prerequisiteIds": ["concept_while"], "x": 1040, "y": 440},
+    {"id": "concept_scope", "lessonId": "lesson_21_scope", "prerequisiteIds": ["concept_variables", "concept_loop_control"], "x": 1280, "y": 440},
+    {"id": "concept_arrays", "lessonId": "lesson_19_arrays", "prerequisiteIds": ["concept_loop_control"], "x": 80, "y": 620},
+    {"id": "concept_dictionaries", "lessonId": "lesson_20_dictionaries", "prerequisiteIds": ["concept_arrays"], "x": 320, "y": 620},
+    {"id": "concept_functions", "lessonId": "lesson_12_func_basics", "prerequisiteIds": ["concept_scope"], "x": 560, "y": 620},
+    {"id": "concept_parameters", "lessonId": "lesson_13_parameters", "prerequisiteIds": ["concept_functions"], "x": 800, "y": 620},
+    {"id": "concept_returns", "lessonId": "lesson_14_return", "prerequisiteIds": ["concept_parameters"], "x": 1040, "y": 620},
+    {"id": "concept_problem_decomp", "lessonId": "lesson_22_problem_decomposition", "prerequisiteIds": ["concept_returns"], "x": 1280, "y": 620},
+    {"id": "concept_style_doc", "lessonId": "lesson_48_style_documentation", "prerequisiteIds": ["concept_comments", "concept_functions"], "x": 1520, "y": 620},
+    {"id": "concept_classes", "lessonId": "lesson_23_scripts_as_classes", "prerequisiteIds": ["concept_problem_decomp", "concept_dictionaries"], "x": 80, "y": 820},
+    {"id": "concept_inheritance", "lessonId": "lesson_24_inheritance_class_name", "prerequisiteIds": ["concept_classes"], "x": 320, "y": 820},
+    {"id": "concept_init", "lessonId": "lesson_25_init", "prerequisiteIds": ["concept_inheritance"], "x": 560, "y": 820},
+    {"id": "concept_properties", "lessonId": "lesson_26_properties_get_set", "prerequisiteIds": ["concept_init"], "x": 800, "y": 820},
+    {"id": "concept_composition", "lessonId": "lesson_27_composition_inheritance", "prerequisiteIds": ["concept_properties"], "x": 1040, "y": 820},
+    {"id": "concept_nodes", "lessonId": "lesson_28_nodes_paths", "prerequisiteIds": ["concept_classes"], "x": 1280, "y": 820},
+    {"id": "concept_lifecycle", "lessonId": "lesson_29_node_lifecycle", "prerequisiteIds": ["concept_nodes"], "x": 1520, "y": 820},
+    {"id": "concept_onready", "lessonId": "lesson_30_onready_nodes", "prerequisiteIds": ["concept_lifecycle"], "x": 1760, "y": 820},
+    {"id": "concept_groups", "lessonId": "lesson_31_groups", "prerequisiteIds": ["concept_onready"], "x": 2000, "y": 820},
+    {"id": "concept_packed_scenes", "lessonId": "lesson_32_packed_scenes", "prerequisiteIds": ["concept_groups"], "x": 2240, "y": 820},
+    {"id": "concept_signals_def", "lessonId": "lesson_33_signals", "prerequisiteIds": ["concept_nodes", "concept_onready"], "x": 80, "y": 1040},
+    {"id": "concept_connect_emit", "lessonId": "lesson_34_connect_emit", "prerequisiteIds": ["concept_signals_def"], "x": 320, "y": 1040},
+    {"id": "concept_input_events", "lessonId": "lesson_35_input", "prerequisiteIds": ["concept_nodes"], "x": 560, "y": 1040},
+    {"id": "concept_node_interact", "lessonId": "lesson_36_node_interaction", "prerequisiteIds": ["concept_connect_emit", "concept_input_events"], "x": 800, "y": 1040},
+    {"id": "concept_exports", "lessonId": "lesson_37_exports", "prerequisiteIds": ["concept_properties", "concept_packed_scenes"], "x": 1040, "y": 1040},
+    {"id": "concept_resource_load", "lessonId": "lesson_38_resource_loading", "prerequisiteIds": ["concept_exports"], "x": 1280, "y": 1040},
+    {"id": "concept_resources", "lessonId": "lesson_39_resources", "prerequisiteIds": ["concept_resource_load"], "x": 1520, "y": 1040},
+    {"id": "concept_saving_data", "lessonId": "lesson_40_saving", "prerequisiteIds": ["concept_resources"], "x": 1760, "y": 1040},
+    {"id": "concept_await_signals", "lessonId": "lesson_41_await_signals", "prerequisiteIds": ["concept_signals_def", "concept_connect_emit"], "x": 80, "y": 1260},
+    {"id": "concept_timers_frames", "lessonId": "lesson_42_timers_frames", "prerequisiteIds": ["concept_await_signals"], "x": 320, "y": 1260},
+    {"id": "concept_async_flow", "lessonId": "lesson_43_async_flow", "prerequisiteIds": ["concept_timers_frames"], "x": 560, "y": 1260},
+    {"id": "concept_await_pitfalls", "lessonId": "lesson_44_await_pitfalls", "prerequisiteIds": ["concept_async_flow"], "x": 800, "y": 1260},
+    {"id": "concept_static_types", "lessonId": "lesson_45_static_types", "prerequisiteIds": ["concept_types", "concept_functions"], "x": 1040, "y": 1260},
+    {"id": "concept_typed_arrays", "lessonId": "lesson_46_typed_arrays", "prerequisiteIds": ["concept_static_types", "concept_arrays"], "x": 1280, "y": 1260},
+    {"id": "concept_assert_debug", "lessonId": "lesson_47_warnings_assert_debugging", "prerequisiteIds": ["concept_static_types", "concept_errors"], "x": 1520, "y": 1260},
+    {"id": "concept_capstone_plan", "lessonId": "lesson_49_project_planning", "prerequisiteIds": ["concept_node_interact", "concept_resources"], "x": 1760, "y": 1260},
+    {"id": "concept_capstone_build", "lessonId": "lesson_50_project_building", "prerequisiteIds": ["concept_capstone_plan", "concept_await_pitfalls"], "x": 2000, "y": 1260},
+    {"id": "concept_capstone_final", "lessonId": "lesson_51_final_integration", "prerequisiteIds": ["concept_capstone_build", "concept_assert_debug"], "x": 2240, "y": 1260}
   ]
 }

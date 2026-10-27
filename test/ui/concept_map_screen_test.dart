@@ -38,7 +38,9 @@ void main() {
     expect(find.byType(Shimmer), findsOneWidget);
     await _pumpUntilLoaded(tester, harness.provider);
     expect(find.text('Concept Map & Spaced Repetition'), findsOneWidget);
+    expect(harness.provider.state.value!.allCards, hasLength(510));
     expect(harness.provider.state.value!.dueCards, isNotEmpty);
+    expect(tester.takeException(), isNull);
 
     tester.view.physicalSize = const Size(390, 844);
     await tester.pumpWidget(harness.app(locale: const Locale('ar')));
@@ -70,6 +72,7 @@ void main() {
       ))[ratedCardId]?.repetitionCount,
       1,
     );
+    expect(tester.takeException(), isNull);
   });
 }
 
