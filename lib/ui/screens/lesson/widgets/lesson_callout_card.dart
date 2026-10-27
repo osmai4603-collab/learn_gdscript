@@ -54,75 +54,90 @@ class LessonCalloutCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border(
-          top: BorderSide(color: borderColor, width: 1.2),
-          bottom: BorderSide(color: borderColor, width: 1.2),
-          right: isEnglish
-              ? BorderSide(color: borderColor, width: 1.2)
-              : BorderSide(color: accentColor, width: 4.0),
-          left: isEnglish
-              ? BorderSide(color: accentColor, width: 4.0)
-              : BorderSide(color: borderColor, width: 1.2),
-        ),
+        border: Border.all(color: borderColor, width: 1.2),
       ),
-      padding: const EdgeInsets.all(14),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: accentColor.withValues(alpha: isDark ? 0.22 : 0.15),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  icon ?? defaultIcon,
-                  size: 18,
-                  color: accentColor,
-                ),
+                width: 4.5,
+                color: accentColor,
               ),
-              const SizedBox(width: 10),
               Expanded(
-                child: Text(
-                  resolvedTitle,
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    color: accentColor,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.2,
+                child: Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: accentColor.withValues(
+                                alpha: isDark ? 0.22 : 0.15,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              icon ?? defaultIcon,
+                              size: 18,
+                              color: accentColor,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              resolvedTitle,
+                              style: theme.textTheme.titleSmall?.copyWith(
+                                color: accentColor,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 0.2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (contentSpans != null &&
+                          contentSpans!.isNotEmpty) ...[
+                        const SizedBox(height: 10),
+                        SelectableText.rich(
+                          TextSpan(
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              height: 1.65,
+                              color: theme.textTheme.bodyMedium?.color
+                                  ?.withValues(
+                                alpha: isDark ? 0.95 : 0.90,
+                              ),
+                            ),
+                            children: contentSpans,
+                          ),
+                        ),
+                      ] else if (content != null &&
+                          content!.trim().isNotEmpty) ...[
+                        const SizedBox(height: 10),
+                        SelectableText(
+                          content!.trim(),
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            height: 1.65,
+                            color: theme.textTheme.bodyMedium?.color
+                                ?.withValues(
+                              alpha: isDark ? 0.95 : 0.90,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
               ),
             ],
           ),
-          if (contentSpans != null && contentSpans!.isNotEmpty) ...[
-            const SizedBox(height: 10),
-            SelectableText.rich(
-              TextSpan(
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  height: 1.65,
-                  color: theme.textTheme.bodyMedium?.color?.withValues(
-                    alpha: isDark ? 0.95 : 0.90,
-                  ),
-                ),
-                children: contentSpans,
-              ),
-            ),
-          ] else if (content != null && content!.trim().isNotEmpty) ...[
-            const SizedBox(height: 10),
-            SelectableText(
-              content!.trim(),
-              style: theme.textTheme.bodyMedium?.copyWith(
-                height: 1.65,
-                color: theme.textTheme.bodyMedium?.color?.withValues(
-                  alpha: isDark ? 0.95 : 0.90,
-                ),
-              ),
-            ),
-          ],
-        ],
+        ),
       ),
     );
   }

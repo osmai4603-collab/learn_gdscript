@@ -33,12 +33,14 @@ class LessonExplanation extends StatelessWidget {
     final locale = Localizations.localeOf(context);
     final title = lesson.title.resolve(locale);
     final objective = lesson.objective.resolve(locale);
-    final titleStyle = Theme.of(context).textTheme.headlineSmall?.copyWith(
-      fontWeight: FontWeight.bold,
-    ) ?? const TextStyle(fontWeight: FontWeight.bold);
-    final objectiveStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
-      height: 1.5,
-    ) ?? const TextStyle();
+    final titleStyle =
+        Theme.of(
+          context,
+        ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold) ??
+        const TextStyle(fontWeight: FontWeight.bold);
+    final objectiveStyle =
+        Theme.of(context).textTheme.titleMedium?.copyWith(height: 1.5) ??
+        const TextStyle();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -55,10 +57,7 @@ class LessonExplanation extends StatelessWidget {
             ),
           )
         else
-          Text(
-            title,
-            style: titleStyle,
-          ),
+          Text(title, style: titleStyle),
         const SizedBox(height: 8),
         if (objective.contains('`') || objective.contains('**'))
           SelectableText.rich(
@@ -72,14 +71,9 @@ class LessonExplanation extends StatelessWidget {
             ),
           )
         else
-          Text(
-            objective,
-            style: objectiveStyle,
-          ),
+          Text(objective, style: objectiveStyle),
         const SizedBox(height: 20),
-        LessonMarkdownContent(
-          markdown: lesson.contentMarkdown.resolve(locale),
-        ),
+        LessonMarkdownContent(markdown: lesson.contentMarkdown.resolve(locale)),
         if (lesson.documentation != null) ...[
           const SizedBox(height: 16),
           LessonDocumentationSection(lesson: lesson),
