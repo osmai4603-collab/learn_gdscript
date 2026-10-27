@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gdscript_engine/gdscript_engine.dart';
-import 'package:learn_gdscript/core/theme/arabic_ide_theme.dart';
-import 'package:learn_gdscript/core/theme/code_editor_theme.dart';
 import 'package:learn_gdscript/core/theme/color_schemes.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
+import 'package:learn_gdscript/core/theme/godot_arabic_ide_theme.dart';
 import 'package:learn_gdscript/core/theme/theme_data.dart';
 import 'package:learn_gdscript/l10n/app_localizations.dart';
 import 'package:learn_gdscript/ui/widgets/code_editor/code_editor_widget.dart';
@@ -13,7 +13,7 @@ import 'package:learn_gdscript/ui/widgets/code_editor/syntax_highlighter.dart';
 
 void main() {
   test('dark theme uses the Godot developer academy palette', () {
-    final colorScheme = AppColorScheme.dark;
+    final colorScheme = AppTheme.dark.colorScheme;
     final theme = AppTheme.dark;
 
     expect(colorScheme.surface, const Color(0xFF0F141B));
@@ -26,12 +26,12 @@ void main() {
   });
 
   test('Arabic IDE theme is separate and uses its own palette', () {
-    final theme = ArabicIdeTheme.dark;
+    final theme = GodotArabicIdeTheme().dark;
 
-    expect(theme.scaffoldBackgroundColor, const Color(0xFF14181D));
+    expect(theme.scaffoldBackgroundColor, const Color(0xFF0F141A));
     expect(theme.colorScheme.secondary, const Color(0xFFEFC52B));
     expect(theme.colorScheme.tertiary, const Color(0xFF61DF72));
-    expect(theme.cardColor, const Color(0xFF282F3B));
+    expect(theme.cardColor, const Color(0xFF252A31));
     expect(AppTheme.dark.colorScheme.secondary, const Color(0xFFFFB783));
   });
 
@@ -229,6 +229,8 @@ void main() {
         errorLine: Colors.red,
         matchedBracket: Colors.cyan,
         foldGutter: Colors.grey,
+        success: Colors.green,
+        achievement: Colors.lime,
       ),
     );
     expect(
@@ -262,6 +264,8 @@ void main() {
       errorLine: Colors.red,
       matchedBracket: Colors.cyan,
       foldGutter: Colors.grey,
+      success: Colors.green,
+      achievement: Colors.lime,
     );
 
     final spans = GDScriptSyntaxHighlighter().highlight(

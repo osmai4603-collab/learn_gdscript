@@ -7,6 +7,16 @@ import 'package:learn_gdscript/data/models/exercise_models.dart';
 import 'package:learn_gdscript/data/models/lesson_models.dart';
 import 'package:learn_gdscript/data/repositories/syntax_reference_repository.dart';
 
+const _strictUnits = <String>{
+  'unit_06_classes_properties',
+  'unit_07_godot_scene_tree',
+  'unit_08_interaction_events',
+  'unit_09_editor_resources',
+  'unit_10_time_async',
+  'unit_11_types_quality',
+  'unit_12_integrated_project',
+};
+
 void main() {
   test('curriculum and syntax reference content is complete and linked', () {
     final curriculumJson = _readObject('assets/curriculum/manifest.json');
@@ -86,7 +96,7 @@ void main() {
             expect(exercise.testCases, isEmpty, reason: exercise.id);
           } else {
             expect(exercise.testCases, isNotEmpty, reason: exercise.id);
-            if (unit.order >= 5) {
+            if (_strictUnits.contains(unit.id)) {
               expect(
                 exercise.testCases.length,
                 greaterThanOrEqualTo(3),
@@ -95,7 +105,7 @@ void main() {
             }
           }
         }
-        if (unit.order >= 5) {
+        if (_strictUnits.contains(unit.id)) {
           expect(
             lessonExerciseTypes,
             hasLength(7),

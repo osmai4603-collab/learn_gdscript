@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root"
+
+if git diff --cached --quiet -- assets/curriculum; then
+  exit 0
+fi
+
+dart run tool/validate_curriculum.dart --strict

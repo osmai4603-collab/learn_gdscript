@@ -402,14 +402,23 @@ void main() {
     await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('مرحباً بعودتك، متعلّم 👋'), findsOneWidget);
-    expect(tester.takeException(), isNull);
+    final arabicLayoutException = tester.takeException();
+    expect(
+      arabicLayoutException,
+      isNull,
+      reason: arabicLayoutException?.toString(),
+    );
 
     await dependencies.appSettingsProvider.setLocale(const Locale('en'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
     expect(find.text('Welcome back, Learner 👋'), findsOneWidget);
     expect(find.text('Curriculum map'), findsOneWidget);
-    expect(tester.takeException(), isNull);
+    final layoutException = tester.takeException();
+    if (layoutException is FlutterError) {
+      fail(layoutException.toStringDeep());
+    }
+    expect(layoutException, isNull, reason: layoutException?.toString());
 
     tester.view.physicalSize = const Size(1200, 900);
     await tester.pump();
@@ -474,7 +483,7 @@ void main() {
     expect(find.text('الصفحة غير موجودة'), findsOneWidget);
   });
 
-  testWidgets('workspace search requires an active language server', (
+  testWidgets('workspace search shows localized empty-query controls', (
     tester,
   ) async {
     final dependencies = await AppDependencies.create(
@@ -489,11 +498,14 @@ void main() {
     GoRouter.of(
       tester.element(find.byType(Scaffold).first),
     ).go('/workspace/search');
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text('نص'), findsOneWidget);
-    expect(find.text('رموز'), findsOneWidget);
-    expect(find.text('أدخل نصاً أو رمزاً للبحث'), findsOneWidget);
+    expect(find.text('البحث في مساحة العمل'), findsNWidgets(2));
+    expect(
+      tester.widget<TextField>(find.byType(TextField)).decoration?.labelText,
+      'أدخل نصاً للبحث في ملفات GDScript المفهرسة',
+    );
     expect(
       tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
       isNull,

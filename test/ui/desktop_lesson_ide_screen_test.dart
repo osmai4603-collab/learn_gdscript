@@ -7,10 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learn_gdscript/app.dart';
 import 'package:learn_gdscript/app_dependencies.dart';
-import 'package:learn_gdscript/core/theme/code_editor_theme.dart';
+import 'package:learn_gdscript/core/theme/editor_theme_extension.dart';
 import 'package:learn_gdscript/data/sqlite/database_helper.dart';
 import 'package:learn_gdscript/ui/screens/lesson/desktop_lesson_ide_flutter_dart.dart';
-import 'package:learn_gdscript/ui/widgets/code_editor/code_editor_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 void main() {
@@ -46,22 +45,23 @@ void main() {
     expect(find.text('درس تجريبي'), findsWidgets);
     expect(find.text('محتوى الدرس'), findsOneWidget);
     final exampleEditor = tester.widget<TextField>(find.byType(TextField));
-    expect(exampleEditor.decoration?.fillColor, const Color(0xFF090F15));
+    final appTheme = Theme.of(tester.element(find.byType(TextField)));
+    expect(
+      exampleEditor.decoration?.fillColor,
+      appTheme.colorScheme.surfaceContainerLow,
+    );
     final codeBlockFinder = find.byWidgetPredicate(
       (widget) =>
           widget is SelectableText &&
           widget.textSpan?.toPlainText().contains('print(score)') == true,
     );
+    final highlightedCode = tester.widget<SelectableText>(codeBlockFinder);
+    final codeTheme = CodeEditorTheme.of(tester.element(codeBlockFinder));
     final codeBlockCard = find.ancestor(
       of: codeBlockFinder,
       matching: find.byType(Card),
     ).first;
-    expect(
-      tester.widget<Card>(codeBlockCard).color,
-      CodeEditorWidget.defaultBackgroundColor,
-    );
-    final highlightedCode = tester.widget<SelectableText>(codeBlockFinder);
-    final codeTheme = CodeEditorTheme.of(tester.element(codeBlockFinder));
+    expect(tester.widget<Card>(codeBlockCard).color, appTheme.cardColor);
     expect(
       highlightedCode.textSpan!.children!
           .whereType<TextSpan>()

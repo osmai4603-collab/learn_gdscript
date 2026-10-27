@@ -471,102 +471,114 @@ class DashboardTopNav extends StatelessWidget {
         : isEngineConnected
         ? l10n.dashboardEngineConnected
         : l10n.dashboardEngineDisconnected;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.94),
-        border:  Border(bottom: BorderSide(color: Theme.of(context).colorScheme.surfaceContainerHigh)),
-      ),
-      child: Wrap(
-        alignment: WrapAlignment.spaceBetween,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 16,
-        runSpacing: 8,
-        children: [
-          InkWell(
-            onTap: () => onNavigate?.call(AppRoutes.workspace),
-            borderRadius: BorderRadius.circular(20),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainer,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final horizontalPadding = constraints.maxWidth < 700 ? 16.0 : 24.0;
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 12),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.94),
+            border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.surfaceContainerHigh)),
+          ),
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16,
+            runSpacing: 8,
+            children: [
+              InkWell(
+                onTap: () => onNavigate?.call(AppRoutes.workspace),
                 borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceContainer,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircleAvatar(radius: 4, backgroundColor: statusColor),
+                      const SizedBox(width: 8),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 100),
+                        child: Text(
+                          statusText,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: CodeTextTheme.of(context).bodyMedium.copyWith(
+                            fontSize: 10,
+                            color: statusColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: 16,
-                runSpacing: 12,
+              Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  CircleAvatar(radius: 4, backgroundColor: statusColor),
+                  AcademyMetricBadge(
+                    icon: Icons.local_fire_department_rounded,
+                    text: l10n.dashboardDays(streakDays),
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                   const SizedBox(width: 8),
-                  Text(
-                    statusText,
-                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
-                      fontSize: 10,
-                      color: statusColor,
+                  AcademyMetricBadge(
+                    icon: Icons.diamond_rounded,
+                    text: '$xp XP',
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  const SizedBox(width: 16),
+                  InkWell(
+                    onTap: () => onNavigate?.call(AppRoutes.settings),
+                    borderRadius: BorderRadius.circular(8),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 34,
+                          height: 34,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryContainer,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Center(
+                            child: Text(
+                              userName.isEmpty ? '?' : userName[0],
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                fontFamily: 'IBM Plex Sans Arabic',
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 90),
+                          child: Text(
+                            userName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontFamily: 'IBM Plex Sans Arabic',
+                              fontSize: 13,
+                              color: Theme.of(context).colorScheme.onSurface,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            ),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AcademyMetricBadge(
-                icon: Icons.local_fire_department_rounded,
-                text: l10n.dashboardDays(streakDays),
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              const SizedBox(width: 8),
-              AcademyMetricBadge(
-                icon: Icons.diamond_rounded,
-                text: '$xp XP',
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              const SizedBox(width: 16),
-              InkWell(
-                onTap: () => onNavigate?.call(AppRoutes.settings),
-                borderRadius: BorderRadius.circular(8),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 34,
-                      height: 34,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          userName.isEmpty ? '?' : userName[0],
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontFamily: 'IBM Plex Sans Arabic',
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onPrimaryContainer,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      userName,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontFamily: 'IBM Plex Sans Arabic',
-                        fontSize: 13,
-                        color: Theme.of(context).colorScheme.onSurface,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -677,36 +689,52 @@ class _GreetingBanner extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  l10n.dashboardNextLevel,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontFamily: 'IBM Plex Sans Arabic',
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.onSurface,
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 180),
+                  child: Text(
+                    l10n.dashboardNextLevel,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 3),
-                Text(
-                  l10n.dashboardLessonsCompleted(
-                    userProgress.completedLessons,
-                    userProgress.totalLessons,
-                  ),
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontFamily: 'IBM Plex Sans Arabic',
-                    fontSize: 12,
-                    color: Theme.of(context).colorScheme.outline,
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 180),
+                  child: Text(
+                    l10n.dashboardLessonsCompleted(
+                      userProgress.completedLessons,
+                      userProgress.totalLessons,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontSize: 12,
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 3),
-                Text(
-                  l10n.dashboardXpToNextLevel(userProgress.nextLevelXp),
-                  style: CodeTextTheme.of(context).bodyMedium.copyWith(
-                    fontSize: 10,
-                    color: Theme.of(context).colorScheme.tertiary,
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 180),
+                  child: Text(
+                    l10n.dashboardXpToNextLevel(userProgress.nextLevelXp),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: CodeTextTheme.of(context).bodyMedium.copyWith(
+                      fontSize: 10,
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
                   ),
                 ),
               ],
@@ -767,6 +795,7 @@ class _WelcomeMetric extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: const BoxConstraints(maxWidth: 200),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.7),
@@ -777,36 +806,24 @@ class _WelcomeMetric extends StatelessWidget {
         children: [
           Icon(icon, size: 16, color: color),
           const SizedBox(width: 6),
-          if (value != null)
-            Flexible(
-              child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontFamily: 'IBM Plex Sans Arabic',
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-            )
-          else
-            Flexible(
-              child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontFamily: 'IBM Plex Sans Arabic',
-                  fontSize: 11,
-                  color: color,
-                ),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 75),
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontFamily: 'IBM Plex Sans Arabic',
+                fontSize: 11,
+                fontWeight: value != null ? FontWeight.w600 : FontWeight.normal,
+                color: value != null ? Theme.of(context).colorScheme.onSurface : color,
               ),
             ),
+          ),
           if (value != null) ...[
             const SizedBox(width: 4),
-            Flexible(
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 75),
               child: Text(
                 value!,
                 maxLines: 1,
@@ -848,13 +865,18 @@ class _ContinueLearningHeroCard extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(6),
               ),
-              child: Text(
-                continueData.unitTitle,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontFamily: 'IBM Plex Sans Arabic',
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 240),
+                child: Text(
+                  continueData.unitTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
             ),

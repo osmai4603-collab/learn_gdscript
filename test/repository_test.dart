@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:learn_gdscript/data/repositories/curriculum_repository.dart';
@@ -67,7 +68,8 @@ void main() {
     ''';
     final assetMap = <String, String>{
       'assets/curriculum/manifest.json': manifestContent,
-      'assets/curriculum/units/01_first/lesson_01_hello.json': '{"invalid": json}',
+      'assets/curriculum/units/01_first/lesson_01_hello.json':
+          '{"invalid": json}',
       'assets/curriculum/units/01_first/lesson_02_broken.json': '',
     };
     final repository = CurriculumRepository(

@@ -33,6 +33,18 @@
 			],
 			"isBackground": false,
 			"problemMatcher": []
+		},
+		{
+			"label": "Generate curriculum baseline audit",
+			"type": "shell",
+			"command": "dart",
+			"args": [
+				"run",
+				"tool/validate_curriculum.dart",
+				"--output=docs/baseline_curriculum_audit_report.md"
+			],
+			"isBackground": false,
+			"problemMatcher": []
 		}
 	]
 }

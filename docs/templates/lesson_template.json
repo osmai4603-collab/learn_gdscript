@@ -1,0 +1,300 @@
+{
+  "id": "lesson_template",
+  "unitId": "unit_template",
+  "title": {
+    "ar": "عنوان الدرس",
+    "en": "Lesson title"
+  },
+  "objective": {
+    "ar": "بنهاية الدرس، ينفّذ المتعلم إجراءً واضحاً يمكن ملاحظته واختباره.",
+    "en": "By the end of the lesson, the learner can perform a clear, observable, testable action."
+  },
+  "estimatedMinutes": 20,
+  "order": 0,
+  "contentMarkdown": {
+    "ar": "## 1. المفهوم والهدف\n\nعرّف المفهوم في سياقه، وبيّن ما الذي سيتمكن المتعلم من فعله بعد الدرس. ابدأ بمثال قريب من عمل اللعبة، ولا تفترض معرفة لم تُقدّم سابقاً.\n\n## 2. الصياغة والقواعد\n\nاشرح شكل الصياغة، معنى كل جزء، وأنواع القيم أو الشروط المطلوبة. ميّز بين القاعدة العامة والاستثناءات، واذكر متى يكون الأسلوب مناسباً.\n\n## 3. مثال عملي مشروح\n\n```gdscript\nfunc total_with_bonus(base: int, bonus: int) -> int:\n\treturn base + bonus\n\nprint(total_with_bonus(5, 2))\n```\n\nتعيد الدالة مجموع الوسيطين، ثم تعرض `print()` النتيجة `7`. غيّر القيم لتتحقق من سلوك المثال.\n\n## 4. أخطاء شائعة وتحذيرات\n\n> [!WARNING]\n> لا تخلط بين القيمة التي تعيدها الدالة والنص الذي تطبعه؛ فهما عمليتان مختلفتان.\n\n> [!NOTE]\n> يوضّح تعريف النوع للوسيطات والقيمة المعادة المقصود من الدالة ويساعد المحرر على اكتشاف الأخطاء.\n\n> [!TIP]\n> اختبر القيم العادية والصفرية والحدية قبل استخدام الدالة في مشهد أكبر.\n\n## 5. قاعدة ذهبية وملخص\n\n**القاعدة الذهبية:** اجعل كل خطوة واضحة، ثم اختبر أثرها بقيم متنوعة.\n\nلخّص المفهوم بجملتين، واربطه بهدف الدرس، ثم اقترح سؤالاً أو تطبيقاً قصيراً للمراجعة.",
+    "en": "## 1. Concept and goal\n\nIntroduce the concept in context and state what the learner will be able to do. Begin with a game-related example and do not assume knowledge that has not been introduced.\n\n## 2. Syntax and rules\n\nExplain the syntax, the purpose of each part, and the required value types or conditions. Distinguish the general rule from exceptions and state when the technique is appropriate.\n\n## 3. Explained practical example\n\n```gdscript\nfunc total_with_bonus(base: int, bonus: int) -> int:\n\treturn base + bonus\n\nprint(total_with_bonus(5, 2))\n```\n\nThe function returns the sum of its parameters, and `print()` displays `7`. Change the values to verify the behavior.\n\n## 4. Common errors and warnings\n\n> [!WARNING]\n> Do not confuse a value returned by a function with text it prints; they are different operations.\n\n> [!NOTE]\n> Parameter and return types communicate intent and help the editor catch mistakes.\n\n> [!TIP]\n> Test ordinary, zero, and boundary values before using the function in a larger scene.\n\n## 5. Golden rule and summary\n\n**Golden rule:** Keep each step clear, then test its effect with varied values.\n\nSummarize the concept in two sentences, connect it to the lesson objective, and suggest a short review task."
+  },
+  "documentation": {
+    "ar": "شرح تعليمي أصلي يستند إلى مرجع Godot الرسمي، مع توضيح ما يحتاجه المتعلم لتطبيق المفهوم.",
+    "en": "Original instructional explanation based on the official Godot reference, focused on what learners need to apply the concept."
+  },
+  "documentationSources": [
+    {
+      "title": {
+        "ar": "أساسيات GDScript",
+        "en": "GDScript basics"
+      },
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
+    }
+  ],
+  "exampleCode": "func total_with_bonus(base: int, bonus: int) -> int:\n\treturn base + bonus\n\nprint(total_with_bonus(5, 2))",
+  "exercises": [
+    {
+      "id": "ex_template_01",
+      "lessonId": "lesson_template",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب دالة `total_with_bonus` تعيد مجموع `base` و`bonus`، ثم اطبع نتيجة استدعائها.",
+        "en": "Write a `total_with_bonus` function that returns `base` plus `bonus`, then print the result of calling it."
+      },
+      "starterCode": "func total_with_bonus(base: int, bonus: int) -> int:\n\tpass\n\nprint(total_with_bonus(5, 2))",
+      "solutionCode": "var result = base + bonus\nprint(result)",
+      "testCases": [
+        {
+          "description": {"ar": "مجموع قيمتين موجبتين", "en": "Sum of two positive values"},
+          "setupCode": "var base = 5\nvar bonus = 2",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {"ar": "مجموع قيمتين صفريتين", "en": "Sum of two zero values"},
+          "setupCode": "var base = 0\nvar bonus = 0",
+          "expectedOutput": "0"
+        }
+      ],
+      "hints": [
+        {"ar": "حدّد المدخلين والقيمة التي ينبغي أن تعيدها الدالة.", "en": "Identify the two inputs and the value the function should return."},
+        {"ar": "استخدم وسيطين من النوع `int` واجمعهما داخل الدالة.", "en": "Use two `int` parameters and add them inside the function."},
+        {"ar": "أعد `base + bonus` باستخدام `return`، ثم اطبع استدعاء الدالة.", "en": "Return `base + bonus`, then print a function call."}
+      ],
+      "order": 0
+    },
+    {
+      "id": "ex_template_02",
+      "lessonId": "lesson_template",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب دالة `is_positive` تعيد `true` إذا كانت القيمة أكبر من صفر، واختبرها بقيمة موجبة.",
+        "en": "Write an `is_positive` function that returns `true` when a value is greater than zero, and test it with a positive value."
+      },
+      "starterCode": "func is_positive(value: int) -> bool:\n\tpass\n\nprint(is_positive(4))",
+      "solutionCode": "print(value > 0)",
+      "testCases": [
+        {
+          "description": {"ar": "قيمة موجبة", "en": "Positive value"},
+          "setupCode": "var value = 4",
+          "expectedOutput": "true"
+        },
+        {
+          "description": {"ar": "القيمة صفر ليست موجبة", "en": "Zero is not positive"},
+          "setupCode": "var value = 0",
+          "expectedOutput": "false"
+        }
+      ],
+      "hints": [
+        {"ar": "حوّل كلمة «موجبة» إلى شرط قابل للفحص.", "en": "Turn the word “positive” into a condition you can test."},
+        {"ar": "قارن القيمة بالصفر وأعد نتيجة المقارنة.", "en": "Compare the value with zero and return the comparison result."},
+        {"ar": "اكتب `return value > 0` داخل الدالة.", "en": "Write `return value > 0` inside the function."}
+      ],
+      "order": 1
+    },
+    {
+      "id": "ex_template_03",
+      "lessonId": "lesson_template",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب دالة `remaining_lives` تعيد عدد المحاولات بعد خصم خسارة واحدة، من دون أن تصبح النتيجة سالبة.",
+        "en": "Write a `remaining_lives` function that subtracts one lost attempt without allowing the result to become negative."
+      },
+      "starterCode": "func remaining_lives(lives: int) -> int:\n\tpass\n\nprint(remaining_lives(3))",
+      "solutionCode": "var remaining = max(lives - 1, 0)\nprint(remaining)",
+      "testCases": [
+        {
+          "description": {"ar": "خصم محاولة من عدد موجب", "en": "Subtract one attempt from a positive count"},
+          "setupCode": "var lives = 3",
+          "expectedOutput": "2"
+        },
+        {
+          "description": {"ar": "عدم إنتاج عدد سالب", "en": "Do not produce a negative count"},
+          "setupCode": "var lives = 0",
+          "expectedOutput": "0"
+        }
+      ],
+      "hints": [
+        {"ar": "فكّر في الناتج عند توفر محاولات وعند وصول العدد إلى الصفر.", "en": "Consider the result both when attempts remain and when the count is zero."},
+        {"ar": "احسب `lives - 1` ثم قارن الناتج بالحد الأدنى المسموح.", "en": "Compute `lives - 1`, then compare it with the allowed minimum."},
+        {"ar": "استخدم `max(lives - 1, 0)` لإبقاء النتيجة عند الصفر أو أعلى.", "en": "Use `max(lives - 1, 0)` to keep the result at zero or above."}
+      ],
+      "order": 2
+    },
+    {
+      "id": "ex_template_04",
+      "lessonId": "lesson_template",
+      "type": "writeCode",
+      "prompt": {
+        "ar": "اكتب دالة `clamp_score` تعيد الدرجة محصورة بين 0 و100، ثم اطبع نتيجة لقيمة أعلى من الحد.",
+        "en": "Write a `clamp_score` function that bounds a score between 0 and 100, then print the result for a value above the limit."
+      },
+      "starterCode": "func clamp_score(score: int) -> int:\n\tpass\n\nprint(clamp_score(120))",
+      "solutionCode": "print(clampi(score, 0, 100))",
+      "testCases": [
+        {
+          "description": {"ar": "قص الدرجة التي تتجاوز الحد الأعلى", "en": "Clamp a score above the upper bound"},
+          "setupCode": "var score = 120",
+          "expectedOutput": "100"
+        },
+        {
+          "description": {"ar": "قص الدرجة التي تقل عن الحد الأدنى", "en": "Clamp a score below the lower bound"},
+          "setupCode": "var score = -5",
+          "expectedOutput": "0"
+        }
+      ],
+      "hints": [
+        {"ar": "حدّد المجال المسموح للدرجة قبل كتابة الحل.", "en": "Identify the allowed score range before writing the solution."},
+        {"ar": "استخدم دالة القص الصحيحة للقيم الصحيحة وحدّي المجال.", "en": "Use the integer clamp helper and provide both bounds."},
+        {"ar": "أعد `clampi(score, 0, 100)` من الدالة.", "en": "Return `clampi(score, 0, 100)` from the function."}
+      ],
+      "order": 3
+    },
+    {
+      "id": "ex_template_05",
+      "lessonId": "lesson_template",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "ما الفرق بين `return` و`print()` في الدالة؟",
+        "en": "What is the difference between `return` and `print()` in a function?"
+      },
+      "options": [
+        {"ar": "كلاهما يوقف اللعبة فوراً.", "en": "Both immediately stop the game."},
+        {"ar": "`return` يعيد قيمة إلى المستدعي، و`print()` يعرض نصاً في الإخراج.", "en": "`return` sends a value back to the caller, while `print()` displays text in the output."},
+        {"ar": "`print()` يعيد دائماً عدد الوسيطات.", "en": "`print()` always returns the number of arguments."}
+      ],
+      "correctOptionIndex": 1,
+      "testCases": [],
+      "hints": [
+        {"ar": "اسأل أين تذهب نتيجة العملية بعد تنفيذ الدالة.", "en": "Ask where a result goes after the function runs."},
+        {"ar": "ميّز بين قيمة يمكن استعمالها لاحقاً ونص يظهر للمطور.", "en": "Distinguish a reusable value from text shown to the developer."},
+        {"ar": "اختر العبارة التي تصف إعادة القيمة مقابل عرضها في لوحة الإخراج.", "en": "Choose the statement that contrasts returning a value with displaying it in the output panel."}
+      ],
+      "order": 4
+    },
+    {
+      "id": "ex_template_06",
+      "lessonId": "lesson_template",
+      "type": "multipleChoice",
+      "prompt": {
+        "ar": "أي تعريف يضمن أن `total` يعيد عدداً صحيحاً مجموع وسيطين؟",
+        "en": "Which definition ensures that `total` returns an integer equal to the sum of two parameters?"
+      },
+      "options": [
+        {"ar": "استخدام `print(a + b)` من دون إرجاع قيمة.", "en": "Use `print(a + b)` without returning a value."},
+        {"ar": "تعريف الدالة من دون وسيطات ثم قراءة متغير غير معرّف.", "en": "Define a function without parameters and read an undefined variable."},
+        {"ar": "تعريف وسيطين من نوع `int` وإرجاع `a + b` بنوع `int`.", "en": "Declare two `int` parameters and return `a + b` as an `int`."}
+      ],
+      "correctOptionIndex": 2,
+      "testCases": [],
+      "hints": [
+        {"ar": "ابدأ من المعلومات المطلوبة: مدخلان ونتيجة عددية.", "en": "Start from the requirements: two inputs and a numeric result."},
+        {"ar": "طابق الأنواع في الوسيطات والقيمة المعادة.", "en": "Match the parameter types and the return type."},
+        {"ar": "ابحث عن تعريف `func total(a: int, b: int) -> int` مع `return a + b`.", "en": "Look for `func total(a: int, b: int) -> int` with `return a + b`."}
+      ],
+      "order": 5
+    },
+    {
+      "id": "ex_template_07",
+      "lessonId": "lesson_template",
+      "type": "fixBug",
+      "prompt": {
+        "ar": "أصلح الدالة: ينبغي أن تعيد مجموع `base` و`bonus`، لكنها حالياً تعيد `base` فقط.",
+        "en": "Fix the function: it should return `base` plus `bonus`, but currently returns only `base`."
+      },
+      "starterCode": "func total_with_bonus(base: int, bonus: int) -> int:\n\treturn base",
+      "solutionCode": "var result = base + bonus\nprint(result)",
+      "testCases": [
+        {
+          "description": {"ar": "إضافة المكافأة إلى الأساس", "en": "Add the bonus to the base"},
+          "setupCode": "var base = 5\nvar bonus = 2",
+          "expectedOutput": "7"
+        },
+        {
+          "description": {"ar": "العمل عندما تكون قيمة الأساس صفراً", "en": "Work when the base value is zero"},
+          "setupCode": "var base = 0\nvar bonus = 4",
+          "expectedOutput": "4"
+        }
+      ],
+      "hints": [
+        {"ar": "قارن المطلوب بالقيمة التي تستخدمها الدالة فعلياً.", "en": "Compare the requirement with the value the function actually uses."},
+        {"ar": "تأكد من أن كلا الوسيطين يساهمان في القيمة المعادة.", "en": "Make sure both parameters contribute to the returned value."},
+        {"ar": "غيّر تعبير `return` إلى `base + bonus`.", "en": "Change the `return` expression to `base + bonus`."}
+      ],
+      "order": 6
+    },
+    {
+      "id": "ex_template_08",
+      "lessonId": "lesson_template",
+      "type": "predictOutput",
+      "prompt": {
+        "ar": "تتبّع تنفيذ الشيفرة واكتب ما يظهر في الإخراج.",
+        "en": "Trace the code and write what appears in the output."
+      },
+      "starterCode": "func double_value(value: int) -> int:\n\treturn value * 2\n\nvar score := double_value(3)\nprint(score + 1)",
+      "solutionCode": "7",
+      "testCases": [
+        {
+          "description": {"ar": "تتبّع الاستدعاء ثم الجمع", "en": "Trace the call and then the addition"},
+          "setupCode": "",
+          "expectedOutput": "7"
+        }
+      ],
+      "hints": [
+        {"ar": "ابدأ بحساب القيمة المعادة من الدالة.", "en": "Start by calculating the value returned by the function."},
+        {"ar": "احسب `double_value(3)` أولاً، ثم أضف واحداً.", "en": "Evaluate `double_value(3)` first, then add one."},
+        {"ar": "تعيد الدالة 6، لذلك يطبع السطر الأخير 7.", "en": "The function returns 6, so the final line prints 7."}
+      ],
+      "order": 7
+    },
+    {
+      "id": "ex_template_09",
+      "lessonId": "lesson_template",
+      "type": "fillBlank",
+      "prompt": {
+        "ar": "أكمل التعبير كي تعيد الدالة مجموع القيمتين: `return ____`.",
+        "en": "Complete the expression so the function returns the sum of both values: `return ____`."
+      },
+      "starterCode": "func add_values(first: int, second: int) -> int:\n\treturn ____",
+      "solutionCode": "print(first + second)",
+      "testCases": [
+        {
+          "description": {"ar": "جمع قيمتين مختلفتين", "en": "Add two different values"},
+          "setupCode": "var first = 2\nvar second = 3",
+          "expectedOutput": "5"
+        }
+      ],
+      "hints": [
+        {"ar": "يجب أن تستخدم القيمة المعادة كلا الوسيطين.", "en": "The returned value must use both parameters."},
+        {"ar": "اختر عملية تجمع `first` و`second`.", "en": "Choose an operation that combines `first` and `second`."},
+        {"ar": "اكتب `first + second` بعد `return`.", "en": "Write `first + second` after `return`."}
+      ],
+      "order": 8
+    },
+    {
+      "id": "ex_template_10",
+      "lessonId": "lesson_template",
+      "type": "reorderSteps",
+      "prompt": {
+        "ar": "رتّب الخطوات لبناء دالة واختبارها: تعريف الدالة، تحديد ناتجها، ثم استدعاؤها.",
+        "en": "Order the steps to build and test a function: define it, specify its result, then call it."
+      },
+      "starterCode": "",
+      "solutionCode": "func multiply_values(first: int, second: int) -> int:\n\treturn first * second\n\nprint(multiply_values(3, 4))",
+      "steps": [
+        {"ar": "عرّف الدالة باسم واضح وحدّد وسيطاتها.", "en": "Define the function with a clear name and its parameters."},
+        {"ar": "اكتب تعبير `return` الذي يحسب النتيجة.", "en": "Write the `return` expression that computes the result."},
+        {"ar": "استدعِ الدالة بقيم اختبار واعرض النتيجة.", "en": "Call the function with test values and display the result."}
+      ],
+      "testCases": [
+        {
+          "description": {"ar": "التحقق من ترتيب بناء الدالة", "en": "Verify the function-building sequence"},
+          "setupCode": "",
+          "expectedOutput": "12"
+        }
+      ],
+      "hints": [
+        {"ar": "ابدأ بما يجب أن يوجد قبل تنفيذ أي استدعاء.", "en": "Start with what must exist before any call can run."},
+        {"ar": "أكمل جسم الدالة قبل تجربة استخدامها.", "en": "Complete the function body before trying to use it."},
+        {"ar": "التعريف يسبق كتابة `return`، وكلاهما يسبق الاستدعاء.", "en": "The definition precedes `return`, and both precede the call."}
+      ],
+      "order": 9
+    }
+  ]
+}
