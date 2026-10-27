@@ -34,34 +34,36 @@
       "id": "ex_11_break_continue_01",
       "lessonId": "lesson_11_break_continue",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "ما دور الكلمة المفتاحية break؟",
-        "en": "What is the Role of break Keyword?"
+        "ar": "أعد ترتيب مثال التحكم بالحلقات: break و continue",
+        "en": "Reorder the Loop Control: break and continue example"
       },
       "prompt": {
-        "ar": "ماذا تفعل الكلمة المفتاحية `break` عند تنفيذها داخل حلقة تكرارية؟",
-        "en": "What does the `break` keyword do when executed inside a loop?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان استخدام الكلمات المفتاحية `break` للخروج المبكر من الحلقة و`continue` لتخطي الدورة الحالية والانتقال للتالية.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master using keywords `break` for early loop exit and `continue` to skip the current iteration and proceed to the next."
       },
-      "options": [
-        {
-          "ar": "تنهي وتخرج من أقرب حلقة تكرارية فوراً وتنتقل للكود الذي يليها",
-          "en": "Immediately terminates and exits the innermost loop, proceeding to subsequent code"
-        },
-        {
-          "ar": "تعيد تشغيل اللعبة من البداية",
-          "en": "Restarts the game from the beginning"
-        },
-        {
-          "ar": "تتخطى دورة واحدة فقط",
-          "en": "Skips a single iteration only"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "break تكسر الحلقة وتخرج منها كلياً.",
-          "en": "break breaks out of the loop entirely."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    for i in range(5):\n        if i == 2:\n            continue\n        if i == 4:\n            break\n        print(i)\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(5):\n        if i == 2:\n            continue\n        if i == 4:\n            break\n        print(i)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "0\n1\n3",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -97,6 +99,10 @@
         {
           "ar": "continue تتخطى الدورة الحالية فقط.",
           "en": "continue skips the current iteration only."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «ما دور الكلمة المفتاحية continue؟» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “What is the Role of continue Keyword?” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -132,6 +138,10 @@
         {
           "ar": "إذا تخطيت سطر زيادة العداد بـ continue في while، يثبت الشرط للأبد.",
           "en": "If you skip the counter increment via continue in while, the condition locks forever."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «خطر continue مع حلقة while» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Hazard of continue with while Loop” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -162,6 +172,10 @@
         {
           "ar": "ستتوقف الطباعة عند الرقم 2 وتخرج الحلقة.",
           "en": "Printing stops at 2 and the loop exits."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: الخروج المبكر بـ break» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Early Exit with break” activity and record its effect before continuing."
         }
       ]
     },
@@ -169,21 +183,25 @@
       "id": "ex_11_break_continue_05",
       "lessonId": "lesson_11_break_continue",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "إيقاف الحلقة بـ break المبكر",
-        "en": "Halting Loop with Early break"
+        "ar": "أكمل الفراغ: التحكم بالحلقات: break و continue",
+        "en": "Complete the blank: Loop Control: break and continue"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يطبع الأرقام من 0 حتى 2 باستخدام حلقة `for range(5)` مع استخدام `break` عند الوصول إلى الرقم `3` داخل دالة `_ready()`.",
-        "en": "Write a script printing numbers 0 through 2 using `for range(5)` with `break` upon reaching `3` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يطبع الأرقام من 0 حتى 2 باستخدام حلقة `for range(5)` مع استخدام `break` عند الوصول إلى الرقم `3` داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script printing numbers 0 through 2 using `for range(5)` with `break` upon reaching `3` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    for i in range(5):\n        if i == 3:\n            break\n        ___(i)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(5):\n        if i == 3:\n            break\n        print(i)",
       "hints": [
         {
           "ar": "استخدم if i == 3: break قبل أمر الطباعة.",
           "en": "Use if i == 3: break before the print statement."
+        },
+        {
+          "ar": "بعد إكمال «إيقاف الحلقة بـ break المبكر»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Halting Loop with Early break”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -191,6 +209,13 @@
           "description": {
             "ar": "التحقق من طباعة 0 ثم 1 ثم 2 ثم التوقف بـ break",
             "en": "Verifying print of 0, 1, 2 then stopping with break"
+          },
+          "expectedOutput": "0\n1\n2"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إيقاف الحلقة بـ break المبكر",
+            "en": "Repeat the scenario to confirm deterministic output: Halting Loop with Early break"
           },
           "expectedOutput": "0\n1\n2"
         }
@@ -215,6 +240,10 @@
         {
           "ar": "استخدم if i == 2: continue لتتخطى طباعة الرقم 2.",
           "en": "Use if i == 2: continue to skip printing number 2."
+        },
+        {
+          "ar": "بعد إكمال «تخطي عنصر محدد بـ continue»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Skipping Specific Item with continue”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -222,6 +251,13 @@
           "description": {
             "ar": "التحقق من طباعة 0 و 1 و 3 مع تخطي 2",
             "en": "Verifying print of 0, 1, and 3 skipping 2"
+          },
+          "expectedOutput": "0\n1\n3"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تخطي عنصر محدد بـ continue",
+            "en": "Repeat the scenario to confirm deterministic output: Skipping Specific Item with continue"
           },
           "expectedOutput": "0\n1\n3"
         }
@@ -246,6 +282,10 @@
         {
           "ar": "ضع شرط continue قبل أمر print ليتخطى الرقم 0.",
           "en": "Place continue condition before print to skip number 0."
+        },
+        {
+          "ar": "في «إصلاح خطأ تخطي الطباعة الخاطئة»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Incorrect Skip Print Bug”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -253,6 +293,13 @@
           "description": {
             "ar": "التحقق من طباعة الرقم 1 فقط بنجاح",
             "en": "Verifying successful printing of number 1 only"
+          },
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ تخطي الطباعة الخاطئة",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Incorrect Skip Print Bug"
           },
           "expectedOutput": "1"
         }
@@ -277,6 +324,10 @@
         {
           "ar": "تتوقف الحلقة تماماً عند الوصول لـ 30، مطبوعة 10 و 20 فقط.",
           "en": "Loop stops entirely upon reaching 30, printing 10 and 20 only."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج استخدام break داخل حلقة» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Output of break Inside Loop” before deciding the final output."
         }
       ],
       "testCases": [
@@ -308,6 +359,10 @@
         {
           "ar": "استخدم `if i % 2 == 0: continue` لتتخطى 0 و 2 و 4 وتطبع 1 و 3.",
           "en": "Use `if i % 2 == 0: continue` to skip 0, 2, 4 and print 1, 3."
+        },
+        {
+          "ar": "بعد إكمال «تخطي العناصر الزوجية بـ continue»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Skipping Even Numbers with continue”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -315,6 +370,13 @@
           "description": {
             "ar": "التحقق من طباعة الأعداد الفردية 1 و 3 بنجاح",
             "en": "Verifying odd numbers 1 and 3 print successfully"
+          },
+          "expectedOutput": "1\n3"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تخطي العناصر الزوجية بـ continue",
+            "en": "Repeat the scenario to confirm deterministic output: Skipping Even Numbers with continue"
           },
           "expectedOutput": "1\n3"
         }
@@ -339,6 +401,10 @@
         {
           "ar": "اجمع بين continue للأرقام تحت 5 و break عند إيجاد 7.",
           "en": "Combine continue for numbers under 5 and break upon finding 7."
+        },
+        {
+          "ar": "بعد إكمال «تحدي التحكم بالحلقات الشامل»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Comprehensive Loop Control Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -346,6 +412,13 @@
           "description": {
             "ar": "التحقق من إيجاد الرقم 7 والخروج الناجح بـ break",
             "en": "Verifying finding number 7 and successful exit with break"
+          },
+          "expectedOutput": "Found 7"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي التحكم بالحلقات الشامل",
+            "en": "Repeat the scenario to confirm deterministic output: Comprehensive Loop Control Challenge"
           },
           "expectedOutput": "Found 7"
         }

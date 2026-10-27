@@ -139,6 +139,26 @@
           },
           "setupCode": "var documented_functions = 10\nvar change = 4",
           "expectedOutput": "14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `documented_functions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `documented_functions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `documented_functions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `documented_functions` and its companion inputs."
+          },
+          "setupCode": "var documented_functions = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -187,6 +207,26 @@
           },
           "setupCode": "var documented_functions = 10\nvar change = 4",
           "expectedOutput": "14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `documented_functions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `documented_functions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `documented_functions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `documented_functions` and its companion inputs."
+          },
+          "setupCode": "var documented_functions = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -235,6 +275,26 @@
           },
           "setupCode": "var documented_functions = 10\nvar change = 4",
           "expectedOutput": "14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `documented_functions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `documented_functions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `documented_functions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `documented_functions` and its companion inputs."
+          },
+          "setupCode": "var documented_functions = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -283,6 +343,26 @@
           },
           "setupCode": "var documented_functions = 10\nvar change = 4",
           "expectedOutput": "14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `documented_functions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `documented_functions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `documented_functions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `documented_functions` and its companion inputs."
+          },
+          "setupCode": "var documented_functions = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -331,6 +411,26 @@
           },
           "setupCode": "var documented_functions = 10\nvar change = 4",
           "expectedOutput": "10\n4\n14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `documented_functions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `documented_functions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `documented_functions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `documented_functions` and its companion inputs."
+          },
+          "setupCode": "var documented_functions = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -379,6 +479,26 @@
           },
           "setupCode": "var documented_functions = 8\nvar change = 3",
           "expectedOutput": "19"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `documented_functions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `documented_functions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `documented_functions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `documented_functions` and its companion inputs."
+          },
+          "setupCode": "var documented_functions = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -427,6 +547,26 @@
           },
           "setupCode": "var documented_functions = 8\nvar change = 3",
           "expectedOutput": "19"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `documented_functions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `documented_functions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var documented_functions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `documented_functions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `documented_functions` and its companion inputs."
+          },
+          "setupCode": "var documented_functions = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -442,52 +582,83 @@
       "order": 8
     },
     {
-      "id": "ex_lesson_48_style_documentation_10",
+      "id": "ex_48_style_10",
       "lessonId": "lesson_48_style_documentation",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً باسم result لحساب ضعف documented_functions مضافاً إليه change في documentation.",
-        "en": "Use a named result variable to calculate documented_functions times two plus change for documentation."
+        "ar": "اكتب دالة حركة ذات معاملات وقيمة إرجاع محددة النوع تضبط السرعة بين الصفر والحد الأقصى. استخدم `assert` للتحقق من صلاحية الحد الأقصى، واختبر سرعة سالبة وصفرية وسرعة تتجاوز الحد.",
+        "en": "Write a movement function with typed parameters and return value that clamps speed between zero and a maximum. Use `assert` to validate the maximum, and test negative, zero, and over-limit speeds."
       },
-      "starterCode": "",
-      "solutionCode": "var result = documented_functions * 2 + change\nprint(result)",
+      "starterCode": "func clamp_speed(current_speed: float, max_speed: float) -> float:\n    # Assert a valid maximum and clamp the current speed.\n    pass\n\nprint(clamp_speed(current_speed, max_speed))",
+      "solutionCode": "func clamp_speed(current_speed: float, max_speed: float) -> float:\n    assert(max_speed >= 0.0, \"Maximum speed cannot be negative\")\n    return min(max(current_speed, 0.0), max_speed)\n\nprint(clamp_speed(current_speed, max_speed))",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من تقييد السرعة التي تتجاوز الحد",
+            "en": "Check speed clamping above the maximum"
           },
-          "setupCode": "var documented_functions = 3\nvar change = 1",
-          "expectedOutput": "7"
+          "setupCode": "var current_speed = 8.0\nvar max_speed = 5.0",
+          "expectedOutput": "5.0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من منع السرعة السالبة",
+            "en": "Check negative speed is clamped to zero"
           },
-          "setupCode": "var documented_functions = 0\nvar change = 1",
-          "expectedOutput": "1"
+          "setupCode": "var current_speed = -3.0\nvar max_speed = 4.0",
+          "expectedOutput": "0.0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من السرعة الصفرية",
+            "en": "Check zero speed"
           },
-          "setupCode": "var documented_functions = 8\nvar change = 3",
-          "expectedOutput": "19"
+          "setupCode": "var current_speed = 0.0\nvar max_speed = 4.0",
+          "expectedOutput": "0.0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `current_speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `current_speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var current_speed = 0\nvar max_speed = 1",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `current_speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `current_speed` and its companion inputs."
+          },
+          "setupCode": "var current_speed = 1\nvar max_speed = 3",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
         {
-          "ar": "عرّف result من المتغيرين ثم اطبعه.",
-          "en": "Assign the expression to result, then print it."
+          "ar": "اجعل حد السرعة غير السالب شرطًا مسبقًا قبل إرجاع القيمة.",
+          "en": "Treat a non-negative maximum as a precondition before returning a value."
         },
         {
-          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
-          "en": "Do not hard-code the result; use the values supplied by each test."
+          "ar": "استخدم الحد الأدنى والأعلى لضمان بقاء الناتج داخل المجال المسموح.",
+          "en": "Use lower and upper bounds to keep the result within the allowed range."
         }
       ],
-      "order": 9
+      "order": 9,
+      "title": {
+        "ar": "تحدي محرك الحركة الصارم الخالي من التحذيرات",
+        "en": "Strictly Typed Movement Controller"
+      },
+      "options": []
     }
   ]
 }

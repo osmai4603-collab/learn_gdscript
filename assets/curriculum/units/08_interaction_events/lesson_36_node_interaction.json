@@ -152,6 +152,26 @@
           },
           "setupCode": "var notified_nodes = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `notified_nodes` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `notified_nodes` set to zero; verify the resulting output."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `notified_nodes` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `notified_nodes` and its companion inputs."
+          },
+          "setupCode": "var notified_nodes = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -200,6 +220,26 @@
           },
           "setupCode": "var notified_nodes = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `notified_nodes` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `notified_nodes` set to zero; verify the resulting output."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `notified_nodes` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `notified_nodes` and its companion inputs."
+          },
+          "setupCode": "var notified_nodes = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -248,6 +288,26 @@
           },
           "setupCode": "var notified_nodes = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `notified_nodes` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `notified_nodes` set to zero; verify the resulting output."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `notified_nodes` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `notified_nodes` and its companion inputs."
+          },
+          "setupCode": "var notified_nodes = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -332,6 +392,26 @@
           },
           "setupCode": "var notified_nodes = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `notified_nodes` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `notified_nodes` set to zero; verify the resulting output."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `notified_nodes` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `notified_nodes` and its companion inputs."
+          },
+          "setupCode": "var notified_nodes = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -415,56 +495,107 @@
           },
           "setupCode": "var notified_nodes = 9\nvar change = 4",
           "expectedOutput": "9\n4\n13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `notified_nodes` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `notified_nodes` set to zero; verify the resulting output."
+          },
+          "setupCode": "var notified_nodes = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `notified_nodes` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `notified_nodes` and its companion inputs."
+          },
+          "setupCode": "var notified_nodes = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
     {
-      "id": "ex_lesson_36_node_interaction_10_apply",
+      "id": "ex_36_node_10",
       "lessonId": "lesson_36_node_interaction",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب شيفرة تضاعف notified_nodes ثم تضيف change وتطبع الناتج في مثال عن node interaction.",
-        "en": "Write code that doubles notified_nodes, adds change, and prints the result in a node interaction example."
+        "ar": "اكتب معالجًا لحدث تفعيل لوحة ضغط يستقبل وزن الكائن كقيمة للحدث. افتح الباب إذا بلغ الوزن الحد المطلوب، وإلا اتركه مغلقًا. اختبر الحد الأدنى نفسه والوزن الأقل منه والوزن الزائد.",
+        "en": "Write a handler for a pressure-plate activation event that receives the actor’s weight as event data. Open the door when the weight reaches the required threshold; otherwise keep it closed. Test the exact threshold, a lower weight, and a higher weight."
       },
       "hints": [
         {
-          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
-          "en": "Double the value first, then add change."
+          "ar": "عامل قيمة الوزن كبيانات الحدث التي تصل إلى دالة المعالجة.",
+          "en": "Treat the weight as event data passed to the handler."
         },
         {
-          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
-          "en": "Use the variables provided by each test."
+          "ar": "استخدم مقارنة شاملة للحد كي يُقبل الوزن المساوي له.",
+          "en": "Use an inclusive comparison so a weight equal to the threshold is accepted."
         }
       ],
       "order": 9,
-      "starterCode": "",
-      "solutionCode": "var result = notified_nodes * 2 + change\nprint(result)",
+      "starterCode": "func on_plate_activated(weight, required_weight):\n    # Decide whether the emitted weight opens the door.\n    pass\n\non_plate_activated(actor_weight, required_weight)",
+      "solutionCode": "func on_plate_activated(weight, required_weight):\n    if weight >= required_weight:\n        print(\"Door: Open\")\n    else:\n        print(\"Door: Closed\")\n\non_plate_activated(actor_weight, required_weight)",
       "testCases": [
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من قبول الوزن المطابق للحد",
+            "en": "Check the exact activation threshold"
           },
-          "setupCode": "var notified_nodes = 2\nvar change = 1",
-          "expectedOutput": "5"
+          "setupCode": "var actor_weight = 50\nvar required_weight = 50",
+          "expectedOutput": "Door: Open",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من رفض وزن أقل من الحد",
+            "en": "Check a weight below the threshold"
           },
-          "setupCode": "var notified_nodes = 0\nvar change = 1",
-          "expectedOutput": "1"
+          "setupCode": "var actor_weight = 49\nvar required_weight = 50",
+          "expectedOutput": "Door: Closed",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من قبول وزن أعلى من الحد",
+            "en": "Check a weight above the threshold"
           },
-          "setupCode": "var notified_nodes = 9\nvar change = 4",
-          "expectedOutput": "22"
+          "setupCode": "var actor_weight = 80\nvar required_weight = 50",
+          "expectedOutput": "Door: Open",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من رفض وزن أقل من الحد الأدنى",
+            "en": "Check that a weight below the threshold is rejected"
+          },
+          "setupCode": "var actor_weight = 0\nvar required_weight = 1",
+          "expectedOutput": "Door: Closed",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من قبول وزن أعلى بكثير من الحد",
+            "en": "Check that a weight well above the threshold is accepted"
+          },
+          "setupCode": "var actor_weight = 1\nvar required_weight = 3",
+          "expectedOutput": "Door: Closed",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
-      ]
+      ],
+      "title": {
+        "ar": "تحدي شبكة الأحداث والأبواب التفاعلية",
+        "en": "Interactive Trigger and Event Dispatcher"
+      },
+      "options": []
     }
   ]
 }

@@ -182,6 +182,122 @@ void main() {
     await tester.pumpAndSettle();
     expect(completed, isTrue);
   });
+
+  testWidgets('code exercises show each setup-backed test result', (
+    tester,
+  ) async {
+    final runner = CodeRunnerService();
+    addTearDown(runner.dispose);
+    final exercise = Exercise(
+      id: 'multi-case',
+      lessonId: 'lesson',
+      type: ExerciseType.writeCode,
+      prompt: const LocalizedText(
+        ar: 'احسب المجموع',
+        en: 'Calculate the total',
+      ),
+      starterCode: 'print(score + bonus)',
+      solutionCode: 'print(score + bonus)',
+      testCases: const [
+        ExerciseTestCase(
+          description: LocalizedText(ar: 'حالة عادية', en: 'Regular case'),
+          setupCode: 'var score = 2\nvar bonus = 3',
+          expectedOutput: '5',
+        ),
+        ExerciseTestCase(
+          description: LocalizedText(ar: 'حالة الصفر', en: 'Zero case'),
+          setupCode: 'var score = 0\nvar bonus = 0',
+          expectedOutput: '0',
+        ),
+        ExerciseTestCase(
+          description: LocalizedText(ar: 'حالة بديلة', en: 'Alternate case'),
+          setupCode: 'var score = 10\nvar bonus = 5',
+          expectedOutput: '999',
+        ),
+      ],
+      hints: const [],
+      order: 0,
+    );
+
+    await tester.pumpWidget(
+      _localizedApp(
+        Provider<TestRunnerService>(
+          create: (_) => TestRunnerService(runner),
+          child: ExerciseWidget(
+            exercise: exercise,
+            exerciseIndex: 0,
+            exerciseCount: 1,
+          ),
+        ),
+        runner,
+      ),
+    );
+
+    await tester.tap(find.text('Run'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Regular case'), findsOneWidget);
+    expect(find.text('Zero case'), findsOneWidget);
+    expect(find.text('Alternate case'), findsOneWidget);
+    expect(find.text('Passed'), findsNWidgets(2));
+    expect(find.text('Failed'), findsOneWidget);
+    expect(find.text('Expected: 999\nActual: 15'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets(
+    'exercise hints reveal progressively and long code stays stable',
+    (tester) async {
+      final runner = CodeRunnerService();
+      addTearDown(runner.dispose);
+      final longCode = List<String>.generate(
+        24,
+        (index) => 'print("Capstone step ${index + 1}")',
+      ).join('\n');
+      final exercise = Exercise(
+        id: 'long-capstone',
+        lessonId: 'lesson',
+        type: ExerciseType.writeCode,
+        prompt: const LocalizedText(ar: 'تحدٍ طويل', en: 'Long challenge'),
+        starterCode: longCode,
+        solutionCode: longCode,
+        testCases: [
+          ExerciseTestCase(
+            description: LocalizedText(ar: 'اختبار المثال', en: 'Example test'),
+            expectedOutput: longCode,
+          ),
+        ],
+        hints: const [
+          LocalizedText(ar: 'التلميح الأول', en: 'First hint'),
+          LocalizedText(ar: 'التلميح الثاني', en: 'Second hint'),
+        ],
+        order: 9,
+      );
+
+      await tester.pumpWidget(
+        _localizedApp(
+          ExerciseWidget(
+            exercise: exercise,
+            exerciseIndex: 9,
+            exerciseCount: 10,
+          ),
+          runner,
+        ),
+      );
+
+      expect(find.text('First hint'), findsNothing);
+      await tester.ensureVisible(find.text('Hint'));
+      await tester.tap(find.text('Hint'));
+      await tester.pump();
+      expect(find.text('First hint'), findsOneWidget);
+      expect(find.text('Second hint'), findsNothing);
+      await tester.ensureVisible(find.text('Hint'));
+      await tester.tap(find.text('Hint'));
+      await tester.pump();
+      expect(find.text('Second hint'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
 }
 
 Widget _localizedApp(Widget child, CodeRunnerService runner) => MaterialApp(

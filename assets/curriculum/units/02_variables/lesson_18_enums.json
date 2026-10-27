@@ -35,34 +35,36 @@
       "id": "ex_18_enums_01",
       "lessonId": "lesson_18_enums",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "ما هي الأرقام السحرية Magic Numbers؟",
-        "en": "What are Magic Numbers?"
+        "ar": "أعد ترتيب مثال الثوابت والتعدادات (تحدي الوحدة 2)",
+        "en": "Reorder the Constants and Enums (Unit 2 Capstone) example"
       },
       "prompt": {
-        "ar": "في برمجة الألعاب، ماذا يقصد مصطلح الأرقام السحرية (Magic Numbers) ولماذا يُحذر منها؟",
-        "en": "In game programming, what do Magic Numbers refer to and why are they discouraged?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان استخدام التعدادات المسماة (Named Enums) والثوابت للقضاء على الأرقام السحرية وإنجاز التحدي التراكمي للوحدة الثانية.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master named enums and constants to eliminate magic numbers and complete the Unit 2 capstone challenge."
       },
-      "options": [
-        {
-          "ar": "استخدام أرقام خام مبهمة (مثل 0 و 1) بدلاً من أسماء واضحة، مما يغمض معنى الشيفرة",
-          "en": "Using raw obscure numbers (like 0 and 1) instead of clear names, obscuring code meaning"
-        },
-        {
-          "ar": "أرقام تزيد سرعة اللعبة أضعافاً مضاعفة سحرياً",
-          "en": "Numbers that magically multiply game speed"
-        },
-        {
-          "ar": "أخطاء تصدير اللعبة لنظام التشغيل",
-          "en": "Errors exporting the game to OS"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "الأرقام المجردة بدون سياق تسمى أرقاماً سحرية ويتم استبدالها بـ Enums.",
-          "en": "Contextless raw numbers are called magic numbers and replaced by Enums."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "enum PlayerState { IDLE, RUNNING, JUMPING }\nfunc _ready():\n    var current_state = PlayerState.RUNNING\n    print(current_state)\nextends Node",
+      "solutionCode": "extends Node\n\nenum PlayerState { IDLE, RUNNING, JUMPING }\n\nfunc _ready():\n    var current_state = PlayerState.RUNNING\n    print(current_state)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -98,6 +100,10 @@
         {
           "ar": "UP هو 0، إذن DOWN هو 1 تتابعياً.",
           "en": "UP is 0, so DOWN is 1 sequentially."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «القيم الافتراضية لعناصر التعداد Enum» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Default Values of Enum Elements” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -133,6 +139,10 @@
         {
           "ar": "الثوابت مخصصة للقيم الثابتة غير القابلة للتعديل.",
           "en": "Constants are dedicated to unchanging fixed values."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «الفرق بين الثوابت والمتغيرات» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Difference Between Constants and Variables” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -163,6 +173,10 @@
         {
           "ar": "التعدادات تمنح أسماء واضحة ومقروءة للحالات العددية.",
           "en": "Enums provide clear readable names for numeric states."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: تعريف واستخدام تعداد الحالات» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Defining and Using State Enum” activity and record its effect before continuing."
         }
       ]
     },
@@ -170,21 +184,25 @@
       "id": "ex_18_enums_05",
       "lessonId": "lesson_18_enums",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "تعريف ثابت أقصى عدد للأعداء",
-        "en": "Defining Max Enemies Constant"
+        "ar": "أكمل الفراغ: الثوابت والتعدادات (تحدي الوحدة 2)",
+        "en": "Complete the blank: Constants and Enums (Unit 2 Capstone)"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يعرّف ثابتاً `const MAX_ENEMIES = 10` ويطبع قيمته داخل دالة `_ready()`.",
-        "en": "Write a script defining constant `const MAX_ENEMIES = 10` and prints its value inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يعرّف ثابتاً `const MAX_ENEMIES = 10` ويطبع قيمته داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script defining constant `const MAX_ENEMIES = 10` and prints its value inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    const MAX_ENEMIES = 10\n    ___(MAX_ENEMIES)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    const MAX_ENEMIES = 10\n    print(MAX_ENEMIES)",
       "hints": [
         {
           "ar": "استخدم `const MAX_ENEMIES = 10` ثم `print(MAX_ENEMIES)`.",
           "en": "Use `const MAX_ENEMIES = 10` then `print(MAX_ENEMIES)`."
+        },
+        {
+          "ar": "بعد إكمال «تعريف ثابت أقصى عدد للأعداء»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Defining Max Enemies Constant”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -192,6 +210,13 @@
           "description": {
             "ar": "التحقق من طباعة ثابت أقصى عدد أعداء بنجاح",
             "en": "Verifying successful max enemies constant output"
+          },
+          "expectedOutput": "10"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تعريف ثابت أقصى عدد للأعداء",
+            "en": "Repeat the scenario to confirm deterministic output: Defining Max Enemies Constant"
           },
           "expectedOutput": "10"
         }
@@ -216,6 +241,10 @@
         {
           "ar": "اطبع `Status.ACTIVE` وسترى الرقم 1.",
           "en": "Print `Status.ACTIVE` and you will see number 1."
+        },
+        {
+          "ar": "بعد إكمال «طباعة قيمة من التعداد»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Printing Enum Element Value”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -223,6 +252,13 @@
           "description": {
             "ar": "التحقق من طباعة القيمة الرقمية للتعداد (1)",
             "en": "Verifying numeric enum value output (1)"
+          },
+          "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: طباعة قيمة من التعداد",
+            "en": "Repeat the scenario to confirm deterministic output: Printing Enum Element Value"
           },
           "expectedOutput": "1"
         }
@@ -247,6 +283,10 @@
         {
           "ar": "استبدل `var` بـ `const` لأن الجاذبية هنا ثابتة.",
           "en": "Replace `var` with `const` since gravity here is constant."
+        },
+        {
+          "ar": "في «إصلاح تعريف الثابت const»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing const Definition Bug”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -254,6 +294,13 @@
           "description": {
             "ar": "التحقق من عمل الشيفرة بعد استخدام const",
             "en": "Verifying code operation after using const"
+          },
+          "expectedOutput": "300"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح تعريف الثابت const",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing const Definition Bug"
           },
           "expectedOutput": "300"
         }
@@ -278,6 +325,10 @@
         {
           "ar": "FIRE هو 0، WATER هو 1، إذن EARTH هو 2.",
           "en": "FIRE is 0, WATER is 1, so EARTH is 2."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بقيمة التعداد المرتّب» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Sequenced Enum Value” before deciding the final output."
         }
       ],
       "testCases": [
@@ -309,6 +360,10 @@
         {
           "ar": "استخدم `const TITLE = \"CyberGame\"` ثم `print(TITLE)`.",
           "en": "Use `const TITLE = \"CyberGame\"` then `print(TITLE)`."
+        },
+        {
+          "ar": "بعد إكمال «تعريف ثابت إعدادات اللعبة»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Defining Game Settings Constant”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -316,6 +371,13 @@
           "description": {
             "ar": "التحقق من طباعة عنوان الثابت النصي بنجاح",
             "en": "Verifying string constant title output successfully"
+          },
+          "expectedOutput": "CyberGame"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تعريف ثابت إعدادات اللعبة",
+            "en": "Repeat the scenario to confirm deterministic output: Defining Game Settings Constant"
           },
           "expectedOutput": "CyberGame"
         }
@@ -327,34 +389,78 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدي الوحدة 2 التراكمي: سجل مقتنيات البطاقة وبطاقة الشخصية (Player Inventory Sheet)",
-        "en": "Unit 2 Capstone: Player Inventory Sheet and Character Card"
+        "ar": "تحدي حاسبة متجر المقتنيات",
+        "en": "Item Shop Transaction Calculator"
       },
       "prompt": {
-        "ar": "أنجز التحدي التراكمي للوحدة الثانية: اكتب سكربتاً يضم ثابتاً `const MAX_HP = 100`، وتعداداً `enum Class { WARRIOR, MAGE }`، ومتغيرات للاحة (`var p_name = \"Aria\"`, `var gold = 250`)، وقم بطباعة بطاقة منسقة بالكامل عبر `String.format()` تطابق الناتج التالي تماماً:\n`Hero: Aria | Gold: 250 | MaxHP: 100`",
-        "en": "Complete Unit 2 capstone: Write a script featuring constant `const MAX_HP = 100`, enum `enum Class { WARRIOR, MAGE }`, variables (`var p_name = \"Aria\"`, `var gold = 250`), and print a fully formatted card via `String.format()` matching exactly:\n`Hero: Aria | Gold: 250 | MaxHP: 100`"
+        "ar": "احسب تكلفة شراء عناصر من متجر اللعبة بعد خصم نسبي، ثم اطبع المبلغ المتبقي إذا كان الذهب كافيًا أو رسالة واضحة إذا لم يكن كافيًا. عالج الشراء الصفري والرصيد غير الكافي. استخدم المتغيرات المهيأة قبل الشيفرة كي تختبر معاملات مختلفة.",
+        "en": "Calculate the cost of a game-shop purchase after a percentage discount. Print the remaining gold when the player can afford it, or a clear message when they cannot. Handle a zero-quantity purchase and insufficient funds. Use the variables initialized before your code to test different transactions."
       },
-      "starterCode": "extends Node\n\nconst MAX_HP = 100\nenum Class { WARRIOR, MAGE }\n\nfunc _ready():\n    # اكتب الأوامر وتنسيق البطاقة هنا\n    ",
-      "solutionCode": "extends Node\n\nconst MAX_HP = 100\nenum Class { WARRIOR, MAGE }\n\nfunc _ready():\n    var p_name = \"Aria\"\n    var gold = 250\n    var card = \"Hero: {name} | Gold: {g} | MaxHP: {hp}\".format({\"name\": p_name, \"g\": gold, \"hp\": MAX_HP})\n    print(card)",
+      "starterCode": "func calculate_total(item_price, item_count, discount_percent):\n    # Return the discounted total as an integer.\n    pass\n\nvar total = calculate_total(item_price, item_count, discount_percent)\nif player_gold >= total:\n    print(\"Purchased: \" + str(total) + \" | Gold left: \" + str(player_gold - total))\nelse:\n    print(\"Not enough gold: \" + str(total))",
+      "solutionCode": "func calculate_total(item_price, item_count, discount_percent):\n    var subtotal = item_price * item_count\n    return int(subtotal * (100 - discount_percent) / 100)\n\nvar total = calculate_total(item_price, item_count, discount_percent)\nif player_gold >= total:\n    print(\"Purchased: \" + str(total) + \" | Gold left: \" + str(player_gold - total))\nelse:\n    print(\"Not enough gold: \" + str(total))",
       "hints": [
         {
-          "ar": "استخدم String.format() مع قاموس يربط المفاتيح بمتغيرات الثابت والشخصية والذهب.",
-          "en": "Use String.format() with a dictionary linking keys to constant, character, and gold variables."
+          "ar": "احسب المجموع الفرعي أولًا، وطبّق الخصم قبل مقارنة السعر بالذهب.",
+          "en": "Calculate the subtotal first, apply the discount, then compare the total with the player’s gold."
         },
         {
-          "ar": "هذا التحدي يدمج المتغيرات والأنواع والتنسيق والثوابت والتعدادات بنجاح تام.",
-          "en": "This challenge successfully integrates variables, types, formatting, constants, and enums."
+          "ar": "افصل حساب السعر عن قرار الشراء في دالة وشرط مستقلين.",
+          "en": "Separate price calculation from the purchase decision with a function and a condition."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "التحقق من تطابق بطاقة الشخصية وسجل المقتنيات تماماً",
-            "en": "Verifying player character card and inventory sheet exact match"
+            "ar": "تحقق من الشراء مع خصم ورصيد كافٍ",
+            "en": "Check a discounted purchase with enough gold"
           },
-          "expectedOutput": "Hero: Aria | Gold: 250 | MaxHP: 100"
+          "setupCode": "var item_price = 20\nvar item_count = 3\nvar discount_percent = 10\nvar player_gold = 100",
+          "expectedOutput": "Purchased: 54 | Gold left: 46",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من شراء صفر عناصر برصيد صفري",
+            "en": "Check zero items with zero gold"
+          },
+          "setupCode": "var item_price = 25\nvar item_count = 0\nvar discount_percent = 0\nvar player_gold = 0",
+          "expectedOutput": "Purchased: 0 | Gold left: 0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من رفض الشراء عند عدم كفاية الرصيد",
+            "en": "Check a purchase rejected for insufficient gold"
+          },
+          "setupCode": "var item_price = 25\nvar item_count = 2\nvar discount_percent = 20\nvar player_gold = 10",
+          "expectedOutput": "Not enough gold: 40",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_price` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_price` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_price = 0\nvar item_count = 2\nvar discount_percent = 1\nvar player_gold = 1",
+          "expectedOutput": "Purchased: 0 | Gold left: 1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_price` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_price` and its companion inputs."
+          },
+          "setupCode": "var item_price = 1\nvar item_count = 3\nvar discount_percent = 1\nvar player_gold = 1",
+          "expectedOutput": "Not enough gold: 2",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
-      ]
+      ],
+      "options": []
     }
   ]
 }

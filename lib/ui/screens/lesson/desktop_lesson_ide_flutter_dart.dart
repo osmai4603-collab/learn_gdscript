@@ -26,7 +26,7 @@ class DesktopLessonIdeLayout extends StatefulWidget {
 }
 
 class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
-  static const _initialExplanationRatio = 0.65;
+  static const _initialExplanationRatio = 0.60;
 
   double _explanationRatio = _initialExplanationRatio;
 
@@ -110,7 +110,7 @@ class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
                             ? 'اسحب لتغيير عرض اللوحتين'
                             : 'Drag to resize panels',
                         child:  SizedBox(
-                          width: 20,
+                          width: 10,
                           child: Center(
                             child: DecoratedBox(
                               decoration: BoxDecoration(
@@ -158,7 +158,7 @@ class _DesktopLessonIdeLayoutState extends State<DesktopLessonIdeLayout> {
     required EdgeInsets padding,
   }) =>
       Container(
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         padding: padding,
         child: SingleChildScrollView(child: child),
       );

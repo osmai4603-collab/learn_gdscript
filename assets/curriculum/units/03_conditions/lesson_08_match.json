@@ -35,34 +35,36 @@
       "id": "ex_08_match_01",
       "lessonId": "lesson_08_match",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "متى نستخدم بنية match بدلاً من if / elif؟",
-        "en": "When to Use match Instead of if / elif"
+        "ar": "أعد ترتيب مثال مطابقة الأنماط match (تحدي الوحدة 3)",
+        "en": "Reorder the Pattern Matching match (Unit 3 Capstone) example"
       },
       "prompt": {
-        "ar": "في أي سيناريو برمجي يُعتبر استخدام بنية `match` الخيار الأفضل مقارنة بسلاسل `elif` الطويلة؟",
-        "en": "In which programming scenario is using `match` considered the superior choice over long `elif` chains?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان استخدام البنية القوية `match` كبديل أسرع وأكثر نظافة لسلاسل `elif` الطويلة، وإنجاز التحدي التراكمي للوحدة الثالثة.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master the powerful `match` construct as a cleaner, faster alternative to long `elif` chains, and complete the Unit 3 capstone challenge."
       },
-      "options": [
-        {
-          "ar": "عند اختبار مطابقة قيمة متغير واحد مع عدة قيم وخيارات ثابتة ومتعددة",
-          "en": "When testing a single variable against multiple fixed values and choices"
-        },
-        {
-          "ar": "عند الرغبة في إيقاف اللعبة نهائياً",
-          "en": "When wishing to shut down the game completely"
-        },
-        {
-          "ar": "عند الحاجة لإنشاء ملفات رسوميات ثلاثية الأبعاد",
-          "en": "When needing to create 3D graphic assets"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "بنية match مصممة خصيصاً لمطابقة قيم متغير واحد بعدة أنماط.",
-          "en": "The match construct is purpose-built for matching a single variable against patterns."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var weapon_type = \"sword\"\n    match weapon_type:\n        \"sword\":\n            print(\"Melee Attack\")\n        \"bow\":\n            print(\"Ranged Attack\")\n        _:\n            print(\"Default Punch\")\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var weapon_type = \"sword\"\n    match weapon_type:\n        \"sword\":\n            print(\"Melee Attack\")\n        \"bow\":\n            print(\"Ranged Attack\")\n        _:\n            print(\"Default Punch\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Melee Attack",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -98,6 +100,10 @@
         {
           "ar": "الرمز _ يلتقط أي قيمة لم يتم مطابقتها في الفروع السابقة.",
           "en": "The _ symbol catches any value not matched in previous branches."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «دور الرمز _ في بنية match» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Role of Underscore _ in match” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -133,6 +139,10 @@
         {
           "ar": "استخدام الفواصل يسمح بدمج خيارات مطابقة متعددة بسهولة.",
           "en": "Using commas allows combining multiple matching choices easily."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «ميزة مطابقة عدة قيم في فرع واحد» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Feature of Matching Multiple Values in One Branch” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -163,6 +173,10 @@
         {
           "ar": "تأكد من وضع النقطتين الرأسيتين `:` بعد كل نمط.",
           "en": "Ensure placing colons `:` after each pattern."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: كتابة هيكل match لحالات التحكم باللعبة» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Writing match Construct for Game States” activity and record its effect before continuing."
         }
       ]
     },
@@ -170,21 +184,25 @@
       "id": "ex_08_match_05",
       "lessonId": "lesson_08_match",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "مطابقة اتجاهات الحركة بـ match",
-        "en": "Matching Movement Directions with match"
+        "ar": "أكمل الفراغ: مطابقة الأنماط match (تحدي الوحدة 3)",
+        "en": "Complete the blank: Pattern Matching match (Unit 3 Capstone)"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يفحص `var dir = \"up\"` باستخدام `match`؛ إذا كان `\"up\"` اطبع `Moving Up`، وإلا اطبع `Stopped` داخل دالة `_ready()`.",
-        "en": "Write a script inspecting `var dir = \"up\"` using `match`; if `\"up\"` print `Moving Up`, else print `Stopped` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يفحص `var dir = \"up\"` باستخدام `match`؛ إذا كان `\"up\"` اطبع `Moving Up`، وإلا اطبع `Stopped` داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script inspecting `var dir = \"up\"` using `match`; if `\"up\"` print `Moving Up`, else print `Stopped` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    var dir = \"up\"\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var dir = \"up\"\n    match dir:\n        \"up\":\n            ___(\"Moving Up\")\n        _:\n            print(\"Stopped\")",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var dir = \"up\"\n    match dir:\n        \"up\":\n            print(\"Moving Up\")\n        _:\n            print(\"Stopped\")",
       "hints": [
         {
           "ar": "استخدم `match dir:` مع فروع `\"up\":` و `_:`.",
           "en": "Use `match dir:` with `\"up\":` and `_:` branches."
+        },
+        {
+          "ar": "بعد إكمال «مطابقة اتجاهات الحركة بـ match»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Matching Movement Directions with match”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -192,6 +210,13 @@
           "description": {
             "ar": "التحقق من طباعة Moving Up بنجاح",
             "en": "Verifying successful Moving Up output"
+          },
+          "expectedOutput": "Moving Up"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: مطابقة اتجاهات الحركة بـ match",
+            "en": "Repeat the scenario to confirm deterministic output: Matching Movement Directions with match"
           },
           "expectedOutput": "Moving Up"
         }
@@ -216,6 +241,10 @@
         {
           "ar": "بما أن dir هي \"left\" فستتפعل الحالة الافتراضية _.",
           "en": "Since dir is \"left\", the default fallback _ triggers."
+        },
+        {
+          "ar": "بعد إكمال «تفعيل الفرع الافتراضي في match»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Triggering Fallback Branch in match”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -223,6 +252,13 @@
           "description": {
             "ar": "التحقق من طباعة Other Direction بنجاح",
             "en": "Verifying successful Other Direction output"
+          },
+          "expectedOutput": "Other Direction"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تفعيل الفرع الافتراضي في match",
+            "en": "Repeat the scenario to confirm deterministic output: Triggering Fallback Branch in match"
           },
           "expectedOutput": "Other Direction"
         }
@@ -247,6 +283,10 @@
         {
           "ar": "استبدل `switch` بالكلمة الصحيحة في GDScript وهي `match`.",
           "en": "Replace `switch` with the correct GDScript keyword `match`."
+        },
+        {
+          "ar": "في «إصلاح خطأ الكلمة المفتاحية match»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing match Keyword Spelling Bug”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -254,6 +294,13 @@
           "description": {
             "ar": "التحقق من عمل الشيفرة بعد استخدام match",
             "en": "Verifying code operation after using match"
+          },
+          "expectedOutput": "Active"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ الكلمة المفتاحية match",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing match Keyword Spelling Bug"
           },
           "expectedOutput": "Active"
         }
@@ -278,6 +325,10 @@
         {
           "ar": "القيمة 2 مطابقة للفرع الأول (1, 2, 3)، لذا سيطبع Low.",
           "en": "Value 2 matches the first branch (1, 2, 3), so it prints Low."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج match مع عدة قيم» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict match Output with Multiple Values” before deciding the final output."
         }
       ],
       "testCases": [
@@ -309,6 +360,10 @@
         {
           "ar": "استخدم فروع match للقيم 1 و 2 و 3 و _.",
           "en": "Use match branches for 1, 2, 3, and _."
+        },
+        {
+          "ar": "بعد إكمال «مطابقة قيم عددية ثابتة بـ match»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Matching Fixed Integer Values with match”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -316,6 +371,13 @@
           "description": {
             "ar": "التحقق من طباعة Bronze بنجاح للرتبة 3",
             "en": "Verifying successful Bronze output for rank 3"
+          },
+          "expectedOutput": "Bronze"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: مطابقة قيم عددية ثابتة بـ match",
+            "en": "Repeat the scenario to confirm deterministic output: Matching Fixed Integer Values with match"
           },
           "expectedOutput": "Bronze"
         }
@@ -327,34 +389,78 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدي الوحدة 3 التراكمي: حاسبة أضرار المعركة (Combat Damage Engine)",
-        "en": "Unit 3 Capstone Challenge: Combat Damage Engine"
+        "ar": "تحدي نظام القتال والضربات الحرجة",
+        "en": "Combat and Critical Strike Simulator"
       },
       "prompt": {
-        "ar": "أنجز التحدي التراكمي للوحدة الثالثة: اكتب سكربتاً يحسب أضرار المعركة بالاعتماد على:\n- متغيرات `var armor = 20`, `var base_damage = 50`, `var is_critical = true`\n- استخدم بنية `match` أو الشروط لاحتساب الضرر النهائي (الضربة الحرجة تضاعف الضرر أساساً `base_damage * 2`، ثم يتم خصم الدرع `armor`). اطبع الناتج النهائي للضرار بالصيغة المطلوبة:\n`Final Damage: 80`",
-        "en": "Complete Unit 3 capstone: Write a script calculating combat damage using:\n- Variables `var armor = 20`, `var base_damage = 50`, `var is_critical = true`\n- Use `match` or conditions to calculate final damage (critical doubles `base_damage * 2`, then subtract `armor`). Print final damage matching:\n`Final Damage: 80`"
+        "ar": "اكتب دالة تحسب الضرر بعد طرح درع العدو، مع منع الضرر من أن يصبح سالبًا، ثم تضاعف الضرر المتبقي عند الضربة الحرجة. استخدم شروطًا واضحة واختبر الضربة العادية والحرجة وتجاوز الدرع للهجوم.",
+        "en": "Write a function that subtracts enemy armor from incoming damage without allowing negative damage, then doubles the remaining damage for a critical hit. Use clear branching and test a regular hit, a critical hit, and armor that exceeds the attack."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    var armor = 20\n    var base_damage = 50\n    var is_critical = true\n    # احسب واطبع الناتج هنا\n    ",
-      "solutionCode": "extends Node\n\nfunc _ready():\n    var armor = 20\n    var base_damage = 50\n    var is_critical = true\n    var mult = 2 if is_critical else 1\n    var damage = (base_damage * mult) - armor\n    print(\"Final Damage: \" + str(damage))",
+      "starterCode": "func resolve_damage(base_damage, armor, is_critical):\n    # Reduce damage by armor, clamp it at zero, and apply critical damage.\n    pass\n\nprint(resolve_damage(base_damage, armor, is_critical))",
+      "solutionCode": "func resolve_damage(base_damage, armor, is_critical):\n    var damage = max(0, base_damage - armor)\n    if is_critical:\n        damage *= 2\n    return damage\n\nprint(resolve_damage(base_damage, armor, is_critical))",
       "hints": [
         {
-          "ar": "احسب الضرر المضاعف بناءً على is_critical ثم اطرح armor ونسق الناتج بـ str().",
-          "en": "Calculate multiplied damage based on is_critical then subtract armor and format with str()."
+          "ar": "اطرح الدرع أولًا ثم استخدم حدًا أدنى يضمن ألا تقل النتيجة عن الصفر.",
+          "en": "Subtract armor first, then enforce a lower bound of zero."
         },
         {
-          "ar": "هذا التحدي يدمج الحساب والشروط البسيطة والمتعددة ومطابقة الأنماط بنجاح.",
-          "en": "This challenge successfully integrates arithmetic, simple/multiple conditions, and pattern matching."
+          "ar": "طبّق مضاعفة الضربة الحرجة بعد حساب الضرر المتبقي فقط.",
+          "en": "Apply the critical multiplier only after calculating the remaining damage."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "التحقق من صحة حساب أضرار المعركة وإخراج Final Damage: 80",
-            "en": "Verifying combat damage calculation accuracy and Final Damage: 80 output"
+            "ar": "تحقق من مضاعفة الضرر بعد طرح الدرع",
+            "en": "Check critical damage after armor reduction"
           },
-          "expectedOutput": "Final Damage: 80"
+          "setupCode": "var base_damage = 50\nvar armor = 20\nvar is_critical = true",
+          "expectedOutput": "60",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من عدم إنتاج ضرر سالب عند تجاوز الدرع",
+            "en": "Check that excess armor prevents negative damage"
+          },
+          "setupCode": "var base_damage = 20\nvar armor = 30\nvar is_critical = true",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من الضربة العادية دون مضاعفة",
+            "en": "Check regular damage without a critical hit"
+          },
+          "setupCode": "var base_damage = 35\nvar armor = 5\nvar is_critical = false",
+          "expectedOutput": "30",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `base_damage` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `base_damage` set to zero; verify the resulting output."
+          },
+          "setupCode": "var base_damage = 0\nvar armor = 1\nvar is_critical = false",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `base_damage` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `base_damage` and its companion inputs."
+          },
+          "setupCode": "var base_damage = 1\nvar armor = 3\nvar is_critical = false",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
-      ]
+      ],
+      "options": []
     }
   ]
 }

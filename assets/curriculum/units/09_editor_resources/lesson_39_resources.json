@@ -132,6 +132,26 @@
           },
           "setupCode": "var item_value = 19\nvar change = 4",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_value` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_value` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_value = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_value` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_value` and its companion inputs."
+          },
+          "setupCode": "var item_value = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -180,6 +200,26 @@
           },
           "setupCode": "var item_value = 19\nvar change = 4",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_value` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_value` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_value = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_value` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_value` and its companion inputs."
+          },
+          "setupCode": "var item_value = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -228,6 +268,26 @@
           },
           "setupCode": "var item_value = 19\nvar change = 4",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_value` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_value` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_value = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_value` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_value` and its companion inputs."
+          },
+          "setupCode": "var item_value = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -276,6 +336,26 @@
           },
           "setupCode": "var item_value = 19\nvar change = 4",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_value` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_value` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_value = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_value` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_value` and its companion inputs."
+          },
+          "setupCode": "var item_value = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -324,6 +404,26 @@
           },
           "setupCode": "var item_value = 19\nvar change = 4",
           "expectedOutput": "19\n4\n23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_value` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_value` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_value = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_value` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_value` and its companion inputs."
+          },
+          "setupCode": "var item_value = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -372,6 +472,26 @@
           },
           "setupCode": "var item_value = 17\nvar change = 3",
           "expectedOutput": "37"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_value` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_value` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_value = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_value` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_value` and its companion inputs."
+          },
+          "setupCode": "var item_value = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -420,6 +540,26 @@
           },
           "setupCode": "var item_value = 17\nvar change = 3",
           "expectedOutput": "37"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_value` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_value` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_value = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_value` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_value` and its companion inputs."
+          },
+          "setupCode": "var item_value = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -468,6 +608,26 @@
           },
           "setupCode": "var item_value = 17\nvar change = 3",
           "expectedOutput": "37"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `item_value` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `item_value` set to zero; verify the resulting output."
+          },
+          "setupCode": "var item_value = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `item_value` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `item_value` and its companion inputs."
+          },
+          "setupCode": "var item_value = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [

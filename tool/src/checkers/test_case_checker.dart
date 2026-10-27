@@ -3,8 +3,10 @@ import '../audit_models.dart';
 import '../config/validation_rules.dart';
 
 void checkTestCases(AuditContext context) {
+  var totalTestCases = 0;
   for (final record in context.lessons) {
     for (final exercise in record.lesson.exercises) {
+      totalTestCases += exercise.testCases.length;
       if (exercise.type != 'writeCode' && exercise.type != 'fixBug') {
         continue;
       }
@@ -35,5 +37,16 @@ void checkTestCases(AuditContext context) {
         }
       }
     }
+  }
+  if (context.units.length == 12 &&
+      context.lessons.length == 51 &&
+      totalTestCases < minimumTotalTestCases) {
+    context.report.add(
+      IssueSeverity.error,
+      'test-case-total',
+      'The curriculum has $totalTestCases test cases; at least '
+      '$minimumTotalTestCases are required.',
+      path: 'assets/curriculum',
+    );
   }
 }

@@ -139,6 +139,26 @@
           },
           "setupCode": "var saved_score = 127\nvar change = 4",
           "expectedOutput": "131"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `saved_score` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `saved_score` set to zero; verify the resulting output."
+          },
+          "setupCode": "var saved_score = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `saved_score` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `saved_score` and its companion inputs."
+          },
+          "setupCode": "var saved_score = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -187,6 +207,26 @@
           },
           "setupCode": "var saved_score = 127\nvar change = 4",
           "expectedOutput": "131"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `saved_score` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `saved_score` set to zero; verify the resulting output."
+          },
+          "setupCode": "var saved_score = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `saved_score` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `saved_score` and its companion inputs."
+          },
+          "setupCode": "var saved_score = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -235,6 +275,26 @@
           },
           "setupCode": "var saved_score = 127\nvar change = 4",
           "expectedOutput": "131"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `saved_score` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `saved_score` set to zero; verify the resulting output."
+          },
+          "setupCode": "var saved_score = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `saved_score` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `saved_score` and its companion inputs."
+          },
+          "setupCode": "var saved_score = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -283,6 +343,26 @@
           },
           "setupCode": "var saved_score = 127\nvar change = 4",
           "expectedOutput": "131"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `saved_score` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `saved_score` set to zero; verify the resulting output."
+          },
+          "setupCode": "var saved_score = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `saved_score` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `saved_score` and its companion inputs."
+          },
+          "setupCode": "var saved_score = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -331,6 +411,26 @@
           },
           "setupCode": "var saved_score = 127\nvar change = 4",
           "expectedOutput": "127\n4\n131"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `saved_score` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `saved_score` set to zero; verify the resulting output."
+          },
+          "setupCode": "var saved_score = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `saved_score` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `saved_score` and its companion inputs."
+          },
+          "setupCode": "var saved_score = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -379,6 +479,26 @@
           },
           "setupCode": "var saved_score = 125\nvar change = 3",
           "expectedOutput": "253"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `saved_score` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `saved_score` set to zero; verify the resulting output."
+          },
+          "setupCode": "var saved_score = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `saved_score` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `saved_score` and its companion inputs."
+          },
+          "setupCode": "var saved_score = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -427,6 +547,26 @@
           },
           "setupCode": "var saved_score = 125\nvar change = 3",
           "expectedOutput": "253"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `saved_score` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `saved_score` set to zero; verify the resulting output."
+          },
+          "setupCode": "var saved_score = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `saved_score` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `saved_score` and its companion inputs."
+          },
+          "setupCode": "var saved_score = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -442,52 +582,83 @@
       "order": 8
     },
     {
-      "id": "ex_lesson_40_saving_10",
+      "id": "ex_40_saving_10",
       "lessonId": "lesson_40_saving",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً باسم result لحساب ضعف saved_score مضافاً إليه change في saved data.",
-        "en": "Use a named result variable to calculate saved_score times two plus change for saved data."
+        "ar": "احسب قيمة محتويات حقيبة محفوظة باستخدام قاموس أسعار، مع تجاهل العناصر التي لا تملك سعرًا مسجلًا. اطبع عدد العناصر وقيمتها الكلية؛ اختبر حقيبة فارغة وعنصرًا غير معروف. يمثل القاموس بيانات المورد التي تحفظها اللعبة وتستعيدها.",
+        "en": "Calculate the value of a saved inventory using a price dictionary, ignoring items without a recorded price. Print the item count and total value; test an empty inventory and an unknown item. The dictionaries model resource data saved and restored by the game."
       },
-      "starterCode": "",
-      "solutionCode": "var result = saved_score * 2 + change\nprint(result)",
+      "starterCode": "func inventory_value(items, prices):\n    var total = 0\n    for item in items:\n        # Add only prices that exist in the dictionary.\n        pass\n    return total\n\nprint(\"Items: \" + str(items.size()) + \" | Value: \" + str(inventory_value(items, prices)))",
+      "solutionCode": "func inventory_value(items, prices):\n    var total = 0\n    for item in items:\n        total += prices.get(item, 0)\n    return total\n\nprint(\"Items: \" + str(items.size()) + \" | Value: \" + str(inventory_value(items, prices)))",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من جمع قيمة العناصر المحفوظة",
+            "en": "Check the total value of saved inventory items"
           },
-          "setupCode": "var saved_score = 120\nvar change = 15",
-          "expectedOutput": "255"
+          "setupCode": "var items = [\"Potion\", \"Key\", \"Potion\"]\nvar prices = {\"Potion\": 15, \"Key\": 5}",
+          "expectedOutput": "Items: 3 | Value: 35",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من حقيبة فارغة",
+            "en": "Check an empty inventory"
           },
-          "setupCode": "var saved_score = 0\nvar change = 15",
-          "expectedOutput": "15"
+          "setupCode": "var items = []\nvar prices = {\"Potion\": 15}",
+          "expectedOutput": "Items: 0 | Value: 0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من تجاهل عنصر غير موجود في قاموس الأسعار",
+            "en": "Check an item missing from the price dictionary"
           },
-          "setupCode": "var saved_score = 125\nvar change = 3",
-          "expectedOutput": "253"
+          "setupCode": "var items = [\"Relic\"]\nvar prices = {\"Potion\": 15}",
+          "expectedOutput": "Items: 1 | Value: 0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من قيمة عنصر واحد محفوظ",
+            "en": "Check the value of one saved item"
+          },
+          "setupCode": "var items = [\"Potion\"]\nvar prices = {\"Potion\": 15, \"Key\": 5}",
+          "expectedOutput": "Items: 1 | Value: 15",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من قيمة حقيبة تحتوي عناصر متعددة",
+            "en": "Check an inventory with multiple items"
+          },
+          "setupCode": "var items = [\"Key\", \"Potion\"]\nvar prices = {\"Potion\": 15, \"Key\": 5}",
+          "expectedOutput": "Items: 2 | Value: 20",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
         {
-          "ar": "عرّف result من المتغيرين ثم اطبعه.",
-          "en": "Assign the expression to result, then print it."
+          "ar": "استخدم قيمة افتراضية صفرية عند غياب اسم العنصر من قاموس الأسعار.",
+          "en": "Use a default price of zero when an item is missing from the price dictionary."
         },
         {
-          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
-          "en": "Do not hard-code the result; use the values supplied by each test."
+          "ar": "احسب القيمة داخل الحلقة واحتفظ بعدد العناصر مستقلاً عن العناصر المسعّرة.",
+          "en": "Accumulate value in the loop while keeping the item count independent of priced entries."
         }
       ],
-      "order": 9
+      "order": 9,
+      "title": {
+        "ar": "تحدي تخزين واسترجاع حقيبة اللاعب",
+        "en": "Inventory Resource and Save Pipeline"
+      },
+      "options": []
     }
   ]
 }

@@ -34,38 +34,36 @@
       "id": "ex_01_hello_01",
       "lessonId": "lesson_01_hello",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "متى يتم استدعاء دالة _ready() تلقائياً؟",
-        "en": "When is _ready() called automatically?"
+        "ar": "أعد ترتيب مثال المحرر وأول برنامج",
+        "en": "Reorder the The Editor and Your First Program example"
       },
       "prompt": {
-        "ar": "في محرك Godot، متى يُنفّذ محرك الألعاب دالة `_ready()` الخاصة بالعقدة؟",
-        "en": "In Godot, when does the engine execute a node's `_ready()` function?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إنشاء أول سكربت في محرر Godot، فهم دورة حياة دالة _ready()، واستخدام print() لعرض الرسائل في لوحة الإخراج.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Create your first script in the Godot editor, understand the _ready() lifecycle function, and use print() to display messages in the output panel."
       },
-      "options": [
-        {
-          "ar": "فوراَ عند دخول العقدة وشملها داخل شجرة المشهد النشطة",
-          "en": "Immediately when the node enters the active scene tree"
-        },
-        {
-          "ar": "عندما يضغط اللاعب على زر الخروج من اللعبة",
-          "en": "When the player clicks the exit game button"
-        },
-        {
-          "ar": "فقط عند تصدير اللعبة لنظام التشغيل النهائي",
-          "en": "Only when exporting the game to the final OS"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "تذكر أن `_ready()` تعني أن العقدة أصبحت جاهزة ودخلت شجرة المشهد.",
-          "en": "Remember that `_ready()` signifies the node is ready and entered the scene tree."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "الخيار الأول يصف بدقة دورة حياة الدالة عند تشغيل المشهد.",
-          "en": "The first option accurately describes the function's lifecycle when the scene runs."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    print(\"مرحباً بك في عالم تطوير الألعاب مع Godot!\")\n    print(2026)\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"مرحباً بك في عالم تطوير الألعاب مع Godot!\")\n    print(2026)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "مرحباً بك في عالم تطوير الألعاب مع Godot!\n2026",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -189,16 +187,16 @@
       "id": "ex_01_hello_05",
       "lessonId": "lesson_01_hello",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "كتابة أمر طباعة ترحيبي",
-        "en": "Writing a Greeting Print Statement"
+        "ar": "أكمل الفراغ: المحرر وأول برنامج",
+        "en": "Complete the blank: The Editor and Your First Program"
       },
       "prompt": {
-        "ar": "اكتب دالة `_ready()` تطبع بالضبط النص التالي عند بدء اللعبة:\n\n`Game Started`",
-        "en": "Write a `_ready()` function that prints exactly the following text when the game starts:\n\n`Game Started`"
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب دالة `_ready()` تطبع بالضبط النص التالي عند بدء اللعبة:\n\n`Game Started`",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a `_ready()` function that prints exactly the following text when the game starts:\n\n`Game Started`"
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    # اكتب أمر الطباعة هنا\n    pass",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ___(\"Game Started\")",
       "solutionCode": "extends Node\n\nfunc _ready():\n    print(\"Game Started\")",
       "hints": [
         {
@@ -215,6 +213,13 @@
           "description": {
             "ar": "التحقق من طباعة النص الترحيبي الصحيح",
             "en": "Verifying correct greeting text output"
+          },
+          "expectedOutput": "Game Started"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: كتابة أمر طباعة ترحيبي",
+            "en": "Repeat the scenario to confirm deterministic output: Writing a Greeting Print Statement"
           },
           "expectedOutput": "Game Started"
         }
@@ -252,6 +257,13 @@
             "en": "Verifying correct numeric output"
           },
           "expectedOutput": "1"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: طباعة قيمة رقمية وإصدار اللعبة",
+            "en": "Repeat the scenario to confirm deterministic output: Printing Number and Game Version"
+          },
+          "expectedOutput": "1"
         }
       ]
     },
@@ -285,6 +297,13 @@
           "description": {
             "ar": "التحقق من إصلاح الخطأ وإخراج النص بنجاح",
             "en": "Verifying error fix and successful text output"
+          },
+          "expectedOutput": "Ready"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تصحيح خطأ إملائي في دالة الطباعة",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Spelling Error in Print Function"
           },
           "expectedOutput": "Ready"
         }
@@ -344,6 +363,10 @@
         {
           "ar": "استخدم `print(\"Loading\")`.",
           "en": "Use `print(\"Loading\")`."
+        },
+        {
+          "ar": "بعد إكمال «طباعة رسالة جاهزية المحرك»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Printing Engine Readiness Message”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -351,6 +374,13 @@
           "description": {
             "ar": "التحقق من طباعة رسالة التحميل",
             "en": "Verifying loading message output"
+          },
+          "expectedOutput": "Loading"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: طباعة رسالة جاهزية المحرك",
+            "en": "Repeat the scenario to confirm deterministic output: Printing Engine Readiness Message"
           },
           "expectedOutput": "Loading"
         }
@@ -386,6 +416,13 @@
           "description": {
             "ar": "التحقق من طباعة الرسالتين بالترتيب الصحيح",
             "en": "Verifying both messages print in correct order"
+          },
+          "expectedOutput": "Initializing Game\nReady"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي ترحيب الوحدة الأول",
+            "en": "Repeat the scenario to confirm deterministic output: Unit 01 First Greeting Challenge"
           },
           "expectedOutput": "Initializing Game\nReady"
         }

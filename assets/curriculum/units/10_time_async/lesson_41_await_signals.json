@@ -139,6 +139,26 @@
           },
           "setupCode": "var ready_steps = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `ready_steps` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `ready_steps` set to zero; verify the resulting output."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `ready_steps` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `ready_steps` and its companion inputs."
+          },
+          "setupCode": "var ready_steps = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -187,6 +207,26 @@
           },
           "setupCode": "var ready_steps = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `ready_steps` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `ready_steps` set to zero; verify the resulting output."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `ready_steps` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `ready_steps` and its companion inputs."
+          },
+          "setupCode": "var ready_steps = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -235,6 +275,26 @@
           },
           "setupCode": "var ready_steps = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `ready_steps` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `ready_steps` set to zero; verify the resulting output."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `ready_steps` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `ready_steps` and its companion inputs."
+          },
+          "setupCode": "var ready_steps = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -283,6 +343,26 @@
           },
           "setupCode": "var ready_steps = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `ready_steps` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `ready_steps` set to zero; verify the resulting output."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `ready_steps` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `ready_steps` and its companion inputs."
+          },
+          "setupCode": "var ready_steps = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -331,6 +411,26 @@
           },
           "setupCode": "var ready_steps = 8\nvar change = 4",
           "expectedOutput": "8\n4\n12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `ready_steps` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `ready_steps` set to zero; verify the resulting output."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `ready_steps` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `ready_steps` and its companion inputs."
+          },
+          "setupCode": "var ready_steps = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -379,6 +479,26 @@
           },
           "setupCode": "var ready_steps = 6\nvar change = 3",
           "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `ready_steps` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `ready_steps` set to zero; verify the resulting output."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `ready_steps` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `ready_steps` and its companion inputs."
+          },
+          "setupCode": "var ready_steps = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -427,6 +547,26 @@
           },
           "setupCode": "var ready_steps = 6\nvar change = 3",
           "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `ready_steps` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `ready_steps` set to zero; verify the resulting output."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `ready_steps` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `ready_steps` and its companion inputs."
+          },
+          "setupCode": "var ready_steps = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -475,6 +615,26 @@
           },
           "setupCode": "var ready_steps = 6\nvar change = 3",
           "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `ready_steps` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `ready_steps` set to zero; verify the resulting output."
+          },
+          "setupCode": "var ready_steps = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `ready_steps` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `ready_steps` and its companion inputs."
+          },
+          "setupCode": "var ready_steps = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [

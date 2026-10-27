@@ -8,6 +8,15 @@ void checkDuplicates(AuditContext context) {
   for (final record in context.lessons) {
     final lesson = record.lesson;
     for (final exercise in lesson.exercises) {
+      if (exercise.hints.length < minimumExerciseHints) {
+        context.report.add(
+          IssueSeverity.warning,
+          'hint-count',
+          '"${exercise.id}" has ${exercise.hints.length} hint(s); at least '
+          '$minimumExerciseHints are required.',
+          path: context.pathFor(record.file),
+        );
+      }
       final prompts = {'ar': exercise.prompt.ar, 'en': exercise.prompt.en};
       for (final entry in prompts.entries) {
         final key = '${entry.key}:${_normalize(entry.value)}';

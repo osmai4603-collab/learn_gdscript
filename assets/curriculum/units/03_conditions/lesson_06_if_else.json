@@ -34,34 +34,36 @@
       "id": "ex_06_if_else_01",
       "lessonId": "lesson_06_if_else",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "الفارق بين علامة الإسناد والمقارنة",
-        "en": "Difference Between Assignment and Comparison"
+        "ar": "أعد ترتيب مثال الشروط البسيطة if / else",
+        "en": "Reorder the Simple if / else Conditions example"
       },
       "prompt": {
-        "ar": "أي من العبارات التالية تُمثل الاختبار الصحيح لمقارنة متغير `score` بالقيمة 10 داخل عبارة شرطية `if`؟",
-        "en": "Which of the following represents the correct test for comparing variable `score` to 10 inside an `if` condition?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان استخدام البنية الشرطية `if / else` لاتخاذ القرارات، مع فهم الفارق الجوهري والخطير بين إعلام الإسناد `=` ومقارنة المساواة `==`.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master using `if / else` conditional branches for decision-making, understanding the critical difference between assignment `=` and equality comparison `==`."
       },
-      "options": [
-        {
-          "ar": "استخدام علامة المساواة المزدوجة `if score == 10:`",
-          "en": "Using double equality `if score == 10:`"
-        },
-        {
-          "ar": "استخدام علامة الإسناد المفردة `if score = 10:`",
-          "en": "Using single assignment `if score = 10:`"
-        },
-        {
-          "ar": "استخدام كلمة equals `if score equals 10:`",
-          "en": "Using word equals `if score equals 10:`"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "المقارنة تتطلب `==` بينما الإسناد يستخدم `=ابتدائية`.",
-          "en": "Comparison requires `==` while assignment uses `=`."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var player_health = 0\n    if player_health > 0:\n        print(\"Hero is alive\")\n    else:\n        print(\"Game Over\")\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var player_health = 0\n    if player_health > 0:\n        print(\"Hero is alive\")\n    else:\n        print(\"Game Over\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Game Over",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -97,6 +99,10 @@
         {
           "ar": "تعتمد لغة GDScript على المسافات لتحديد حدود كتل الأوامر التنفيذية.",
           "en": "GDScript relies on indentation to determine execution block boundaries."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «أهمية المسافات البادئة Indentation» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Importance of Indentation” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -132,6 +138,10 @@
         {
           "ar": "فرع else يمثل الحالة الافتراضية البديلة عند فشل شرط if.",
           "en": "The else branch acts as the fallback when the if condition fails."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «متى يتم تنفيذ كتلة else؟» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “When Does the else Block Execute?” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -162,6 +172,10 @@
         {
           "ar": "تأكد من وضع النقطتين الرأسيتين `:` بعد الشرط ومراعاة المسافة البادئة.",
           "en": "Ensure placing colon `:` after condition and correct indentation."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: كتابة شرط فحص فتح الأبواب» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Writing Door Unlock Condition” activity and record its effect before continuing."
         }
       ]
     },
@@ -169,21 +183,25 @@
       "id": "ex_06_if_else_05",
       "lessonId": "lesson_06_if_else",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "كتابة شرط فحص النجاح",
-        "en": "Writing Success Check Condition"
+        "ar": "أكمل الفراغ: الشروط البسيطة if / else",
+        "en": "Complete the blank: Simple if / else Conditions"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً بفحص متغير `var points = 60`؛ إذا كانت أكبر من أو تساوي 50، اطبع `Pass` وإلا اطبع `Fail` داخل دالة `_ready()`.",
-        "en": "Write a script checking `var points = 60`; if greater than or equal to 50, print `Pass` else print `Fail` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً بفحص متغير `var points = 60`؛ إذا كانت أكبر من أو تساوي 50، اطبع `Pass` وإلا اطبع `Fail` داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script checking `var points = 60`; if greater than or equal to 50, print `Pass` else print `Fail` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    var points = 60\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var points = 60\n    if points >= 50:\n        ___(\"Pass\")\n    else:\n        print(\"Fail\")",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var points = 60\n    if points >= 50:\n        print(\"Pass\")\n    else:\n        print(\"Fail\")",
       "hints": [
         {
           "ar": "استخدم `if points >= 50:` ثم اطبع Pass وتحت else اطبع Fail.",
           "en": "Use `if points >= 50:` then print Pass and under else print Fail."
+        },
+        {
+          "ar": "بعد إكمال «كتابة شرط فحص النجاح»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Writing Success Check Condition”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -191,6 +209,13 @@
           "description": {
             "ar": "التحقق من طباعة Pass بنجاح لاجتياز النقاط الحدية",
             "en": "Verifying successful Pass output for passing score boundary"
+          },
+          "expectedOutput": "Pass"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: كتابة شرط فحص النجاح",
+            "en": "Repeat the scenario to confirm deterministic output: Writing Success Check Condition"
           },
           "expectedOutput": "Pass"
         }
@@ -215,6 +240,10 @@
         {
           "ar": "عندما تكون health تساوي 0 سينفذ فرع else ويطبع Dead.",
           "en": "When health is 0 the else branch executes and prints Dead."
+        },
+        {
+          "ar": "بعد إكمال «اختبار حالة الفشل في الشرط»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Testing Failure State in Condition”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -222,6 +251,13 @@
           "description": {
             "ar": "التحقق من طباعة Dead عندما تكون الطاقة صفرًا",
             "en": "Verifying Dead output when health is zero"
+          },
+          "expectedOutput": "Dead"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: اختبار حالة الفشل في الشرط",
+            "en": "Repeat the scenario to confirm deterministic output: Testing Failure State in Condition"
           },
           "expectedOutput": "Dead"
         }
@@ -246,6 +282,10 @@
         {
           "ar": "استبدل `=` المفردة بـ `==` المزدوجة للمقارنة.",
           "en": "Replace single `=` with double `==` for comparison."
+        },
+        {
+          "ar": "في «إصلاح خطأ استخدام علامة الإسناد في الشرط»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Assignment Operator Bug in Condition”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -253,6 +293,13 @@
           "description": {
             "ar": "التحقق من عمل الشرط بشكل صحيح بعد استخدام ==",
             "en": "Verifying condition operation correctly after using =="
+          },
+          "expectedOutput": "Equal"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ استخدام علامة الإسناد في الشرط",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Assignment Operator Bug in Condition"
           },
           "expectedOutput": "Equal"
         }
@@ -277,6 +324,10 @@
         {
           "ar": "بما أن 10 أكبر من أو تساوي 10، فسيتحقق شرط if.",
           "en": "Since 10 is greater than or equal to 10, the if condition passes."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج فحص الشرط البسيط» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Simple Condition Check Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -308,6 +359,10 @@
         {
           "ar": "استخدم `print(\"Open\" if open else \"Closed\")`.",
           "en": "Use `print(\"Open\" if open else \"Closed\")`."
+        },
+        {
+          "ar": "بعد إكمال «استخدام التعبير الشرطي المختصر»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Using Ternary Shorthand Condition”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -315,6 +370,13 @@
           "description": {
             "ar": "التحقق من صحة ناتج التعبير المختصر (Open)",
             "en": "Verifying shorthand expression result correctness (Open)"
+          },
+          "expectedOutput": "Open"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: استخدام التعبير الشرطي المختصر",
+            "en": "Repeat the scenario to confirm deterministic output: Using Ternary Shorthand Condition"
           },
           "expectedOutput": "Open"
         }
@@ -339,6 +401,10 @@
         {
           "ar": "استخدم شرط `player_score > 100` مع الفروع المناسبة.",
           "en": "Use condition `player_score > 100` with appropriate branches."
+        },
+        {
+          "ar": "بعد إكمال «تحدي الشروط البسيطة الشامل»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Comprehensive Simple Conditions Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -346,6 +412,13 @@
           "description": {
             "ar": "التحقق من مطابقة طباعة Bonus Unlocked بنجاح",
             "en": "Verifying successful Bonus Unlocked output match"
+          },
+          "expectedOutput": "Bonus Unlocked"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي الشروط البسيطة الشامل",
+            "en": "Repeat the scenario to confirm deterministic output: Comprehensive Simple Conditions Challenge"
           },
           "expectedOutput": "Bonus Unlocked"
         }

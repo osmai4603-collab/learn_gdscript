@@ -34,38 +34,36 @@
       "id": "ex_16_casting_01",
       "lessonId": "lesson_16_casting",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "نتيجة تحويل العدد العشري إلى صحيح int(7.9)",
-        "en": "Result of Casting Float to Int int(7.9)"
+        "ar": "أعد ترتيب مثال تحويل الأنواع وفحصها",
+        "en": "Reorder the Type Casting and Inspection example"
       },
       "prompt": {
-        "ar": "ما الذي ينتج عن تنفيذ عملية التحويل التالية في GDScript: `int(7.9)`؟",
-        "en": "What does casting `int(7.9)` yield in GDScript?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان التحويل الصريح بين أنواع البيانات باستخدام `int()`, `float()`, `str()` وفهم مخاطر اقتطاع `int(float)` وتدقيق نوع البيانات أثناء التشغيل.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master explicit type conversion using `int()`, `float()`, `str()` and understand truncation risks of `int(float)` and runtime type inspection."
       },
-      "options": [
-        {
-          "ar": "العدد الصحيح `7` (يتم اقتطاع الجزء العشري دون تقريب)",
-          "en": "The integer `7` (fractional part is truncated without rounding)"
-        },
-        {
-          "ar": "العدد `8` (تقريب إلى القريب للأعلى)",
-          "en": "The number `8` (rounded up)"
-        },
-        {
-          "ar": "خطأ صياغة يوقف اللعبة",
-          "en": "A syntax error stopping the game"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "دالة int() تقتطع الفاصلة العشرية بالكامل ولا تقرب الرقم.",
-          "en": "The int() function entirely truncates the decimal point without rounding."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "الخيار الأول يعبر عن قاعدة اقتطاع الكسور في int().",
-          "en": "The first option expresses the int() truncation rule."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var text_score = \"45\"\n    var final_score = int(text_score) + 5\n    print(final_score)\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var text_score = \"45\"\n    var final_score = int(text_score) + 5\n    print(final_score)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "50",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -140,6 +138,10 @@
         {
           "ar": "استخدم دالة `int()` لتتحول القيمة النصية الرقمية إلى عدد صحيح.",
           "en": "Use the `int()` function to convert numeric string values to integers."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «كيفية تحويل نص رقمي إلى عدد صحيح» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “How to Convert Numeric String to Integer” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -170,6 +172,10 @@
         {
           "ar": "التحويل الصريح يمنع أخطاء تداخل الأنواع.",
           "en": "Explicit casting prevents type mismatch errors."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: تحويل النص الرقمي وجمعه» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Casting Numeric String and Adding” activity and record its effect before continuing."
         }
       ]
     },
@@ -177,21 +183,25 @@
       "id": "ex_16_casting_05",
       "lessonId": "lesson_16_casting",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "تحويل نص إلى عدد وإجراء عملية حسابية",
-        "en": "Casting String to Number and Calculating"
+        "ar": "أكمل الفراغ: تحويل الأنواع وفحصها",
+        "en": "Complete the blank: Type Casting and Inspection"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يحول النص `\"50\"` إلى عدد صحيح ويضيف إليه `5` ثم يطبع الناتج داخل دالة `_ready()`.",
-        "en": "Write a script converting string `\"50\"` to integer, adding `5`, and printing result inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يحول النص `\"50\"` إلى عدد صحيح ويضيف إليه `5` ثم يطبع الناتج داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script converting string `\"50\"` to integer, adding `5`, and printing result inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var val = int(\"50\") + 5\n    ___(val)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var val = int(\"50\") + 5\n    print(val)",
       "hints": [
         {
           "ar": "استخدم `int(\"50\") + 5` واطبع الناتج.",
           "en": "Use `int(\"50\") + 5` and print result."
+        },
+        {
+          "ar": "بعد إكمال «تحويل نص إلى عدد وإجراء عملية حسابية»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Casting String to Number and Calculating”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -199,6 +209,13 @@
           "description": {
             "ar": "التحقق من صحة ناتج التحويل والجمع (55)",
             "en": "Verifying correct cast and addition result (55)"
+          },
+          "expectedOutput": "55"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحويل نص إلى عدد وإجراء عملية حسابية",
+            "en": "Repeat the scenario to confirm deterministic output: Casting String to Number and Calculating"
           },
           "expectedOutput": "55"
         }
@@ -223,6 +240,10 @@
         {
           "ar": "استخدم `str(500)` ثم اطبع المتغير.",
           "en": "Use `str(500)` then print the variable."
+        },
+        {
+          "ar": "بعد إكمال «تحويل عدد إلى نص وعرضه»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Casting Number to String and Displaying”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -230,6 +251,13 @@
           "description": {
             "ar": "التحقق من طباعة النص الناتج من التحويل",
             "en": "Verifying text output resulting from cast"
+          },
+          "expectedOutput": "500"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحويل عدد إلى نص وعرضه",
+            "en": "Repeat the scenario to confirm deterministic output: Casting Number to String and Displaying"
           },
           "expectedOutput": "500"
         }
@@ -254,6 +282,10 @@
         {
           "ar": "دالة التحويل لعدد صحيح اسمها `int` وليست `integer`.",
           "en": "The integer cast function is named `int`, not `integer`."
+        },
+        {
+          "ar": "في «إصلاح خطأ استدعاء دالة التحويل»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Cast Function Call Error”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -261,6 +293,13 @@
           "description": {
             "ar": "التحقق من عمل الشيفرة بعد تصحيح اسم دالة int",
             "en": "Verifying code operation after correcting int function name"
+          },
+          "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ استدعاء دالة التحويل",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Cast Function Call Error"
           },
           "expectedOutput": "15"
         }
@@ -285,6 +324,10 @@
         {
           "ar": "تذكر أن التحويل بـ int() يقتطع الكسر كلياً.",
           "en": "Remember casting with int() truncates the fraction entirely."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج تحويل عشري إلى صحيح» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Float to Int Cast Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -316,6 +359,10 @@
         {
           "ar": "استخدم `float(\"4.25\")` ثم اطبع الناتج.",
           "en": "Use `float(\"4.25\")` then print result."
+        },
+        {
+          "ar": "بعد إكمال «تحويل نص عشري إلى float»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Casting Decimal String to float”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -323,6 +370,13 @@
           "description": {
             "ar": "التحقق من طباعة العدد العشري بدقة",
             "en": "Verifying decimal float output accurately"
+          },
+          "expectedOutput": "4.25"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحويل نص عشري إلى float",
+            "en": "Repeat the scenario to confirm deterministic output: Casting Decimal String to float"
           },
           "expectedOutput": "4.25"
         }
@@ -347,6 +401,10 @@
         {
           "ar": "استخدم `str(100) + \" Points\"`.",
           "en": "Use `str(100) + \" Points\"`."
+        },
+        {
+          "ar": "بعد إكمال «تحدي تحويل الأنواع ودمجها»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Type Casting and Combination Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -354,6 +412,13 @@
           "description": {
             "ar": "التحقق من مطاعة النتيجة المدمجة للرقم والنص",
             "en": "Verifying concatenated number and text output match"
+          },
+          "expectedOutput": "100 Points"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي تحويل الأنواع ودمجها",
+            "en": "Repeat the scenario to confirm deterministic output: Type Casting and Combination Challenge"
           },
           "expectedOutput": "100 Points"
         }

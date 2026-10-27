@@ -34,38 +34,36 @@
       "id": "ex_17_strings_01",
       "lessonId": "lesson_17_strings",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "أفضل طريقة لتنسيق الرسائل المعقدة ودعم الترجمة",
-        "en": "Best Way to Format Complex Messages and Localization"
+        "ar": "أعد ترتيب مثال النصوص وتنسيقها المتقدم",
+        "en": "Reorder the Strings and Advanced Formatting example"
       },
       "prompt": {
-        "ar": "أي من الأساليب التالية يعتبر الأفضل هندسياً لتنسيق نصوص اللعبة وتسهيل ترجمتها لاحقاً لعدة لغات؟",
-        "en": "Which approach is considered architecturally best for game text formatting and localization?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان دمج النصوص، استخدام دالة `str()` للتنسيق، وتطبيق تنسيق النصوص المتقدم عبر `%s` وطريقة `String.format()` لدعم تعدد اللغات.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master string concatenation, `str()` formatting, and advanced formatting using `%s` and `String.format()` for localization support."
       },
-      "options": [
-        {
-          "ar": "استخدام طريقة `String.format()` مع عناصر نائبة مسماة وقاموس بيانات",
-          "en": "Using `String.format()` with named placeholders and a data dictionary"
-        },
-        {
-          "ar": "كتابة نصوص ثابتة لكل لغة بدون أي متغيرات",
-          "en": "Writing hardcoded static text for every language without variables"
-        },
-        {
-          "ar": "تجنب طباعة أي نصوص في اللعبة نهائياً",
-          "en": "Avoiding printing any text in the game entirely"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "طريقة String.format() مع مفاتيح مسمّاة تدعم الترجمة وتمنع أخطاء الترتيب.",
-          "en": "String.format() with named keys supports localization and prevents order bugs."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "الخيار الأول يعبر عن الممارسة الاحترافية.",
-          "en": "The first option expresses professional practice."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var player_name = \"Alex\"\n    var score = 150\n    var msg = \"Player {name} scored {points} pts\".format({\"name\": player_name, \"points\": score})\n    print(msg)\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var player_name = \"Alex\"\n    var score = 150\n    var msg = \"Player {name} scored {points} pts\".format({\"name\": player_name, \"points\": score})\n    print(msg)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Player Alex scored 150 pts",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -101,6 +99,10 @@
         {
           "ar": "استخدام `str()` ضروري عند دمج الأرقام بالنصوص بـ `+`.",
           "en": "Using `str()` is required when combining numbers with text using `+`."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «كيفية دمج عدد مع نص بشكل آمن» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “How to Safely Combine Number with Text” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -136,6 +138,10 @@
         {
           "ar": "النصوص في الذاكرة ثابتة، وكل ربط بـ + ينشئ نصاً جديداً في الذاكرة.",
           "en": "Strings in memory are immutable, and every + join creates a new string in memory."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «مخاطر ربط النصوص المتكرر بـ + داخل الحلقات» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Risks of Repetitive String Joining with + in Loops” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -166,6 +172,10 @@
         {
           "ar": "تأكد من تحويل النقاط إلى نص بـ `str(p)` قبل دمجها.",
           "en": "Ensure converting points to string with `str(p)` before combining."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: بناء رسالة لاعب منسقة» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Building a Formatted Player Message” activity and record its effect before continuing."
         }
       ]
     },
@@ -173,21 +183,25 @@
       "id": "ex_17_strings_05",
       "lessonId": "lesson_17_strings",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "دمج النص والرقم للوحة النتائج",
-        "en": "Combining Text and Number for Scoreboard"
+        "ar": "أكمل الفراغ: النصوص وتنسيقها المتقدم",
+        "en": "Complete the blank: Strings and Advanced Formatting"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يعرّف `var score = 100` ويطبع النص `Score: 100` باستخدام `str()` داخل دالة `_ready()`.",
-        "en": "Write a script defining `var score = 100` and prints `Score: 100` using `str()` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يعرّف `var score = 100` ويطبع النص `Score: 100` باستخدام `str()` داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script defining `var score = 100` and prints `Score: 100` using `str()` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var score = 100\n    ___(\"Score: \" + str(score))",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var score = 100\n    print(\"Score: \" + str(score))",
       "hints": [
         {
           "ar": "استخدم `print(\"Score: \" + str(score))`.",
           "en": "Use `print(\"Score: \" + str(score))`."
+        },
+        {
+          "ar": "بعد إكمال «دمج النص والرقم للوحة النتائج»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Combining Text and Number for Scoreboard”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -195,6 +209,13 @@
           "description": {
             "ar": "التحقق من طباعة النتيجة النصية مع الرقم بدقة",
             "en": "Verifying text output with number accurately"
+          },
+          "expectedOutput": "Score: 100"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: دمج النص والرقم للوحة النتائج",
+            "en": "Repeat the scenario to confirm deterministic output: Combining Text and Number for Scoreboard"
           },
           "expectedOutput": "Score: 100"
         }
@@ -219,6 +240,10 @@
         {
           "ar": "استخدم العبارة مع `.format({\"item\": \"Sword\"})`.",
           "en": "Use the string with `.format({\"item\": \"Sword\"})`."
+        },
+        {
+          "ar": "بعد إكمال «استخدام التنسيق المتقدم String.format()»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Using Advanced String.format()”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -226,6 +251,13 @@
           "description": {
             "ar": "التحقق من صحة ناتج التنسيق المتقدم بالقاموس",
             "en": "Verifying advanced dictionary formatting output accuracy"
+          },
+          "expectedOutput": "Item: Sword"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: استخدام التنسيق المتقدم String.format()",
+            "en": "Repeat the scenario to confirm deterministic output: Using Advanced String.format()"
           },
           "expectedOutput": "Item: Sword"
         }
@@ -250,6 +282,10 @@
         {
           "ar": "أضف `str(lvl)` لتتحول الأرقام إلى نصوص صالحة للدمج.",
           "en": "Add `str(lvl)` so numbers convert to valid strings for joining."
+        },
+        {
+          "ar": "في «إصلاح خطأ عدم تحويل الرقم لـ str()»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Missing str() Number Conversion Bug”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -257,6 +293,13 @@
           "description": {
             "ar": "التحقق من عمل الشيفرة بعد استخدام str() بنجاح",
             "en": "Verifying code operation after successful str() usage"
+          },
+          "expectedOutput": "Level: 5"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ عدم تحويل الرقم لـ str()",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Missing str() Number Conversion Bug"
           },
           "expectedOutput": "Level: 5"
         }
@@ -281,6 +324,10 @@
         {
           "ar": "يتم تعويض `{amount}` بالقيمة 500 تلقائياً.",
           "en": "{amount} is replaced by value 500 automatically."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج تنسيق النصوص المتقدم» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Advanced String Formatting Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -312,6 +359,10 @@
         {
           "ar": "استخدم `print(\"Game\" + \" Over\" + \"!\")`.",
           "en": "Use `print(\"Game\" + \" Over\" + \"!\")`."
+        },
+        {
+          "ar": "بعد إكمال «دمج عدة نصوص ثابتة»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Joining Multiple Static Strings”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -319,6 +370,13 @@
           "description": {
             "ar": "التحقق من دمج النصوص الثلاثة بدقة",
             "en": "Verifying accurate joining of all three strings"
+          },
+          "expectedOutput": "Game Over!"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: دمج عدة نصوص ثابتة",
+            "en": "Repeat the scenario to confirm deterministic output: Joining Multiple Static Strings"
           },
           "expectedOutput": "Game Over!"
         }
@@ -343,6 +401,10 @@
         {
           "ar": "استخدم مفاتيح `p` و `h` في القاموس داخل دالة `.format()`.",
           "en": "Use keys `p` and `h` in dictionary inside `.format()`."
+        },
+        {
+          "ar": "بعد إكمال «تحدي النصوص والتنسيق المتقدم الشامل»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Comprehensive Strings and Advanced Formatting Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -350,6 +412,13 @@
           "description": {
             "ar": "التحقق من مطابقة تقرير اللاعب المنسق بالكامل",
             "en": "Verifying fully formatted player report match"
+          },
+          "expectedOutput": "Player: Hero | Health: 100"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي النصوص والتنسيق المتقدم الشامل",
+            "en": "Repeat the scenario to confirm deterministic output: Comprehensive Strings and Advanced Formatting Challenge"
           },
           "expectedOutput": "Player: Hero | Health: 100"
         }

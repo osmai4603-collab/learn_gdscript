@@ -34,34 +34,36 @@
       "id": "ex_09_for_01",
       "lessonId": "lesson_09_for",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "ما الذي تنتجه دالة range(4)؟",
-        "en": "What Does range(4) Produce?"
+        "ar": "أعد ترتيب مثال حلقة for ونطاقات range",
+        "en": "Reorder the The for Loop and range example"
       },
       "prompt": {
-        "ar": "عند تنفيذ التعبير `range(4)` في حلقة `for`، ما هي الأعداد الصحيحة التي يتم توليدها ضمنياً؟",
-        "en": "When executing `range(4)` in a `for` loop, what integers are implicitly generated?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان تكرار تنفيذ الأوامر لعدد محدد من المرات باستخدام حلقة `for` ودالة النطاق `range()`.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master repeating statement execution for a fixed number of times using the `for` loop and `range()` function."
       },
-      "options": [
-        {
-          "ar": "الأعداد `0, 1, 2, 3` (تبدأ من صفر وتتوقف قبل 4)",
-        "en": "The numbers `0, 1, 2, 3` (starts at zero and stops before 4)"
-        },
-        {
-          "ar": "الأعداد `1, 2, 3, 4`",
-          "en": "The numbers `1, 2, 3, 4`"
-        },
-        {
-          "ar": "الأعداد من 0 إلى 4 شاملة الرقم 4",
-          "en": "Numbers from 0 to 4 inclusive"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "نطاق range يبدأ دائماً من 0 ولا يشمل الرقم الأخير.",
-          "en": "Range always starts at 0 and excludes the stop boundary."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    for i in range(3):\n        print(\"Wave: \" + str(i))\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(3):\n        print(\"Wave: \" + str(i))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Wave: 0\nWave: 1\nWave: 2",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -97,6 +99,10 @@
         {
           "ar": "حلقة for مخصصة للتكرار المحدود ومعالجة العناصر.",
           "en": "The for loop is dedicated to bounded iteration and element processing."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «متى نستخدم حلقة for بالتحديد؟» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “When Specifically to Use for Loop?” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -132,6 +138,10 @@
         {
           "ar": "الوسيط الثالث هو مقدار الخطوة (Step).",
           "en": "The third argument is the step amount."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «دور الوسيط الثالث في range(start, end, step)» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Role of Third Argument in range” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -162,6 +172,10 @@
         {
           "ar": "تأكد من مراعاة المسافة البادئة تحت حلقة for.",
           "en": "Ensure proper indentation under the for loop."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: طباعة عداد التصاعدي بـ for» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Printing Ascending Counter with for” activity and record its effect before continuing."
         }
       ]
     },
@@ -169,21 +183,25 @@
       "id": "ex_09_for_05",
       "lessonId": "lesson_09_for",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "طباعة أرقام النطاق البسيط",
-        "en": "Printing Simple Range Numbers"
+        "ar": "أكمل الفراغ: حلقة for ونطاقات range",
+        "en": "Complete the blank: The for Loop and range"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يستخدم حلقة `for` مع `range(3)` لطباعة الأرقام من 0 إلى 2 تباعاً في أسطر منفصلة داخل دالة `_ready()`.",
-        "en": "Write a script using a `for` loop with `range(3)` to print numbers 0 through 2 consecutively on separate lines inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يستخدم حلقة `for` مع `range(3)` لطباعة الأرقام من 0 إلى 2 تباعاً في أسطر منفصلة داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script using a `for` loop with `range(3)` to print numbers 0 through 2 consecutively on separate lines inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    for i in range(3):\n        ___(i)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    for i in range(3):\n        print(i)",
       "hints": [
         {
           "ar": "استخدم `for i in range(3): print(i)` مع مسافة بادئة صحيحة.",
           "en": "Use `for i in range(3): print(i)` with proper indentation."
+        },
+        {
+          "ar": "بعد إكمال «طباعة أرقام النطاق البسيط»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Printing Simple Range Numbers”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -191,6 +209,13 @@
           "description": {
             "ar": "التحقق من طباعة الأرقام 0 ثم 1 ثم 2 تباعاً",
             "en": "Verifying numbers 0 then 1 then 2 print consecutively"
+          },
+          "expectedOutput": "0\n1\n2"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: طباعة أرقام النطاق البسيط",
+            "en": "Repeat the scenario to confirm deterministic output: Printing Simple Range Numbers"
           },
           "expectedOutput": "0\n1\n2"
         }
@@ -215,6 +240,10 @@
         {
           "ar": "استخدم `for i in range(0, 5, 2): print(i)` لطباعة 0 و 2 و 4.",
           "en": "Use `for i in range(0, 5, 2): print(i)` to print 0, 2, and 4."
+        },
+        {
+          "ar": "بعد إكمال «التكرار بخطوات مخصصة بـ range»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Iterating with Custom Step in range”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -222,6 +251,13 @@
           "description": {
             "ar": "التحقق من طباعة الأعداد 0 و 2 و 4 بنجاح",
             "en": "Verifying numbers 0, 2, and 4 print successfully"
+          },
+          "expectedOutput": "0\n2\n4"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: التكرار بخطوات مخصصة بـ range",
+            "en": "Repeat the scenario to confirm deterministic output: Iterating with Custom Step in range"
           },
           "expectedOutput": "0\n2\n4"
         }
@@ -246,6 +282,10 @@
         {
           "ar": "أضف مسافة بادئة (Tab أو 4 مسافات) قبل أمر print.",
           "en": "Add indentation (Tab or 4 spaces) before print statement."
+        },
+        {
+          "ar": "في «إصلاح خطأ المسافة البادئة في حلقة for»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Indentation Bug in for Loop”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -253,6 +293,13 @@
           "description": {
             "ar": "التحقق من عمل الحلقة بعد ضبط المسافة البادئة",
             "en": "Verifying loop operation after fixing indentation"
+          },
+          "expectedOutput": "0\n1"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ المسافة البادئة في حلقة for",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Indentation Bug in for Loop"
           },
           "expectedOutput": "0\n1"
         }
@@ -277,6 +324,10 @@
         {
           "ar": "يتم الدوران على كل عنصر في المصفوفة وطباعته في سطر مستقل.",
           "en": "Iterates over each item in array printing on separate lines."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج التكرار المباشر على العناصر» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Direct Element Iteration Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -308,6 +359,10 @@
         {
           "ar": "استخدم متغير sum وجمع عناصر range(1, 4) بداخله.",
           "en": "Use sum variable and add range(1, 4) elements inside."
+        },
+        {
+          "ar": "بعد إكمال «حساب المجموع التراكمي بـ for»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Calculating Cumulative Sum with for”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -315,6 +370,13 @@
           "description": {
             "ar": "التحقق من صحة المجموع الإجمالي التراكمي (6)",
             "en": "Verifying cumulative total sum accuracy (6)"
+          },
+          "expectedOutput": "6"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: حساب المجموع التراكمي بـ for",
+            "en": "Repeat the scenario to confirm deterministic output: Calculating Cumulative Sum with for"
           },
           "expectedOutput": "6"
         }
@@ -339,6 +401,10 @@
         {
           "ar": "استخدم `range(3, 0, -1)` للعد التنازلي ثم أمر طباعة منفصل لـ Go!.",
           "en": "Use `range(3, 0, -1)` for countdown then separate print for Go!."
+        },
+        {
+          "ar": "بعد إكمال «تحدي حلقة for الشامل»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Comprehensive for Loop Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -346,6 +412,13 @@
           "description": {
             "ar": "التحقق من مطابقة العد التنازلي مع رسالة الانطلاق",
             "en": "Verifying countdown match with start message"
+          },
+          "expectedOutput": "3\n2\n1\nGo!"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي حلقة for الشامل",
+            "en": "Repeat the scenario to confirm deterministic output: Comprehensive for Loop Challenge"
           },
           "expectedOutput": "3\n2\n1\nGo!"
         }

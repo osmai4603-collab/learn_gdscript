@@ -139,6 +139,26 @@
           },
           "setupCode": "var warning_count = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `warning_count` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `warning_count` set to zero; verify the resulting output."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `warning_count` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `warning_count` and its companion inputs."
+          },
+          "setupCode": "var warning_count = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -187,6 +207,26 @@
           },
           "setupCode": "var warning_count = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `warning_count` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `warning_count` set to zero; verify the resulting output."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `warning_count` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `warning_count` and its companion inputs."
+          },
+          "setupCode": "var warning_count = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -235,6 +275,26 @@
           },
           "setupCode": "var warning_count = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `warning_count` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `warning_count` set to zero; verify the resulting output."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `warning_count` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `warning_count` and its companion inputs."
+          },
+          "setupCode": "var warning_count = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -283,6 +343,26 @@
           },
           "setupCode": "var warning_count = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `warning_count` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `warning_count` set to zero; verify the resulting output."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `warning_count` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `warning_count` and its companion inputs."
+          },
+          "setupCode": "var warning_count = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -331,6 +411,26 @@
           },
           "setupCode": "var warning_count = 9\nvar change = 4",
           "expectedOutput": "9\n4\n13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `warning_count` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `warning_count` set to zero; verify the resulting output."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `warning_count` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `warning_count` and its companion inputs."
+          },
+          "setupCode": "var warning_count = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -379,6 +479,26 @@
           },
           "setupCode": "var warning_count = 7\nvar change = 3",
           "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `warning_count` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `warning_count` set to zero; verify the resulting output."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `warning_count` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `warning_count` and its companion inputs."
+          },
+          "setupCode": "var warning_count = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -427,6 +547,26 @@
           },
           "setupCode": "var warning_count = 7\nvar change = 3",
           "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `warning_count` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `warning_count` set to zero; verify the resulting output."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `warning_count` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `warning_count` and its companion inputs."
+          },
+          "setupCode": "var warning_count = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -475,6 +615,26 @@
           },
           "setupCode": "var warning_count = 7\nvar change = 3",
           "expectedOutput": "17"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `warning_count` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `warning_count` set to zero; verify the resulting output."
+          },
+          "setupCode": "var warning_count = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `warning_count` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `warning_count` and its companion inputs."
+          },
+          "setupCode": "var warning_count = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [

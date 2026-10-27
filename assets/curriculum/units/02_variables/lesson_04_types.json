@@ -34,38 +34,36 @@
       "id": "ex_04_types_01",
       "lessonId": "lesson_04_types",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "خطر قسمة الأعداد الصحيحة int / int",
-        "en": "Danger of Integer Division int / int"
+        "ar": "أعد ترتيب مثال أنواع البيانات وقسمة الأعداد",
+        "en": "Reorder the Data Types and Integer Division example"
       },
       "prompt": {
-        "ar": "ما الذي ينتج عن تنفيذ عملية القسمة التالية في GDScript: `5 / 2`؟",
-        "en": "What does the division `5 / 2` yield in GDScript?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان أنواع البيانات الأساسية (`int`, `float`, `String`, `bool`) وفهم التحذير الحرج لقسمة الأعداد الصحيحة `int / int` ومخاطر سقوط الكسور.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master basic data types (`int`, `float`, `String`, `bool`) and understand the critical warning for `int / int` division truncation."
       },
-      "options": [
-        {
-          "ar": "العدد الصحيح `2` (لأن الكسر يتم إسقاطه كلياً)",
-          "en": "The integer `2` (because the fraction is completely truncated)"
-        },
-        {
-          "ar": "العدد العشري الدقيق `2.5`",
-          "en": "The exact decimal `2.5`"
-        },
-        {
-          "ar": "خطأ صياغة يمنع عمل اللعبة",
-          "en": "A syntax error stopping the game"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "قسمة عددين صحيحين في GDScript تعطي دائماً عدداً صحيحاً وتُسقط باقي القسمة العشري.",
-          "en": "Dividing two integers in GDScript always yields an integer, dropping the decimal remainder."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "الخيار الأول يعبر عن قاعدة قسمة الصحيحين.",
-          "en": "The first option expresses the integer division rule."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var total_gold: int = 7\n    var party_members: int = 2\n    var share = float(total_gold) / party_members\n    print(share)\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var total_gold: int = 7\n    var party_members: int = 2\n    var share = float(total_gold) / party_members\n    print(share)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "3.5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -174,6 +172,10 @@
         {
           "ar": "تحويل أحد الأطراف لـ float يحافظ على دقة الحسابات العشرية.",
           "en": "Casting one operand to float preserves decimal precision."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: تجنب قسمة الأعداد الصحيحة» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Avoiding Integer Division Truncation” activity and record its effect before continuing."
         }
       ]
     },
@@ -181,21 +183,25 @@
       "id": "ex_04_types_05",
       "lessonId": "lesson_04_types",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "حساب الناتج العشري الصحيح",
-        "en": "Calculating Correct Decimal Result"
+        "ar": "أكمل الفراغ: أنواع البيانات وقسمة الأعداد",
+        "en": "Complete the blank: Data Types and Integer Division"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يطبع ناتج القسمة الصحيحة لـ `9.0 / 2` للحصول على كسر عشري دقيق.",
-        "en": "Write a script printing the decimal division result of `9.0 / 2` for precise decimals."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يطبع ناتج القسمة الصحيحة لـ `9.0 / 2` للحصول على كسر عشري دقيق.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script printing the decimal division result of `9.0 / 2` for precise decimals."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ___(9.0 / 2)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    print(9.0 / 2)",
       "hints": [
         {
           "ar": "استخدم `print(9.0 / 2)`.",
           "en": "Use `print(9.0 / 2)`."
+        },
+        {
+          "ar": "بعد إكمال «حساب الناتج العشري الصحيح»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Calculating Correct Decimal Result”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -203,6 +209,13 @@
           "description": {
             "ar": "التحقق من صحة الناتج العشري (4.5)",
             "en": "Verifying correct decimal output (4.5)"
+          },
+          "expectedOutput": "4.5"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: حساب الناتج العشري الصحيح",
+            "en": "Repeat the scenario to confirm deterministic output: Calculating Correct Decimal Result"
           },
           "expectedOutput": "4.5"
         }
@@ -227,6 +240,10 @@
         {
           "ar": "اطبع المتغير بـ `print(speed)`.",
           "en": "Print the variable using `print(speed)`."
+        },
+        {
+          "ar": "بعد إكمال «تعريف متغير صريح النوع للسرعة»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Defining Explicitly Typed Speed Variable”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -234,6 +251,13 @@
           "description": {
             "ar": "التحقق من طباعة السرعة العشرية بنجاح",
             "en": "Verifying decimal speed output successfully"
+          },
+          "expectedOutput": "125.5"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تعريف متغير صريح النوع للسرعة",
+            "en": "Repeat the scenario to confirm deterministic output: Defining Explicitly Typed Speed Variable"
           },
           "expectedOutput": "125.5"
         }
@@ -258,6 +282,10 @@
         {
           "ar": "استبدل `pront` بـ `print`.",
           "en": "Replace `pront` with `print`."
+        },
+        {
+          "ar": "في «إصلاح طباعة القيمة المنطقية»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Boolean Value Print”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -265,6 +293,13 @@
           "description": {
             "ar": "التحقق من صحة إخراج القيمة المنطقية true",
             "en": "Verifying correct true boolean output"
+          },
+          "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح طباعة القيمة المنطقية",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Boolean Value Print"
           },
           "expectedOutput": "true"
         }
@@ -276,19 +311,23 @@
       "order": 7,
       "type": "predictOutput",
       "title": {
-        "ar": "تنبأ بناتج قسمة الأعداد الصحيحة",
-        "en": "Predict Integer Division Output"
+        "ar": "تنبأ بناتج القسمة العشرية",
+        "en": "Predict Floating-Point Division Output"
       },
       "prompt": {
-        "ar": "ما الذي سيطبعه هذا السكربت عند تنفيذه:\n\n```gdscript\nextends Node\nfunc _ready():\n    print(7 / 3)\n```",
-        "en": "What will this script print when executed:\n\n```gdscript\nextends Node\nfunc _ready():\n    print(7 / 3)\n```"
+        "ar": "ما الذي سيطبعه هذا السكربت عند تنفيذ `7 / 3`؟ في GDScript تعيد عملية القسمة قيمة عشرية حتى عندما يكون المعاملان عددين صحيحين.",
+        "en": "What will this script print for `7 / 3`? In GDScript, division produces a floating-point result even when both operands are integers."
       },
       "starterCode": "extends Node\n\nfunc _ready():\n    print(7 / 3)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    print(7 / 3)",
       "hints": [
         {
-          "ar": "تذكر أن قسمة عددين صحيحين تُسقط الكسر.",
-          "en": "Remember that integer division truncates the fraction."
+          "ar": "لا تطبق قاعدة القسمة الصحيحة في لغات أخرى؛ افحص نوع ناتج العامل `/` في GDScript.",
+          "en": "Do not assume integer truncation from other languages; check the result type of `/` in GDScript."
+        },
+        {
+          "ar": "احسب خارج القسمة العشري، لا خارج القسمة الصحيح.",
+          "en": "Calculate the decimal quotient rather than an integer quotient."
         }
       ],
       "testCases": [
@@ -297,7 +336,7 @@
             "ar": "التحقق من تطابق توقع القسمة الصحيحة (2)",
             "en": "Verifying integer division prediction match (2)"
           },
-          "expectedOutput": "2"
+          "expectedOutput": "2.3333333333333335"
         }
       ]
     },
@@ -320,6 +359,10 @@
         {
           "ar": "اطبع بـ `print(player_name)`.",
           "en": "Print using `print(player_name)`."
+        },
+        {
+          "ar": "بعد إكمال «استخدام نوع النص String»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Using String Type”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -327,6 +370,13 @@
           "description": {
             "ar": "التحقق من طباعة اسم البطل بنجاح",
             "en": "Verifying hero name output successfully"
+          },
+          "expectedOutput": "Hero"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: استخدام نوع النص String",
+            "en": "Repeat the scenario to confirm deterministic output: Using String Type"
           },
           "expectedOutput": "Hero"
         }
@@ -351,6 +401,10 @@
         {
           "ar": "استخدم `print(15.0 / 4)` للحصول على `3.75`.",
           "en": "Use `print(15.0 / 4)` to get `3.75`."
+        },
+        {
+          "ar": "بعد إكمال «تحدي أنواع البيانات والعمليات»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Data Types and Operations Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -358,6 +412,13 @@
           "description": {
             "ar": "التحقق من دقة الناتج العشري (3.75)",
             "en": "Verifying decimal result precision (3.75)"
+          },
+          "expectedOutput": "3.75"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي أنواع البيانات والعمليات",
+            "en": "Repeat the scenario to confirm deterministic output: Data Types and Operations Challenge"
           },
           "expectedOutput": "3.75"
         }

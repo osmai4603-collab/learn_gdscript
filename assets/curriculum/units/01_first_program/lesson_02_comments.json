@@ -34,38 +34,36 @@
       "id": "ex_02_comments_01",
       "lessonId": "lesson_02_comments",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "الرمز المخصص للتعليقات العادية",
-        "en": "Symbol for Standard Comments"
+        "ar": "أعد ترتيب مثال التعليقات والتوثيق",
+        "en": "Reorder the Comments and Documentation example"
       },
       "prompt": {
-        "ar": "ما هو الرمز الذي تبدأ به التعليقات الداخلية في لغة GDScript لكي يتجاهلها محرك الألعاب تماماً؟",
-        "en": "What symbol starts internal comments in GDScript so the engine entirely ignores them?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: استخدام التعليقات الفردية `#` لتوضيح الشيفرة والتعليقات التوثيقية `##` لتوليد مساعدة محرر Godot.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Use single-line comments `#` to clarify code and documentation comments `##` to generate Godot editor tooltips."
       },
-      "options": [
-        {
-          "ar": "الرمز `#`",
-          "en": "The `#` symbol"
-        },
-        {
-          "ar": "الرمز `//` أو الرمزين `/*`",
-          "en": "The `//` or `/*` symbols"
-        },
-        {
-          "ar": "العلامة الاقتصادية `$`",
-          "en": "The `$` sign"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "تستخدم لغة GDScript الرمز المفرد `#` للتعليقات.",
-          "en": "GDScript uses the single `#` symbol for comments."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "الخيار الأول هو الرمز الصحيح في GDScript.",
-          "en": "The first option is the correct symbol in GDScript."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "## Player movement speed in pixels per second\nconst PLAYER_SPEED: float = 300.0\nfunc _ready():\n    # Print confirmation that settings loaded\n    print(\"Settings loaded successfully\")\nextends Node",
+      "solutionCode": "extends Node\n\n## Player movement speed in pixels per second\nconst PLAYER_SPEED: float = 300.0\n\nfunc _ready():\n    # Print confirmation that settings loaded\n    print(\"Settings loaded successfully\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Settings loaded successfully",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -189,16 +187,16 @@
       "id": "ex_02_comments_05",
       "lessonId": "lesson_02_comments",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "إضافة تعليق توضيحي قبل الطباعة",
-        "en": "Adding an Explanatory Comment Before Printing"
+        "ar": "أكمل الفراغ: التعليقات والتوثيق",
+        "en": "Complete the blank: Comments and Documentation"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يبدأ بتعليق عادي `# Game Ready` ثم يطبع النص `Ready` في دالة `_ready()`.",
-        "en": "Write a script starting with a standard comment `# Game Ready` then prints `Ready` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يبدأ بتعليق عادي `# Game Ready` ثم يطبع النص `Ready` في دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script starting with a standard comment `# Game Ready` then prints `Ready` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    # اكتب التعليق هنا\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    # Game Ready\n    ___(\"Ready\")",
       "solutionCode": "extends Node\n\nfunc _ready():\n    # Game Ready\n    print(\"Ready\")",
       "hints": [
         {
@@ -215,6 +213,13 @@
           "description": {
             "ar": "التحقق من طباعة النص مع وجود التعليق",
             "en": "Verifying text output with comment present"
+          },
+          "expectedOutput": "Ready"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إضافة تعليق توضيحي قبل الطباعة",
+            "en": "Repeat the scenario to confirm deterministic output: Adding an Explanatory Comment Before Printing"
           },
           "expectedOutput": "Ready"
         }
@@ -252,6 +257,13 @@
             "en": "Verifying documented variable output"
           },
           "expectedOutput": "100"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: كتابة تعليق توثيقي فوق متغير",
+            "en": "Repeat the scenario to confirm deterministic output: Writing a Documentation Comment Above a Variable"
+          },
+          "expectedOutput": "100"
         }
       ]
     },
@@ -285,6 +297,13 @@
           "description": {
             "ar": "التحقق من تصحيح التعليق وإخراج الناتج الصحيح",
             "en": "Verifying comment fix and correct output"
+          },
+          "expectedOutput": "OK"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تصحيح رمز تعليق غير صالح",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Invalid Comment Symbol"
           },
           "expectedOutput": "OK"
         }
@@ -344,6 +363,10 @@
         {
           "ar": "ضع كل تعليق في سطر مسبوق بـ `#` ثم أمر الطباعة.",
           "en": "Place each comment on a separate line prefixed by `#` followed by print."
+        },
+        {
+          "ar": "بعد إكمال «تنظيم كود مع تعليقات متعددة»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Organizing Code with Multiple Comments”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -351,6 +374,13 @@
           "description": {
             "ar": "التحقق من طباعة الكلمة الأخيرة بنجاح",
             "en": "Verifying final word output successfully"
+          },
+          "expectedOutput": "Done"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تنظيم كود مع تعليقات متعددة",
+            "en": "Repeat the scenario to confirm deterministic output: Organizing Code with Multiple Comments"
           },
           "expectedOutput": "Done"
         }
@@ -375,6 +405,10 @@
         {
           "ar": "استخدم `## System Active` قبل الدالة، ثم `print(\"Active\")` داخلها.",
           "en": "Use `## System Active` before the function, then `print(\"Active\")` inside."
+        },
+        {
+          "ar": "بعد إكمال «تحدي توثيق الخصائص والمخرجات»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Properties and Output Documentation Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -382,6 +416,13 @@
           "description": {
             "ar": "التحقق من الإخراج السليم للتوثيق والطباعة",
             "en": "Verifying clean output of documentation and print"
+          },
+          "expectedOutput": "Active"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي توثيق الخصائص والمخرجات",
+            "en": "Repeat the scenario to confirm deterministic output: Properties and Output Documentation Challenge"
           },
           "expectedOutput": "Active"
         }

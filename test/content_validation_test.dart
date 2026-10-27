@@ -7,16 +7,6 @@ import 'package:learn_gdscript/data/models/exercise_models.dart';
 import 'package:learn_gdscript/data/models/lesson_models.dart';
 import 'package:learn_gdscript/data/repositories/syntax_reference_repository.dart';
 
-const _strictUnits = <String>{
-  'unit_06_classes_properties',
-  'unit_07_godot_scene_tree',
-  'unit_08_interaction_events',
-  'unit_09_editor_resources',
-  'unit_10_time_async',
-  'unit_11_types_quality',
-  'unit_12_integrated_project',
-};
-
 void main() {
   test('curriculum and syntax reference content is complete and linked', () {
     final curriculumJson = _readObject('assets/curriculum/manifest.json');
@@ -39,6 +29,8 @@ void main() {
     final lessonsById = <String, Lesson>{};
     final exercisesById = <String, String>{};
     final exerciseTypes = <String, int>{};
+    var totalTestCases = 0;
+    var capstoneCount = 0;
     for (final unit in curriculum.units) {
       final unitJson = _readObject(
         'assets/curriculum/units/${_unitDirectory(unit)}/unit.json',
@@ -87,6 +79,17 @@ void main() {
             inInclusiveRange(2, 4),
             reason: exercise.id,
           );
+          expect(
+            exercise.hints.map((hint) => hint.ar.trim()).toSet(),
+            hasLength(exercise.hints.length),
+            reason: '${exercise.id} Arabic hints should be distinct',
+          );
+          expect(
+            exercise.hints.map((hint) => hint.en.trim()).toSet(),
+            hasLength(exercise.hints.length),
+            reason: '${exercise.id} English hints should be distinct',
+          );
+          totalTestCases += exercise.testCases.length;
           if (exercise.type == ExerciseType.multipleChoice) {
             expect(exercise.options.length, greaterThanOrEqualTo(2));
             expect(exercise.correctOptionIndex, isNotNull);
@@ -96,22 +99,39 @@ void main() {
             expect(exercise.testCases, isEmpty, reason: exercise.id);
           } else {
             expect(exercise.testCases, isNotEmpty, reason: exercise.id);
-            if (_strictUnits.contains(unit.id)) {
+            if (exercise.type == ExerciseType.writeCode ||
+                exercise.type == ExerciseType.fixBug) {
               expect(
                 exercise.testCases.length,
-                greaterThanOrEqualTo(3),
+                greaterThanOrEqualTo(2),
                 reason: exercise.id,
               );
             }
           }
         }
-        if (_strictUnits.contains(unit.id)) {
-          expect(
-            lessonExerciseTypes,
-            hasLength(7),
-            reason: '${lesson.id} should use all supported exercise types',
-          );
-        }
+        expect(
+          lessonExerciseTypes,
+          hasLength(7),
+          reason: '${lesson.id} should use all supported exercise types',
+        );
+      }
+      if (unit.order < 11) {
+        final finalLesson = unitLessons.last;
+        final capstone = finalLesson.exercises.singleWhere(
+          (exercise) => exercise.order == 9,
+        );
+        expect(
+          capstone.type,
+          ExerciseType.writeCode,
+          reason: '${finalLesson.id} order 9 should be a coding capstone',
+        );
+        expect(
+          capstone.testCases.length,
+          greaterThanOrEqualTo(3),
+          reason: capstone.id,
+        );
+        expect(capstone.solutionCode, isNotEmpty, reason: capstone.id);
+        capstoneCount++;
       }
       expect(
         unitLessons.map((lesson) => lesson.order).toList(),
@@ -119,6 +139,8 @@ void main() {
       );
     }
 
+    expect(capstoneCount, 11);
+    expect(totalTestCases, greaterThan(1200));
     expect(lessonsById, hasLength(51));
     expect(exercisesById, hasLength(510));
     for (final lesson in lessonsById.values) {

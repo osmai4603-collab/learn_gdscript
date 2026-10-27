@@ -146,6 +146,26 @@
           },
           "setupCode": "var connected_systems = 10\nvar change = 4",
           "expectedOutput": "14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `connected_systems` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `connected_systems` set to zero; verify the resulting output."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `connected_systems` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `connected_systems` and its companion inputs."
+          },
+          "setupCode": "var connected_systems = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -194,6 +214,26 @@
           },
           "setupCode": "var connected_systems = 10\nvar change = 4",
           "expectedOutput": "14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `connected_systems` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `connected_systems` set to zero; verify the resulting output."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `connected_systems` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `connected_systems` and its companion inputs."
+          },
+          "setupCode": "var connected_systems = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -242,6 +282,26 @@
           },
           "setupCode": "var connected_systems = 10\nvar change = 4",
           "expectedOutput": "14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `connected_systems` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `connected_systems` set to zero; verify the resulting output."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `connected_systems` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `connected_systems` and its companion inputs."
+          },
+          "setupCode": "var connected_systems = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -290,6 +350,26 @@
           },
           "setupCode": "var connected_systems = 10\nvar change = 4",
           "expectedOutput": "14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `connected_systems` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `connected_systems` set to zero; verify the resulting output."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `connected_systems` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `connected_systems` and its companion inputs."
+          },
+          "setupCode": "var connected_systems = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -338,6 +418,26 @@
           },
           "setupCode": "var connected_systems = 10\nvar change = 4",
           "expectedOutput": "10\n4\n14"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `connected_systems` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `connected_systems` set to zero; verify the resulting output."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `connected_systems` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `connected_systems` and its companion inputs."
+          },
+          "setupCode": "var connected_systems = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -386,6 +486,26 @@
           },
           "setupCode": "var connected_systems = 8\nvar change = 3",
           "expectedOutput": "19"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `connected_systems` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `connected_systems` set to zero; verify the resulting output."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `connected_systems` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `connected_systems` and its companion inputs."
+          },
+          "setupCode": "var connected_systems = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -434,6 +554,26 @@
           },
           "setupCode": "var connected_systems = 8\nvar change = 3",
           "expectedOutput": "19"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `connected_systems` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `connected_systems` set to zero; verify the resulting output."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `connected_systems` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `connected_systems` and its companion inputs."
+          },
+          "setupCode": "var connected_systems = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -482,6 +622,26 @@
           },
           "setupCode": "var connected_systems = 8\nvar change = 3",
           "expectedOutput": "19"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `connected_systems` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `connected_systems` set to zero; verify the resulting output."
+          },
+          "setupCode": "var connected_systems = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `connected_systems` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `connected_systems` and its companion inputs."
+          },
+          "setupCode": "var connected_systems = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [

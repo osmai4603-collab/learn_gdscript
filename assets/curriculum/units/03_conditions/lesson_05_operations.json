@@ -34,34 +34,36 @@
       "id": "ex_05_operations_01",
       "lessonId": "lesson_05_operations",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "متى يعطي المعامل and القيمة true؟",
-        "en": "When Does the and Operator Return true?"
+        "ar": "أعد ترتيب مثال العمليات الحسابية والمنطقية",
+        "en": "Reorder the Arithmetic and Logical Operations example"
       },
       "prompt": {
-        "ar": "في منطق GDScript، متى يتم تقييم التعبير المكون من معاملين مرتبطين بـ `and` ليكون الناتج `true`؟",
-        "en": "In GDScript logic, when does an expression joined by `and` evaluate to `true`?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان استخدام المعاملات الحسابية، وعمليات المقارنة، والمعاملات المنطقية (`and`, `or`, `not`) لبناء تعبيرات دقيقة.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master arithmetic operators, comparison operators, and logical operators (`and`, `or`, `not`) to build precise expressions."
       },
-      "options": [
-        {
-          "ar": "عندما يكون كلا الشرطين أو الطرفين صحيحين تماماً (true)",
-          "en": "When both conditions/operands are strictly true"
-        },
-        {
-          "ar": "عندما يكون أحد الشرطين فقط صحيحاً",
-          "en": "When only one condition is true"
-        },
-        {
-          "ar": "عندما يكون كلاهما خطأ (false)",
-          "en": "When both are false"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "المعامل and (و) يتطلب تحقق الطرفين معاً.",
-          "en": "The and operator requires both sides to hold true."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var score = 85\n    var has_bonus = true\n    var is_victorious = (score >= 80) and has_bonus\n    print(is_victorious)\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var score = 85\n    var has_bonus = true\n    var is_victorious = (score >= 80) and has_bonus\n    print(is_victorious)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "true",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -97,6 +99,10 @@
         {
           "ar": "المعامل or (أو) يكفيه تحقق طرف واحد فقط ليكون الناتج true.",
           "en": "The or operator only needs one side to be true."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «متى يعطي المعامل or القيمة true؟» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “When Does the or Operator Return true?” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -132,6 +138,10 @@
         {
           "ar": "7 فيها كم 3؟ فيها مرتان (6) والباقي 1.",
           "en": "How many 3s in 7? Two (6) with remainder 1."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «عمل باقي القسمة %» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Modulo Operation %” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -162,6 +172,10 @@
         {
           "ar": "استخدام الأقواس يوضح أسبقية التقييم المنطقي.",
           "en": "Using parentheses clarifies logical evaluation precedence."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: فحص شرط مركب بالمعاملات المنطقية» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Evaluating Compound Condition with Logical Operators” activity and record its effect before continuing."
         }
       ]
     },
@@ -169,21 +183,25 @@
       "id": "ex_05_operations_05",
       "lessonId": "lesson_05_operations",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "تقييم معامل and المنطقي",
-        "en": "Evaluating Logical and Operator"
+        "ar": "أكمل الفراغ: العمليات الحسابية والمنطقية",
+        "en": "Complete the blank: Arithmetic and Logical Operations"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يطبع ناتج التقييم المنطقي لـ `(10 > 5 and 3 < 8)` داخل دالة `_ready()`.",
-        "en": "Write a script printing logical evaluation of `(10 > 5 and 3 < 8)` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يطبع ناتج التقييم المنطقي لـ `(10 > 5 and 3 < 8)` داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script printing logical evaluation of `(10 > 5 and 3 < 8)` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ___(10 > 5 and 3 < 8)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    print(10 > 5 and 3 < 8)",
       "hints": [
         {
           "ar": "كلا الشرطين صحيحان، إذن الناتج سيكون `true`.",
           "en": "Both conditions are true, so output is `true`."
+        },
+        {
+          "ar": "بعد إكمال «تقييم معامل and المنطقي»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Evaluating Logical and Operator”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -191,6 +209,13 @@
           "description": {
             "ar": "التحقق من صحة تقييم التعبير بـ true",
             "en": "Verifying expression evaluation correctness as true"
+          },
+          "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تقييم معامل and المنطقي",
+            "en": "Repeat the scenario to confirm deterministic output: Evaluating Logical and Operator"
           },
           "expectedOutput": "true"
         }
@@ -215,6 +240,10 @@
         {
           "ar": "استخدم `print(10 % 4)` وسيكون الناتج 2.",
           "en": "Use `print(10 % 4)` and result will be 2."
+        },
+        {
+          "ar": "بعد إكمال «استخدام معامل باقي القسمة %»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Using Modulo Operator %”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -222,6 +251,13 @@
           "description": {
             "ar": "التحقق من صحة حساب باقي القسمة (2)",
             "en": "Verifying correct modulo calculation output (2)"
+          },
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: استخدام معامل باقي القسمة %",
+            "en": "Repeat the scenario to confirm deterministic output: Using Modulo Operator %"
           },
           "expectedOutput": "2"
         }
@@ -246,6 +282,10 @@
         {
           "ar": "استبدل `pront` بـ `print`.",
           "en": "Replace `pront` with `print`."
+        },
+        {
+          "ar": "في «إصلاح خطأ استدعاء الطباعة في العمليات»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Print Call in Operations”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -253,6 +293,13 @@
           "description": {
             "ar": "التحقق من عمل الشيفرة بعد التصحيح",
             "en": "Verifying code operation after fix"
+          },
+          "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ استدعاء الطباعة في العمليات",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Print Call in Operations"
           },
           "expectedOutput": "true"
         }
@@ -277,6 +324,10 @@
         {
           "ar": "العبارة `5 > 10` خاطئة (false)، وعكسها بـ not يعطي true.",
           "en": "The expression `5 > 10` is false, and reversing it with not yields true."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج المعاملات المنطقية المركبة» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Compound Logical Operators Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -308,6 +359,10 @@
         {
           "ar": "يكفي تحقق أحد الطرفين في or ليكون الناتج `true`.",
           "en": "One side being true in or makes the result `true`."
+        },
+        {
+          "ar": "بعد إكمال «استخدام المعامل or»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Using or Operator”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -315,6 +370,13 @@
           "description": {
             "ar": "التحقق من صحة الناتج بـ true",
             "en": "Verifying correct true output"
+          },
+          "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: استخدام المعامل or",
+            "en": "Repeat the scenario to confirm deterministic output: Using or Operator"
           },
           "expectedOutput": "true"
         }
@@ -339,6 +401,10 @@
         {
           "ar": "كلا الشارين صحيحان، إذن الناتج النهائي سيكون `true`.",
           "en": "Both conditions are true, so final output is `true`."
+        },
+        {
+          "ar": "بعد إكمال «تحدي العمليات الحسابية والمنطقية الشامل»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Comprehensive Arithmetic and Logical Operations Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -346,6 +412,13 @@
           "description": {
             "ar": "التحقق من صحة التقييم المركب للتعبييرين",
             "en": "Verifying compound evaluation correctness for both expressions"
+          },
+          "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي العمليات الحسابية والمنطقية الشامل",
+            "en": "Repeat the scenario to confirm deterministic output: Comprehensive Arithmetic and Logical Operations Challenge"
           },
           "expectedOutput": "true"
         }

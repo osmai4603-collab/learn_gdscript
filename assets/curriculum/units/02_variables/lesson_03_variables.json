@@ -34,38 +34,36 @@
       "id": "ex_03_variables_01",
       "lessonId": "lesson_03_variables",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "الفرق بين var و const",
-        "en": "Difference Between var and const"
+        "ar": "أعد ترتيب مثال المتغيرات والثوابت",
+        "en": "Reorder the Variables and Constants example"
       },
       "prompt": {
-        "ar": "ما هو الفارق الجوهري بين استخدام الكلمة المفتاحية `var` والكلمة المفتاحية `const` في GDScript؟",
-        "en": "What is the core difference between `var` and `const` in GDScript?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: استخدام الكلمة `var` لتعريف متغيرات قابلة للتغيير و`const` للثوابت، مع تطبيق قواعد التسمية القياسية بأسلوب `snake_case`.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Use `var` to define mutable variables and `const` for constants, applying standard `snake_case` naming conventions."
       },
-      "options": [
-        {
-          "ar": "متغيرات `var` قابلة لتغيير قيمتها عبر الزمن، بينما ثوابت `const` ثابتة لا يمكن تعديلها",
-          "en": "`var` values can change over time, whereas `const` values are fixed and unmodifiable"
-        },
-        {
-          "ar": "ثوابت `const` مخصصة للعب فقط بينما `var` مخصصة لتصدير اللعبة",
-          "en": "`const` is for gameplay only while `var` is for exporting"
-        },
-        {
-          "ar": "لا يوجد أي فرق بينهما سوى عدد الحروف",
-          "en": "There is no difference except letter count"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "تذكر أن كلمة Variable تعني متغير و Constant تعني ثابت.",
-          "en": "Remember that Variable means changeable and Constant means fixed."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "الخيار الأول يعبر بدقة عن الغرض من كليهما.",
-          "en": "The first option accurately captures their purpose."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var score: int = 10\n    score = score + 5\n    print(score)\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var score: int = 10\n    score = score + 5\n    print(score)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "15",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -178,6 +176,10 @@
         {
           "ar": "المتغير يسمح بتخزين وحساب القيم الجديدة باستمرار.",
           "en": "Variables allow storing and computing new values continuously."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: تتبع تغير قيمة المتغير عبر الزمن» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Tracking Variable Value Changes Over Time” activity and record its effect before continuing."
         }
       ]
     },
@@ -185,21 +187,25 @@
       "id": "ex_03_variables_05",
       "lessonId": "lesson_03_variables",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "تعريف وطباعة متغير عملات اللاعب",
-        "en": "Defining and Printing Player Coins Variable"
+        "ar": "أكمل الفراغ: المتغيرات والثوابت",
+        "en": "Complete the blank: Variables and Constants"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يعرّف متغيراً `var coins = 50` ثم يطبع قيمته داخل دالة `_ready()`.",
-        "en": "Write a script defining `var coins = 50` then prints its value inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يعرّف متغيراً `var coins = 50` ثم يطبع قيمته داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script defining `var coins = 50` then prints its value inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var coins = 50\n    ___(coins)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var coins = 50\n    print(coins)",
       "hints": [
         {
           "ar": "الصيغة: `var coins = 50` ثم `print(coins)`.",
           "en": "Syntax: `var coins = 50` then `print(coins)`."
+        },
+        {
+          "ar": "بعد إكمال «تعريف وطباعة متغير عملات اللاعب»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Defining and Printing Player Coins Variable”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -207,6 +213,13 @@
           "description": {
             "ar": "التحقق من طباعة قيمة متغير العملات بنجاح",
             "en": "Verifying successful coins variable value output"
+          },
+          "expectedOutput": "50"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تعريف وطباعة متغير عملات اللاعب",
+            "en": "Repeat the scenario to confirm deterministic output: Defining and Printing Player Coins Variable"
           },
           "expectedOutput": "50"
         }
@@ -231,6 +244,10 @@
         {
           "ar": "استخدم `score = score + 5` ثم `print(score)`.",
           "en": "Use `score = score + 5` then `print(score)`."
+        },
+        {
+          "ar": "بعد إكمال «تحديث قيمة المتغير وطباعتها»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Updating Variable Value and Printing”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -238,6 +255,13 @@
           "description": {
             "ar": "التحقق من صحة تحديث المتغير وطباعة الناتج (15)",
             "en": "Verifying correct variable update and output (15)"
+          },
+          "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحديث قيمة المتغير وطباعتها",
+            "en": "Repeat the scenario to confirm deterministic output: Updating Variable Value and Printing"
           },
           "expectedOutput": "15"
         }
@@ -262,6 +286,10 @@
         {
           "ar": "يجب استخدام الكلمة المفتاحية `var` عند إنشاء متغير جديد.",
           "en": "You must use the `var` keyword when creating a new variable."
+        },
+        {
+          "ar": "في «إصلاح خطأ تعريف المتغير»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Variable Definition Error”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -269,6 +297,13 @@
           "description": {
             "ar": "التحقق من عمل الشيفرة بعد إضافة var",
             "en": "Verifying code operation after adding var"
+          },
+          "expectedOutput": "100"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ تعريف المتغير",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Variable Definition Error"
           },
           "expectedOutput": "100"
         }
@@ -293,6 +328,10 @@
         {
           "ar": "اضرب القيمة الأولية 50 في 2.",
           "en": "Multiply the initial value 50 by 2."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج تعديل متغير السرعة» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Output of Speed Variable Modification” before deciding the final output."
         }
       ],
       "testCases": [
@@ -324,6 +363,10 @@
         {
           "ar": "استخدم `const MAX_LEVEL = 10` ثم `print(MAX_LEVEL)`.",
           "en": "Use `const MAX_LEVEL = 10` then `print(MAX_LEVEL)`."
+        },
+        {
+          "ar": "بعد إكمال «استخدام ثابت قيمته معلومة»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Using a Known Constant Value”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -331,6 +374,13 @@
           "description": {
             "ar": "التحقق من طباعة الثابت بدقة",
             "en": "Verifying constant output accurately"
+          },
+          "expectedOutput": "10"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: استخدام ثابت قيمته معلومة",
+            "en": "Repeat the scenario to confirm deterministic output: Using a Known Constant Value"
           },
           "expectedOutput": "10"
         }
@@ -355,6 +405,10 @@
         {
           "ar": "اطبع ناتج `BASE_POINTS + bonus`.",
           "en": "Print the result of `BASE_POINTS + bonus`."
+        },
+        {
+          "ar": "بعد إكمال «تحدي المتغيرات والثوابت المشترك»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Combined Variables and Constants Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -362,6 +416,13 @@
           "description": {
             "ar": "التحقق من صحة جمع الثابت والمتغير وإخراج المجموع (75)",
             "en": "Verifying correct addition of constant and variable output (75)"
+          },
+          "expectedOutput": "75"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي المتغيرات والثوابت المشترك",
+            "en": "Repeat the scenario to confirm deterministic output: Combined Variables and Constants Challenge"
           },
           "expectedOutput": "75"
         }

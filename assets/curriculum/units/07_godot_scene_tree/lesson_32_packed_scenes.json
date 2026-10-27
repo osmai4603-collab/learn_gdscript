@@ -152,6 +152,26 @@
           },
           "setupCode": "var scene_instances = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `scene_instances` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `scene_instances` set to zero; verify the resulting output."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `scene_instances` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `scene_instances` and its companion inputs."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -200,6 +220,26 @@
           },
           "setupCode": "var scene_instances = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `scene_instances` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `scene_instances` set to zero; verify the resulting output."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `scene_instances` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `scene_instances` and its companion inputs."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -248,6 +288,26 @@
           },
           "setupCode": "var scene_instances = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `scene_instances` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `scene_instances` set to zero; verify the resulting output."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `scene_instances` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `scene_instances` and its companion inputs."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -332,6 +392,26 @@
           },
           "setupCode": "var scene_instances = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `scene_instances` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `scene_instances` set to zero; verify the resulting output."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `scene_instances` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `scene_instances` and its companion inputs."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -415,56 +495,107 @@
           },
           "setupCode": "var scene_instances = 8\nvar change = 4",
           "expectedOutput": "8\n4\n12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `scene_instances` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `scene_instances` set to zero; verify the resulting output."
+          },
+          "setupCode": "var scene_instances = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `scene_instances` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `scene_instances` and its companion inputs."
+          },
+          "setupCode": "var scene_instances = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
     {
-      "id": "ex_lesson_32_packed_scenes_10_apply",
+      "id": "ex_32_packed_10",
       "lessonId": "lesson_32_packed_scenes",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب شيفرة تضاعف scene_instances ثم تضيف change وتطبع الناتج في مثال عن PackedScene instances.",
-        "en": "Write code that doubles scene_instances, adds change, and prints the result in a PackedScene instances example."
+        "ar": "مثّل مفاتيح غرفة زنزانة بقائمة من القواميس تحتوي حالة الجاهزية والتفعيل. افتح البوابة فقط عندما تكون كل المفاتيح جاهزة ومفعّلة، مع اعتبار القائمة الفارغة غير كافية. هذا النموذج يحاكي فحص مجموعة عقد قبل إنشاء مشهد البوابة.",
+        "en": "Represent dungeon-room switches as dictionaries containing readiness and activation state. Open the gate only when every switch is ready and activated, treating an empty list as insufficient. This models checking a node group before creating the gate scene."
       },
       "hints": [
         {
-          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
-          "en": "Double the value first, then add change."
+          "ar": "تحقق من القائمة قبل الحلقة حتى لا تُفتح البوابة تلقائيًا بلا مفاتيح.",
+          "en": "Check the collection before the loop so an empty group cannot open the gate."
         },
         {
-          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
-          "en": "Use the variables provided by each test."
+          "ar": "أوقف التحقق مبكرًا عند أول مفتاح غير جاهز أو غير مفعّل.",
+          "en": "Stop checking as soon as a switch is unready or inactive."
         }
       ],
       "order": 9,
-      "starterCode": "",
-      "solutionCode": "var result = scene_instances * 2 + change\nprint(result)",
+      "starterCode": "func can_open_gate(switches):\n    # Check that the group is non-empty and every switch is ready and activated.\n    pass\n\nif can_open_gate(switches):\n    print(\"Gate: Open\")\nelse:\n    print(\"Gate: Closed\")",
+      "solutionCode": "func can_open_gate(switches):\n    if switches.size() == 0:\n        return false\n    for switch in switches:\n        if not switch[\"ready\"] or not switch[\"activated\"]:\n            return false\n    return true\n\nif can_open_gate(switches):\n    print(\"Gate: Open\")\nelse:\n    print(\"Gate: Closed\")",
       "testCases": [
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من فتح البوابة عند جاهزية جميع المفاتيح",
+            "en": "Check gate opening when all switches are ready"
           },
-          "setupCode": "var scene_instances = 1\nvar change = 2",
-          "expectedOutput": "4"
+          "setupCode": "var switches = [{\"ready\": true, \"activated\": true}, {\"ready\": true, \"activated\": true}]",
+          "expectedOutput": "Gate: Open",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من إبقاء البوابة مغلقة عند غياب المفاتيح",
+            "en": "Check gate stays closed with no switches"
           },
-          "setupCode": "var scene_instances = 0\nvar change = 2",
-          "expectedOutput": "2"
+          "setupCode": "var switches = []",
+          "expectedOutput": "Gate: Closed",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من منع الفتح عند وجود مفتاح غير جاهز",
+            "en": "Check that one unready switch prevents opening"
           },
-          "setupCode": "var scene_instances = 8\nvar change = 4",
-          "expectedOutput": "20"
+          "setupCode": "var switches = [{\"ready\": true, \"activated\": true}, {\"ready\": false, \"activated\": true}]",
+          "expectedOutput": "Gate: Closed",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من إبقاء البوابة مغلقة عندما لا يُفعّل المفتاح",
+            "en": "Check that an inactive switch keeps the gate closed"
+          },
+          "setupCode": "var switches = [{\"ready\": true, \"activated\": false}]",
+          "expectedOutput": "Gate: Closed",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من فتح البوابة عند جاهزية جميع المفاتيح",
+            "en": "Check that all ready switches open the gate"
+          },
+          "setupCode": "var switches = [{\"ready\": true, \"activated\": true}, {\"ready\": true, \"activated\": true}]",
+          "expectedOutput": "Gate: Open",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
-      ]
+      ],
+      "title": {
+        "ar": "تحدي مدير غرفة المشهد والمجموعات",
+        "en": "Room Scene Manager and Group Dispatcher"
+      },
+      "options": []
     }
   ]
 }

@@ -33,37 +33,39 @@
     {
       "id": "ex_lesson_21_scope_predict",
       "lessonId": "lesson_21_scope",
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "توقع ما يحدث للمتغير `points` بعد انتهاء `add_point()`.",
-        "en": "Predict what happens to `points` after `add_point()` finishes."
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: ميّز بين المتغير المحلي والعام، وتجنّب الاعتماد غير المقصود على الحالة المشتركة.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Distinguish local and script-level variables, and avoid accidental dependence on shared state."
       },
-      "options": [
-        {
-          "ar": "يبقى محلياً داخل الدالة ولا يمكن الوصول إليه من خارج نطاقها.",
-          "en": "It stays local to the function and cannot be accessed outside its scope."
-        },
-        {
-          "ar": "يصبح متغيراً عاماً تلقائياً.",
-          "en": "It automatically becomes a global variable."
-        },
-        {
-          "ar": "تتحول قيمته إلى نص.",
-          "en": "Its value becomes a string."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "تتبّع موضع تعريف المتغير أو انتقال القيمة بين الدوال.",
-          "en": "Trace where a variable is declared or how a value flows between functions."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "قارن اختيارك بالتعريف والأمثلة في الدرس.",
-          "en": "Compare your choice with the lesson definition and examples."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
         }
       ],
-      "order": 0
+      "order": 0,
+      "title": {
+        "ar": "أعد ترتيب مثال نطاق المتغيرات",
+        "en": "Reorder the Variable Scope example"
+      },
+      "starterCode": "    var total = a + b\n    return total\nprint(make_total(2, 3))\nfunc make_total(a, b):",
+      "solutionCode": "func make_total(a, b):\n    var total = a + b\n    return total\n\nprint(make_total(2, 3))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_21_scope_identify",
@@ -103,36 +105,60 @@
     {
       "id": "ex_lesson_21_scope_complete",
       "lessonId": "lesson_21_scope",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً يوضح الفكرة الأساسية لهذا الدرس.",
-        "en": "Complete a sketch that explains the core idea of this lesson."
+        "ar": "أكمل الفراغ لإرجاع مجموع النقاط المحسوب داخل الدالة.",
+        "en": "Complete the blank to return the score total calculated inside the function."
       },
-      "steps": [
-        {
-          "ar": "صنّف `score` و`points` بحسب موضع تعريفهما.",
-          "en": "Classify `score` and `points` by where they are declared."
-        },
-        {
-          "ar": "حدد أيهما محلي وأيهما مشترك.",
-          "en": "Identify which is local and which is shared."
-        },
-        {
-          "ar": "اكتب ما إذا كان يمكن الوصول إلى كل متغير خارج الدالة.",
-          "en": "Write whether each variable can be accessed outside the function."
-        }
-      ],
       "hints": [
         {
-          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
-          "en": "Write your prediction or plan before trying it, then review it against the example."
+          "ar": "أعد القيمة التي حُسبت في النطاق المحلي بدل إنشاء متغير عام.",
+          "en": "Return the value calculated in local scope instead of creating a global variable."
         },
         {
-          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
-          "en": "This is a self-check activity, not an automated test."
+          "ar": "تأكد من أن القيمة المرجعة هي نفسها التي تستخدمها نتيجة الاستدعاء.",
+          "en": "Make sure the returned value is the one used by the call result."
         }
       ],
-      "order": 2
+      "order": 2,
+      "title": {
+        "ar": "أكمل إرجاع النقاط المحلية",
+        "en": "Complete the local score return"
+      },
+      "starterCode": "func score_with_bonus(base_score, bonus_score):\n    var result = base_score + bonus_score\n    return ___\n\nprint(score_with_bonus(base_score, bonus_score))",
+      "solutionCode": "func score_with_bonus(base_score, bonus_score):\n    var result = base_score + bonus_score\n    return result\n\nprint(score_with_bonus(base_score, bonus_score))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تحقق من الناتج في المسار المعتاد.",
+            "en": "Check the regular result."
+          },
+          "setupCode": "var base_score = 10\nvar bonus_score = 2",
+          "expectedOutput": "12",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "اختبر قيمًا صفرية.",
+            "en": "Test zero values."
+          },
+          "setupCode": "var base_score = 0\nvar bonus_score = 0",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من مدخلات بديلة.",
+            "en": "Check alternate inputs."
+          },
+          "setupCode": "var base_score = 3\nvar bonus_score = 7",
+          "expectedOutput": "10",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_21_scope_code_1",
@@ -149,6 +175,13 @@
           "description": {
             "ar": "يطابق الإخراج السلوك المطلوب.",
             "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "9"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_21_scope_code_1",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_21_scope_code_1"
           },
           "expectedOutput": "9"
         }
@@ -182,6 +215,13 @@
             "en": "The output matches the requested behavior."
           },
           "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_21_scope_fix",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_21_scope_fix"
+          },
+          "expectedOutput": "5"
         }
       ],
       "hints": [
@@ -213,6 +253,13 @@
             "en": "The output matches the requested behavior."
           },
           "expectedOutput": "Score: 8"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_21_scope_code_2",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_21_scope_code_2"
+          },
+          "expectedOutput": "Score: 8"
         }
       ],
       "hints": [
@@ -230,36 +277,60 @@
     {
       "id": "ex_lesson_21_scope_6",
       "lessonId": "lesson_21_scope",
-      "type": "guidedTask",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "ارسم أو أنشئ مثالاً صغيراً يوضح نطاق المتغيرات. هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
-        "en": "Sketch or create a small example of Variable Scope. This is a self-check task, not an automated test."
+        "ar": "تتبّع متغيرًا محليًا داخل دالة ثم تنبأ بالمجموع المطبوع.",
+        "en": "Trace a local variable inside a function and predict the printed total."
       },
-      "steps": [
-        {
-          "ar": "حدد الهدف من المثال.",
-          "en": "Define the goal of the example."
-        },
-        {
-          "ar": "أضف أقل العناصر المطلوبة.",
-          "en": "Add only the necessary elements."
-        },
-        {
-          "ar": "قارن النتيجة بتعريف المفهوم.",
-          "en": "Compare the result with the concept definition."
-        }
-      ],
       "hints": [
         {
-          "ar": "أكمل الخطوات بنفسك في ملاحظاتك أو مشروع تجريبي.",
-          "en": "Complete the steps in your notes or a test project."
+          "ar": "تتبّع المتغير المحلي حتى أمر الإرجاع ثم إلى موضع الاستدعاء.",
+          "en": "Trace the local variable through the return statement and call site."
         },
         {
-          "ar": "لا يتحقق التطبيق آلياً من إعدادات محرر Godot.",
-          "en": "The app does not automatically verify Godot editor settings."
+          "ar": "احسب النتيجة من مدخلات كل حالة على حدة.",
+          "en": "Calculate each case from its own inputs."
         }
       ],
-      "order": 6
+      "order": 6,
+      "title": {
+        "ar": "تتبّع نطاق مكافأة العدو",
+        "en": "Trace enemy-bonus scope"
+      },
+      "starterCode": "func enemy_reward(base_xp, bonus_xp):\n    var total = base_xp + bonus_xp\n    return total\n\nprint(enemy_reward(base_xp, bonus_xp))",
+      "solutionCode": "func enemy_reward(base_xp, bonus_xp):\n    var total = base_xp + bonus_xp\n    return total\n\nprint(enemy_reward(base_xp, bonus_xp))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتبّع متغير النطاق المحلي.",
+            "en": "Trace the local-scope variable."
+          },
+          "setupCode": "var base_xp = 30\nvar bonus_xp = 5",
+          "expectedOutput": "35",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "اختبر قيمًا صفرية.",
+            "en": "Test zero values."
+          },
+          "setupCode": "var base_xp = 0\nvar bonus_xp = 0",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من مدخلات بديلة.",
+            "en": "Check alternate inputs."
+          },
+          "setupCode": "var base_xp = 12\nvar bonus_xp = 8",
+          "expectedOutput": "20",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_21_scope_code_3",
@@ -276,6 +347,13 @@
           "description": {
             "ar": "يطابق الإخراج السلوك المطلوب.",
             "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "5"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_21_scope_code_3",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_21_scope_code_3"
           },
           "expectedOutput": "5"
         }
@@ -307,6 +385,13 @@
           "description": {
             "ar": "يطابق الإخراج السلوك المطلوب.",
             "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "8.0"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_21_scope_code_4",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_21_scope_code_4"
           },
           "expectedOutput": "8.0"
         }

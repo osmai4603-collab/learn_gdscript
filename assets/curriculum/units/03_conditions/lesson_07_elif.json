@@ -34,34 +34,36 @@
       "id": "ex_07_elif_01",
       "lessonId": "lesson_07_elif",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "القاعدة الأساسية لترتيب شروط elif",
-        "en": "Golden Rule of Ordering elif Conditions"
+        "ar": "أعد ترتيب مثال الشروط المتعددة elif والترتيب الهرمي",
+        "en": "Reorder the Multiple elif Conditions and Hierarchical Ordering example"
       },
       "prompt": {
-        "ar": "عند كتابة عدة فروع `elif` لفحص تقييم النقاط، كيف يجب ترتيب الشروط هرمياً؟",
-        "en": "When writing multiple `elif` branches to evaluate score ratings, how should conditions be ordered hierarchically?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان ترتيب شروط `elif` من الحالة الأخص إلى الأعم لتجنب حجب الفروع الإيجابية.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master ordering `elif` conditions from most specific to broadest to prevent blocking positive branches."
       },
-      "options": [
-        {
-          "ar": "ترتيبها من الحالة الأخص (الأضيق والأعلى) إلى الحالة الأعم (الأوسع)",
-          "en": "Ordering from the most specific (narrowest/highest) to the broadest"
-        },
-        {
-          "ar": "ترتيب الشروط بشكل عشوائي تماماً",
-          "en": "Ordering conditions completely at random"
-        },
-        {
-          "ar": "وضع الشروط العامة دائماً في الأعلى",
-          "en": "Always placing broad conditions at the top"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "وضع الشروط الأخص أولاً يمنع حجبها بالشروط العامة.",
-          "en": "Placing specific conditions first prevents broad ones from shadowing them."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var health_percentage = 15\n    if health_percentage <= 10:\n        print(\"Critical Danger\")\n    elif health_percentage <= 50:\n        print(\"Warning\")\n    else:\n        print(\"Healthy\")\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var health_percentage = 15\n    if health_percentage <= 10:\n        print(\"Critical Danger\")\n    elif health_percentage <= 50:\n        print(\"Warning\")\n    else:\n        print(\"Healthy\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Warning",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -97,6 +99,10 @@
         {
           "ar": "المحرك ينفذ أول فرع مطابق فقط ويتخطى بقية الفروع.",
           "en": "The engine executes only the first matching branch and skips the rest."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «كيفية اختيار المحرك للفرع المناسب» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “How Engine Selects Matching Branch” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -132,6 +138,10 @@
         {
           "ar": "else يعمل كحالة آمنة أخيرة (Catch-all).",
           "en": "else acts as a safe final catch-all."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «دور فرع else الأخير» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Role of the Final else Branch” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -162,6 +172,10 @@
         {
           "ar": "رتب الشروط من الأكبر للأصغر لضمان الصحة المنطقية.",
           "en": "Order conditions from largest to smallest to ensure logical correctness."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: تדרیب على تسلسل الشروط المتعددة» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Practicing Multiple Condition Chaining” activity and record its effect before continuing."
         }
       ]
     },
@@ -169,21 +183,25 @@
       "id": "ex_07_elif_05",
       "lessonId": "lesson_07_elif",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "كتابة شروط التقييم الهرمية",
-        "en": "Writing Hierarchical Evaluation Conditions"
+        "ar": "أكمل الفراغ: الشروط المتعددة elif والترتيب الهرمي",
+        "en": "Complete the blank: Multiple elif Conditions and Hierarchical Ordering"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يفحص `var score = 92`؛ إذا كانت `>= 90` اطبع `Gold`، وإذا كانت `>= 75` اطبع `Silver`، وإلا اطبع `Bronze` داخل دالة `_ready()`.",
-        "en": "Write a script checking `var score = 92`; if `>= 90` print `Gold`, if `>= 75` print `Silver`, else print `Bronze` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يفحص `var score = 92`؛ إذا كانت `>= 90` اطبع `Gold`، وإذا كانت `>= 75` اطبع `Silver`، وإلا اطبع `Bronze` داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script checking `var score = 92`; if `>= 90` print `Gold`, if `>= 75` print `Silver`, else print `Bronze` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    var score = 92\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var score = 92\n    if score >= 90:\n        ___(\"Gold\")\n    elif score >= 75:\n        print(\"Silver\")\n    else:\n        print(\"Bronze\")",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var score = 92\n    if score >= 90:\n        print(\"Gold\")\n    elif score >= 75:\n        print(\"Silver\")\n    else:\n        print(\"Bronze\")",
       "hints": [
         {
           "ar": "استخدم `if score >= 90:` ثم `elif score >= 75:` ثم `else:`.",
           "en": "Use `if score >= 90:` then `elif score >= 75:` then `else:`."
+        },
+        {
+          "ar": "بعد إكمال «كتابة شروط التقييم الهرمية»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Writing Hierarchical Evaluation Conditions”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -191,6 +209,13 @@
           "description": {
             "ar": "التحقق من طباعة Gold بنجاح للعلامة 92",
             "en": "Verifying successful Gold output for score 92"
+          },
+          "expectedOutput": "Gold"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: كتابة شروط التقييم الهرمية",
+            "en": "Repeat the scenario to confirm deterministic output: Writing Hierarchical Evaluation Conditions"
           },
           "expectedOutput": "Gold"
         }
@@ -214,7 +239,11 @@
       "hints": [
         {
           "ar": "القيمة 80 تحقق شرط >= 75 ولا تحقق >= 90، لذا تطبع Silver.",
-        "en": "Score 80 satisfies >= 75 and not >= 90, so it prints Silver."
+          "en": "Score 80 satisfies >= 75 and not >= 90, so it prints Silver."
+        },
+        {
+          "ar": "بعد إكمال «فحص الفئة المتوسطة بالترتيب الهرمي»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Checking Middle Tier in Hierarchical Order”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -222,6 +251,13 @@
           "description": {
             "ar": "التحقق من طباعة Silver للعلامة 80",
             "en": "Verifying Silver output for score 80"
+          },
+          "expectedOutput": "Silver"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: فحص الفئة المتوسطة بالترتيب الهرمي",
+            "en": "Repeat the scenario to confirm deterministic output: Checking Middle Tier in Hierarchical Order"
           },
           "expectedOutput": "Silver"
         }
@@ -244,8 +280,12 @@
       "solutionCode": "extends Node\n\nfunc _ready():\n    var val = 10\n    if val > 20:\n        print(\"High\")\n    elif val > 5:\n        print(\"Valid\")\n    else:\n        print(\"Low\")",
       "hints": [
         {
-            "ar": "الكلمة المختصرة في GDScript هي `elif` وليست `else if`.",
-            "en": "The keyword in GDScript is `elif`, not `else if`."
+          "ar": "الكلمة المختصرة في GDScript هي `elif` وليست `else if`.",
+          "en": "The keyword in GDScript is `elif`, not `else if`."
+        },
+        {
+          "ar": "في «إصلاح خطأ الكلمة المفتاحية elif»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing elif Keyword Spelling Bug”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -253,6 +293,13 @@
           "description": {
             "ar": "التحقق من عمل الشيفرة بعد تصحيح else if إلى elif",
             "en": "Verifying code operation after correcting else if to elif"
+          },
+          "expectedOutput": "Valid"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ الكلمة المفتاحية elif",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing elif Keyword Spelling Bug"
           },
           "expectedOutput": "Valid"
         }
@@ -277,6 +324,10 @@
         {
           "ar": "القيمة 25 ليست أكبر من 35، لكنها أكبر من 20، لذا يتحقق فرع elif الثاني.",
           "en": "25 is not > 35, but is > 20, so the second elif branch triggers."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج تسلسل الشروط المتعددة» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Multiple Conditions Chain Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -308,6 +359,10 @@
         {
           "ar": "عندما x تساوي 0 سيلتقطها فرع else ويطبع Zero.",
           "en": "When x equals 0 the else branch catches and prints Zero."
+        },
+        {
+          "ar": "بعد إكمال «فحص الحالات الحدودية الثلاثية»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Checking Three-Way Boundary Cases”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -315,6 +370,13 @@
           "description": {
             "ar": "التحقق من طباعة Zero للحالة الصفرية الحدية",
             "en": "Verifying Zero output for boundary zero state"
+          },
+          "expectedOutput": "Zero"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: فحص الحالات الحدودية الثلاثية",
+            "en": "Repeat the scenario to confirm deterministic output: Checking Three-Way Boundary Cases"
           },
           "expectedOutput": "Zero"
         }
@@ -339,6 +401,10 @@
         {
           "ar": "استخدم الترتب الهرمي السليم للأعمار لطباعة Teen بنجاح.",
           "en": "Use proper hierarchical age ordering to successfully print Teen."
+        },
+        {
+          "ar": "بعد إكمال «تحدي الشروط المتعددة الهرمية الشامل»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Comprehensive Hierarchical Multiple Conditions Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -346,6 +412,13 @@
           "description": {
             "ar": "التحقق من طباعة Teen بنجاح للعمر 15",
             "en": "Verifying successful Teen output for age 15"
+          },
+          "expectedOutput": "Teen"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي الشروط المتعددة الهرمية الشامل",
+            "en": "Repeat the scenario to confirm deterministic output: Comprehensive Hierarchical Multiple Conditions Challenge"
           },
           "expectedOutput": "Teen"
         }

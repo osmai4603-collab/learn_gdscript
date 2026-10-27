@@ -132,6 +132,26 @@
           },
           "setupCode": "var speed = 247\nvar change = 4",
           "expectedOutput": "251"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var speed = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `speed` and its companion inputs."
+          },
+          "setupCode": "var speed = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -180,6 +200,26 @@
           },
           "setupCode": "var speed = 247\nvar change = 4",
           "expectedOutput": "251"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var speed = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `speed` and its companion inputs."
+          },
+          "setupCode": "var speed = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -228,6 +268,26 @@
           },
           "setupCode": "var speed = 247\nvar change = 4",
           "expectedOutput": "251"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var speed = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `speed` and its companion inputs."
+          },
+          "setupCode": "var speed = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -276,6 +336,26 @@
           },
           "setupCode": "var speed = 247\nvar change = 4",
           "expectedOutput": "251"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var speed = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `speed` and its companion inputs."
+          },
+          "setupCode": "var speed = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -324,6 +404,26 @@
           },
           "setupCode": "var speed = 247\nvar change = 4",
           "expectedOutput": "247\n4\n251"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var speed = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `speed` and its companion inputs."
+          },
+          "setupCode": "var speed = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -372,6 +472,26 @@
           },
           "setupCode": "var speed = 245\nvar change = 3",
           "expectedOutput": "493"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var speed = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `speed` and its companion inputs."
+          },
+          "setupCode": "var speed = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -420,6 +540,26 @@
           },
           "setupCode": "var speed = 245\nvar change = 3",
           "expectedOutput": "493"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var speed = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `speed` and its companion inputs."
+          },
+          "setupCode": "var speed = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -468,6 +608,26 @@
           },
           "setupCode": "var speed = 245\nvar change = 3",
           "expectedOutput": "493"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `speed` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `speed` set to zero; verify the resulting output."
+          },
+          "setupCode": "var speed = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `speed` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `speed` and its companion inputs."
+          },
+          "setupCode": "var speed = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [

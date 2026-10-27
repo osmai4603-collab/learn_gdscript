@@ -145,6 +145,26 @@
           },
           "setupCode": "var signal_values = 17\nvar change = 4",
           "expectedOutput": "21"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `signal_values` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `signal_values` set to zero; verify the resulting output."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `signal_values` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `signal_values` and its companion inputs."
+          },
+          "setupCode": "var signal_values = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -193,6 +213,26 @@
           },
           "setupCode": "var signal_values = 17\nvar change = 4",
           "expectedOutput": "21"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `signal_values` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `signal_values` set to zero; verify the resulting output."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `signal_values` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `signal_values` and its companion inputs."
+          },
+          "setupCode": "var signal_values = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -241,6 +281,26 @@
           },
           "setupCode": "var signal_values = 17\nvar change = 4",
           "expectedOutput": "21"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `signal_values` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `signal_values` set to zero; verify the resulting output."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `signal_values` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `signal_values` and its companion inputs."
+          },
+          "setupCode": "var signal_values = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -325,6 +385,26 @@
           },
           "setupCode": "var signal_values = 17\nvar change = 4",
           "expectedOutput": "21"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `signal_values` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `signal_values` set to zero; verify the resulting output."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `signal_values` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `signal_values` and its companion inputs."
+          },
+          "setupCode": "var signal_values = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -408,6 +488,26 @@
           },
           "setupCode": "var signal_values = 17\nvar change = 4",
           "expectedOutput": "17\n4\n21"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `signal_values` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `signal_values` set to zero; verify the resulting output."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `signal_values` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `signal_values` and its companion inputs."
+          },
+          "setupCode": "var signal_values = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -456,6 +556,26 @@
           },
           "setupCode": "var signal_values = 17\nvar change = 4",
           "expectedOutput": "38"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `signal_values` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `signal_values` set to zero; verify the resulting output."
+          },
+          "setupCode": "var signal_values = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `signal_values` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `signal_values` and its companion inputs."
+          },
+          "setupCode": "var signal_values = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     }

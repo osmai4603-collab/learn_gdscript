@@ -34,34 +34,36 @@
       "id": "ex_10_while_01",
       "lessonId": "lesson_10_while",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "خطر الحلقات اللانهائية في while",
-        "en": "Danger of Infinite Loops in while"
+        "ar": "أعد ترتيب مثال حلقة while ومخاطر التكرار اللانهائي",
+        "en": "Reorder the The while Loop and Infinite Loop Hazards example"
       },
       "prompt": {
-        "ar": "ما الذي يحدث للعبة أو المحرك إذا كتبت حلقة `while` بشرط لا ينتهي أبداً ولا يُحدث متغيراته؟",
-        "en": "What happens to the game or engine if you write a `while` loop with an unending condition and unmutated variables?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان استخدام حلقة `while` لتنفيذ الأوامر شرطياً، مع الانتباه التام للتحذير الحرج لتجنب تجميد المحرك بسبب الحلقات اللانهائية.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master using the `while` loop for conditional repetition, paying strict attention to the critical warning preventing engine freezes from infinite loops."
       },
-      "options": [
-        {
-          "ar": "تحدث حلقة لانهائية (Infinite Loop) تجمد خيط المعالجة بالكامل وتتطلب إغلاق المحرك قسرياً",
-          "en": "An infinite loop occurs, completely freezing the game thread and forcing a hard engine close"
-        },
-        {
-          "ar": "يتجاهل المحرك الحلقة تلقائياً ويستمر في العمل بسلاسة",
-          "en": "The engine automatically ignores the loop and runs smoothly"
-        },
-        {
-          "ar": "تتضاعف سرعة اللعبة أضعافاً مضاعفة",
-          "en": "Game speed doubles exponentially"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "حلقة while تتطلب دائماً تحديث المتغير لإنهاء الشرط.",
-          "en": "A while loop always requires variable updates to terminate the condition."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var countdown = 3\n    while countdown > 0:\n        print(countdown)\n        countdown -= 1\n    print(\"Liftoff!\")\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var countdown = 3\n    while countdown > 0:\n        print(countdown)\n        countdown -= 1\n    print(\"Liftoff!\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "3\n2\n1\nLiftoff!",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -97,6 +99,10 @@
         {
           "ar": "while مخصصة للشروط الديناميكية المستمرة.",
           "en": "while is tailored for ongoing dynamic conditions."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «متى نفضل استخدام حلقة while؟» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “When Do We Prefer while Loop?” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -132,6 +138,10 @@
         {
           "ar": "يجب أن يتغير شرط التوقف بمرور الدورات.",
           "en": "The stopping condition must change across iterations."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «كيفية إنهاء حلقة while بأمان» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “How to Safely Terminate while Loop” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -162,6 +172,10 @@
         {
           "ar": "تأكد دائماً من وجود سطر النقصان أو الزيادة داخل كتلة while.",
           "en": "Always ensure the decrement or increment line exists inside the while block."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: كتابة عداد تنازلي آمن بـ while» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Writing Safe Countdown with while” activity and record its effect before continuing."
         }
       ]
     },
@@ -169,21 +183,25 @@
       "id": "ex_10_while_05",
       "lessonId": "lesson_10_while",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "تطبيق حلقة while تنازلية",
-        "en": "Applying Descending while Loop"
+        "ar": "أكمل الفراغ: حلقة while ومخاطر التكرار اللانهائي",
+        "en": "Complete the blank: The while Loop and Infinite Loop Hazards"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يستخدم حلقة `while` لطياعة العد التنازلي من 2 إلى 1 بالشكل:\n`2\n1`\nداخل دالة `_ready()`.",
-        "en": "Write a script using a `while` loop printing countdown from 2 down to 1 as:\n`2\n1`\ninside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يستخدم حلقة `while` لطياعة العد التنازلي من 2 إلى 1 بالشكل:\n`2\n1`\nداخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script using a `while` loop printing countdown from 2 down to 1 as:\n`2\n1`\ninside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var n = 2\n    while n > 0:\n        ___(n)\n        n -= 1",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var n = 2\n    while n > 0:\n        print(n)\n        n -= 1",
       "hints": [
         {
           "ar": "استخدم `var n = 2` ثم `while n > 0:` مع طباعة وطرح `n -= 1`.",
           "en": "Use `var n = 2` then `while n > 0:` printing and subtracting `n -= 1`."
+        },
+        {
+          "ar": "بعد إكمال «تطبيق حلقة while تنازلية»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Applying Descending while Loop”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -191,6 +209,13 @@
           "description": {
             "ar": "التحقق من طباعة العد التنازلي 2 ثم 1 بنجاح",
             "en": "Verifying successful countdown output of 2 then 1"
+          },
+          "expectedOutput": "2\n1"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تطبيق حلقة while تنازلية",
+            "en": "Repeat the scenario to confirm deterministic output: Applying Descending while Loop"
           },
           "expectedOutput": "2\n1"
         }
@@ -215,6 +240,10 @@
         {
           "ar": "سيطبع السكربت 1 ثم 2 ثم 4.",
           "en": "The script will print 1 then 2 then 4."
+        },
+        {
+          "ar": "بعد إكمال «تضاعف القيمة حتى حد معين بـ while»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Doubling Value Up to Threshold with while”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -222,6 +251,13 @@
           "description": {
             "ar": "التحقق من طباعة القيم المتضاعفة 1 و 2 و 4",
             "en": "Verifying doubled values 1, 2, and 4 print correctly"
+          },
+          "expectedOutput": "1\n2\n4"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تضاعف القيمة حتى حد معين بـ while",
+            "en": "Repeat the scenario to confirm deterministic output: Doubling Value Up to Threshold with while"
           },
           "expectedOutput": "1\n2\n4"
         }
@@ -246,6 +282,10 @@
         {
           "ar": "أضف سطر `i += 1` داخل حلقة while لتحديث الحالة.",
           "en": "Add line `i += 1` inside the while loop to update state."
+        },
+        {
+          "ar": "في «إصلاح نقص تحديث العداد لمنع التجميد»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Missing Counter Update to Prevent Freeze”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -253,6 +293,13 @@
           "description": {
             "ar": "التحقق من عمل الحلقة بأمان بعد إضافة التحديث",
             "en": "Verifying safe loop operation after adding state update"
+          },
+          "expectedOutput": "0\n1"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح نقص تحديث العداد لمنع التجميد",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Missing Counter Update to Prevent Freeze"
           },
           "expectedOutput": "0\n1"
         }
@@ -277,6 +324,10 @@
         {
           "ar": "يبدأ بـ 3 ثم يطبعها ويصبح 2، وعندما يصبح 1 يتوقف الشرط steps > 1.",
           "en": "Starts at 3, prints it becomes 2, and when 1 stops condition steps > 1."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج حلقة while الشرطية» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Conditional while Loop Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -308,6 +359,10 @@
         {
           "ar": "سيطبع السكربت 0 ثم 2 ثم 4.",
           "en": "The script prints 0 then 2 then 4."
+        },
+        {
+          "ar": "بعد إكمال «حلقة while للوصول إلى الهدف»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “while Loop Reaching Target”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -315,6 +370,13 @@
           "description": {
             "ar": "التحقق من طباعة القيم 0 و 2 و 4",
             "en": "Verifying values 0, 2, and 4 print correctly"
+          },
+          "expectedOutput": "0\n2\n4"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: حلقة while للوصول إلى الهدف",
+            "en": "Repeat the scenario to confirm deterministic output: while Loop Reaching Target"
           },
           "expectedOutput": "0\n2\n4"
         }
@@ -339,6 +401,10 @@
         {
           "ar": "اطبع energy ثم انقص 10 في كل دورة حتى تصبح صفرًا.",
           "en": "Print energy then subtract 10 each iteration until zero."
+        },
+        {
+          "ar": "بعد إكمال «تحدي حلقة while الآمنة الشامل»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Comprehensive Safe while Loop Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -346,6 +412,13 @@
           "description": {
             "ar": "التحقق من مطاعة استهلاك الطاقة بالتدرج السليم",
             "en": "Verifying energy consumption progression match"
+          },
+          "expectedOutput": "30\n20\n10"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي حلقة while الآمنة الشامل",
+            "en": "Repeat the scenario to confirm deterministic output: Comprehensive Safe while Loop Challenge"
           },
           "expectedOutput": "30\n20\n10"
         }

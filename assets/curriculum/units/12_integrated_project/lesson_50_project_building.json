@@ -139,6 +139,26 @@
           },
           "setupCode": "var collected_items = 12\nvar change = 4",
           "expectedOutput": "16"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `collected_items` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `collected_items` set to zero; verify the resulting output."
+          },
+          "setupCode": "var collected_items = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `collected_items` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `collected_items` and its companion inputs."
+          },
+          "setupCode": "var collected_items = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -187,6 +207,26 @@
           },
           "setupCode": "var collected_items = 12\nvar change = 4",
           "expectedOutput": "16"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `collected_items` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `collected_items` set to zero; verify the resulting output."
+          },
+          "setupCode": "var collected_items = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `collected_items` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `collected_items` and its companion inputs."
+          },
+          "setupCode": "var collected_items = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -235,6 +275,26 @@
           },
           "setupCode": "var collected_items = 12\nvar change = 4",
           "expectedOutput": "16"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `collected_items` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `collected_items` set to zero; verify the resulting output."
+          },
+          "setupCode": "var collected_items = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `collected_items` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `collected_items` and its companion inputs."
+          },
+          "setupCode": "var collected_items = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -283,6 +343,26 @@
           },
           "setupCode": "var collected_items = 12\nvar change = 4",
           "expectedOutput": "16"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `collected_items` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `collected_items` set to zero; verify the resulting output."
+          },
+          "setupCode": "var collected_items = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `collected_items` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `collected_items` and its companion inputs."
+          },
+          "setupCode": "var collected_items = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -331,6 +411,26 @@
           },
           "setupCode": "var collected_items = 12\nvar change = 4",
           "expectedOutput": "12\n4\n16"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `collected_items` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `collected_items` set to zero; verify the resulting output."
+          },
+          "setupCode": "var collected_items = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `collected_items` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `collected_items` and its companion inputs."
+          },
+          "setupCode": "var collected_items = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -379,6 +479,26 @@
           },
           "setupCode": "var collected_items = 10\nvar change = 3",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `collected_items` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `collected_items` set to zero; verify the resulting output."
+          },
+          "setupCode": "var collected_items = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `collected_items` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `collected_items` and its companion inputs."
+          },
+          "setupCode": "var collected_items = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -427,6 +547,26 @@
           },
           "setupCode": "var collected_items = 10\nvar change = 3",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `collected_items` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `collected_items` set to zero; verify the resulting output."
+          },
+          "setupCode": "var collected_items = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `collected_items` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `collected_items` and its companion inputs."
+          },
+          "setupCode": "var collected_items = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -475,6 +615,26 @@
           },
           "setupCode": "var collected_items = 10\nvar change = 3",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `collected_items` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `collected_items` set to zero; verify the resulting output."
+          },
+          "setupCode": "var collected_items = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `collected_items` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `collected_items` and its companion inputs."
+          },
+          "setupCode": "var collected_items = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [

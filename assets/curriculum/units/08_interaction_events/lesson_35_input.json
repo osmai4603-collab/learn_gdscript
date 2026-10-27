@@ -145,6 +145,26 @@
           },
           "setupCode": "var active_actions = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_actions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_actions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_actions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_actions` and its companion inputs."
+          },
+          "setupCode": "var active_actions = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -193,6 +213,26 @@
           },
           "setupCode": "var active_actions = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_actions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_actions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_actions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_actions` and its companion inputs."
+          },
+          "setupCode": "var active_actions = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -241,6 +281,26 @@
           },
           "setupCode": "var active_actions = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_actions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_actions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_actions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_actions` and its companion inputs."
+          },
+          "setupCode": "var active_actions = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -325,6 +385,26 @@
           },
           "setupCode": "var active_actions = 9\nvar change = 4",
           "expectedOutput": "13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_actions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_actions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_actions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_actions` and its companion inputs."
+          },
+          "setupCode": "var active_actions = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -408,6 +488,26 @@
           },
           "setupCode": "var active_actions = 9\nvar change = 4",
           "expectedOutput": "9\n4\n13"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_actions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_actions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_actions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_actions` and its companion inputs."
+          },
+          "setupCode": "var active_actions = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -456,6 +556,26 @@
           },
           "setupCode": "var active_actions = 9\nvar change = 4",
           "expectedOutput": "22"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_actions` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_actions` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_actions = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_actions` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_actions` and its companion inputs."
+          },
+          "setupCode": "var active_actions = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     }

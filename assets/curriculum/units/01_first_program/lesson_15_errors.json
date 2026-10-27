@@ -35,38 +35,36 @@
       "id": "ex_15_errors_01",
       "lessonId": "lesson_15_errors",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "الفرق بين أخطاء الصياغة وأخطاء التشغيل",
-        "en": "Difference Between Syntax and Runtime Errors"
+        "ar": "أعد ترتيب مثال قراءة الأخطاء وتشخيصها (تحدي الوحدة 1)",
+        "en": "Reorder the Reading Errors and Debugging (Unit 1 Capstone) example"
       },
       "prompt": {
-        "ar": "متى تظهر أخطاء الصياغة (Syntax Errors) في محرك Godot عادةً؟",
-        "en": "When do syntax errors typically appear in the Godot engine?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: استخدام نافذة المراجع وأخطاء المحرر لتشخيص الأخطاء البرمجية وإنجاز التحدي التراكمي للوحدة الأولى.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Use the debugger and editor diagnostics to troubleshoot code errors and complete the Unit 1 capstone challenge."
       },
-      "options": [
-        {
-          "ar": "قبل تشغيل اللعبة وتمنع تشغيل المشهد باللون الأحمر",
-          "en": "Before running the game, blocking scene execution in red"
-        },
-        {
-          "ar": "فقط بعد إغلاق اللعبة بـ 5 دقائق",
-          "en": "Only 5 minutes after closing the game"
-        },
-        {
-          "ar": "عندما يربح اللاعب المرحلة النهائية",
-          "en": "When the player wins the final stage"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "أخطاء الصياغة تمنع تشغيل المشهد قبل البدء.",
-          "en": "Syntax errors prevent scene startup before execution."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "الخيار الأول يعبر بدقة عن طبيعة أخطاء الصياغة.",
-          "en": "The first option accurately describes syntax errors."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var initial_score = 50 + 50\n    print(initial_score)\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var initial_score = 50 + 50\n    print(initial_score)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "100",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -190,21 +188,25 @@
       "id": "ex_15_errors_05",
       "lessonId": "lesson_15_errors",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "تصحيح وكتابة شيفرة خالية من الأخطاء",
-        "en": "Correcting and Writing Bug-Free Code"
+        "ar": "أكمل الفراغ: قراءة الأخطاء وتشخيصها (تحدي الوحدة 1)",
+        "en": "Complete the blank: Reading Errors and Debugging (Unit 1 Capstone)"
       },
       "prompt": {
-        "ar": "اكتب دالة `_ready()` سليمة تطبع النتيجة الصحيحة لعملية حسابية `10 + 20`:",
-        "en": "Write a sound `_ready()` function that prints the correct result of the calculation `10 + 20`:"
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب دالة `_ready()` سليمة تطبع النتيجة الصحيحة لعملية حسابية `10 + 20`:",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a sound `_ready()` function that prints the correct result of the calculation `10 + 20`:"
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    print(10 + 20)",
+      "starterCode": "extends Node\n\nfunc _ready():\n    ___(10 + 20)",
       "solutionCode": "extends Node\n\nfunc _ready():\n    print(10 + 20)",
       "hints": [
         {
           "ar": "العملية الحسابية داخل print() لا تحتاج علامات تنصيص لتطبع ناتجها (30).",
           "en": "Arithmetic inside print() doesn't need quotes to print its result (30)."
+        },
+        {
+          "ar": "بعد إكمال «تصحيح وكتابة شيفرة خالية من الأخطاء»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Correcting and Writing Bug-Free Code”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -212,6 +214,13 @@
           "description": {
             "ar": "التحقق من صحة ناتج حساب المجموع",
             "en": "Verifying calculation sum result correctness"
+          },
+          "expectedOutput": "30"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تصحيح وكتابة شيفرة خالية من الأخطاء",
+            "en": "Repeat the scenario to confirm deterministic output: Correcting and Writing Bug-Free Code"
           },
           "expectedOutput": "30"
         }
@@ -236,6 +245,10 @@
         {
           "ar": "تعريف المتغير بـ `var` ثم استخدامه بـ `print(item_count)`.",
           "en": "Define variable with `var` then use with `print(item_count)`."
+        },
+        {
+          "ar": "بعد إكمال «كتابة متغير وحساب رسالة خالية من الأخطاء»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Writing Variable and Calculating Error-Free Message”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -243,6 +256,13 @@
           "description": {
             "ar": "التحقق من طباعة قيمة المتغير بدقة",
             "en": "Verifying variable value output accurately"
+          },
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: كتابة متغير وحساب رسالة خالية من الأخطاء",
+            "en": "Repeat the scenario to confirm deterministic output: Writing Variable and Calculating Error-Free Message"
           },
           "expectedOutput": "3"
         }
@@ -267,6 +287,10 @@
         {
           "ar": "أضف قوس الإغلاق `)` في نهاية السطر.",
           "en": "Add closing parenthesis `)` at the end of the line."
+        },
+        {
+          "ar": "في «إصلاح قوس ناقص في دالة الطباعة»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Missing Parenthesis in Print”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -274,6 +298,13 @@
           "description": {
             "ar": "التحقق من عمل الشيفرة بعد إضافة القوس",
             "en": "Verifying code function after adding parenthesis"
+          },
+          "expectedOutput": "Debug OK"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح قوس ناقص في دالة الطباعة",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Missing Parenthesis in Print"
           },
           "expectedOutput": "Debug OK"
         }
@@ -310,7 +341,7 @@
             "ar": "التحقق من طباعة النص المدمج مع المتغير",
             "en": "Verifying concatenated text and variable output"
           },
-          "expectedOutput": "Level: 1"
+          "expectedOutput": "Level:  1"
         }
       ]
     },
@@ -333,6 +364,10 @@
         {
           "ar": "استخدم `var is_active = true` ثم `print(is_active)`.",
           "en": "Use `var is_active = true` then `print(is_active)`."
+        },
+        {
+          "ar": "بعد إكمال «فحص متغير حالة النظام»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Checking System State Variable”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -340,6 +375,13 @@
           "description": {
             "ar": "التحقق من طباعة القيمة المنطقية true",
             "en": "Verifying boolean true output"
+          },
+          "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: فحص متغير حالة النظام",
+            "en": "Repeat the scenario to confirm deterministic output: Checking System State Variable"
           },
           "expectedOutput": "true"
         }
@@ -351,34 +393,78 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدي الوحدة 1 التراكمي: بطاقة هوية اللعبة (Game Splash Card)",
-        "en": "Unit 1 Capstone Challenge: Game Splash Card"
+        "ar": "تحدي بطاقة شخصية اللعبة",
+        "en": "Player Identity Card Challenge"
       },
       "prompt": {
-        "ar": "أنجز التحدي التراكمي للوحدة الأولى: اكتب سكربتاً يضم تعليقاً توثيقياً للعنوان `## Game Splash Card` وفي دالة `_ready()` يطبع تباعاً في ثلاثة أسطر منفصلة:\n1. `Title: Cyber Runner`\n2. `Version: 1.0`\n3. `Status: Ready`",
-        "en": "Complete the Unit 1 capstone challenge: Write a script featuring documentation comment `## Game Splash Card` and inside `_ready()` prints consecutively in three separate lines:\n1. `Title: Cyber Runner`\n2. `Version: 1.0`\n3. `Status: Ready`"
+        "ar": "ابنِ بطاقة تعريف لبطل اللعبة عبر دالة واضحة: اعرض الاسم والرتبة ورسالة الجاهزية في سطر واحد، واستخدم توثيقًا داخليًا `##`. إذا كان الاسم أو الرتبة فارغًا، استخدم قيمة افتراضية مناسبة. اختبر أكثر من بطل عبر المتغيرات المهيأة قبل الشيفرة.",
+        "en": "Build a game hero identity card with a clear function: show the name, rank, and ready message on one line, and document the function with `##`. Use sensible defaults when the name or rank is empty. Test more than one hero using the variables provided before your code."
       },
-      "starterCode": "extends Node\n\n## Game Splash Card\nfunc _ready():\n    # اكتب الأوامر هنا\n    ",
-      "solutionCode": "extends Node\n\n## Game Splash Card\nfunc _ready():\n    print(\"Title: Cyber Runner\")\n    print(\"Version: 1.0\")\n    print(\"Status: Ready\")",
+      "starterCode": "## Prints a formatted player identity card.\nfunc print_identity_card(hero_name, hero_rank, ready_message):\n    # Format the values and handle empty text.\n    pass\n\nprint_identity_card(hero_name, hero_rank, ready_message)",
+      "solutionCode": "## Prints a formatted player identity card.\nfunc print_identity_card(hero_name, hero_rank, ready_message):\n    if hero_name == \"\":\n        hero_name = \"Unknown\"\n    if hero_rank == \"\":\n        hero_rank = \"Rookie\"\n    print(\"Hero: \" + hero_name + \" | Rank: \" + hero_rank + \" | Status: \" + ready_message)\n\nprint_identity_card(hero_name, hero_rank, ready_message)",
       "hints": [
         {
-          "ar": "اكتب ثلاثة أوامر `print()` متتالية داخل دالة `_ready()` مع مراعاة النصوص بدقة.",
-          "en": "Write three consecutive `print()` statements inside `_ready()` with exact text."
+          "ar": "ابدأ بتحديد قيم افتراضية للنصوص الفارغة قبل تنسيق الرسالة.",
+          "en": "Choose defaults for empty text before formatting the message."
         },
         {
-          "ar": "هذا التحدي يدمج مهارات الطباعة والتعليقات وتجنب أخطاء الصياغة بنجاح.",
-          "en": "This challenge successfully integrates printing, comments, and syntax error prevention."
+          "ar": "اجمع القيم في دالة واحدة، ثم استدعها بالمتغيرات التي يهيئها كل اختبار.",
+          "en": "Keep the formatting in one function, then call it with the variables each test initializes."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "التحقق من مطابقة بطاقة هوية اللعبة بكافة أسطرها الثلاثة",
-            "en": "Verifying game splash card output matching all three lines"
+            "ar": "تحقق من تنسيق بطاقة بطل اعتيادية",
+            "en": "Check a regular hero identity card"
           },
-          "expectedOutput": "Title: Cyber Runner\nVersion: 1.0\nStatus: Ready"
+          "setupCode": "var hero_name = \"Aria\"\nvar hero_rank = \"Scout\"\nvar ready_message = \"Ready\"",
+          "expectedOutput": "Hero: Aria | Rank: Scout | Status: Ready",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من القيم الافتراضية عند فراغ الاسم والرتبة",
+            "en": "Check defaults for empty name and rank"
+          },
+          "setupCode": "var hero_name = \"\"\nvar hero_rank = \"\"\nvar ready_message = \"Loaded\"",
+          "expectedOutput": "Hero: Unknown | Rank: Rookie | Status: Loaded",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من بطاقة بطل بمدخلات مختلفة",
+            "en": "Check the card with different hero inputs"
+          },
+          "setupCode": "var hero_name = \"Mira\"\nvar hero_rank = \"Mage\"\nvar ready_message = \"Spawned\"",
+          "expectedOutput": "Hero: Mira | Rank: Mage | Status: Spawned",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من بطاقة بطل باسم ورتبة مختلفين",
+            "en": "Check the card with a different hero name and rank"
+          },
+          "setupCode": "var hero_name = \"Rin\"\nvar hero_rank = \"Knight\"\nvar ready_message = \"Entered\"",
+          "expectedOutput": "Hero: Rin | Rank: Knight | Status: Entered",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من استخدام رتبة افتراضية عند فراغها",
+            "en": "Check the default rank for empty input"
+          },
+          "setupCode": "var hero_name = \"Sol\"\nvar hero_rank = \"\"\nvar ready_message = \"Respawned\"",
+          "expectedOutput": "Hero: Sol | Rank: Rookie | Status: Respawned",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
-      ]
+      ],
+      "options": []
     }
   ]
 }

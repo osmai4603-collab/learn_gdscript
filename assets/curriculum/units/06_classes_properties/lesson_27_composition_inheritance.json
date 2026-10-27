@@ -145,6 +145,26 @@
           },
           "setupCode": "var base_damage = 19\nvar change = 4",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `base_damage` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `base_damage` set to zero; verify the resulting output."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `base_damage` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `base_damage` and its companion inputs."
+          },
+          "setupCode": "var base_damage = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -193,6 +213,26 @@
           },
           "setupCode": "var base_damage = 19\nvar change = 4",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `base_damage` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `base_damage` set to zero; verify the resulting output."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `base_damage` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `base_damage` and its companion inputs."
+          },
+          "setupCode": "var base_damage = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -241,6 +281,26 @@
           },
           "setupCode": "var base_damage = 19\nvar change = 4",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `base_damage` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `base_damage` set to zero; verify the resulting output."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `base_damage` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `base_damage` and its companion inputs."
+          },
+          "setupCode": "var base_damage = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -325,6 +385,26 @@
           },
           "setupCode": "var base_damage = 19\nvar change = 4",
           "expectedOutput": "23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `base_damage` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `base_damage` set to zero; verify the resulting output."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `base_damage` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `base_damage` and its companion inputs."
+          },
+          "setupCode": "var base_damage = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -408,56 +488,107 @@
           },
           "setupCode": "var base_damage = 19\nvar change = 4",
           "expectedOutput": "19\n4\n23"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `base_damage` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `base_damage` set to zero; verify the resulting output."
+          },
+          "setupCode": "var base_damage = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `base_damage` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `base_damage` and its companion inputs."
+          },
+          "setupCode": "var base_damage = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
     {
-      "id": "ex_lesson_27_composition_inheritance_10_apply",
+      "id": "ex_27_comp_10",
       "lessonId": "lesson_27_composition_inheritance",
       "type": "writeCode",
       "prompt": {
-        "ar": "اكتب شيفرة تضاعف base_damage ثم تضيف change وتطبع الناتج في مثال عن composition.",
-        "en": "Write code that doubles base_damage, adds change, and prints the result in a composition example."
+        "ar": "أنشئ صنفًا `Entity` يخزن الحياة ويعالج الضرر، ثم صنف `Player` يركّب كيانًا ويضيف درعًا يمتص الضرر قبل وصوله إلى الحياة. اختبر امتصاص الدرع كليًا وجزئيًا ونفاده.",
+        "en": "Create an `Entity` class that stores health and handles damage, then a `Player` class that composes an entity and adds a shield that absorbs damage before health is reduced. Test full absorption, partial absorption, and shield depletion."
       },
       "hints": [
         {
-          "ar": "احسب ضعف القيمة أولاً ثم أضف change.",
-          "en": "Double the value first, then add change."
+          "ar": "ابدأ بدالة الضرر في الصنف الأساسي، ثم اجعل اللاعب يحدد مقدار ما يمتصه الدرع.",
+          "en": "Implement damage handling in the base class, then let the player calculate how much the shield absorbs."
         },
         {
-          "ar": "استخدم المتغيرات التي يهيئها كل اختبار.",
-          "en": "Use the variables provided by each test."
+          "ar": "استخدم الوراثة لإعادة استخدام تحديث الحياة، ولا تكرر منطق الصنف الأساسي.",
+          "en": "Use inheritance to reuse health updates instead of duplicating the base-class logic."
         }
       ],
       "order": 9,
-      "starterCode": "",
-      "solutionCode": "var result = base_damage * 2 + change\nprint(result)",
+      "starterCode": "class Entity:\n    var health: int\n\n    func _init(starting_health: int):\n        health = starting_health\n\n    func take_damage(amount: int) -> int:\n        # Keep health at zero or above.\n        pass\n\nclass Player:\n    var entity\n    var shield: int\n\n    func _init(starting_health: int, starting_shield: int):\n        entity = Entity.new(starting_health)\n        shield = starting_shield\n\n    func defend(amount: int) -> int:\n        # Absorb damage with the shield, then delegate to the entity.\n        pass\n\nvar player = Player.new(starting_health, starting_shield)\nprint(player.defend(incoming_damage))",
+      "solutionCode": "class Entity:\n    var health: int\n\n    func _init(starting_health: int):\n        health = starting_health\n\n    func take_damage(amount: int) -> int:\n        health = max(0, health - amount)\n        return health\n\nclass Player:\n    var entity\n    var shield: int\n\n    func _init(starting_health: int, starting_shield: int):\n        entity = Entity.new(starting_health)\n        shield = starting_shield\n\n    func defend(amount: int) -> int:\n        var absorbed = min(amount, shield)\n        shield -= absorbed\n        return entity.take_damage(amount - absorbed)\n\nvar player = Player.new(starting_health, starting_shield)\nprint(player.defend(incoming_damage))",
       "testCases": [
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من امتصاص جزء من الضرر بالدرع",
+            "en": "Check partial damage absorption by shield"
           },
-          "setupCode": "var base_damage = 12\nvar change = 5",
-          "expectedOutput": "29"
+          "setupCode": "var starting_health = 100\nvar starting_shield = 20\nvar incoming_damage = 30",
+          "expectedOutput": "90",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من امتصاص الدرع كامل الضرر",
+            "en": "Check shield fully absorbing damage"
           },
-          "setupCode": "var base_damage = 0\nvar change = 5",
-          "expectedOutput": "5"
+          "setupCode": "var starting_health = 50\nvar starting_shield = 100\nvar incoming_damage = 60",
+          "expectedOutput": "50",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "تتحقق النتيجة مع القيم المحددة.",
-            "en": "The result matches the supplied values."
+            "ar": "تحقق من نفاد الدرع وعدم نزول الحياة عن الصفر",
+            "en": "Check shield depletion and health floor"
           },
-          "setupCode": "var base_damage = 19\nvar change = 4",
-          "expectedOutput": "42"
+          "setupCode": "var starting_health = 20\nvar starting_shield = 10\nvar incoming_damage = 40",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `starting_health` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `starting_health` set to zero; verify the resulting output."
+          },
+          "setupCode": "var starting_health = 0\nvar starting_shield = 1\nvar incoming_damage = 1",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `starting_health` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `starting_health` and its companion inputs."
+          },
+          "setupCode": "var starting_health = 1\nvar starting_shield = 3\nvar incoming_damage = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
-      ]
+      ],
+      "title": {
+        "ar": "تحدي صنف الكائن الحي والمكونات",
+        "en": "Entity Class and Component Architecture"
+      },
+      "options": []
     }
   ]
 }

@@ -51,37 +51,39 @@
     {
       "id": "ex_lesson_14_return_added_3",
       "lessonId": "lesson_14_return",
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "أي وصف يطابق مفهوم «القيم المعادة»؟",
-        "en": "Which description matches “Return Values”?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: أعد نتيجة من الدالة واستخدمها في موضع آخر.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Return a result from a function and use it elsewhere."
       },
-      "options": [
-        {
-          "ar": "الدالة تجمع تعليمات قابلة لإعادة الاستخدام.",
-          "en": "A function groups reusable statements."
-        },
-        {
-          "ar": "هو اسم آخر لمخرجات الطباعة.",
-          "en": "It is another name for printed output."
-        },
-        {
-          "ar": "لا يغير طريقة تنظيم البرنامج.",
-          "en": "It does not affect program organization."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
-          "en": "Look for the role or benefit explained in the lesson."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
-          "en": "Review the concept definition in the lesson."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
         }
       ],
-      "order": 1
+      "order": 1,
+      "title": {
+        "ar": "أعد ترتيب مثال القيم المعادة",
+        "en": "Reorder the Return Values example"
+      },
+      "starterCode": "    return a + b\nvar result = add(3, 5)\nprint(result)\nfunc add(a, b):",
+      "solutionCode": "func add(a, b):\n    return a + b\n\nvar result = add(3, 5)\nprint(result)",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "8",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_14_return_added_4",
@@ -155,18 +157,25 @@
     {
       "id": "ex_14_square_return",
       "lessonId": "lesson_14_return",
-      "type": "writeCode",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "عرّف `square(n)` لتعيد مربع `6`، ثم اطبع القيمة المعادة.",
-        "en": "Define `square(n)` to return the square of `6`, then print the returned value."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: عرّف `square(n)` لتعيد مربع `6`، ثم اطبع القيمة المعادة.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Define `square(n)` to return the square of `6`, then print the returned value."
       },
-      "starterCode": "",
+      "starterCode": "func square(n):\n    return n * n\n\n___(square(6))",
       "solutionCode": "func square(n):\n    return n * n\n\nprint(square(6))",
       "testCases": [
         {
           "description": {
             "ar": "تُعاد قيمة المربع وتُطبع.",
             "en": "The square is returned and printed."
+          },
+          "expectedOutput": "36"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_14_square_return",
+            "en": "Repeat the scenario to confirm deterministic output: ex_14_square_return"
           },
           "expectedOutput": "36"
         }
@@ -181,7 +190,11 @@
           "en": "Multiply `n` by itself, then print the function call."
         }
       ],
-      "order": 4
+      "order": 4,
+      "title": {
+        "ar": "أكمل الفراغ: القيم المعادة",
+        "en": "Complete the blank: Return Values"
+      }
     },
     {
       "id": "ex_14_is_even",
@@ -198,6 +211,13 @@
           "description": {
             "ar": "العدد 8 زوجي.",
             "en": "The number 8 is even."
+          },
+          "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_14_is_even",
+            "en": "Repeat the scenario to confirm deterministic output: ex_14_is_even"
           },
           "expectedOutput": "true"
         }
@@ -265,6 +285,13 @@
             "en": "The output matches the expected result."
           },
           "expectedOutput": "1\n1"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_14_return_added_code_1",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_14_return_added_code_1"
+          },
+          "expectedOutput": "1\n1"
         }
       ],
       "hints": [
@@ -296,6 +323,13 @@
             "en": "The output matches the expected result."
           },
           "expectedOutput": "Ready"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_14_return_added_code_2",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_14_return_added_code_2"
+          },
+          "expectedOutput": "Ready"
         }
       ],
       "hints": [
@@ -325,6 +359,13 @@
           "description": {
             "ar": "يطابق الإخراج المتوقع.",
             "en": "The output matches the expected result."
+          },
+          "expectedOutput": "6"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_14_return_added_code_3",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_14_return_added_code_3"
           },
           "expectedOutput": "6"
         }

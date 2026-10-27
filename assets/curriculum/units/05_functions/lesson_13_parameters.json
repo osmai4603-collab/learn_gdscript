@@ -20,37 +20,39 @@
     {
       "id": "ex_lesson_13_parameters_added_3",
       "lessonId": "lesson_13_parameters",
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "أي وصف يطابق مفهوم «المعاملات»؟",
-        "en": "Which description matches “Parameters”?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: مرّر قيماً إلى الدالة لتخصيص عملها.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Pass values to a function to customize its behavior."
       },
-      "options": [
-        {
-          "ar": "الدالة تجمع تعليمات قابلة لإعادة الاستخدام.",
-          "en": "A function groups reusable statements."
-        },
-        {
-          "ar": "هو اسم آخر لمخرجات الطباعة.",
-          "en": "It is another name for printed output."
-        },
-        {
-          "ar": "لا يغير طريقة تنظيم البرنامج.",
-          "en": "It does not affect program organization."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
-          "en": "Look for the role or benefit explained in the lesson."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
-          "en": "Review the concept definition in the lesson."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
         }
       ],
-      "order": 0
+      "order": 0,
+      "title": {
+        "ar": "أعد ترتيب مثال المعاملات",
+        "en": "Reorder the Parameters example"
+      },
+      "starterCode": "    print(\"Hello, \" + name + \"!\")\ngreet(\"Ali\")\ngreet(\"Sara\")\nfunc greet(name):",
+      "solutionCode": "func greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Ali\")\ngreet(\"Sara\")",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Hello, Ali!\nHello, Sara!",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_13_parameters_added_4",
@@ -90,36 +92,60 @@
     {
       "id": "ex_lesson_13_parameters_trace",
       "lessonId": "lesson_13_parameters",
-      "type": "guidedTask",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أكمل تتبع `greet(name)` عند استدعائها بـ `Mia`، مع تمييز المعامل عن الوسيط.",
-        "en": "Complete a trace of `greet(name)` called with `Mia`, identifying the parameter and argument."
+        "ar": "تنبأ بمخرج دالة تجمع الضرر الأساسي والمكافأة باستخدام معاملات مختلفة.",
+        "en": "Predict a function that combines base damage and a bonus using different parameters."
       },
-      "steps": [
-        {
-          "ar": "ضع خطاً تحت المعامل في التعريف.",
-          "en": "Underline the parameter in the definition."
-        },
-        {
-          "ar": "ضع دائرة حول الوسيط في الاستدعاء.",
-          "en": "Circle the argument in the call."
-        },
-        {
-          "ar": "اكتب النص الذي تطبعه الدالة.",
-          "en": "Write the text printed by the function."
-        }
-      ],
       "hints": [
         {
-          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
-          "en": "Write your prediction or plan before trying it, then review it against the example."
+          "ar": "طابق كل وسيط بالقيمة التي يمررها الاستدعاء إلى المعامل المقابل.",
+          "en": "Match each argument to the corresponding parameter."
         },
         {
-          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
-          "en": "This is a self-check activity, not an automated test."
+          "ar": "نفّذ الجمع داخل الدالة ثم قارن النتيجة المطبوعة.",
+          "en": "Perform the addition inside the function and check the printed result."
         }
       ],
-      "order": 2
+      "order": 2,
+      "title": {
+        "ar": "تتبّع معاملات حساب الضرر",
+        "en": "Trace damage-calculation parameters"
+      },
+      "starterCode": "func total_damage(base_damage, bonus):\n    return base_damage + bonus\n\nprint(total_damage(base_damage, bonus))",
+      "solutionCode": "func total_damage(base_damage, bonus):\n    return base_damage + bonus\n\nprint(total_damage(base_damage, bonus))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتبّع التنفيذ مع مجموعة المدخلات الأولى.",
+            "en": "Trace execution with the first input set."
+          },
+          "setupCode": "var base_damage = 20\nvar bonus = 5",
+          "expectedOutput": "25",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "اختبر السلوك عند مدخلات صفرية.",
+            "en": "Test behavior with zero-valued inputs."
+          },
+          "setupCode": "var base_damage = 0\nvar bonus = 0",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من مدخلات بديلة مستقلة.",
+            "en": "Check a separate alternate input set."
+          },
+          "setupCode": "var base_damage = 10\nvar bonus = 3",
+          "expectedOutput": "13",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_13_parameters_added_code_1",
@@ -169,6 +195,13 @@
             "en": "The function prints twice its argument."
           },
           "expectedOutput": "10"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_13_double_parameter",
+            "en": "Repeat the scenario to confirm deterministic output: ex_13_double_parameter"
+          },
+          "expectedOutput": "10"
         }
       ],
       "hints": [
@@ -198,6 +231,13 @@
           "description": {
             "ar": "تظهر القيمة الممررة إلى المعامل.",
             "en": "The value passed to the parameter appears."
+          },
+          "expectedOutput": "Hello, Mia!"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_13_fix_parameter",
+            "en": "Repeat the scenario to confirm deterministic output: ex_13_fix_parameter"
           },
           "expectedOutput": "Hello, Mia!"
         }
@@ -265,6 +305,13 @@
             "en": "The default value is used for the second parameter."
           },
           "expectedOutput": "Echo\nEcho"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_13_default_repeat",
+            "en": "Repeat the scenario to confirm deterministic output: ex_13_default_repeat"
+          },
+          "expectedOutput": "Echo\nEcho"
         }
       ],
       "hints": [
@@ -296,6 +343,13 @@
             "en": "The output matches the expected result."
           },
           "expectedOutput": "Ready"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_13_parameters_added_code_2",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_13_parameters_added_code_2"
+          },
+          "expectedOutput": "Ready"
         }
       ],
       "hints": [
@@ -325,6 +379,13 @@
           "description": {
             "ar": "يطابق الإخراج المتوقع.",
             "en": "The output matches the expected result."
+          },
+          "expectedOutput": "Hello, Ava"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_13_parameters_added_code_3",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_13_parameters_added_code_3"
           },
           "expectedOutput": "Hello, Ava"
         }

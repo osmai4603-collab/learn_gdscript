@@ -20,37 +20,39 @@
     {
       "id": "ex_lesson_12_func_basics_added_3",
       "lessonId": "lesson_12_func_basics",
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "أي وصف يطابق مفهوم «تعريف الدوال»؟",
-        "en": "Which description matches “Defining Functions”?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: اجمع الأوامر في دالة واستدعها عند الحاجة.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Group statements in a function and call it when needed."
       },
-      "options": [
-        {
-          "ar": "الدالة تجمع تعليمات قابلة لإعادة الاستخدام.",
-          "en": "A function groups reusable statements."
-        },
-        {
-          "ar": "هو اسم آخر لمخرجات الطباعة.",
-          "en": "It is another name for printed output."
-        },
-        {
-          "ar": "لا يغير طريقة تنظيم البرنامج.",
-          "en": "It does not affect program organization."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "ابحث عن الدور أو الفائدة المحددة في نص الدرس.",
-          "en": "Look for the role or benefit explained in the lesson."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
         },
         {
-          "ar": "ارجع إلى تعريف المفهوم في الشرح.",
-          "en": "Review the concept definition in the lesson."
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
         }
       ],
-      "order": 0
+      "order": 0,
+      "title": {
+        "ar": "أعد ترتيب مثال تعريف الدوال",
+        "en": "Reorder the Defining Functions example"
+      },
+      "starterCode": "    print(\"Hello!\")\ngreet()\ngreet()\nfunc greet():",
+      "solutionCode": "func greet():\n    print(\"Hello!\")\n\ngreet()\ngreet()",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Hello!\nHello!",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_12_func_basics_added_4",
@@ -135,6 +137,13 @@
             "en": "The message appears once for each call."
           },
           "expectedOutput": "Hi!\nHi!\nHi!"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_12_say_hi",
+            "en": "Repeat the scenario to confirm deterministic output: ex_12_say_hi"
+          },
+          "expectedOutput": "Hi!\nHi!\nHi!"
         }
       ],
       "hints": [
@@ -152,36 +161,60 @@
     {
       "id": "ex_lesson_12_func_basics_plan",
       "lessonId": "lesson_12_func_basics",
-      "type": "guidedTask",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "أكمل مخطط تنفيذ `say_hi()` من التعريف إلى ظهور الرسالة.",
-        "en": "Complete a trace of `say_hi()` from its definition to the message appearing."
+        "ar": "تتبّع الدالة ثم تنبأ بالقيمة المطبوعة لكل مدخل.",
+        "en": "Trace the function and predict the printed value for each input."
       },
-      "steps": [
-        {
-          "ar": "اكتب سطر التعريف وجسم الدالة.",
-          "en": "Write the definition line and function body."
-        },
-        {
-          "ar": "حدد سطر الاستدعاء.",
-          "en": "Identify the call statement."
-        },
-        {
-          "ar": "اكتب الرسالة التي تظهر لكل استدعاء.",
-          "en": "Write the message printed for each call."
-        }
-      ],
       "hints": [
         {
-          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
-          "en": "Write your prediction or plan before trying it, then review it against the example."
+          "ar": "تتبّع المعامل إلى قيمة الإرجاع ثم إلى أمر الطباعة.",
+          "en": "Follow the parameter through the return value and into the print call."
         },
         {
-          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
-          "en": "This is a self-check activity, not an automated test."
+          "ar": "احسب الناتج لكل استدعاء بدل افتراض قيمة واحدة ثابتة.",
+          "en": "Calculate each call separately instead of assuming one fixed result."
         }
       ],
-      "order": 4
+      "order": 4,
+      "title": {
+        "ar": "تتبّع دالة تضاعف القيمة",
+        "en": "Trace a doubling function"
+      },
+      "starterCode": "func double(value):\n    return value * 2\n\nprint(double(number))",
+      "solutionCode": "func double(value):\n    return value * 2\n\nprint(double(number))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تتبّع التنفيذ مع مجموعة المدخلات الأولى.",
+            "en": "Trace execution with the first input set."
+          },
+          "setupCode": "var number = 4",
+          "expectedOutput": "8",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "اختبر السلوك عند مدخلات صفرية.",
+            "en": "Test behavior with zero-valued inputs."
+          },
+          "setupCode": "var number = 0",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من مدخلات بديلة مستقلة.",
+            "en": "Check a separate alternate input set."
+          },
+          "setupCode": "var number = 7",
+          "expectedOutput": "14",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_12_func_basics_fix",
@@ -198,6 +231,13 @@
           "description": {
             "ar": "يطابق الإخراج السلوك المطلوب.",
             "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "Hello, Mia!"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_12_func_basics_fix",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_12_func_basics_fix"
           },
           "expectedOutput": "Hello, Mia!"
         }
@@ -229,6 +269,13 @@
           "description": {
             "ar": "تظهر الدالة الفاصلة بين السطرين.",
             "en": "The function prints a separator between the two lines."
+          },
+          "expectedOutput": "Start\n----------\nEnd"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_12_separator",
+            "en": "Repeat the scenario to confirm deterministic output: ex_12_separator"
           },
           "expectedOutput": "Start\n----------\nEnd"
         }
@@ -296,6 +343,13 @@
             "en": "The output matches the expected result."
           },
           "expectedOutput": "1\n1"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_12_func_basics_added_code_1",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_12_func_basics_added_code_1"
+          },
+          "expectedOutput": "1\n1"
         }
       ],
       "hints": [
@@ -325,6 +379,13 @@
           "description": {
             "ar": "يطابق الإخراج المتوقع.",
             "en": "The output matches the expected result."
+          },
+          "expectedOutput": "Ready"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_12_func_basics_added_code_2",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_12_func_basics_added_code_2"
           },
           "expectedOutput": "Ready"
         }

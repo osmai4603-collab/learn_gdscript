@@ -15,7 +15,8 @@ void checkSchema(AuditContext context) {
         path: context.pathFor(record.file),
       );
     }
-    if (lesson.id != record.file.uri.pathSegments.last.replaceFirst('.json', '')) {
+    if (lesson.id !=
+        record.file.uri.pathSegments.last.replaceFirst('.json', '')) {
       context.report.add(
         IssueSeverity.error,
         'identifiers',
@@ -40,7 +41,9 @@ void checkSchema(AuditContext context) {
       );
     }
     final lessonExerciseIds = <String>{};
+    final lessonExerciseTypes = <String>{};
     for (final exercise in lesson.exercises) {
+      lessonExerciseTypes.add(exercise.type);
       if (exercise.lessonId != lesson.id) {
         context.report.add(
           IssueSeverity.error,
@@ -66,6 +69,18 @@ void checkSchema(AuditContext context) {
           path: context.pathFor(record.file),
         );
       }
+    }
+    final missingExerciseTypes = supportedExerciseTypes.difference(
+      lessonExerciseTypes,
+    );
+    if (missingExerciseTypes.isNotEmpty) {
+      context.report.add(
+        IssueSeverity.error,
+        'exercise-type-variety',
+        'Lesson "${lesson.id}" is missing exercise types: '
+            '${missingExerciseTypes.join(', ')}.',
+        path: context.pathFor(record.file),
+      );
     }
     final orders = lesson.exercises.map((exercise) => exercise.order).toList();
     if (orders.toSet().length != orders.length) {

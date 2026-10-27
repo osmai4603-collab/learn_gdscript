@@ -34,34 +34,36 @@
       "id": "ex_19_arrays_01",
       "lessonId": "lesson_19_arrays",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "بم تبدأ فهارس المصفوفات في GDScript؟",
-        "en": "What Index Do Arrays Start At in GDScript?"
+        "ar": "أعد ترتيب مثال المصفوفات Array والعمليات عليها",
+        "en": "Reorder the Arrays and Operations example"
       },
       "prompt": {
-        "ar": "عند إنشاء مصفوفة في لغة GDScript، برقم ماذا يبدأ فهرس (Index) أول عنصر مخزن فيها؟",
-        "en": "When creating an array in GDScript, what index does the first stored element start at?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان إنشاء واستخدام المصفوفات، فهم انتقالها بالمرجع (Pass-by-reference)، والالتزام بتحذير عدم تعديل المصفوفة أثناء الدوران عليها.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master creating and using arrays, understand Pass-by-reference semantics, and adhere to the warning against mutating arrays while iterating."
       },
-      "options": [
-        {
-          "ar": "الرقم `0` (الفهارس يبدأ عدها دائماً من الصفر)",
-          "en": "The number `0` (indices always start counting from zero)"
-        },
-        {
-          "ar": "الرقم `1`",
-          "en": "The number `1`"
-        },
-        {
-          "ar": "الرقم `-1`",
-          "en": "The number `-1`"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "فهارس الحاويات تبدأ من 0 في GDScript.",
-          "en": "Container indices start at 0 in GDScript."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var inventory = [\"Sword\", \"Shield\"]\n    inventory.append(\"Potion\")\n    print(inventory[0])\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var inventory = [\"Sword\", \"Shield\"]\n    inventory.append(\"Potion\")\n    print(inventory[0])",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Sword",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -97,6 +99,10 @@
         {
           "ar": "append تضيف العنصر ذيله.",
           "en": "append adds the item to the tail."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «كيفية إضافة عنصر لنهاية المصفوفة» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “How to Add Item to End of Array” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -132,6 +138,10 @@
         {
           "ar": "تغيير الحجم والفهارس أثناء الدوران يربك حلقة الـ for.",
           "en": "Mutating size and indices during iteration confuses the for loop."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «مخاطر تعديل المصفوفة أثناء الدوران عليها» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Hazards of Mutating Array During Iteration” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -162,6 +172,10 @@
         {
           "ar": "استخدم append لإضافة العنصر واقرا بالفهرس 0.",
           "en": "Use append to add item and read at index 0."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: إنشاء مصفوفة وإضافة وإرجاع عنصر» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Creating Array, Adding and Returning Item” activity and record its effect before continuing."
         }
       ]
     },
@@ -169,21 +183,25 @@
       "id": "ex_19_arrays_05",
       "lessonId": "lesson_19_arrays",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "قراءة عنصر من المصفوفة بالفهرس",
-        "en": "Reading Array Item by Index"
+        "ar": "أكمل الفراغ: المصفوفات Array والعمليات عليها",
+        "en": "Complete the blank: Arrays and Operations"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يعرّف مصفوفة أسلحة `var weapons = [\"Bow\", \"Staff\"]` ويطبع العنصر الأول `weapons[0]` داخل دالة `_ready()`.",
-        "en": "Write a script defining weapon array `var weapons = [\"Bow\", \"Staff\"]` and prints first item `weapons[0]` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يعرّف مصفوفة أسلحة `var weapons = [\"Bow\", \"Staff\"]` ويطبع العنصر الأول `weapons[0]` داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script defining weapon array `var weapons = [\"Bow\", \"Staff\"]` and prints first item `weapons[0]` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var weapons = [\"Bow\", \"Staff\"]\n    ___(weapons[0])",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var weapons = [\"Bow\", \"Staff\"]\n    print(weapons[0])",
       "hints": [
         {
           "ar": "استخدم `print(weapons[0])` لطباعة Bow.",
           "en": "Use `print(weapons[0])` to print Bow."
+        },
+        {
+          "ar": "بعد إكمال «قراءة عنصر من المصفوفة بالفهرس»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Reading Array Item by Index”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -191,6 +209,13 @@
           "description": {
             "ar": "التحقق من طباعة العنصر الأول Bow بنجاح",
             "en": "Verifying successful print of first item Bow"
+          },
+          "expectedOutput": "Bow"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: قراءة عنصر من المصفوفة بالفهرس",
+            "en": "Repeat the scenario to confirm deterministic output: Reading Array Item by Index"
           },
           "expectedOutput": "Bow"
         }
@@ -215,6 +240,10 @@
         {
           "ar": "استخدم append مرتين ثم list.size() لطباعة 2.",
           "en": "Use append twice then list.size() to print 2."
+        },
+        {
+          "ar": "بعد إكمال «إضافة عنصر جديد وقياس حجم المصفوفة»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Appending New Item and Measuring Array Size”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -222,6 +251,13 @@
           "description": {
             "ar": "التحقق من صحة حجم المصفوفة الإجمالي (2)",
             "en": "Verifying total array size correctness (2)"
+          },
+          "expectedOutput": "2"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إضافة عنصر جديد وقياس حجم المصفوفة",
+            "en": "Repeat the scenario to confirm deterministic output: Appending New Item and Measuring Array Size"
           },
           "expectedOutput": "2"
         }
@@ -246,6 +282,10 @@
         {
           "ar": "استبدل `pront` بـ `print` الصحيحة.",
           "en": "Replace `pront` with correct `print`."
+        },
+        {
+          "ar": "في «إصلاح خطأ استدعاء الطباعة مع المصفوفة»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Print Call Bug with Array”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -253,6 +293,13 @@
           "description": {
             "ar": "التحقق من طباعة Gold بنجاح بعد التصحيح",
             "en": "Verifying successful Gold print after fix"
+          },
+          "expectedOutput": "Gold"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ استدعاء الطباعة مع المصفوفة",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Print Call Bug with Array"
           },
           "expectedOutput": "Gold"
         }
@@ -277,6 +324,10 @@
         {
           "ar": "يتم ضرب كل عنصر في 2 وطباعته (10 ثم 20).",
           "en": "Each element is multiplied by 2 and printed (10 then 20)."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج الدوران على عناصر المصفوفة» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Array Element Iteration Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -308,6 +359,10 @@
         {
           "ar": "استخدم `scores[1] = 25` ثم اطبع `scores[1]`.",
           "en": "Use `scores[1] = 25` then print `scores[1]`."
+        },
+        {
+          "ar": "بعد إكمال «تحديث قيمة عنصر في المصفوفة»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Updating Array Element Value”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -315,6 +370,13 @@
           "description": {
             "ar": "التحقق من طباعة القيمة المحدثة 25 بنجاح",
             "en": "Verifying successful updated value 25 output"
+          },
+          "expectedOutput": "25"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحديث قيمة عنصر في المصفوفة",
+            "en": "Repeat the scenario to confirm deterministic output: Updating Array Element Value"
           },
           "expectedOutput": "25"
         }
@@ -339,6 +401,10 @@
         {
           "ar": "أضف العناصر الثلاثة بـ append ثم اطبع levels.size().",
           "en": "Append all three items then print levels.size()."
+        },
+        {
+          "ar": "بعد إكمال «تحدي المصفوفات الشامل»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Comprehensive Arrays Challenge”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -346,6 +412,13 @@
           "description": {
             "ar": "التحقق من نجاح إضافة العناصر وقياس حجم المصفوفة (3)",
             "en": "Verifying item appending success and array size measurement (3)"
+          },
+          "expectedOutput": "3"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: تحدي المصفوفات الشامل",
+            "en": "Repeat the scenario to confirm deterministic output: Comprehensive Arrays Challenge"
           },
           "expectedOutput": "3"
         }

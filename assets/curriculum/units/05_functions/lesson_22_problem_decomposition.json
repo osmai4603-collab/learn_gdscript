@@ -33,37 +33,60 @@
     {
       "id": "ex_lesson_22_problem_decomposition_predict",
       "lessonId": "lesson_22_problem_decomposition",
-      "type": "multipleChoice",
+      "type": "predictOutput",
       "prompt": {
-        "ar": "توقع ما الذي يحدث عند استدعاء `show_area(3, 4)` في المثال.",
-        "en": "Predict what happens when `show_area(3, 4)` is called in the example."
+        "ar": "تتبّع الدالة التي تحسب عدد خطوات المهمة من المدخلات المعروضة، ثم تنبأ بالمخرج.",
+        "en": "Trace the function that calculates the number of task steps from its inputs, then predict the output."
       },
-      "options": [
-        {
-          "ar": "تحسب دالة المساحة 12 ثم تعرض `Area: 12`.",
-          "en": "The area function calculates 12, then displays `Area: 12`."
-        },
-        {
-          "ar": "تطبع دالة الحساب دون أن تعيد نتيجة.",
-          "en": "The calculation function prints without returning a result."
-        },
-        {
-          "ar": "لا تستدعى أي دالة.",
-          "en": "No function is called."
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "تتبّع موضع تعريف المتغير أو انتقال القيمة بين الدوال.",
-          "en": "Trace where a variable is declared or how a value flows between functions."
+          "ar": "اجمع القيم التي تمثل التخطيط والتنفيذ بعد ربطها بمعاملات الدالة.",
+          "en": "Combine planning and implementation values through the function parameters."
         },
         {
-          "ar": "قارن اختيارك بالتعريف والأمثلة في الدرس.",
-          "en": "Compare your choice with the lesson definition and examples."
+          "ar": "احسب نتيجة الاستدعاء نفسه ولا تعتمد على أي خيارات سابقة.",
+          "en": "Calculate the call result directly instead of relying on previous choices."
         }
       ],
-      "order": 0
+      "order": 0,
+      "title": {
+        "ar": "تنبأ بناتج دالة تخطيط المهمة",
+        "en": "Predict the output of the task-planning function"
+      },
+      "starterCode": "func task_steps(planning, implementation):\n    return planning + implementation\n\nprint(task_steps(planning, implementation))",
+      "solutionCode": "func task_steps(planning, implementation):\n    return planning + implementation\n\nprint(task_steps(planning, implementation))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تحقق من خطة ومراحل تنفيذ اعتيادية",
+            "en": "Check a regular plan and implementation estimate"
+          },
+          "setupCode": "var planning = 3\nvar implementation = 5",
+          "expectedOutput": "8",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من مدخلات صفرية",
+            "en": "Check zero-valued inputs"
+          },
+          "setupCode": "var planning = 0\nvar implementation = 0",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من تقدير بديل للمراحل",
+            "en": "Check an alternate step estimate"
+          },
+          "setupCode": "var planning = 4\nvar implementation = 6",
+          "expectedOutput": "10",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_22_problem_decomposition_identify",
@@ -103,67 +126,98 @@
     {
       "id": "ex_lesson_22_problem_decomposition_complete",
       "lessonId": "lesson_22_problem_decomposition",
-      "type": "guidedTask",
+      "type": "fillBlank",
       "prompt": {
-        "ar": "أكمل مخططاً يوضح الفكرة الأساسية لهذا الدرس.",
-        "en": "Complete a sketch that explains the core idea of this lesson."
+        "ar": "أكمل دالة صغيرة تجمع الخبرة الأساسية والمكافأة، ثم اطبع الناتج.",
+        "en": "Complete a small function that combines base experience and a bonus, then print the result."
       },
-      "steps": [
-        {
-          "ar": "اكتب الهدف النهائي للمهمة.",
-          "en": "Write the task’s final goal."
-        },
-        {
-          "ar": "قسّمها إلى حساب وعرض.",
-          "en": "Split it into calculation and display."
-        },
-        {
-          "ar": "حدد ما الذي تعيده دالة الحساب.",
-          "en": "Identify what the calculation function returns."
-        }
-      ],
       "hints": [
         {
-          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
-          "en": "Write your prediction or plan before trying it, then review it against the example."
+          "ar": "مرّر القيمتين إلى الدالة واجمعهما داخل التعبير المرجع.",
+          "en": "Pass both values to the function and combine them in the returned expression."
         },
         {
-          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
-          "en": "This is a self-check activity, not an automated test."
+          "ar": "اختبر الدالة بقيم صفرية للتأكد من عدم وجود اعتماد على قيمة ثابتة.",
+          "en": "Test with zero values to ensure the function does not rely on a fixed value."
         }
       ],
-      "order": 2
+      "order": 2,
+      "title": {
+        "ar": "أكمل دالة جمع الخبرة",
+        "en": "Complete the experience-sum function"
+      },
+      "starterCode": "func combine_xp(base_xp, bonus_xp):\n    return ___\n\nprint(combine_xp(base_xp, bonus_xp))",
+      "solutionCode": "func combine_xp(base_xp, bonus_xp):\n    return base_xp + bonus_xp\n\nprint(combine_xp(base_xp, bonus_xp))",
+      "testCases": [
+        {
+          "description": {
+            "ar": "تحقق من المسار الاعتيادي.",
+            "en": "Check the regular path."
+          },
+          "setupCode": "var base_xp = 30\nvar bonus_xp = 5",
+          "expectedOutput": "35",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "اختبر الحالة الحدية للصفر.",
+            "en": "Test the zero boundary case."
+          },
+          "setupCode": "var base_xp = 0\nvar bonus_xp = 0",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من مدخلات مختلفة.",
+            "en": "Check different inputs."
+          },
+          "setupCode": "var base_xp = 12\nvar bonus_xp = 8",
+          "expectedOutput": "20",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     },
     {
       "id": "ex_lesson_22_problem_decomposition_code_1",
       "lessonId": "lesson_22_problem_decomposition",
-      "type": "writeCode",
+      "type": "reorderSteps",
       "prompt": {
-        "ar": "عرّف `rectangle_area(w, h)` لإعادة المساحة ثم اطبع مساحة 5 × 2.",
-        "en": "Define `rectangle_area(w, h)` to return the area, then print the area of 5 × 2."
+        "ar": "أعد ترتيب أسطر الشيفرة لتجميع الخبرة ثم عرض مكافأة الموجة.",
+        "en": "Reorder the code lines to combine experience and then display the wave reward."
       },
-      "starterCode": "",
+      "starterCode": "    return w * h\nprint(rectangle_area(5, 2))\nfunc rectangle_area(w, h):",
       "solutionCode": "func rectangle_area(w, h):\n    return w * h\n\nprint(rectangle_area(5, 2))",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الإخراج السلوك المطلوب.",
-            "en": "The output matches the requested behavior."
+            "ar": "التحقق من ناتج حساب المكافأة بعد ترتيب الأسطر",
+            "en": "Check reward output after reordering the lines"
           },
-          "expectedOutput": "10"
+          "expectedOutput": "10",
+          "ignoreWhitespace": true,
+          "ignoreCase": false,
+          "setupCode": "var base_xp = 10\nvar bonus_xp = 5\nvar multiplier = 2"
         }
       ],
       "hints": [
         {
-          "ar": "ابدأ بتعريف الدالة ومعاملاتها قبل كتابة الاستدعاء.",
-          "en": "Start by defining the function and its parameters before writing the call."
+          "ar": "ابدأ بتعريف الدوال المساعدة قبل السطر الذي يستدعيها.",
+          "en": "Define helper functions before the line that calls them."
         },
         {
-          "ar": "تحقق من المسافة البادئة وأن الإخراج يطابق المطلوب حرفياً.",
-          "en": "Check indentation and make sure the output matches exactly."
+          "ar": "حافظ على ترتيب الحساب: الجمع أولًا ثم تطبيق المعامل.",
+          "en": "Preserve the calculation order: add first, then apply the multiplier."
         }
       ],
-      "order": 3
+      "order": 3,
+      "title": {
+        "ar": "أعد ترتيب خطوات حساب المكافأة",
+        "en": "Reorder the reward-calculation steps"
+      }
     },
     {
       "id": "ex_lesson_22_problem_decomposition_fix",
@@ -180,6 +234,13 @@
           "description": {
             "ar": "يطابق الإخراج السلوك المطلوب.",
             "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_22_problem_decomposition_fix",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_22_problem_decomposition_fix"
           },
           "expectedOutput": "12"
         }
@@ -211,6 +272,13 @@
           "description": {
             "ar": "يطابق الإخراج السلوك المطلوب.",
             "en": "The output matches the requested behavior."
+          },
+          "expectedOutput": "Level: 3"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_22_problem_decomposition_code_2",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_22_problem_decomposition_code_2"
           },
           "expectedOutput": "Level: 3"
         }
@@ -278,6 +346,13 @@
             "en": "The output matches the requested behavior."
           },
           "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_22_problem_decomposition_code_3",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_22_problem_decomposition_code_3"
+          },
+          "expectedOutput": "true"
         }
       ],
       "hints": [
@@ -309,6 +384,13 @@
             "en": "The output matches the requested behavior."
           },
           "expectedOutput": "Value: 8"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: ex_lesson_22_problem_decomposition_code_4",
+            "en": "Repeat the scenario to confirm deterministic output: ex_lesson_22_problem_decomposition_code_4"
+          },
+          "expectedOutput": "Value: 8"
         }
       ],
       "hints": [
@@ -324,12 +406,12 @@
       "order": 8
     },
     {
-      "id": "ex_lesson_22_problem_decomposition_apply",
+      "id": "ex_22_problem_decomposition_10",
       "lessonId": "lesson_22_problem_decomposition",
-      "type": "guidedTask",
+      "type": "writeCode",
       "prompt": {
-        "ar": "طبّق المفهوم على مثال صغير من مشروعك واكتب طريقة تحقق ذاتية.",
-        "en": "Apply the concept to a small example from your project and write a self-check."
+        "ar": "قسّم حساب مكافأة موجة أعداء إلى دوال صغيرة: اجمع الخبرة الأساسية والمكافأة، ثم طبّق معامل الموجة. اطبع الناتج النهائي، وتعامل مع موجة بلا خبرة ومكافأة سالبة بحيث لا تصبح المكافأة النهائية أقل من صفر.",
+        "en": "Break an enemy-wave reward calculation into small functions: combine base experience and a bonus, then apply the wave multiplier. Print the final reward, and handle an empty wave and a negative bonus without producing a negative reward."
       },
       "steps": [
         {
@@ -347,15 +429,74 @@
       ],
       "hints": [
         {
-          "ar": "اكتب توقعك أو خطتك قبل التنفيذ، ثم راجعها مع المثال.",
-          "en": "Write your prediction or plan before trying it, then review it against the example."
+          "ar": "اجعل لكل دالة مسؤولية واحدة ثم استخدم الدالة الصغيرة داخل الحساب المركب.",
+          "en": "Give each function one responsibility, then reuse the small function in the combined calculation."
         },
         {
-          "ar": "هذه مهمة مراجعة ذاتية وليست اختباراً آلياً.",
-          "en": "This is a self-check activity, not an automated test."
+          "ar": "طبّق حد الصفر على الخبرة المجمعة قبل ضربها في معامل الموجة.",
+          "en": "Clamp the combined experience at zero before applying the wave multiplier."
         }
       ],
-      "order": 9
+      "order": 9,
+      "title": {
+        "ar": "تحدي تفكيك مكافأة موجة الأعداء",
+        "en": "Enemy Wave Reward Breakdown"
+      },
+      "starterCode": "func combine_experience(base_xp, bonus_xp):\n    pass\n\nfunc calculate_wave_reward(base_xp, bonus_xp, multiplier):\n    # Compose the smaller calculation and keep reward non-negative.\n    pass\n\nprint(calculate_wave_reward(base_xp, bonus_xp, multiplier))",
+      "solutionCode": "func combine_experience(base_xp, bonus_xp):\n    return max(0, base_xp + bonus_xp)\n\nfunc calculate_wave_reward(base_xp, bonus_xp, multiplier):\n    return combine_experience(base_xp, bonus_xp) * multiplier\n\nprint(calculate_wave_reward(base_xp, bonus_xp, multiplier))",
+      "options": [],
+      "testCases": [
+        {
+          "description": {
+            "ar": "تحقق من جمع الخبرة والمكافأة ثم تطبيق المعامل",
+            "en": "Check combined experience and wave multiplier"
+          },
+          "setupCode": "var base_xp = 40\nvar bonus_xp = 10\nvar multiplier = 2",
+          "expectedOutput": "100",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من موجة بلا خبرة أو مكافأة",
+            "en": "Check a wave with no experience or bonus"
+          },
+          "setupCode": "var base_xp = 0\nvar bonus_xp = 0\nvar multiplier = 3",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من منع المكافأة السالبة",
+            "en": "Check that a negative bonus cannot create a negative reward"
+          },
+          "setupCode": "var base_xp = 5\nvar bonus_xp = -20\nvar multiplier = 4",
+          "expectedOutput": "0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `base_xp` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `base_xp` set to zero; verify the resulting output."
+          },
+          "setupCode": "var base_xp = 0\nvar bonus_xp = 1\nvar multiplier = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `base_xp` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `base_xp` and its companion inputs."
+          },
+          "setupCode": "var base_xp = 1\nvar bonus_xp = 3\nvar multiplier = 1",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        }
+      ]
     }
   ]
 }

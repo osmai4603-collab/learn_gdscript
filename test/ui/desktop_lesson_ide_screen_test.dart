@@ -44,8 +44,10 @@ void main() {
     expect(find.text('المقدمة'), findsWidgets);
     expect(find.text('درس تجريبي'), findsWidgets);
     expect(find.text('محتوى الدرس'), findsOneWidget);
-    final exampleEditor = tester.widget<TextField>(find.byType(TextField));
-    final appTheme = Theme.of(tester.element(find.byType(TextField)));
+    final exampleEditor = tester.widget<TextField>(
+      find.byType(TextField).first,
+    );
+    final appTheme = Theme.of(tester.element(find.byType(TextField).first));
     expect(
       exampleEditor.decoration?.fillColor,
       appTheme.colorScheme.surfaceContainerLow,
@@ -57,10 +59,9 @@ void main() {
     );
     final highlightedCode = tester.widget<SelectableText>(codeBlockFinder);
     final codeTheme = CodeEditorTheme.of(tester.element(codeBlockFinder));
-    final codeBlockCard = find.ancestor(
-      of: codeBlockFinder,
-      matching: find.byType(Card),
-    ).first;
+    final codeBlockCard = find
+        .ancestor(of: codeBlockFinder, matching: find.byType(Card))
+        .first;
     expect(tester.widget<Card>(codeBlockCard).color, appTheme.cardColor);
     expect(
       highlightedCode.textSpan!.children!
@@ -122,12 +123,25 @@ void main() {
     );
     expect(tester.getSize(editorPanel).width, lessThan(initialEditorWidth));
 
+    await tester.ensureVisible(find.text('احسب النقاط مع المكافأة'));
+    expect(find.text('احسب النقاط مع المكافأة'), findsOneWidget);
+    await tester.tap(find.text('شغّل'));
+    await tester.pumpAndSettle();
+    expect(find.text('حالة معتادة'), findsOneWidget);
+    expect(find.text('نقاط صفرية'), findsOneWidget);
+    expect(find.text('نقاط مرتفعة'), findsOneWidget);
+    expect(find.text('المتوقع: 999\nالفعلي: 15'), findsOneWidget);
+
     await dependencies.appSettingsProvider.setLocale(const Locale('en'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 250));
     expect(find.text('Introduction'), findsOneWidget);
     expect(find.text('Test lesson'), findsWidgets);
     expect(find.text('Test content'), findsOneWidget);
+    expect(
+      find.text('Calculate score with the supplied bonus'),
+      findsOneWidget,
+    );
   });
 }
 
@@ -173,6 +187,44 @@ class _LessonAssetBundle extends CachingAssetBundle {
             'محتوى الدرس\nهذا `var score = 10` مثال\n\n```gdscript\nvar score = 10\nprint(score)\n```',
         contentEn:
             'Test content\nThis is `var score = 10` inline code\n\n```gdscript\nvar score = 10\nprint(score)\n```',
+        exercises: [
+          {
+            'id': 'ex_test_score',
+            'lessonId': 'lesson_02_next',
+            'order': 0,
+            'type': 'writeCode',
+            'prompt': {
+              'ar': 'احسب النقاط مع المكافأة',
+              'en': 'Calculate score with the supplied bonus',
+            },
+            'starterCode': 'print(score + bonus)',
+            'solutionCode': 'print(score + bonus)',
+            'testCases': [
+              {
+                'description': {'ar': 'حالة معتادة', 'en': 'Typical player'},
+                'setupCode': 'var score = 10\nvar bonus = 5',
+                'expectedOutput': '15',
+              },
+              {
+                'description': {'ar': 'نقاط صفرية', 'en': 'Empty score'},
+                'setupCode': 'var score = 0\nvar bonus = 0',
+                'expectedOutput': '0',
+              },
+              {
+                'description': {'ar': 'نقاط مرتفعة', 'en': 'High score'},
+                'setupCode': 'var score = 20\nvar bonus = 10',
+                'expectedOutput': '999',
+              },
+            ],
+            'hints': [
+              {'ar': 'اجمع النقاط والمكافأة.', 'en': 'Add score and bonus.'},
+              {
+                'ar': 'استخدم المتغيرات المهيأة للاختبار.',
+                'en': 'Use the variables initialized for the test.',
+              },
+            ],
+          },
+        ],
       ),
       _ => _manifest,
     };
@@ -185,6 +237,7 @@ class _LessonAssetBundle extends CachingAssetBundle {
     required String titleEn,
     required String contentAr,
     required String contentEn,
+    List<Object?> exercises = const [],
   }) => jsonEncode({
     'id': id,
     'unitId': 'unit_01_intro',
@@ -194,6 +247,6 @@ class _LessonAssetBundle extends CachingAssetBundle {
     'order': 0,
     'contentMarkdown': {'ar': contentAr, 'en': contentEn},
     'exampleCode': 'var example_value = 1',
-    'exercises': [],
+    'exercises': exercises,
   });
 }

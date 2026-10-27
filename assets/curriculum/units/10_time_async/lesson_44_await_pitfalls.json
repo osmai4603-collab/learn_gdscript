@@ -139,6 +139,26 @@
           },
           "setupCode": "var active_tasks = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_tasks` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_tasks` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_tasks = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_tasks` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_tasks` and its companion inputs."
+          },
+          "setupCode": "var active_tasks = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -187,6 +207,26 @@
           },
           "setupCode": "var active_tasks = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_tasks` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_tasks` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_tasks = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_tasks` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_tasks` and its companion inputs."
+          },
+          "setupCode": "var active_tasks = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -235,6 +275,26 @@
           },
           "setupCode": "var active_tasks = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_tasks` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_tasks` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_tasks = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_tasks` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_tasks` and its companion inputs."
+          },
+          "setupCode": "var active_tasks = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -283,6 +343,26 @@
           },
           "setupCode": "var active_tasks = 8\nvar change = 4",
           "expectedOutput": "12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_tasks` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_tasks` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_tasks = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_tasks` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_tasks` and its companion inputs."
+          },
+          "setupCode": "var active_tasks = 1\nvar change = 3",
+          "expectedOutput": "4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -331,6 +411,26 @@
           },
           "setupCode": "var active_tasks = 8\nvar change = 4",
           "expectedOutput": "8\n4\n12"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_tasks` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_tasks` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_tasks = 0\nvar change = 1",
+          "expectedOutput": "0\n1\n1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_tasks` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_tasks` and its companion inputs."
+          },
+          "setupCode": "var active_tasks = 1\nvar change = 3",
+          "expectedOutput": "1\n3\n4",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -379,6 +479,26 @@
           },
           "setupCode": "var active_tasks = 6\nvar change = 3",
           "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_tasks` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_tasks` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_tasks = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_tasks` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_tasks` and its companion inputs."
+          },
+          "setupCode": "var active_tasks = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -427,6 +547,26 @@
           },
           "setupCode": "var active_tasks = 6\nvar change = 3",
           "expectedOutput": "15"
+        },
+        {
+          "description": {
+            "ar": "حالة حدية عند جعل المدخل `active_tasks` صفرًا والتحقق من الناتج.",
+            "en": "Boundary case with `active_tasks` set to zero; verify the resulting output."
+          },
+          "setupCode": "var active_tasks = 0\nvar change = 1",
+          "expectedOutput": "1",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من النتيجة عند تغيير قيم `active_tasks` والمدخلات المصاحبة.",
+            "en": "Check the result with an alternate value for `active_tasks` and its companion inputs."
+          },
+          "setupCode": "var active_tasks = 1\nvar change = 3",
+          "expectedOutput": "5",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
@@ -442,52 +582,83 @@
       "order": 8
     },
     {
-      "id": "ex_lesson_44_await_pitfalls_10",
+      "id": "ex_44_pitfalls_10",
       "lessonId": "lesson_44_await_pitfalls",
       "type": "writeCode",
       "prompt": {
-        "ar": "استخدم متغيراً باسم result لحساب ضعف active_tasks مضافاً إليه change في await safety.",
-        "en": "Use a named result variable to calculate active_tasks times two plus change for await safety."
+        "ar": "مثّل استئناف هجوم خاص بعد انتهاء فترة الانتظار: لا تسمح بالهجوم إذا حُذفت الشخصية أثناء الانتظار، ولا تسمح به قبل جاهزية التبريد. اطبع حالة واضحة لكل من الشخصية المحذوفة والتبريد النشط والجاهز.",
+        "en": "Model resuming a special attack after an awaited cooldown: reject the attack if the actor was removed during the wait, and reject it while the cooldown is still active. Print a clear status for a removed actor, an active cooldown, and a ready actor."
       },
-      "starterCode": "",
-      "solutionCode": "var result = active_tasks * 2 + change\nprint(result)",
+      "starterCode": "func can_use_special(actor_exists, cooldown_ready):\n    # Validate the actor first, then check cooldown readiness.\n    pass\n\nif can_use_special(actor_exists, cooldown_ready):\n    print(\"Attack: Ready\")\nelse:\n    print(\"Attack: Blocked\")",
+      "solutionCode": "func can_use_special(actor_exists, cooldown_ready):\n    if not actor_exists:\n        return false\n    return cooldown_ready\n\nif can_use_special(actor_exists, cooldown_ready):\n    print(\"Attack: Ready\")\nelse:\n    print(\"Attack: Blocked\")",
       "testCases": [
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من السماح بالهجوم بعد جاهزية التبريد",
+            "en": "Check an attack after cooldown readiness"
           },
-          "setupCode": "var active_tasks = 1\nvar change = 1",
-          "expectedOutput": "3"
+          "setupCode": "var actor_exists = true\nvar cooldown_ready = true",
+          "expectedOutput": "Attack: Ready",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من منع متابعة الشخصية المحذوفة",
+            "en": "Check that a removed actor cannot resume"
           },
-          "setupCode": "var active_tasks = 0\nvar change = 1",
-          "expectedOutput": "1"
+          "setupCode": "var actor_exists = false\nvar cooldown_ready = true",
+          "expectedOutput": "Attack: Blocked",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         },
         {
           "description": {
-            "ar": "يطابق الحساب الناتج مع القيم المعطاة.",
-            "en": "The calculation matches the supplied values."
+            "ar": "تحقق من منع الهجوم قبل انتهاء التبريد",
+            "en": "Check that an active cooldown blocks the attack"
           },
-          "setupCode": "var active_tasks = 6\nvar change = 3",
-          "expectedOutput": "15"
+          "setupCode": "var actor_exists = true\nvar cooldown_ready = false",
+          "expectedOutput": "Attack: Blocked",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من حظر الهجوم أثناء التبريد",
+            "en": "Check that an active cooldown blocks the attack"
+          },
+          "setupCode": "var actor_exists = true\nvar cooldown_ready = false",
+          "expectedOutput": "Attack: Blocked",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من حظر الهجوم عند حذف الشخصية والتبريد النشط",
+            "en": "Check removal and active cooldown together"
+          },
+          "setupCode": "var actor_exists = false\nvar cooldown_ready = false",
+          "expectedOutput": "Attack: Blocked",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ],
       "hints": [
         {
-          "ar": "عرّف result من المتغيرين ثم اطبعه.",
-          "en": "Assign the expression to result, then print it."
+          "ar": "بعد الانتظار، افحص صلاحية الشخصية قبل أي استخدام آخر لها.",
+          "en": "After the wait, validate the actor before using it again."
         },
         {
-          "ar": "لا تثبّت الناتج؛ استخدم القيم التي يوفرها الاختبار.",
-          "en": "Do not hard-code the result; use the values supplied by each test."
+          "ar": "افصل شرط بقاء الشخصية عن شرط انتهاء التبريد لتوضيح سبب الحظر.",
+          "en": "Keep actor validity and cooldown readiness as separate checks."
         }
       ],
-      "order": 9
+      "order": 9,
+      "title": {
+        "ar": "تحدي نظام تبريد الهجوم الآمن",
+        "en": "Safe Asynchronous Cooldown Manager"
+      },
+      "options": []
     }
   ]
 }

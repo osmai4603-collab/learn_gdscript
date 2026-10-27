@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
 import '../tool/src/audit_models.dart';
 import '../tool/src/curriculum_auditor.dart';
@@ -11,13 +10,28 @@ void main() {
     final report = await CurriculumAuditor(Directory.current).run();
     final markdown = buildMarkdownReport(report, strict: false);
 
-    expect(report.hasErrors, isFalse);
+    expect(
+      report.hasErrors,
+      isFalse,
+      reason: report.issues
+          .where((issue) => issue.severity == IssueSeverity.error)
+          .map((issue) => '${issue.rule}: ${issue.message}')
+          .join('\n'),
+    );
     expect(
       report.issues.where((issue) => issue.rule == 'concept-coverage'),
       isEmpty,
     );
     expect(
       report.issues.where((issue) => issue.rule == 'concept-map'),
+      isEmpty,
+    );
+    expect(
+      report.issues.where(
+        (issue) => issue.rule == 'test-case-total' ||
+            issue.rule == 'unit-capstone' ||
+            issue.rule == 'exercise-type-variety',
+      ),
       isEmpty,
     );
     expect(report.count(IssueSeverity.warning), greaterThan(0));

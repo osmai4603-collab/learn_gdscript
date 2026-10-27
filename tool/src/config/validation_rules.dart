@@ -16,5 +16,16 @@ const requiredArabicSectionPatterns = <String, List<String>>{
 
 const directivePattern = r'\[!(WARNING|NOTE|TIP)\]';
 const minimumCodeTestCases = 2;
+const minimumTotalTestCases = 1201;
+const minimumExerciseHints = 2;
+const supportedExerciseTypes = <String>{
+  'writeCode',
+  'multipleChoice',
+  'fixBug',
+  'predictOutput',
+  'fillBlank',
+  'reorderSteps',
+  'guidedTask',
+};
 const minimumLessonMinutes = 8;
 const maximumLessonMinutes = 25;

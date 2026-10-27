@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'audit_models.dart';
+import 'config/validation_rules.dart';
 
 class AuditLocalizedText {
   const AuditLocalizedText({required this.ar, required this.en});
@@ -438,16 +439,7 @@ class AuditContext {
     final id = _requiredString(json, 'id');
     final lessonId = _requiredString(json, 'lessonId');
     final type = _requiredString(json, 'type');
-    const supportedTypes = {
-      'writeCode',
-      'fillBlank',
-      'predictOutput',
-      'fixBug',
-      'reorderSteps',
-      'multipleChoice',
-      'guidedTask',
-    };
-    if (!supportedTypes.contains(type)) {
+    if (!supportedExerciseTypes.contains(type)) {
       throw FormatException('Unsupported exercise type "$type".');
     }
     final prompt = _parseLocalizedText(json, 'prompt');

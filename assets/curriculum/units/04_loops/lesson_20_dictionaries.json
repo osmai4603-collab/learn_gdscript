@@ -35,34 +35,36 @@
       "id": "ex_20_dictionaries_01",
       "lessonId": "lesson_20_dictionaries",
       "order": 0,
-      "type": "multipleChoice",
+      "type": "reorderSteps",
       "title": {
-        "ar": "مم يتكون القاموس Dictionary في GDScript؟",
-        "en": "What Does a Dictionary Consist Of?"
+        "ar": "أعد ترتيب مثال القواميس Dictionary (تحدي الوحدة 4)",
+        "en": "Reorder the Dictionaries (Unit 4 Capstone) example"
       },
       "prompt": {
-        "ar": "كيف يتم تخزين وترتيب البيانات داخل القاموس (Dictionary) في لغة GDScript؟",
-        "en": "How is data stored and organized inside a Dictionary in GDScript?"
+        "ar": "أعد ترتيب أسطر المثال لتعمل الشيفرة وتعرض السلوك الموضح في الدرس: إتقان استخدام القواميس لتنظيم بيانات الخصائص والمفاتيح، استخدام القراءة الآمنة عبر `get()`، وإنجاز التحدي التراكمي للوحدة الرابعة.",
+        "en": "Reorder the example lines so the script runs and demonstrates the lesson objective: Master using dictionaries for organizing property key-value data, safe reading via `get()`, and complete the Unit 4 capstone challenge."
       },
-      "options": [
-        {
-          "ar": "على هيئة أزواج من المفتاح والقيمة (Key-Value Pairs)",
-          "en": "In the form of Key-Value pairs"
-        },
-        {
-          "ar": "على هيئة أرقام فهارس متسلسلة تبدأ من 0 حصراً",
-          "en": "In sequential numeric indices starting at 0 exclusively"
-        },
-        {
-          "ar": "كنصوص فقط بدون قيم مرتبطة",
-          "en": "As raw text without associated values"
-        }
-      ],
-      "correctOptionIndex": 0,
       "hints": [
         {
-          "ar": "القاموس يربط مفتاحاً (Key) بقيمة (Value).",
-          "en": "A dictionary maps a Key to a Value."
+          "ar": "ابدأ بالتعريفات والتهيئة قبل استدعاء السلوك الذي يستخدمها.",
+          "en": "Place declarations and initialization before the behavior that uses them."
+        },
+        {
+          "ar": "تتبّع اعتماد كل سطر على البيانات والنتيجة السابقة.",
+          "en": "Trace how each line depends on earlier data and results."
+        }
+      ],
+      "starterCode": "func _ready():\n    var monster = {\"name\": \"Goblin\", \"gold\": 25}\n    print(monster.get(\"name\", \"Unknown\"))\n    print(monster[\"gold\"])\nextends Node",
+      "solutionCode": "extends Node\n\nfunc _ready():\n    var monster = {\"name\": \"Goblin\", \"gold\": 25}\n    print(monster.get(\"name\", \"Unknown\"))\n    print(monster[\"gold\"])",
+      "testCases": [
+        {
+          "description": {
+            "ar": "التحقق من إخراج المثال بعد إعادة ترتيب الأسطر",
+            "en": "Check the example output after reordering the lines"
+          },
+          "expectedOutput": "Goblin\n25",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
       ]
     },
@@ -98,6 +100,10 @@
         {
           "ar": "دالة get تحميك من انهيار اللعبة عند طلب مفتاح غير معرف.",
           "en": "The get function protects you from crashes when requesting undefined keys."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «أهمية استخدام دالة get() الآمنة» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “Importance of Using Safe get() Function” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -133,6 +139,10 @@
         {
           "ar": "الإسناد المباشر بالمفتاح يضيف المفتاح إن لمש يوجد أو يحدثه إن وجد.",
           "en": "Direct key assignment adds the key if missing or updates it if present."
+        },
+        {
+          "ar": "قارن البدائل بسيناريو «كيفية تعديل أو إضافة قيمة في القاموس» واستبعد ما لا يفسّر السلوك المذكور.",
+          "en": "Compare the choices against “How to Update or Add Value in Dictionary” and eliminate those that do not explain the described behavior."
         }
       ]
     },
@@ -163,6 +173,10 @@
         {
           "ar": "استخدم hero.get() لتأمين القراءة الافتراضية.",
           "en": "Use hero.get() to secure default reads."
+        },
+        {
+          "ar": "غيّر عنصرًا واحدًا في تجربة «مهمة تطبيقية: إنشاء وقراءة القاموس الآمن» وسجّل أثره قبل متابعة الخطوة التالية.",
+          "en": "Change one element in the “Guided Task: Creating and Safe Reading Dictionary” activity and record its effect before continuing."
         }
       ]
     },
@@ -170,21 +184,25 @@
       "id": "ex_20_dictionaries_05",
       "lessonId": "lesson_20_dictionaries",
       "order": 4,
-      "type": "writeCode",
+      "type": "fillBlank",
       "title": {
-        "ar": "إنشاء وقراءة قيمة من القاموس",
-        "en": "Creating and Reading Value from Dictionary"
+        "ar": "أكمل الفراغ: القواميس Dictionary (تحدي الوحدة 4)",
+        "en": "Complete the blank: Dictionaries (Unit 4 Capstone)"
       },
       "prompt": {
-        "ar": "اكتب سكربتاً يعرّف قاموساً `var player = {\"name\": \"Sam\", \"score\": 42}` ويطبع قيمة المفتاح `\"score\"` داخل دالة `_ready()`.",
-        "en": "Write a script defining dictionary `var player = {\"name\": \"Sam\", \"score\": 42}` and prints key `\"score\"` inside `_ready()`."
+        "ar": "أكمل الفراغ في الشيفرة لتحقيق هدف الدرس: اكتب سكربتاً يعرّف قاموساً `var player = {\"name\": \"Sam\", \"score\": 42}` ويطبع قيمة المفتاح `\"score\"` داخل دالة `_ready()`.",
+        "en": "Fill the blank in the code to achieve the lesson goal: Write a script defining dictionary `var player = {\"name\": \"Sam\", \"score\": 42}` and prints key `\"score\"` inside `_ready()`."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    ",
+      "starterCode": "extends Node\n\nfunc _ready():\n    var player = {\"name\": \"Sam\", \"score\": 42}\n    ___(player[\"score\"])",
       "solutionCode": "extends Node\n\nfunc _ready():\n    var player = {\"name\": \"Sam\", \"score\": 42}\n    print(player[\"score\"])",
       "hints": [
         {
           "ar": "استخدم `print(player[\"score\"])` لطباعة 42.",
           "en": "Use `print(player[\"score\"])` to print 42."
+        },
+        {
+          "ar": "بعد إكمال «إنشاء وقراءة قيمة من القاموس»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Creating and Reading Value from Dictionary”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -192,6 +210,13 @@
           "description": {
             "ar": "التحقق من طباعة قيمة النقاط 42 بنجاح",
             "en": "Verifying successful score value 42 output"
+          },
+          "expectedOutput": "42"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إنشاء وقراءة قيمة من القاموس",
+            "en": "Repeat the scenario to confirm deterministic output: Creating and Reading Value from Dictionary"
           },
           "expectedOutput": "42"
         }
@@ -216,6 +241,10 @@
         {
           "ar": "استخدم `print(item.get(\"price\", 10))` لإرجاع القيمة الافتراضية.",
           "en": "Use `print(item.get(\"price\", 10))` to return default value."
+        },
+        {
+          "ar": "بعد إكمال «استخدام القراءة الآمنة get()»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Using Safe get() Reading”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -223,6 +252,13 @@
           "description": {
             "ar": "التحقق من إرجاع وطباعة القيمة الافتراضية 10 بنجاح",
             "en": "Verifying successful return and print of default value 10"
+          },
+          "expectedOutput": "10"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: استخدام القراءة الآمنة get()",
+            "en": "Repeat the scenario to confirm deterministic output: Using Safe get() Reading"
           },
           "expectedOutput": "10"
         }
@@ -247,6 +283,10 @@
         {
           "ar": "استبدل `pront` بـ `print` الصحيحة.",
           "en": "Replace `pront` with correct `print`."
+        },
+        {
+          "ar": "في «إصلاح خطأ إملاء الطباعة في القاموس»، افحص الصياغة أولًا ثم تحقّق من السلوك بعد إصلاح السبب لا العرض.",
+          "en": "For “Fixing Dictionary Print Spelling Bug”, inspect the syntax first, then verify behavior after fixing the cause rather than the symptom."
         }
       ],
       "testCases": [
@@ -254,6 +294,13 @@
           "description": {
             "ar": "التحقق من طباعة Hero بنجاح بعد التصحيح",
             "en": "Verifying successful Hero print after fix"
+          },
+          "expectedOutput": "Hero"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إصلاح خطأ إملاء الطباعة في القاموس",
+            "en": "Repeat the scenario to confirm deterministic output: Fixing Dictionary Print Spelling Bug"
           },
           "expectedOutput": "Hero"
         }
@@ -278,6 +325,10 @@
         {
           "ar": "تم تحديث قيمة hp من 50 إلى 100، لذا سيطبع 100.",
           "en": "hp value updated from 50 to 100, so it prints 100."
+        },
+        {
+          "ar": "تتبّع قيم المتغيرات خطوة بخطوة في «تنبأ بناتج تحديث القاموس» قبل تحديد المخرج النهائي.",
+          "en": "Trace variable values step by step for “Predict Dictionary Update Output” before deciding the final output."
         }
       ],
       "testCases": [
@@ -309,6 +360,10 @@
         {
           "ar": "استخدم `settings[\"fullscreen\"] = true` ثم اطبع القيمة.",
           "en": "Use `settings[\"fullscreen\"] = true` then print value."
+        },
+        {
+          "ar": "بعد إكمال «إضافة مفتاح جديد للقاموس»، غيّر مدخلًا واحدًا في كل مرة وتتبع السطر الذي يغيّر النتيجة.",
+          "en": "After completing “Adding New Key to Dictionary”, change one input at a time and trace which statement changes the result."
         }
       ],
       "testCases": [
@@ -316,6 +371,13 @@
           "description": {
             "ar": "التحقق من طباعة القيمة المنطقية true بنجاح",
             "en": "Verifying successful true boolean output"
+          },
+          "expectedOutput": "true"
+        },
+        {
+          "description": {
+            "ar": "إعادة تشغيل السيناريو للتأكد من ثبات الناتج: إضافة مفتاح جديد للقاموس",
+            "en": "Repeat the scenario to confirm deterministic output: Adding New Key to Dictionary"
           },
           "expectedOutput": "true"
         }
@@ -327,34 +389,78 @@
       "order": 9,
       "type": "writeCode",
       "title": {
-        "ar": "تحدي الوحدة 4 التراكمي: مصفي الغنائم والموارد (Loot Drop Processor)",
-        "en": "Unit 4 Capstone Challenge: Loot Drop Processor"
+        "ar": "تحدي مدير موجات الأعداء والغنائم",
+        "en": "Enemy Wave and Loot Pipeline"
       },
       "prompt": {
-        "ar": "أنجز التحدي التراكمي للوحدة الرابعة: اكتب سكربتاً يعالج قائمة غنائم المعركة؛\n- مصفوفة قواميس تمثل الغنائم الساقطة: `[{\"name\": \"Gold\", \"val\": 50}, {\"name\": \"Broken Sword\", \"val\": 0}, {\"name\": \"Ruby\", \"val\": 120}]`\n- استخدم حلقة `for` لتصفية الغنائم التي قيمة `val > 0`، واجمع إجمالي الذهب والقيم الصالحة، ثم اطبع حصيلة المجموع النهائي للصلاحية بالصيغة:\n`Total Loot Value: 170`",
-        "en": "Complete Unit 4 capstone: Write a script processing combat loot drops;\n- Array of dictionaries representing dropped loot: `[{\"name\": \"Gold\", \"val\": 50}, {\"name\": \"Broken Sword\", \"val\": 0}, {\"name\": \"Ruby\", \"val\": 120}]`\n- Use a `for` loop to filter loot with `val > 0`, sum valid values, and print final total value matching:\n`Total Loot Value: 170`"
+        "ar": "عالج موجة من الأعداء الممثلة بقواميس: تجاهل الأعداء المهزومين، واحسب عدد الأعداء النشطين ومجموع نقاط خبرتهم. استخدم حلقة على الحاوية واختبر موجة فارغة وموجة لا تحتوي إلا على أعداء مهزومين.",
+        "en": "Process an enemy wave represented by dictionaries: ignore defeated enemies and calculate the active-enemy count and total experience. Iterate over the collection and test an empty wave and a wave containing only defeated enemies."
       },
-      "starterCode": "extends Node\n\nfunc _ready():\n    var loots = [{\"name\": \"Gold\", \"val\": 50}, {\"name\": \"Broken Sword\", \"val\": 0}, {\"name\": \"Ruby\", \"val\": 120}]\n    # اصفِ واجمع واطبع الناتج هنا\n    ",
-      "solutionCode": "extends Node\n\nfunc _ready():\n    var loots = [{\"name\": \"Gold\", \"val\": 50}, {\n        \"name\": \"Broken Sword\",\n        \"val\": 0\n    }, {\"name\": \"Ruby\", \"val\": 120}]\n    var total = 0\n    for item in loots:\n        var v = item.get(\"val\", 0)\n        if v > 0:\n            total += v\n    print(\"Total Loot Value: \" + str(total))",
+      "starterCode": "var active_count = 0\nvar total_xp = 0\nfor enemy in enemies:\n    # Count and reward active enemies only.\n    pass\nprint(\"Active: \" + str(active_count) + \" | XP: \" + str(total_xp))",
+      "solutionCode": "var active_count = 0\nvar total_xp = 0\nfor enemy in enemies:\n    if not enemy[\"defeated\"]:\n        active_count += 1\n        total_xp += enemy[\"xp\"]\nprint(\"Active: \" + str(active_count) + \" | XP: \" + str(total_xp))",
       "hints": [
         {
-          "ar": "مر عبر كل قاموس في مصفوفة loots، واستخدم get() للتحقق من val وتجميع القيم الموجبة.",
-          "en": "Iterate over each dictionary in loots array, use get() to check val and accumulate positive values."
+          "ar": "افحص حالة كل عدو قبل إضافة خبرته إلى المجموع.",
+          "en": "Check each enemy’s state before adding its experience."
         },
         {
-          "ar": "هذا التحدي يدمج الحلقات والمصفوفات والقواميس وشروط الحذف والتصفية بنجاح تام.",
-          "en": "This challenge successfully integrates loops, arrays, dictionaries, and filtering conditions."
+          "ar": "ابدأ العدادين بصفر، وحدّثهما داخل الحلقة للأعداء النشطين فقط.",
+          "en": "Initialize both counters to zero and update them only for active enemies."
         }
       ],
       "testCases": [
         {
           "description": {
-            "ar": "التحقق من صحة تصفية الغنائم واحتساب المجموع الإجمالي 170",
-            "en": "Verifying loot filtering accuracy and total sum 170"
+            "ar": "تحقق من تصفية الأعداء المهزومين وجمع الخبرة",
+            "en": "Check defeated-enemy filtering and experience total"
           },
-          "expectedOutput": "Total Loot Value: 170"
+          "setupCode": "var enemies = [{\"defeated\": false, \"xp\": 12}, {\"defeated\": true, \"xp\": 20}, {\"defeated\": false, \"xp\": 8}]",
+          "expectedOutput": "Active: 2 | XP: 20",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من معالجة موجة فارغة",
+            "en": "Check an empty wave"
+          },
+          "setupCode": "var enemies = []",
+          "expectedOutput": "Active: 0 | XP: 0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من موجة جميع أعدائها مهزومون",
+            "en": "Check a wave where every enemy is defeated"
+          },
+          "setupCode": "var enemies = [{\"defeated\": true, \"xp\": 50}]",
+          "expectedOutput": "Active: 0 | XP: 0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من عدو نشط بلا نقاط خبرة",
+            "en": "Check an active enemy with zero experience"
+          },
+          "setupCode": "var enemies = [{\"defeated\": false, \"xp\": 0}]",
+          "expectedOutput": "Active: 1 | XP: 0",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
+        },
+        {
+          "description": {
+            "ar": "تحقق من جمع خبرة عدة أعداء نشطين",
+            "en": "Check experience from multiple active enemies"
+          },
+          "setupCode": "var enemies = [{\"defeated\": false, \"xp\": 25}, {\"defeated\": false, \"xp\": 5}]",
+          "expectedOutput": "Active: 2 | XP: 30",
+          "ignoreWhitespace": true,
+          "ignoreCase": false
         }
-      ]
+      ],
+      "options": []
     }
   ]
 }
