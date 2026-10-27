@@ -9,7 +9,7 @@
     "ar": "تعرّف توقيتات `_enter_tree` و`_ready` و`_process` على مستوى المفهوم.",
     "en": "Recognize the roles of `_enter_tree`, `_ready`, and `_process` conceptually."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 16,
   "order": 1,
   "documentation": {
     "ar": "يحدث `_enter_tree()` عند دخول العقدة الشجرة، و`_ready()` بعد جاهزية الأبناء، ويُستدعى `_process(delta)` كل إطار مرسوم. استخدم `_physics_process(delta)` للتحديثات المرتبطة بخطوات الفيزياء.",
@@ -21,19 +21,19 @@
         "ar": "دوال دورة حياة العقدة",
         "en": "Node lifecycle callbacks"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/overridable_functions.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/overridable_functions.html"
     },
     {
       "title": {
         "ar": "مرجع الصنف Node",
         "en": "Node class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_node.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## اختر توقيت العمل\n\nتدخل العقدة الشجرة قبل أن تصبح جاهزة للاستخدام الكامل. في `_ready()` تكون الأبناء جاهزة عادة. يستدعى `_process(delta)` كل إطار؛ لا تضع فيه عملاً غير لازم. للحركة المرتبطة بالفيزياء استخدم `_physics_process(delta)`.\n\n```gdscript\nextends Node2D\n\nfunc _ready():\n    print(\"Ready\")\n\nfunc _process(delta):\n    pass\n```\n\nيمثل `delta` الزمن المنقضي منذ الإطار السابق.",
-    "en": "## Choose when work happens\n\nA node enters the tree before it is fully ready for use. In `_ready()`, children are normally ready. `_process(delta)` is called every frame; do not put unnecessary work there. Use `_physics_process(delta)` for physics-related movement.\n\n```gdscript\nextends Node2D\n\nfunc _ready():\n    print(\"Ready\")\n\nfunc _process(delta):\n    pass\n```\n\n`delta` represents the time elapsed since the previous frame."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nWorld (Node2D) [lifecycle.gd]\n└── Player (CharacterBody2D)\n    └── Sprite2D (Sprite2D)\n```\n\nأرفق سكربت دورة الحياة بـ World؛ يوضّح Player ترتيب دخول الأبناء وجاهزيتها.\n\n## اختر توقيت العمل\n\nيستدعى `_enter_tree()` للأب قبل أبنائه، ثم `_ready()` للأبناء قبل الوالد. يتكرر `_process(delta)` كل إطار، وعند الإزالة يستدعى `_exit_tree()` للأبناء قبل الوالد. استخدم `_physics_process(delta)` للحركة المرتبطة بالفيزياء.\n\n```gdscript\nextends Node2D\n\nfunc _ready():\n    print(\"Ready\")\n\nfunc _process(delta):\n    pass\n```\n\nيمثل `delta` الزمن المنقضي منذ الإطار السابق. التسلسل العام هو `_enter_tree()` ثم `_ready()` ثم المعالجة ثم `_exit_tree()` عند الخروج.\n\n> [!WARNING]\n> تحقق من اسم العقدة ومسارها الفعليين؛ المسار غير الموجود قد ينتج مرجعاً غير صالح أو خطأ وقت التشغيل.\n\n> [!NOTE]\n> تدخل الأبناء الشجرة قبل الوالد وتكتمل جاهزيتها قبل `_ready()` للوالد؛ يبدأ `@onready` بعد دخول الشجرة.\n\n> [!TIP]\n> استخدم أسماء مستقرة، واستعمل مجموعة أو مرجعاً محفوظاً عندما يكون البحث بالمسار هشاً.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nWorld (Node2D) [lifecycle.gd]\n└── Player (CharacterBody2D)\n    └── Sprite2D (Sprite2D)\n```\n\nAttach the lifecycle script to World; Player illustrates child entry and readiness order.\n\n## Choose when work happens\n\n`_enter_tree()` runs for a parent before its children, then `_ready()` runs for children before the parent. `_process(delta)` repeats every frame, and on removal `_exit_tree()` runs for children before the parent. Use `_physics_process(delta)` for physics-related movement.\n\n```gdscript\nextends Node2D\n\nfunc _ready():\n    print(\"Ready\")\n\nfunc _process(delta):\n    pass\n```\n\n`delta` represents the time elapsed since the previous frame. The overall lifecycle is `_enter_tree()`, then `_ready()`, processing, and `_exit_tree()` when leaving.\n\n> [!WARNING]\n> Check actual node names and paths; a missing path can produce an invalid reference or runtime error.\n\n> [!NOTE]\n> Children enter the tree before their parent and are ready before the parent’s `_ready()`; `@onready` runs after tree entry.\n\n> [!TIP]\n> Use stable node names, and prefer a group or stored reference when path-based lookup is brittle."
   },
   "exercises": [
     {

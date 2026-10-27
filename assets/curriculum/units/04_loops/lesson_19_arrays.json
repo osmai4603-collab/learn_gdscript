@@ -9,7 +9,7 @@
     "ar": "إتقان إنشاء واستخدام المصفوفات، فهم انتقالها بالمرجع (Pass-by-reference)، والالتزام بتحذير عدم تعديل المصفوفة أثناء الدوران عليها.",
     "en": "Master creating and using arrays, understand Pass-by-reference semantics, and adhere to the warning against mutating arrays while iterating."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 14,
   "order": 3,
   "contentMarkdown": {
     "ar": "## المصفوفات Array والعمليات عليها في GDScript\n\n### 1. المفهوم في سياق الألعاب\nالمصفوفة (Array) هي حاوية مرتبة تخزن مجموعة عناصر متسلسلة تحت اسم واحد (مثل قائمة مقتنيات اللاعب `inventory` أو أعداء الشاشة). تبدأ الفهارس (Indices) في GDScript دائماً من الرقم `0`.\n\n### 2. القواعد والصياغة والتحذيرات الهامة\n- **الإضافة والحذف:** استخدام `append(item)` لإضافة عنصر للنهاية، واستخدام `remove_at(index)` أو `erase(item)` للحذف.\n- ⚠️ **تحذير رسمي (Pass-by-reference):** المصفوفات تُمرر **بالمرجع** وليس بالقيمة؛ أي أن نسخ مصفوفة إلى متغير آخر يجعل كلاً منهما يشير لنفس بيانات الذاكرة.\n- ⚠️ **تحذير أداء خطير:** **يحظر منعاً باتاً** حذف عناصر من المصفوفة أثناء التكرار عليها في حلقة `for` مباشرة لأن ذلك يغير الفهارس ويسبب انهياراً أو أخطاء خفية؛ استخدم حلقة عكسية أو انسخ القائمة أولاً.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var inventory = [\"Sword\", \"Shield\"]\n    inventory.append(\"Potion\")\n    print(inventory[0])\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** محاولة الوصول إلى فهرس أكبر من حجم المصفوفة `size() - 1` تسبب خطأ وقت التشغيل (Index out of bounds).\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** حافظ على نظافة فهارس المصفوفات وتجنب تعديلها أثناء التكرار عليها تفادياً للأخطاء والمشاكل البرمجية.",
@@ -26,7 +26,7 @@
         "ar": "دليل المصفوفات في Godot",
         "en": "Godot Arrays Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#array"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#array"
     }
   ],
   "exercises": [

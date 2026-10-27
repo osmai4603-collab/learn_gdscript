@@ -9,11 +9,11 @@
     "ar": "استخدم `extends` للتخصص و`class_name` لإتاحة صنفك باسم واضح.",
     "en": "Use `extends` for specialization and `class_name` to expose your class by a clear name."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 15,
   "order": 1,
   "documentation": {
-    "ar": "تحدد `extends` الصنف الأب للسكربت. يضيف الصنف المشتق خصائص أو دوالاً أو يعيد تعريف سلوك مناسب. يمنح `class_name` صنفك اسماً مسجلاً للمشروع. استخدم الوراثة لعلاقة نوع متخصص من، لا لمشاركة عابرة.",
-    "en": "`extends` selects a script’s parent class. A derived class adds properties or functions or overrides appropriate behavior. `class_name` gives your class a registered project-wide name. Use inheritance for a specialized-kind-of relationship, not incidental sharing."
+    "ar": "تحدد `extends` الصنف الأب للسكربت. يضيف الصنف المشتق خصائص أو دوالاً أو يعيد تعريف سلوك مناسب. يمنح `class_name` صنفك اسماً مسجلاً للمشروع. استخدم الوراثة لعلاقة نوع متخصص من، لا لمشاركة عابرة. يظهر الصنف المشتق من نوع عقدة في نافذة إضافة العقد بعد تسجيله وتحميله في المحرر.",
+    "en": "`extends` selects a script’s parent class. A derived class adds properties or functions or overrides appropriate behavior. `class_name` gives your class a registered project-wide name. Use inheritance for a specialized-kind-of relationship, not incidental sharing. A class derived from a node type is available in the Add Node dialog after it is registered and loaded by the editor."
   },
   "documentationSources": [
     {
@@ -21,19 +21,26 @@
         "ar": "الأصناف في GDScript",
         "en": "Classes in GDScript"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#classes"
     },
     {
       "title": {
         "ar": "مرجع الصنف Node",
         "en": "Node class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_node.html"
+    },
+    {
+      "title": {
+        "ar": "الوراثة في GDScript",
+        "en": "GDScript inheritance"
+      },
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#inheritance"
     }
   ],
   "contentMarkdown": {
-    "ar": "## تخصيص صنف موجود\n\nيمكن للسكربت أن يرث من صنف Godot أو صنف آخر. يتيح ذلك استخدام خصائص الأب وتخصيص السلوك. يسجل `class_name` اسماً يمكن الإشارة إليه من سكربتات المشروع.\n\n```gdscript\nextends Node2D\nclass_name MovingActor\n\n@export var speed = 120.0\n\nfunc move_right(delta):\n    position.x += speed * delta\n```\n\nيوفر `Node2D` خاصية الموضع. لا ترث من صنف لا يلائم طبيعة الكائن لمجرد إعادة استخدام سطر.",
-    "en": "## Specialize an existing class\n\nA script can inherit from a Godot class or another class. This lets it use parent properties and specialize behavior. `class_name` registers a name that project scripts can reference.\n\n```gdscript\nextends Node2D\nclass_name MovingActor\n\n@export var speed = 120.0\n\nfunc move_right(delta):\n    position.x += speed * delta\n```\n\n`Node2D` provides a position property. Do not inherit from an unsuitable class just to reuse one line."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nActor (Node2D) [script attached to Actor]\n```\n\nأرفق سكربت الصنف بعقدة Actor المشتقة من Node2D.\n\n## تخصيص صنف موجود\n\nيمكن للسكربت أن يرث من صنف Godot أو صنف آخر. يتيح ذلك استخدام خصائص الأب وتخصيص السلوك. يسجل `class_name` اسماً يمكن الإشارة إليه من سكربتات المشروع.\n\n```gdscript\nextends Node2D\nclass_name MovingActor\n\n@export var speed = 120.0\n\nfunc move_right(delta):\n    position.x += speed * delta\n```\n\nيوفر `Node2D` خاصية الموضع. لا ترث من صنف لا يلائم طبيعة الكائن لمجرد إعادة استخدام سطر.\n\n> [!WARNING]\n> لا تستخدم `class_name` بديلاً عن إنشاء نسخة أو عقدة؛ التسجيل يتيح النوع ولا ينشئه تلقائياً.\n\n> [!NOTE]\n> عندما يرث السكربت من نوع عقدة، يمكن إنشاء النوع المسجل من نافذة إضافة العقد بعد أن يتعرف المحرر على السكربت.\n\n> [!TIP]\n> استخدم `super()` لاستدعاء سلوك الأب عند الحاجة، وخصص السلوك الذي يختلف فقط.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nActor (Node2D) [script attached to Actor]\n```\n\nAttach the class script to the Actor node, which extends Node2D.\n\n## Specialize an existing class\n\nA script can inherit from a Godot class or another class. This lets it use parent properties and specialize behavior. `class_name` registers a name that project scripts can reference.\n\n```gdscript\nextends Node2D\nclass_name MovingActor\n\n@export var speed = 120.0\n\nfunc move_right(delta):\n    position.x += speed * delta\n```\n\n`Node2D` provides a position property. Do not inherit from an unsuitable class just to reuse one line.\n\n> [!WARNING]\n> Do not treat `class_name` as instance or node creation; registration makes the type available but does not instantiate it.\n\n> [!NOTE]\n> When the script extends a node type, the registered type can be created from Add Node after the editor recognizes the script.\n\n> [!TIP]\n> Use `super()` to call parent behavior when needed, and override only what should differ."
   },
   "exercises": [
     {

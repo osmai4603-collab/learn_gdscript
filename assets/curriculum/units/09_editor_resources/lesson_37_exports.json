@@ -9,11 +9,11 @@
     "ar": "اعرض خصائص السكربت في Inspector واضبط نوعها ومدى قيمها.",
     "en": "Expose script properties in the Inspector and constrain their types and values."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 15,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## اجعل الإعدادات قابلة للتحرير\n\nتتيح `@export` عرض متغير السكربت في Inspector كي يضبط المصمم قيمته لكل عقدة دون تغيير الشيفرة. اختر نوعاً واضحاً واستخدم تلميحاً مناسباً عندما تكون القيمة ضمن مجال معروف.\n\n```gdscript\n@export_range(0.0, 500.0, 10.0) var speed: float = 240.0\n@export var display_name: String = \"Rover\"\n```\n\nتظهر الخصائص بعد إرفاق السكربت بعقدة. احتفظ بقيمة افتراضية مفيدة، ولا تصدّر تفاصيل داخلية لا يحتاج المصمم إلى ضبطها.",
-    "en": "## Make settings editable\n\n`@export` exposes a script variable in the Inspector so a designer can change it for each node without editing code. Choose a clear type and a suitable hint when a value has a known range.\n\n```gdscript\n@export_range(0.0, 500.0, 10.0) var speed: float = 240.0\n@export var display_name: String = \"Rover\"\n```\n\nExported properties appear after attaching the script to a node. Keep a useful default and avoid exposing implementation details that designers should not change."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nGame (Control)\n├── InventoryUI (VBoxContainer)\n└── SaveController (Node)\n\nInventoryData (Resource, InventoryData.tres)\n```\n\nأرفق سكربت التحكم أو الحفظ بـ SaveController؛ المورد InventoryData.tres بيانات مستقلة عن شجرة العقد.\n\n## اجعل الإعدادات قابلة للتحرير\n\nتتيح `@export` عرض متغير السكربت في Inspector كي يضبط المصمم قيمته لكل عقدة دون تغيير الشيفرة. اختر نوعاً واضحاً واستخدم تلميحاً مناسباً عندما تكون القيمة ضمن مجال معروف.\n\n```gdscript\n@export_range(0.0, 500.0, 10.0) var speed: float = 240.0\n@export var display_name: String = \"Rover\"\n```\n\nتظهر الخصائص بعد إرفاق السكربت بعقدة. احتفظ بقيمة افتراضية مفيدة، ولا تصدّر تفاصيل داخلية لا يحتاج المصمم إلى ضبطها.\n\n> [!WARNING]\n> لا تكتب بيانات تشغيل المستخدم داخل `res://`؛ استخدم `user://` وتحقق من نجاح التحميل والتحليل قبل استعمال البيانات.\n\n> [!NOTE]\n> العقدة جزء من شجرة المشهد، أما `Resource` فيمثل بيانات يمكن مشاركتها ولا يدخل تلك الشجرة.\n\n> [!TIP]\n> استخدم `preload()` للمراجع المعروفة مسبقاً و`load()` للتحميل عند الحاجة.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nGame (Control)\n├── InventoryUI (VBoxContainer)\n└── SaveController (Node)\n\nInventoryData (Resource, InventoryData.tres)\n```\n\nAttach the controller or saving script to SaveController; InventoryData.tres is data independent of the node tree.\n\n## Make settings editable\n\n`@export` exposes a script variable in the Inspector so a designer can change it for each node without editing code. Choose a clear type and a suitable hint when a value has a known range.\n\n```gdscript\n@export_range(0.0, 500.0, 10.0) var speed: float = 240.0\n@export var display_name: String = \"Rover\"\n```\n\nExported properties appear after attaching the script to a node. Keep a useful default and avoid exposing implementation details that designers should not change.\n\n> [!WARNING]\n> Do not write user runtime data into `res://`; use `user://` and validate loading and parsing before using restored data.\n\n> [!NOTE]\n> A node belongs to the scene tree, while a `Resource` represents shareable data and is not part of that tree.\n\n> [!TIP]\n> Use `preload()` for known references and `load()` for runtime loading when needed."
   },
   "documentation": {
     "ar": "يحوّل `@export` متغيراً إلى خاصية قابلة للتحرير والتخزين في Inspector للعقدة التي تحمل السكربت. يختار Godot محرراً مناسباً بحسب النوع، وتساعد تلميحات مثل `@export_range` في تقديم مجال أو خطوة للقيم العددية. القيود تصف احتياج التصميم ولا تستبدل التحقق المنطقي في الشيفرة. تحفظ تعديلات العقدة ضمن المشهد، بينما تبقى القيمة الافتراضية في السكربت أساساً للنسخ الجديدة. استخدم التصدير للإعدادات المقصودة فقط، وأبقِ الحالة المؤقتة الخاصة بالتنفيذ غير مصدّرة.",
@@ -25,7 +25,7 @@
         "ar": "تصدير GDScript",
         "en": "GDScript exports"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_exports.html"
     }
   ],
   "exercises": [

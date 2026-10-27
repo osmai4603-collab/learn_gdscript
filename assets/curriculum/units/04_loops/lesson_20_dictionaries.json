@@ -9,7 +9,7 @@
     "ar": "إتقان استخدام القواميس لتنظيم بيانات الخصائص والمفاتيح، استخدام القراءة الآمنة عبر `get()`، وإنجاز التحدي التراكمي للوحدة الرابعة.",
     "en": "Master using dictionaries for organizing property key-value data, safe reading via `get()`, and complete the Unit 4 capstone challenge."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 14,
   "order": 4,
   "contentMarkdown": {
     "ar": "## القواميس Dictionary في GDScript\n\n### 1. المفهوم في سياق الألعاب\nعندما تريد تخزين خصائص معقدة لعنصر أو شخصية (مثل: الاسم، السرعة، السلاح، ونقاط الدفاع)، فإن المصفوفات العادية لا تفيد لأنها تعتمد على أرقام الفهارس. **القاموس (Dictionary)** يربط كل قيمة **بمفتاح نصي واضح** (Key-Value Pairs)، مثل `{\"name\": \"Orc\", \"hp\": 100}`.\n\n### 2. القواعد والصياغة والقراءة الآمنة\n- **القراءة المباشرة:** باستخدام المفتاح مثل `enemy[\"hp\"]`.\n- **القراءة الآمنة (`get`):** استخدام `enemy.get(\"missing_key\", default_value)` لتفادي توقف اللعبة المفاجئ عند محاولة قراءة مفتاح غير موجود.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var monster = {\"name\": \"Goblin\", \"gold\": 25}\n    # قراءة آمنة لخصائص الوحش\n    print(monster.get(\"name\", \"Unknown\"))\n    print(monster[\"gold\"])\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** محاولة قراءة مفتاح غير موجود في القاموس عبر الأقواس المباشرة `dict[\"bad_key\"]` تسبب توقف اللعبة فوراً (Crash)؛ استخدم دائماً دالة `get()` أو افحص الوجود بـ `has()`.\n- ℹ️ **معلومة تقنية:** القواميس والمصفوفات تُمرر بالمرجع (Pass-by-reference) في الذاكرة.\n\n### 5. الملخص والقاعدة الذهبية (تحدي الوحدة 4)\n> **قاعدة ذهبية وتحدي الوحدة:** القواميس هي قلب تنظيم بيانات الألعاب. وفي ختام هذه الوحدة، سننجز **تحدي مصفي الغنائم والموارد (Loot Drop Processor)** لدمج الحلقات والمصفوفات والقواميس ودوال التحكم.",
@@ -27,7 +27,7 @@
         "ar": "دليل القواميس في Godot",
         "en": "Godot Dictionaries Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#dictionary"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#dictionary"
     }
   ],
   "exercises": [

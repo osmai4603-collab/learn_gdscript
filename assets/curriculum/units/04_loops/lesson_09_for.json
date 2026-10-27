@@ -9,7 +9,7 @@
     "ar": "إتقان تكرار تنفيذ الأوامر لعدد محدد من المرات باستخدام حلقة `for` ودالة النطاق `range()`.",
     "en": "Master repeating statement execution for a fixed number of times using the `for` loop and `range()` function."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 12,
   "order": 0,
   "contentMarkdown": {
     "ar": "## حلقة for ونطاقات range في GDScript\n\n### 1. المفهوم في سياق الألعاب\nبدلاً من تكرار كتابة أمر طباعة رسالة ترحيب 10 مرات يدوياً، تمكنك الحلقات (Loops) من تنفيذ نفس كتلة الأوامر مئات المرات بكفاءة تامة. حلقة `for` هي الخيار الأول عندما تكون مسبقاً على علم بعدد مرات التكرار المطلوبة.\n\n### 2. القواعد والصياغة\n- **استخدام range(n):** تولد تسلسلاً أعداداً تبدأ من `0` وتتوقف قبل الرقم `n` (أي أن `range(3)` تنتج الأعداد `0, 1, 2`).\n- صيغة النطاق المتقدمة `range(start, end, step)` تسمح بتحديد البداية، النهاية، ومقدار الخطوة (تنازلي أو تصاعدي).\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    # تكرار العد من 0 إلى 2\n    for i in range(3):\n        print(\"Wave: \" + str(i))\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تذكر أن النهاية في `range(n)` تكون غير مشمولة (Exclusive)؛ أي أن `range(5)` تنتهي عند الرقم 4 ولا تصل إلى 5.\n- ℹ️ **معلومة تقنية:** يمكنك أيضاً الدوران مباشرة على عناصر المصفوفات بدون استخدام range عبر `for item in array:`.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم حلقة `for` دائماً عندما يكون عدد مرات التكرار محدداً ومعلوماً، واحرص على تفقد حدود range بدقة.",
@@ -26,7 +26,7 @@
         "ar": "دليل الحلقات في Godot",
         "en": "Godot Loops Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#for"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#for"
     }
   ],
   "exercises": [

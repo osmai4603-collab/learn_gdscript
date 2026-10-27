@@ -9,11 +9,11 @@
     "ar": "صرّح بأنواع المتغيرات والمعاملات والقيم المعادة لتوضيح العقود.",
     "en": "Declare variable, parameter, and return types to make contracts explicit."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 16,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## اكتب العقد في التصريح\n\nيساعد النوع الساكن المحرر والمحلل على فهم القيمة المتوقعة واكتشاف بعض الأخطاء مبكراً. استخدم `var name: Type = value`، ويمكن كتابة نوع الإرجاع بعد `->`.\n\n```gdscript\nvar lives: int = 3\nvar label: String = \"Pilot\"\nfunc add_point(amount: int) -> int:\n    return amount + 1\n```\n\nيظل `Variant` مفيداً عندما يكون النوع متغيراً عمداً، لكنه يقلل المعلومات المتاحة للمحلل. اجعل النوع والقيمة متوافقين.",
-    "en": "## Put the contract in the declaration\n\nStatic types help the editor and analyzer understand expected values and catch some mistakes early. Use `var name: Type = value`, and write a return type after `->`.\n\n```gdscript\nvar lives: int = 3\nvar label: String = \"Pilot\"\nfunc add_point(amount: int) -> int:\n    return amount + 1\n```\n\n`Variant` remains useful when a value is intentionally variable, but gives the analyzer less information. Keep declared types and values compatible."
+    "ar": "## اكتب العقد في التصريح\n\nيساعد النوع الساكن المحرر والمحلل على فهم القيمة المتوقعة واكتشاف بعض الأخطاء مبكراً. استخدم `var name: Type = value`، ويمكن كتابة نوع الإرجاع بعد `->`.\n\n```gdscript\nvar lives: int = 3\nvar label: String = \"Pilot\"\nfunc add_point(amount: int) -> int:\n    return amount + 1\n```\n\nيظل `Variant` مفيداً عندما يكون النوع متغيراً عمداً، لكنه يقلل المعلومات المتاحة للمحلل. اجعل النوع والقيمة متوافقين.\n\n> [!WARNING]\n> النوع الساكن لا يمنع كل أخطاء وقت التشغيل ولا يجعل كل عملية أسرع تلقائياً؛ لا تتجاهل التحذيرات.\n\n> [!NOTE]\n> قد يحسن التحديد النوعي الأداء في مسارات معينة، لكن مقدار التحسن يعتمد على الحالة؛ قِس باستخدام profiler بدلاً من افتراض نسبة ثابتة.\n\n> [!TIP]\n> ابدأ بكتابة الأنواع في حدود الدوال والمجموعات التي تستفيد من فحص مبكر أو وضوح أكبر.",
+    "en": "## Put the contract in the declaration\n\nStatic types help the editor and analyzer understand expected values and catch some mistakes early. Use `var name: Type = value`, and write a return type after `->`.\n\n```gdscript\nvar lives: int = 3\nvar label: String = \"Pilot\"\nfunc add_point(amount: int) -> int:\n    return amount + 1\n```\n\n`Variant` remains useful when a value is intentionally variable, but gives the analyzer less information. Keep declared types and values compatible.\n\n> [!WARNING]\n> Static types do not prevent every runtime error or make every operation faster automatically; do not ignore warnings.\n\n> [!NOTE]\n> Typing may improve performance on particular paths, but gains depend on workload; profile instead of assuming a fixed percentage.\n\n> [!TIP]\n> Start by typing function boundaries and collections that benefit from early checking or clearer intent."
   },
   "documentation": {
     "ar": "تحدد الأنواع القيم المقبولة وتتيح تحليلاً وإكمالاً أدق. صرّح بنوع المتغير والمعامل والقيمة المعادة عند الحاجة إلى توضيح العقد، أو اعتمد الاستدلال عندما تكون القيمة الابتدائية كافية. يسمح `Variant` بأنواع متعددة لكنه قد يؤخر اكتشاف عدم التوافق إلى وقت التشغيل. اختر النوع الذي يعبر عن الاستخدام الفعلي، ولا تعالج التحذير بتحويل غير مبرر. قد تتطلب واجهات Godot نوعاً أكثر تحديداً، لذا تحقّق من النوع عند حدود الأنظمة والبيانات الخارجية.",
@@ -25,7 +25,7 @@
         "ar": "الأنواع الساكنة في GDScript",
         "en": "Static typing in GDScript"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/static_typing.html"
     }
   ],
   "exercises": [

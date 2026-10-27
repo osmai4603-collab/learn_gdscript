@@ -9,7 +9,7 @@
     "ar": "ميّز بين المتغير المحلي والعام، وتجنّب الاعتماد غير المقصود على الحالة المشتركة.",
     "en": "Distinguish local and script-level variables, and avoid accidental dependence on shared state."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 14,
   "order": 3,
   "documentation": {
     "ar": "يحدد النطاق المواضع التي يمكن فيها الوصول إلى اسم. أبقِ القيم المؤقتة محلية، ومرّر البيانات عبر المعاملات وأعد النتائج عند الحاجة. المتغير على مستوى السكربت متاح لنطاق أوسع، لذا قلّل مواضع تغييره.",
@@ -21,12 +21,12 @@
         "ar": "أساسيات GDScript",
         "en": "GDScript basics"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## أين يعيش المتغير؟\n\nيكون المتغير الذي تعرّفه داخل دالة محلياً لها. المتغير على مستوى السكربت متاح لدوال السكربت، وقد يؤدي تغييره من مواضع كثيرة إلى صعوبة تتبع الحالة.\n\n```gdscript\nvar score = 0\n\nfunc add_point():\n    var points = 1\n    score += points\n\nadd_point()\nprint(score)\n```\n\nهنا `points` محلي داخل `add_point`، بينما `score` حالة مشتركة. استخدم المعاملات والقيم المعادة لتمرير البيانات بين الدوال عندما يكون ذلك مناسباً.",
-    "en": "## Where does a variable live?\n\nA variable declared inside a function is local to it. A script-level variable is available to functions in that script, and changing it from many places can make state hard to trace.\n\n```gdscript\nvar score = 0\n\nfunc add_point():\n    var points = 1\n    score += points\n\nadd_point()\nprint(score)\n```\n\nHere `points` is local to `add_point`, while `score` is shared state. Use parameters and return values to pass data between functions when appropriate."
+    "ar": "## أين يعيش المتغير؟\n\nيكون المتغير الذي تعرّفه داخل دالة محلياً لها. المتغير على مستوى السكربت متاح لدوال السكربت، وقد يؤدي تغييره من مواضع كثيرة إلى صعوبة تتبع الحالة.\n\n```gdscript\nvar score = 0\n\nfunc add_point():\n    var points = 1\n    score += points\n\nadd_point()\nprint(score)\n```\n\nهنا `points` محلي داخل `add_point`، بينما `score` حالة مشتركة. استخدم المعاملات والقيم المعادة لتمرير البيانات بين الدوال عندما يكون ذلك مناسباً.\n\n> [!WARNING]\n> تجنّب الاعتماد على حالة خفية أو اسم محلي يظلل متغيراً مهماً؛ اجعل مدخلات الدالة ونتيجتها واضحتين.\n\n> [!NOTE]\n> تحافظ الدوال الصغيرة ذات المسؤولية الواحدة على سهولة الفهم والاختبار.\n\n> [!TIP]\n> جرّب الدالة بقيم عادية وحدّية، ثم افحص القيمة التي تعيدها.",
+    "en": "## Where does a variable live?\n\nA variable declared inside a function is local to it. A script-level variable is available to functions in that script, and changing it from many places can make state hard to trace.\n\n```gdscript\nvar score = 0\n\nfunc add_point():\n    var points = 1\n    score += points\n\nadd_point()\nprint(score)\n```\n\nHere `points` is local to `add_point`, while `score` is shared state. Use parameters and return values to pass data between functions when appropriate.\n\n> [!WARNING]\n> Avoid hidden state or a local name that shadows an important variable; keep inputs and results explicit.\n\n> [!NOTE]\n> Small functions with one responsibility are easier to understand and test.\n\n> [!TIP]\n> Try normal and boundary inputs, then inspect the returned value."
   },
   "exampleCode": "func make_total(a, b):\n    var total = a + b\n    return total\n\nprint(make_total(2, 3))",
   "exercises": [

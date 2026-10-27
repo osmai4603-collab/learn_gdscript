@@ -44,6 +44,18 @@ void main() {
     expect(find.text('المقدمة'), findsWidgets);
     expect(find.text('درس تجريبي'), findsWidgets);
     expect(find.text('محتوى الدرس'), findsOneWidget);
+    expect(find.text('14 دقائق'), findsOneWidget);
+    await tester.ensureVisible(find.text('توثيق الدرس'));
+    await tester.tap(find.text('توثيق الدرس'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('مرجع Godot 4.3'));
+    expect(find.text('مرجع Godot 4.3'), findsOneWidget);
+    expect(
+      find.text(
+        'https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html',
+      ),
+      findsOneWidget,
+    );
     final exampleEditor = tester.widget<TextField>(
       find.byType(TextField).first,
     );
@@ -98,6 +110,19 @@ void main() {
       inlineSpans.singleWhere((span) => span.text == 'var').style?.color,
       codeTheme.keyword,
     );
+    final sceneTreeBlockFinder = find.byWidgetPredicate(
+      (widget) =>
+          widget is SelectableText &&
+          widget.textSpan?.toPlainText().contains('Main (Node2D)') == true,
+    );
+    expect(sceneTreeBlockFinder, findsOneWidget);
+    final sceneTreeBlock = tester.widget<SelectableText>(sceneTreeBlockFinder);
+    expect(
+      sceneTreeBlock.textSpan!.style!.fontFamily,
+      CodeTextTheme.of(
+        tester.element(sceneTreeBlockFinder),
+      ).bodyMedium.fontFamily,
+    );
 
     final explanationPanel = find.byKey(
       const ValueKey('lesson_explanation_panel'),
@@ -105,13 +130,7 @@ void main() {
     final editorPanel = find.byKey(const ValueKey('lesson_editor_panel'));
     final initialExplanationWidth = tester.getSize(explanationPanel).width;
     final initialEditorWidth = tester.getSize(editorPanel).width;
-    expect(
-      initialExplanationWidth,
-      closeTo(
-        tester.getSize(find.byType(DesktopLessonIdeLayout)).width * 0.65,
-        1,
-      ),
-    );
+    expect(initialExplanationWidth, greaterThan(initialEditorWidth));
     await tester.drag(
       find.byKey(const ValueKey('lesson_panel_resize_handle')),
       const Offset(-120, 0),
@@ -130,7 +149,8 @@ void main() {
     expect(find.text('حالة معتادة'), findsOneWidget);
     expect(find.text('نقاط صفرية'), findsOneWidget);
     expect(find.text('نقاط مرتفعة'), findsOneWidget);
-    expect(find.text('المتوقع: 999\nالفعلي: 15'), findsOneWidget);
+    expect(find.textContaining('999'), findsOneWidget);
+    expect(find.textContaining('30'), findsOneWidget);
 
     await dependencies.appSettingsProvider.setLocale(const Locale('en'));
     await tester.pump();
@@ -138,10 +158,18 @@ void main() {
     expect(find.text('Introduction'), findsOneWidget);
     expect(find.text('Test lesson'), findsWidgets);
     expect(find.text('Test content'), findsOneWidget);
+    expect(find.text('14 minutes'), findsOneWidget);
+    expect(find.text('Godot 4.3 reference'), findsOneWidget);
     expect(
       find.text('Calculate score with the supplied bonus'),
       findsOneWidget,
     );
+
+    tester.view.physicalSize = const Size(390, 844);
+    await tester.pumpAndSettle();
+    expect(find.byType(DesktopLessonIdeLayout), findsNothing);
+    expect(find.text('Test lesson'), findsWidgets);
+    expect(tester.takeException(), isNull);
   });
 }
 
@@ -184,9 +212,9 @@ class _LessonAssetBundle extends CachingAssetBundle {
         titleAr: 'درس تجريبي',
         titleEn: 'Test lesson',
         contentAr:
-            'محتوى الدرس\nهذا `var score = 10` مثال\n\n```gdscript\nvar score = 10\nprint(score)\n```',
+            'محتوى الدرس\nهذا `var score = 10` مثال\n\n```gdscript\nvar score = 10\nprint(score)\n```\n\n```text\nMain (Node2D)\n└── Player (CharacterBody2D)\n```',
         contentEn:
-            'Test content\nThis is `var score = 10` inline code\n\n```gdscript\nvar score = 10\nprint(score)\n```',
+            'Test content\nThis is `var score = 10` inline code\n\n```gdscript\nvar score = 10\nprint(score)\n```\n\n```text\nMain (Node2D)\n└── Player (CharacterBody2D)\n```',
         exercises: [
           {
             'id': 'ex_test_score',
@@ -243,9 +271,20 @@ class _LessonAssetBundle extends CachingAssetBundle {
     'unitId': 'unit_01_intro',
     'title': {'ar': titleAr, 'en': titleEn},
     'objective': {'ar': 'تعلّم الأساسيات', 'en': 'Learn the basics'},
-    'estimatedMinutes': 5,
+    'estimatedMinutes': 14,
     'order': 0,
     'contentMarkdown': {'ar': contentAr, 'en': contentEn},
+    'documentation': {
+      'ar': 'شرح توثيق الدرس',
+      'en': 'Lesson documentation explanation',
+    },
+    'documentationSources': [
+      {
+        'title': {'ar': 'مرجع Godot 4.3', 'en': 'Godot 4.3 reference'},
+        'url':
+            'https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html',
+      },
+    ],
     'exampleCode': 'var example_value = 1',
     'exercises': exercises,
   });

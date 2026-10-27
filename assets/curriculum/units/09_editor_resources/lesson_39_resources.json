@@ -9,11 +9,11 @@
     "ar": "أنشئ مورداً يحمل بيانات مشتركة واستخدمه من أكثر من مكان.",
     "en": "Create a resource that holds shared data and use it from more than one place."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 17,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## البيانات ليست عقدة\n\n`Resource` كائن بيانات يمكن حفظه كملف ومشاركته بين العقد والمشاهد. أنشئ صنفاً مخصصاً بوراثة `Resource` واجعل حقوله المصدّرة قابلة للتحرير.\n\n```gdscript\nextends Resource\nclass_name ItemData\n\n@export var display_name: String = \"\"\n@export var value: int = 0\n```\n\nاستخدم المورد للأوصاف والإعدادات التي لا تحتاج إلى سلوك شجرة المشهد. يمكن لعدة عقد مشاركة المورد نفسه؛ أنشئ نسخة مستقلة عندما تتطلب كل نسخة حالة متغيرة خاصة بها.",
-    "en": "## Data is not a node\n\nA `Resource` is a data object that can be saved as a file and shared by nodes and scenes. Create a custom class extending `Resource` and expose its fields for editing.\n\n```gdscript\nextends Resource\nclass_name ItemData\n\n@export var display_name: String = \"\"\n@export var value: int = 0\n```\n\nUse resources for descriptions and settings that do not need scene-tree behavior. Several nodes can share one resource; make an independent duplicate when each instance needs its own changing state."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nGame (Control)\n├── InventoryUI (VBoxContainer)\n└── SaveController (Node)\n\nInventoryData (Resource, InventoryData.tres)\n```\n\nأرفق سكربت التحكم أو الحفظ بـ SaveController؛ المورد InventoryData.tres بيانات مستقلة عن شجرة العقد.\n\n## البيانات ليست عقدة\n\n`Resource` كائن بيانات يمكن حفظه كملف ومشاركته بين العقد والمشاهد. أنشئ صنفاً مخصصاً بوراثة `Resource` واجعل حقوله المصدّرة قابلة للتحرير.\n\n```gdscript\nextends Resource\nclass_name ItemData\n\n@export var display_name: String = \"\"\n@export var value: int = 0\n```\n\nاستخدم المورد للأوصاف والإعدادات التي لا تحتاج إلى سلوك شجرة المشهد. يمكن لعدة عقد مشاركة المورد نفسه؛ أنشئ نسخة مستقلة عندما تتطلب كل نسخة حالة متغيرة خاصة بها.\n\n> [!WARNING]\n> لا تكتب بيانات تشغيل المستخدم داخل `res://`؛ استخدم `user://` وتحقق من نجاح التحميل والتحليل قبل استعمال البيانات.\n\n> [!NOTE]\n> العقدة جزء من شجرة المشهد، أما `Resource` فيمثل بيانات يمكن مشاركتها ولا يدخل تلك الشجرة.\n\n> [!TIP]\n> استخدم `preload()` للمراجع المعروفة مسبقاً و`load()` للتحميل عند الحاجة.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nGame (Control)\n├── InventoryUI (VBoxContainer)\n└── SaveController (Node)\n\nInventoryData (Resource, InventoryData.tres)\n```\n\nAttach the controller or saving script to SaveController; InventoryData.tres is data independent of the node tree.\n\n## Data is not a node\n\nA `Resource` is a data object that can be saved as a file and shared by nodes and scenes. Create a custom class extending `Resource` and expose its fields for editing.\n\n```gdscript\nextends Resource\nclass_name ItemData\n\n@export var display_name: String = \"\"\n@export var value: int = 0\n```\n\nUse resources for descriptions and settings that do not need scene-tree behavior. Several nodes can share one resource; make an independent duplicate when each instance needs its own changing state.\n\n> [!WARNING]\n> Do not write user runtime data into `res://`; use `user://` and validate loading and parsing before using restored data.\n\n> [!NOTE]\n> A node belongs to the scene tree, while a `Resource` represents shareable data and is not part of that tree.\n\n> [!TIP]\n> Use `preload()` for known references and `load()` for runtime loading when needed."
   },
   "documentation": {
     "ar": "`Resource` أساس بيانات Godot القابلة للتخزين وإعادة الاستخدام؛ وعلى خلاف `Node` لا ينضم إلى شجرة المشهد ولا يملك دورة حياة عقدة. عرّف مورداً مخصصاً بوراثة `Resource` وأضف خصائص مصدّرة، ثم أنشئ ملف المورد في المحرر. يمكن لعقد متعددة الاحتفاظ بمرجع إلى المورد ذاته، وهو مفيد للبيانات الثابتة لكنه مهم عند تعديلها: قد يظهر التغيير في كل مستخدم للمورد المشترك. افصل البيانات الوصفية عن الحالة المؤقتة، وكرّر المورد عند الحاجة إلى استقلال الحالة.",
@@ -25,7 +25,14 @@
         "ar": "الموارد",
         "en": "Resources"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/resources.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع Resource",
+        "en": "Resource class reference"
+      },
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_resource.html"
     }
   ],
   "exercises": [

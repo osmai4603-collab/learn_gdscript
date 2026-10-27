@@ -9,11 +9,11 @@
     "ar": "انتظر إشارة بطريقة غير متزامنة ثم تابع الدالة عند صدورها.",
     "en": "Wait for a signal asynchronously and resume a function when it is emitted."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 16,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## علّق الدالة لا اللعبة\n\nتسمح `await` لدالة GDScript بالتوقف حتى تصدر إشارة، ثم تتابع من السطر التالي. لا يعني ذلك إيقاف المحرك كله؛ تظل بقية الإطارات والعقد تعمل.\n\n```gdscript\nfunc show_message() -> void:\n    print(\"Ready\")\n    await get_tree().create_timer(1.0).timeout\n    print(\"Go\")\n```\n\nيفترض المثال التالي وجود عقدة `AnimationPlayer` باسم `$AnimationPlayer` وعقدة باب باسم `$Door`، مع حركة معرفة في المحرّك. تأكد من أن الإشارة ستصدر، وراعِ عمر الكائن الذي يملكها.",
-    "en": "## Pause a function, not the game\n\n`await` lets a GDScript function suspend until a signal is emitted, then continue at the next line. It does not stop the whole engine; other frames and nodes keep running.\n\n```gdscript\nfunc show_message() -> void:\n    print(\"Ready\")\n    await get_tree().create_timer(1.0).timeout\n    print(\"Go\")\n```\n\nThe following example assumes an `AnimationPlayer` child at `$AnimationPlayer` and a door node at `$Door`, with an animation configured in the player. Ensure the signal can occur, and consider the lifetime of the object that owns it."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nBattleScene (Node2D)\n├── Hero (CharacterBody2D)\n└── AttackTimer (Timer)\n```\n\nأرفق سكربت العملية بـ Hero واضبط `AttackTimer.one_shot = true` عند استخدامه للتبريد.\n\n## علّق الدالة لا اللعبة\n\nتسمح `await` لدالة GDScript بالتوقف حتى تصدر إشارة، ثم تتابع من السطر التالي. لا يعني ذلك إيقاف المحرك كله؛ تظل بقية الإطارات والعقد تعمل.\n\n```gdscript\nfunc show_message() -> void:\n    print(\"Ready\")\n    await get_tree().create_timer(1.0).timeout\n    print(\"Go\")\n```\n\nيفترض المثال التالي وجود عقدة `AnimationPlayer` باسم `$AnimationPlayer` وعقدة باب باسم `$Door`، مع حركة معرفة في المحرّك. تأكد من أن الإشارة ستصدر، وراعِ عمر الكائن الذي يملكها.\n\n> [!WARNING]\n> بعد `await` قد تكون العقدة حُذفت أو تغيرت الحالة؛ أعد فحص المرجع ولا تفترض استمرار صلاحيته.\n\n> [!NOTE]\n> `await` يعلّق الدالة الحالية دون إيقاف اللعبة؛ `create_timer()` عابر بينما `Timer` عقدة قابلة للضبط وإعادة الاستخدام.\n\n> [!TIP]\n> صمّم مسار إلغاء أو مهلة للإشارات التي قد لا تصدر.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nBattleScene (Node2D)\n├── Hero (CharacterBody2D)\n└── AttackTimer (Timer)\n```\n\nAttach the operation script to Hero and set `AttackTimer.one_shot = true` when using it for cooldowns.\n\n## Pause a function, not the game\n\n`await` lets a GDScript function suspend until a signal is emitted, then continue at the next line. It does not stop the whole engine; other frames and nodes keep running.\n\n```gdscript\nfunc show_message() -> void:\n    print(\"Ready\")\n    await get_tree().create_timer(1.0).timeout\n    print(\"Go\")\n```\n\nThe following example assumes an `AnimationPlayer` child at `$AnimationPlayer` and a door node at `$Door`, with an animation configured in the player. Ensure the signal can occur, and consider the lifetime of the object that owns it.\n\n> [!WARNING]\n> After `await`, a node may have been freed or state may have changed; revalidate references instead of assuming they remain valid.\n\n> [!NOTE]\n> `await` suspends the current function without stopping the game; `create_timer()` is transient while a `Timer` node is configurable and reusable.\n\n> [!TIP]\n> Design a cancellation path or timeout for signals that may never be emitted."
   },
   "documentation": {
     "ar": "يحدد `await` نقطة تعليق داخل الدالة حتى تصدر الإشارة المنتظرة أو تتوفر القيمة. عند صدور الإشارة تتابع الدالة من موضع الانتظار، ولا يتجمد المحرك. الانتظار لإشارة لن تصدر قد يترك الدالة معلقة؛ تحقق من أن العملية التي تطلقها بدأت فعلاً. راعِ أيضاً عمر العقدة التي تملك الإشارة، فقد تزال قبل استئناف التنفيذ. استخدم إشارة تصف الحدث الفعلي بدلاً من تخمين عدد الإطارات.",
@@ -25,14 +25,21 @@
         "ar": "أساسيات GDScript: await",
         "en": "GDScript basics: await"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
     },
     {
       "title": {
         "ar": "استخدام الإشارات",
         "en": "Using signals"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/signals.html"
+    },
+    {
+      "title": {
+        "ar": "أساسيات GDScript: الكوروتين",
+        "en": "GDScript basics: coroutines"
+      },
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#coroutines"
     }
   ],
   "exercises": [

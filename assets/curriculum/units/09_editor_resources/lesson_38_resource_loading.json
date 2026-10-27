@@ -9,11 +9,11 @@
     "ar": "اختر بين تحميل مورد مسبقاً أو طلبه أثناء التشغيل.",
     "en": "Choose between preloading a resource and loading it at runtime."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 16,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## اربط المورد بتوقيت مناسب\n\nتقبل `preload()` مساراً معروفاً وقت التحليل، وتناسب المورد الثابت الضروري في السكربت. أما `load()` فتطلب المورد عند تنفيذ السطر، فتناسب المسارات المختارة أثناء التشغيل.\n\n```gdscript\nconst HUD_SCENE = preload(\"res://ui/hud.tscn\")\nvar icon: Texture2D = load(\"res://art/marker.png\")\n```\n\nالمسار يبدأ عادةً بـ `res://` ويجب أن يشير إلى ملف موجود. `load()` متزامنة بذاتها؛ لا تجعلها حملاً خلفياً تلقائياً. تحقق من المورد عندما يكون المسار متغيراً.",
-    "en": "## Match the resource to its loading time\n\n`preload()` takes a path known while the script is parsed and fits a fixed resource required by the script. `load()` requests a resource when its line runs, which suits paths chosen at runtime.\n\n```gdscript\nconst HUD_SCENE = preload(\"res://ui/hud.tscn\")\nvar icon: Texture2D = load(\"res://art/marker.png\")\n```\n\nA path commonly starts with `res://` and must point to an existing file. `load()` is synchronous by itself; it does not automatically load in the background. Validate a resource when its path is dynamic."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nGame (Control)\n├── InventoryUI (VBoxContainer)\n└── SaveController (Node)\n\nInventoryData (Resource, InventoryData.tres)\n```\n\nأرفق سكربت التحكم أو الحفظ بـ SaveController؛ المورد InventoryData.tres بيانات مستقلة عن شجرة العقد.\n\n## اربط المورد بتوقيت مناسب\n\nتقبل `preload()` مساراً معروفاً وقت التحليل، وتناسب المورد الثابت الضروري في السكربت. أما `load()` فتطلب المورد عند تنفيذ السطر، فتناسب المسارات المختارة أثناء التشغيل.\n\n```gdscript\nconst HUD_SCENE = preload(\"res://ui/hud.tscn\")\nvar icon: Texture2D = load(\"res://art/marker.png\")\n```\n\nالمسار يبدأ عادةً بـ `res://` ويجب أن يشير إلى ملف موجود. `load()` متزامنة بذاتها؛ لا تجعلها حملاً خلفياً تلقائياً. تحقق من المورد عندما يكون المسار متغيراً.\n\n> [!WARNING]\n> لا تكتب بيانات تشغيل المستخدم داخل `res://`؛ استخدم `user://` وتحقق من نجاح التحميل والتحليل قبل استعمال البيانات.\n\n> [!NOTE]\n> العقدة جزء من شجرة المشهد، أما `Resource` فيمثل بيانات يمكن مشاركتها ولا يدخل تلك الشجرة.\n\n> [!TIP]\n> استخدم `preload()` للمراجع المعروفة مسبقاً و`load()` للتحميل عند الحاجة.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nGame (Control)\n├── InventoryUI (VBoxContainer)\n└── SaveController (Node)\n\nInventoryData (Resource, InventoryData.tres)\n```\n\nAttach the controller or saving script to SaveController; InventoryData.tres is data independent of the node tree.\n\n## Match the resource to its loading time\n\n`preload()` takes a path known while the script is parsed and fits a fixed resource required by the script. `load()` requests a resource when its line runs, which suits paths chosen at runtime.\n\n```gdscript\nconst HUD_SCENE = preload(\"res://ui/hud.tscn\")\nvar icon: Texture2D = load(\"res://art/marker.png\")\n```\n\nA path commonly starts with `res://` and must point to an existing file. `load()` is synchronous by itself; it does not automatically load in the background. Validate a resource when its path is dynamic.\n\n> [!WARNING]\n> Do not write user runtime data into `res://`; use `user://` and validate loading and parsing before using restored data.\n\n> [!NOTE]\n> A node belongs to the scene tree, while a `Resource` represents shareable data and is not part of that tree.\n\n> [!TIP]\n> Use `preload()` for known references and `load()` for runtime loading when needed."
   },
   "documentation": {
     "ar": "استخدم `preload(path)` للمورد ذي المسار الثابت المعروف في السكربت؛ يكون المورد متاحاً مبكراً ويمكن إسناده إلى ثابت. يقبل `load(path)` مساراً وقت التنفيذ، فيتيح الاختيار حسب الحالة لكنه قد ينفذ العمل عند موضع الاستدعاء. قد يفشل التحميل، لذلك تحقق من نتيجة المسار الديناميكي قبل استخدامها. كلا الخيارين لتحميل موارد المشروع، ولا ينبغي الخلط بينهما وبين تحميل خلفي صريح للملفات الكبيرة. راجع المسارات بدقة وحافظ على أسماء الملفات وحالة الأحرف.",
@@ -25,7 +25,7 @@
         "ar": "الموارد: تحميل الموارد من الشيفرة",
         "en": "Resources: loading resources from code"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/resources.html"
     }
   ],
   "exercises": [

@@ -9,7 +9,25 @@ Future<void> checkDocumentationLinks(
 }) async {
   final seen = <String>{};
   for (final record in context.lessons) {
-    for (final source in record.lesson.documentationSources) {
+    final rawSources = record.raw['documentationSources'];
+    for (
+      var index = 0;
+      index < record.lesson.documentationSources.length;
+      index++
+    ) {
+      final source = record.lesson.documentationSources[index];
+      final rawSource = rawSources is List && index < rawSources.length
+          ? rawSources[index]
+          : null;
+      if (rawSource is! Map || !_hasBilingualTitle(rawSource['title'])) {
+        context.report.add(
+          IssueSeverity.error,
+          'documentation-title',
+          'Every documentation source must have non-empty Arabic and English titles.',
+          path: context.pathFor(record.file),
+        );
+      }
+
       final uri = Uri.tryParse(source);
       if (uri == null ||
           uri.scheme != 'https' ||
@@ -22,9 +40,11 @@ Future<void> checkDocumentationLinks(
         );
         continue;
       }
-      if (!uri.path.startsWith('/en/4.3/')) {
+      if (!uri.path.startsWith('/en/4.3/') ||
+          uri.path.contains('/stable/') ||
+          uri.path.contains('/latest/')) {
         context.report.add(
-          IssueSeverity.warning,
+          IssueSeverity.error,
           'documentation-version',
           'Documentation URL is not pinned to Godot 4.3: $source',
           path: context.pathFor(record.file),
@@ -37,6 +57,16 @@ Future<void> checkDocumentationLinks(
   }
 }
 
+bool _hasBilingualTitle(Object? value) {
+  if (value is! Map) return false;
+  final arabic = value['ar'];
+  final english = value['en'];
+  return arabic is String &&
+      arabic.trim().isNotEmpty &&
+      english is String &&
+      english.trim().isNotEmpty;
+}
+
 Future<void> _checkStatus(
   AuditContext context,
   LessonRecord record,
@@ -44,12 +74,10 @@ Future<void> _checkStatus(
 ) async {
   final client = HttpClient()..connectionTimeout = const Duration(seconds: 8);
   try {
-    final request = await client.getUrl(uri).timeout(
-      const Duration(seconds: 10),
-    );
-    final response = await request.close().timeout(
-      const Duration(seconds: 10),
-    );
+    final request = await client
+        .getUrl(uri)
+        .timeout(const Duration(seconds: 10));
+    final response = await request.close().timeout(const Duration(seconds: 10));
     await response.drain<void>();
     if (response.statusCode < 200 || response.statusCode >= 400) {
       context.report.add(

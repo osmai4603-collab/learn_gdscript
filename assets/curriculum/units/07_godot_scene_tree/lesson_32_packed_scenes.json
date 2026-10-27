@@ -9,7 +9,7 @@
     "ar": "أنشئ نسخة من PackedScene وأضفها إلى الشجرة، وأزل العقدة عند انتهاء الحاجة إليها.",
     "en": "Instantiate a PackedScene and add it to the tree, then remove a node when it is no longer needed."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 18,
   "order": 4,
   "documentation": {
     "ar": "حمّل مشهداً محفوظاً بوصفه `PackedScene`، ثم استدع `instantiate()` وأنشئ العقدة. أضفها إلى الشجرة باستخدام `add_child()`. يطلب `queue_free()` تحرير العقدة في نهاية الإطار.",
@@ -21,19 +21,19 @@
         "ar": "مرجع PackedScene",
         "en": "PackedScene class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_packedscene.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_packedscene.html"
     },
     {
       "title": {
         "ar": "العقد والمشاهد",
         "en": "Nodes and scenes"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/nodes_and_scenes.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## أنشئ نسخة مشهد وقت التشغيل\n\nيمكن إعادة استخدام مشهد محفوظ بوصفه `PackedScene`. أنشئ نسخة وأضفها إلى عقدة أب مناسبة.\n\n```gdscript\nvar coin_scene = preload(\"res://coin.tscn\")\n\nfunc spawn_coin():\n    var coin = coin_scene.instantiate()\n    add_child(coin)\n```\n\nاحتفظ بمرجع النسخة لتعديلها لاحقاً. استخدم `queue_free()` عند انتهاء الحاجة إليها. يحتاج هذا المثال إلى ملف موجود في مشروع Godot.",
-    "en": "## Instantiate a scene at runtime\n\nA saved scene can be reused as a `PackedScene`. Create an instance and add it to an appropriate parent node.\n\n```gdscript\nvar coin_scene = preload(\"res://coin.tscn\")\n\nfunc spawn_coin():\n    var coin = coin_scene.instantiate()\n    add_child(coin)\n```\n\nKeep the instance reference if you need to update it later. Use `queue_free()` when it is no longer needed. This example requires a file in a Godot project."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nLevel (Node2D) [spawner.gd]\n└── Coin (instance of res://coin.tscn, added at runtime)\n```\n\nأرفق سكربت التوليد بـ Level؛ يُنشأ Coin من `coin.tscn` ويضاف كابن وقت التشغيل.\n\n## أنشئ نسخة مشهد وقت التشغيل\n\nيمكن إعادة استخدام مشهد محفوظ بوصفه `PackedScene`. أنشئ نسخة وأضفها إلى عقدة أب مناسبة.\n\n```gdscript\nvar coin_scene = preload(\"res://coin.tscn\")\n\nfunc spawn_coin():\n    var coin = coin_scene.instantiate()\n    add_child(coin)\n```\n\nاحتفظ بمرجع النسخة لتعديلها لاحقاً. استخدم `queue_free()` عند انتهاء الحاجة إليها. يحتاج هذا المثال إلى ملف موجود في مشروع Godot.\n\n> [!WARNING]\n> تحقق من اسم العقدة ومسارها الفعليين؛ المسار غير الموجود قد ينتج مرجعاً غير صالح أو خطأ وقت التشغيل.\n\n> [!NOTE]\n> تدخل الأبناء الشجرة قبل الوالد وتكتمل جاهزيتها قبل `_ready()` للوالد؛ يبدأ `@onready` بعد دخول الشجرة.\n\n> [!TIP]\n> استخدم أسماء مستقرة، واستعمل مجموعة أو مرجعاً محفوظاً عندما يكون البحث بالمسار هشاً.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nLevel (Node2D) [spawner.gd]\n└── Coin (instance of res://coin.tscn, added at runtime)\n```\n\nAttach the spawning script to Level; Coin is instantiated from `coin.tscn` and added as a child at runtime.\n\n## Instantiate a scene at runtime\n\nA saved scene can be reused as a `PackedScene`. Create an instance and add it to an appropriate parent node.\n\n```gdscript\nvar coin_scene = preload(\"res://coin.tscn\")\n\nfunc spawn_coin():\n    var coin = coin_scene.instantiate()\n    add_child(coin)\n```\n\nKeep the instance reference if you need to update it later. Use `queue_free()` when it is no longer needed. This example requires a file in a Godot project.\n\n> [!WARNING]\n> Check actual node names and paths; a missing path can produce an invalid reference or runtime error.\n\n> [!NOTE]\n> Children enter the tree before their parent and are ready before the parent’s `_ready()`; `@onready` runs after tree entry.\n\n> [!TIP]\n> Use stable node names, and prefer a group or stored reference when path-based lookup is brittle."
   },
   "exercises": [
     {

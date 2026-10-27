@@ -9,7 +9,7 @@
     "ar": "إتقان التحويل الصريح بين أنواع البيانات باستخدام `int()`, `float()`, `str()` وفهم مخاطر اقتطاع `int(float)` وتدقيق نوع البيانات أثناء التشغيل.",
     "en": "Master explicit type conversion using `int()`, `float()`, `str()` and understand truncation risks of `int(float)` and runtime type inspection."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 12,
   "order": 2,
   "contentMarkdown": {
     "ar": "## تحويل الأنواع وفحصها في GDScript\n\n### 1. المفهوم في سياق الألعاب\nأحياناً تتلقى بيانات من المستخدم أو من ملف حفظ على هيئة نص (`String`) وتريد جمعها كأرقام، أو العكس تريد عرض نقاط اللعب في واجهة نصية. هنا يأتي دور **التحويل الصريح (Type Casting)**.\n\n### 2. القواعد والصياغة والتحذيرات\n- `int(\"12\")` تحول النص إلى عدد صحيح.\n- `float(\"3.5\")` تحول النص إلى عدد عشري.\n- `str(100)` تحول العدد إلى نص لدمجه مع نصوص أخرى.\n- ⚠️ **تحذير رسمي (اقتطاع الكسور):** تحويل عدد عشري إلى صحيح عبر `int(7.9)` **يقتطع الكسر كلياً ولا يقرب الرقم للأقرب**، ليصبح الناتج `7` تماماً!\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var text_score = \"45\"\n    # تحويل النص إلى عدد لجمع نقاط إضافية\n    var final_score = int(text_score) + 5\n    print(final_score)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** محاولة تحويل نص غير رقمي مثل `int(\"Hello\")` ستفشل وتنتج القيمة `0` أو تسبب خطأ تشغيلي.\n- ℹ️ **معلومة تقنية:** استخدام دالة `typeof(value)` يسمح بفحص نوع القيمة برمجياً عند الحاجة.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم التحويل الصريح متى ما احتجت دمج النصوص بالأرقام أو معالجة المدخلات، وتذكر دائماً أن `int()` يقتطع الكسور تماماً.",
@@ -26,7 +26,7 @@
         "ar": "تحويل الأنواع في GDScript",
         "en": "GDScript Type Conversion"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#type-conversion"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#type-conversion"
     }
   ],
   "exercises": [

@@ -31,18 +31,51 @@ class LessonExplanation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
+    final title = lesson.title.resolve(locale);
+    final objective = lesson.objective.resolve(locale);
+    final titleStyle = Theme.of(context).textTheme.headlineSmall?.copyWith(
+      fontWeight: FontWeight.bold,
+    ) ?? const TextStyle(fontWeight: FontWeight.bold);
+    final objectiveStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
+      height: 1.5,
+    ) ?? const TextStyle();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          lesson.title.resolve(locale),
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
+        if (title.contains('`'))
+          SelectableText.rich(
+            TextSpan(
+              style: titleStyle,
+              children: LessonMarkdownContent.buildInlineSpans(
+                context,
+                title,
+                baseStyle: titleStyle,
+              ),
+            ),
+          )
+        else
+          Text(
+            title,
+            style: titleStyle,
+          ),
         const SizedBox(height: 8),
-        Text(
-          lesson.objective.resolve(locale),
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        if (objective.contains('`') || objective.contains('**'))
+          SelectableText.rich(
+            TextSpan(
+              style: objectiveStyle,
+              children: LessonMarkdownContent.buildInlineSpans(
+                context,
+                objective,
+                baseStyle: objectiveStyle,
+              ),
+            ),
+          )
+        else
+          Text(
+            objective,
+            style: objectiveStyle,
+          ),
         const SizedBox(height: 20),
         LessonMarkdownContent(
           markdown: lesson.contentMarkdown.resolve(locale),

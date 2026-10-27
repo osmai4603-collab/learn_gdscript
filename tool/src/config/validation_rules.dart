@@ -27,5 +27,5 @@ const supportedExerciseTypes = <String>{
   'reorderSteps',
   'guidedTask',
 };
-const minimumLessonMinutes = 8;
+const minimumLessonMinutes = 10;
 const maximumLessonMinutes = 25;

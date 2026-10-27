@@ -9,7 +9,7 @@
     "ar": "قسّم مهمة أكبر إلى دوال صغيرة ذات أسماء ومسؤوليات واضحة.",
     "en": "Break a larger task into small functions with clear names and responsibilities."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 15,
   "order": 4,
   "documentation": {
     "ar": "ابدأ بالنتيجة المطلوبة، ثم قسم المهمة إلى خطوات متماسكة. اجعل لكل خطوة اسماً واضحاً ومسؤولية مفهومة. أعد القيم الحسابية بدلاً من طباعتها كي يتمكن المستدعي من إعادة استخدامها.",
@@ -21,12 +21,12 @@
         "ar": "أساسيات GDScript",
         "en": "GDScript basics"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## من هدف إلى خطوات مسماة\n\nابدأ بوصف النتيجة، ثم قسمها إلى خطوات صغيرة. اجعل لكل خطوة دالة باسم يصف فعلها. تفيد دالة الحساب إذا أعادت نتيجة، ويمكن لدالة أخرى تنسيقها أو عرضها.\n\n```gdscript\nfunc calculate_area(width, height):\n    return width * height\n\nfunc show_area(width, height):\n    var area = calculate_area(width, height)\n    print(\"Area: \" + str(area))\n\nshow_area(3, 4)\n```\n\nتفصل `calculate_area` الحساب عن العرض. لا تحول كل سطر إلى دالة؛ اختر حدوداً تجعل المسؤوليات والأسماء مفيدة.",
-    "en": "## From a goal to named steps\n\nStart by describing the result, then split it into small steps. Give each step a function whose name describes its action. A calculation function is useful when it returns a result that another function can format or display.\n\n```gdscript\nfunc calculate_area(width, height):\n    return width * height\n\nfunc show_area(width, height):\n    var area = calculate_area(width, height)\n    print(\"Area: \" + str(area))\n\nshow_area(3, 4)\n```\n\n`calculate_area` separates calculation from display. Do not turn every line into a function; choose boundaries that make responsibilities and names useful."
+    "ar": "## من هدف إلى خطوات مسماة\n\nابدأ بوصف النتيجة، ثم قسمها إلى خطوات صغيرة. اجعل لكل خطوة دالة باسم يصف فعلها. تفيد دالة الحساب إذا أعادت نتيجة، ويمكن لدالة أخرى تنسيقها أو عرضها.\n\n```gdscript\nfunc calculate_area(width, height):\n    return width * height\n\nfunc show_area(width, height):\n    var area = calculate_area(width, height)\n    print(\"Area: \" + str(area))\n\nshow_area(3, 4)\n```\n\nتفصل `calculate_area` الحساب عن العرض. لا تحول كل سطر إلى دالة؛ اختر حدوداً تجعل المسؤوليات والأسماء مفيدة.\n\n> [!WARNING]\n> تجنّب الاعتماد على حالة خفية أو اسم محلي يظلل متغيراً مهماً؛ اجعل مدخلات الدالة ونتيجتها واضحتين.\n\n> [!NOTE]\n> تحافظ الدوال الصغيرة ذات المسؤولية الواحدة على سهولة الفهم والاختبار.\n\n> [!TIP]\n> جرّب الدالة بقيم عادية وحدّية، ثم افحص القيمة التي تعيدها.",
+    "en": "## From a goal to named steps\n\nStart by describing the result, then split it into small steps. Give each step a function whose name describes its action. A calculation function is useful when it returns a result that another function can format or display.\n\n```gdscript\nfunc calculate_area(width, height):\n    return width * height\n\nfunc show_area(width, height):\n    var area = calculate_area(width, height)\n    print(\"Area: \" + str(area))\n\nshow_area(3, 4)\n```\n\n`calculate_area` separates calculation from display. Do not turn every line into a function; choose boundaries that make responsibilities and names useful.\n\n> [!WARNING]\n> Avoid hidden state or a local name that shadows an important variable; keep inputs and results explicit.\n\n> [!NOTE]\n> Small functions with one responsibility are easier to understand and test.\n\n> [!TIP]\n> Try normal and boundary inputs, then inspect the returned value."
   },
   "exampleCode": "func calculate_area(width, height):\n    return width * height\n\nfunc show_area(width, height):\n    var area = calculate_area(width, height)\n    print(\"Area: \" + str(area))\n\nshow_area(3, 4)",
   "exercises": [

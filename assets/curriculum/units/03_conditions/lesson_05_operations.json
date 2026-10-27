@@ -9,7 +9,7 @@
     "ar": "إتقان استخدام المعاملات الحسابية، وعمليات المقارنة، والمعاملات المنطقية (`and`, `or`, `not`) لبناء تعبيرات دقيقة.",
     "en": "Master arithmetic operators, comparison operators, and logical operators (`and`, `or`, `not`) to build precise expressions."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 12,
   "order": 0,
   "contentMarkdown": {
     "ar": "## العمليات الحسابية والمنطقية في GDScript\n\n### 1. المفهوم في سياق الألعاب\nكل قرار في اللعبة يعتمد على تقييم الشروط: هل نقاط الصحة أكبر من صفر؟ هل يمتلك اللاعب مفتاحاً **و** درعاً؟ العمليات الحسابية والمنطقية هي الأدوات التي تحول أرقام اللعبة إلى قرارات (`true` أو `false`).\n\n### 2. القواعد والصياغة\n- **الحسابية:** `+`, `-`, `*`, `/`, و `%` (باقي القسمة، ومفيد جداً لدورات الحركة وتبديل الأدوار).\n- **المقارنة:** `==` (تساوي)، `!=` (لا تساوي)، `>`, `<`, `>=`, `<=`).\n- **المنطقية:** `and` (كلا الشرطين صحيحين)، `or` (أحدهما على الأقل صحيح)، `not` (عكس النتيجة).\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var score = 85\n    var has_bonus = true\n    # التحقق من اجتياز الاختبار ووجود مكافأة\n    var is_victorious = (score >= 80) and has_bonus\n    print(is_victorious)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** لا تعتمد على التخمين في أسبقية العمليات؛ استخدم دائماً الأقواس `()` لتوضيح الترتيب وحماية منطق اللعبة من أخطاء الأسبقية.\n- ℹ️ **معلومة تقنية:** باقي القسمة `%` يُستخدم كثيراً في الألعاب لتحديد الأعداد الزوجية والفردية أو تكرار المؤثرات بعد عدد محدد من الخطوات.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة الذهبية:** ابنِ الشروط المعقدة بدمج `and` و `or` داخل أقواس واضحة؛ فهذا يمنع التباس الأسبقية ويحافظ على صحة منطق اللعبة.",
@@ -26,7 +26,7 @@
         "ar": "عوامل وقواعد GDScript",
         "en": "GDScript Operators Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#operators"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#operators"
     }
   ],
   "exercises": [

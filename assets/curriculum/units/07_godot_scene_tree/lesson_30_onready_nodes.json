@@ -9,11 +9,11 @@
     "ar": "استخدم `$` و`@onready` لتخزين مرجع إلى عقدة ابن بعد جاهزية المشهد.",
     "en": "Use `$` and `@onready` to store a child-node reference after the scene is ready."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 15,
   "order": 2,
   "documentation": {
-    "ar": "يستخدم `$` مسار عقدة كاختصار. تؤجل `@onready` تعيين المرجع حتى تصبح العقدة جاهزة، وهو مفيد عندما يجب أن تكون بنية الأبناء موجودة. يجب أن يتطابق المسار مع المشهد الفعلي.",
-    "en": "`$` uses a node path as shorthand. `@onready` delays assigning a reference until the node is ready, which is useful when the child structure must exist. The path must match the actual scene."
+    "ar": "يستخدم `$` مسار عقدة كاختصار. تؤجل `@onready` تعيين المرجع حتى تصبح العقدة جاهزة، وهو مفيد عندما يجب أن تكون بنية الأبناء موجودة. يجب أن يتطابق المسار مع المشهد الفعلي. تُهيأ قيمة `@onready` بعد دخول العقدة إلى الشجرة وقبل استدعاء `_ready()` لها، وتكون عقد الأبناء قد دخلت الشجرة وأصبحت جاهزة أولاً.",
+    "en": "`$` uses a node path as shorthand. `@onready` delays assigning a reference until the node is ready, which is useful when the child structure must exist. The path must match the actual scene. An `@onready` value is initialized after the node enters the tree and before its `_ready()` call; child nodes have entered the tree and become ready first."
   },
   "documentationSources": [
     {
@@ -21,19 +21,19 @@
         "ar": "العقد والمشاهد",
         "en": "Nodes and scenes"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/nodes_and_scenes.html"
     },
     {
       "title": {
         "ar": "مرجع الصنف Node",
         "en": "Node class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_node.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## خزّن مرجع الابن عند الجاهزية\n\nإذا كانت `StatusLabel` ابناً مباشراً، يمكن تخزين مرجع لها ثم تحديث النص عند الجاهزية.\n\n```gdscript\nextends Node2D\n\n@onready var status_label = $StatusLabel\n\nfunc _ready():\n    status_label.text = \"Ready\"\n```\n\nإذا غيّرت اسم العقدة في المحرر، حدّث المسار أيضاً. لا يستطيع السكربت الإشارة إلى عقدة غير موجودة.",
-    "en": "## Cache a child reference when ready\n\nIf `StatusLabel` is a direct child, you can cache a reference and update its text when ready.\n\n```gdscript\nextends Node2D\n\n@onready var status_label = $StatusLabel\n\nfunc _ready():\n    status_label.text = \"Ready\"\n```\n\nIf you rename the node in the editor, update the path too. A script cannot reference a node that does not exist."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nPlayer (Node2D) [player.gd]\n└── StatusLabel (Label)\n```\n\nأرفق السكربت بـ Player؛ يطابق المسار `$StatusLabel` في المثال.\n\n## خزّن مرجع الابن عند الجاهزية\n\nإذا كانت `StatusLabel` ابناً مباشراً، يمكن تخزين مرجع لها ثم تحديث النص عند الجاهزية.\n\n```gdscript\nextends Node2D\n\n@onready var status_label = $StatusLabel\n\nfunc _ready():\n    status_label.text = \"Ready\"\n```\n\nإذا غيّرت اسم العقدة في المحرر، حدّث المسار أيضاً. لا يستطيع السكربت الإشارة إلى عقدة غير موجودة.\n\n> [!WARNING]\n> تحقق من اسم العقدة ومسارها الفعليين؛ المسار غير الموجود قد ينتج مرجعاً غير صالح أو خطأ وقت التشغيل.\n\n> [!NOTE]\n> تدخل الأبناء الشجرة قبل الوالد وتكتمل جاهزيتها قبل `_ready()` للوالد؛ يبدأ `@onready` بعد دخول الشجرة.\n\n> [!TIP]\n> استخدم أسماء مستقرة، واستعمل مجموعة أو مرجعاً محفوظاً عندما يكون البحث بالمسار هشاً.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nPlayer (Node2D) [player.gd]\n└── StatusLabel (Label)\n```\n\nAttach the script to Player; this matches the `$StatusLabel` path in the example.\n\n## Cache a child reference when ready\n\nIf `StatusLabel` is a direct child, you can cache a reference and update its text when ready.\n\n```gdscript\nextends Node2D\n\n@onready var status_label = $StatusLabel\n\nfunc _ready():\n    status_label.text = \"Ready\"\n```\n\nIf you rename the node in the editor, update the path too. A script cannot reference a node that does not exist.\n\n> [!WARNING]\n> Check actual node names and paths; a missing path can produce an invalid reference or runtime error.\n\n> [!NOTE]\n> Children enter the tree before their parent and are ready before the parent’s `_ready()`; `@onready` runs after tree entry.\n\n> [!TIP]\n> Use stable node names, and prefer a group or stored reference when path-based lookup is brittle."
   },
   "exercises": [
     {

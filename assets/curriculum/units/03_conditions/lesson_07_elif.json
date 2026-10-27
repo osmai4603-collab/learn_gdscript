@@ -9,7 +9,7 @@
     "ar": "إتقان ترتيب شروط `elif` من الحالة الأخص إلى الأعم لتجنب حجب الفروع الإيجابية.",
     "en": "Master ordering `elif` conditions from most specific to broadest to prevent blocking positive branches."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 14,
   "order": 2,
   "contentMarkdown": {
     "ar": "## الشروط المتعددة elif في GDScript\n\n### 1. المفهوم في سياق الألعاب\nعندما يكون لديك مسارات متعددة للعبة (مثل مستويات تقييم الأداء: ممتاز، جيد، مقبول، راسب)، فإنك تحتاج إلى فروع متسلسلة باستخدام `elif`. يقوم المحرك بفحص الشروط من الأعلى إلى الأسفل وينفذ **أول فرع صحيح يصادفه** ثم يخرج من الهيكل تماماً.\n\n### 2. القواعد والصياغة والترتيب الهرمي\n- **القاعدة الذهبية للترتيب:** ابدأ دائماً بالشروط **الأخص** (الأضيق) أولاً، ثم الشروط الأكثر عمومية. على سبيل المثال، فحص `score >= 90` يجب أن يوضع قبل `score >= 50`؛ وإلا فإن أي علامة 95 سيتم التقاطها فوراً عند 50 ويتم تخطي تقدير الممتاز.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var health_percentage = 15\n    if health_percentage <= 10:\n        print(\"Critical Danger\")\n    elif health_percentage <= 50:\n        print(\"Warning\")\n    else:\n        print(\"Healthy\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** وضع الشروط العامة في الأعلى يحجب بالكامل الشروط الأخص تحتها ولا يُنفذ الكود التابع لها أبداً.\n- ℹ️ **معلومة تقنية:** فرع `else` في نهاية السلسلة اختياري، ولكن يفضل إضافته لضمان معالجة الحالات غير المتوقعة (Catch-all).\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** رتب شروطك دائماً من الأخص إلى الأعم، وتأكد من اختبار الحدود والأرقام الحدية (مثل 50 و 49).",
@@ -26,7 +26,7 @@
         "ar": "دليل الشروط المتعددة في Godot",
         "en": "Godot Multiple Conditions Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif"
     }
   ],
   "exercises": [

@@ -9,7 +9,7 @@
     "ar": "استخدام الكلمة `var` لتعريف متغيرات قابلة للتغيير و`const` للثوابت، مع تطبيق قواعد التسمية القياسية بأسلوب `snake_case`.",
     "en": "Use `var` to define mutable variables and `const` for constants, applying standard `snake_case` naming conventions."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 12,
   "order": 0,
   "contentMarkdown": {
     "ar": "## المتغيرات والثوابت في GDScript\n\n### 1. المفهوم في سياق الألعاب\nالمتغير (Variable) يشبه صندوقاً في الذاكرة نحتفظ بداخله ببيانات تتغير أثناء اللعب، مثل نقاط الصحة (`health`)، عدد العملات الذهبية (`coins`)، أو موقع الشخصية. أما الثابت (Constant) فهو قيمة لا تتغير طوال فترة تشغيل اللعبة (مثل أقصى سرعة ممكنة أو إصدار اللعبة).\n\n### 2. القواعد والصياغة\n- **المتغيرات:** تُعرّف بالكلمة المفتاحية `var` ويُفضل تسميتها بأحرف صغيرة مفصولة بشرطة سفلية مثل `player_score`.\n- **الثوابت:** تُعرّف بالكلمة المفتاحية `const` وعادةً تكتب بأحرف كبيرة بالكامل مثل `MAX_HEALTH = 100`.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    # تعريف متغير لعدد النقاط الابتدائية\n    var score: int = 10\n    # إضافة نقاط جديدة عند جمع جوائز\n    score = score + 5\n    print(score)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** محاولة إعادة إسناد قيمة جديدة إلى ثابت (`const`) ستؤدي إلى خطأ صياغة يوقف تشغيل السكربت فوراً.\n- ℹ️ **معلومة تقنية:** اختيار أسماء معبرة للمتغيرات (مثل `current_ammo` بدلاً من `x`) يجعل الكود قابلاً للصراءة والقراءة الفورية.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم `var` لكل قيمة تتغير بمرور الزمن داخل اللعبة، واستخدم `const` للقيم الثابتة التي يجب ألا تتغير أبداً.",
@@ -26,7 +26,7 @@
         "ar": "دليل المتغيرات في Godot",
         "en": "Godot Variables Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#variables"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#variables"
     }
   ],
   "exercises": [

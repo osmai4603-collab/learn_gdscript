@@ -9,11 +9,11 @@
     "ar": "اربط الأنظمة بإشارات وموارد ثم راجع المشروع بقائمة تحقق عملية.",
     "en": "Connect systems with signals and resources, then review the project with a practical checklist."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 25,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## اربط الأنظمة بواجهات واضحة\n\nيرسل العنصر إشارة عند جمعه، ويستقبل مدير اللعبة الحدث ليحدث النتيجة، ثم يحدّث HUD العرض. استخدم Resource لبيانات ثابتة مثل اسم العنصر أو قيمته.\n\n```gdscript\nsignal collected(item_data: Resource)\n\nfunc collect() -> void:\n    collected.emit(item_data)\n```\n\nيفترض مثال `exampleCode` أن السكربت مرفق بعقدة Area2D لها CollisionShape2D، وأن العقدة الداخلة ضمن مجموعة `player`، وأن `item_data` مورد صالح. في المراجعة شغّل المشروع من مشهد البداية، جرّب التفاعل، وافحص الأخطاء والتحذيرات والموارد. المهمة العملية تعتمد على فحصك؛ لا تُعرض كاجتياز آلي.",
-    "en": "## Connect systems through clear interfaces\n\nAn item emits a signal when collected, the game manager receives it and updates the score, then the HUD refreshes its display. Use a Resource for stable data such as an item’s name or value.\n\n```gdscript\nsignal collected(item_data: Resource)\n\nfunc collect() -> void:\n    collected.emit(item_data)\n```\n\nThe `exampleCode` assumes the script is attached to an Area2D with a CollisionShape2D, the entering node belongs to the `player` group, and `item_data` is a valid resource. For review, run the project from its start scene, test the interaction, and inspect errors, warnings, and resources. This hands-on task depends on your inspection; it is not an automated pass."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nArcadeGame (Node2D)\n├── PlayerShip (CharacterBody2D)\n├── Spawner (Node2D)\n├── HUD (CanvasLayer)\n└── ScoreManager (Node)\n```\n\nأرفق سكربتاً بكل نظام رئيسي، وصِل النقاط والصحة إلى HUD عبر إشارات.\n\n## اربط الأنظمة بواجهات واضحة\n\nيرسل العنصر إشارة عند جمعه، ويستقبل مدير اللعبة الحدث ليحدث النتيجة، ثم يحدّث HUD العرض. استخدم Resource لبيانات ثابتة مثل اسم العنصر أو قيمته.\n\n```gdscript\nsignal collected(item_data: Resource)\n\nfunc collect() -> void:\n    collected.emit(item_data)\n```\n\nيفترض مثال `exampleCode` أن السكربت مرفق بعقدة Area2D لها CollisionShape2D، وأن العقدة الداخلة ضمن مجموعة `player`، وأن `item_data` مورد صالح. في المراجعة شغّل المشروع من مشهد البداية، جرّب التفاعل، وافحص الأخطاء والتحذيرات والموارد. المهمة العملية تعتمد على فحصك؛ لا تُعرض كاجتياز آلي.\n\n> [!WARNING]\n> لا تدمج الأنظمة دفعة واحدة؛ اختبر كل خطوة قابلة للتشغيل، وتحقق من المراجع والإشارات قبل إضافة التعقيد.\n\n> [!NOTE]\n> شجرة المشروع المقترحة نقطة بداية قابلة للتغيير؛ حافظ على مسؤولية واضحة لكل عقدة وتدفق بيانات معلوم.\n\n> [!TIP]\n> أنجز شريحة لعب صغيرة من البداية إلى النهاية، ثم وسّعها بعد نجاح اختبارها.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nArcadeGame (Node2D)\n├── PlayerShip (CharacterBody2D)\n├── Spawner (Node2D)\n├── HUD (CanvasLayer)\n└── ScoreManager (Node)\n```\n\nAttach a script to each main system and connect score and health to HUD using signals.\n\n## Connect systems through clear interfaces\n\nAn item emits a signal when collected, the game manager receives it and updates the score, then the HUD refreshes its display. Use a Resource for stable data such as an item’s name or value.\n\n```gdscript\nsignal collected(item_data: Resource)\n\nfunc collect() -> void:\n    collected.emit(item_data)\n```\n\nThe `exampleCode` assumes the script is attached to an Area2D with a CollisionShape2D, the entering node belongs to the `player` group, and `item_data` is a valid resource. For review, run the project from its start scene, test the interaction, and inspect errors, warnings, and resources. This hands-on task depends on your inspection; it is not an automated pass.\n\n> [!WARNING]\n> Do not integrate every system at once; test each runnable step and verify references and signals before adding complexity.\n\n> [!NOTE]\n> The proposed project tree is a starting point, not a requirement; keep each node’s responsibility and data flow clear.\n\n> [!TIP]\n> Complete a small end-to-end playable slice, then expand it after it passes its checks."
   },
   "documentation": {
     "ar": "الإشارة واجهة إعلان حدث تتيح للمرسل إبلاغ المستمعين دون معرفة تفاصيل تنفيذهم. اربطها من المحرر أو الشيفرة وتأكد من تطابق المعاملات وعدم تكرار الاتصال. تناسب الموارد البيانات الوصفية القابلة لإعادة الاستخدام، بينما تحفظ الحالة المتغيرة في الكائن المسؤول. راجع المشروع بتشغيله من نقطة البداية واختبار المسارات والملفات والتحذيرات. مجرد تعريف إشارة لا يثبت عملها؛ تحقق عملياً من الاتصال وسلوك المستمع.",
@@ -25,21 +25,21 @@
         "ar": "استخدام الإشارات",
         "en": "Using signals"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/signals.html"
     },
     {
       "title": {
         "ar": "الموارد",
         "en": "Resources"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/resources.html"
     },
     {
       "title": {
         "ar": "تنظيم المشروع",
         "en": "Project organization"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/best_practices/project_organization.html"
     }
   ],
   "exercises": [

@@ -9,7 +9,7 @@
     "ar": "استخدام التعليقات الفردية `#` لتوضيح الشيفرة والتعليقات التوثيقية `##` لتوليد مساعدة محرر Godot.",
     "en": "Use single-line comments `#` to clarify code and documentation comments `##` to generate Godot editor tooltips."
   },
-  "estimatedMinutes": 8,
+  "estimatedMinutes": 10,
   "order": 1,
   "contentMarkdown": {
     "ar": "## التعليقات والتوثيق في GDScript\n\n### 1. المفهوم في سياق الألعاب\nعندما تبرمج لعبة ضخمة، قد تعود لملف الشيفرة بعد أسابيع أو ينضم إليك مبرمج آخر في الفريق. التعليقات (Comments) هي ملاحظات بشرية لا ينفذها محرك Godط، بل تساعد في توضيح *سبب* كتابة الكود لا مجرد *ماذا* يفعل.\n\n### 2. القواعد والصياغة\n- **التعليق العادي:** يبدأ بالرمز `#` ويتجاهله المفسر تماماً عند التشغيل.\n- **التعليق التوثيقي:** يبدأ بالرمز المزدوج `##` فوق الدوال أو المتغيرات، ويستخدمه محرر Godot لعرض شروح جاهزة في نافذة الفحص (Inspector) والإكمال التلقائي.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\n## سرعة حركة اللاعب بالبكسل في الثانية\nconst PLAYER_SPEED: float = 300.0\n\nfunc _ready():\n    # طباعة رسالة تؤكد تحميل نظام الإعدادات\n    print(\"Settings loaded successfully\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تجنب كتابة تعليق يعيد تكرار السطر حرفياً (مثل `var x = 5 # ضع 5 في x`). اكتب بدلاً من ذلك *السبب* (مثل `var x = 5 # الحد الأقصى لمحاولات اللعب`).\n- ℹ️ **معلومة تقنية:** يمكنك استخدام التعليقات مؤقتاً لتعطيل سطر شيفرة يشك في وجود خطأ به (ما يُعرف بـ Commenting Out).\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** التعليقات الواضحة هي لغة التواصل بين المبرمج وزملائه (أو نسختك المستقبلية). وثّق الأجزاء المعقدة دائماً بـ `##` والدلائل بـ `#`.",
@@ -26,7 +26,7 @@
         "ar": "دليل الأسلوب الرسمي في GDScript",
         "en": "GDScript Style Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_style_guide.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_styleguide.html"
     }
   ],
   "exercises": [

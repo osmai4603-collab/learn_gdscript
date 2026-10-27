@@ -9,11 +9,11 @@
     "ar": "استخدم مؤقتاً أو إشارة إطار لمزامنة عمل مؤجل أو متكرر.",
     "en": "Use a timer or frame signal to synchronize delayed or repeated work."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 16,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## اختر ساعة الحدث\n\nعقدة `Timer` قابلة للضبط وتصدر `timeout` عند انتهاء المدة. استخدم `SceneTree.create_timer()` لانتظار قصير داخل دالة، أو عقدة Timer لإعداد ظاهر أو تكرار.\n\n```gdscript\nawait get_tree().create_timer(0.5).timeout\nprint(\"Half a second passed\")\n```\n\nإشارات `process_frame` و`physics_frame` تزامن العمل مع دورة المحرك، لكنها ليست مؤقتاً لمدة ثابتة. لا تستخدم حلقة مشغولة لقياس الزمن.",
-    "en": "## Choose the event clock\n\nA `Timer` node can be configured and emits `timeout` when its duration elapses. Use `SceneTree.create_timer()` for a short wait inside a function, or a Timer node for visible configuration or repetition.\n\n```gdscript\nawait get_tree().create_timer(0.5).timeout\nprint(\"Half a second passed\")\n```\n\n`process_frame` and `physics_frame` synchronize work with engine processing, but are not fixed-duration timers. Do not use a busy loop to measure time."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nBattleScene (Node2D)\n├── Hero (CharacterBody2D)\n└── AttackTimer (Timer)\n```\n\nأرفق سكربت العملية بـ Hero واضبط `AttackTimer.one_shot = true` عند استخدامه للتبريد.\n\n## اختر ساعة الحدث\n\nعقدة `Timer` قابلة للضبط وتصدر `timeout` عند انتهاء المدة. استخدم `SceneTree.create_timer()` لانتظار قصير داخل دالة، أو عقدة Timer لإعداد ظاهر أو تكرار.\n\n```gdscript\nawait get_tree().create_timer(0.5).timeout\nprint(\"Half a second passed\")\n```\n\nإشارات `process_frame` و`physics_frame` تزامن العمل مع دورة المحرك، لكنها ليست مؤقتاً لمدة ثابتة. لا تستخدم حلقة مشغولة لقياس الزمن.\n\n> [!WARNING]\n> بعد `await` قد تكون العقدة حُذفت أو تغيرت الحالة؛ أعد فحص المرجع ولا تفترض استمرار صلاحيته.\n\n> [!NOTE]\n> `await` يعلّق الدالة الحالية دون إيقاف اللعبة؛ `create_timer()` عابر بينما `Timer` عقدة قابلة للضبط وإعادة الاستخدام.\n\n> [!TIP]\n> صمّم مسار إلغاء أو مهلة للإشارات التي قد لا تصدر.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nBattleScene (Node2D)\n├── Hero (CharacterBody2D)\n└── AttackTimer (Timer)\n```\n\nAttach the operation script to Hero and set `AttackTimer.one_shot = true` when using it for cooldowns.\n\n## Choose the event clock\n\nA `Timer` node can be configured and emits `timeout` when its duration elapses. Use `SceneTree.create_timer()` for a short wait inside a function, or a Timer node for visible configuration or repetition.\n\n```gdscript\nawait get_tree().create_timer(0.5).timeout\nprint(\"Half a second passed\")\n```\n\n`process_frame` and `physics_frame` synchronize work with engine processing, but are not fixed-duration timers. Do not use a busy loop to measure time.\n\n> [!WARNING]\n> After `await`, a node may have been freed or state may have changed; revalidate references instead of assuming they remain valid.\n\n> [!NOTE]\n> `await` suspends the current function without stopping the game; `create_timer()` is transient while a `Timer` node is configurable and reusable.\n\n> [!TIP]\n> Design a cancellation path or timeout for signals that may never be emitted."
   },
   "documentation": {
     "ar": "تصدر `Timer.timeout` عند انقضاء `wait_time` إذا كان المؤقت جارياً. يمكن إعداد المؤقت ليعمل مرة واحدة أو يتكرر، كما تؤثر ملكية العقدة وإعدادات الإيقاف المؤقت في سلوكه. توفر `SceneTree.create_timer()` مؤقتاً مؤقتاً يمكن انتظار إشارته. أما إشارات الإطار فتحدد ترتيب التنفيذ بالنسبة لدورة المعالجة ولا تقيس مدة ثابتة. استخدم Timer للمدة الزمنية وإشارات الإطار عندما يلزم الانتظار إلى نقطة معالجة مناسبة.",
@@ -25,14 +25,14 @@
         "ar": "مرجع Timer",
         "en": "Timer class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_timer.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_timer.html"
     },
     {
       "title": {
         "ar": "مرجع SceneTree",
         "en": "SceneTree class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_scenetree.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_scenetree.html"
     }
   ],
   "exercises": [

@@ -9,11 +9,11 @@
     "ar": "مرّر قيماً إلى الدالة لتخصيص عملها.",
     "en": "Pass values to a function to customize its behavior."
   },
-  "estimatedMinutes": 7,
+  "estimatedMinutes": 14,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## مرّر بيانات إلى الدالة\n\nتستقبل الدالة قيماً عبر معاملات في تعريفها. مرّر وسيطاً مناسباً لكل معامل وبالترتيب نفسه. عند وجود قيمة شائعة، يمكن كتابة قيمة افتراضية للمعامل كي تستخدم إذا لم يمرر المستدعي وسيطاً.",
-    "en": "## Pass data to a function\n\nA function receives values through parameters in its definition. Pass an appropriate argument for each parameter in the same order. When there is a common value, give the parameter a default so it is used when the caller omits an argument."
+    "ar": "## مرّر بيانات إلى الدالة\n\nتستقبل الدالة قيماً عبر معاملات في تعريفها. مرّر وسيطاً مناسباً لكل معامل وبالترتيب نفسه. عند وجود قيمة شائعة، يمكن كتابة قيمة افتراضية للمعامل كي تستخدم إذا لم يمرر المستدعي وسيطاً.\n\n> [!WARNING]\n> تجنّب الاعتماد على حالة خفية أو اسم محلي يظلل متغيراً مهماً؛ اجعل مدخلات الدالة ونتيجتها واضحتين.\n\n> [!NOTE]\n> تحافظ الدوال الصغيرة ذات المسؤولية الواحدة على سهولة الفهم والاختبار.\n\n> [!TIP]\n> جرّب الدالة بقيم عادية وحدّية، ثم افحص القيمة التي تعيدها.",
+    "en": "## Pass data to a function\n\nA function receives values through parameters in its definition. Pass an appropriate argument for each parameter in the same order. When there is a common value, give the parameter a default so it is used when the caller omits an argument.\n\n> [!WARNING]\n> Avoid hidden state or a local name that shadows an important variable; keep inputs and results explicit.\n\n> [!NOTE]\n> Small functions with one responsibility are easier to understand and test.\n\n> [!TIP]\n> Try normal and boundary inputs, then inspect the returned value."
   },
   "exampleCode": "func greet(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet(\"Ali\")\ngreet(\"Sara\")",
   "exercises": [
@@ -413,7 +413,7 @@
         "ar": "أساسيات GDScript",
         "en": "GDScript basics"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ]
 }

@@ -15,9 +15,9 @@ warnings so the existing curriculum can be baselined and migrated incrementally.
 | 6 | Answer distribution | Warn when more than 40% of a lesson's multiple-choice answers use index zero; flag fewer than three options. |
 | 7 | Test-case coverage | Require two cases for `writeCode` and `fixBug`, flag identical expectations and setup, and require at least 1,201 cases in the full 510-exercise curriculum. |
 | 8 | Official directives | Warn if lesson content has none of `[!WARNING]`, `[!NOTE]`, or `[!TIP]`. |
-| 9 | Documentation links | Require the official HTTPS host and a Godot 4.3 URL; optionally check HTTP status with `--check-links`. |
+| 9 | Documentation links | Require the official HTTPS host, a Godot 4.3 URL, and non-empty Arabic and English titles; optionally check HTTP status with `--check-links`. |
 | 10 | Concept map | Check lesson coverage, references, duplicate lesson mappings, and graph validity. |
-| 11 | Time estimate | Estimate a broad duration from the larger localized word count and exercise count; warn outside half-to-twice that estimate, bounded to 8–25 minutes. |
+| 11 | Time estimate | Reject lesson estimates outside the calibrated 10–25 minute range; the approved calibration matrix is authoritative. |
 | 12 | Exercise variety | Require all seven supported exercise types in every lesson. |
 | 13 | Cumulative challenge | Require an order-9 coding capstone with at least three test cases in the last lesson of units 1–11; also check for a guided or explicitly cumulative task in each unit. |
 

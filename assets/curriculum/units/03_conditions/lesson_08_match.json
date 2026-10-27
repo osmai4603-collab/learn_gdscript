@@ -9,7 +9,7 @@
     "ar": "إتقان استخدام البنية القوية `match` كبديل أسرع وأكثر نظافة لسلاسل `elif` الطويلة، وإنجاز التحدي التراكمي للوحدة الثالثة.",
     "en": "Master the powerful `match` construct as a cleaner, faster alternative to long `elif` chains, and complete the Unit 3 capstone challenge."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 14,
   "order": 3,
   "contentMarkdown": {
     "ar": "## مطابقة الأنماط match في GDScript\n\n### 1. المفهوم في سياق الألعاب\nعندما يكون لديك متغير واحد (مثل حالة اللاعب أو نوع السلاح أو اتجاه الحركة) وتريد اختبار قيم محددة كثيرة، فإن استخدام سلاسل `elif` الطويلة يكون مرهقاً وغير منظم. بنية **`match`** (المعروفة بـ Switch في لغات أخرى) تقدم حلاً أنظف، أسرع، وأكثر قابلية للقراءة في Godot 4.\n\n### 2. القواعد والصياغة\n- تُستخدم الكلمة `match` متبوعة بالمتغير ثم النقطتين الرأسيتين `:`.\n- كل فرع يبدأ بالقيمة المستهدفة متبوعة بنقطتين `:` وتحتها الأوامر المسافة البادئة.\n- الحالة الافتراضية تكتب كحارس افتراضي باستخدام الرمز `_` (يعني ما عدا ذلك).\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var weapon_type = \"sword\"\n    match weapon_type:\n        \"sword\":\n            print(\"Melee Attack\")\n        \"bow\":\n            print(\"Ranged Attack\")\n        _:\n            print(\"Default Punch\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** نسيان وضع الحالة الافتراضية `_` قد يترك بعض الحالات دون معالجة، ويفضل دائماً تضمينها للسلامة البرمجية.\n- ℹ️ **معلومة تقنية:** `match` في GDScript تدعم مطابقة عدة قيم مفصولة بفواصل في نفس الفرع (مثل `1, 2, 3:`).\n\n### 5. الملخص والقاعدة الذهبية (تحدي الوحدة 3)\n> **قاعدة ذهبية وتحدي الوحدة:** استخدم `match` دائماً عندما تقارن قيمة واحدة بعدة خيارات ثابتة؛ فهو يوفر وضوحاً فائقاً. وفي ختام هذه الوحدة، سننجز **تحدي حاسبة أضرار المعركة (Combat Damage Engine)** لدمج العمليات والشروط وفروع `match`.",
@@ -27,7 +27,7 @@
         "ar": "دليل مطابقة الأنماط في Godot",
         "en": "Godot Pattern Matching Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_advanced.html#match-statement"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_advanced.html#match-statement"
     }
   ],
   "exercises": [

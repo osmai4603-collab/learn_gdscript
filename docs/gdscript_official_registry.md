@@ -24,9 +24,11 @@ lesson objective rather than a general documentation landing page.
 | Resources | Resources | <https://docs.godotengine.org/en/4.3/tutorials/scripting/resources.html> | Resource creation, loading, and reuse |
 | Resource class | Resource class | <https://docs.godotengine.org/en/4.3/classes/class_resource.html> | Resource identity and lifecycle |
 | Saving | Saving games | <https://docs.godotengine.org/en/4.3/tutorials/io/saving_games.html> | Persisting and restoring game data |
+| Configuration files | ConfigFile class | <https://docs.godotengine.org/en/4.3/classes/class_configfile.html> | INI-style section and key settings |
 | Coroutines and `await` | GDScript basics: coroutines | <https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#coroutines> | Awaiting signals and asynchronous flow |
 | Timers | Timer class | <https://docs.godotengine.org/en/4.3/classes/class_timer.html> | Timeouts and timer lifecycle |
 | Warnings and debugging | GDScript warning system | <https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/warning_system.html> | Warning configuration and handling |
+| Debugger panel | Debugger panel | <https://docs.godotengine.org/en/4.3/tutorials/scripting/debug/debugger_panel.html> | Breakpoints, errors, and runtime inspection |
 
 ## Authoring rules
 

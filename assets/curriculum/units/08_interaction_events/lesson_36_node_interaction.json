@@ -9,11 +9,11 @@
     "ar": "صمّم تدفق حدث بين عقدة باعثة ومستقبلات دون اقتران غير لازم.",
     "en": "Design event flow between an emitter and receivers without unnecessary coupling."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 18,
   "order": 3,
   "documentation": {
-    "ar": "تنسق الإشارات التفاعل بين العقد: تصدر عقدة الحدث وتستقبل العقد الأخرى ما تحتاجه. ضع المسؤولية عن الاستجابة لدى المستقبل المناسب، وقلل اعتماد الباعث على تفاصيل الأنظمة الأخرى.",
-    "en": "Signals coordinate interaction between nodes: one node emits an event and other nodes receive what they need. Put response responsibility in the appropriate receiver and minimize the emitter’s dependence on other systems."
+    "ar": "تنسق الإشارات التفاعل بين العقد: تصدر عقدة الحدث وتستقبل العقد الأخرى ما تحتاجه. ضع المسؤولية عن الاستجابة لدى المستقبل المناسب، وقلل اعتماد الباعث على تفاصيل الأنظمة الأخرى. القاعدة العملية هي Signal Up, Call Down: الإشارة مناسبة لإعلان حدث إلى أعلى دون معرفة المستقبل، والاستدعاء المباشر مناسب لتوجيه الأب إلى ابن معروف.",
+    "en": "Signals coordinate interaction between nodes: one node emits an event and other nodes receive what they need. Put response responsibility in the appropriate receiver and minimize the emitter’s dependence on other systems. A useful rule is Signal Up, Call Down: use a signal to announce an event upward without knowing the receiver, and a direct call when a parent directs a known child."
   },
   "documentationSources": [
     {
@@ -21,19 +21,19 @@
         "ar": "الإشارات",
         "en": "Signals"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/signals.html"
     },
     {
       "title": {
         "ar": "مرجع الصنف Node",
         "en": "Node class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_node.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## افصل الحدث عن الاستجابة\n\nقد تعلن عقدة اللاعب `health_changed(current)`، وتستقبلها واجهة الصحة لتحديث العرض ونظام الصوت لتشغيل مؤثر. لا يحتاج الباعث إلى معرفة كل هذه الاستجابات.\n\n```gdscript\nextends Node\n\nsignal health_changed(current: int)\nvar health: int = 100\n\nfunc set_health(value: int):\n    health = value\n    health_changed.emit(health)\n```\n\nتحقق من اتصالات المشهد في المحرر؛ هذا النشاط التصميمي ليس تأكيداً آلياً على إعداد الاتصال.",
-    "en": "## Separate an event from its response\n\nA player node can announce `health_changed(current)`. A health UI can update its display while an audio system plays an effect. The emitter does not need to know every response.\n\n```gdscript\nextends Node\n\nsignal health_changed(current: int)\nvar health: int = 100\n\nfunc set_health(value: int):\n    health = value\n    health_changed.emit(health)\n```\n\nVerify scene connections in the editor; this design activity does not automatically confirm the connection setup."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nGame (Node)\n├── Player (Node) [health_changed emitter]\n└── HUD (CanvasLayer) [receiver]\n```\n\nأرفق باعث `health_changed` بـ Player، واربط HUD لاستقبال القيمة وتحديث العرض.\n\n## افصل الحدث عن الاستجابة\n\nقد تعلن عقدة اللاعب `health_changed(current)`، وتستقبلها واجهة الصحة لتحديث العرض ونظام الصوت لتشغيل مؤثر. لا يحتاج الباعث إلى معرفة كل هذه الاستجابات.\n\n```gdscript\nextends Node\n\nsignal health_changed(current: int)\nvar health: int = 100\n\nfunc set_health(value: int):\n    health = value\n    health_changed.emit(health)\n```\n\nتحقق من اتصالات المشهد في المحرر؛ هذا النشاط التصميمي ليس تأكيداً آلياً على إعداد الاتصال.\n\n> [!WARNING]\n> لا تجعل باعث الإشارة يبحث عن كل مستقبِل ويعدّل حالته مباشرة؛ ذلك يزيد الاقتران.\n\n> [!NOTE]\n> تُرسل الإشارات بيانات الحدث إلى المستقبلين المتصلين ولا تحفظ آخر قيمة تلقائياً.\n\n> [!TIP]\n> استخدم Signal Up, Call Down: ارفع الأحداث بإشارة، ووجّه الأب استدعاءً مباشراً إلى ابن معروف.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nGame (Node)\n├── Player (Node) [health_changed emitter]\n└── HUD (CanvasLayer) [receiver]\n```\n\nAttach the `health_changed` emitter to Player and connect HUD to receive the value and update the display.\n\n## Separate an event from its response\n\nA player node can announce `health_changed(current)`. A health UI can update its display while an audio system plays an effect. The emitter does not need to know every response.\n\n```gdscript\nextends Node\n\nsignal health_changed(current: int)\nvar health: int = 100\n\nfunc set_health(value: int):\n    health = value\n    health_changed.emit(health)\n```\n\nVerify scene connections in the editor; this design activity does not automatically confirm the connection setup.\n\n> [!WARNING]\n> Do not make a signal emitter find and modify every receiver directly; that increases coupling.\n\n> [!NOTE]\n> Signals deliver event data to connected receivers and do not automatically store the latest value.\n\n> [!TIP]\n> Use Signal Up, Call Down: emit events upward and let a parent directly direct a known child."
   },
   "exercises": [
     {

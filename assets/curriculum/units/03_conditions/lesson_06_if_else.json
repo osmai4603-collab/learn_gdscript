@@ -9,7 +9,7 @@
     "ar": "إتقان استخدام البنية الشرطية `if / else` لاتخاذ القرارات، مع فهم الفارق الجوهري والخطير بين إعلام الإسناد `=` ومقارنة المساواة `==`.",
     "en": "Master using `if / else` conditional branches for decision-making, understanding the critical difference between assignment `=` and equality comparison `==`."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 12,
   "order": 1,
   "contentMarkdown": {
     "ar": "## الشروط البسيطة if / else في GDScript\n\n### 1. المفهوم في سياق الألعاب\nالألعاب مليئة بالخيارات المبنية على شروط: **إذا** امتلك اللاعب درعاً كافياً، **فإن** الضربة لا تقتله، **وإلا** ينقص من طاقته. البنية `if / else` تمكن لعبتك من تفريع المسارات بناءً على حالة البيانات.\n\n### 2. القواعد والصياغة والتحذير الأهم\n- تُكتب الشروط متبوعة بنقطتين رأسيتين `:` مع الالتزام بالمسافات البادئة (Indentation) للكتل التابعة.\n- ⚠️ **تحذير رسمي حرج (الفارق بين `=` و `==`):** \n  - علامة الإسناد الفردية `=` تستخدم لتخزين قيمة في متغير (مثل `var x = 5`).\n  - علامة المساواة المزدوجة `==` تستخدم للمقارنة والتحقق من التساوي (مثل `if x == 5:`). الخلط بينهما يسبب خطأ صياغة يمنع تشغيل اللعبة.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var player_health = 0\n    # التحقق من حالة حياة اللاعب\n    if player_health > 0:\n        print(\"Hero is alive\")\n    else:\n        print(\"Game Over\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** إهمال المسافات البادئة أو استخدام مسافات غير متطابقة يسبب خطأ المسافة البادئة (IndentationError).\n- ℹ️ **معلومة تقنية:** يمكنك استخدام التعبير المختصر للتصريح السريع مثل `\"Alive\" if health > 0 else \"Dead\"`.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم `if` عندما تريد تنفيذ شيفرة بشرط تحقق الحالة، واجعل `else` البديل الافتراضي لكل الحالات الأخرى.",
@@ -26,7 +26,7 @@
         "ar": "دليل التحكم في التدفق بـ Godot",
         "en": "Godot Control Flow Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif"
     }
   ],
   "exercises": [

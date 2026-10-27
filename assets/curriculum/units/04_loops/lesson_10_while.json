@@ -9,7 +9,7 @@
     "ar": "إتقان استخدام حلقة `while` لتنفيذ الأوامر شرطياً، مع الانتباه التام للتحذير الحرج لتجنب تجميد المحرك بسبب الحلقات اللانهائية.",
     "en": "Master using the `while` loop for conditional repetition, paying strict attention to the critical warning preventing engine freezes from infinite loops."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 14,
   "order": 1,
   "contentMarkdown": {
     "ar": "## حلقة while ومخاطر الحلقات اللانهائية في GDScript\n\n### 1. المفهوم في سياق الألعاب\nحلقة `while` تستمر في التكرار **ما دام الشرط يحافظ على كونه صحيحاً (`true`)**. تُستخدم عندما لا تكون متأكداً من عدد المرات المطلوبة، بل تعتمد على حدث ديناميكي (مثل الانتظار حتى نفاد طاقة العدو أو انتهاء العد التنازلي).\n\n### 2. القواعد والصياغة والتحذير الحرج\n- تُكتب بالشكل `while condition:` مع تحديث متغير الشرط داخل الجسم البرمجي.\n- ⚠️ **تحذير حرج جداً (تجميد المحرك):** إذا نسيت تحديث المتغير الذي يعتمد عليه الشرط (مثل نسيان كتابة `i += 1`)، ستدخل اللعبة في **حلقة لانهائية (Infinite Loop)** تقوم بتجميد خيط معالجة اللعبة بالكامل وتتطلب إغلاق محرك Godot قسرياً!\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var countdown = 3\n    while countdown > 0:\n        print(countdown)\n        # تحديث الحالة لمنع التجميد اللانهائي\n        countdown -= 1\n    print(\"Liftoff!\")\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تأكد دائماً من وجود مسار واضح يجعل الشرط يتحول إلى `false` خلال عدد محدد من الخطوات.\n- ℹ️ **معلومة تقنية:** في ألعاب الفيديو، تجنب استخدام `while` طويلة داخل خيط المعالجة الرئيسي (Main Thread) لتفادي حدوث هبوط مفاجئ في معدل الإطارات (Lag Spike).\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** مع كل حلقة `while`، اسأل نفسك فوراً: *متى وأين يتحول هذا الشرط إلى false؟* وضَع دائماً آلية لتحديث وتغيير الحالة.",
@@ -26,7 +26,7 @@
         "ar": "دليل حلقة while في Godot",
         "en": "Godot while Loop Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#while"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#while"
     }
   ],
   "exercises": [

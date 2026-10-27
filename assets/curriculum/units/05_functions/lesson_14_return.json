@@ -9,11 +9,11 @@
     "ar": "أعد نتيجة من الدالة واستخدمها في موضع آخر.",
     "en": "Return a result from a function and use it elsewhere."
   },
-  "estimatedMinutes": 7,
+  "estimatedMinutes": 14,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## أعد نتيجة بدلاً من طباعتها\n\nتعيد `return` قيمة إلى المكان الذي استدعى الدالة وتنهي تنفيذها. يمكنك حفظ الناتج أو استخدامه في تعبير. تعرض `print()` القيمة للمستخدم، لكنها لا تقوم مقام الإرجاع.",
-    "en": "## Return a result instead of printing it\n\n`return` sends a value back to the place that called the function and ends it. You can store the result or use it in an expression. `print()` displays the value to the user but does not replace returning it."
+    "ar": "## أعد نتيجة بدلاً من طباعتها\n\nتعيد `return` قيمة إلى المكان الذي استدعى الدالة وتنهي تنفيذها. يمكنك حفظ الناتج أو استخدامه في تعبير. تعرض `print()` القيمة للمستخدم، لكنها لا تقوم مقام الإرجاع.\n\n> [!WARNING]\n> تجنّب الاعتماد على حالة خفية أو اسم محلي يظلل متغيراً مهماً؛ اجعل مدخلات الدالة ونتيجتها واضحتين.\n\n> [!NOTE]\n> تحافظ الدوال الصغيرة ذات المسؤولية الواحدة على سهولة الفهم والاختبار.\n\n> [!TIP]\n> جرّب الدالة بقيم عادية وحدّية، ثم افحص القيمة التي تعيدها.",
+    "en": "## Return a result instead of printing it\n\n`return` sends a value back to the place that called the function and ends it. You can store the result or use it in an expression. `print()` displays the value to the user but does not replace returning it.\n\n> [!WARNING]\n> Avoid hidden state or a local name that shadows an important variable; keep inputs and results explicit.\n\n> [!NOTE]\n> Small functions with one responsibility are easier to understand and test.\n\n> [!TIP]\n> Try normal and boundary inputs, then inspect the returned value."
   },
   "exampleCode": "func add(a, b):\n    return a + b\n\nvar result = add(3, 5)\nprint(result)",
   "exercises": [
@@ -393,7 +393,7 @@
         "ar": "أساسيات GDScript",
         "en": "GDScript basics"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ]
 }

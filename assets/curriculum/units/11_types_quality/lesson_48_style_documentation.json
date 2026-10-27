@@ -9,11 +9,11 @@
     "ar": "نسّق GDScript باتساق واكتب تعليقات توثيق مفيدة للصنف والدوال.",
     "en": "Format GDScript consistently and write useful documentation comments for classes and functions."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 16,
   "order": 3,
   "contentMarkdown": {
-    "ar": "## اجعل الشيفرة سهلة القراءة\n\nالاتساق في الأسماء والمسافات وترتيب الدوال يسهل المراجعة. اتبع دليل أسلوب GDScript في المشروع، واستخدم تعليقات توثيق `##` لشرح الغرض والعقد لا لتكرار كل سطر.\n\n```gdscript\n## Tracks a best score.\nclass_name ScoreTracker\nextends RefCounted\n\nvar best_score: int = 0\n\n## Stores [param score] when it is a new record.\nfunc record_score(score: int) -> bool:\n    if score > best_score:\n        best_score = score\n        return true\n    return false\n```\n\nحدّث التعليقات عند تغير السلوك؛ فالتعليق القديم يضلل أكثر مما يساعد.",
-    "en": "## Make code easy to read\n\nConsistent names, spacing, and function ordering make reviews easier. Follow the project’s GDScript style guide, and use `##` documentation comments to explain purpose and contracts instead of repeating every line.\n\n```gdscript\n## Tracks a best score.\nclass_name ScoreTracker\nextends RefCounted\n\nvar best_score: int = 0\n\n## Stores [param score] when it is a new record.\nfunc record_score(score: int) -> bool:\n    if score > best_score:\n        best_score = score\n        return true\n    return false\n```\n\nUpdate comments when behavior changes; stale comments mislead more than they help."
+    "ar": "## اجعل الشيفرة سهلة القراءة\n\nالاتساق في الأسماء والمسافات وترتيب الدوال يسهل المراجعة. اتبع دليل أسلوب GDScript في المشروع، واستخدم تعليقات توثيق `##` لشرح الغرض والعقد لا لتكرار كل سطر.\n\n```gdscript\n## Tracks a best score.\nclass_name ScoreTracker\nextends RefCounted\n\nvar best_score: int = 0\n\n## Stores [param score] when it is a new record.\nfunc record_score(score: int) -> bool:\n    if score > best_score:\n        best_score = score\n        return true\n    return false\n```\n\nحدّث التعليقات عند تغير السلوك؛ فالتعليق القديم يضلل أكثر مما يساعد.\n\n> [!WARNING]\n> التنسيق المتسق لا يضمن صحة المنطق؛ راجع السلوك والاختبارات أيضاً.\n\n> [!NOTE]\n> يتبع دليل GDScript الرسمي أسماء snake_case ومسافة بادئة بعلامات الجدولة؛ حافظ على ذلك باتساق.\n\n> [!TIP]\n> اكتب تعليق `##` يوضح الغرض والعقد، ثم حدّثه مع تغير السلوك.",
+    "en": "## Make code easy to read\n\nConsistent names, spacing, and function ordering make reviews easier. Follow the project’s GDScript style guide, and use `##` documentation comments to explain purpose and contracts instead of repeating every line.\n\n```gdscript\n## Tracks a best score.\nclass_name ScoreTracker\nextends RefCounted\n\nvar best_score: int = 0\n\n## Stores [param score] when it is a new record.\nfunc record_score(score: int) -> bool:\n    if score > best_score:\n        best_score = score\n        return true\n    return false\n```\n\nUpdate comments when behavior changes; stale comments mislead more than they help.\n\n> [!WARNING]\n> Consistent formatting does not guarantee correct logic; review behavior and tests as well.\n\n> [!NOTE]\n> The official GDScript style guide uses snake_case and tab indentation; apply it consistently.\n\n> [!TIP]\n> Write a `##` comment that explains purpose and contract, then update it when behavior changes."
   },
   "documentation": {
     "ar": "يحدد دليل الأسلوب قواعد تسمية وتنسيق تجعل الملفات متسقة، لكنه لا يعوض التصميم الواضح. استخدم أسماء تعبّر عن الدور ومسافات بادئة ثابتة. تبدأ تعليقات التوثيق بـ `##` وترتبط بالصنف أو الدالة، ويمكن استخدام وسوم مثل `[param score]` للإشارة إلى معامل. اشرح الغرض والعقد والآثار المهمة، لا تفاصيل واضحة من جسم التنفيذ. راجع التعليق عند تغيير الشيفرة كي لا يصف سلوكاً قديماً.",
@@ -25,14 +25,14 @@
         "ar": "دليل أسلوب GDScript",
         "en": "GDScript style guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_styleguide.html"
     },
     {
       "title": {
         "ar": "تعليقات توثيق GDScript",
         "en": "GDScript documentation comments"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_documentation_comments.html"
     }
   ],
   "exercises": [

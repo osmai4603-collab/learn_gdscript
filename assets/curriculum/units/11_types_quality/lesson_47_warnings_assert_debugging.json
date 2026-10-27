@@ -9,11 +9,11 @@
     "ar": "عالج التحذيرات واستخدم assert لفحص افتراضات التطوير وصحح الأخطاء بالمراقبة.",
     "en": "Address warnings, use assert for development assumptions, and debug by inspecting behavior."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 18,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## اكتشف المشكلة مبكراً\n\nالتحذيرات تشير إلى نمط قد يكون خطأ، مثل متغير غير مستخدم أو تحويل غير آمن. اقرأ الرسالة وموقعها وأصلح السبب بدلاً من كتمها.\n\n```gdscript\nfunc apply_damage(amount: int) -> void:\n    assert(amount >= 0, \"Damage must not be negative\")\n    print(\"Damage: \", amount)\n```\n\n`assert` يفحص افتراضاً داخلياً أثناء التطوير، وليس بديلاً عن التحقق الموجّه للمستخدم. استخدم نقاط التوقف ومراقبة القيم خطوة بخطوة لتحديد موضع التغير.",
-    "en": "## Find problems early\n\nWarnings flag patterns that may be mistakes, such as an unused variable or unsafe conversion. Read the message and location and fix its cause instead of suppressing it.\n\n```gdscript\nfunc apply_damage(amount: int) -> void:\n    assert(amount >= 0, \"Damage must not be negative\")\n    print(\"Damage: \", amount)\n```\n\n`assert` checks an internal assumption during development; it is not a substitute for user-facing validation. Use breakpoints and inspect values step by step to find where a change occurs."
+    "ar": "## اكتشف المشكلة مبكراً\n\nالتحذيرات تشير إلى نمط قد يكون خطأ، مثل متغير غير مستخدم أو تحويل غير آمن. اقرأ الرسالة وموقعها وأصلح السبب بدلاً من كتمها.\n\n```gdscript\nfunc apply_damage(amount: int) -> void:\n    assert(amount >= 0, \"Damage must not be negative\")\n    print(\"Damage: \", amount)\n```\n\n`assert` يفحص افتراضاً داخلياً أثناء التطوير، وليس بديلاً عن التحقق الموجّه للمستخدم. استخدم نقاط التوقف ومراقبة القيم خطوة بخطوة لتحديد موضع التغير.\n\n> [!WARNING]\n> لا تستخدم `assert` للتحقق من إدخال المستخدم أو لضمان صحة بيانات الإنتاج؛ تحقق منها بمسار صريح.\n\n> [!NOTE]\n> يمكن تخصيص مستوى التحذيرات من إعدادات المشروع، لكن خفض المستوى لا يصلح سبب التحذير.\n\n> [!TIP]\n> أعد إنتاج المشكلة، ثم استخدم نقاط التوقف وراقب القيم حتى يظهر موضع الخلل.",
+    "en": "## Find problems early\n\nWarnings flag patterns that may be mistakes, such as an unused variable or unsafe conversion. Read the message and location and fix its cause instead of suppressing it.\n\n```gdscript\nfunc apply_damage(amount: int) -> void:\n    assert(amount >= 0, \"Damage must not be negative\")\n    print(\"Damage: \", amount)\n```\n\n`assert` checks an internal assumption during development; it is not a substitute for user-facing validation. Use breakpoints and inspect values step by step to find where a change occurs.\n\n> [!WARNING]\n> Do not use `assert` for user-input validation or production data guarantees; validate those through explicit code paths.\n\n> [!NOTE]\n> Warning levels can be configured in project settings, but lowering a level does not fix the warning’s cause.\n\n> [!TIP]\n> Reproduce the issue, then use breakpoints and inspect values until you find the faulty step."
   },
   "documentation": {
     "ar": "تعرض منظومة التحذيرات ملاحظات التحليل، وقد تتأثر شدتها بإعدادات المشروع. أصلح السبب الجذري عادةً بدلاً من تغيير مستوى التحذير. يوقف `assert(condition)` التنفيذ عند فشل افتراض داخلي في وضع التصحيح، لذا استخدمه لشروط ينبغي تحققها لا لمعالجة إدخال المستخدم المعتاد. عند التصحيح، أعد إنتاج المشكلة ثم افحص القيم عند نقطة مناسبة وتتبع تغيرها باستخدام Debugger. يمكن أن يختلف سلوك التأكيدات في إصدارات الإنتاج؛ لا تعتمد عليها كتحقق أمني أو تحقق نهائي من صحة البيانات.",
@@ -25,14 +25,14 @@
         "ar": "نظام تحذيرات GDScript",
         "en": "GDScript warning system"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/warning_system.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/warning_system.html"
     },
     {
       "title": {
-        "ar": "نظرة عامة على لوحة المصحح",
-        "en": "Overview of the Debugger panel"
+        "ar": "لوحة المصحح",
+        "en": "Debugger panel"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/debug/overview_of_debugger_panel.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/debug/debugger_panel.html"
     }
   ],
   "exercises": [

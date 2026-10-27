@@ -9,7 +9,7 @@
     "ar": "إتقان دمج النصوص، استخدام دالة `str()` للتنسيق، وتطبيق تنسيق النصوص المتقدم عبر `%s` وطريقة `String.format()` لدعم تعدد اللغات.",
     "en": "Master string concatenation, `str()` formatting, and advanced formatting using `%s` and `String.format()` for localization support."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 12,
   "order": 3,
   "contentMarkdown": {
     "ar": "## النصوص وتنسيقها المتقدم في GDScript\n\n### 1. المفهوم في سياق الألعاب\nفي الألعاب، كل رسالة تظهر على الشاشة (مثل اسم البطل، النقاط، أو رسائل الحوار) تعتمد على النصوص (`String`). لتصميم واجهات قابلة للترجمة وسهلة الصيانة، نحتاج إلى أساليب احترافية لتنسيق النصوص بدلاً من الدمج البسيط العشوائي.\n\n### 2. القواعد والصياغة\n- **الدمج البسيط:** باستخدام العامل `+` مع تحويل الأرقام إلى نصوص عبر `str()`.\n- **التنسيق عبر العناصر النائبة (`%s`):** وضع عناصر نائبة يتم تعويضها بالقيم تباعاً.\n- **التنسيق عبر القواميس (`String.format()`):** تمرير قاموس يحمل مفاتيح واضحة لتعبئة النصوص بأمان تام ودعم الترجمة.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    var player_name = \"Alex\"\n    var score = 150\n    # استخدام التنسيق المتقدم بالقاموس\n    var msg = \"Player {name} scored {points} pts\".format({\"name\": player_name, \"points\": score})\n    print(msg)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تجنب ربط النصوص المتكرر بـ `+` داخل الحلقات الطويلة لأنه يستهلك الذاكرة بإنشاء كائنات جديدة، واستخدم التنسيق أو المصفوفات النصية.\n- ℹ️ **معلومة تقنية:** دعم تعدد اللغات (Localization) يعتمد كلياً على استخدام العناصر النائبة المسمّاة بدلاً من دمج النصوص يدوياً.\n\n### 5. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** نسّق رسائلك دائماً باستخدام `String.format()` في النصوص المعقدة؛ فهذا يجعل الكود أنظف وأسهل في الترجمة والصيانة.",
@@ -26,7 +26,7 @@
         "ar": "دليل تنسيق النصوص في Godot",
         "en": "Godot String Formatting Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_format_string.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_format_string.html"
     }
   ],
   "exercises": [

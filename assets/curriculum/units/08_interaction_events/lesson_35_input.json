@@ -9,7 +9,7 @@
     "ar": "اختر طريقة استقبال إدخال المستخدم المناسبة للفعل المطلوب.",
     "en": "Choose an input-handling approach that fits the requested interaction."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 16,
   "order": 2,
   "documentation": {
     "ar": "عرّف أفعالاً مثل `move_left` في Project Settings → Input Map واربطها بمفاتيح. استخدم `Input.is_action_pressed()` للحالة المستمرة أو `_input(event)` لمعالجة حدث وارد. إعداد المحرر لا يتحقق منه stdout.",
@@ -21,12 +21,19 @@
         "ar": "إدخال اللاعب",
         "en": "Input"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/inputs/index.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/inputs/index.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع InputEvent",
+        "en": "InputEvent class reference"
+      },
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_inputevent.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## من المفتاح إلى فعل مسمى\n\nعرّف فعلاً في Input Map واربطه بزر. يمكن للسكربت قراءة حالة فعل مستمر أو استقبال الحدث مباشرة.\n\n```gdscript\nextends Node2D\n\nfunc _physics_process(delta):\n    if Input.is_action_pressed(\"move_right\"):\n        position.x += 100.0 * delta\n```\n\nيتطلب المثال إعداد `move_right` من المحرر. استخدم مرحلة الفيزياء للحركة المرتبطة بالفيزياء.",
-    "en": "## From a key to a named action\n\nDefine an action in Input Map and bind it to a button. A script can read the state of a continuous action or receive an event directly.\n\n```gdscript\nextends Node2D\n\nfunc _physics_process(delta):\n    if Input.is_action_pressed(\"move_right\"):\n        position.x += 100.0 * delta\n```\n\nThis example requires configuring `move_right` in the editor. Use the physics stage for physics-related movement."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nPlayer (Node2D) [input.gd]\n```\n\nأرفق سكربت الإدخال بـ Player، واضبط `move_right` في Project Settings → Input Map.\n\n## من المفتاح إلى فعل مسمى\n\nعرّف فعلاً في Input Map واربطه بزر. يمكن للسكربت قراءة حالة فعل مستمر أو استقبال الحدث مباشرة.\n\n```gdscript\nextends Node2D\n\nfunc _physics_process(delta):\n    if Input.is_action_pressed(\"move_right\"):\n        position.x += 100.0 * delta\n```\n\nيتطلب المثال إعداد `move_right` من المحرر. استخدم مرحلة الفيزياء للحركة المرتبطة بالفيزياء.\n\n> [!WARNING]\n> لا تعتمد على رمز مفتاح ثابت إذا كان الفعل يمثل حركة أو تفاعلاً؛ اربطه بفعل مسمى في Input Map.\n\n> [!NOTE]\n> تصل `_input()` قبل معالجة الواجهة، بينما `_unhandled_input()` مناسب للأحداث التي لم تستهلكها الواجهة.\n\n> [!TIP]\n> اختبر الفعل بعد ضبطه في Project Settings → Input Map، واستخدم `_physics_process()` لحركة الفيزياء.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nPlayer (Node2D) [input.gd]\n```\n\nAttach the input script to Player and configure `move_right` in Project Settings → Input Map.\n\n## From a key to a named action\n\nDefine an action in Input Map and bind it to a button. A script can read the state of a continuous action or receive an event directly.\n\n```gdscript\nextends Node2D\n\nfunc _physics_process(delta):\n    if Input.is_action_pressed(\"move_right\"):\n        position.x += 100.0 * delta\n```\n\nThis example requires configuring `move_right` in the editor. Use the physics stage for physics-related movement.\n\n> [!WARNING]\n> Avoid hard-coding a physical key when the intent is an action; bind a named action in Input Map.\n\n> [!NOTE]\n> `_input()` runs before GUI handling, while `_unhandled_input()` is for events the GUI did not consume.\n\n> [!TIP]\n> Test the action after configuring it in Project Settings → Input Map, and use `_physics_process()` for physics movement."
   },
   "exercises": [
     {

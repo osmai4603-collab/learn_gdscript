@@ -9,11 +9,11 @@
     "ar": "نفّذ شريحة لعب صغيرة بتركيب العقد ودوال واضحة وحاوية للبيانات.",
     "en": "Implement a small playable slice using composed nodes, clear functions, and a data collection."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 22,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## ابنِ شريحة لعب قابلة للتشغيل\n\nأنشئ مشهداً رئيسياً ومشهداً للاعب وآخر للعنصر. سمّ الأفعال بدوال، واستخدم مصفوفة أو قاموساً لتتبع العناصر وحالة الجولة.\n\n```gdscript\nvar collected_ids: Array[String] = []\n\nfunc collect_item(item_id: String) -> void:\n    if not collected_ids.has(item_id):\n        collected_ids.append(item_id)\n        print(\"Collected: \", item_id)\n```\n\nنفّذ أصغر مسار متكامل: ابدأ الجولة، اجمع عنصراً، حدّث النتيجة واعرضها. اختبر الحالات الحدية مثل جمع العنصر مرتين وإعادة الجولة.",
-    "en": "## Build a runnable slice\n\nCreate a main scene, a player scene, and an item scene. Name actions with functions, and use an array or dictionary to track items and round state.\n\n```gdscript\nvar collected_ids: Array[String] = []\n\nfunc collect_item(item_id: String) -> void:\n    if not collected_ids.has(item_id):\n        collected_ids.append(item_id)\n        print(\"Collected: \", item_id)\n```\n\nImplement the smallest end-to-end flow: start a round, collect an item, update the score, and display it. Test edge cases such as duplicate collection and restarting."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nArcadeGame (Node2D)\n├── PlayerShip (CharacterBody2D)\n├── Spawner (Node2D)\n├── HUD (CanvasLayer)\n└── ScoreManager (Node)\n```\n\nأرفق سكربتاً بكل نظام رئيسي، وصِل النقاط والصحة إلى HUD عبر إشارات.\n\n## ابنِ شريحة لعب قابلة للتشغيل\n\nأنشئ مشهداً رئيسياً ومشهداً للاعب وآخر للعنصر. سمّ الأفعال بدوال، واستخدم مصفوفة أو قاموساً لتتبع العناصر وحالة الجولة.\n\n```gdscript\nvar collected_ids: Array[String] = []\n\nfunc collect_item(item_id: String) -> void:\n    if not collected_ids.has(item_id):\n        collected_ids.append(item_id)\n        print(\"Collected: \", item_id)\n```\n\nنفّذ أصغر مسار متكامل: ابدأ الجولة، اجمع عنصراً، حدّث النتيجة واعرضها. اختبر الحالات الحدية مثل جمع العنصر مرتين وإعادة الجولة.\n\n> [!WARNING]\n> لا تدمج الأنظمة دفعة واحدة؛ اختبر كل خطوة قابلة للتشغيل، وتحقق من المراجع والإشارات قبل إضافة التعقيد.\n\n> [!NOTE]\n> شجرة المشروع المقترحة نقطة بداية قابلة للتغيير؛ حافظ على مسؤولية واضحة لكل عقدة وتدفق بيانات معلوم.\n\n> [!TIP]\n> أنجز شريحة لعب صغيرة من البداية إلى النهاية، ثم وسّعها بعد نجاح اختبارها.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nArcadeGame (Node2D)\n├── PlayerShip (CharacterBody2D)\n├── Spawner (Node2D)\n├── HUD (CanvasLayer)\n└── ScoreManager (Node)\n```\n\nAttach a script to each main system and connect score and health to HUD using signals.\n\n## Build a runnable slice\n\nCreate a main scene, a player scene, and an item scene. Name actions with functions, and use an array or dictionary to track items and round state.\n\n```gdscript\nvar collected_ids: Array[String] = []\n\nfunc collect_item(item_id: String) -> void:\n    if not collected_ids.has(item_id):\n        collected_ids.append(item_id)\n        print(\"Collected: \", item_id)\n```\n\nImplement the smallest end-to-end flow: start a round, collect an item, update the score, and display it. Test edge cases such as duplicate collection and restarting.\n\n> [!WARNING]\n> Do not integrate every system at once; test each runnable step and verify references and signals before adding complexity.\n\n> [!NOTE]\n> The proposed project tree is a starting point, not a requirement; keep each node’s responsibility and data flow clear.\n\n> [!TIP]\n> Complete a small end-to-end playable slice, then expand it after it passes its checks."
   },
   "documentation": {
     "ar": "امنح كل عقدة مسؤولية واضحة واستخدم دوالاً تسمي الأفعال. اختر مصفوفة للعناصر المرتبة أو قاموساً للبحث بمفتاح. اجعل تحديث الحالة في مسار واضح لتجنب النتائج المتضاربة. ابدأ بمسار كامل بسيط من بداية الجولة إلى نتيجتها، ثم اختبر الحالات الحدية قبل إضافة المؤثرات. هذا مثال توضيحي؛ فالشجرة المناسبة تختلف باختلاف المشروع.",
@@ -25,14 +25,14 @@
         "ar": "العقد والمشاهد",
         "en": "Nodes and scenes"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/nodes_and_scenes.html"
     },
     {
       "title": {
         "ar": "أساسيات GDScript",
         "en": "GDScript basics"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ],
   "exercises": [

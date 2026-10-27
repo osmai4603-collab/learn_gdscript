@@ -9,7 +9,7 @@
     "ar": "إتقان استخدام التعدادات المسماة (Named Enums) والثوابت للقضاء على الأرقام السحرية وإنجاز التحدي التراكمي للوحدة الثانية.",
     "en": "Master named enums and constants to eliminate magic numbers and complete the Unit 2 capstone challenge."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 14,
   "order": 4,
   "contentMarkdown": {
     "ar": "## الثوابت والتعدادات في GDScript\n\n### 1. المفهوم في سياق الألعاب\nعندما تبرمج لعبة، قد تستخدم أرقاماً مبهمة مثل استخدام الرقم `0` لتمثيل حالة الوقوف، و`1` للحركة، و`2` للقفز. هذه تسمى في البرمجة **الأرقام السحرية (Magic Numbers)** لأنها غامضة. الحل الاحترافي هو استخدام **التعدادات (Enums)** لتسمية هذه الحالات بوضوح.\n\n### 2. القواعد والصياغة\n- **الثوابت:** تُعرّف بـ `const` لضمان عدم تغير إعدادات اللعبة الحرجة.\n- **التعدادات:** تُعرّف بـ `enum State { IDLE, RUN, JUMP }`، وتمنح كل خيار رقماً تسلسلياً تلقائياً يبدأ من الصفر، مع إمكانية قراءتها بأسماء مفهومة.\n\n### 3. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nenum PlayerState { IDLE, RUNNING, JUMPING }\n\nfunc _ready():\n    var current_state = PlayerState.RUNNING\n    print(current_state)\n```\n\n### 4. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** تجنب استخدام الأرقام المجردة في الشروط والحالات؛ استخدم دائماً أسماء التعدادات (Enums) لسهولة الصيانة وتجنب الأخطاء.\n- ℹ️ **معلومة تقنية:** التعدادات في GDScript توفر إكمالاً تلقائياً ممتازاً في محرر Godot.\n\n### 5. الملخص والقاعدة الذهبية (تحدي الوحدة 2)\n> **قاعدة ذهبية وتحدي الوحدة:** التعدادات والثوابت تحمي لعبتك من الأخطاء الغامضة. في ختام هذه الوحدة، سننجز **تحدي بطاقة شخصية اللاعب وسجل المقتنيات (Player Inventory & Character Card)** لدمج المتغيرات والأنواع والتنسيق والتعدادات.",
@@ -27,7 +27,7 @@
         "ar": "دليل التعدادات في Godot",
         "en": "Godot Enums Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#enumerations"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#enumerations"
     }
   ],
   "exercises": [

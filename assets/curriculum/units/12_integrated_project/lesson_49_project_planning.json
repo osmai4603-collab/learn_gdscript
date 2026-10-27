@@ -9,11 +9,11 @@
     "ar": "حوّل فكرة صغيرة إلى مشاهد وعقد وموارد ومهام قابلة للتنفيذ.",
     "en": "Turn a small idea into actionable scenes, nodes, resources, and tasks."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 20,
   "order": 0,
   "contentMarkdown": {
-    "ar": "## ابدأ بخريطة صغيرة\n\nاختر حلقة لعب واضحة مثل جمع عناصر قبل انتهاء الوقت. اكتب ما يراه اللاعب ومسؤولية كل عقدة والبيانات التي يجب أن تبقى بين المشاهد.\n\n```text\nMain (Node)\n├── Player (CharacterBody2D)\n├── Items (Node2D)\n└── HUD (CanvasLayer)\n```\n\nقسّم العمل: اللاعب للحركة، العنصر للتفاعل، HUD للعرض، ومدير الجولة للنتيجة والوقت. استخدم إشارات بين المكونات لتقليل الترابط.",
-    "en": "## Start with a small map\n\nChoose a clear gameplay loop, such as collecting items before time runs out. Write down what the player sees, each node’s responsibility, and what data must persist between scenes.\n\n```text\nMain (Node)\n├── Player (CharacterBody2D)\n├── Items (Node2D)\n└── HUD (CanvasLayer)\n```\n\nSplit the work: the player handles movement, an item handles interaction, the HUD displays information, and a round manager owns score and time. Use signals between components to reduce coupling."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nArcadeGame (Node2D)\n├── PlayerShip (CharacterBody2D)\n├── Spawner (Node2D)\n├── HUD (CanvasLayer)\n└── ScoreManager (Node)\n```\n\nأرفق سكربتاً بكل نظام رئيسي، وصِل النقاط والصحة إلى HUD عبر إشارات.\n\n## ابدأ بخريطة صغيرة\n\nاختر حلقة لعب واضحة مثل جمع عناصر قبل انتهاء الوقت. اكتب ما يراه اللاعب ومسؤولية كل عقدة والبيانات التي يجب أن تبقى بين المشاهد.\n\n```text\nMain (Node)\n├── Player (CharacterBody2D)\n├── Items (Node2D)\n└── HUD (CanvasLayer)\n```\n\nقسّم العمل: اللاعب للحركة، العنصر للتفاعل، HUD للعرض، ومدير الجولة للنتيجة والوقت. استخدم إشارات بين المكونات لتقليل الترابط.\n\n> [!WARNING]\n> لا تدمج الأنظمة دفعة واحدة؛ اختبر كل خطوة قابلة للتشغيل، وتحقق من المراجع والإشارات قبل إضافة التعقيد.\n\n> [!NOTE]\n> شجرة المشروع المقترحة نقطة بداية قابلة للتغيير؛ حافظ على مسؤولية واضحة لكل عقدة وتدفق بيانات معلوم.\n\n> [!TIP]\n> أنجز شريحة لعب صغيرة من البداية إلى النهاية، ثم وسّعها بعد نجاح اختبارها.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nArcadeGame (Node2D)\n├── PlayerShip (CharacterBody2D)\n├── Spawner (Node2D)\n├── HUD (CanvasLayer)\n└── ScoreManager (Node)\n```\n\nAttach a script to each main system and connect score and health to HUD using signals.\n\n## Start with a small map\n\nChoose a clear gameplay loop, such as collecting items before time runs out. Write down what the player sees, each node’s responsibility, and what data must persist between scenes.\n\n```text\nMain (Node)\n├── Player (CharacterBody2D)\n├── Items (Node2D)\n└── HUD (CanvasLayer)\n```\n\nSplit the work: the player handles movement, an item handles interaction, the HUD displays information, and a round manager owns score and time. Use signals between components to reduce coupling.\n\n> [!WARNING]\n> Do not integrate every system at once; test each runnable step and verify references and signals before adding complexity.\n\n> [!NOTE]\n> The proposed project tree is a starting point, not a requirement; keep each node’s responsibility and data flow clear.\n\n> [!TIP]\n> Complete a small end-to-end playable slice, then expand it after it passes its checks."
   },
   "documentation": {
     "ar": "يصف التخطيط الجيد حلقة لعب صغيرة قابلة للإنجاز قبل إضافة التفاصيل. حدد المشاهد ومسؤولية كل عقدة والبيانات المشتركة والإشارات التي تصل الأجزاء. تعامل مع رسم الشجرة كدليل لا كتصميم إلزامي لكل لعبة. رتّب الملفات في مجلدات مفهومة وقسّم العمل إلى خطوات قابلة للتشغيل والفحص. ابدأ بشريحة متكاملة بسيطة ثم حسّنها، بدلاً من بناء الأنظمة معزولة.",
@@ -25,14 +25,14 @@
         "ar": "تنظيم المشروع",
         "en": "Project organization"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/best_practices/project_organization.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/best_practices/project_organization.html"
     },
     {
       "title": {
         "ar": "العقد والمشاهد",
         "en": "Nodes and scenes"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/nodes_and_scenes.html"
     }
   ],
   "exercises": [

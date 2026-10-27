@@ -9,11 +9,11 @@
     "ar": "تجنب الانتظار الذي لا ينتهي واستخدام كائن أزيل أثناء التعليق.",
     "en": "Avoid waits that never finish and using an object removed during suspension."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 18,
   "order": 3,
   "contentMarkdown": {
-    "ar": "## اجعل لكل انتظار سبباً صالحاً\n\nقد تنتظر إشارة لا تصدر أبداً، أو تستخدم عقدة بعد حذفها، أو تفترض أن الحالة لم تتغير أثناء الانتظار. تحقق من مصدر الإشارة وابدأ العملية التي تطلقها.\n\n```gdscript\nfunc wait_for_ready() -> void:\n    if not is_instance_valid($Worker):\n        return\n    await $Worker.ready_signal\n    if not is_instance_valid($Worker):\n        return\n    print(\"Ready\")\n```\n\nيفترض المثال التالي وجود عقدة ابن باسم Worker يعرّف سكربتها الإشارة `ready_signal`، وأن هناك عملية ستصدرها. الفحص قبل الانتظار لا يكفي إذا أمكن حذف العقدة أثناءه؛ أعد التحقق بعد الاستئناف.",
-    "en": "## Give every wait a valid reason\n\nYou might await a signal that never fires, use a node after it was removed, or assume state did not change while suspended. Check the signal source and start the operation that emits it.\n\n```gdscript\nfunc wait_for_ready() -> void:\n    if not is_instance_valid($Worker):\n        return\n    await $Worker.ready_signal\n    if not is_instance_valid($Worker):\n        return\n    print(\"Ready\")\n```\n\nThe example assumes a child node named Worker whose script declares `ready_signal`, and an operation that will emit it. A pre-wait check is insufficient if the node can be removed during the wait; check again after resumption."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nBattleScene (Node) [script attached to BattleScene]\n├── Worker (Node, declares ready_signal)\n└── AttackTimer (Timer)\n```\n\nأرفق السكربت بـ BattleScene؛ يجب أن تعرّف Worker الإشارة `ready_signal` وتصدرها العملية المقابلة.\n\n## اجعل لكل انتظار سبباً صالحاً\n\nقد تنتظر إشارة لا تصدر أبداً، أو تستخدم عقدة بعد حذفها، أو تفترض أن الحالة لم تتغير أثناء الانتظار. تحقق من مصدر الإشارة وابدأ العملية التي تطلقها.\n\n```gdscript\nvar worker\n\nfunc _ready() -> void:\n    worker = get_node_or_null(\"Worker\")\n\nfunc wait_for_ready() -> void:\n    if not is_instance_valid(worker):\n        return\n    await worker.ready_signal\n    if not is_instance_valid(worker):\n        return\n    print(\"Ready\")\n```\n\nيفترض المثال وجود عقدة ابن باسم Worker يعرّف سكربتها الإشارة `ready_signal`، وأن `wait_for_ready()` تستدعى بعد `_ready()`. يحفظ السكربت مرجعاً إلى العقدة ويفحص صلاحيته بعد الاستئناف، لأن البحث بالمسار مرة أخرى قد يفشل بعد حذفها.\n\n> [!WARNING]\n> بعد `await` قد تكون العقدة حُذفت أو تغيرت الحالة؛ أعد فحص المرجع ولا تفترض استمرار صلاحيته.\n\n> [!NOTE]\n> `await` يعلّق الدالة الحالية دون إيقاف اللعبة؛ `create_timer()` عابر بينما `Timer` عقدة قابلة للضبط وإعادة الاستخدام.\n\n> [!TIP]\n> صمّم مسار إلغاء أو مهلة للإشارات التي قد لا تصدر.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nBattleScene (Node) [script attached to BattleScene]\n├── Worker (Node, declares ready_signal)\n└── AttackTimer (Timer)\n```\n\nAttach the script to BattleScene; Worker must declare `ready_signal` and the corresponding operation must emit it.\n\n## Give every wait a valid reason\n\nYou might await a signal that never fires, use a node after it was removed, or assume state did not change while suspended. Check the signal source and start the operation that emits it.\n\n```gdscript\nvar worker\n\nfunc _ready() -> void:\n    worker = get_node_or_null(\"Worker\")\n\nfunc wait_for_ready() -> void:\n    if not is_instance_valid(worker):\n        return\n    await worker.ready_signal\n    if not is_instance_valid(worker):\n        return\n    print(\"Ready\")\n```\n\nThe example assumes a child node named Worker whose script declares `ready_signal`, and that `wait_for_ready()` is called after `_ready()`. The script stores a node reference and validates it after resumption, since looking it up by path again may fail after removal.\n\n> [!WARNING]\n> After `await`, a node may have been freed or state may have changed; revalidate references instead of assuming they remain valid.\n\n> [!NOTE]\n> `await` suspends the current function without stopping the game; `create_timer()` is transient while a `Timer` node is configurable and reusable.\n\n> [!TIP]\n> Design a cancellation path or timeout for signals that may never be emitted."
   },
   "documentation": {
     "ar": "قد تبقى الدالة معلقة إلى الأبد إذا لم يصدر الحدث المنتظر. حدد من يطلق الإشارة وكيف ينتهي المسار عند إلغاء العملية أو إغلاق المشهد. يمكن أن تزال عقدة أثناء التعليق؛ تحقق من صلاحيتها قبل الوصول إليها بعد الاستئناف. كذلك قد تتداخل عمليتان منتظرتان وتعيد عملية قديمة نتيجة غير حديثة. استخدم حالة إلغاء أو معرف عملية عند الحاجة، وتجنب حلقة انتظار مشغولة تستهلك الإطارات.",
@@ -25,14 +25,14 @@
         "ar": "أساسيات GDScript: await",
         "en": "GDScript basics: await"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
     },
     {
       "title": {
         "ar": "مرجع Object",
         "en": "Object class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_object.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_object.html"
     }
   ],
   "exercises": [

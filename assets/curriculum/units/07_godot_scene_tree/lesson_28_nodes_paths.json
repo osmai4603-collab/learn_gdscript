@@ -9,7 +9,7 @@
     "ar": "افهم العقدة كلبنة للمشهد، وميّز المسار النسبي والمطلق.",
     "en": "Understand a node as a scene building block and distinguish relative and absolute paths."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 16,
   "order": 0,
   "documentation": {
     "ar": "العقد لبنات المشهد، وتربطها علاقة أبوة وأبناء في شجرة. المسار النسبي يبدأ من العقدة الحالية، بينما يبدأ المسار المطلق من جذر الشجرة. إعادة التسمية أو نقل العقدة قد تتطلب تحديث المسار.",
@@ -21,19 +21,19 @@
         "ar": "العقد والمشاهد",
         "en": "Nodes and scenes"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/nodes_and_scenes.html"
     },
     {
       "title": {
         "ar": "مرجع الصنف Node",
         "en": "Node class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_node.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## اقرأ شجرة المشهد\n\nلكل عقدة أب واحد في الشجرة ويمكنها احتواء أبناء. المسار النسبي مثل `Child/Label` يبدأ من موضع معروف؛ والمسار المطلق مثل `/root/Main/Player` يبدأ من جذر المشهد.\n\n```text\nMain\n└── Player\n    └── Label\n```\n\nمن `Player` يكون المسار إلى `Label` هو `Label`. استخدم أسماء مستقرة حتى لا تصبح المراجع هشة.",
-    "en": "## Read the scene tree\n\nEach node has one parent in the tree and may contain children. A relative path such as `Child/Label` starts from a known location; an absolute path such as `/root/Main/Player` starts at the scene root.\n\n```text\nMain\n└── Player\n    └── Label\n```\n\nFrom `Player`, the path to `Label` is `Label`. Use stable names to keep references from becoming brittle."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nMain (Node2D)\n└── Player (CharacterBody2D)\n    └── Label (Label)\n```\n\nأرفق سكربت المثال بـ Player؛ المسار النسبي من Player إلى Label هو `Label`.\n\n## اقرأ شجرة المشهد\n\nلكل عقدة أب واحد في الشجرة ويمكنها احتواء أبناء. المسار النسبي مثل `Child/Label` يبدأ من موضع معروف؛ والمسار المطلق مثل `/root/Main/Player` يبدأ من جذر المشهد.\n\n```text\nMain\n└── Player\n    └── Label\n```\n\nمن `Player` يكون المسار إلى `Label` هو `Label`. استخدم أسماء مستقرة حتى لا تصبح المراجع هشة.\n\n> [!WARNING]\n> تحقق من اسم العقدة ومسارها الفعليين؛ المسار غير الموجود قد ينتج مرجعاً غير صالح أو خطأ وقت التشغيل.\n\n> [!NOTE]\n> تدخل الأبناء الشجرة قبل الوالد وتكتمل جاهزيتها قبل `_ready()` للوالد؛ يبدأ `@onready` بعد دخول الشجرة.\n\n> [!TIP]\n> استخدم أسماء مستقرة، واستعمل مجموعة أو مرجعاً محفوظاً عندما يكون البحث بالمسار هشاً.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nMain (Node2D)\n└── Player (CharacterBody2D)\n    └── Label (Label)\n```\n\nAttach the example script to Player; the relative path from Player to Label is `Label`.\n\n## Read the scene tree\n\nEach node has one parent in the tree and may contain children. A relative path such as `Child/Label` starts from a known location; an absolute path such as `/root/Main/Player` starts at the scene root.\n\n```text\nMain\n└── Player\n    └── Label\n```\n\nFrom `Player`, the path to `Label` is `Label`. Use stable names to keep references from becoming brittle.\n\n> [!WARNING]\n> Check actual node names and paths; a missing path can produce an invalid reference or runtime error.\n\n> [!NOTE]\n> Children enter the tree before their parent and are ready before the parent’s `_ready()`; `@onready` runs after tree entry.\n\n> [!TIP]\n> Use stable node names, and prefer a group or stored reference when path-based lookup is brittle."
   },
   "exercises": [
     {

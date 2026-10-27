@@ -9,15 +9,15 @@
     "ar": "احفظ بيانات بسيطة في ملف مستخدم واستعدها مع التحقق من النتيجة.",
     "en": "Save simple data to a user file and restore it while checking the result."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 18,
   "order": 3,
   "contentMarkdown": {
-    "ar": "## احفظ ما يحتاجه اللاعب\n\nتشير `res://` إلى ملفات المشروع المضمنة، بينما تخصص `user://` لملفات بيانات المستخدم القابلة للكتابة. يمكن استخدام JSON للبيانات البسيطة التي تحتاج إلى قراءة بشرية.\n\n```gdscript\nvar file := FileAccess.open(\"user://save.json\", FileAccess.WRITE)\nif file != null:\n    file.store_string(JSON.stringify({\"best_score\": 42}))\n```\n\nعند القراءة، تحقق من فتح الملف ومن نجاح تحليل البيانات قبل استخدامها. لا تخلط مورد المشروع بملف الحفظ؛ فلكل منهما موقع وغرض مختلف.",
-    "en": "## Save what the player needs\n\n`res://` refers to bundled project files, while `user://` is for writable user data. JSON can work well for simple data that should be human-readable.\n\n```gdscript\nvar file := FileAccess.open(\"user://save.json\", FileAccess.WRITE)\nif file != null:\n    file.store_string(JSON.stringify({\"best_score\": 42}))\n```\n\nWhen reading, check that the file opened and that parsing succeeded before using its data. Do not confuse a project resource with a save file: they have different locations and purposes."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nGame (Control)\n├── InventoryUI (VBoxContainer)\n└── SaveController (Node)\n\nInventoryData (Resource, InventoryData.tres)\n```\n\nأرفق سكربت التحكم أو الحفظ بـ SaveController؛ المورد InventoryData.tres بيانات مستقلة عن شجرة العقد.\n\n## احفظ ما يحتاجه اللاعب\n\nتشير `res://` إلى ملفات المشروع المضمنة، بينما تخصص `user://` لملفات بيانات المستخدم القابلة للكتابة. يمكن استخدام JSON للبيانات البسيطة التي تحتاج إلى قراءة بشرية، أو `ConfigFile` لإعدادات مقسمة إلى أقسام ومفاتيح.\n\n```gdscript\nvar file := FileAccess.open(\"user://save.json\", FileAccess.WRITE)\nif file != null:\n    file.store_string(JSON.stringify({\"best_score\": 42}))\n```\n\nعند القراءة، تحقق من فتح الملف ومن نجاح تحليل البيانات قبل استخدامها. لا تخلط مورد المشروع بملف الحفظ؛ فلكل منهما موقع وغرض مختلف.\n\n> [!WARNING]\n> لا تكتب بيانات تشغيل المستخدم داخل `res://`؛ استخدم `user://` وتحقق من نجاح التحميل والتحليل قبل استعمال البيانات.\n\n> [!NOTE]\n> العقدة جزء من شجرة المشهد، أما `Resource` فيمثل بيانات يمكن مشاركتها ولا يدخل تلك الشجرة.\n\n> [!TIP]\n> استخدم `preload()` للمراجع المعروفة مسبقاً و`load()` للتحميل عند الحاجة.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nGame (Control)\n├── InventoryUI (VBoxContainer)\n└── SaveController (Node)\n\nInventoryData (Resource, InventoryData.tres)\n```\n\nAttach the controller or saving script to SaveController; InventoryData.tres is data independent of the node tree.\n\n## Save what the player needs\n\n`res://` refers to bundled project files, while `user://` is for writable user data. JSON works well for simple human-readable data, while `ConfigFile` organizes settings into sections and keys.\n\n```gdscript\nvar file := FileAccess.open(\"user://save.json\", FileAccess.WRITE)\nif file != null:\n    file.store_string(JSON.stringify({\"best_score\": 42}))\n```\n\nWhen reading, check that the file opened and that parsing succeeded before using its data. Do not confuse a project resource with a save file: they have different locations and purposes.\n\n> [!WARNING]\n> Do not write user runtime data into `res://`; use `user://` and validate loading and parsing before using restored data.\n\n> [!NOTE]\n> A node belongs to the scene tree, while a `Resource` represents shareable data and is not part of that tree.\n\n> [!TIP]\n> Use `preload()` for known references and `load()` for runtime loading when needed."
   },
   "documentation": {
-    "ar": "يوفر `user://` موقع بيانات المستخدم الذي يمكن الكتابة إليه وقت التشغيل، أما `res://` فيشير إلى ملفات المشروع المضمنة. تتيح `FileAccess` فتح الملف في وضع القراءة أو الكتابة؛ تحقق من نجاح الفتح قبل استخدام الكائن. يمكن تمثيل قاموس بسيط بصيغة JSON، لكن البيانات المستعادة تحتاج إلى التحقق من البنية والأنواع والقيم الافتراضية، فقد يكون الملف مفقوداً أو قديماً أو تالفاً. لا تفترض أن ملف الحفظ مكان آمن لتخزين أسرار.",
-    "en": "`user://` is the user-data location writable at runtime, while `res://` refers to bundled project files. `FileAccess` opens a file in read or write mode; check that opening succeeded before using the object. A simple dictionary can be represented as JSON, but restored data needs validation for shape, types, and defaults because a file may be missing, old, or damaged. Do not assume a save file is a secure place for secrets."
+    "ar": "يوفر `user://` موقع بيانات المستخدم الذي يمكن الكتابة إليه وقت التشغيل، أما `res://` فيشير إلى ملفات المشروع المضمنة. تتيح `FileAccess` فتح الملف في وضع القراءة أو الكتابة؛ تحقق من نجاح الفتح قبل استخدام الكائن. يمكن تمثيل قاموس بسيط بصيغة JSON، لكن البيانات المستعادة تحتاج إلى التحقق من البنية والأنواع والقيم الافتراضية، فقد يكون الملف مفقوداً أو قديماً أو تالفاً. لا تفترض أن ملف الحفظ مكان آمن لتخزين أسرار. استخدم `ConfigFile` للإعدادات ذات الأقسام والمفاتيح أو JSON للبيانات المتداخلة التي تحتاج إلى تنسيق قابل للتبادل؛ تحقق من البيانات المستعادة في الحالتين.",
+    "en": "`user://` is the user-data location writable at runtime, while `res://` refers to bundled project files. `FileAccess` opens a file in read or write mode; check that opening succeeded before using the object. A simple dictionary can be represented as JSON, but restored data needs validation for shape, types, and defaults because a file may be missing, old, or damaged. Do not assume a save file is a secure place for secrets. Use `ConfigFile` for section-and-key settings or JSON for nested, interoperable data; validate restored data in either case."
   },
   "documentationSources": [
     {
@@ -25,14 +25,21 @@
         "ar": "حفظ الألعاب",
         "en": "Saving games"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/io/saving_games.html"
     },
     {
       "title": {
         "ar": "مرجع FileAccess",
         "en": "FileAccess class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_fileaccess.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_fileaccess.html"
+    },
+    {
+      "title": {
+        "ar": "مرجع ConfigFile",
+        "en": "ConfigFile class reference"
+      },
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_configfile.html"
     }
   ],
   "exercises": [

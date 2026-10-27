@@ -9,7 +9,7 @@
     "ar": "اربط مستقبلاً بإشارة واستجب للحدث دون اقتران غير لازم.",
     "en": "Connect a receiver to a signal and respond without unnecessary coupling."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 16,
   "order": 1,
   "documentation": {
     "ar": "يمكن ربط الإشارات من محرر Godot أو بالكود. عند الربط بالكود، استخدم مرجع الإشارة وطابق توقيع دالة الاستقبال مع عدد المعاملات. يطلق الباعث الإشارة عندما يقع الحدث.",
@@ -21,19 +21,19 @@
         "ar": "الإشارات",
         "en": "Signals"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/signals.html"
     },
     {
       "title": {
         "ar": "مرجع الصنف Node",
         "en": "Node class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_node.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## باعث ومستقبل\n\nيمكن لزر الواجهة إصدار `pressed` بينما تتصل به عقدة أخرى وتستجيب للنقر. الربط لا يجعل الباعث بحاجة إلى معرفة كل تفاصيل المستقبل.\n\n```gdscript\nfunc _ready():\n    $Button.pressed.connect(_on_button_pressed)\n\nfunc _on_button_pressed():\n    print(\"Pressed\")\n```\n\nيمكن إجراء الاتصال أيضاً من تبويب Node في المحرر. تحقق يدوياً من وجود المسار والإشارة والدالة.",
-    "en": "## Emitter and receiver\n\nA UI button can emit `pressed` while another node connects to it and responds to a click. This connection does not require the emitter to know every receiver detail.\n\n```gdscript\nfunc _ready():\n    $Button.pressed.connect(_on_button_pressed)\n\nfunc _on_button_pressed():\n    print(\"Pressed\")\n```\n\nYou can also connect from the editor’s Node tab. Manually verify that the path, signal, and function exist."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nMenu (Control) [script attached to Menu]\n└── Button (Button)\n```\n\nأرفق السكربت بـ Menu؛ `$Button.pressed` يطابق مسار الزر في المثال.\n\n## باعث ومستقبل\n\nيمكن لزر الواجهة إصدار `pressed` بينما تتصل به عقدة أخرى وتستجيب للنقر. الربط لا يجعل الباعث بحاجة إلى معرفة كل تفاصيل المستقبل.\n\n```gdscript\nfunc _ready():\n    $Button.pressed.connect(_on_button_pressed)\n\nfunc _on_button_pressed():\n    print(\"Pressed\")\n```\n\nيمكن إجراء الاتصال أيضاً من تبويب Node في المحرر. تحقق يدوياً من وجود المسار والإشارة والدالة.\n\n> [!WARNING]\n> لا تفترض أن إرسال الإشارة يضمن وجود مستقبِل؛ تحقق من التوصيل وتجنب الاتصالات المكررة.\n\n> [!NOTE]\n> تصل أحداث `_input()` قبل الواجهة، بينما تعالج `_unhandled_input()` ما لم تستهلكه الواجهة أو عقدة أخرى.\n\n> [!TIP]\n> اجعل الباعث يعلن الحدث ودع المستقبل المناسب يقرر الاستجابة لتقليل الاقتران.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nMenu (Control) [script attached to Menu]\n└── Button (Button)\n```\n\nAttach the script to Menu; `$Button.pressed` matches the button path in the example.\n\n## Emitter and receiver\n\nA UI button can emit `pressed` while another node connects to it and responds to a click. This connection does not require the emitter to know every receiver detail.\n\n```gdscript\nfunc _ready():\n    $Button.pressed.connect(_on_button_pressed)\n\nfunc _on_button_pressed():\n    print(\"Pressed\")\n```\n\nYou can also connect from the editor’s Node tab. Manually verify that the path, signal, and function exist.\n\n> [!WARNING]\n> Do not assume emitting a signal guarantees a receiver; verify the connection and avoid duplicate connections.\n\n> [!NOTE]\n> `_input()` receives events before GUI handling, while `_unhandled_input()` receives events not consumed by the GUI or another node.\n\n> [!TIP]\n> Let the emitter announce an event and the appropriate receiver choose the response to reduce coupling."
   },
   "exercises": [
     {

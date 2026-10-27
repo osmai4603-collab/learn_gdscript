@@ -9,7 +9,7 @@
     "ar": "افهم أن السكربت يعرّف خصائص وسلوكاً يمكن لنسخه المتعددة مشاركته.",
     "en": "Understand that a script defines properties and behavior shared by its instances."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 15,
   "order": 0,
   "documentation": {
     "ar": "يعرّف سكربت GDScript صنفاً يمكن أن يحتوي متغيرات ودوالاً. تعامل مع التعريف بوصفه قالباً، والنسخة بوصفها كائناً فعلياً. تشترك النسخ في تعريف السلوك لكن لكل نسخة قيم خصائصها.",
@@ -21,12 +21,12 @@
         "ar": "الأصناف في GDScript",
         "en": "Classes in GDScript"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#classes"
     }
   ],
   "contentMarkdown": {
-    "ar": "## التعريف والنسخة\n\nيجمع الصنف البيانات والسلوك الخاصين بمفهوم واحد. يمكن أن تنشئ نسخاً متعددة من الصنف؛ لكل نسخة قيمها، مع مشاركة تعريف الدوال.\n\n```gdscript\nextends RefCounted\nclass_name InventoryItem\n\nvar item_name = \"\"\nvar quantity = 0\n\nfunc describe():\n    return item_name + \" x\" + str(quantity)\n```\n\nهذا سكربت صنف؛ تعريفه وحده لا ينشئ نسخة. استخدم `class_name` لإتاحة اسم واضح للصنف في المشروع.",
-    "en": "## Definition and instance\n\nA class groups data and behavior for one concept. You can create multiple instances; each has its own values while sharing the function definitions.\n\n```gdscript\nextends RefCounted\nclass_name InventoryItem\n\nvar item_name = \"\"\nvar quantity = 0\n\nfunc describe():\n    return item_name + \" x\" + str(quantity)\n```\n\nThis is a class script; defining it does not create an instance. Use `class_name` to expose a clear class name in the project."
+    "ar": "## التعريف والنسخة\n\nيجمع الصنف البيانات والسلوك الخاصين بمفهوم واحد. يمكن أن تنشئ نسخاً متعددة من الصنف؛ لكل نسخة قيمها، مع مشاركة تعريف الدوال.\n\n```gdscript\nextends RefCounted\nclass_name InventoryItem\n\nvar item_name = \"\"\nvar quantity = 0\n\nfunc describe():\n    return item_name + \" x\" + str(quantity)\n```\n\nهذا سكربت صنف؛ تعريفه وحده لا ينشئ نسخة. استخدم `class_name` لإتاحة اسم واضح للصنف في المشروع.\n\n> [!WARNING]\n> لا تخلط بين تعريف الصنف وإنشاء نسخة منه؛ تعريف `RefCounted` وحده لا يضيف عقدة إلى المشهد.\n\n> [!NOTE]\n> تحتفظ كل نسخة بقيم خصائصها، بينما تشترك النسخ في تعريف الدوال.\n\n> [!TIP]\n> اجعل مسؤولية الصنف وحالة كل نسخة واضحتين.",
+    "en": "## Definition and instance\n\nA class groups data and behavior for one concept. You can create multiple instances; each has its own values while sharing the function definitions.\n\n```gdscript\nextends RefCounted\nclass_name InventoryItem\n\nvar item_name = \"\"\nvar quantity = 0\n\nfunc describe():\n    return item_name + \" x\" + str(quantity)\n```\n\nThis is a class script; defining it does not create an instance. Use `class_name` to expose a clear class name in the project.\n\n> [!WARNING]\n> Do not confuse defining a class with creating an instance; defining a `RefCounted` class does not add a node to a scene.\n\n> [!NOTE]\n> Each instance keeps its own property values while instances share function definitions.\n\n> [!TIP]\n> Keep the class responsibility and each instance’s state clear."
   },
   "exercises": [
     {

@@ -9,7 +9,7 @@
     "ar": "اختر بين تركيب كائنات متعاونة ووراثة صنف متخصص وفق العلاقة المطلوبة.",
     "en": "Choose between composing cooperating objects and inheriting a specialized class based on the relationship."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 16,
   "order": 4,
   "documentation": {
     "ar": "استخدم الوراثة عندما يكون الصنف الجديد نوعاً متخصصاً من الأب ويستفيد من واجهته. استخدم التركيب عندما يملك الكائن أجزاء مستقلة أو يتعاون معها. التركيب مناسب غالباً لعلاقة «يملك/يستخدم».",
@@ -21,12 +21,12 @@
         "ar": "الأصناف في GDScript",
         "en": "Classes in GDScript"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#classes"
     }
   ],
   "contentMarkdown": {
-    "ar": "## «نوع من» أم «يملك»؟\n\nترث شخصية متخصصة من صنف أساسي إذا كانت بالفعل نوعاً منه. أما ملف اللاعب الذي يملك مخزوناً، فيمكنه الاحتفاظ بمرجع إلى مكوّن المخزون.\n\n```gdscript\nextends RefCounted\nclass_name PlayerProfile\n\nvar inventory\nvar display_name = \"\"\n\nfunc describe():\n    return display_name\n```\n\nتجنب سلاسل الوراثة الطويلة لمجرد مشاركة أسطر قليلة؛ اختر العلاقة التي تمثل النموذج الحقيقي.",
-    "en": "## “Is a kind of” or “has a”? \n\nA specialized character can inherit from a base class when it truly is a kind of that class. A player profile that has an inventory can instead keep a reference to an inventory component.\n\n```gdscript\nextends RefCounted\nclass_name PlayerProfile\n\nvar inventory\nvar display_name = \"\"\n\nfunc describe():\n    return display_name\n```\n\nAvoid long inheritance chains just to share a few lines; choose the relationship that represents the real model."
+    "ar": "## «نوع من» أم «يملك»؟\n\nترث شخصية متخصصة من صنف أساسي إذا كانت بالفعل نوعاً منه. أما ملف اللاعب الذي يملك مخزوناً، فيمكنه الاحتفاظ بمرجع إلى مكوّن المخزون.\n\n```gdscript\nextends RefCounted\nclass_name PlayerProfile\n\nvar inventory\nvar display_name = \"\"\n\nfunc describe():\n    return display_name\n```\n\nتجنب سلاسل الوراثة الطويلة لمجرد مشاركة أسطر قليلة؛ اختر العلاقة التي تمثل النموذج الحقيقي.\n\n> [!WARNING]\n> لا تستخدم الوراثة لمجرد مشاركة بضعة أسطر؛ قد تنشئ علاقة نوع غير صحيحة.\n\n> [!NOTE]\n> يمثل المثال `PlayerProfile` كمورد بيانات، ولا يتطلب إدراجه في شجرة مشهد.\n\n> [!TIP]\n> استخدم التركيب لعلاقة «يملك/يستخدم»، والوراثة لعلاقة «نوع متخصص من».",
+    "en": "## “Is a kind of” or “has a”? \n\nA specialized character can inherit from a base class when it truly is a kind of that class. A player profile that has an inventory can instead keep a reference to an inventory component.\n\n```gdscript\nextends RefCounted\nclass_name PlayerProfile\n\nvar inventory\nvar display_name = \"\"\n\nfunc describe():\n    return display_name\n```\n\nAvoid long inheritance chains just to share a few lines; choose the relationship that represents the real model.\n\n> [!WARNING]\n> Do not use inheritance merely to share a few lines; it can create an incorrect type relationship.\n\n> [!NOTE]\n> The `PlayerProfile` example is a data object and does not need to be placed in a scene tree.\n\n> [!TIP]\n> Use composition for “has/uses” relationships and inheritance for “is a specialized kind of”."
   },
   "exercises": [
     {

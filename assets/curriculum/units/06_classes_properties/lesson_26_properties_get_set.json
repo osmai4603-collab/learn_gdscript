@@ -9,11 +9,11 @@
     "ar": "استخدم الخصائص لتنظيم حالة الكائن و`get` و`set` للتحكم عند الحاجة.",
     "en": "Use properties to organize object state and `get` and `set` to control access when needed."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 16,
   "order": 3,
   "documentation": {
-    "ar": "الخصائص تمثل حالة الكائن. استخدم `get` أو `set` عند الحاجة إلى قيمة محسوبة أو تحقق عند التعيين. تتطور تفاصيل الصياغة حسب إصدار Godot؛ راجع توثيق الإصدار المستهدف لتفادي إعادة الدخول غير المقصودة.",
-    "en": "Properties represent object state. Use `get` or `set` when you need a computed value or validation on assignment. Syntax details can vary by Godot version; consult the target version’s documentation to avoid unintended re-entry."
+    "ar": "يُستدعى `set` عند إسناد قيمة للخاصية. داخل setter، يسمح GDScript 4 بإسناد الخاصية نفسها لتحديث قيمة التخزين دون استدعاء متكرر؛ لذلك يمكن تطبيع القيمة مباشرة. يُستدعى `get` عند قراءة الخاصية ويمكنه إرجاع قيمة محسوبة.",
+    "en": "A `set` accessor runs when a value is assigned to the property. In GDScript 4, assigning that property inside its setter updates the stored value without recursively invoking the setter, so the value can be normalized directly. A `get` accessor runs on reads and can return a computed value."
   },
   "documentationSources": [
     {
@@ -21,12 +21,19 @@
         "ar": "الأصناف في GDScript",
         "en": "Classes in GDScript"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+    },
+    {
+      "title": {
+        "ar": "خصائص GDScript",
+        "en": "GDScript setters and getters"
+      },
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#setters-and-getters"
     }
   ],
   "contentMarkdown": {
-    "ar": "## تحكم في الخاصية\n\nيمكن أن يتحقق setter من قيمة أو يحدها، ويمكن أن يعيد getter قيمة محسوبة. تجنب setter يعيد تعيين الخاصية إلى نفسها بطريقة تسبب استدعاءً متكرراً؛ راجع صيغة إصدار Godot المستخدم.\n\n```gdscript\nextends RefCounted\nclass_name HealthState\n\nvar health: int = 100:\n    set(value):\n        health = clampi(value, 0, 100)\n```\n\nالفكرة هي الحفاظ على مجال صحة واضح. استخدم تخزيناً داخلياً عند الحاجة لتجنب إعادة الدخول.",
-    "en": "## Control a property\n\nA setter can validate or constrain a value, and a getter can return a calculated value. Avoid a setter that assigns the property to itself in a way that causes repeated calls; check the syntax for your Godot version.\n\n```gdscript\nextends RefCounted\nclass_name HealthState\n\nvar health: int = 100:\n    set(value):\n        health = clampi(value, 0, 100)\n```\n\nThe goal is to maintain a clear health range. Use internal storage when needed to avoid re-entry."
+    "ar": "## تحكم في الخاصية\n\nيمكن أن يتحقق setter من قيمة أو يحدها، ويمكن أن يعيد getter قيمة محسوبة. في GDScript 4، إسناد الخاصية نفسها داخل setter يحدّث قيمة التخزين مباشرة ولا يعيد استدعاء setter؛ أما الإسناد إليها من خارج setter فيمر عبره.\n\n```gdscript\nextends RefCounted\nclass_name HealthState\n\nvar health: int = 100:\n    set(value):\n        health = clampi(value, 0, 100)\n```\n\nتحافظ الخاصية على مجال صحة واضح؛ الإسناد إليها داخل setter يضبط قيمة التخزين، أما القراءة الخارجية فتستخدم getter إن عُرّف.\n\n> [!WARNING]\n> لا تفترض أن إسناد خاصية مجرد تخزين؛ قد ينفذ setter تحققاً أو آثاراً جانبية.\n\n> [!NOTE]\n> في GDScript 4، إسناد الخاصية من داخل setter يحدّث التخزين مباشرة، بينما الإسناد الخارجي يستدعي setter.\n\n> [!TIP]\n> طبّع القيمة داخل setter، واجعل getter يعيد القيمة المحسوبة عند الحاجة.",
+    "en": "## Control a property\n\nA setter can validate or constrain a value, and a getter can return a calculated value. In GDScript 4, assigning the property inside its own setter updates the stored value directly and does not call the setter again; assignments from outside the setter do invoke it.\n\n```gdscript\nextends RefCounted\nclass_name HealthState\n\nvar health: int = 100:\n    set(value):\n        health = clampi(value, 0, 100)\n```\n\nThe property keeps health within a clear range; assignment inside the setter updates stored data, while external reads use the getter when one is defined.\n\n> [!WARNING]\n> Do not assume assigning a property is plain storage; a setter may validate or trigger side effects.\n\n> [!NOTE]\n> In GDScript 4, assigning the property inside its setter updates storage directly, while external assignments invoke the setter.\n\n> [!TIP]\n> Normalize values in setters and use getters when a computed value is needed."
   },
   "exercises": [
     {

@@ -9,11 +9,11 @@
     "ar": "استخدم `_init` لضبط بيانات النسخة عند إنشائها.",
     "en": "Use `_init` to set instance data when it is created."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 15,
   "order": 2,
   "documentation": {
-    "ar": "يُستدعى `_init()` عند إنشاء نسخة من الصنف. استخدم معاملاته لتهيئة خصائصها. لا تخلط بين إنشاء كائن وبين جاهزية عقدة داخل شجرة المشهد؛ فالعمل المعتمد على الأبناء يناسب مرحلة الجاهزية.",
-    "en": "`_init()` runs when an instance of a class is created. Use its arguments to initialize properties. Do not confuse object creation with a node becoming ready in the scene tree; work that depends on children belongs at the ready stage."
+    "ar": "يُستدعى `_init()` عند إنشاء نسخة من الصنف. استخدم معاملاته لتهيئة خصائصها. لا تخلط بين إنشاء كائن وبين جاهزية عقدة داخل شجرة المشهد؛ فالعمل المعتمد على الأبناء يناسب مرحلة الجاهزية. في المُهيئ الموروث، استخدم `super(...)` لتمرير الوسائط التي يتطلبها مُهيئ الصنف الأب.",
+    "en": "`_init()` runs when an instance of a class is created. Use its arguments to initialize properties. Do not confuse object creation with a node becoming ready in the scene tree; work that depends on children belongs at the ready stage. In an inherited initializer, use `super(...)` to pass the arguments required by the parent initializer."
   },
   "documentationSources": [
     {
@@ -21,19 +21,19 @@
         "ar": "الأصناف في GDScript",
         "en": "Classes in GDScript"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#classes"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#classes"
     },
     {
       "title": {
         "ar": "دوال دورة حياة العقدة",
         "en": "Node lifecycle callbacks"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/overridable_functions.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/overridable_functions.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## اضبط الحالة منذ البداية\n\nيساعد `_init()` على جعل متطلبات إنشاء الكائن صريحة. استقبل البيانات المطلوبة ثم خزّنها في خصائص النسخة.\n\n```gdscript\nextends RefCounted\nclass_name Potion\n\nvar label: String\nvar healing: int\n\nfunc _init(item_label: String, amount: int):\n    label = item_label\n    healing = amount\n```\n\nلا تجعل المُهيئ يعتمد على عقد أبناء موجودة في شجرة المشهد؛ استخدم دورة حياة العقدة عندما تحتاج إلى تلك البنية.",
-    "en": "## Set state from the start\n\n`_init()` makes an object’s creation requirements explicit. Receive the required data and store it in instance properties.\n\n```gdscript\nextends RefCounted\nclass_name Potion\n\nvar label: String\nvar healing: int\n\nfunc _init(item_label: String, amount: int):\n    label = item_label\n    healing = amount\n```\n\nDo not make the initializer depend on child nodes being in the scene tree; use the node lifecycle when you need that structure."
+    "ar": "## اضبط الحالة منذ البداية\n\nيساعد `_init()` على جعل متطلبات إنشاء الكائن صريحة. استقبل البيانات المطلوبة ثم خزّنها في خصائص النسخة.\n\n```gdscript\nextends RefCounted\nclass_name Potion\n\nvar label: String\nvar healing: int\n\nfunc _init(item_label: String, amount: int):\n    label = item_label\n    healing = amount\n```\n\nعند اشتقاق صنف يملك مُهيئاً، مرّر القيم اللازمة إلى مُهيئ الأب باستخدام `super(...)`، وتأكد من مطابقة الوسائط. لا تجعل المُهيئ يعتمد على عقد أبناء موجودة في شجرة المشهد؛ استخدم دورة حياة العقدة عندما تحتاج إلى تلك البنية.\n\n> [!WARNING]\n> تأكد من تمرير الوسائط التي يتطلبها `_init()` عند إنشاء النسخة، ومن مطابقة استدعاء `super(...)` لمُهيئ الأب.\n\n> [!NOTE]\n> يُستدعى `_init()` عند إنشاء الكائن، أما `_ready()` فيعتمد على دخول العقدة إلى شجرة المشهد.\n\n> [!TIP]\n> هيّئ البيانات المطلوبة في المُهيئ، وأجّل العمل المعتمد على الأبناء إلى دورة حياة العقدة.",
+    "en": "## Set state from the start\n\n`_init()` makes an object’s creation requirements explicit. Receive the required data and store it in instance properties.\n\n```gdscript\nextends RefCounted\nclass_name Potion\n\nvar label: String\nvar healing: int\n\nfunc _init(item_label: String, amount: int):\n    label = item_label\n    healing = amount\n```\n\nWhen deriving from a class with an initializer, pass the required values to the parent initializer with `super(...)` and match its parameters. Do not make an initializer depend on child nodes being in the scene tree; use the node lifecycle when you need that structure.\n\n> [!WARNING]\n> Pass the arguments required by `_init()` when creating an instance, and match `super(...)` to the parent initializer.\n\n> [!NOTE]\n> `_init()` runs when the object is created, while `_ready()` depends on a node entering the scene tree.\n\n> [!TIP]\n> Initialize required data in the constructor, and defer child-dependent work to the node lifecycle."
   },
   "exercises": [
     {

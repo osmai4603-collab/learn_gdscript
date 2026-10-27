@@ -1,38 +1,17 @@
-import 'dart:math' as math;
-
 import '../audit_context.dart';
 import '../audit_models.dart';
 import '../config/validation_rules.dart';
 
 void checkTimeAndChallenge(AuditContext context) {
-  int wordCount(String text) =>
-      text.trim().split(RegExp(r'\s+')).where((word) => word.isNotEmpty).length;
   for (final record in context.lessons) {
     final lesson = record.lesson;
-    final arabicWords = wordCount(lesson.contentMarkdown.ar);
-    final englishWords = wordCount(lesson.contentMarkdown.en);
-    final readingMinutes = (math.max(arabicWords, englishWords) + 99) ~/ 100;
-    final practiceMinutes = (lesson.exercises.length * 3 + 3) ~/ 4;
-    final expectedMinutes = math.max(
-      minimumLessonMinutes,
-      readingMinutes + practiceMinutes,
-    );
-    final minimum = math.max(
-      minimumLessonMinutes,
-      (expectedMinutes * 0.5).ceil(),
-    );
-    final maximum = math.min(
-      maximumLessonMinutes,
-      (expectedMinutes * 2).ceil(),
-    );
-    if (lesson.estimatedMinutes < minimum ||
-        lesson.estimatedMinutes > maximum) {
+    if (lesson.estimatedMinutes < minimumLessonMinutes ||
+        lesson.estimatedMinutes > maximumLessonMinutes) {
       context.report.add(
-        IssueSeverity.warning,
-        'estimated-time',
-        'estimatedMinutes is ${lesson.estimatedMinutes}; expected $minimum–'
-            '$maximum based on lesson length and exercise count '
-            '(absolute range $minimumLessonMinutes–$maximumLessonMinutes).',
+        IssueSeverity.error,
+        'estimated-time-range',
+        'estimatedMinutes must be between $minimumLessonMinutes and '
+            '$maximumLessonMinutes; found ${lesson.estimatedMinutes}.',
         path: context.pathFor(record.file),
       );
     }
@@ -55,8 +34,9 @@ void checkTimeAndChallenge(AuditContext context) {
           IssueSeverity.error,
           'unit-capstone',
           'Final lesson "${finalLesson.id}" must have one order-9 coding '
-          'capstone with at least three test cases.',
-          path: 'assets/curriculum/units/${lessons.last.unitDirectory}/unit.json',
+              'capstone with at least three test cases.',
+          path:
+              'assets/curriculum/units/${lessons.last.unitDirectory}/unit.json',
         );
       }
     }

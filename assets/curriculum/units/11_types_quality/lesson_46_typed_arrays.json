@@ -9,11 +9,11 @@
     "ar": "قيّد عناصر المصفوفة بنوع محدد واستخدم عناصرها بوضوح.",
     "en": "Constrain array elements to a specific type and use them clearly."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 16,
   "order": 1,
   "contentMarkdown": {
-    "ar": "## اجعل نوع العناصر معروفاً\n\nتقبل المصفوفة العادية أنواعاً مختلفة؛ أما `Array[Type]` فتحدد نوع عناصرها. يساعد ذلك على رفض القيم غير الملائمة ويوضح ما تحتويه القائمة.\n\n```gdscript\nvar scores: Array[int] = [10, 20, 30]\nvar names: Array[String] = [\"Ada\", \"Lin\"]\n```\n\nلا يحدد نوع العناصر حجم المصفوفة أو يجعلها ثابتة. عند الحاجة إلى أنواع متعددة، فكر في صنف بيانات مشترك بدلاً من خلط القيم عشوائياً.",
-    "en": "## Make element types known\n\nA regular array can contain different types; `Array[Type]` specifies the element type. This helps reject unsuitable values and documents what the collection contains.\n\n```gdscript\nvar scores: Array[int] = [10, 20, 30]\nvar names: Array[String] = [\"Ada\", \"Lin\"]\n```\n\nThe element type does not define array length or make it immutable. If several kinds are needed, consider a shared data class instead of mixing values accidentally."
+    "ar": "## اجعل نوع العناصر معروفاً\n\nتقبل المصفوفة العادية أنواعاً مختلفة؛ أما `Array[Type]` فتحدد نوع عناصرها. يساعد ذلك على رفض القيم غير الملائمة ويوضح ما تحتويه القائمة.\n\n```gdscript\nvar scores: Array[int] = [10, 20, 30]\nvar names: Array[String] = [\"Ada\", \"Lin\"]\n```\n\nلا يحدد نوع العناصر حجم المصفوفة أو يجعلها ثابتة. عند الحاجة إلى أنواع متعددة، فكر في صنف بيانات مشترك بدلاً من خلط القيم عشوائياً.\n\n> [!WARNING]\n> المصفوفة محددة النوع ترفض القيم غير المتوافقة؛ تحقق من البيانات الخارجية قبل إدراجها.\n\n> [!NOTE]\n> `Array[int]` يقيّد نوع العناصر لكنه لا يجعل المصفوفة ثابتة أو غير قابلة للتعديل.\n\n> [!TIP]\n> استخدم `Array[Type]` عندما تكون عناصر المجموعة من النوع نفسه، واختبر عمليات الإضافة والاستبدال.",
+    "en": "## Make element types known\n\nA regular array can contain different types; `Array[Type]` specifies the element type. This helps reject unsuitable values and documents what the collection contains.\n\n```gdscript\nvar scores: Array[int] = [10, 20, 30]\nvar names: Array[String] = [\"Ada\", \"Lin\"]\n```\n\nThe element type does not define array length or make it immutable. If several kinds are needed, consider a shared data class instead of mixing values accidentally.\n\n> [!WARNING]\n> A typed array rejects incompatible values; validate external data before inserting it.\n\n> [!NOTE]\n> `Array[int]` constrains element types but does not make the array constant or immutable.\n\n> [!TIP]\n> Use `Array[Type]` when a collection has a consistent element type, and test insertions and replacements."
   },
   "documentation": {
     "ar": "تقيّد `Array[Type]` عناصر الحاوية بنوع واحد، مثل `Array[int]`. لا تحدد الصيغة حجم المصفوفة، ويمكن تغيير عناصرها ما دامت متوافقة مع النوع. توفر المصفوفة المعرّفة معلومات أفضل للمحلل عند القراءة والإضافة والتكرار. إذا تطلب التصميم أنواعاً مختلفة، فاستخدم نموذج بيانات واضحاً أو `Variant` عمداً، لا خلطاً عرضياً. تحقّق من البيانات القادمة من ملف أو واجهة قبل إسنادها إلى مصفوفة مقيّدة.",
@@ -25,7 +25,7 @@
         "ar": "الأنواع الساكنة في GDScript",
         "en": "Static typing in GDScript"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/static_typing.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/static_typing.html"
     }
   ],
   "exercises": [

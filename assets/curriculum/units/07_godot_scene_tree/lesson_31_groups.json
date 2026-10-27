@@ -9,7 +9,7 @@
     "ar": "استخدم المجموعات لوصف أدوار العقد والاستعلام عنها جماعياً.",
     "en": "Use groups to describe node roles and query them collectively."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 15,
   "order": 3,
   "documentation": {
     "ar": "أضف العقد إلى مجموعات مثل `enemies` أو `interactables` من المحرر أو عبر `add_to_group()`. يمكن الاستعلام عن أعضاء المجموعة عبر شجرة المشهد. المجموعة تصنيف وصفي وليست علاقة أبوة.",
@@ -21,19 +21,19 @@
         "ar": "مجموعات العقد",
         "en": "Groups"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/groups.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/groups.html"
     },
     {
       "title": {
         "ar": "مرجع الصنف Node",
         "en": "Node class reference"
       },
-      "url": "https://docs.godotengine.org/en/stable/classes/class_node.html"
+      "url": "https://docs.godotengine.org/en/4.3/classes/class_node.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## صنّف العقد حسب الدور\n\nيمكن أن تجمع `enemies` عقداً غير متجاورة في الشجرة لكنها تؤدي الدور نفسه. أضف العقدة من المحرر أو بالكود.\n\n```gdscript\nextends Node\n\nfunc _ready():\n    add_to_group(\"interactables\")\n```\n\nالمجموعة لا تنشئ عقدة أب ولا تستبدل واجهة واضحة بين المكونات.",
-    "en": "## Categorize nodes by role\n\nThe `enemies` group can collect nodes that are not next to each other in the tree but share the same role. Add a node in the editor or through code.\n\n```gdscript\nextends Node\n\nfunc _ready():\n    add_to_group(\"interactables\")\n```\n\nA group does not create a parent node or replace a clear interface between components."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nWorld (Node2D)\n└── Interactables (Node2D)\n    ├── Chest1 (StaticBody2D) [group: interactables]\n    └── Chest2 (StaticBody2D) [group: interactables]\n```\n\nأرفق سكربت المثال بكل عقدة تريد إضافتها إلى مجموعة `interactables`، أو أضفها من المحرر.\n\n## صنّف العقد حسب الدور\n\nيمكن أن تجمع `enemies` عقداً غير متجاورة في الشجرة لكنها تؤدي الدور نفسه. أضف العقدة من المحرر أو بالكود.\n\n```gdscript\nextends Node\n\nfunc _ready():\n    add_to_group(\"interactables\")\n```\n\nالمجموعة لا تنشئ عقدة أب ولا تستبدل واجهة واضحة بين المكونات.\n\n> [!WARNING]\n> تحقق من اسم العقدة ومسارها الفعليين؛ المسار غير الموجود قد ينتج مرجعاً غير صالح أو خطأ وقت التشغيل.\n\n> [!NOTE]\n> تدخل الأبناء الشجرة قبل الوالد وتكتمل جاهزيتها قبل `_ready()` للوالد؛ يبدأ `@onready` بعد دخول الشجرة.\n\n> [!TIP]\n> استخدم أسماء مستقرة، واستعمل مجموعة أو مرجعاً محفوظاً عندما يكون البحث بالمسار هشاً.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nWorld (Node2D)\n└── Interactables (Node2D)\n    ├── Chest1 (StaticBody2D) [group: interactables]\n    └── Chest2 (StaticBody2D) [group: interactables]\n```\n\nAttach the example script to each node to add to `interactables`, or add those nodes in the editor.\n\n## Categorize nodes by role\n\nThe `enemies` group can collect nodes that are not next to each other in the tree but share the same role. Add a node in the editor or through code.\n\n```gdscript\nextends Node\n\nfunc _ready():\n    add_to_group(\"interactables\")\n```\n\nA group does not create a parent node or replace a clear interface between components.\n\n> [!WARNING]\n> Check actual node names and paths; a missing path can produce an invalid reference or runtime error.\n\n> [!NOTE]\n> Children enter the tree before their parent and are ready before the parent’s `_ready()`; `@onready` runs after tree entry.\n\n> [!TIP]\n> Use stable node names, and prefer a group or stored reference when path-based lookup is brittle."
   },
   "exercises": [
     {

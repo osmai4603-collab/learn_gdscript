@@ -134,9 +134,7 @@ class _ConceptMapScreenState extends State<ConceptMapScreen> {
         .reduceOrNull((a, b) => a.isBefore(b) ? a : b);
     final daysUntilReview = hasDueCards
         ? 0
-        : nextReview == null
-        ? null
-        : nextReview.difference(snapshot.loadedAt).inDays.clamp(0, 36500);
+        : nextReview?.difference(snapshot.loadedAt).inDays.clamp(0, 36500);
     final example =
         lesson.exampleCode ??
         (lesson.exercises.isEmpty ? '' : lesson.exercises.first.starterCode);

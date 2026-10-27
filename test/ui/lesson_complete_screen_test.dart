@@ -34,7 +34,7 @@ void main() {
       unitId: 'unit_01',
       title: const LocalizedText(ar: 'الدرس الأول', en: 'First lesson'),
       objective: const LocalizedText(ar: 'هدف', en: 'Objective'),
-      estimatedMinutes: 5,
+      estimatedMinutes: 10,
       order: 0,
       contentMarkdown: const LocalizedText(ar: '', en: ''),
       exercises: const <Exercise>[],

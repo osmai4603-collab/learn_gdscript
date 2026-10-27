@@ -9,11 +9,11 @@
     "ar": "رتّب الخطوات قبل الانتظار وبعده وافهم أثر التعليق على الدالة.",
     "en": "Order steps before and after a wait and understand how suspension affects a function."
   },
-  "estimatedMinutes": 9,
+  "estimatedMinutes": 17,
   "order": 2,
   "contentMarkdown": {
-    "ar": "## رتّب العمل حول نقطة انتظار\n\nتتقدم الدالة حتى `await` ثم تعيد التحكم إلى المحرك. عندما يكتمل المنتظر تتابع بقية الدالة؛ وقد تنفذ دوال أخرى أثناء الانتظار وتتغير الحالة.\n\n```gdscript\nfunc refresh_panel() -> void:\n    $Panel.hide()\n    await get_tree().create_timer(0.2).timeout\n    $Panel.show()\n```\n\nقسّم العمل إلى مرحلتين وأعد فحص الشروط التي قد تتغير. لا تفترض أن استدعاء الدالة ينتظر اكتمالها تلقائياً.",
-    "en": "## Arrange work around a wait\n\nA function runs until `await`, then yields control to the engine. When the awaited object completes, the rest of the function resumes; other functions may run and state may change meanwhile.\n\n```gdscript\nfunc refresh_panel() -> void:\n    $Panel.hide()\n    await get_tree().create_timer(0.2).timeout\n    $Panel.show()\n```\n\nSeparate the work into two phases and recheck conditions that may change. Do not assume calling a function automatically waits for it to finish."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nBattleScene (Control) [script attached to BattleScene]\n└── Panel (PanelContainer)\n```\n\nأرفق السكربت بـ BattleScene؛ العقدة الابنة Panel تطابق المسار `$Panel` قبل الانتظار وبعده.\n\n## رتّب العمل حول نقطة انتظار\n\nتتقدم الدالة حتى `await` ثم تعيد التحكم إلى المحرك. عندما يكتمل المنتظر تتابع بقية الدالة؛ وقد تنفذ دوال أخرى أثناء الانتظار وتتغير الحالة.\n\n```gdscript\nfunc refresh_panel() -> void:\n    $Panel.hide()\n    await get_tree().create_timer(0.2).timeout\n    $Panel.show()\n```\n\nقسّم العمل إلى مرحلتين وأعد فحص الشروط التي قد تتغير. لا تفترض أن استدعاء الدالة ينتظر اكتمالها تلقائياً.\n\n> [!WARNING]\n> بعد `await` قد تكون العقدة حُذفت أو تغيرت الحالة؛ أعد فحص المرجع ولا تفترض استمرار صلاحيته.\n\n> [!NOTE]\n> `await` يعلّق الدالة الحالية دون إيقاف اللعبة؛ `create_timer()` عابر بينما `Timer` عقدة قابلة للضبط وإعادة الاستخدام.\n\n> [!TIP]\n> صمّم مسار إلغاء أو مهلة للإشارات التي قد لا تصدر.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nBattleScene (Control) [script attached to BattleScene]\n└── Panel (PanelContainer)\n```\n\nAttach the script to BattleScene; its Panel child matches `$Panel` before and after the wait.\n\n## Arrange work around a wait\n\nA function runs until `await`, then yields control to the engine. When the awaited object completes, the rest of the function resumes; other functions may run and state may change meanwhile.\n\n```gdscript\nfunc refresh_panel() -> void:\n    $Panel.hide()\n    await get_tree().create_timer(0.2).timeout\n    $Panel.show()\n```\n\nSeparate the work into two phases and recheck conditions that may change. Do not assume calling a function automatically waits for it to finish.\n\n> [!WARNING]\n> After `await`, a node may have been freed or state may have changed; revalidate references instead of assuming they remain valid.\n\n> [!NOTE]\n> `await` suspends the current function without stopping the game; `create_timer()` is transient while a `Timer` node is configurable and reusable.\n\n> [!TIP]\n> Design a cancellation path or timeout for signals that may never be emitted."
   },
   "documentation": {
     "ar": "توقف الدالة التي تحتوي `await` مؤقتاً وتكمل لاحقاً، ولذلك قد يحدث عمل آخر بين مرحلتيها. اجعل حدود الانتظار واضحة وأعد التحقق من الحالة وصلاحية العقدة بعد الاستئناف. استدعاء الدالة غير المتزامنة لا يعني بالضرورة أن المستدعي ينتظر اكتمالها؛ صمم واجهة العودة بوضوح. استخدم هذا التدفق عند وجود حدث حقيقي مطلوب انتظاره، مثل مؤقت أو انتهاء حركة، لا لمجرد تقسيم الدالة.",
@@ -25,7 +25,7 @@
         "ar": "أساسيات GDScript: await",
         "en": "GDScript basics: await"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html"
     }
   ],
   "exercises": [

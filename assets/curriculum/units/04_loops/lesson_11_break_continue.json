@@ -9,7 +9,7 @@
     "ar": "إتقان استخدام الكلمات المفتاحية `break` للخروج المبكر من الحلقة و`continue` لتخطي الدورة الحالية والانتقال للتالية.",
     "en": "Master using keywords `break` for early loop exit and `continue` to skip the current iteration and proceed to the next."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 12,
   "order": 2,
   "contentMarkdown": {
     "ar": "## التحكم بالحلقات: break و continue في GDScript\n\n### 1. المفهوم في سياق الألعاب\nأحياناً أثناء البحث في قائمة عناصر أو تكرار خطوات اللعبة، تجد ما تبحث عنه مبكراً وتريد إيقاف البحث تماماً، أو تريد تجاهل عنصر تالف وتخطي دورته. هنا تأتي أدوات التحكم الاحترافية:\n- **`break`:** تنهي وتخرج من أقرب حلقة فوراً.\n- **`continue`:** تتجاوز وتتخطى بقية الأوامر في الدورة الحالية وتنتقل للدورة التلالية فوراً.\n\n### 2. مثال عملي مشروح سطر بسطر\n```gdscript\nextends Node\n\nfunc _ready():\n    for i in range(5):\n        # تخطي الرقم 2 والانتقال للذي يليه\n        if i == 2:\n            continue\n        # الخروج النهائي عند الوصول لـ 4\n        if i == 4:\n            break\n        print(i)\n```\n\n### 3. أخطاء شائعة وتحذيرات رسمية\n- ⚠️ **تحذير رسمي:** عند استخدام `continue` داخل حلقة `while`، تأكد تماماً من تحديث متغير العداد قبل القفز بـ continue وإلا ستتسبب في حلقة لانهائية مجمدة!\n- ℹ️ **معلومة تقنية:** استخدام `break` يوفر الكثير من أداء المعالج عند البحث في المصفوفات الكبيرة بمجرد إيجاد الهدف المطلوب.\n\n### 4. الملخص والقاعدة الذهبية\n> **قاعدة ذهبية:** استخدم `break` للخروج السريع عند إيجاد الهدف، واستخدم `continue` لتنقية وتخطي العناصر غير المرغوبة بدقة.",
@@ -26,7 +26,7 @@
         "ar": "دليل التحكم في التدفق والحلقات في Godot",
         "en": "Godot Control Flow Guide"
       },
-      "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#break-and-continue"
+      "url": "https://docs.godotengine.org/en/4.3/tutorials/scripting/gdscript/gdscript_basics.html#break-and-continue"
     }
   ],
   "exercises": [

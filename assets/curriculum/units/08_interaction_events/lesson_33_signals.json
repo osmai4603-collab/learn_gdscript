@@ -9,7 +9,7 @@
     "ar": "عرّف إشارة باسم واضح تصف حدثاً مهماً ويمكنها حمل معلومات لازمة.",
     "en": "Define a clearly named signal for an important event, with any needed information."
   },
-  "estimatedMinutes": 10,
+  "estimatedMinutes": 15,
   "order": 0,
   "documentation": {
     "ar": "تعرّف العقدة الإشارة التي تصدر عنها. يمكن أن تحمل معاملات، ويطلقها الباعث عند وقوع الحدث باستخدام `emit()`. لا يحتاج الباعث إلى معرفة تفاصيل كل مستمع.",
@@ -21,12 +21,12 @@
         "ar": "الإشارات",
         "en": "Signals"
       },
-      "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+      "url": "https://docs.godotengine.org/en/4.3/getting_started/step_by_step/signals.html"
     }
   ],
   "contentMarkdown": {
-    "ar": "## أعلن عن حدث\n\nاكتب `signal` ثم اسماً يصف الحدث. أضف معاملات فقط عندما يحتاج المستقبل إلى معلومات عنها.\n\n```gdscript\nextends Node\nsignal item_collected(item_name)\n\nfunc collect_item(name):\n    item_collected.emit(name)\n```\n\nفي Godot 4 تستخدم `emit()` لإطلاق الإشارة. أطلق الحدث عندما يقع فعلاً، لا عند تعريفه.",
-    "en": "## Declare an event\n\nWrite `signal` followed by a name that describes the event. Add arguments only when a receiver needs the information.\n\n```gdscript\nextends Node\nsignal item_collected(item_name)\n\nfunc collect_item(name):\n    item_collected.emit(name)\n```\n\nIn Godot 4, use `emit()` to raise the signal. Emit the event when it happens, not when it is declared."
+    "ar": "## إعداد المشهد المفترض في Godot\n\n```text\nLevel (Node2D)\n├── Item (Node) [item_collected signal]\n└── HUD (CanvasLayer) [receiver]\n```\n\nأرفق باعث `item_collected` بـ Item، واربط HUD مستقبلاً إذا احتاج إلى تحديث العرض.\n\n## أعلن عن حدث\n\nاكتب `signal` ثم اسماً يصف الحدث. أضف معاملات فقط عندما يحتاج المستقبل إلى معلومات عنها.\n\n```gdscript\nextends Node\nsignal item_collected(item_name)\n\nfunc collect_item(name):\n    item_collected.emit(name)\n```\n\nفي Godot 4 تستخدم `emit()` لإطلاق الإشارة. أطلق الحدث عندما يقع فعلاً، لا عند تعريفه.\n\n> [!WARNING]\n> لا تفترض أن إرسال الإشارة يضمن وجود مستقبِل؛ تحقق من التوصيل وتجنب الاتصالات المكررة.\n\n> [!NOTE]\n> تصل أحداث `_input()` قبل الواجهة، بينما تعالج `_unhandled_input()` ما لم تستهلكه الواجهة أو عقدة أخرى.\n\n> [!TIP]\n> اجعل الباعث يعلن الحدث ودع المستقبل المناسب يقرر الاستجابة لتقليل الاقتران.",
+    "en": "## Assumed Godot Scene Setup\n\n```text\nLevel (Node2D)\n├── Item (Node) [item_collected signal]\n└── HUD (CanvasLayer) [receiver]\n```\n\nAttach the `item_collected` emitter to Item and connect HUD as a receiver if it needs to update the display.\n\n## Declare an event\n\nWrite `signal` followed by a name that describes the event. Add arguments only when a receiver needs the information.\n\n```gdscript\nextends Node\nsignal item_collected(item_name)\n\nfunc collect_item(name):\n    item_collected.emit(name)\n```\n\nIn Godot 4, use `emit()` to raise the signal. Emit the event when it happens, not when it is declared.\n\n> [!WARNING]\n> Do not assume emitting a signal guarantees a receiver; verify the connection and avoid duplicate connections.\n\n> [!NOTE]\n> `_input()` receives events before GUI handling, while `_unhandled_input()` receives events not consumed by the GUI or another node.\n\n> [!TIP]\n> Let the emitter announce an event and the appropriate receiver choose the response to reduce coupling."
   },
   "exercises": [
     {
